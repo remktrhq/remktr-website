@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UNDERCUT Placement Arbitrage | reMKTR</title>
+
+    <!-- Meta Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1716243463156892');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none" alt=""
+        src="https://www.facebook.com/tr?id=1716243463156892&ev=PageView&noscript=1">
+    </noscript>
+
+    <!-- X / Twitter Pixel -->
+    <script>
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?
+    s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',
+    s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+    a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}
+    (window,document,'script');
+    twq('config','rd4k5');
+    </script>
+
+    <!-- Microsoft Clarity -->
+    <script>
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})
+    (window, document, "clarity", "script", "xc0040t55v");
+    </script>
+
+    <link rel="stylesheet" href="../assets/humble-vault-styles.css?v=undercut-pro-20260624">
+  </head>
+  <body data-offer="placement-arbitrage-undercut">
+    <main id="app"></main>
+    <script src="../assets/humble-vault-app.js?v=undercut-pro-20260624"></script>
+    <script>renderOffer("undercut");</script>
+
+    <!-- Offer-Specific Pageview -->
+    <script>
+      window.remktrOffer = {
+        offer: "undercut",
+        offerName: "UNDERCUT Placement Arbitrage",
+        primaryCta: "Get my Recovery Leak Audit"
+      };
+      if (window.fbq) fbq("trackCustom", "OfferLandingPageView", window.remktrOffer);
+      if (window.twq) twq("event", "tw-rd4k5-rd6v2", window.remktrOffer);
+      if (window.clarity) clarity("set", "offer", "undercut");
+    </script>
+
+    <!-- CTA Click Tracking -->
+    <script>
+    document.addEventListener("click", function(event) {
+      var cta = event.target.closest("a.button, button.button, .button");
+      if (!cta) return;
+      var payload = {
+        offer: window.remktrOffer && window.remktrOffer.offer,
+        offer_name: window.remktrOffer && window.remktrOffer.offerName,
+        cta_text: (cta.innerText || cta.textContent || "").trim(),
+        page_path: window.location.pathname
+      };
+      if (window.fbq) {
+        fbq("track", "Lead", payload);
+        fbq("trackCustom", "OfferCtaClick", payload);
+      }
+      if (window.twq) twq("event", "tw-rd4k5-rd6v3", payload);
+      if (window.clarity) {
+        clarity("event", "offer_cta_click");
+        clarity("set", "cta_text", payload.cta_text);
+      }
+    });
+    </script>
+  </body>
+</html>
