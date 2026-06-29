@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jan-21-2026-08-19-22-2486-PM.png" alt="Amazon EC2 G7e Delivers 2.3x Faster AI Inference"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jan-21-2026-08-19-22-2486-PM.png" alt="Amazon EC2 G7e Delivers 2.3x Faster AI Inference" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Amazon EC2 G7e Delivers 2.3x Faster AI Inference</h1>
     <div class="blog-post-meta">
@@ -75,7 +75,7 @@
 <li>15.2 TB local NVMe and GPUDirect Storage for blazing model loads.</li>
 <li>Single-node efficiency: fewer shards, lower latency, simpler ops, better $/token.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-21-2026-08-20-19-1569-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-21-2026-08-20-19-1569-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="underthehood">Under the Hood</h2>
 <h3 id="gpumuscle">GPU muscle</h3>
 <p>You get up to 8 NVIDIA RTX PRO 6000 Blackwell Server Edition GPUs per instance, each with 96 GB. That’s 768 GB of on-node GPU memory—enough headroom for large language models, agentic AI, and high-res multimodal pipelines without frantic sharding. Compared to L40S-era G6e, G7e brings up to 4x inter-GPU bandwidth and lower peer-to-peer latency on the same PCIe switch. The net effect: multi-GPU inference feels closer to one big GPU than a herd of cats.</p>
@@ -101,7 +101,7 @@
 <li>Hardware utilization jumps because the model and KV cache actually fit.</li>
 <li>Control-plane overhead drops because you’re managing fewer instances and fewer shards.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-21-2026-08-21-06-3725-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-21-2026-08-21-06-3725-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h3 id="networkingforinferencebursts">Networking for inference bursts</h3>
 <p>“Elastic Fabric Adapter (EFA) is a network device you can attach to your Amazon EC2 instance to accelerate High Performance Computing (HPC) and machine learning applications.” On G7e, you get up to 1600 Gbps with EFA and EC2 UltraClusters, enabling small-scale multi-node finetuning and fast distributed sampling without turning your network into the bottleneck.</p>
 <p>Use it when it really helps: cross-node all-reduce, quick dataset staging, or bursty overflow capacity. The rest of the time, keep your inference hot path on a single node so microbursts don’t pay round-trip tax.</p>

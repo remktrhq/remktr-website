@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-18-2025-04-26-57-7563-PM.png" alt="Prepare For Amazon’s December 2024 SP‑API Attribute Overhaul"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-18-2025-04-26-57-7563-PM.png" alt="Prepare For Amazon’s December 2024 SP‑API Attribute Overhaul" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Prepare For Amazon’s December 2024 SP‑API Attribute Overhaul</h1>
     <div class="blog-post-meta">
@@ -73,7 +73,7 @@
 <li>Expect marketplace nuance—one size won’t fit all.</li>
 <li>Update validation, mapping, and feeds to avoid listing errors.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-18-2025-04-27-58-2449-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-18-2025-04-27-58-2449-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="whatschangingandwhy">Whats Changing And Why</h2>
 <h3 id="attributeusagerescored">Attribute usage rescored</h3>
 <p>Some attributes you treated as optional may now be required for certain product types. Others will get deprecated. That affects listing creation, partial updates, and error handling. If your mapper assumes yesterday’s rules, you’ll hit today’s rejections.</p>
@@ -135,7 +135,7 @@
 </ul>
 <p>Example: If “BatteryType” becomes required for certain Electronics, open a ticket. Link the PTD doc section and block deploys until the field is populated.</p>
 <p>Alert channels should match urgency. Breaking required-field changes get paging. Enum additions can be informational. Deprecations trigger migration tasks with deadlines.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-18-2025-04-28-53-4015-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-18-2025-04-28-53-4015-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h3 id="strongadaptersbeatbrittleconstants">Strong adapters beat brittle constants</h3>
 <p>Move enum lists out of code and into a managed adapter with versioning. Translation tables should map variations, like “Stainless Steel” to “Stainless_Steel,” and reject unknowns.</p>
 <p><em>Developer note if you came from WCF land:</em> enumeration types in data contracts serialize strictly. Treat Amazon enums the same way. Unknown values should fail fast in preflight, not at runtime.</p>

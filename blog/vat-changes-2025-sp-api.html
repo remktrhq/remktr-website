@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Dec-17-2025-04-11-14-9339-PM.png" alt="Master Amazon's 2025 VAT Report Changes Before Deadlines"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Dec-17-2025-04-11-14-9339-PM.png" alt="Master Amazon's 2025 VAT Report Changes Before Deadlines" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Master Amazon's 2025 VAT Report Changes Before Deadlines</h1>
     <div class="blog-post-meta">
@@ -74,7 +74,7 @@
 <li><p>Jan 1, 2026: e-invoicing-related VCR column names change (e.g., “SDI Invoice Delivery Status” becomes “E-Invoice Delivery Status”).</p></li>
 <li><p>UK VAT threshold is £90,000; EU registration rules vary. There’s no federal VAT in the USA (2025).</p></li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-17-2025-04-12-06-0128-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-17-2025-04-12-06-0128-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="14characterinvoiceidswitch">14 Character Invoice ID Switch</h2>
 <h3 id="whatschanging">What’s changing</h3>
 <p>Starting January 1, 2025, the VAT Calculation Service locks invoice IDs to 14 characters. The sequence stays unique and ordered—just tighter. If your tools expect variable-length IDs, imports can fail or mismatches appear.</p>
@@ -102,7 +102,7 @@
 <li>Add a schema contract test: invoice_id non-null, exactly 14 chars, unique in report, and stable across re-downloads.</li>
 <li>Keep a feature flag to toggle legacy versus fixed-length parsing for one week.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-17-2025-04-13-07-6132-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-17-2025-04-13-07-6132-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="crossbordervatgotstricter">Cross Border VAT Got Stricter</h2>
 <h3 id="thedestinationbaseddefault">The destination-based default</h3>
 <p>From August 2024 onward, report logic better mirrors destination-based VAT. In practice, you apply the buyer’s country rate. UK-to-EU sale? Think German 19% or French 20% when tax sits at destination.</p>

@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-27-14-4912-PM.png" alt="Secure SFTP to Any VPC with AWS Transfer"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-27-14-4912-PM.png" alt="Secure SFTP to Any VPC with AWS Transfer" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Secure SFTP to Any VPC with AWS Transfer</h1>
     <div class="blog-post-meta">
@@ -72,7 +72,7 @@
 <li>Write to S3 or EFS with least-privilege IAM and clear policies. Store partner credentials and keys in AWS Secrets Manager for safe handling. <em>Encrypt everything with SSE-KMS for keys and data at rest.</em></li>
 <li>Watch traffic with VPC Flow Logs and metrics with CloudWatch. Audit API operations end-to-end using CloudTrail for compliance and tracing.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-28-35-0050-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-28-35-0050-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="commonfix">Common fix</h2>
 <ul>
 <li>setstat unsupported error occurs because S3 does not support POSIX attributes. <em>Disable preserve timestamp and permissions settings in the SFTP client.</em> Manage file permissions with IAM instead, not POSIX metadata at all.</li>
@@ -81,7 +81,7 @@
 <ul>
 <li>Attach an ACM certificate and map a friendly DNS name. For example, sftp.example.com points to your Transfer Family server host. That makes partner onboarding cleaner and less confusing, which folks appreciate.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-29-42-1006-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-29-42-1006-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="quickstart">Quick start</h2>
 <p>1) Pick a VPC, private subnets, and a tight egress-only security group.
 2) Configure private routing and DNS resolution to the partner endpoint.

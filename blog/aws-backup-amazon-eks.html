@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-11-2025-08-16-41-6925-PM.png" alt="Back Up And Restore EKS Clusters The Easy Way"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-11-2025-08-16-41-6925-PM.png" alt="Back Up And Restore EKS Clusters The Easy Way" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Back Up And Restore EKS Clusters The Easy Way</h1>
     <div class="blog-post-meta">
@@ -79,7 +79,7 @@
 <li>AWS Backup can now provision a new EKS cluster during restore.</li>
 <li>Use IAM managed policies and EKS authorization modes (API/API<em>AND</em>CONFIG_MAP).</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-11-2025-08-17-41-7081-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-11-2025-08-17-41-7081-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="nomorescripts">No More Scripts</h2>
 <h3 id="theoldreality">The old reality</h3>
 <p>If you’ve run EKS for a while, you know the drill well. Back up YAMLs, snapshot volumes, sync S3, then hope the playbook matches reality. Every cluster had its own little quirks, which drifted. Platform teams turned into backup babysitters. You were one namespace deletion away from a painful “learning experience.”</p>
@@ -91,7 +91,7 @@
 <p><em>This is less about convenience and more about reliability you can prove.</em> Centralized policies mean fewer snowflakes. Restores that rehydrate labels, annotations, and configs mean fewer surprises. Granular scope means faster, safer drills when testing.</p>
 <p>A platform lead at a fintech said their old EKS DR exercise took a full day. It also needed three engineers juggling steps. With centralized policies and granular restores, they cut it under two hours with one on-call. <em>That’s the difference between we think and we know.</em></p>
 <p>It also shifts your operational posture in a real way. Instead of hoping snapshots are good, you run routine, low-blast-radius drills. Restore a single namespace and prove your RTO and RPO often. When the real incident hits, it’s muscle memory, not a scramble.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-11-2025-08-18-36-1429-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-11-2025-08-18-36-1429-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="insidethesnapshot">Inside The Snapshot</h2>
 <h3 id="statestorage">State storage</h3>
 <p>You don’t just need volume snapshots; you need the cluster back as it was. AWS Backup protects cluster configuration and state—deployments, services, RBAC, and other resource definitions—alongside app data. Persistent storage coverage spans Amazon EBS, Amazon EFS, and Amazon S3 objects your apps need. It aligns infra and data in one recovery point.</p>

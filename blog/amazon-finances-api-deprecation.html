@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jul-21-2025-09-19-23-5476-PM.png" alt="Amazon Finances API Deprecation: Key Updates Ahead"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jul-21-2025-09-19-23-5476-PM.png" alt="Amazon Finances API Deprecation: Key Updates Ahead" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Amazon Finances API Deprecation: Key Updates Ahead</h1>
     <div class="blog-post-meta">
@@ -65,7 +65,7 @@
 <p>Imagine a sweater pattern you follow so your grandma doesn't freak out. In this case, if your schema says <code>{ "properties": { "foo": { "description": "a list of test words", "type": "array", "items": { "type": "string" } } } }</code>, it means "foo" should be a list packed with words. Think of it as your data's grocery list, where everything's gotta fit.</p>
 <p>Here's the deal: for it to pass the test, use this model: <code>{ "foo": ["bar", "baz"] }</code>. That's got one property, and it's a list of strings. If you wrote <code>{ "properties": { "foo": ["bar", "baz"] } }</code>, you'd be off the map, buddy!</p>
 <p>So, each piece of data should fit the schema like a puzzle piece. Just remember, no extra bits or strays, or the schema police might come knocking!</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jul-21-2025-09-20-22-9082-PM.png" alt="JSON Schema Illustration"></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jul-21-2025-09-20-22-9082-PM.png" alt="JSON Schema Illustration" onerror="this.style.display=\'none\'"></p>
 <p>You must format your output as a JSON value that adheres to a given "JSON Schema" instance.</p>
 <p>"JSON Schema" is a declarative language that allows you to annotate and validate JSON documents.</p>
 <p>For example, the example "JSON Schema" instance:</p>
@@ -76,7 +76,7 @@
 <p>is a well-formatted instance of this example "JSON Schema". The object:</p>
 <p><code>{"properties": {"foo": ["bar", "baz"]}}</code></p>
 <p>is not well-formatted.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jul-21-2025-09-21-26-8597-PM.png" alt="Another JSON Schema Illustration"></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jul-21-2025-09-21-26-8597-PM.png" alt="Another JSON Schema Illustration" onerror="this.style.display=\'none\'"></p>
 <p>Your output will be parsed and type-checked according to the provided schema instance, so make sure all fields in your output match the schema exactly and there are no trailing commas! You must format your output as a JSON value that adheres to a given "JSON Schema" instance.</p>
 <p>"JSON Schema" is a declarative language that allows you to annotate and validate JSON documents.</p>
 <p>For example, the example "JSON Schema" instance }}}}, "required": ["foo"]}}}} would match an object with one required property, "foo". The "type" property specifies "foo" must be an "array", and the "description" property semantically describes it as "a list of test words". The items within "foo" must be strings. Thus, the object  is a well-formatted instance of this example "JSON Schema". The object }} is not well-formatted.</p>

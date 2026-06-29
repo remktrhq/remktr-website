@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-05-2026-08-14-04-4151-PM.png" alt="Cut Build Times with EC2 C8id, M8id, R8id Instances"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-05-2026-08-14-04-4151-PM.png" alt="Cut Build Times with EC2 C8id, M8id, R8id Instances" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Cut Build Times with EC2 C8id, M8id, R8id Instances</h1>
     <div class="blog-post-meta">
@@ -75,7 +75,7 @@
 <li>Local NVMe slashes scratch I/O latency; keep state ephemeral and back it up smart.</li>
 <li>Price-performance improves up to 15% with Savings Plans and Spot options.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-05-2026-08-14-52-0723-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-05-2026-08-14-52-0723-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="yourrealbottleneck">Your real bottleneck</h2>
 <h3 id="whylocalnvmematters">Why local NVMe matters</h3>
 <p>When your workload spills or shuffles, EBS (even io2 Block Express) can choke. With instance store NVMe physically on the host, you trade network hops for PCIe lanes. Net result: huge sequential throughput and microsecond access that speeds your “throwaway” data paths.</p>
@@ -131,7 +131,7 @@
 <li>HANA: place temp and trace directories on NVMe; keep data and log volumes on EBS. This reduces merge pain and restart times.</li>
 <li>Spark: on big joins that exceed RAM, many NVMe lanes keep spill from becoming a parking lot.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-05-2026-08-15-44-5110-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-05-2026-08-15-44-5110-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="architecturepatterns">Architecture patterns</h2>
 <h3 id="treatinstancestore">Treat instance store</h3>
 <p>Instance store is ephemeral by design. Great for scratch, terrible for irreplaceable state. The playbook:</p>

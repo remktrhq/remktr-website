@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-42-04-1425-PM.png" alt="Cut SP-API Costs: Smarter Calls, Faster Sales Now"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-42-04-1425-PM.png" alt="Cut SP-API Costs: Smarter Calls, Faster Sales Now" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Cut SP-API Costs: Smarter Calls, Faster Sales Now</h1>
     <div class="blog-post-meta">
@@ -74,7 +74,7 @@
 <li>Cache aggressively, filter narrowly, paginate safely, and dedupe.</li>
 <li>Pre-warm for peaks: bigger queues, scheduled reports, circuit breakers.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-43-26-5793-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-43-26-5793-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="stoppollingletevents">Stop Polling Let Events</h2>
 <h3 id="whyeventsbeatpolls">Why events beat polls</h3>
 <p><em>Polling is the tax you pay for not listening.</em> With SP-API Notifications routed through Amazon EventBridge or SQS, you flip the model: Amazon tells you when something changes, and you react. That means fewer wasted calls and fresher data.</p>
@@ -161,7 +161,7 @@
 <li>Customer support actions where immediacy beats efficiency.</li>
 </ul>
 <p>Even then, cap the per-minute updates and fold everything else back into your next feed cycle.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-44-52-0698-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-44-52-0698-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="errorbudgetsbackoffidempotency">Error Budgets Backoff Idempotency</h2>
 <h3 id="backoffwithjitter">Backoff with jitter</h3>
 <p>When SP-API returns 429 (throttled) or 5xx (transient), you should retry — slowly and randomly. Exponential backoff with jitter is the standard: double the delay each time and add randomness to avoid retry storms. Respect any Retry-After header if provided.</p>

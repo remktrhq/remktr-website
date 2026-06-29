@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-45-20-4583-PM.png" alt="Cut AWS Firewall Costs 15–40% Without Sacrifice"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-45-20-4583-PM.png" alt="Cut AWS Firewall Costs 15–40% Without Sacrifice" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Cut AWS Firewall Costs 15–40% Without Sacrifice</h1>
     <div class="blog-post-meta">
@@ -76,7 +76,7 @@
 <li>Practical blueprint + aws network firewall example and case study included</li>
 </ul>
 <p>If you only skim one section, read the blueprint and the 10‑step checklist. You’ll leave with a concrete path that fits what you already run.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-46-10-6974-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-46-10-6974-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="pricedropchangesmath">Price drop changes math</h2>
 <h3 id="whatchanged">What changed</h3>
 <p>Two things moved the needle. First, AWS removed extra data processing charges for Advanced Inspection—TLS decryption and deep packet inspection on encrypted flows. Second, there are hourly and data processing discounts when NAT Gateway is service‑chained with AWS Network Firewall secondary endpoints. For you, that means the priciest part of “doing security right” (decryption at scale) no longer nukes your budget.</p>
@@ -99,7 +99,7 @@
 <li>What to measure: total data processed, fraction of flows under Advanced Inspection, NAT volume through service‑chained secondary endpoints.</li>
 <li>How to show impact: compare monthly pre/post costs normalized to GB processed and flows inspected. Expect 15–40% savings if you previously had broad TLS inspection.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-46-55-2673-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-46-55-2673-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="blueprintcentralinspection">Blueprint central inspection</h2>
 <h3 id="transitgatewayhub">Transit Gateway hub</h3>
 <p>Put AWS Transit Gateway (TGW) in the middle and attach your VPCs (prod, dev, shared services) and on‑prem (VPN/Direct Connect). Create inspection VPCs with AWS Network Firewall endpoints in dedicated subnets. Update TGW route tables so inter‑VPC and egress traffic detours through the inspection VPC. This enforces consistent policies without micromanaging every team’s routes.</p>

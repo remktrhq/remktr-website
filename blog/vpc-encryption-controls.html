@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-21-2025-08-14-33-6871-PM.png" alt="Make Every AWS VPC Packet Encrypted In Transit"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-21-2025-08-14-33-6871-PM.png" alt="Make Every AWS VPC Packet Encrypted In Transit" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Make Every AWS VPC Packet Encrypted In Transit</h1>
     <div class="blog-post-meta">
@@ -75,7 +75,7 @@
 <li>Map to HIPAA, PCI DSS, FedRAMP, and NYDFS for easier evidence and audits.</li>
 <li>For older instances, upgrade to supported types to keep traffic encrypted.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-21-2025-08-15-30-2358-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-21-2025-08-15-30-2358-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="killsplaintextbydesign">Kills plaintext by design</h2>
 <h3 id="monitorfirstthenenforce">Monitor first then enforce</h3>
 <p>VPC Encryption Controls run in two gears:</p>
@@ -153,7 +153,7 @@
 </ul>
 <p>Once flows look clean in monitor mode for a solid window, say two weeks, move to enforce.</p>
 <p>If you’re worried about client breakage, roll out redirects first at ALB. Then tighten server-side to TLS-only. For databases, turn on require SSL or TLS in nonprod, fix client configs, then promote to prod. For caches, enable in-transit encryption and rotate clients accordingly.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-21-2025-08-16-27-3210-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-21-2025-08-16-27-3210-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="forgettheedges">Forget the edges</h2>
 <h3 id="transitgatewayenableit">Transit Gateway enable it</h3>
 <p>If two VPCs talk via Transit Gateway and only the VPCs are in enforce, you still need encryption controls on the TGW. Do it via Console or API using modify-transit-gateway. AWS says enabling on an existing TGW won’t cut traffic.</p>

@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-04-05-2716-PM.png" alt="Secure Amazon MQ fast with HTTP auth and mTLS"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-04-05-2716-PM.png" alt="Secure Amazon MQ fast with HTTP auth and mTLS" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Secure Amazon MQ fast with HTTP auth and mTLS</h1>
     <div class="blog-post-meta">
@@ -75,7 +75,7 @@
 <li>mTLS adds strong client identity and pairs well with HTTP auth for defense-in-depth.</li>
 <li>Keep it fast: cache decisions, deploy auth near brokers, and add circuit breakers.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-05-04-2396-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-05-04-2396-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="amazonmqhttpauthmtls">Amazon MQ HTTP auth mTLS</h2>
 <h3 id="theshortversion">The short version</h3>
 <p>Amazon MQ for RabbitMQ now supports two enterprise-grade knobs you wanted for years:</p>
@@ -101,7 +101,7 @@
 </ul>
 <p>Real-world example: You run a payments platform under PCI scope. Producers use mTLS certs from your private CA, so you trust the workload. Your HTTP backend validates short-lived OAuth tokens on each publish. It checks the merchant_id claim against allowed routing keys, then returns precise “can publish to exchange X with routing key Y” decisions. Clean, auditable, and hard to abuse.</p>
 <p>This pattern matches breach data today. Stolen or misused credentials still drive many incidents. Cut long-lived secrets and add cryptographic identity at transport. You’ll shrink that risk surface in a real way.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-06-29-6280-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-06-29-6280-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="designyourhttpbackend">Design your HTTP backend</h2>
 <h3 id="implementationsketch">Implementation sketch</h3>
 <p>Think of HTTP-based authentication as a broker-to-API handshake. The broker forwards presented credentials to your endpoint. That could be username and password, a bearer token, or cert details. Your service checks identity and entitlements, then returns a decision and permissions. That’s your control plane for Amazon MQ for RabbitMQ authentication and authorization.</p>

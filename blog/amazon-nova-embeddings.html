@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-40-00-5036-PM.png" alt="Build multimodal RAG fast with Amazon Nova embeddings"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-40-00-5036-PM.png" alt="Build multimodal RAG fast with Amazon Nova embeddings" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Build multimodal RAG fast with Amazon Nova embeddings</h1>
     <div class="blog-post-meta">
@@ -74,7 +74,7 @@
 <li>Operated in Bedrock: synchronous for real-time; async for high-volume or batch.</li>
 <li>Use cases: e-commerce visual and textual search, media archive discovery, compliance docs, and more.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-41-02-0577-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-41-02-0577-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="oneembeddingspacechangessearch">One embedding space changes search</h2>
 <h3 id="theoldwayisbroken">The old way is broken</h3>
 <p>You probably stitched separate models: a text embedder for docs, a vision model for images. Then something bespoke for audio or video transcripts. That splits your index and complicates ranking. It makes “What’s the clip where the engineer says ‘latency dropped’ while the graph spikes?” nearly impossible.</p>
@@ -89,7 +89,7 @@
 <p>Behind the scenes, this works through a shared representation across formats. Think of a multilingual friend who speaks content, not English versus pixels or audio waves. If your query mentions “the chart that spikes after Q2,” the space places that phrase near the exact image region. It also sits near the paragraph explaining the spike. You’re not translating between separate systems. You’re asking one brain to recall one memory.</p>
 <p>If you’ve tried cross-modal models like CLIP, the intuition will feel familiar. Align text and visuals so similar concepts cluster. The difference is Nova’s scope. Not just images and captions, but documents, audio, and video moments in one space. That unlocks “find the moment,” not just “find the file.”</p>
 <p>Move from simple search to real workflows. Think triaging customer tickets or auditing marketing claims. The reliability from consistent retrieval keeps projects alive past the demo. Teams stop babysitting edge cases, and start building features.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-41-59-4703-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-41-59-4703-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="novamultimodalembeddingsinsidebedrock">Nova Multimodal Embeddings inside Bedrock</h2>
 <h3 id="inputslimitsandsegmentation">Inputs limits and segmentation</h3>
 <p>Nova accepts text and documents up to 8K tokens. It handles video and audio segments up to 30 seconds. Larger assets? Segment them. For video, chunk by scene or slide transitions. For audio, chunk by silence or speaker turns. For long PDFs, chunk by headings or logical sections. For example, per chart with its caption. You then embed each chunk. Retrieval reassembles the answer.</p>

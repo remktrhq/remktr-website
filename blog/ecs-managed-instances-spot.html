@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-46-24-8558-PM.png" alt="Cut Container Spend With ECS Managed Instances On Spot"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-46-24-8558-PM.png" alt="Cut Container Spend With ECS Managed Instances On Spot" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Cut Container Spend With ECS Managed Instances On Spot</h1>
     <div class="blog-post-meta">
@@ -74,7 +74,7 @@
 <li><p>ECS handles scaling, patching, and maintenance so you focus on apps.</p></li>
 <li><p>Consider Fargate Spot for zero-infra; use Managed Instances for control/perf.</p></li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-47-13-6866-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-47-13-6866-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="meetthemove">Meet the move</h2>
 <h3 id="whatthisactuallyis">What this actually is</h3>
 <p>Amazon ECS Managed Instances brings AWS-managed infrastructure to ECS on EC2. AWS handles provisioning, scaling, and routine maintenance of the instance fleet behind your ECS cluster. Pair that with EC2 Spot Instances—spare capacity at steep discounts—and you get elastic, low-cost compute for containers without wrangling autoscaling.</p>
@@ -113,7 +113,7 @@
 </ul>
 <p>If you’re searching “amazon ecs managed instances vs fargate,” here’s the punchline: choose Managed Instances when you need GPUs, huge RAM, custom storage, or predictable per-instance performance; choose Fargate when your time-to-value and ops simplicity trump fine-grained control.</p>
 <p>One more angle: startup times. With EC2, you can pre-warm capacity or keep a small buffer of instances around for immediate task placement. With Fargate, you don’t manage hosts, but you also don’t pre-warm. If your workloads are ultra-latency-sensitive on scale-up, Managed Instances give you more dials.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-48-08-6184-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-48-08-6184-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="architectingforinterruption">Architecting for interruption</h2>
 <h3 id="blendcapacitylikeaportfolio">Blend capacity like a portfolio</h3>
 <p>Use ECS capacity providers to mix On-Demand and Spot. Set a small On-Demand base (e.g., 20–30%) for steady reliability, then let Spot handle bursts. Managed scaling adjusts the Auto Scaling group to track your task demand. This blend evens out Spot hiccups while preserving big savings.</p>

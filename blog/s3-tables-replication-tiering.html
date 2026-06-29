@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-15-53-4882-PM.png" alt="Cut S3 Iceberg Costs With Replication And Intelligent-Tiering"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-15-53-4882-PM.png" alt="Cut S3 Iceberg Costs With Replication And Intelligent-Tiering" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Cut S3 Iceberg Costs With Replication And Intelligent-Tiering</h1>
     <div class="blog-post-meta">
@@ -74,7 +74,7 @@
 <li>Use lifecycle policies for deterministic archiving; Intelligent-Tiering for dynamic.</li>
 <li>Expect fewer ops tickets, fewer surprises, and lower storage bills.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-16-48-7469-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-16-48-7469-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="replicationthatstaysconsistent">Replication that stays consistent</h2>
 <h3 id="consistencyyoucantrust">Consistency you can trust</h3>
 <p>Replicating Iceberg is more than copying parquet files. You need snapshots, manifests, and metadata to land in the same order as the source. Otherwise you’ll query ghost data or miss fresh updates. S3 Tables replication handles this for you. New snapshots, metadata changes, and data file adds/removes are replayed in sequence. Replication is asynchronous, but updates usually land within minutes. You get near real-time read-only replicas.</p>
@@ -105,7 +105,7 @@
 <p><em>Bottom line: apply S3 Intelligent-Tiering to your destination table buckets.</em> Let the replica’s actual behavior pay your storage bill.</p>
 <p>If you’re worried about performance, breathe. The frequent and infrequent tiers still deliver milliseconds latency. Archive Instant Access gives a lower storage rate with instant access. That’s a sweet spot for replicas that cool off but must be queryable anytime. Deeper archive options exist for extra-cold data. Review retrieval behavior before enabling them on active replicas.</p>
 <p>A practical trick: pair Intelligent-Tiering with ongoing file compaction. Bigger, well-compressed parquet files cut per-object overhead. They can improve scan efficiency in engines like Athena and EMR. You’ll pay fewer per-object monitoring charges. And get better query performance on the hot path.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-17-40-3157-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-17-40-3157-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="multiregionicebergboring">Multi Region Iceberg boring</h2>
 <h3 id="drpattern">DR pattern</h3>
 <p>A common pattern: write in Region A on the hot path. Replicate to Regions B and C as read-only. Analytics teams in B and C point Athena or EMR to the local replica for routine reports. If Region A has issues, promote a replica per your governance playbook. <em>Keep calm.</em> Because replication preserves commit order, readers don’t see partial states.</p>

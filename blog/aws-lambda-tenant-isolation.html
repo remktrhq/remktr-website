@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-19-2025-08-24-58-3814-PM.png" alt="Ship Secure Multi-Tenant SaaS Faster With Lambda Isolation"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Nov-19-2025-08-24-58-3814-PM.png" alt="Ship Secure Multi-Tenant SaaS Faster With Lambda Isolation" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Ship Secure Multi-Tenant SaaS Faster With Lambda Isolation</h1>
     <div class="blog-post-meta">
@@ -74,7 +74,7 @@
 <li>Works for SaaS, internal multi-tenant platforms, and regulated workloads.</li>
 <li>Start by enabling the mode, tagging resources by tenant, and wiring IAM to those tags.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-19-2025-08-26-01-3321-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-19-2025-08-26-01-3321-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="whatisolationmodedoes">What Isolation Mode Does</h2>
 <h3 id="computeandcontextisolation">Compute and context isolation</h3>
 <p>Tenant Isolation Mode spins up isolated runtimes per tenant while you use a single Lambda. Each call carries tenant context—think tenantId, plan tier, and routing hints. Your code decides what to touch and what to skip. You write shared business logic once, while the platform enforces isolation.</p>
@@ -102,7 +102,7 @@
 <p>More tenants, same function. Warm paths, shared cache, fewer idle bits. You pay for calls and duration, not hundreds of dormant copies. Since you tag everything, showback or chargeback per tenant is easy. Great for unit economics and pricing talks.</p>
 <p>First-hand example: A data analytics SaaS merges 120 per-tenant Lambdas into one function. It uses Tenant Isolation Mode. Result: one pipeline to deploy, 120 IAM roles with tag filters, and a dashboard by tenant ID. Ops time drops, and on-call stops hating Fridays.</p>
 <p>If you want more, reserve extra concurrency or memory for premium tenants. Keep one codebase but tune runtime settings or upstream throttles. VIPs get steadier latency. The books stay clear because everything is tagged.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-19-2025-08-27-09-2245-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-19-2025-08-27-09-2245-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="blueprintenabletaglock">Blueprint Enable Tag Lock</h2>
 <h3 id="enabletenantisolationmode">Enable Tenant Isolation Mode</h3>
 <p>Flip it on in the console or CLI for your function. The runtime starts receiving tenant-aware context. Your code uses that context to pick tenant resources, like the right schema or S3 prefix.</p>

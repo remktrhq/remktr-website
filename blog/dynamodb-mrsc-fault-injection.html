@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-36-34-6702-PM.png" alt="Battle-Test Failover with DynamoDB MRSC and FIS Global Tables"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-36-34-6702-PM.png" alt="Battle-Test Failover with DynamoDB MRSC and FIS Global Tables" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Battle-Test Failover with DynamoDB MRSC and FIS Global Tables</h1>
     <div class="blog-post-meta">
@@ -75,7 +75,7 @@
 <li>Monitor CloudWatch metrics and DynamoDB Streams; document a repeatable game day runbook.</li>
 <li>Costs are pay-per-use: DynamoDB per read/write/storage/replication; FIS billed per experiment duration.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-37-23-4180-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-37-23-4180-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="whatmrscandfisprovide">What MRSC and FIS Provide</h2>
 <h3 id="mrscinplainenglish">MRSC in Plain English</h3>
 <p>Multi-Region strong consistency (MRSC) means your writes commit across Regions with a clarity contract designed to deliver zero data loss and sub-second recovery goals. With DynamoDB global tables (v2), you replicate data across Regions at petabyte scale with single-digit millisecond performance. The MRSC twist: you’re proving a Region going dark won’t drop writes or return stale reads where it matters. You’re designing for reality, not hope.</p>
@@ -234,7 +234,7 @@
 <li>Reduce batch sizes in hot paths to cut item churn and write amp.</li>
 <li>Improve alarms to fire on user-impacting symptoms (checkout success) not just low-level noise.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-38-46-2628-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-38-46-2628-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="faq">FAQ</h2>
 <h3 id="practicalmrscfisexample">Practical MRSC FIS example</h3>
 <p>Run a 20-minute cross-Region latency injection (e.g., 300 ms) during controlled load. Verify write success, conflict counts, replication backlog clearance under 60 seconds, and user SLOs (checkout success, balance accuracy). Then simulate a Regional outage to validate automated failover.</p>

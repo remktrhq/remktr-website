@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-19-00-1692-PM.png" alt="Cut EC2 costs 20–30% with C8id, M8id, R8id"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-19-00-1692-PM.png" alt="Cut EC2 costs 20–30% with C8id, M8id, R8id" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Cut EC2 costs 20–30% with C8id, M8id, R8id</h1>
     <div class="blog-post-meta">
@@ -75,7 +75,7 @@
 <li>C8id = compute-heavy, M8id = general-purpose, R8id = memory-intensive.</li>
 <li>Use AWS Pricing Calculator + Compute Optimizer to right-size and save.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-19-51-9891-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-19-51-9891-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="meetintelxeon6trio">Meet Intel Xeon 6 trio</h2>
 <h3 id="thelineupataglance">The lineup at a glance</h3>
 <ul>
@@ -91,7 +91,7 @@
 <h3 id="aquickconcreteexample">A quick concrete example</h3>
 <p>Think about your CI/CD pipeline. On C8id, you pin builds to CPU-optimized nodes and cut noisy neighbor risk with right-sized vCPUs. You also use instance storage (where available) for faster local I/O during image builds. For microservices on M8id, you balance CPU and memory headroom while using enhanced networking. That keeps p99 latencies stable through traffic spikes. For R8id, you park Redis, Memcached, or in-memory analytics. Keep hot data in RAM and kill round trips. This isn’t theory; this is how modern stacks squeeze throughput today.</p>
 <p>If you’re on Kubernetes, label nodes by family (c8id, m8id, r8id). Add simple nodeSelectors or Affinity rules and treat each pool like a performance persona. Use Pod Disruption Budgets and topology spread to keep replicas healthy during rollouts. For build-heavy teams, point your runners at C8id with local NVMe for Docker layer caching. Watch your build times just collapse.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-20-39-1316-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-08-20-39-1316-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="choosebyworkload">Choose by workload</h2>
 <h3 id="computeheavypickc8id">Compute heavy pick C8id</h3>
 <p>If your jobs look like HPC kernels, Monte Carlo sims, media transcode, or Spark stages that are CPU-bound, C8id lands first. Pair EFA with tightly coupled jobs to cut MPI jitter and time-to-solution. For embarrassingly parallel tasks like batch or map-only stages, scale out with autoscaling. Bin-pack to keep cores hot and idle time low.</p>

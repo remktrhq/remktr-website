@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Dec-30-2025-04-09-05-0097-PM.png" alt="Track EBT In Amazon Finances API Without Headaches"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Dec-30-2025-04-09-05-0097-PM.png" alt="Track EBT In Amazon Finances API Without Headaches" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Track EBT In Amazon Finances API Without Headaches</h1>
     <div class="blog-post-meta">
@@ -73,7 +73,7 @@
 <li>Ops: respect throttling and pagination; store nextToken; monitor retries.</li>
 <li>Benefits: cleaner EBT tracking, easier audits, simpler reconciliation across marketplaces.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-30-2025-04-10-10-7406-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-30-2025-04-10-10-7406-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="whatchanged">What Changed</h2>
 <h3 id="theupgradeinonesentence">The upgrade in one sentence</h3>
 <p>Amazon’s SP-API Finances v0 now emits EBT refund reimbursement events. You can flag and book EBT directly in financial events instead of guessing from order metadata.</p>
@@ -101,7 +101,7 @@
 <li>Marketplace differences matter. Currency, fee structures, and reserve timing can vary by marketplace. Persist marketplace IDs and currency codes everywhere.</li>
 <li>Optional fields are a thing. Build your schema and checks to allow missing fields without blowing up the job.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-30-2025-04-11-09-3221-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Dec-30-2025-04-11-09-3221-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="turneventsintoaccounting">Turn Events Into Accounting</h2>
 <h3 id="startwithidentifiersandscope">Start with identifiers and scope</h3>
 <p>You’ll pull financial events with finances:read. From there, filter EBTRefundReimbursementOnlyEventList. Persist the event ID, order or group IDs, marketplace, posted date, and currency. Those anchors let you dedupe, replay, and audit.</p>

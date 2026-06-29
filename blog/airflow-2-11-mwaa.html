@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-30-31-7749-PM.png" alt="Ship Data Pipelines Faster: Airflow 2.11 Hits MWAA"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-30-31-7749-PM.png" alt="Ship Data Pipelines Faster: Airflow 2.11 Hits MWAA" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Ship Data Pipelines Faster: Airflow 2.11 Hits MWAA</h1>
     <div class="blog-post-meta">
@@ -74,7 +74,7 @@
 <li>Lean on deferrable patterns. Right-size schedulers to trim idle capacity and waste.</li>
 </ul>
 <p>That’s the headline. The rest is practical how-to. Exactly where 2.11 helps, how to harden your codebase, and a rollout plan that won’t wake your on-call.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-31-22-8414-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-31-22-8414-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="what211unlocks">What 2.11 Unlocks</h2>
 <h3 id="newversiononmanagedrunway">New version on managed runway</h3>
 <p>Airflow 2.11 on MWAA gives you a curated, tested image with pinned deps. You get managed scaling and the usual AWS operational plumbing baked in. Translation: fewer “works on my laptop” surprises. More time tuning DAGs, not babysitting containers. Because MWAA abstracts the platform work, this jump focuses on your code. Think DAGs, operators, and providers instead of infra chores.</p>
@@ -144,7 +144,7 @@
 <li>Freeze and tag your DAG repo and requirements.txt at green promotion. It makes rollback easy.</li>
 </ul>
 <p><em>If something goes sideways, roll back in minutes.</em> Point event sources and API calls back to blue. Revert the S3 DAG path pointer and freeze changes while you investigate.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-32-15-1041-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-32-15-1041-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="performancecostopswins">Performance Cost Ops Wins</h2>
 <h3 id="schedulerandtriggerertuning">Scheduler and triggerer tuning</h3>
 <p>Airflow 2.11 on MWAA is a good excuse to revisit orchestration costs. If you still rely on long-polling sensors, convert them to deferrable ones. Use deferrable sensors in the amazon provider for S3, EMR, and Glue when available. Deferral frees worker slots while tasks wait on events. That boosts throughput and cuts idle burn.</p>

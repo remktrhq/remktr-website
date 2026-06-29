@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-45-17-7693-PM.png" alt="Move Encrypted EC2 Across Regions Without Breaking Compliance"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-45-17-7693-PM.png" alt="Move Encrypted EC2 Across Regions Without Breaking Compliance" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Move Encrypted EC2 Across Regions Without Breaking Compliance</h1>
     <div class="blog-post-meta">
@@ -75,7 +75,7 @@
 <li>Design KMS: create destination keys, set policies/grants, log with CloudTrail, and validate IAM least privilege.</li>
 <li>For compliance, automate evidence with AWS Config rules, CloudTrail, and AWS Backup reporting.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-46-46-7820-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-46-46-7820-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="whatencryptedandcompliantmeans">What encrypted and compliant means</h2>
 <h3 id="atrestvsintransit">At rest vs in transit</h3>
 <p>“AWS EC2 encryption at rest” means EBS volumes, snapshots, and AMIs use KMS keys. When you copy an encrypted EBS snapshot to another Region, AWS decrypts it in the source Region with the source key, then re‑encrypts it with a KMS key you pick in the destination Region. You never expose the source key or share key material.</p>
@@ -137,7 +137,7 @@
 <li>Vault Lock: Enable it to enforce write‑once, read‑many controls. This helps satisfy immutability and retention requirements.</li>
 <li>Reporting: Turn on built‑in compliance reports so you can show coverage, last successful backup, and copy status during audits.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-47-37-4235-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-47-37-4235-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="designthekmsplan">Design the KMS plan</h2>
 <h3 id="keysinthetargetregion">Keys in the target Region</h3>
 <p>Decide your KMS key strategy up front. Options:</p>

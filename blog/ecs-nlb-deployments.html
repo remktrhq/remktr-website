@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-08-50-0945-PM.png" alt="Ship Safer ECS Deployments with Network Load Balancers"></div>
+    <div class="blog-post-hero"><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-08-50-0945-PM.png" alt="Ship Safer ECS Deployments with Network Load Balancers" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Ship Safer ECS Deployments with Network Load Balancers</h1>
     <div class="blog-post-meta">
@@ -78,7 +78,7 @@
 <li>Use CodeDeploy configs, like time-based canary or linear, with ECS blue or green services.</li>
 <li>Tune deregistration delay and health checks so in-flight sessions drain clean.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-09-39-5085-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-09-39-5085-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="whynlbcanarieschangemath">Why NLB canaries change math</h2>
 <h3 id="quickcontrastnlbvsalb">Quick contrast NLB vs ALB</h3>
 <p>Here’s the 60-second version. ALB is Layer 7: HTTP headers, cookies, path or host rules, and routing. NLB is Layer 4: raw TCP or UDP, static IPs, TLS passthrough or termination, and very low latency. For long-lived connections or game-level performance, pick NLB. For path rules or WAF, pick ALB.</p>
@@ -101,7 +101,7 @@
 <p>Linear deployments move traffic in fixed steps on a timer. Example: shift 10% every 3 minutes until 100%. If metrics go red, like error spikes, resets, or bad p99, ECS halts or rolls back. It’s a steady curve that’s easy to explain and reason about.</p>
 <p>Practical tip: set steps based on peak traffic, not instance count. Ten percent at off-peak might be noise. Ten percent at peak is a real test.</p>
 <p>Common defaults in CodeDeploy style setups: 10% every 1 minute, or 10% every 3 minutes. Pick intervals long enough to see effects on caches, pools, and GC pauses. Fast ramps tempt you, but slow ramps catch edge cases.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-10-28-8967-PM.png" alt=""></p>
+<p><img src="/hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-10-28-8967-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h3 id="canarytrustbutverify">Canary trust but verify</h3>
 <p>Canary tests a small slice first, like 5% for 10 minutes, then 100% if healthy. It’s perfect for schema changes, protocol tweaks, or new TLS configs. With NLB, connection stickiness matters a lot. Tune deregistration delay so in-flight sessions on the old task set don’t get dropped mid-chat.</p>
 <p><em>Health is your contract.</em> Use CloudWatch to watch:</p>
