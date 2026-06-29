@@ -1,0 +1,411 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-january-2026-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship January AWS Updates Fast: Patches, Regions, CLI</title>
+    <link rel="canonical" href="aws-january-2026-updates.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore AWS Jan 2026 updates: Amazon Corretto security patches, regional expansions, and CLI tools; additional services examples and additional services meaning.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship January AWS Updates Fast: Patches, Regions, CLI",
+        "datePublished": "2026-01-26T21:26:32Z",
+        "dateModified": "2026-01-26T21:26:33.110Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-january-2026-updates",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-26-2026-09-13-19-7334-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-january-2026-updates.html">Ship January AWS Updates Fast: Patches, Regions, CLI</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 26, 2026 9:26:32 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’ve got two clocks ticking right now: security and speed. January’s AWS drop turns both up to 11 today, honestly. Corretto ships critical crypto fixes for JDK 17, 21, and 22. New regions light up for AI and training clusters this month. The AWS CLI gets a new GPU-specific lens for visibility. You can spot G7e signals without spelunking in Grafana again.</p>
+<p>Here’s the catch, and it matters more than you think. If you don’t patch, test, and roll fast, you leave attack surface open. And you leave performance sitting there on the table too today. That’s not just risky—it’s expensive, and it adds up fast.</p>
+<p>Good news: this is a fast ship if you follow a checklist. Update Corretto with yum or fresh Docker images on your builds. Flip region flags for Bedrock custom models and SageMaker HyperPod today. And drop the new CLI into your dev machines right away. Think of it like USPS premium PO Box Street Addressing. Same box, more delivery options, plain and simple today too. In your AWS world, “additional services” is the leverage layer—low effort, extra capability.</p>
+<p>Today, you’ll get the what, the why, and the how, period. Plus a clean action plan you can run in under an hour.</p>
+<p>If security drives trust and speed drives revenue, this release is the rare two-for-one. Patch the JVM first, then expand your region footprint where it matters. Add the CLI muscle that reveals idle GPUs you can shut down. <em>That’s risk down, cost down, and capability up—all before lunch.</em></p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Patch Amazon Corretto now for crypto CVE fixes on JDK 17/21/22.</li>
+<li>New region coverage: Bedrock custom models and SageMaker HyperPod in EU (Spain) and AP (Hyderabad).</li>
+<li>AWS CLI v2.17 adds <code>aws ec2 describe-gpu-instances</code> for G7e visibility.</li>
+<li>“Additional services” = low-lift upgrades (think USPS street addressing) that unlock extra capabilities.</li>
+<li>Update via yum or fresh Docker images, validate CI, and roll by environment.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-26-2026-09-14-12-3152-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="decodeadditionalservices">Decode additional services</h2>
+<h3 id="thesimpledefinition">The simple definition</h3>
+<p>If you’ve wondered about “additional services meaning,” here’s the clean take. They are optional add-ons that extend a core product without replacing it. In AWS, it might mean enabling a new region for a feature. Or turning on a new CLI capability for your team. In mail land, it’s like USPS Street Addressing—same box, smarter delivery.</p>
+<h3 id="poboxanalogyworks">PO Box analogy works</h3>
+<p>Searches like “premium PO Box service street addressing” keep pointing to one simple idea. Greater reach, same base asset, with no new mailbox needed. USPS describes Street Addressing like this:</p>
+<p>“Street Addressing Service allows you to use the street address of the Post Office for your PO Box.” — USPS FAQ</p>
+<p>That means more carriers can deliver to your PO Box. In AWS terms, it’s the same pattern with a twist. Enable Bedrock in another region or adopt a new CLI subcommand. You get a wider surface and the same workflow still.</p>
+<ul>
+<li>Additional services synonym: add-ons, extensions, opt-ins.</li>
+<li>Additional services examples: Bedrock custom models in more regions, SageMaker HyperPod availability, and the new GPU-specific EC2 CLI call.</li>
+</ul>
+<p>As a USPS note, the “premium PO Box service street addressing cost” varies by location and box size. Translation to AWS is simple, so don’t overthink it. Some add-ons are free toggles, like feature flags in your console. Others add cost once used: compute, storage, transfer, and managed services. Know which is which before your next deploy.</p>
+<p>“Additional services” isn’t fluff; it’s real leverage. Winning teams treat these upgrades like compounding advantages over time.</p>
+<p>“Street Addressing Service allows you to use the street address of the Post Office for your PO Box.” — USPS FAQ</p>
+<h3 id="turnadditionalservicesintogains">Turn additional services into gains</h3>
+<ul>
+<li>Start with inventory: list features you already use and map their regions.</li>
+<li>Identify quick wins: a region toggle that reduces latency or eases compliance today.</li>
+<li>Add a small guardrail layer: budgets, quota checks, and encryption defaults.</li>
+<li>Bake into IaC: move add-ons from ad hoc to default pattern. Optional doesn’t mean manual.</li>
+</ul>
+<p><em>The short version is simple: more routes, same mailbox.</em> More regions and commands, same account and workflows you already trust. That’s leverage without any re-architecture at all, really, for now.</p>
+<h2 id="patchfirstcryptofixes">Patch first crypto fixes</h2>
+<h3 id="whatshipped">What shipped</h3>
+<p>Amazon Corretto’s January 2026 updates deliver security and performance for Java. Supported JDKs include 17 LTS, 21 LTS, and 22 builds. The headline is simple: critical crypto CVEs got fixed fast. That matters because auth, TLS, and data checks rely on those bits. Corretto is AWS’s no-cost, multiplatform OpenJDK distribution, and it’s drop-in.</p>
+<p>“Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK).” — AWS Corretto</p>
+<h3 id="whywaitoncryptopatches">Why wait on crypto patches</h3>
+<ul>
+<li>Attackers read the same advisories you do, every single time. The window between disclosure and exploit can be days.</li>
+<li>Crypto defaults often tighten in good ways that protect you. That’s protection you want now, not something to defer.</li>
+<li>Compliance teams love timely patch cycles. It’s the cheapest control you can ship.</li>
+</ul>
+<p>If your JVM touches auth, payments, PII, messaging, or data pipelines, you patch.</p>
+<h3 id="updatewithoutdrama">Update without drama</h3>
+<ul>
+<li>Linux: update via your package manager (e.g., yum) and restart services.</li>
+<li>Containers: pull the latest Corretto Docker images and rebuild.</li>
+<li>CI/CD: pin the new base image or Java version. Run tests, then roll by environment.</li>
+</ul>
+<p><em>Pro move:</em> validate TLS handshakes and signed JWT flows in staging. Crypto fixes can tighten defaults, so catch handshake breaks before prod.</p>
+<p>First-hand example: One fintech standardized on Corretto 17 inside containers across services. Their update playbook was simple: rebuild, run contract tests, and canary deploy. Total time to prod was under two hours, but your mileage varies. The pattern holds even at your shop.</p>
+<h3 id="validationchecklist">Validation checklist</h3>
+<ul>
+<li>Smoke test startup: services boot cleanly with no JVM or provider errors.</li>
+<li>TLS checks: verify mutual TLS endpoints, cipher suites, and certificate chains.</li>
+<li>JWT and JWS: validate signing and verification paths; confirm key IDs (kid) resolve correctly.</li>
+<li>Database drivers: confirm encrypted connections to RDS or Aurora use expected protocols.</li>
+<li>Perf sanity: run a light load test to check GC and throughput look normal.</li>
+</ul>
+<h3 id="rolloutsequencing">Rollout sequencing</h3>
+<ul>
+<li>Staging first: upgrade nonprod and run solid regression tests.</li>
+<li>Canary: push to 5–10% of prod, watch errors, p95 latency, and auth failures.</li>
+<li>Progressive: finish the rollout once your key metrics stay flat.</li>
+<li>Post-ship: log patch windows and versions in change history for audit.</li>
+</ul>
+<h2 id="regionexpansionnewcoverage">Region expansion new coverage</h2>
+<h3 id="whatopenedup">What opened up</h3>
+<p>Amazon Bedrock custom models and SageMaker HyperPod now land in EU (Spain) and AP (Hyderabad). That’s a big unlock if customers or data residency needs live there. Expect lower cross-region latency, cleaner compliance, and sometimes lower egress.</p>
+<p>“You can use Amazon Bedrock in the following AWS Regions…” — AWS Bedrock docs</p>
+<h3 id="whythismatters">Why this matters</h3>
+<ul>
+<li>Data residency: EU-only or India-local rules get easier with regional endpoints.</li>
+<li>Customer experience: sub-100 ms gains stack up for chat, search, and inference.</li>
+<li>Cost structure: serving and training closer can reduce transfer and network sprawl.</li>
+</ul>
+<h3 id="bedrockcustommodels">Bedrock custom models</h3>
+<ul>
+<li>Fine-tune and host closer to users to trim latency and jitter.</li>
+<li>Keep training data in-region to match local compliance expectations.</li>
+<li>Use per-region KMS keys and VPC endpoints to harden data paths.</li>
+</ul>
+<h3 id="sagemakerhyperpod">SageMaker HyperPod</h3>
+<ul>
+<li>Run managed training clusters for large-scale jobs without custom orchestration.</li>
+<li>Schedule distributed runs off-peak to balance cost and throughput.</li>
+<li>Use spot where it fits; set quotas and budgets to avoid runaway jobs.</li>
+</ul>
+<h3 id="whattoflip">What to flip</h3>
+<ul>
+<li>Add EU (Spain) and AP (Hyderabad) to Bedrock and SageMaker region lists.</li>
+<li>Create per-region KMS keys, S3 buckets, and strict IAM roles.</li>
+<li>Define VPC endpoints for Bedrock, SageMaker, S3, STS, and CloudWatch.</li>
+<li>Add regional CloudWatch alarms and dashboards for each new region.</li>
+</ul>
+<p><em>Expert view: “Not all service features are available in all regions.”</em> Every new region adds meaningful options for teams. If EU (Spain) or AP (Hyderabad) matter, move now and tighten your playbooks.</p>
+<h3 id="finopsguardrails">FinOps guardrails</h3>
+<ul>
+<li>Start small: run minimal training jobs to profile time, cost, and throughput.</li>
+<li>Add budgets and alerts: set daily caps for training and inference.</li>
+<li>Tag everything: project, owner, and environment; enforce with SCPs or CI checks.</li>
+<li>Compare: measure latency and cost before and after to justify scaling.</li>
+</ul>
+<h2 id="cligpuvisibility">CLI GPU visibility</h2>
+<h3 id="whythishelps">Why this helps</h3>
+<p>AWS CLI v2.17 adds <code>aws ec2 describe-gpu-instances</code> for direct GPU inventory. You get G7e visibility without stitching filters and tags across types. If you run training or GPU inference, your scripts can finally relax. This removes glue code you never wanted to maintain.</p>
+<p>“The AWS Command Line Interface (AWS CLI) is a unified tool to manage your AWS services.” — AWS CLI docs</p>
+<h3 id="whattodo">What to do</h3>
+<ul>
+<li>Upgrade: install v2.17 on dev laptops, CI runners, and bastions.</li>
+<li>Audit: list GPU instances across accounts and regions with the new command.</li>
+<li>Monitor: cross-check with CloudWatch GPU metrics and alert on idle nodes.</li>
+</ul>
+<p>First-hand example: A media team cut GPU hours by 12% in one week. They alerted on idle G-family nodes and auto-stopped with SSM documents. Visibility creates savings, almost immediately.</p>
+<p><em>Small but mighty note:</em> standardize profiles and region defaults in shared config. Less friction means more usage across your teams.</p>
+<h3 id="maketheoutputwork">Make the output work</h3>
+<ul>
+<li>Normalize: export results to JSON and enrich with tags like team and project.</li>
+<li>Action: stop or hibernate idle GPUs during non-business hours.</li>
+<li>Exceptions: keep an allowlist for always-on research or 24/7 inference.</li>
+<li>Report: post weekly Slack summaries with “savings captured” estimates.</li>
+</ul>
+<h3 id="teamenablementtips">Team enablement tips</h3>
+<ul>
+<li>Add the new command to runbooks and onboarding docs.</li>
+<li>Include it in pre-deploy checks for ML pipelines.</li>
+<li>Wire dashboards so GPU fleet composition stays visible.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-26-2026-09-15-17-3295-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="costsandpoboxanalogy">Costs and PO Box analogy</h2>
+<h3 id="thecostlens">The cost lens</h3>
+<p>Searches like “premium PO Box service street addressing cost” exist for a reason. USPS pricing varies by box size and office location. Street Addressing changes delivery options, not the mailbox itself. In AWS, region toggles and CLI upgrades seem free at first glance. The moment you train or scale endpoints, the meter runs: compute, storage, and transfer.</p>
+<h3 id="howtoframedecisions">How to frame decisions</h3>
+<ul>
+<li>Latency vs. spend: in-region Bedrock and HyperPod reduce latency and exceptions.</li>
+<li>Team time vs. tooling: a strong CLI saves dev hours and maintenance.</li>
+<li>Risk vs. agility: Corretto patches remove known crypto CVEs with tiny effort.</li>
+</ul>
+<p><em>USPS parallel: “Street Addressing Service allows you to use the street address of the Post Office for your PO Box.”</em> More routes, same mailbox. In AWS, regional and tooling add-ons expand your routes.</p>
+<p><em>Call it what it is: additional services synonym equals “leverage.”</em> You’re not rebuilding your stack; you’re widening the pipes.</p>
+<p>“Street Addressing Service allows you to use the street address of the Post Office for your PO Box.” — USPS FAQ</p>
+<h3 id="avoidclassictraps">Avoid classic traps</h3>
+<ul>
+<li>The free toggle illusion: enabling a region feels free, until the first training job. Pair feature flags with budgets and alerts, always.</li>
+<li>Shadow scripts: if the CLI can do it, stop maintaining a bash zoo. Consolidate on supported commands.</li>
+</ul>
+<h2 id="quickpitstop">Quick pit stop</h2>
+<ul>
+<li>Corretto patches hit crypto libraries for JDK 17/21/22—update via yum or Docker, then test TLS and JWT paths.</li>
+<li>Bedrock custom models and SageMaker HyperPod now live in EU (Spain) and AP (Hyderabad).</li>
+<li>AWS CLI v2.17 adds <code>aws ec2 describe-gpu-instances</code> for G7e visibility; upgrade your environments.</li>
+<li>Treat “additional services” like USPS Street Addressing: same core, bigger reach, with real price implications once you scale usage.</li>
+</ul>
+<h2 id="faqfastanswers">FAQ fast answers</h2>
+<ol>
+<li>Q: What is Amazon Corretto and why should I care?</li>
+</ol>
+<p>A: Corretto is AWS’s production-ready OpenJDK build. January updates include critical crypto CVE fixes and performance tweaks for JDK 17, 21, and 22. If you run Java in prod, patching reduces risk with minimal friction.</p>
+<ol start="2">
+<li>Q: How do I update Corretto safely?</li>
+</ol>
+<p>A: On Linux, use your package manager, like yum. For containers, pull the latest Corretto image and rebuild. Run tests, especially TLS and JWT paths. Canary deploy, then roll across environments.</p>
+<ol start="3">
+<li>Q: Which regions just got new capabilities?</li>
+</ol>
+<p>A: EU (Spain) and AP (Hyderabad) now support Bedrock custom models and SageMaker HyperPod. Expect better latency, cleaner data residency, and clearer operations if you serve those geos.</p>
+<ol start="4">
+<li>Q: What exactly does “additional services” mean here?</li>
+</ol>
+<p>A: Optional add-ons that extend core capabilities. Examples include enabling a feature in a new region or adopting a new CLI command. Synonyms: add-ons, extensions, opt-ins. Examples: Bedrock in new regions, HyperPod availability, and the GPU-focused CLI.</p>
+<ol start="5">
+<li>Q: What is USPS Street Addressing, and why is it relevant?</li>
+</ol>
+<p>A: USPS Street Addressing lets PO Box holders use the Post Office’s street address. That way, more carriers can deliver to the same box. It mirrors AWS: same core resource, broader routes. Costs vary by location and box size.</p>
+<ol start="6">
+<li>Q: Will these AWS changes increase my bill?</li>
+</ol>
+<p>A: Patching Corretto is free; the cost is your time. Enabling regions or training clusters adds spend when workloads run. The new CLI is free and can save money by exposing idle GPUs.</p>
+<ol start="7">
+<li>Q: How do I keep this from becoming a one-off fire drill?</li>
+</ol>
+<p>A: Make it a routine. Set a quarterly JVM patch window, keep a regions matrix in your repo, and add nightly GPU inventory checks. Automate what you repeat, every time.</p>
+<ol start="8">
+<li>Q: Any gotchas with CI and Corretto updates?</li>
+</ol>
+<p>A: If pipelines use specific Java versions, pin and update on purpose. Clear caches so old class files don’t sneak in. Rerun tests that hit crypto, HTTP clients, and database drivers.</p>
+<ol start="9">
+<li>Q: How do I verify Bedrock and HyperPod endpoints are reachable in new regions?</li>
+</ol>
+<p>A: Use VPC endpoints where supported and dry-run IAM permissions. Run a small hello-world training job or model call. Watch CloudWatch logs and metrics for timing and traffic.</p>
+<ol start="10">
+<li>Q: What should my GPU utilization targets look like?</li>
+</ol>
+<p>A: Avoid long idle time. During training, high utilization is perfect. Between runs, stop or hibernate instances. For inference, right-size and scale with demand.</p>
+<h2 id="shipthisupdate">Ship this update</h2>
+<ul>
+<li>Corretto: update via yum or pull new Docker images; restart Java apps.</li>
+<li>Tests: run integration tests focused on TLS, JWT, and crypto paths.</li>
+<li>CLI: install AWS CLI v2.17; verify <code>aws ec2 describe-gpu-instances</code> across profiles.</li>
+<li>Regions: add EU (Spain) and AP (Hyderabad) to IaC; validate quotas, KMS keys, and VPC endpoints.</li>
+<li>Observability: tag GPU instances; set CloudWatch alarms on low utilization; add a nightly stop job.</li>
+<li>Policies: add budgets and service quotas for Bedrock and SageMaker in the new regions.</li>
+<li>Docs: update runbooks and internal wikis with new regions and the CLI command.</li>
+<li>Go/No-Go: canary, then progressive rollout. Announce completion in your #release channel.</li>
+</ul>
+<p><em>The fastest way to reduce risk is to make patching a habit.</em> This January package pays off fast: less crypto risk, more regional reach, and sharper GPU visibility.</p>
+<p>Your next move: bake these “additional services” into your defaults. Don’t make them special; make them standard. <em>That’s how you compound speed.</em></p>
+<p>Want templates and automation to make these rollouts repeatable? Explore our <a href="../features.html">Features</a>. For real-world outcomes from teams shipping faster and safer, see our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/corretto/">AWS Corretto overview</a></li>
+<li><a href="https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/generic-linux-install.html">Corretto installation (Linux)</a></li>
+<li><a href="https://hub.docker.com/_/amazoncorretto">Amazon Corretto Docker images</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-regions.html">Amazon Bedrock regions</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/hyperpod.html">Amazon SageMaker HyperPod docs</a></li>
+<li><a href="https://github.com/aws/aws-cli/releases">AWS CLI releases (v2)</a></li>
+<li><a href="https://aws.amazon.com/ec2/instance-types/">AWS EC2 instance types overview</a></li>
+<li><a href="https://faq.usps.com/s/article/What-is-Street-Addressing-Service">USPS Street Addressing FAQ</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-january-2026-updates.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq00f1.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+January+AWS+Updates+Fast%3A+Patches%2C+Regions%2C+CLI&amp;pi=303822117590&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=303822117590&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-january-2026-updates&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-january-2026-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:43 GMT -->
+</html>

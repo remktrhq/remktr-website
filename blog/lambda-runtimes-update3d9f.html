@@ -1,0 +1,384 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/lambda-runtimes-update?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:20:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Master AWS Lambda runtimes: templates, docs, deprecations covered</title>
+    <link rel="canonical" href="lambda-runtimes-update.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore the Amazon.Lambda.Templates 8.0.1 update fixing .NET 10, GitHub discussions and AWS Lambda runtime docs on versions and deprecation—plan via AWS Health.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Master AWS Lambda runtimes: templates, docs, deprecations covered",
+        "datePublished": "2026-01-13T01:40:35Z",
+        "dateModified": "2026-01-13T01:40:35.745Z",
+        "mainEntityOfPage": "https://remktr.com/blog/lambda-runtimes-update",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-13-2026-01-32-55-7273-AM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="lambda-runtimes-update.html">Master AWS Lambda runtimes: templates, docs, deprecations covered</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 13, 2026 1:40:35 AM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You ship fast… until a runtime deprecates and your deploys face-plant. That’s the trap we all fall into sooner or later. Good news—this cycle is predictable if you watch for it. AWS just refreshed the tooling and clarified the docs for runtimes. Get your house in order now, and you’ll skate the next change.</p>
+<p><em>The headline is simple.</em> Amazon.Lambda.Templates 8.0.1 fixes .NET 10 targeting snags for real. Chatter around Amazon.Lambda.TestTool-10.0 is heating up for local runs. The AWS Lambda runtime docs doubled down on lifecycle reality. Supported runtimes get automatic security patches; deprecated ones don’t. Translation: your future downtime is optional if you plan with AWS Health Dashboard.</p>
+<p><em>Your move is simple: know what changed, and understand the lifecycle rules.</em> Audit your versions, then upgrade with a repeatable playbook. Do that and you’ll ship faster, not slower, every time runtimes roll.</p>
+<p>And one more thing: treat this like mowing the lawn, not a rescue mission. Small, regular passes keep things neat and boring. Let it slide, and you’re whacking weeds on a Sunday. Put guardrails in now—tags, alerts, and canaries. You’ll shift runtime updates from stressful all-hands to a boring, 20-minute chore.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Amazon.Lambda.Templates 8.0.1 resolves .NET 10 targeting issues. Use it to scaffold clean Lambda projects.</li>
+<li>Use Amazon.Lambda.TestTool-10.0 for fast local iterations and fewer deploy-debug loops.</li>
+<li>Supported runtimes get automatic security patches; deprecated ones require your upgrade work.</li>
+<li>Track AWS Lambda runtime versions and plan with AWS Health Dashboard alerts.</li>
+<li>If you care about Node.js 24, watch the official runtimes page before upgrading.</li>
+<li>Upgrade playbook: inventory, test locally, change runtime via console or IaC, canary, monitor, repeat.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-13-2026-01-33-38-7118-AM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatchanged">What changed</h2>
+<h3 id="amazonlambdatemplates801">Amazon.Lambda.Templates 8.0.1</h3>
+<p>The .NET Lambda community pushed for clarity and compatibility, and it finally landed. The Amazon.Lambda.Templates 8.0.1 release fixed .NET 10 targeting issues cleanly. Practically, you get scaffolds that match the current Lambda .NET story. Fewer mismatches, cleaner builds, and less fiddling with SDK and runtime metadata. If you paused new projects because templates dragged you into version limbo, this is your green light.</p>
+<p>Link your workflow with the latest templates via NuGet. Keep an eye on the aws/aws-lambda-dotnet repo for fixes and samples. The faster you align scaffolding to actual runtime support, the fewer CI/CD surprises.</p>
+<p>What this looks like day to day: new projects ship with sensible defaults. You get the right TargetFramework entries and Lambda-ready layouts that don’t fight builds. You spend less time chasing cryptic warnings and more time writing handlers. Standardizing gets easier across teams since everyone starts from the same base. That base already matches the runtime you plan to use.</p>
+<p>Pro tips to adopt fast:</p>
+<ul>
+<li>Standardize the template version in internal docs so new services match your fleet.</li>
+<li>Add a quick create-new-project checklist to your onboarding wiki: template version, runtime target, deployment method.</li>
+<li>Review older .csproj files for drift. Small mismatches in target or packaging become big headaches during upgrades.</li>
+</ul>
+<h3 id="localtestingwithtesttool100">Local testing with TestTool-10.0</h3>
+<p>Local iteration is where speed actually lives. Amazon.Lambda.TestTool-10.0 gives a tight loop to run and debug locally. You avoid full deploys for every change and experiment faster with dependencies. That means stronger feedback and real confidence before you flip a runtime switch in prod.</p>
+<blockquote>
+  <p>“Everything fails, all the time.” — Werner Vogels, AWS CTO</p>
+</blockquote>
+<p>When you accept that truth, tools that reduce unknowns aren’t nice-to-haves. They’re insurance. Use the TestTool to harden your upgrade path early.</p>
+<p>Local runs do more than catch obvious errors. They help you validate environment assumptions like variables, event shapes, and logging. You can simulate API Gateway events, SQS batches, and SNS messages easily. You’ll see how cold starts, serialization, and dependencies behave under the new runtime. Pair that with pre-prod and you’ve got a two-layer safety net.</p>
+<p>Quick setup ideas:</p>
+<ul>
+<li>Keep a small library of production sample events, scrubbed for PII of course.</li>
+<li>Validate both happy-path and ugly inputs like truncations, missing fields, and weird types.</li>
+<li>Log consistently and parseably, key=value style, so you can diff behavior.</li>
+</ul>
+<h3 id="whyyoucare">Why you care</h3>
+<ul>
+<li>Less time wiring templates, more time shipping real value.</li>
+<li>Local test cycles cut regressions before anyone else sees them.</li>
+<li>Clean targeting today makes runtime jumps easier tomorrow.</li>
+</ul>
+<p>If you stay disciplined on basics, runtime changes stop being risky. Your templates match reality, your local loop catches foot-guns, and pre-prod canaries confirm behavior under load.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-13-2026-01-34-26-6926-AM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="runtimes101">Runtimes 101</h2>
+<h3 id="supportedvsdeprecatedyourriskprofile">Supported vs deprecated (your risk profile)</h3>
+<p>AWS Lambda’s runtime lifecycle is not ambiguous. Supported runtimes receive managed security patches; deprecated ones do not. That single rule should set your upgrade cadence. If you’re on a supported runtime, AWS does heavy lifting in the background. When a runtime deprecates, you own the upgrade, and the clock starts.</p>
+<blockquote>
+  <p>“Supported runtimes get automatic security patches, while deprecated ones require upgrades.” — AWS Lambda runtime docs</p>
+</blockquote>
+<p><em>Read that again and plan backwards from your worst case scenario.</em> A critical fix lands, but your function stays pinned to an end-of-life runtime.</p>
+<p>The takeaway is blunt: don’t wait for a production breakage to nudge you. Once a runtime shows a deprecation date on the official page, start the work. Treat it like an expiring certificate. Book the work, run the playbook, then get back to the roadmap.</p>
+<h3 id="planwithawshealth">Plan with AWS Health</h3>
+<p>The AWS Health Dashboard surfaces account-level runtime deprecation events with timelines and guidance. Treat those alerts like SLAs your team owns. Wire them to chat or issue trackers, assign owners, and add runbooks. The earlier you see a notice, the calmer your migration goes.</p>
+<p>Turn this into muscle memory:</p>
+<ul>
+<li>Create an AWS Health alert rule via EventBridge and route it to on-call.</li>
+<li>For multi-account orgs, centralize Health events and fan them out correctly.</li>
+<li>Document a one-page runbook: what to check, who approves, canary steps, and rollback triggers.</li>
+</ul>
+<h3 id="whatchangesforyou">What changes for you</h3>
+<ul>
+<li>Supported runtime: patches roll in behind the scenes, and you validate behavior.</li>
+<li>Deprecated runtime: no more patches, so upgrade or accept risk.</li>
+<li>Your job: schedule upgrades during regular sprints, not during an incident.</li>
+</ul>
+<p>This mindset helps you say no to risky deferrals. It also helps you say yes to small, boring upgrades.</p>
+<h2 id="wherethingsstand">Where things stand</h2>
+<h3 id="checkruntimeversionsnow">Check runtime versions now</h3>
+<p>Don’t guess. Pull your inventory and list every function, runtime, and dependency. Cross-check against the AWS Lambda runtimes page to confirm what’s current. Create a simple matrix with function name, runtime, version, last deploy, and owner. That becomes your truth source when decisions get messy.</p>
+<p>Pro move: tag functions with runtime and team owner in tags. It’s easier to route a deprecation notice when metadata isn’t trapped in a spreadsheet.</p>
+<p>Make it repeatable:</p>
+<ul>
+<li>Export your function list regularly and store it with platform docs.</li>
+<li>Include Lambda Layers in the inventory since layers can pin older runtimes.</li>
+<li>Track memory sizes and timeouts too, since upgrades can nudge performance.</li>
+</ul>
+<h3 id="aboutnodejs24">About Node.js 24</h3>
+<p>Seeing buzz around 'aws lambda node 24'? Makes sense. Node.js moves fast, and teams want the latest features. But don’t ship off rumors or tweets alone. Before you plan a cutover, verify on the official Lambda runtimes documentation. If it’s listed, you’re good to start evaluation. If not, set a watch and keep your code runtime-agnostic. Then jump when it lands.</p>
+<p>A few habits keep you nimble:</p>
+<ul>
+<li>Avoid runtime-specific hacks that lock you in long term.</li>
+<li>Keep bundling simple and transparent so targets can swap easily.</li>
+<li>When a new runtime appears, test with real payloads and a canary first.</li>
+</ul>
+<h3 id="roadmaphygiene">Roadmap hygiene</h3>
+<ul>
+<li>Establish runtime SLAs, like upgrade within X weeks of a new supported runtime.</li>
+<li>Lock version gates in CI to block deploying deprecated runtimes entirely.</li>
+<li>Add a quarterly runtime review to scan versions, dependencies, and retire dead functions.</li>
+</ul>
+<p>If you treat runtimes like product dependencies, not background noise, you’ll stay ahead. You won’t need heroics every time a notice pops up.</p>
+<h2 id="upgradewithoutdrama">Upgrade without drama</h2>
+<h3 id="inventoryandassess">Inventory and assess</h3>
+<p>Start with facts. Export functions, runtimes, memory and time settings, and key libraries. Identify risky edges like native modules, pinned old SDKs, and custom layers tied to versions.</p>
+<p>Risk score each function by traffic, blast radius, and complexity. Tackle low-risk, high-confidence wins first to build momentum. Leave the gnarly one for last, but not forever.</p>
+<p>Also consider data flow and dependencies:</p>
+<ul>
+<li>Event sources: SQS, SNS, API Gateway, EventBridge, and Step Functions. Each has different failures.</li>
+<li>Downstream calls: DynamoDB, RDS, and third-party APIs. Runtime changes can shift TLS or connections.</li>
+<li>Observability: are logs and metrics consistent enough to compare before and after? If not, standardize.</li>
+</ul>
+<h3 id="testlocallythenpreprod">Test locally then pre prod</h3>
+<p>Spin up Amazon.Lambda.TestTool-10.0 for local runs and tight loops. Mock inputs from your top production events. Test cold and warm starts. In pre-prod, use the new runtime with realistic traffic patterns if possible.</p>
+<p>Baseline metrics before any switch: latency, error rates, and memory. You’ll need those numbers to prove “works on my machine” isn’t lying.</p>
+<p>Validation checklist:</p>
+<ul>
+<li>Happy-path requests return the same outputs and status codes every time.</li>
+<li>Error handling behaves consistently, retries and DLQs still work as expected.</li>
+<li>Memory usage and duration don’t spike on typical requests and workflows.</li>
+<li>Startup time is acceptable; watch cold starts on low-traffic functions closely.</li>
+</ul>
+<h3 id="changetheruntimesafely">Change the runtime safely</h3>
+<p>Use the AWS Console, SAM, CDK, Serverless Framework, or Terraform—whatever you deploy with. Keep the change small and explicit to reduce surprises. Upgrade helpers like Amazon.Lambda.Templates 8.0.1 reduce misconfig pain. They ensure your project targets the right framework and runtime.</p>
+<p>Roll out with a canary starting at 1–5% traffic. Watch CloudWatch metrics and logs, then ramp safely. If you see regressions, roll back fast and iterate.</p>
+<p>Guardrails that pay off:</p>
+<ul>
+<li>Use versions and aliases to route traffic during canaries.</li>
+<li>Set alarms on error rates, throttles, and latency percentiles during rollout windows.</li>
+<li>Keep a one-command rollback path documented, one click even better.</li>
+</ul>
+<h3 id="monitorandharden">Monitor and harden</h3>
+<p>Watch for memory creep or timeouts with the new runtime under load. Adjust memory and timeout to hit the sweet spot. Capture learnings in a shared doc so the next upgrade runs faster.</p>
+<p>Post-upgrade chores:</p>
+<ul>
+<li>Re-run load tests at realistic concurrency to confirm cost and performance.</li>
+<li>Check that logs and metrics still parse correctly in your observability stack.</li>
+<li>Update your inventory with the new runtime and date to close the loop.</li>
+</ul>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>Inventory every function by runtime and owner, then tag them in AWS.</li>
+<li>Confirm supported versions on the official Lambda runtimes page today.</li>
+<li>Use Amazon.Lambda.Templates 8.0.1 to align .NET project scaffolds cleanly.</li>
+<li>Iterate locally with Amazon.Lambda.TestTool-10.0 and baseline metrics first.</li>
+<li>Change runtime via console or IaC, then canary and monitor closely.</li>
+<li>Wire AWS Health Dashboard alerts to your team and set runtime SLAs.</li>
+</ul>
+<p>Add two more habits while you’re at it:</p>
+<ul>
+<li>Keep a known-good sample payload set for each event source, and test them all.</li>
+<li>Review Lambda Layers during upgrades; an outdated layer can undermine a clean change.</li>
+</ul>
+<h2 id="faqs">FAQs</h2>
+<h3 id="changeawslambdaruntime">Change AWS Lambda runtime</h3>
+<p>Open your function in the AWS Management Console. Go to Configuration, then General configuration. Choose Edit, select the new runtime from the dropdown, and Save. Redeploy if your workflow requires it. Validate with a test event and check CloudWatch logs right after.</p>
+<p>A few gotchas to avoid: confirm the function role, environment variables, and layer compatibility before Save. If you use aliases for traffic shifting, publish a new version. Point the alias to it rather than flipping $LATEST directly.</p>
+<h3 id="awsupgraderuntimeautomatically">AWS upgrade runtime automatically</h3>
+<p>No. AWS patches supported runtimes, but it won’t auto-migrate you to a new major runtime. When a runtime deprecates, you must upgrade explicitly via console or your infrastructure-as-code pipeline.</p>
+<p><em>This separation is good.</em> Your function won’t change under you without a deploy. It also means you need a calendar and a playbook, for real.</p>
+<h3 id="deprecationnoticetime">Deprecation notice time</h3>
+<p>Timelines vary by language and version. Always treat AWS Health notices as your source of truth. The safest stance is proactive upgrades, not last-minute scrambles.</p>
+<p>Practical policy: schedule runtime reviews quarterly. Aim to finish upgrades before the posted end date. You want buffer for testing, approvals, and canaries.</p>
+<h3 id="awslambdanode24">aws lambda node 24</h3>
+<p>Don’t assume. Check the AWS Lambda runtimes documentation to confirm support. If Node.js 24 appears as a supported runtime, evaluate and test. If it’s not listed, keep code portable and monitor announcements. Either way, run a structured upgrade when support goes official.</p>
+<p>While you wait, keep dependencies updated. Avoid hard dependencies on features not in your current runtime.</p>
+<h3 id="amazonlambdatemplatesandversions">Amazon.Lambda.Templates and versions</h3>
+<p>Templates scaffold projects that align to current best practices and targeting. The 8.0.1 update fixed .NET 10 targeting issues and reduced friction. It helps when building .NET-based Lambdas that match supported runtimes. Runtime availability still depends on AWS Lambda itself. Templates just make it easier to hit the right target when you scaffold.</p>
+<p>In short: templates shape your starting point, runtime dictates what runs in production.</p>
+<h3 id="islocaltestingworthit">Is local testing worth it</h3>
+<p>Yes. Local testing with Amazon.Lambda.TestTool-10.0 shortens feedback loops and catches incompatibilities. You won’t wait on deployments for every tiny check. Pair it with a staging or pre-prod canary to validate under realistic load.</p>
+<p>Think of local as your fast filter and staging as your reality check. Honestly, you want both.</p>
+<h2 id="changeruntimeinminutes">Change runtime in minutes</h2>
+<ul>
+<li>Open AWS Lambda Console and select your function from the list.</li>
+<li>Go to Configuration → General configuration, then click Edit.</li>
+<li>Choose the new runtime and confirm against the Lambda runtimes page.</li>
+<li>Save changes and redeploy if your pipeline needs a publish step.</li>
+<li>Run a test event, then check CloudWatch metrics and logs for issues.</li>
+<li>If all green, promote via canary by gradually increasing traffic, and monitor.</li>
+</ul>
+<p>Small extras that help:</p>
+<ul>
+<li>Set a temporary alarm on error rate and duration for the first hour.</li>
+<li>Note the function version and time of change in your change log.</li>
+</ul>
+<h2 id="wrapup">Wrap-up</h2>
+<p><em>Runtimes are product dependencies, not background noise you can ignore.</em> Treat them that way—template correctly, test locally, watch versions, and upgrade on a rhythm. You’ll avoid incident-driven upgrades and ship with real confidence. The combo of Amazon.Lambda.Templates 8.0.1, Amazon.Lambda.TestTool-10.0, and the official runtime docs covers you. Start with an inventory, wire AWS Health alerts, and move one function at a time. You’ll turn runtime changes from ugh into routine.</p>
+<p>If you’re a team lead, pick one service this week and run the playbook. Time-box it to a single sprint task and document everything you learned. Next sprint, do two of them. Within a quarter, your fleet will be tidy and your dashboards quiet. Your next runtime wave will feel like a flyby, not a storm.</p>
+<p>Finally, keep eyes on the official runtimes page and hands on the basics. Tags, aliases, canaries, and clear logs are your steady guardrails. That’s the boring, repeatable system that lets you move fast without breaking production.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">AWS Lambda runtimes</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtime-support-policy.html">AWS Lambda runtime support policy</a></li>
+<li><a href="https://aws.amazon.com/premiumsupport/technology/aws-health-dashboard/">AWS Health Dashboard (product page)</a></li>
+<li><a href="https://www.nuget.org/packages/Amazon.Lambda.Templates/8.0.1">Amazon.Lambda.Templates 8.0.1 (NuGet)</a></li>
+<li><a href="https://github.com/aws/aws-lambda-dotnet">aws/aws-lambda-dotnet (GitHub)</a></li>
+<li><a href="https://www.nuget.org/packages/Amazon.Lambda.TestTool-10.0/">Amazon.Lambda.TestTool-10.0 (NuGet)</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html">Using AWS Lambda function versions and aliases</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-cloudwatch.html">Monitor and troubleshoot Lambda with CloudWatch</a></li>
+<li><a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/deployments-create-traffic-shifting-lambda.html">Traffic shifting for Lambda with AWS CodeDeploy</a></li>
+<li><a href="https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html">AWS Health events via Amazon EventBridge</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/lambda/list-functions.html">AWS CLI list-functions reference</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="lambda-runtimes-update.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqc918.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Master+AWS+Lambda+runtimes%3A+templates%2C+docs%2C+deprecations+covered&amp;pi=293775082221&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=293775082221&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Flambda-runtimes-update&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/lambda-runtimes-update?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:20:29 GMT -->
+</html>

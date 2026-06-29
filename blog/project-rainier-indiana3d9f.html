@@ -1,0 +1,341 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/project-rainier-indiana?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Project Rainier: Inside AWS’s Indiana Supercluster For Anthropic</title>
+    <link rel="canonical" href="project-rainier-indiana.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore Project Rainier’s Indiana data center by Amazon AWS, powering Anthropic’s Claude with nearly 500k Trainium2 chips and custom networking for massive AI.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Project Rainier: Inside AWS\u2019s Indiana Supercluster For Anthropic",
+        "datePublished": "2025-11-03T20:24:10Z",
+        "dateModified": "2025-11-03T20:24:11.225Z",
+        "mainEntityOfPage": "https://remktr.com/blog/project-rainier-indiana",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-03-2025-08-16-19-6610-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="project-rainier-indiana.html">Project Rainier: Inside AWS’s Indiana Supercluster For Anthropic</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 3, 2025 8:24:10 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>AWS just flipped on one of the world’s biggest AI clusters. And it’s not where you think. Project Rainier lives in Indiana, not Silicon Valley. It’s packing nearly half a million Trainium2 chips. That’s 5x the compute Anthropic used for earlier Claude models. Translation: faster training, smarter outputs, cheaper inference when you scale.</p>
+<p><em>Here’s the kicker.</em> AWS built and shipped Rainier in under a year. For a cluster this size, that’s Formula 1 in a world of minivans. Think custom interconnects, tuned networking, and a campus made for brutal, hot workloads. It runs 24/7, rain or shine, without flinching.</p>
+<p><em>Wondering if compute is the new oil?</em> Rainier kinda answers that, and hands you a map. Whether you train frontier models or trim latency in prod, this changes your playbook. It also opens fresh lanes for you to grab.</p>
+<p>Zoom out for a sec. <em>This isn’t just another cloud press note.</em> It signals a shift from “Can we get GPUs?” to “How fast can we iterate without burning cash?” When the fabric gets faster and cheaper, slides don’t win. <em>Reps win.</em> Project Rainier makes those reps real.</p>
+<ul>
+<li>TL;DR</li>
+<li>Project Rainier is an AWS supercluster in Indiana with nearly 500k Trainium2 chips.</li>
+<li>Anthropic is training and deploying Claude on Rainier; compute is 5x prior levels.</li>
+<li>The campus was built for power, cooling, and low-latency networking.</li>
+<li>Expect lower cost-per-token and faster iteration for training and inference.</li>
+<li>By 2025, Claude runs across 1M+ Trainium2 chips for training and serving.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-03-2025-08-17-46-5393-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="insideprojectrainier">Inside Project Rainier</h2>
+<h3 id="purposebuiltaisupercluster">Purpose built AI supercluster</h3>
+<p>Project Rainier is AWS’s fully live AI compute cluster on Trainium2. That’s their second-gen accelerator made for machine learning. The headline stat is loud: nearly half a million chips on day one. Anthropic is already using it to build, tune, and serve Claude at frontier scale. If you’ve tracked "project rainier amazon" updates, this is the slideware turning concrete. It’s real capacity you can plan around.</p>
+<p><em>In plain English, this is a model factory.</em> Trainium-family chips are built for the heavy math behind transformers. The surrounding stack—compilers, libraries, placement, and monitoring—turns raw silicon into steady throughput. That means fewer timeouts mid-epoch and more stable runs at bigger batch sizes. It helps with wider context windows or mixing modalities too.</p>
+<p><em>A supercluster isn’t just lots of servers in a room.</em> It’s a tuned system where compute, memory bandwidth, storage IOPS, and network topology match up. No single piece should choke the rest. When you ask for thousands of accelerators for one job, the scheduler maps them onto the right topology. That keeps collective ops snappy and keeps your step time down. Done wrong, you stare at retries and deadlocks all night.</p>
+<h3 id="hardwareandnetwork">Hardware and network</h3>
+<p>At this scale, the magic isn’t just chips. It’s the glue. Rainier leans on custom interconnects and tuned networking to shove huge gradients and checkpoints across thousands of nodes. It does that without melting your latency budget. That hits your step time, optimizer stability, and throughput per dollar. For multimodal training, topology can mean “it converged” versus “we ran out of patience.”</p>
+<p>Think about a global batch across thousands of accelerators. You need collective comms that know the topology and handle stragglers. You want mixed-precision paths tuned for speed and stability. You also need fast storage to stream terabytes per minute cleanly. Checkpointing can’t stall the full job, or you lose days to drift. These parts aren’t glamorous, but they decide six days or week three.</p>
+<p>Software matters as much as metal. Compiler tricks like kernel fusion, fewer memory moves, and smarter tensor placement can unlock big gains. Double-digit gains sometimes. The more auto-tune the platform brings, the less you rewrite loops. Then you can spend time testing ideas, not plumbing.</p>
+<h3 id="whyscalematters">Why scale matters</h3>
+<p>The scaling story hasn’t changed. More compute, more capability. Research keeps showing steady gains from bigger models trained longer on more data. As Kaplan et al. put it, the math is predictable. Add compute, and test loss drops on a power-law curve.</p>
+<blockquote>
+  <p><em>“Test loss scales as a power-law with model size, dataset size, and compute.” — Kaplan et al., 2020</em></p>
+</blockquote>
+<p>Scale also acts like insurance for research. With more compute, you can run real ablations and compare schedules for real. You can test longer contexts and dig into safety at depth instead of guessing. You get to answer “What if?” with data, not vibes. Breakthroughs stack from many small, fast tests in a row.</p>
+<p><em>And don’t forget inference.</em> With more serving capacity, teams can ship bigger context windows and richer agents. You can add more tool calls without throttling users or blowing up latency. The same scale that trains frontier models makes day-two operations feel chill.</p>
+<h2 id="whyindiana">Why Indiana</h2>
+<h3 id="rainierlocation">Rainier location</h3>
+<p>Location matters because power, water, grid links, and land set cost and reliability. Project Rainier sits in Indiana. AWS opened an $11B data center campus built for dense AI. The Midwest math is simple. It’s close to power, better land costs, and more room to grow without chaos.</p>
+<p><em>Indiana isn’t a postcard flex.</em> It’s a bet on fundamentals. You can’t run a supercluster without steady electricity and tight utility partners. You also need land for future phases. Multiple fiber routes help too, so traffic isn’t stuck in one chokepoint. Fewer constraints means fewer nasty surprises.</p>
+<p>For builders, that translates to practical wins. You get more predictable capacity during peak demand, like model releases. Your jobs are more likely to start on time. Pricing is less likely to spike every time the market heats up.</p>
+<h3 id="thegigawattsquestion">The gigawatts question</h3>
+<p><em>Hyperscale AI doesn’t sip electrons. It gulps them.</em> AWS hasn’t tied a specific gigawatt number to Rainier yet. Big AI campuses usually plan for hundreds of megawatts, sometimes more. They leave room to scale past a gigawatt over years. What matters for you is sustained capacity at peak. You also want a reliable grid and power pricing that doesn’t wreck your curve.</p>
+<p>If you run cost models, you already know power dominates. Efficiency helps fast. Better PUE targets and liquid cooling cut energy per token. Smarter workload placement helps too. Even small gains turn into real dollars when you serve billions of tokens daily.</p>
+<h3 id="coolingandnetworkegress">Cooling and network egress</h3>
+<p>Cooling isn’t just HVAC. It’s a design constraint. Expect a mix of advanced air and liquid cooling, with heat reuse in some spots. Tight PUE targets keep cost-per-token competitive. On the network side, Indiana gives room for serious fiber on campus. That means low intra-campus latency and strong inter-region throughput. You get tighter tail latencies and saner egress patterns. Training stays predictable when everyone else is queueing.</p>
+<blockquote>
+  <p><em>“Compute without power is a press release; compute with power is a product.” — A data center architect explaining AI site selection</em></p>
+</blockquote>
+<p>Water stewardship and sustainability targets matter more as AI scales. Regions with predictable climate and responsible water sources lower risk. Access to renewables helps reduce environmental and regulatory headaches. If you’ve got ESG goals, you can point to efficient sites and cleaner mixes. That makes procurement and compliance smoother.</p>
+<h2 id="anthropicandaws">Anthropic and AWS</h2>
+<h3 id="fasteriteration">Faster iteration</h3>
+<p>Anthropic is actively training and deploying Claude on Rainier today. The big shift is iteration speed. Run more experiments faster, and you ship safer, smarter models. That 5x compute jump versus prior runs changes your weekly cadence. More runs per week and broader sweeps fit inside real schedules.</p>
+<p>In practice, time between model variants gets shorter, sometimes much shorter. Feedback loops from evals to code get tighter. Triage is faster when a run misbehaves, which it will sometimes. Instead of waiting days to confirm a hunch, you can validate in hours. The loop compresses, and team learning compounds.</p>
+<h3 id="trainingandservingscale">Training and serving scale</h3>
+<p>By the end of 2025, Claude should be supported on 1M+ Trainium2 chips. That covers both training and inference. <em>It’s not just a flex. It’s reliability.</em> Serving at that scale lets you push bigger contexts and heavier tool use. You can run richer multimodal pipelines while keeping p95 latency calm. You can also split traffic across regions and AZs without sweating spikes.</p>
+<p>Under the hood, think tensor parallelism during training and pipeline parallelism across stages. For inference, smart caching is key. KV caches, retrieval results, and tool outputs should live close to action. With a wide footprint, you place caches near users and route smartly. Users don’t feel the complexity. They just feel speed.</p>
+<h3 id="costpertokenandsafety">Cost per token and safety</h3>
+<p>Hardware choice hits cost-per-token straight on. Trainium2 targets ML economics with better throughput per watt. Performance-per-dollar looks strong for the right schedules. GPU pricing can sting on long runs. For a safety-first shop like Anthropic, cheaper compute means more red teaming and eval coverage. You can test stress cases without rationing.</p>
+<blockquote>
+  <p><em>“Compute, data, and algorithms trade off—extra compute lets you explore safer model configurations without giving up capability.” — Interpreting scaling literature (Kaplan et al.; Hoffmann et al.)</em></p>
+</blockquote>
+<p><em>Safety isn’t a last step.</em> With abundant compute, you front-load interpretability checks and alternative fine-tunes. You run long-context stress tests to catch odd edge cases. The result is a calmer launch day with fewer fire drills.</p>
+<h2 id="builderplaybook">Builder playbook</h2>
+<h3 id="forstartups">For startups</h3>
+<ul>
+<li>Start with inference economics. Target Trainium-family endpoints via managed services when you can.</li>
+<li>Pre-train less, fine-tune more. Use strong base models like Claude with great data.</li>
+<li>Build for spiky demand. Design autoscaling for bursts. Rainier-class capacity compresses queues.</li>
+</ul>
+<p>Also, measure everything. Track effective tokens per dollar and cache hit rates closely. Watch user-visible latency, especially p95 and p99. Small choices swing costs more than you think. Prompt templates, chunking, and retry logic all add up. When analytics tells the truth, you can move fast without bill shock.</p>
+<p>If you’re running lean, start with managed endpoints to ship fast. As you grow, drop to lower-level primitives for control. Keep abstractions thin so you can switch without rewrites.</p>
+<h3 id="forenterprises">For enterprises</h3>
+<ul>
+<li>Migrate high-variance workloads first. Conversational apps, multimodal search, and batch summarization move the needle.</li>
+<li>Treat “project rainier data center” as a reliability anchor. Plan region diversity and DR with latency-aware routing.</li>
+<li>Negotiate throughput SLAs that match your release calendar. Capacity is strategy.</li>
+</ul>
+<p>Add governance early. Lock approved model versions and prompt policies before pilots spread. Set logging requirements so audits don’t hurt. Align procurement with engineering on scale targets and launch windows. Build a showback model so business units see costs tied to outcomes. They’ll optimize once they own the number.</p>
+<h3 id="forresearchers">For researchers</h3>
+<ul>
+<li>Push scaling sweeps across data curation and multimodal fusion. Instruction tuning benefits too.</li>
+<li>Bank on longer contexts. Tune evals for 100k+ tokens, tool loops, and agentic flows.</li>
+<li>Measure energy, not just FLOPs. Your best models will meet capability and sustainability.</li>
+</ul>
+<p>Make your work reproducible on budget. Track seeds, configs, and datasets carefully. With more compute, it’s tempting to brute-force everything. Resist that urge. A clean sweep teaches more than one lucky run. It’s easier to defend in papers and reviews too.</p>
+<blockquote>
+  <p><em>“Compute is oxygen for AI. You can’t innovate if you can’t breathe.” — A common refrain in modern ML labs</em></p>
+</blockquote>
+<h2 id="machineroomdetails">Machine room details</h2>
+<ul>
+<li>Storage: Plan high-throughput ingest and checkpointing. Sharded datasets with prefetch keep accelerators fed.</li>
+<li>Scheduling: Gang scheduling and topology-aware placement cut stragglers and retry storms.</li>
+<li>Observability: Tie training metrics to infra metrics. If step time drifts, find the cause fast.</li>
+<li>Failure modes: Build idempotent steps and smart checkpoints. Assume a node fails mid-run.</li>
+</ul>
+<p><em>These are the unsexy parts that save your launch when stuff breaks.</em></p>
+<h2 id="rainierrealitycheck">Rainier reality check</h2>
+<ul>
+<li>Rainier is live in Indiana with nearly 500k Trainium2 chips.</li>
+<li>Anthropic’s Claude is training and serving there at 5x prior compute.</li>
+<li>The Indiana campus focuses on power, cooling, and fiber at scale.</li>
+<li>Expect lower cost-per-token and faster iteration across training and inference.</li>
+<li>Plan for longer contexts, heavier tooling, and bursty traffic patterns.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-03-2025-08-19-03-1426-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="projectrainierfaqs">Project Rainier FAQs</h2>
+<h3 id="whereisrainier">Where is Rainier</h3>
+<p>Project Rainier’s campus is in Indiana. It’s a purpose-built site for dense AI workloads. Power, cooling, and the network fabric are tuned for large training and low-latency serving. If you search “project rainier location” or “project rainier indiana,” that’s the anchor.</p>
+<h3 id="howbigisthecluster">How big is the cluster</h3>
+<p>AWS says Rainier runs nearly half a million Trainium2 chips. That’s over five times the compute Anthropic used for earlier Claude training. The plan points to more than one million Trainium2 chips by end of 2025. That spans training and serving.</p>
+<h3 id="whataboutgigawatts">What about gigawatts</h3>
+<p>AWS hasn’t shared a gigawatt figure for Rainier yet. In practice, big AI campuses provision hundreds of megawatts with room to expand. Indiana signals a long-term plan for power and cooling without coastal limits.</p>
+<h3 id="trainium2vsgpus">Trainium2 vs GPUs</h3>
+<p>Trainium2 is built for ML training and inference on AWS. It targets performance-per-dollar and performance-per-watt. For many jobs, economics can beat general GPUs, especially with managed services and availability.</p>
+<h3 id="accessrainiercapacity">Access Rainier capacity</h3>
+<p>You won’t book “Rainier” by name. You’ll use Trainium2 through AWS services and instances as they roll out. Expect support through managed endpoints, training services, and EC2 families for Trainium2.</p>
+<h3 id="onlyforanthropic">Only for Anthropic</h3>
+<p>Anthropic is the flagship partner, yes. But more Trainium2 helps the broader AWS ecosystem. You should see gains in instance availability, managed model performance, and pricing over time.</p>
+<h3 id="gpupricesandavailability">GPU prices and availability</h3>
+<p>Indirectly, yeah. More Trainium2 gives real alternatives. That can ease GPU queues and steady prices. Even if you keep some GPU jobs, the market gets less brittle with options.</p>
+<h3 id="datasovereigntyandcompliance">Data sovereignty and compliance</h3>
+<p>Region selection still matters a lot. Use region-aware routing and encryption at rest and in transit. Define data residency rules by design. Rainier capacity fits within AWS’s regional model, so sovereignty plans still work.</p>
+<h3 id="portingtotrainium2">Porting to Trainium2</h3>
+<p>Plan for some engineering lift. Use supported frameworks and standard ops when you can. Profile early. The lift drops if you avoid exotic custom ops. Start small, validate numerics, then scale up. Once tuned, the economics repeat every run.</p>
+<h3 id="sustainabilityandpowermix">Sustainability and power mix</h3>
+<p>AI demand is rising fast, and so are efficiency expectations. Watch published efficiency metrics like PUE. Favor regions with more low-carbon power. Track energy per token next to cost per token. Gains compound at scale.</p>
+<h2 id="trainium2builderchecklist">Trainium2 builder checklist</h2>
+<ul>
+<li>Choose your path: managed endpoints for speed; EC2 Trainium2 for control.</li>
+<li>Right-size your model: start strong, then fine-tune with domain data.</li>
+<li>Optimize the pipeline: mixed precision and gradient accumulation. Use sharding where supported.</li>
+<li>Push longer context: design prompts, memory, and evals for 100k+ tokens.</li>
+<li>Instrument everything: track cost-per-token, p95 latency, and energy per run.</li>
+<li>Test failover: multi-AZ routing and burst plans for big launches.</li>
+</ul>
+<p>More to add as you scale:</p>
+<ul>
+<li>Caching strategy: KV and retrieval caches can slash costs by double digits. Warm them early.</li>
+<li>Prompt hygiene: shorter, sharper prompts save tokens and latency. Bake linting into CI.</li>
+<li>Eval harness: automate adversarial tests and tool loops. Add long-context regressions.</li>
+<li>Cost guardrails: set budget alarms for token spend and concurrency. Fail gracefully when hot.</li>
+<li>Rollouts: canary new model versions to 1–5% with shadow evals before full send.</li>
+</ul>
+<p>Here’s the bottom line. Project Rainier isn’t just an AWS flex. It resets AI cost and capability curves. When you move from “waiting on capacity” to “we can run another sweep tonight,” you build different. Anthropic’s bet is clear. More compute, more rigorous testing, better models. Your move is to design for this world. Opt into Trainium2 where it fits, re-benchmark cost-per-token, and refactor evals for longer contexts and heavier tool use. Winners won’t only be biggest. They’ll be the fastest to learn.</p>
+<p><em>“Compute is compounding faster than your roadmap. Adjust accordingly.”</em></p>
+<p>Looking to turn this compute edge into real growth? See outcomes in our <a href="../case-studies.html">Case Studies</a>. Building on Amazon Marketing Cloud? Unify activation and analytics with <a href="../amc-cloud.html">AMC Cloud</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/machine-learning/trainium/">Amazon Web Services: Trainium</a></li>
+<li><a href="https://aws.amazon.com/machine-learning/inferentia/">Amazon Web Services: Inferentia</a></li>
+<li><a href="https://press.aboutamazon.com/">Amazon/Anthropic strategic collaboration (press)</a></li>
+<li><a href="https://arxiv.org/abs/2001.08361">Kaplan et al., Scaling Laws for Neural Language Models (2020)</a></li>
+<li><a href="https://arxiv.org/abs/2203.15556">Hoffmann et al., Training Compute-Optimal Large Language Models (Chinchilla, 2022)</a></li>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/">AWS Global Infrastructure</a></li>
+<li><a href="https://aws.amazon.com/hpc/efa/">AWS Elastic Fabric Adapter (HPC networking)</a></li>
+<li><a href="https://aws.amazon.com/machine-learning/neuron/">AWS Neuron (SDK for Trainium/Inferentia)</a></li>
+<li><a href="https://www.iea.org/reports/data-centres-and-data-transmission-networks">IEA: Data centres and data transmission networks</a></li>
+<li><a href="https://www.thegreengrid.org/en/resources/library-and-tools/2-pue">The Green Grid: PUE (Power Usage Effectiveness)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="project-rainier-indiana.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqfb09.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Project+Rainier%3A+Inside+AWS%E2%80%99s+Indiana+Supercluster+For+Anthropic&amp;pi=255376409324&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=255376409324&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fproject-rainier-indiana&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/project-rainier-indiana?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:07 GMT -->
+</html>

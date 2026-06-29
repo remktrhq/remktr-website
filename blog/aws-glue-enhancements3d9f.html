@@ -1,0 +1,406 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-glue-enhancements?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship marketing ETL faster with new AWS Glue writes</title>
+    <link rel="canonical" href="aws-glue-enhancements.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover AWS Glue release notes: new write operations for SAP OData, Marketo Engage, Salesforce Marketing Cloud, HubSpot to streamline ETL for marketing, CRM.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship marketing ETL faster with new AWS Glue writes",
+        "datePublished": "2026-02-16T21:29:47Z",
+        "dateModified": "2026-02-16T21:29:48.409Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-glue-enhancements",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-16-2026-09-18-52-4075-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-glue-enhancements.html">Ship marketing ETL faster with new AWS Glue writes</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 16, 2026 9:29:47 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You spend hours pulling customer data into S3, cleaning it in Spark, then… exporting CSVs to upload into your tools. It’s 2026—<em>why are you still the human API?</em></p>
+<p>Here’s the unlock. AWS Glue just added write operations for SAP OData, Adobe Marketo Engage, Salesforce Marketing Cloud, and HubSpot connectors. Translation: you can push clean, modeled data back into the exact systems your marketers, lifecycle teams, and sales ops actually use.</p>
+<p>That means fewer brittle scripts, fewer point tools, and way fewer late-night “why didn’t this segment update?” pings. You stay in Glue. You model once. You write wherever.</p>
+<p>If you’ve been waiting to build reverse ETL without adding another SaaS to your stack—or you’re tired of duct-taping AppFlow, Lambdas, and spreadsheets—<em>this is your green light.</em></p>
+<p>One more reason this matters. Your team already trusts Glue for jobs, schemas, and monitoring. Turning it into your activation engine means less context switching and more shipping.</p>
+<p>And yes, this is how you shrink martech latency from “whenever someone uploads a CSV” to “near-real-time enough to hit a promo window.”</p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>New AWS Glue write operations for SAP OData, Marketo Engage, Salesforce Marketing Cloud, and HubSpot shrink martech latency and tool sprawl.</li>
+<li>Use Glue jobs (Spark or Python shell) to power reverse ETL, audience syncs, and lifecycle automations—end-to-end in AWS.</li>
+<li>Mind API limits, idempotency keys, and schema drift. <em>Test writes like you test payments.</em></li>
+<li>Check AWS Glue release notes for version support and aws glue 3.0 end of life timelines.</li>
+<li>Prefer newer aws glue versions (5.x/6.x) for performance, Python/Spark updates, and connector compatibility.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-16-2026-09-19-37-7097-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatchangedandwhynow">What changed and why now</h2>
+<h3 id="theheadline">The headline</h3>
+<p>AWS Glue now supports write operations for four big martech surfaces: SAP OData endpoints, Adobe Marketo Engage, Salesforce Marketing Cloud (SFMC), and HubSpot. You already could read from many of these; adding writes completes the loop so you can operationalize data—without bouncing between five tools.</p>
+<ul>
+<li>SAP OData: Post transactional updates or master data changes to SAP systems via OData services.</li>
+<li>Marketo Engage: Push leads, custom objects, or program memberships.</li>
+<li>Salesforce Marketing Cloud: Update Data Extensions and triggered send data.</li>
+<li>HubSpot: Sync contacts, companies, deals, and custom properties.</li>
+</ul>
+<p>See AWS Glue release notes for the full aws glue enhancements list and region availability.</p>
+<p>What this unlocks in practice. You can treat your curated zone in S3 as the source of truth and fan out to these destinations in a single pipeline. No more hand-offs to “the person with the Marketo login.” Your Spark transformations, quality checks, and observability now sit in front of the actual business action.</p>
+<h3 id="whobenefits">Who benefits</h3>
+<p>If you run marketing analytics, data engineering, or growth ops, you can now:</p>
+<ul>
+<li>Ship first-party audiences to activation tools without new vendors.</li>
+<li>Keep data residency in AWS and simplify security reviews.</li>
+<li>Collapse “read in Spark -&gt; export -&gt; upload via API” into one Glue job.</li>
+</ul>
+<p>Bonus points if your security team prefers fewer external connections and a single audit trail. With Glue, your governance lives where your data already lives.</p>
+<h3 id="whythisisbig">Why this is big</h3>
+<p><em>Activation speed matters.</em> Segments get stale. Offers miss windows. When writes live inside Glue, you tap the same Spark code, catalog schemas, and monitoring you already use.</p>
+<p>First-hand example. Say you score leads nightly and calculate LTV cohorts weekly. With Glue writes, you update Marketo lead attributes and SFMC Data Extensions in the same pipeline that computed them—no more CSV uploads from a marketing ops inbox.</p>
+<p>Add a real-world twist. Your pipeline can enrich HubSpot contacts with product events while also posting order syncs to SAP via OData—all triggered by the same job parameters and guarded by the same IAM role.</p>
+<p>References:</p>
+<ul>
+<li>AWS Glue release notes</li>
+<li>AWS Glue Studio connectors</li>
+</ul>
+<h2 id="designpatternsinstantroi">Design patterns instant ROI</h2>
+<h3 id="reverseetlwithoutplatform">Reverse ETL without platform</h3>
+<p>Build a job that:</p>
+<p>1) Reads modeled data from your curated zone (e.g., S3/Parquet partitioned by date).
+2) Transforms to target schemas (Marketo lead fields, SFMC Data Extensions, HubSpot contact properties).
+3) Writes in batches with retries and dead-letter queues (DLQs) for rejects.</p>
+<p>This replaces manual uploads or point tools while giving you Spark-scale transforms, Glue job bookmarks, and centralized logging.</p>
+<p>Add these practical touches:</p>
+<ul>
+<li>Mapping layer: Maintain a simple mapping file (YAML/JSON) in S3 that pairs your canonical fields to each destination’s property names. Your job reads it at runtime so field changes don’t require a code redeploy.</li>
+<li>Feature flags: Use job parameters to toggle destinations (e.g., write<em>to</em>marketo=true). Handy for staged rollouts.</li>
+<li>Dry runs: Add a “validate_only” mode that fetches destination schemas and validates payloads without actually writing. Save any mismatches to S3 for review.</li>
+</ul>
+<h3 id="upsertsmergesandidempotency">Upserts merges and idempotency</h3>
+<p>APIs differ:</p>
+<ul>
+<li>Marketo and HubSpot: Lean on external IDs or email as primary keys, but always prefer a stable external ID. Build upserts that do “create-or-update” behavior and supply idempotency keys where supported.</li>
+<li>SFMC: Write to Data Extensions. Treat writes as append plus dedup on a surrogate key inside your model if the API doesn’t fully upsert.</li>
+<li>SAP OData: Respect service metadata. Many endpoints enforce required fields and versioning (ETags) for concurrency control.</li>
+</ul>
+<p>Pro moves:</p>
+<ul>
+<li>Batch size: Tune to stay below per-minute limits (Marketo, HubSpot, and SFMC all throttle). Add exponential backoff.</li>
+<li>Partial failures: Route rejects to S3 with payload + error message. Reprocess with a "corrections" job.</li>
+<li>Sequencing: Some endpoints require parent objects first (e.g., companies before contacts). Enforce DAG order across Glue jobs.</li>
+</ul>
+<p>Example. A lifecycle team promotes “High-Intent Leads” hourly. Your Glue job merges overnight scoring with recent events, upserts 5k leads to Marketo, and flags a campaign membership in SFMC. No swivel-chairing.</p>
+<p>Docs to keep handy:</p>
+<ul>
+<li>Marketo REST API</li>
+<li>HubSpot API overview</li>
+<li>Salesforce Marketing Cloud APIs</li>
+</ul>
+<h3 id="observabilitymarketerswilltrust">Observability marketers will trust</h3>
+<ul>
+<li>Golden metrics: Track records<em>attempted, records</em>succeeded, records<em>rejected, write</em>latency<em>ms, and api</em>throttle_events. Publish them to CloudWatch and set SLOs (e.g., 99% success, &lt;5-minute lag for priority audiences).</li>
+<li>Per-destination reporting: Mark payloads with a destination tag and object type so you can filter metrics fast when a provider has a blip.</li>
+<li>Human-readable receipts: After each run, write a summary JSON and a friendly text report to S3 (and optionally Slack) showing counts by segment and destination. Marketers love receipts.</li>
+</ul>
+<h3 id="errorhandlingthatpage">Error handling that page</h3>
+<ul>
+<li>Categorize failures: Separate 4xx (bad data/permissions) from 5xx (provider issues). Auto-retry only the safe ones.</li>
+<li>Retry budget: Cap retries per payload and roll excess into the DLQ to avoid burning quota.</li>
+<li>Replays: Build a tiny job that reads DLQs, fixes common issues (e.g., trims whitespace, normalizes emails), and retries with a special idempotency key suffix so you can trace replays.</li>
+</ul>
+<h3 id="latencyandschedulingtips">Latency and scheduling tips</h3>
+<ul>
+<li>Hourly for most audiences is plenty. Use event-driven triggers (e.g., new partition in S3) when you need faster loops.</li>
+<li>Chunk large audiences by account, region, or lifecycle stage to avoid timeouts and quota spikes.</li>
+<li>For time-sensitive promos, run an early canary (1% of payload) first. If error rates are clean, fan out.</li>
+</ul>
+<h2 id="versionrealitycheck">Version reality check</h2>
+<h3 id="knowyourruntime">Know your runtime</h3>
+<p>Write support—and its performance—depends on aws glue versions. Runtimes bundle specific Apache Spark, Python, and library versions. Newer versions typically bring:</p>
+<ul>
+<li>Better Spark performance and memory management.</li>
+<li>New Python versions and security patches.</li>
+<li>Updated connectors and bug fixes.</li>
+</ul>
+<p>Before you roll out, verify the connector’s supported Glue versions in the docs. If you’re running legacy jobs on 3.0, test on a newer runtime in a dev endpoint or separate job to confirm compatibility, especially with pandas, Arrow, and auth libraries.</p>
+<p>Pro tip. Build a small “compat test” job that imports your usual libs, hits sandbox endpoints, and exercises 5–10 representative writes. Keep it in source control and run it before every runtime upgrade.</p>
+<h3 id="planaroundwindows">Plan around windows</h3>
+<p>AWS periodically sunsets older runtimes. If you’re searching for aws glue 3.0 end of life details, check the official aws glue release notes. Don’t assume “it still runs” equals “it’s supported.” Lack of security updates or bug fixes can bite you during audits.</p>
+<p>Migration tips:</p>
+<ul>
+<li>Pin a baseline version for the project, but schedule quarterly reviews against release notes.</li>
+<li>Maintain dual-run pipelines (old vs. new runtime) for a week to compare metrics and errors.</li>
+<li>Use canary datasets first; scale after API and schema validations pass.</li>
+</ul>
+<p>Practical rule. If you’re building new reverse ETL today, target 5.x/6.x where available. That sets you up for modern Python/Spark, stronger connector support, and fewer surprise deprecations.</p>
+<p>Helpful links:</p>
+<ul>
+<li>AWS Glue release notes</li>
+<li>AWS Glue (what it is)</li>
+</ul>
+<h2 id="guardrailssecuregovernobserve">Guardrails secure govern observe</h2>
+<h3 id="lockdownaccessandsecrets">Lock down access and secrets</h3>
+<ul>
+<li>Authentication: Store API keys, OAuth tokens, and client secrets in AWS Secrets Manager. Rotate regularly and reference them at runtime.</li>
+<li>Network: Use VPC endpoints or private links where supported so writes don’t traverse the public internet.</li>
+<li>Least privilege: Scope IAM roles so jobs can read only the necessary S3 prefixes and call only required connector endpoints.</li>
+</ul>
+<p>How to make this concrete:</p>
+<ul>
+<li>Separate roles per destination (e.g., glue-role-marketo, glue-role-sfmc). If one credential is compromised, blast radius stays tiny.</li>
+<li>Keep secrets out of job parameters. Reference by ARN and decrypt at runtime. Audit access in CloudTrail.</li>
+</ul>
+<h3 id="respectapilimitsaudittrail">Respect API limits audit trail</h3>
+<ul>
+<li>Throttling: Most martech APIs enforce per-minute or per-day caps. Implement token-bucket rate limiting, exponential backoff, and jitter. Surface retry counts and backoff metrics.</li>
+<li>Idempotency: Design for safe retries. Include a deterministic idempotency key (e.g., hash of external<em>id + update</em>type + date) when you can. If the API doesn’t support it, enforce “last write wins” logic on your side.</li>
+<li>Observability: Emit business metrics (records attempted/succeeded/rejected), not just logs. Wire CloudWatch metrics and alarms for success rates, latency, and 4xx/5xx spikes.</li>
+</ul>
+<p>Auditability checklist:</p>
+<ul>
+<li>Every run should have a run_id and a link to logs and metrics.</li>
+<li>Every payload should store a checksum and destination response code.</li>
+<li>Every reject should keep the raw input, the transformed payload, and the error reason.</li>
+</ul>
+<h3 id="datagovernanceandschemadrift">Data governance and schema drift</h3>
+<ul>
+<li>Catalog everything: Register target schemas in Glue Data Catalog—even if targets are SaaS objects—to track expected fields.</li>
+<li>PII hygiene: Tag sensitive columns and scrub before writes. Apply Lake Formation tags to gate who can launch jobs that push PII to SaaS.</li>
+<li>Change control: When marketing adds a new HubSpot property, prevent silent failures by validating schema diffs at job start.</li>
+</ul>
+<p>First-hand example. A B2C subscriptions team used Glue to sync churn-risk flags to HubSpot. They enforced a preflight schema check, rejected 0.8% of rows to a DLQ due to invalid emails, and unblocked the lifecycle team without creating a new toolchain.</p>
+<p>Bonus. Keep a lightweight “data contract” doc per destination (owner, object names, required fields, rate limit notes, rollback plan). Nothing fancy—one page that prevents 80% of surprises.</p>
+<h2 id="halftimebriefingworking">Halftime briefing working</h2>
+<ul>
+<li>Glue write support for SAP OData, Marketo, SFMC, and HubSpot lets you run reverse ETL without extra platforms.</li>
+<li>Build idempotent upserts, batch carefully, and handle partial failures with DLQs.</li>
+<li>Target newer runtimes (5.x/6.x) and monitor the aws glue release notes for deprecations.</li>
+<li>Secure creds in Secrets Manager, restrict IAM, and add CloudWatch-based SLOs.</li>
+<li>Validate schemas at job start to catch drift before you burn API quota.</li>
+</ul>
+<p>Zooming out. Teams that win with this pattern keep the payloads boring and the monitoring loud. They automate the unglamorous bits—mappings, retries, alerts—and free humans for the creative work (offers, journeys, experiments).</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-16-2026-09-20-27-7626-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="faqquickanswersbeforeship">FAQ quick answers before ship</h2>
+<h3 id="doineedgluestudio">Do I need Glue Studio</h3>
+<p>Either works. Glue Studio offers a visual experience and managed connectors. Many teams prototype in Studio and codify production pipelines as Spark or Python shell jobs with the same connectors. Pick one path, add CI/CD, and standardize job parameters.</p>
+<h3 id="howdowritesauthenticate">How do writes authenticate</h3>
+<p>Through each provider’s OAuth or API token mechanism configured in the connector. Store secrets in AWS Secrets Manager, inject them at runtime, and avoid hardcoding in scripts or job parameters.</p>
+<h3 id="apiratelimitstimeouts">API rate limits timeouts</h3>
+<p>Assume they exist and design for them. Batch requests, add exponential backoff with jitter, surface retry counts as CloudWatch metrics, and include dead-letter queues for hard rejects. For large updates, schedule during off-peak windows and chunk by account/region.</p>
+<h3 id="awsglueendoflife">aws glue end of life</h3>
+<p>AWS deprecates older runtimes over time. The exact date can change by Region and context. Always check the official aws glue release notes for current support windows and plan upgrades to newer aws glue versions.</p>
+<h3 id="howdifferentfromappflow">How different from AppFlow</h3>
+<p>AppFlow is great for no-code data movement between SaaS and AWS. Glue is built for code-first, large-scale transformations and complex orchestration. With write support in Glue, you can keep heavy transformations and activation in one place—especially when you already run Spark jobs.</p>
+<h3 id="testwritessafely">Test writes safely</h3>
+<p>Yes. Most tools support sandboxes (Marketo, SFMC, HubSpot). Point your dev Glue job at sandbox endpoints, use synthetic data, and disable downstream automations until validation passes. Gate production with a manual approval in your CI/CD pipeline.</p>
+<h3 id="whataboutcostsfinops">What about costs FinOps</h3>
+<p>Glue costs scale with job runtime and resources. Good hygiene helps. Prune input data, cache lookups where possible, right-size DPUs, and consolidate writes to avoid tiny, chatty requests. Add CloudWatch budgets and alerts early so there are no mysteries.</p>
+<h3 id="doineedstepfunctions">Do I need Step Functions</h3>
+<p>Glue triggers and workflows can cover many cases. If you need long-running orchestrations, branched logic, or human approvals, pair Glue with Step Functions. Keep the business logic in your Spark code; let orchestration do orchestration.</p>
+<h2 id="planproductionizewrites">Plan productionize writes</h2>
+<ul>
+<li>Confirm connector write support for your Region and runtime version.</li>
+<li>Create an aws glue project repo with IaC (job, role, connections, alarms).</li>
+<li>Store SaaS credentials in Secrets Manager; grant least-privilege IAM.</li>
+<li>Prototype a Glue Studio job to validate schemas and small test writes.</li>
+<li>Define idempotency strategy and error-handling (retries, DLQ bucket).</li>
+<li>Tune batch sizes to respect provider rate limits; add backoff with jitter.</li>
+<li>Add schema preflight checks to catch drift before execution.</li>
+<li>Wire CloudWatch metrics and alarms for success rate, latency, and throttles.</li>
+<li>Run a dual-write canary (sandbox + prod read-only) for one week.</li>
+<li>Promote: lock versions, document SLOs, and schedule regular upgrade tests.</li>
+</ul>
+<p>To go even faster, template your job:</p>
+<ul>
+<li>Standard params: env, destination, batch<em>size, validate</em>only, segment_name.</li>
+<li>Shared libs: one internal package for retries, idempotency, metrics, and schema validation. Reuse across destinations.</li>
+<li>Reusable mappings: store mappings per destination/version so upgrades don’t break older jobs.</li>
+</ul>
+<h2 id="wrapup">Wrap-up</h2>
+<p>AWS Glue’s new write operations flip your pipelines from “data at rest” to “data in motion.” You don’t just clean data—you deploy it where it matters: CRM, MAP, and the inboxes that drive revenue.</p>
+<p>If you adopt one mindset, make it this. <em>Treat outbound writes like payment flows.</em> Validate inputs, enforce idempotency, and observe everything. Then use Glue’s scale to do the boring parts (batching, retries, logging) so your team can focus on the fun parts (better scoring, richer segments, faster tests).</p>
+<p><em>Start small—one audience, one endpoint.</em> Prove latency drops and error rates. Then templatize the job, snap in a second destination, and let your marketing team ship experiments at the speed of curiosity.</p>
+<p>Working with Amazon Marketing Cloud audiences or activating into Amazon DSP as part of this workflow? Explore our <a href="../amc-cloud.html">AMC Cloud</a> and get inspiration from real-world outcomes in our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/glue/latest/dg/release-notes.html">AWS Glue release notes</a></li>
+<li><a href="https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html">AWS Glue: What is AWS Glue?</a></li>
+<li><a href="https://docs.aws.amazon.com/glue/latest/ug/connectors-chapter.html">AWS Glue Studio connectors</a></li>
+<li><a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager (for credential storage)</a></li>
+<li><a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html">Rotating secrets in AWS Secrets Manager</a></li>
+<li><a href="https://docs.aws.amazon.com/glue/latest/ug/monitor-jobs.html">Monitoring AWS Glue jobs</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html">VPC endpoints and AWS PrivateLink</a></li>
+<li><a href="https://docs.aws.amazon.com/lake-formation/latest/dg/tags-concepts.html">Lake Formation tag-based access control (LF-Tags)</a></li>
+<li><a href="https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/">Exponential backoff and jitter (AWS Architecture Blog)</a></li>
+<li><a href="https://developers.marketo.com/rest-api/">Marketo REST API reference</a></li>
+<li><a href="https://developers.hubspot.com/docs/api/overview">HubSpot API overview</a></li>
+<li><a href="https://developer.salesforce.com/docs/marketing/marketing-cloud/guide/marketing-cloud-apis.html">Salesforce Marketing Cloud APIs</a></li>
+<li><a href="https://www.odata.org/">OData (SAP OData protocol background)</a></li>
+<li><a href="https://aws.amazon.com/glue/pricing/">AWS Glue pricing</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-glue-enhancements.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqb810.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+marketing+ETL+faster+with+new+AWS+Glue+writes&amp;pi=315693650669&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=315693650669&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-glue-enhancements&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-glue-enhancements?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:02 GMT -->
+</html>

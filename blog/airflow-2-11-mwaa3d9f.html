@@ -1,0 +1,354 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/airflow-2-11-mwaa?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship Data Pipelines Faster: Airflow 2.11 Hits MWAA</title>
+    <link rel="canonical" href="airflow-2-11-mwaa.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Announcing Apache Airflow 2.11 support in Amazon Managed Workflows. Create environments, ease migration to Airflow 3, and boost data pipeline orchestration.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship Data Pipelines Faster: Airflow 2.11 Hits MWAA",
+        "datePublished": "2026-01-12T22:36:16Z",
+        "dateModified": "2026-01-12T22:36:16.784Z",
+        "mainEntityOfPage": "https://remktr.com/blog/airflow-2-11-mwaa",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-12-2026-10-30-31-7749-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="airflow-2-11-mwaa.html">Ship Data Pipelines Faster: Airflow 2.11 Hits MWAA</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 12, 2026 10:36:16 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You just got a speed boost. Amazon Managed Workflows for Apache Airflow (MWAA) now supports Airflow 2.11. No AMI scavenger hunts. No weird dependency gremlins jumping out at midnight. More important, 2.11 is the cleaner ramp to Airflow 3.</p>
+<p>If you’ve paused upgrades because “migration risk” felt like a two-week outage, 2.11 changes that math. It brings clearer deprecation paths and updated provider support. Hello, apache-airflow-providers-amazon. Plus the guardrails you want before a big version jump.</p>
+<p>Here’s the playbook. What 2.11 on MWAA unlocks. How to prep for Airflow 3 now, without breaking prod. A low-drama upgrade plan. And a few cost and stability tweaks you can bank today.</p>
+<p>This is the update you’ll see in AWS Weekly Roundup results. Right next to things like “AWS Lambda for .NET” and that “modern workplace pro’s post” with a thousand likes. Let’s make sure yours actually has substance.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Amazon MWAA now supports Apache Airflow 2.11. You get a safer runway to Airflow 3.</li>
+<li>Use 2.11 to chase deprecations, modernize DAGs (TaskFlow, TaskGroup), and pin providers.</li>
+<li>Treat warnings as errors. Run canaries. Blue/green your MWAA environments, don’t roll dice.</li>
+<li>Update apache-airflow-providers-amazon using MWAA’s constraints to avoid dependency drift.</li>
+<li>Lean on deferrable patterns. Right-size schedulers to trim idle capacity and waste.</li>
+</ul>
+<p>That’s the headline. The rest is practical how-to. Exactly where 2.11 helps, how to harden your codebase, and a rollout plan that won’t wake your on-call.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-31-22-8414-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="what211unlocks">What 2.11 Unlocks</h2>
+<h3 id="newversiononmanagedrunway">New version on managed runway</h3>
+<p>Airflow 2.11 on MWAA gives you a curated, tested image with pinned deps. You get managed scaling and the usual AWS operational plumbing baked in. Translation: fewer “works on my laptop” surprises. More time tuning DAGs, not babysitting containers. Because MWAA abstracts the platform work, this jump focuses on your code. Think DAGs, operators, and providers instead of infra chores.</p>
+<p>Airflow 2.11’s biggest value right now is forward compat. The project has been signaling deprecations and cleanup ahead of Airflow 3. Running 2.11 surfaces those warnings early. You can fix patterns on the chopping block and verify the providers you rely on. Especially apache-airflow-providers-amazon for S3, EMR, Glue, Redshift, Athena, and friends.</p>
+<p>If dependency roulette ever stole a day, this is the antidote. The MWAA image pins Airflow core, Python, and provider versions to a known-good set. You get newer Airflow features and a hard stop against version drift. In practice, that means:</p>
+<ul>
+<li>You aren’t hand-building base images or chasing OS-level CVEs anymore.</li>
+<li>You don’t need a build pipeline for every provider mix under the sun.</li>
+<li>You can roll forward or back by switching the MWAA environment version.</li>
+</ul>
+<p>Bonus: 2.11 is current enough that deprecation warnings are loud and actionable. It’s also stable enough that most 2.x DAGs should keep working. That is, if you stick to the supported provider interface.</p>
+<h3 id="compatibilityandproviders">Compatibility and providers</h3>
+<p>Providers move fast. Keeping them aligned with your Airflow core is a full-time job when self-hosted. On MWAA, you update requirements.txt and let the platform enforce matching constraints. The result is fewer mismatches and a cleaner upgrade path. If you’ve been stuck on an older provider, 2.11 gives you a supported window to advance.</p>
+<p>Example: You’ve got Glue jobs triggered by S3 sensors and Redshift unloads. On 2.11, bump the amazon provider to a version compatible with the constraints. Migrate any deprecated operators to maintained ones. Validate with backfills on a staging environment. When tests pass, promote. No cowboy deploys.</p>
+<p>Practical steps for provider hygiene on MWAA 2.11:</p>
+<ul>
+<li>Start with MWAA’s version matrix. Pick the Airflow 2.11 image and note supported providers. Those are your guardrails.</li>
+<li>In requirements.txt, pin exact versions. Use apache-airflow-providers-amazon==X.Y.Z, not &gt;= or ~=. Avoid surprises from transitive upgrades.</li>
+<li>Need a feature in a newer provider than the image supports? Test it in a staging MWAA with the exact same image and constraints. If it fails, don’t force it. Ask for an image with that provider or adjust your plan.</li>
+<li>Pin custom libs too, like pandas and pyarrow. Many provider hooks depend on them. An innocent minor bump can break serialization or auth.</li>
+</ul>
+<p>Heads-up on imports. If you still use legacy paths like airflow.contrib or generic airflow.operators imports, change them now. Airflow 2.x has warned on this for a while. Airflow 3 will be stricter. Align to provider-specific imports. For example, airflow.providers.amazon.aws.operators.s3 for S3 operators. Make the later jump boring.</p>
+<h2 id="prepareforairflow3">Prepare for Airflow 3</h2>
+<h3 id="treatdeprecationslikefailingbuilds">Treat deprecations like failing builds</h3>
+<p>Airflow 2.11 gives you loud, useful warnings about what won’t survive the bump. Don’t ignore them. Turn on aggressive logging and run static checks. If you’re brave, treat deprecation warnings as errors in CI. The goal isn’t perfect. It’s blocking clearly doomed patterns from landing in prod. Most common culprits are legacy operators, SubDAGs, old imports, and older DAG idioms.</p>
+<p>Airflow maintainers are clear. SubDAGs are deprecated and TaskGroup is the way forward. If you still have nested SubDAGs hiding in your repo, this is the sprint to flatten them.</p>
+<p>Make it mechanical:</p>
+<ul>
+<li>In test runs, set Python warning filters to elevate DeprecationWarning and PendingDeprecationWarning. Make them errors. Catch breaks in CI, not at 2 a.m.</li>
+<li>Add a lint rule or pre-commit check to block deprecated import paths. If someone sneaks in contrib operators, the build fails.</li>
+<li>Keep a migration spreadsheet with columns for file, deprecation, replacement, owner, and ETA. It drives real work, not hand-wringing.</li>
+</ul>
+<p>What shows up most in real repos:</p>
+<ul>
+<li>Airflow contrib imports from 1.x still lingering in 2.x. Replace with provider imports.</li>
+<li>SubDagOperator used to bundle steps. Replace it with TaskGroup and TaskFlow tasks.</li>
+<li>Sensors that poll often and tie up workers. Use deferrable sensors when supported.</li>
+<li>XCom misuse. Don’t shove big data through XCom. Store payloads in S3 and pass references.</li>
+</ul>
+<h3 id="modernizeyourdagpatterns">Modernize your DAG patterns</h3>
+<p>Use 2.11 to standardize on the TaskFlow API. That means @task and @dag decorators. Use TaskGroup for structure and deferrable patterns for long waits. Clean up cross-DAG dependencies with Datasets. They beat ad-hoc polling. Standardize imports and config so your code matches current docs, not tribal memory.</p>
+<p>Example: Replace a SubDagOperator running a five-step data quality check. Use a TaskGroup with five @task functions. Push and pull XComs via return values. Keep state tight and wire the group behind a single dependency. Same behavior, fewer foot-guns, and future-proof for Airflow 3.</p>
+<p>Add a few quick wins:</p>
+<ul>
+<li>Dynamic task mapping beats for-loops. For per-partition work, map tasks over inputs. Don’t unroll tasks by hand.</li>
+<li>Keep DAG files cheap to parse. No heavy imports or network calls at top level. If parse time spikes, your scheduler hurts.</li>
+<li>Prefer JSON-serializable XCom payloads. Keep enable<em>xcom</em>pickling off. Store large objects in S3, Redshift, or Glue.</li>
+<li>Use Datasets for cross-DAG orchestration. They’re cleaner than hand-made flags and avoid race conditions.</li>
+<li>Centralize connection and Variable access. Use get with defaults. Keep secrets in AWS Secrets Manager via MWAA.</li>
+</ul>
+<h2 id="upgradeplan">Upgrade Plan</h2>
+<h3 id="versionpinningandconstraints">Version pinning and constraints</h3>
+<p>MWAA ships images with a constraints file. <em>Use it, seriously.</em> Pin apache-airflow-providers-amazon and other providers to versions compatible with 2.11. In requirements.txt, be explicit. No opportunistic upgrades. If you need a newer provider feature, validate it in staging. Use the exact MWAA image tag and constraints before touching prod.</p>
+<p>Also audit custom wheels and plugins. If you bring your own libraries like Pandas, pin them. The worst upgrade bugs are “minor” bumps that break serialization or auth. <em>The constraints file is your friend.</em> Reconcile to it instead of fighting it.</p>
+<p>Pro tip: snapshot your current dependency tree with pip freeze before the move. After you deploy to a 2.11 staging environment, freeze again. Diff the two outputs. Anything new or unexpectedly bumped deserves a look before you cut over.</p>
+<h3 id="bluegreenmwaaandcanaries">Blue green MWAA and canaries</h3>
+<p><em>Don’t in-place upgrade and pray.</em> Clone your MWAA environment to a 2.11 staging copy. Same DAGs, same variables and connections, sanitized. Use a smaller worker footprint to save cost. Point a slice of traffic or a selected DAG subset at staging. Run backfills with production-like volumes. Watch scheduler health, task duration percentiles, and failure modes.</p>
+<p>When clean, create a green 2.11 prod environment next to your current blue. Promote in two moves. Enable DAGs in green while keeping blue hot. Then cut external triggers like API and events to green. Roll back by switching triggers to blue if needed.</p>
+<p>Example: Canary 10% of your top 20 DAGs by runtime. Also 100% of event-driven DAGs using deferrable sensors. If canaries complete within baseline plus or minus 10% duration, you’re good. And error rates don’t spike for 48 hours. Then promote.</p>
+<p>Operational checklist for the cutover:</p>
+<ul>
+<li>Mirror MWAA environment config. Airflow configs, environment class, scheduler and worker sizes.</li>
+<li>Sync Variables and Connections using the same backing stores. For example, AWS Secrets Manager, with non-prod values.</li>
+<li>Copy DAGs to a separate S3 path for staging. Wire that path to the staging environment.</li>
+<li>Run backfills for a realistic window. Try previous 7–14 days for your busiest DAGs.</li>
+<li>Create CloudWatch alarms for parse time spikes. Also queued task growth and triggerer backlog changes.</li>
+<li>Freeze and tag your DAG repo and requirements.txt at green promotion. It makes rollback easy.</li>
+</ul>
+<p><em>If something goes sideways, roll back in minutes.</em> Point event sources and API calls back to blue. Revert the S3 DAG path pointer and freeze changes while you investigate.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-12-2026-10-32-15-1041-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="performancecostopswins">Performance Cost Ops Wins</h2>
+<h3 id="schedulerandtriggerertuning">Scheduler and triggerer tuning</h3>
+<p>Airflow 2.11 on MWAA is a good excuse to revisit orchestration costs. If you still rely on long-polling sensors, convert them to deferrable ones. Use deferrable sensors in the amazon provider for S3, EMR, and Glue when available. Deferral frees worker slots while tasks wait on events. That boosts throughput and cuts idle burn.</p>
+<p>Tune DAG-level parallelism using real data, not vibes. Look at historical median task durations and dependency graphs. Raise concurrency on I/O-bound steps. Keep CPU-bound transforms contained. On MWAA, right-size worker counts and scheduler capacity to meet your SLA instead of maxing everything.</p>
+<p>Make pools your friend:</p>
+<ul>
+<li>Create pools for rate-limited services like APIs and warehouses. Cap concurrent hits to avoid throttling.</li>
+<li>Use separate pools for heavy transforms and lightweight checks. Quick tasks shouldn’t get starved by long jobs.</li>
+<li>Revisit pool sizes each quarter. Usage patterns shift more than you think.</li>
+</ul>
+<p>A few low-effort tweaks with high payoff:</p>
+<ul>
+<li>Trim retry explosions. Set sensible retries and exponential backoff on flaky external calls. Add short-circuit checks before expensive retries.</li>
+<li>Standardize SLAs and alerts per DAG. <em>Not everything deserves a pager, let’s be honest.</em></li>
+<li>Put expensive compute in the right place. Use EMR on EKS, Glue, or Redshift for processing. Keep Airflow as the conductor, not the orchestra.</li>
+</ul>
+<h3 id="observabilityandincidenthygiene">Observability and incident hygiene</h3>
+<p>Use CloudWatch metrics and logs to baseline parse times and scheduler heartbeat. Watch queued tasks and task duration quantiles. Add alerts for DAG parse spikes and rising retry rates. Also triggerer backlogs. In 2.11, warnings for deprecated patterns are clearer. Pipe them to a “migration” channel so they don’t drown in noise.</p>
+<p>Example: You migrate S3KeySensor to a deferrable variant for ingest pipelines. Worker slot use evens out during peak arrival windows. Scheduler queue depth stabilizes. Retry storms vanish when upstream jitter hits. Same SLA, lower cost, calmer pager.</p>
+<p>Observability playbook:</p>
+<ul>
+<li>Log group hygiene. Keep scheduler, worker, and dag-processing logs easy to search. Apply retention policies that match audit needs.</li>
+<li>Metric filters. Create filters for “DeprecationWarning” and “PendingDeprecationWarning” in logs. Wire them to a dashboard for migration progress.</li>
+<li>Dashboards. Track DAG parse duration, active runs, task success and failure rates, triggerer queue depth, and pool utilization.</li>
+<li>Runbooks. For top DAGs, document failure modes and one-click rerun steps. Make it easy for on-call to fix fast.</li>
+</ul>
+<h2 id="whatthismeans">What This Means</h2>
+<ul>
+<li>MWAA now supports Airflow 2.11. You get a managed, tested image.</li>
+<li>Use it to fix deprecations and modernize DAGs ahead of Airflow 3.</li>
+<li>Pin providers, especially apache-airflow-providers-amazon, to MWAA constraints.</li>
+<li>Blue/green your environments and run canaries. Don’t YOLO prod.</li>
+<li>Convert long-polling sensors to deferrable patterns to free capacity.</li>
+</ul>
+<p>And yes, you can brag a little. Just make sure the brag is backed by a clean rollout, lower idle, and fewer flaky patterns.</p>
+<h2 id="faq">FAQ</h2>
+<ol>
+<li><h3 id="supportedairflowversions">Supported Airflow versions</h3>
+<p>AWS publishes a living matrix of supported Airflow versions for MWAA. Airflow 2.11 is now available, alongside certain prior 2.x releases. Always confirm in the MWAA “Airflow versions” docs before planning an upgrade.</p></li>
+<li><h3 id="changeprovidersfor211">Change providers for 2.11</h3>
+<p>Probably, yeah. Upgrade apache-airflow-providers-amazon and others to versions compatible with the 2.11 image. Use MWAA’s constraints file as the source of truth. Test in staging. Don’t let pip auto-bump transitive dependencies in prod.</p></li>
+<li><h3 id="subdagsinairflow211">SubDAGs in Airflow 2.11</h3>
+<p>SubDAGs exist but are deprecated. The community recommends TaskGroup instead. If you still rely on SubDagOperator, use 2.11 to migrate. It’s cleaner, more maintainable, and follows the project’s direction.</p></li>
+<li><h3 id="reduceworkercosts">Reduce worker costs</h3>
+<p>Find long-polling sensors and replace them with deferrable operators or sensors where available. Right-size DAG concurrency and worker counts based on real metrics. Look at queue depth and task durations. You’ll free up slots and smooth the scheduler without overprovisioning.</p></li>
+<li><h3 id="safestupgradepath">Safest upgrade path</h3>
+<p>Create a staging MWAA environment on 2.11. Mirror DAGs and configs. Run backfills and canaries. Then deploy a green 2.11 prod next to your blue. Cut triggers to green and keep blue hot. Monitor for 24–72 hours before decommissioning blue.</p></li>
+<li><h3 id="helpsairflow3migration">Helps Airflow 3 migration</h3>
+<p>Yes. 2.11 is the practical prep step. Fix deprecations, align imports, standardize TaskFlow and TaskGroup, and lock provider versions. When Airflow 3 arrives on MWAA, you’ll be in striking distance.</p></li>
+<li><h3 id="deferrableoperatorsonmwaa">Deferrable operators on MWAA</h3>
+<p>Deferrable operators rely on the triggerer process. On supported MWAA images, the triggerer is managed for you. Check the 2.11 image docs to confirm compatibility and any provider-specific needs before converting sensors.</p></li>
+<li><h3 id="crossdagdependencies">Cross DAG dependencies</h3>
+<p>Move toward Datasets for cross-DAG orchestration. They make dependencies explicit and are less brittle than ad-hoc sensors or custom flags. Validate dataset triggers in staging first to ensure they fit your SLAs.</p></li>
+<li><h3 id="xcomchangestoplan">XCom changes to plan</h3>
+<p>Keep XCom payloads small and JSON-serializable. For large stuff, push the object to S3 and pass the URI. This avoids serialization issues and keeps scheduler and workers happy during and after the upgrade.</p></li>
+<li><h3 id="pythonversions">Python versions</h3>
+<p>Don’t assume. Use the Python version that ships with the MWAA 2.11 image you select. Match your local tooling like lint and tests to that version. Avoid “works in dev, breaks in prod” surprises.</p></li>
+</ol>
+<h2 id="7steprolloutplan">7 Step rollout plan</h2>
+<ul>
+<li>Audit deprecations on 2.x. Log and triage warnings across repos.</li>
+<li>Migrate SubDAGs to TaskGroup. Adopt TaskFlow with @task and @dag.</li>
+<li>Pin providers, amazon and others, to MWAA 2.11 constraints.</li>
+<li>Stand up a 2.11 staging MWAA. Mirror DAGs and secrets safely.</li>
+<li>Run backfills and canaries. Benchmark durations and failure rates.</li>
+<li>Create green 2.11 prod. Cut triggers over and keep blue hot.</li>
+<li>Monitor 48–72 hours. Finalize, then remove blue when stable.</li>
+</ul>
+<p>You want less risk, more throughput, and a path to Airflow 3 that doesn’t hijack your roadmap. Airflow 2.11 on MWAA checks those boxes. Use it to get your house in order. Clean deprecations, modernize DAGs, and make the provider ecosystem boring again. Then turn knobs that actually move needles. Deferrable patterns, concurrency tuning, and observability that catches issues before your CFO catches the bill.</p>
+<p>If you’re about to write that “modern workplace pro’s post,” keep it simple. We upgraded to 2.11, killed flaky patterns, cut idle, and set ourselves up for Airflow 3. <em>That’s the brag that matters.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html">Amazon MWAA Airflow versions matrix</a></li>
+<li><a href="https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html">Create an MWAA environment (version selection)</a></li>
+<li><a href="https://airflow.apache.org/docs/apache-airflow/2.11.0/">Apache Airflow 2.11 docs (index)</a></li>
+<li><a href="https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/">Airflow Providers: Amazon package docs</a></li>
+<li><a href="https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroup">SubDAG deprecation and TaskGroup guidance</a></li>
+<li><a href="https://airflow.apache.org/docs/apache-airflow/stable/installation/installing-from-pypi.html#constraints-files">Managing dependencies and constraints (Airflow)</a></li>
+<li><a href="https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html">Datasets concept and usage in Airflow</a></li>
+<li><a href="https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html">Triggers and deferrable operators in Airflow</a></li>
+<li><a href="https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html">Monitoring Amazon MWAA with CloudWatch</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="airflow-2-11-mwaa.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq8ce8.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+Data+Pipelines+Faster%3A+Airflow+2.11+Hits+MWAA&amp;pi=293687700196&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=293687700196&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fairflow-2-11-mwaa&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/airflow-2-11-mwaa?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:06 GMT -->
+</html>

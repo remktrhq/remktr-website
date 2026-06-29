@@ -1,0 +1,399 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/amd-ec2-hpc8a?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Hpc8a on AWS: 40% Faster AMD EPYC Compute</title>
+    <link rel="canonical" href="amd-ec2-hpc8a.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover the AMD EC2 instance Hpc8a with 5th Gen AMD EPYC, 40% higher performance, 42% memory bandwidth and 300 Gbps EFA to accelerate HPC simulations.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Hpc8a on AWS: 40% Faster AMD EPYC Compute",
+        "datePublished": "2026-02-17T20:24:36Z",
+        "dateModified": "2026-02-17T20:24:36.679Z",
+        "mainEntityOfPage": "https://remktr.com/blog/amd-ec2-hpc8a",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-17-2026-08-16-39-9469-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="amd-ec2-hpc8a.html">Hpc8a on AWS: 40% Faster AMD EPYC Compute</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 17, 2026 8:24:36 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You know that sim that always misses the overnight window? The one that makes your team babysit a cluster and pray the queue clears? <em>That run just got way faster.</em></p>
+<p>AWS launched Hpc8a—an AMD EC2 instance with 5th Gen AMD EPYC. It delivers up to 40% higher performance than Hpc7a, 42% more memory bandwidth, and 300 Gbps Elastic Fabric Adapter (EFA). Translation: you can chew through CFD, FEA, and weather jobs faster. You scale cleaner and likely spend less for the same or better results.</p>
+<p>No pet projects here. We’re talking 192 high‑frequency cores and 768 GiB RAM. That’s a clean 1:4 core‑to‑memory ratio, which is nice. Plus sixth‑gen Nitro under the hood. It’s built for tightly coupled MPI jobs that punish weak interconnects. If your app chats across nodes, Hpc8a speaks fluently—and fast.</p>
+<p>Your move? <em>Rethink your HPC playbook.</em> If you’ve been eyeing GPUs for everything, stop a sec. CPU‑bound math just got a real upgrade. And if your on‑prem cluster sits in procurement hell, this is your out.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Up to 40% faster vs. Hpc7a; 42% more memory bandwidth.</li>
+<li>192 cores, 768 GiB RAM, 300 Gbps EFA for low‑latency MPI.</li>
+<li>Single size: hpc8a.96xlarge; EBS‑only; baseline 75 Gbps network.</li>
+<li>Best for tightly coupled CFD, FEA, WRF, molecular dynamics.</li>
+<li>Available now in US East (Ohio) and Europe (Stockholm).</li>
+<li>Save with Savings Plans; burst with Spot for non‑critical runs.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-17-2026-08-17-32-6985-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whathpc8achanges">What Hpc8a Changes</h2>
+<h3 id="whythiscpujumpmatters">Why this CPU jump matters</h3>
+<p>If your workload is CPU‑bound and chatty—think OpenFOAM, WRF, or explicit FEA—it’s not just flops. Your speed limit is memory bandwidth and inter‑node latency. Hpc8a lifts all three: higher‑frequency 5th Gen AMD EPYC cores, 42% more memory bandwidth vs. Hpc7a, and 300 Gbps EFA for ultra‑low‑latency MPI. That combo lets you scale without your solver face‑planting at 256+ nodes.</p>
+<p>For you, that means fewer hacks around halo exchanges and fewer restarts. You also get a better strong‑scaling curve across more nodes. The 1:4 core‑to‑memory ratio (4 GiB per core) hits a sweet spot. Great for meshes that blow up cache but don’t need memory‑heavy SKUs.</p>
+<p>Zooming in: strong scaling keeps problem size fixed while adding nodes. The wall time should drop when things go right. The usual failure mode is diminishing returns once communication dominates compute. Hpc8a’s extra memory bandwidth keeps per‑core kernels fed and steady. EFA’s fat pipe and low jitter keep collectives from ballooning. Think Allreduce, Alltoall, and neighbor exchanges staying tight. On real jobs—like a 30–80M cell RANS case or a 3D weather domain with tilted nesting—you avoid the cliff. You get a smooth scaling curve instead.</p>
+<p>Also worth calling out: high clocks help the “serial islands” inside parallel codes. Geometry preprocessing, mesh partitioning, file I/O orchestration, and setup phases get faster. When those shrink, your whole pipeline flows better end‑to‑end, not just the compute kernel.</p>
+<h3 id="aquickmentalmodel">A quick mental model</h3>
+<ul>
+<li>Compute: 192 high‑frequency cores keep per‑rank performance high.</li>
+<li>Memory: 768 GiB keeps memory‑bound kernels from starved stalls.</li>
+<li>Network: 300 Gbps EFA minimizes the MPI tax at scale.</li>
+</ul>
+<p>First‑hand example: You run a 50M‑cell RANS CFD model across 8 nodes. On Hpc8a, you can raise ranks‑per‑node while holding memory‑per‑rank steady. Then lean on EFA to keep all‑to‑all and nearest‑neighbor exchanges tight. Net‑net: shorter wall clock without wrecking accuracy or inflating your bill.</p>
+<p><em>Pro tip:</em> Keep your ranks per NUMA domain balanced. Over‑subscribe and you’ll turn extra bandwidth into cache thrash.</p>
+<p><em>Another way to picture it:</em></p>
+<ul>
+<li>WRF: Domain decomposition across i/j tiles loves low‑latency halos each time step. With EFA, those halos don’t stall the ensemble, so time‑to‑forecast tightens.</li>
+<li>Explicit FEA: The solver advances tiny time steps and needs fast global reductions. If latency is low and consistent, you push physics more and wait less.</li>
+<li>Molecular dynamics: Neighbor list updates and PME grids can be chatty. Faster links mean fewer long‑tail outliers per step.</li>
+</ul>
+<p>Keep in mind, scaling isn’t just about adding ranks. It’s about balance. If one rank’s partition has too many boundary faces or funky geometry, it slows everything. Before you blame the network, check partition quality and reorder meshes for locality. Also verify eager and rendezvous thresholds match your usual message sizes.</p>
+<h2 id="underthehood">Under The Hood</h2>
+<h3 id="thesiliconandsystemstory">The silicon and system story</h3>
+<ul>
+<li>5th Gen AMD EPYC (max up to 4.5 GHz): High clocks help single‑thread‑sensitive kernels. Geometry, I/O, and decompositions speed up. Parallel sections still fly.</li>
+<li>Sixth‑gen AWS Nitro Cards: Offload virtualization, storage, and networking to hardware. That frees more CPU for your code and tightens tenant isolation.</li>
+<li>EFA at 300 Gbps: Built for HPC and ML collectives; integrates with libfabric. Your MPI stack talks to the network like it should—fast and consistent.</li>
+</ul>
+<p>This isn’t a kitchen‑sink instance. AWS ships a single size—hpc8a.96xlarge. You tune via nodes and ranks, not SKU musical chairs. It’s EBS‑only, which simplifies ephemeral choices quite a bit. It also nudges you toward right‑sized FSx for Lustre scratch for hot I/O.</p>
+<p>Under the covers, EFA uses a user‑space networking stack via libfabric. You get hardware offloads and reliable datagram transport to slash tail latency. Translation: less jitter in your collectives and more predictable iteration times. Nitro keeps noisy‑neighbor effects in check. It offloads the hypervisor and data plane, which matters if your job hates microbursts.</p>
+<h3 id="whatthatmeans">What that means</h3>
+<ul>
+<li>MPI: Use libfabric’s EFA provider; set the right eager and rendezvous thresholds.</li>
+<li>I/O: Land your working set on FSx for Lustre; keep checkpoints on EBS.</li>
+<li>Schedulers: Use cluster placement groups; pin ranks per NUMA; set CPU affinity.</li>
+</ul>
+<p>First‑hand example: A genomics pipeline has bursty I/O and shared reads. Stage reference data on FSx for Lustre for high‑throughput reads. Write checkpoints and logs to EBS for persistence. Your compute stays hot, and your storage bill stays sane.</p>
+<p>A few tactical tips to make the hardware sing:</p>
+<ul>
+<li>MPI stacks: Confirm your provider path (e.g., libfabric/efa) is really active. Use verbose logs to verify small messages use eager and larger flip to rendezvous. If supported, test different collective algorithms for Allreduce and Alltoall. Tree vs. ring vs. recursive doubling can vary by pattern.</li>
+<li>NUMA awareness: Treat sockets as first‑class citizens. Map ranks to sockets and keep memory local. Bad binding turns fancy cores into glorified waiters.</li>
+<li>Threading: If you mix MPI + OpenMP, measure the sweet spot. Try 2–4 threads per rank instead of assuming all cores, all the time. Too many threads can fight over cache lines.</li>
+</ul>
+<h2 id="pickhpc8aversusgpuinstances">Pick Hpc8a Versus GPU Instances</h2>
+<h3 id="cpuvsgputree">CPU vs GPU tree</h3>
+<p>Pick Hpc8a when:</p>
+<ul>
+<li>Your solver is CPU‑bound (CFD RANS/LES, explicit FEA, WRF, molecular dynamics without heavy GPU kernels).</li>
+<li>You rely on MPI collectives that punish slow interconnects.</li>
+<li>You need predictable scaling at 100s–1000s of vCPUs without retuning CUDA.</li>
+</ul>
+<p>Pick GPU instances when:</p>
+<ul>
+<li>Your code has mature GPU paths (dense linear algebra, deep learning, modern MD with CUDA/HIP backends).</li>
+<li>You’re memory‑bandwidth limited but can leverage HBM.</li>
+</ul>
+<p><em>Note:</em> amazon ec2 g3 instances (older GPU family) were great for graphics and visualization. They weren’t for state‑of‑the‑art CUDA training. If you need aws gpu accelerated instances for training or inference, use current GPU families. For long, steady workloads, aws gpu reserved instances or Savings Plans can still make sense. Hpc8a complements those well. Use CPU for meshing, preprocessing, and parameter sweeps. Keep GPUs for kernels that truly vectorize.</p>
+<p>Think in terms of engineering time. If your GPU path is half‑baked or would take weeks to port, think twice. You’re burning calendar, not just dollars, when you delay. Hpc8a lets you scale today with minimal code changes. Later, you can port the hottest kernels to GPUs surgically. Many shops go hybrid. CPUs handle mesh gen, parameter sweeps, UQ runs, and pre/post steps. GPUs crush the few kernels with high arithmetic intensity and clean memory access.</p>
+<h3 id="priceperformancerealitycheck">Price performance reality check</h3>
+<p>Hpc8a claims up to 25% better price‑performance versus Hpc7a. That advantage stacks when your scaling improves via EFA and more memory bandwidth. If you were over‑provisioning nodes to dodge MPI slowdowns, right‑size ranks instead. Then rely on the fatter pipe and claw back spend. <em>Always validate with your own strong‑scaling plots before flipping production.</em></p>
+<p>First‑hand example: Split a week’s batch into A/B runs—A on Hpc7a, B on Hpc8a. Keep identical decomposition and I/O settings for both. Track wall clock, node hours, and solver iteration time. If B cuts node hours by over 20% with stable residuals, you’ve got your migration case.</p>
+<p>How to run a clean bake‑off:</p>
+<ul>
+<li>Fix the software: same solver version, compiler, flags, and libraries.</li>
+<li>Warm up once to fill caches and stabilize turbo; then measure steady‑state.</li>
+<li>Pin ranks and threads identically; verify NUMA locality for both runs.</li>
+<li>Keep I/O identical: same FSx mount point, lustre stripe settings, and cadence.</li>
+<li>Run at least three iterations; compare medians and inspect the p95 tail.</li>
+<li>Record CPU utilization, network p99 latency, and EFA errors near zero.</li>
+</ul>
+<p>If your Hpc8a run shows a better strong‑scaling slope and lower p95 iteration time, that’s real price‑performance. Not just a spec sheet win.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-17-2026-08-18-24-7124-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="realworldplays">Real World Plays</h2>
+<h3 id="makeefadorealwork">Make EFA do real work</h3>
+<ul>
+<li>Enable EFA in your templates; verify with fi_info and MPI logs.</li>
+<li>Use cluster placement groups for tightly coupled jobs to cut jitter.</li>
+<li>Tune MPI buffer sizes and collective algorithms; the defaults aren’t gospel.</li>
+</ul>
+<p><em>Add a smoke test before you spend big on a run.</em> Do a tiny ping‑pong or micro‑collective sample across a subset of nodes. Confirm the EFA path is hot and tail latency is low. If the test looks noisy, fix placement or provider settings first. Don’t discover a placement miss at 1,024 ranks.</p>
+<h3 id="memoryandnumahygiene">Memory and NUMA hygiene</h3>
+<ul>
+<li>Map ranks per socket; avoid cross‑socket chatter that drags performance.</li>
+<li>Use huge pages for memory‑intensive solvers.</li>
+<li>Profile with perf or pmu‑tools to spot stalls and LLC bandwidth.</li>
+</ul>
+<p><em>Rules of thumb:</em></p>
+<ul>
+<li>Prefer 2 MB huge pages by default; try 1 GB if arrays are giant. Make sure the OS supports it and then measure TLB miss rate and end‑to‑end time.</li>
+<li>Keep memory‑per‑rank consistent across nodes. If one node swaps or OOMs, you’ll waste hours rerunning.</li>
+<li>Watch for last‑level cache contention. If per‑rank working set blows past LLC, try fewer ranks per socket. It can beat brute‑force parallelism sometimes.</li>
+</ul>
+<h3 id="storagethatmatches">Storage that matches</h3>
+<ul>
+<li>Scratch: Amazon FSx for Lustre for parallel I/O on shared datasets.</li>
+<li>Persistence: EBS for checkpoints and logs; spread across volumes for throughput.</li>
+<li>Trim output: Don’t write fields you never post‑process later.</li>
+</ul>
+<p><em>More nuance:</em></p>
+<ul>
+<li>Batch checkpoints: fewer, larger files cut metadata overhead vs. many tiny ones.</li>
+<li>Align checkpoint cadence with solver resilience. If steps are cheap, checkpoint less. If steps are expensive, checkpoint enough to sleep at night. Also survive Spot interruptions during non‑critical phases.</li>
+<li>For read‑mostly reference datasets, keep them hot on FSx for Lustre. For write‑heavy scratch, validate stripe count and file layout. Keep OSTs busy without overload.</li>
+</ul>
+<h3 id="operationalguardrails">Operational guardrails</h3>
+<ul>
+<li>Orchestrate with AWS ParallelCluster; bake AMIs with OpenMPI and libfabric set right.</li>
+<li>Monitor EFA utilization, network p99, and CPU cycles in CloudWatch.</li>
+<li>Use Spot for non‑critical sweeps; Savings Plans for steady production.</li>
+</ul>
+<p><em>A few more safety nets:</em></p>
+<ul>
+<li>Use capacity‑optimized allocation for Spot to cut interruptions. Spread fleets across instance pools and AZs when you can.</li>
+<li>Put tightly coupled runs in placement groups and keep some buffer capacity. Backfill looser jobs elsewhere where they fit.</li>
+<li>Set alarms on iteration time and throughput to catch regressions early. A stray kernel upgrade or bad NUMA binding can sink a week.</li>
+</ul>
+<p>First‑hand example: A crash simulation pipeline moves meshing and preprocessing to Hpc8a Spot fleets. Those are cheap and parallel. Then it runs core explicit FEA on On‑Demand Hpc8a with cluster placement. Post‑processing returns to Spot queues. Net effect: faster results with a blended cost that stays friendly.</p>
+<h2 id="quickhitrecap">Quick Hit Recap</h2>
+<ul>
+<li>Hpc8a = 192 cores, 768 GiB, 300 Gbps EFA; tuned for MPI at scale.</li>
+<li>Up to 40% faster and 42% more memory bandwidth vs. Hpc7a.</li>
+<li>Single size simplifies planning; scale with nodes and ranks, not SKUs.</li>
+<li>Use libfabric EFA, cluster placement, NUMA pinning, and huge pages.</li>
+<li>Pair FSx for Lustre (scratch) with EBS (checkpoints) to keep I/O hot.</li>
+<li>Choose Hpc8a for CPU‑bound solvers; keep GPUs for kernels that benefit.</li>
+</ul>
+<h2 id="hpc8afaq">Hpc8a FAQ</h2>
+<ol>
+<li><h3 id="hpc8avshpc7a">Hpc8a vs Hpc7a</h3>
+<p>Hpc8a delivers up to 40% higher performance and 42% more memory bandwidth. It also brings 300 Gbps EFA to the table. In practice, you’ll see better strong scaling and lower iteration times for MPI‑heavy codes. It also offers up to 25% better price‑performance for many CPU‑bound jobs.</p></li>
+<li><h3 id="hpc8areplacegpuclusters">Hpc8a replace GPU clusters</h3>
+<p>No. Hpc8a targets CPU‑bound, tightly coupled workloads. If your solver has optimized GPU paths—like certain MD, CFD, or ML kernels—GPUs still win. Use Hpc8a for preprocessing, parameter sweeps, CPU‑centric solvers, and anything needing fast cores and low‑latency MPI.</p></li>
+<li><h3 id="changempistackuseefa">Change MPI stack use EFA</h3>
+<p>You’ll want an MPI build that uses libfabric’s EFA provider. Validate with fi_info and MPI verbose logs. Many popular stacks support EFA out of the box. Also use cluster placement groups to keep network jitter low at scale.</p></li>
+<li><h3 id="whatstoragesetupworksbest">What storage setup works best</h3>
+<p>For shared, high‑throughput scratch, use Amazon FSx for Lustre. For durable checkpoints and logs, stick with EBS and stripe if needed. Keep output lean by disabling unused fields. I/O can dominate runtime if you let it.</p></li>
+<li><h3 id="howshouldibuycapacity">How should I buy capacity</h3>
+<p>Start with On‑Demand for benchmarking. For steady production, Savings Plans usually give the best discount flexibility. For non‑critical sweeps or ensembles, Spot can slash costs. Just checkpoint often and use job arrays.</p></li>
+<li><h3 id="whereishpc8aavailablenow">Where is Hpc8a available now</h3>
+<p>As of Feb 16, 2026: US East (Ohio) and Europe (Stockholm). Check AWS region availability pages for updates before planning large migrations.</p></li>
+<li><h3 id="estimatememoryperrank">Estimate memory per rank</h3>
+<p>Start from your mesh size, per‑cell state variables, and solver buffers. Add headroom for I/O and diagnostics, often 10–20% or so. Divide by target ranks‑per‑node and ensure you stay below 4 GiB per core on average. If you’re near the limit, reduce ranks per node or trim diagnostics.</p></li>
+<li><h3 id="anylicensingorschedulergotchas">Any licensing or scheduler gotchas</h3>
+<p>Floating license servers can become a hidden bottleneck with spotty links. Place them close to compute, and cache license checkouts when supported. For schedulers, use placement group awareness and topology hints. Don’t strand ranks across AZs or miss EFA enablement.</p></li>
+<li><p>### What metrics should I watch</p></li>
+</ol>
+<ul>
+<li><p>Iteration time distribution (median and p95)</p></li>
+<li><p>CPU utilization per core (watch for imbalances)</p></li>
+<li><p>Network throughput and p99 latency</p></li>
+<li><p>EFA provider in use (verify libfabric path)</p></li>
+<li><p>I/O throughput on FSx for Lustre and EBS queue depth</p>
+<p>If p95 iteration time drifts up mid‑run, suspect an I/O storm first. Or a noisy placement or a mis‑bound rank causing pain.</p></li>
+</ul>
+<ol>
+<li><h3 id="migratefromonpremclusters">Migrate from on prem clusters</h3>
+<p>Lift a representative workload first: same data, solver, and scripts. Validate correctness, then tune ranks‑per‑node and placement. Once performance clears the bar, templatize the stack with ParallelCluster. Then lock in purchasing with Savings Plans for the steady piece. Keep a small on‑prem or cloud GPU pool if some kernels need it.</p></li>
+</ol>
+<h2 id="launchhpc8afast">Launch Hpc8a Fast</h2>
+<ul>
+<li>Pick region (US East—Ohio, or Europe—Stockholm) and enable EFA.</li>
+<li>Spin an hpc8a.96xlarge with a cluster placement group.</li>
+<li>Install and verify libfabric + MPI (EFA provider); run fi_info.</li>
+<li>Mount FSx for Lustre for scratch; provision EBS for checkpoints.</li>
+<li>Set ranks per NUMA, CPU affinity, and huge pages; verify with lscpu and numactl.</li>
+<li>Run a small strong‑scaling test; plot wall time versus nodes.</li>
+<li>Compare node hours vs. Hpc7a; decide On‑Demand vs. Savings Plans vs. Spot.</li>
+</ul>
+<p><em>Bonus points:</em></p>
+<ul>
+<li>Save a golden AMI with your tuned stack so every node is identical.</li>
+<li>Document your best‑known config next to the job script. Include ranks, threads, and I/O cadence.</li>
+<li>Automate A/B tests monthly so regressions don’t sneak in quietly.</li>
+</ul>
+<p>Hpc8a compresses time‑to‑results. Your job is to keep the pipeline fed and the network hot.</p>
+<p>In short: Hpc8a shrinks your wall clock without blowing up your budget. You get 192 high‑freq AMD cores, 42% more memory bandwidth, and 300 Gbps EFA. It actually scales your MPI past the awkward middle at last. If your workloads are CPU‑bound and talky, this feels like the easy button. Start with a week of jobs, A/B the runs, then lock in the winner with Savings Plans. Teams that benchmark and tune will bank gains—and lap folks still waiting on on‑prem queues.</p>
+<p><em>2005: GPUs were for pixels. 2026: CPUs and networks got fast enough that picking the right pipe can beat brute force. Choose wisely.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html">AWS Elastic Fabric Adapter (EFA)</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa-start.html">AWS EFA Getting Started and Best Practices</a></li>
+<li><a href="https://aws.amazon.com/ec2/nitro/">AWS Nitro System overview</a></li>
+<li><a href="https://aws.amazon.com/hpc/parallelcluster/">AWS ParallelCluster</a></li>
+<li><a href="https://aws.amazon.com/fsx/lustre/">Amazon FSx for Lustre</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">Amazon EC2 placement groups</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html">Amazon CloudWatch metrics for EC2</a></li>
+<li><a href="https://aws.amazon.com/savingsplans/">AWS Savings Plans</a></li>
+<li><a href="https://aws.amazon.com/ec2/spot/">Amazon EC2 Spot Instances</a></li>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/">AWS Regional Services List</a></li>
+<li><a href="https://aws.amazon.com/ec2/instance-types/hpc7a/">Amazon EC2 Hpc7a instances</a></li>
+<li><a href="https://www.mpi-forum.org/">Message Passing Interface (MPI) Forum</a></li>
+<li><a href="https://ofiwg.github.io/libfabric/">libfabric (OpenFabrics Interfaces)</a></li>
+<li><a href="https://www.open-mpi.org/">Open MPI</a></li>
+<li><a href="https://www.openfoam.com/">OpenFOAM (CFD)</a></li>
+<li><a href="https://www.mmm.ucar.edu/weather-research-and-forecasting-model">WRF (Weather Research and Forecasting Model)</a></li>
+<li><a href="https://www.amd.com/en/products/epyc.html">AMD EPYC processors</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="amd-ec2-hpc8a.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq86ca.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Hpc8a+on+AWS%3A+40%25+Faster+AMD+EPYC+Compute&amp;pi=316119466698&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=316119466698&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Famd-ec2-hpc8a&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/amd-ec2-hpc8a?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:02 GMT -->
+</html>

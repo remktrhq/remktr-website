@@ -1,0 +1,571 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/nova-forge-agentcore-review?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>AWS Nova Forge and AgentCore Review: Ship Bounded AI Faster</title>
+    <link rel="canonical" href="nova-forge-agentcore-review.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore a review of AWS Nova Forge and AgentCore; learn how Nova LLMs fine-tune on proprietary data and see AgentCore evaluations across 13 frameworks.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "AWS Nova Forge and AgentCore Review: Ship Bounded AI Faster",
+        "datePublished": "2025-12-15T22:51:53Z",
+        "dateModified": "2025-12-15T22:51:53.432Z",
+        "mainEntityOfPage": "https://remktr.com/blog/nova-forge-agentcore-review",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-15-2025-10-45-20-0866-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="nova-forge-agentcore-review.html">AWS Nova Forge and AgentCore Review: Ship Bounded AI Faster</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 15, 2025 10:51:53 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You don’t need another model. You need training on your data, period.
+And you need guardrails so agents don’t go rogue on messy customer asks.
+<em>That’s the move here.</em></p>
+<p>The fastest path to safe AI in prod isn’t “just add more prompts.”
+It’s pairing fine-tuning with policy controls and real evals.
+Nova Forge gives you the first piece.
+AgentCore’s Policy Engine delivers the second piece.</p>
+<p>If sandbox demos burned you, and then collapsed in prod, this helps.
+You adapt a model to your domain, lock agents to enterprise rules, and measure performance across 13 eval frameworks before you ship.
+That’s the gap between a flashy proof-of-concept and something your CIO will actually bless.</p>
+<p><em>Bold claim? Yep.</em>
+But if you want AI that behaves, you need training where your data lives and guardrails that don’t break task success.
+Let’s unpack what Nova Forge and AgentCore actually bring—and how to use them without drowning in hype.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Nova Forge: fine-tune Nova LLMs on your own data.</li>
+<li>AgentCore Policy Engine: runtime boundaries plus user memory for context.</li>
+<li>Evaluations: 13 frameworks scoring safety, quality, and task success.</li>
+<li>Sweet spot: domain-heavy tasks where generic models hallucinate.</li>
+<li>Pricing and GitHub: details vary; watch AWS channels as docs land.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-15-2025-10-46-19-7024-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<p>If the TL;DR is the appetizer, the main course is how these parts work together under load—when users show up with messy questions, half-finished info, and a talent for edge cases.
+The promise isn’t just smarter outputs; it’s predictable behavior you can audit, measure, and trust at scale.</p>
+<h2 id="novaforgeinplainenglish">Nova Forge in plain English</h2>
+<h3 id="whatyouactuallyget">What you actually get</h3>
+<p>Nova Forge lets you fine-tune Nova LLMs on your own data.
+The value: move past prompt spaghetti and encode your domain—terms, formats, decisions—straight into weights.
+You cut prompt length, boost consistency, and make the model “think like your org.”</p>
+<p>That means your model doesn’t just copy a style; it internalizes your definitions, workflows, and exceptions.
+Instead of stacking 40-shot prompts and praying, you train once on gold examples and benefit on every call.
+It’s the difference between sticky notes on a monitor and updating the actual playbook.</p>
+<h3 id="whyitmatters">Why it matters</h3>
+<p>Generic LLMs guess.
+Your business can’t.
+With proper fine-tuning, you turn fuzzy reasoning into predictable workflows.
+Support macros reflect policy, product copy aligns to legal, and analytics summaries use metrics your CFO actually cares about.
+<em>Short version: fewer hallucinations, more on-policy answers.</em></p>
+<p>Fine-tuning also cuts token bloat.
+Shorter prompts, fewer system rules, lower latency, better cost control.
+Most teams don’t see how much spend comes from prompts that repeat the same rules.
+Bake those rules into the model once, and you save on every request after.</p>
+<h3 id="whereitfits">Where it fits</h3>
+<ul>
+<li>Data stays in your environment while training jobs run on curated corpora.</li>
+<li>Pair Forge with retrieval for fresh facts and AgentCore for runtime constraints.</li>
+<li>Use Forge for core behaviors; keep prompts for per-request nuance.</li>
+</ul>
+<p><em>A simple mental model: Forge is “who we are and how we work.”</em>
+Retrieval is “what’s new today.”
+Policies are “what’s allowed right now.”
+Keep those roles clean, and the system stays stable as you scale.</p>
+<h3 id="apracticalexample">A practical example</h3>
+<p>Picture onboarding analysts in fintech.
+You fine-tune Nova on internal KYC guides and ticket resolutions.
+Now the model recognizes your risk taxonomy out of the box.
+It formats SAR narratives in the house style and flags edge cases for human review.
+The goal isn’t zero human—it’s faster, safer first drafts that match your playbook.</p>
+<p>Zoom out, and the same pattern works in healthcare intake, B2B sales ops, or manufacturing quality control.
+Anywhere you have repeatable logic plus strict guardrails, Forge locks in the logic so every answer starts closer to correct.</p>
+<h3 id="howtopreptrainingdata">How to prep training data</h3>
+<ul>
+<li>Start small and clean.
+High-quality beats high-volume.
+One bad example can teach the wrong move to thousands of queries.</li>
+<li>Label outcomes precisely.
+Good/better/best, final decision, and reason codes.
+Your labels teach the model what “success” means.</li>
+<li>Normalize formats.
+Consistent headers, fields, and style.
+Models learn quicker when patterns stay tight.</li>
+<li>Anonymize early.
+Replace PII with tokens like [NAME] and [ACCOUNT_ID] to prevent memorization.</li>
+<li>Keep a frozen validation set.
+If your validation drifts, you’ll ship regressions without noticing.</li>
+</ul>
+<h3 id="howtomeasureimprovement">How to measure improvement</h3>
+<p>Track deltas against a baseline, not vibes:</p>
+<ul>
+<li>Accuracy versus gold answers on a held-out set.</li>
+<li>Edit distance from ideal responses, smaller is better.</li>
+<li>Time-to-resolution or cycles-to-first-correct.</li>
+<li>Refusal rate when an answer should be allowed.</li>
+<li>On-policy compliance rate, does it follow your rules?</li>
+</ul>
+<p>If a fine-tune improves accuracy 10% but doubles refusals, that’s not a win.
+Look at compound outcomes: accuracy times completion times safety.</p>
+<h2 id="agentcorespolicyenginedecoded">AgentCores Policy Engine decoded</h2>
+<h3 id="whatitbinds">What it binds</h3>
+<p>AgentCore’s Policy Engine constrains what agents can see, say, and do.
+Think allowlists and denylists, content filters, data access rules, and workflow limits.
+It layers in user memory so the agent remembers preferences and past context without re-asking.</p>
+<p><em>Policies are your runtime truth.</em>
+They translate risk rules into code the agent actually follows.
+What tools it can call, what fields it can fetch, who sees what, and when to escalate.
+The big win is consistency.
+Tuesday’s 3 a.m. chatbot behaves like Tuesday’s 3 p.m. human agent with a supervisor nearby.</p>
+<h3 id="the13evaluationframeworks">The 13 evaluation frameworks</h3>
+<p>You can test agents across safety, quality, and reliability dimensions.
+Think toxicity, PII leakage, jailbreak resilience, hallucination rate, instruction-following, and task success.
+The point isn’t a vanity score; it’s a red, amber, or green gate for deployment.</p>
+<p>Expect categories like adversarial robustness, harmful content detection, data exfiltration resistance, fairness and bias probes, tool-use correctness, and traceability.
+You don’t need to memorize the categories.
+You do need to run them before shipping and rerun them after any major change.</p>
+<h3 id="howmemorychangesthegame">How memory changes the game</h3>
+<p>Memory shifts you from cold start answers to personalized continuity.
+Your support agent recalls the user’s last issue, preferred channels, and entitlements.
+Your research agent knows team definitions and past conclusions.
+Memory boosts CX and speed—but only if policies fence it in.</p>
+<p>Two rules keep memory safe:</p>
+<ul>
+<li>Eligibility: define what can be remembered, like preferences or device type, and what cannot, like full card numbers or diagnosis details.</li>
+<li>Retention: set time windows and purge jobs.
+If you can’t explain why you kept it, you probably shouldn’t keep it.</li>
+</ul>
+<h3 id="realworldscenario">Real world scenario</h3>
+<p>Retail returns chatbot.
+Policy says never expose full card numbers.
+Use store credits before refunds for flagged accounts, and escalate VIPs above $X.
+Memory recalls prior cases and loyalty tier.
+Evaluations prove it doesn’t leak PII under adversarial prompts.
+That’s how you scale without waking Legal at 2 a.m.</p>
+<p>Add one more twist: throttled tool use.
+The agent can generate a refund only once per session without supervisor approval.
+If users push, it politely refuses and logs the attempt.
+That’s security with a smile, not a brick wall.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-15-2025-10-47-15-1006-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="frompoctoprod">From POC to prod</h2>
+<h3 id="step1narrowusecase">Step 1 narrow use case</h3>
+<p>Choose tasks with repeatable structure.
+Support macros, sales proposals, compliance summaries, and internal Q&amp;A.
+Success equals measurable throughput and quality gains.</p>
+<p><em>Make it boring on purpose.</em>
+Boring work has sharp edges and clear KPIs.
+You want undeniable wins.
+Fewer edits, faster responses, and fewer escalations.</p>
+<h3 id="step2curatetrainingdata">Step 2 curate training data</h3>
+<ul>
+<li>Deduplicate.
+Label outcomes.
+Remove contradictory examples.</li>
+<li>Strip sensitive fields or tokenize them.</li>
+<li>Keep a clean validation set to avoid overfitting.</li>
+</ul>
+<p>Add a quick rubric for curators:</p>
+<ul>
+<li>Is this example like real traffic?
+Keep.</li>
+<li>Is it an edge case you want the model to handle?
+Keep, but label.</li>
+<li>Is it confusing, outdated, or off-policy?
+Fix it or drop it.</li>
+</ul>
+<h3 id="step3finetunenovaforge">Step 3 fine tune Nova Forge</h3>
+<p>Start small.
+Establish a baseline with prompts only, then fine-tune on 1–5k high-quality examples.
+Track win-rate deltas.
+Accuracy, edit distance from gold answers, and time-to-resolution.</p>
+<p>Keep an eye on drift.
+After the first fine-tune, add 100–200 new examples each sprint from human-in-the-loop feedback.
+Schedule monthly retrains so improvements stick, not just tribal knowledge.</p>
+<h3 id="step4wrapagentcorepolicies">Step 4 wrap AgentCore policies</h3>
+<p>Define guardrails before traffic hits.
+Content policy, tool-use limits, PII handling, and escalation paths.
+Turn on user memory for stickiness—and test that it never stores what it shouldn’t.</p>
+<p>Document policies like API contracts:</p>
+<ul>
+<li>Inputs allowed, fields and formats.</li>
+<li>Outputs required, tone, disclaimers, and fields.</li>
+<li>Tools callable, and max calls per session.</li>
+<li>Escalation triggers and handoff details.</li>
+</ul>
+<h3 id="step5run13evals">Step 5 run 13 evals</h3>
+<p>Push adversarial tests.
+Measure both safety and task completion.
+If a stricter filter drops completion by eight percent, tune it instead of disabling.
+Make tradeoffs explicit.</p>
+<p>Run evals at three checkpoints:</p>
+<ul>
+<li>Baseline, prompt-only.</li>
+<li>Post-fine-tune, Nova Forge.</li>
+<li>Post-policy, AgentCore.</li>
+</ul>
+<p>This isolates where gains and regressions come from.
+If policies tank completion, they might be overbroad.
+If fine-tuning boosts accuracy but increases hallucinations on unknowns, add refusal examples to training.</p>
+<h3 id="step6humanloop">Step 6 human loop</h3>
+<p>Route ambiguous cases to humans.
+Capture corrections as new training data.
+Your loop should improve monthly, not ad hoc.</p>
+<p>Target a healthy ratio.
+Automate the routine, escalate the unclear.
+If humans fix the same mistake more than twice, it belongs in the next fine-tune.</p>
+<h3 id="step7monitordrift">Step 7 monitor drift</h3>
+<p>Log refusals, jailbreak attempts, and off-policy actions.
+Treat eval regressions like failed unit tests—block deploys until green.</p>
+<p>Dashboards that matter:</p>
+<ul>
+<li>Refusal rate by intent.</li>
+<li>PII redaction misses, this should be zero.</li>
+<li>Tool-call errors and retries.</li>
+<li>Content filter triggers by category.</li>
+<li>Average edits per human review.</li>
+</ul>
+<h2 id="pricinggithubevaluations">Pricing GitHub evaluations</h2>
+<h3 id="novaforgepricing">Nova Forge pricing</h3>
+<p>As of publication, detailed pricing didn’t show up in the re:Invent echoes.
+Expect the usual levers.
+Data processing, training time, checkpoints, and maybe storage or egress.
+Practical tip: start with a tight, high-signal dataset to get ROI before scaling.
+Always compare fine-tuning cost to prompt engineering plus retrieval alternatives.</p>
+<p>Hidden costs to watch:</p>
+<ul>
+<li>Data labeling and review time, humans aren’t free.</li>
+<li>Evaluation runs before and after release.</li>
+<li>Re-training cadence as policies or products change.</li>
+<li>Model selection experiments you’ll later discard.</li>
+</ul>
+<h3 id="agentcorepricing">AgentCore pricing</h3>
+<p>Policy and evaluation features often meter by requests, eval runs, or agent-time.
+Budget for pre-deploy eval cycles plus ongoing spot-checks in production.
+Don’t skip evals to save cost—one policy failure in prod costs way more.</p>
+<p>Line items leaders ask about:</p>
+<ul>
+<li>Per-request surcharge for policy checks.</li>
+<li>Memory storage and encryption at rest.</li>
+<li>Evaluation suite runs and report exports.</li>
+<li>Audit log retention by month or gigabytes.</li>
+</ul>
+<h3 id="novaforgeagentcoregithub">nova forge agentcore github</h3>
+<p>Looking for code?
+Check for official samples under known AWS GitHub orgs like aws-samples and session repos linked from re:Invent recordings.
+If you don’t see a first-party repo yet, document your experiments.
+Keep your IaC for datasets, jobs, and policies versioned so you can swap in official modules later without refactors.</p>
+<p>A simple structure that ages well:</p>
+<ul>
+<li>data/ for raw, curated, and validation.</li>
+<li>jobs/ for fine-tune configs and training specs.</li>
+<li>policies/ for YAML or JSON, with changelogs.</li>
+<li>evals/ for scenarios, prompts, and expected outcomes.</li>
+<li>infra/ for roles, storage, and CI/CD templates.</li>
+</ul>
+<h3 id="agentcoreevaluationsinpractice">AgentCore evaluations in practice</h3>
+<p>Treat the 13 frameworks like a balanced scorecard.
+Run baseline, prompt-only.
+Then post-fine-tune with Nova Forge, and post-policy with AgentCore.
+Track deltas for safety and task success.
+A win looks like plus twelve percent resolution accuracy, minus forty percent PII risk, and stable or better CSAT.
+If safety spikes refusals, iterate on policy specificity—don’t just loosen thresholds.</p>
+<p>Two operational tips:</p>
+<ul>
+<li>Keep an “adversarial bank” of tricky prompts.
+Every time a tester finds a hole, add it to the bank.</li>
+<li>Make evals part of CI/CD.
+New checkpoint or policy?
+<em>No green, no ship.</em></li>
+</ul>
+<h2 id="whattowatchnext">What to watch next</h2>
+<h3 id="whatslikelycoming">Whats likely coming</h3>
+<ul>
+<li>Tighter integration between Forge checkpoints and AgentCore evaluation dashboards.</li>
+<li>Pre-baked policy packs for regulated verticals.</li>
+<li>Evaluation presets mapped to internal risk ratings.</li>
+</ul>
+<p>Also expect stronger support for audit trails.
+Per-response policy traces, decision rationales, and signed artifacts that make auditors smile, not squint.</p>
+<h3 id="commongotchas">Common gotchas</h3>
+<ul>
+<li>Overfitting your tone, underfitting your logic.
+Teach reasoning, not only style.</li>
+<li>Memory creep.
+Define what’s eligible for memory, retention windows, and purge rules.</li>
+<li>Policy whiplash.
+Don’t toggle guardrails weekly.
+Use change windows and A/B tests to observe effects.</li>
+</ul>
+<p>A bonus gotcha: ignoring tool error handling.
+If a tool fails, the agent should say so and escalate, not hallucinate success.</p>
+<h3 id="securityandcompliancelens">Security and compliance lens</h3>
+<p>Map policies to specific controls like PII redaction, data residency, and auditing.
+Log every blocked action and refusal reason.
+Auditors love a paper trail.
+Align evaluations with your model risk framework so AI fits your governance, not invents a new process.</p>
+<p>Add the basics:</p>
+<ul>
+<li>Least-privilege roles for tools and data.</li>
+<li>Encryption at rest and in transit.</li>
+<li>Region pinning for data residency.</li>
+<li>Consent signals for memory features.</li>
+<li>Regular purge jobs and retention policies.</li>
+</ul>
+<h3 id="bottomline">Bottom line</h3>
+<p>You’re buying two things.
+Better model behavior with Nova Forge and safer agent execution with AgentCore Policy Engine.
+Use both or risk a lopsided build.
+Smart model, dumb agent; or safe agent, useless outputs.
+The power move is the combo.</p>
+<h2 id="halfwaycheck">Halfway check</h2>
+<ul>
+<li>Fine-tune with Nova Forge to encode your domain logic.</li>
+<li>Bind runtime behavior with AgentCore policies and user memory.</li>
+<li>Validate with 13 evaluation frameworks before any real traffic.</li>
+<li>Start small, measure deltas, and ship behind human-in-the-loop.</li>
+<li>Track safety and performance together; treat regressions like failed tests.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<p>1.</p>
+<h3 id="whatisnovaforge">What is Nova Forge</h3>
+<p>It’s a service to fine-tune Nova LLMs on your data so the model reflects your terms, formats, and decision patterns.
+Use it when prompt-only approaches hit quality ceilings.</p>
+<p>2.</p>
+<h3 id="agentcorepolicyenginerole">AgentCore Policy Engine role</h3>
+<p>It constrains agent behavior with policies for access, content, and tool-use.
+It adds user memory for continuity and evaluates agents across 13 frameworks spanning safety, quality, and task success before you deploy.</p>
+<p>3.</p>
+<h3 id="how13evaluationframeworkshelp">How 13 evaluation frameworks help</h3>
+<p>They provide measurable gates for shipping.
+You can quantify toxicity, PII leakage, jailbreak resilience, hallucination rate, instruction-following, and task-specific success.
+Launches stop being based on vibes.</p>
+<p>4.</p>
+<h3 id="githubreponovaforgeagentcore">GitHub repo Nova Forge AgentCore</h3>
+<p>Availability can change.
+Look for official samples via AWS event pages or known GitHub orgs.
+If none are published yet, structure your experiments with versioned configs so adopting official modules later is painless.</p>
+<p>5.</p>
+<h3 id="pricingfornovaforgeagentcore">Pricing for Nova Forge AgentCore</h3>
+<p>Detailed pricing wasn’t provided in the re:Invent echoes referenced here.
+Expect usage-based components across training, evals, and requests.
+Start with small, high-signal pilots to validate ROI before scaling.</p>
+<p>6.</p>
+<h3 id="differentfromguardrailsorrag">Different from guardrails or RAG</h3>
+<p>Forge bakes domain behavior into the model itself.
+AgentCore enforces runtime policies and evaluations.
+RAG is great for freshness.
+But without fine-tuning and policies, you’ll still see inconsistency and safety gaps.</p>
+<p>7.</p>
+<h3 id="doistillneedhumans">Do I still need humans</h3>
+<p>Yes.
+Humans handle ambiguity, edge cases, and policy changes.
+Treat human feedback like fuel for the next fine-tune, not a permanent crutch.</p>
+<p>8.</p>
+<h3 id="whatmetricsforexecs">What metrics for execs</h3>
+<p>Show a one-page scorecard.
+Accuracy versus gold, completion rate, CSAT, average handle time, refusal rate, PII incidents with a goal of zero, and eval pass rates.
+Make safety and performance gains easy to read at a glance.</p>
+<p>9.</p>
+<h3 id="keepmemoryprivacycompliant">Keep memory privacy compliant</h3>
+<p>Use opt-in, minimize what you store, encrypt it, and set retention windows.
+Purge on schedule and prove you purged with logs.
+If it’s sensitive and you don’t need it, don’t keep it.</p>
+<p>10.</p>
+<h3 id="runthiswithoutrag">Run this without RAG</h3>
+<p>Yes, for stable, policy-heavy workflows.
+Add RAG when you need freshness like pricing, inventory, or docs.
+Forge handles behavior; RAG handles facts; policies keep it all safe.</p>
+<h2 id="your7steplaunchplan">Your 7 step launch plan</h2>
+<ul>
+<li>Define one measurable use case with owner, KPIs, and SLAs.</li>
+<li>Curate 1–5k labeled, high-signal examples; hold out validation.</li>
+<li>Baseline with prompt-only and record metrics.</li>
+<li>Fine-tune via Nova Forge and compare deltas.</li>
+<li>Configure AgentCore policies and user memory; log refusals.</li>
+<li>Run the 13-framework eval suite; gate release on green.</li>
+<li>Roll out with human-in-the-loop and weekly drift reviews.</li>
+</ul>
+<p>You want AI your ops team actually trusts.
+Nova Forge gets you a model that speaks your language.
+AgentCore Policy Engine makes sure it follows the rules when it matters.
+Put them together, and you move from demo weekends to durable production.</p>
+<p><em>Pro tip: Most AI failures aren’t model problems—they’re governance problems dressed up as creativity.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://reinvent.awsevents.com/">AWS re:Invent (official)</a></li>
+<li><a href="https://www.youtube.com/@AWSEvents">AWS Events YouTube (keynotes/sessions)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Guardrails for Amazon Bedrock (docs)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html">Model evaluation in Amazon Bedrock (docs)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html">Agents for Amazon Bedrock (docs)</a></li>
+<li><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework 1.0</a></li>
+<li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">OWASP Top 10 for Large Language Model Applications</a></li>
+<li><a href="https://atlas.mitre.org/">MITRE ATLAS (Adversarial Threat Landscape for AI)</a></li>
+<li><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">GDPR principles (data minimization, storage limitation)</a></li>
+<li><a href="https://www.hhs.gov/hipaa/for-professionals/privacy/index.html">U.S. HHS HIPAA Privacy Rule overview</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="nova-forge-agentcore-review.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq9aa4.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=AWS+Nova+Forge+and+AgentCore+Review%3A+Ship+Bounded+AI+Faster&amp;pi=276802886348&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=276802886348&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fnova-forge-agentcore-review&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/nova-forge-agentcore-review?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:57 GMT -->
+</html>

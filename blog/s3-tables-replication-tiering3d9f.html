@@ -1,0 +1,342 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/s3-tables-replication-tiering?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:29:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Cut S3 Iceberg Costs With Replication And Intelligent-Tiering</title>
+    <link rel="canonical" href="s3-tables-replication-tiering.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Boost data resilience with S3 Tables replication across Regions and accounts. Enable S3 Intelligent-Tiering to optimize costs and speed for Apache Iceberg.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cut S3 Iceberg Costs With Replication And Intelligent-Tiering",
+        "datePublished": "2025-12-02T20:27:51Z",
+        "dateModified": "2025-12-02T20:27:52.078Z",
+        "mainEntityOfPage": "https://remktr.com/blog/s3-tables-replication-tiering",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-02-2025-08-15-53-4882-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="s3-tables-replication-tiering.html">Cut S3 Iceberg Costs With Replication And Intelligent-Tiering</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 2, 2025 8:27:51 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’re probably paying too much for your data lake. Not because your data is huge (it is). It’s because your storage plan is still stuck in 2019. Meanwhile, your analysts wait on stale copies that break at the worst time.</p>
+<p>Here’s the flip. Amazon S3 Tables just added automatic replication for Apache Iceberg tables. And it now supports S3 Intelligent-Tiering on replicas. Translation: you get near real-time, consistent copies across Regions and accounts. And you stop guessing which storage class to pick.</p>
+<p>If that sounds basic, it isn’t. The hard part of Iceberg at scale isn’t writing files. It’s keeping catalogs, metadata, and snapshots perfectly in sync. So Athena, Redshift, or EMR can query replicas without weird results.</p>
+<p>With S3 Tables replication, updates commit in the same order as the source. Usually within minutes. Add Intelligent-Tiering on the destination buckets and your cold-but-critical replicas slide into the cheapest viable tier automatically. <em>No cron jobs. No headcount. No drama.</em></p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Near real-time Iceberg replication across Regions/accounts with ordered commits.</li>
+<li>Read-only replicas stay queryable by Athena, Redshift, EMR—no custom glue.</li>
+<li>Turn on S3 Intelligent-Tiering in destination buckets to cut storage costs.</li>
+<li>Keep performance: Intelligent-Tiering reacts to access patterns—no manual moves.</li>
+<li>Use lifecycle policies for deterministic archiving; Intelligent-Tiering for dynamic.</li>
+<li>Expect fewer ops tickets, fewer surprises, and lower storage bills.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-16-48-7469-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="replicationthatstaysconsistent">Replication that stays consistent</h2>
+<h3 id="consistencyyoucantrust">Consistency you can trust</h3>
+<p>Replicating Iceberg is more than copying parquet files. You need snapshots, manifests, and metadata to land in the same order as the source. Otherwise you’ll query ghost data or miss fresh updates. S3 Tables replication handles this for you. New snapshots, metadata changes, and data file adds/removes are replayed in sequence. Replication is asynchronous, but updates usually land within minutes. You get near real-time read-only replicas.</p>
+<p>Why this matters: consistency lets you point an engine straight at a replica and just query. No custom sync scripts, no “hold while we re-index” drama. If a write committed in us-east-1, your replica in eu-west-1 commits the same write, in the same order.</p>
+<p>Think of Iceberg like a journaled file system for analytics. Each table keeps a pointer to the current snapshot. That snapshot references the exact set of data and delete files to read. Ordered replication means the snapshot pointer and its manifest lists reach the replica in clean sequence. Queries always see a valid, atomic table state. That’s the difference between a clean SELECT and a 2 a.m. Slack thread.</p>
+<p>Time-travel is a bonus here. Iceberg tracks snapshot history, so your replica can do point-in-time reads. As long as you retain the right metadata. That makes audits and backfills safer across accounts. Just align snapshot retention between source and destination.</p>
+<h3 id="whereitshines">Where it shines</h3>
+<ul>
+<li>Disaster recovery: If a Region goes sideways, your read-only replicas stay available elsewhere.</li>
+<li>Compliance residency: Park copies in required geos without exposing your primary.</li>
+<li>Performance: Put replicas near users or apps to lower read latency.</li>
+<li>Safe sharing: Share replicas with partners or other accounts without risking your primary.</li>
+</ul>
+<p>“Apache Iceberg is an open table format for huge analytic datasets,” per the project. That’s the scale you’re playing at. So ordered commits and catalog consistency aren’t nice-to-haves; they’re the whole game.</p>
+<p>In practice, teams lean on replicas for noisy hours or bursty reporting. Finance can hit a local replica in eu-west-1 every morning. No hammering your primary in us-east-1. Observability teams can run anomaly detection on a replica during an incident. Without starving batch jobs. And when regulators ask for read-only access, a dedicated replica gives you clean separation. Simple access controls, less stress.</p>
+<p>Operationally, this reduces glue code. You’re not duct-taping cron jobs, object replication rules, and catalog rebuilds. All to keep Iceberg consistent. The replication flow respects Iceberg semantics by design. That means fewer race conditions, fewer “works on my laptop” moments, and kinder on-call.</p>
+<h2 id="costcontrolwithoutguesses">Cost control without guesses</h2>
+<h3 id="howintelligenttieringdecides">How Intelligent Tiering decides</h3>
+<p>Replica buckets are a perfect fit for S3 Intelligent-Tiering. Many replicas are touched infrequently, until you really need them. Intelligent-Tiering watches access patterns and moves objects across cheaper tiers automatically. When a replica gets hot—say during an incident—objects move to the right tier. You don’t write a single lifecycle rule.</p>
+<p>Key idea: stop pre-picking storage classes that might not fit next month. Let real access behavior drive tier placement. No performance tuning tax. No “oops, wrong class” penalties.</p>
+<p>Iceberg tables naturally mix hot and cold objects. Recent partitions get queried. Old partitions mostly sit. The tiering algorithm maps well to that reality. Newer data stays in frequent access tiers. Older objects drift to lower-cost tiers until someone needs them again. You don’t maintain per-prefix rules. Or remember to update lifecycle policies when partitioning changes.</p>
+<h3 id="pricingcuesyoushouldknow">Pricing cues you should know</h3>
+<ul>
+<li>Intelligent-Tiering has multiple access tiers, including Archive Instant Access and deeper archive tiers for colder data. Tiering is based on last-access patterns.</li>
+<li>There’s a small monitoring and automation fee per object. Pricing varies by Region. No retrieval fees for data accessed in standard Intelligent-Tiering access tiers. Details live on the AWS pricing page.</li>
+<li>For very small objects or extremely hot data, do the math. It’s not always cheaper. But for large, mostly cold replicas, it’s often a net win.</li>
+</ul>
+<p><em>Bottom line: apply S3 Intelligent-Tiering to your destination table buckets.</em> Let the replica’s actual behavior pay your storage bill.</p>
+<p>If you’re worried about performance, breathe. The frequent and infrequent tiers still deliver milliseconds latency. Archive Instant Access gives a lower storage rate with instant access. That’s a sweet spot for replicas that cool off but must be queryable anytime. Deeper archive options exist for extra-cold data. Review retrieval behavior before enabling them on active replicas.</p>
+<p>A practical trick: pair Intelligent-Tiering with ongoing file compaction. Bigger, well-compressed parquet files cut per-object overhead. They can improve scan efficiency in engines like Athena and EMR. You’ll pay fewer per-object monitoring charges. And get better query performance on the hot path.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-17-40-3157-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="multiregionicebergboring">Multi Region Iceberg boring</h2>
+<h3 id="drpattern">DR pattern</h3>
+<p>A common pattern: write in Region A on the hot path. Replicate to Regions B and C as read-only. Analytics teams in B and C point Athena or EMR to the local replica for routine reports. If Region A has issues, promote a replica per your governance playbook. <em>Keep calm.</em> Because replication preserves commit order, readers don’t see partial states.</p>
+<p>Query engines: Athena, Redshift, and EMR speak Iceberg. You don’t need to transform files or maintain separate schemas. Point to the replica’s catalog or location, and you’re off. Want to standardize SQL and automate reporting across engines? Check out <a href="../requery.html">Requery</a>.</p>
+<p>In real life, “boring” means dashboards keep loading even when a Region is grumpy. It means nightly workloads don’t pile up because a partner query went rogue. And your cost curve doesn’t pop off the chart at quarter-end. Not because two teams decided to backfill the same year at the same time.</p>
+<h3 id="datasharingwithoutfear">Data sharing without fear</h3>
+<p>Need to share with a partner or another account? Replicated, read-only tables are safer to expose. You cut blast radius, protect primary performance, and keep compliance happy. Clear boundaries, clean logs.</p>
+<p>Operationally, S3 Tables replication is set-and-forget. Configure in the console or CLI. Target one or more destination buckets, even cross-account. Let the service maintain order and freshness. Most changes land in minutes. That’s good enough for analytics, observability, and governance.</p>
+<p><em>This is how you get multi-Region without duct tape.</em> A single table format (Iceberg). A single storage substrate (S3). And a managed replication flow that respects your metadata semantics.</p>
+<p>Pro move: keep replicas read-only by policy. Route all writes back to the primary Region except during formal failovers. This prevents accidental drift and makes promotion steps crisp. When you do promote, document the cutover in your runbook. Update catalog writers, pause compaction briefly, and confirm the latest snapshot pointer. Then resume writes.</p>
+<h2 id="lifecyclerulesvsintelligenttiering">Lifecycle rules vs Intelligent Tiering</h2>
+<h3 id="whenlifecyclepolicieswin">When lifecycle policies win</h3>
+<ul>
+<li>Deterministic retention: Objects older than X days must move to Glacier or be deleted. Lifecycle rules shine here—simple, auditable, predictable.</li>
+<li>Strict governance workflows: If approvals or legal holds drive timing, lifecycle gives a rulebook for auditors.</li>
+<li>Object-class heterogeneity: Tag data classes and set explicit movement paths by tag. Lifecycle is surgical.</li>
+</ul>
+<h3 id="whens3intelligenttieringwins">When S3 Intelligent Tiering wins</h3>
+<ul>
+<li>Unpredictable access: Replicas get touched sporadically—until they don’t. Intelligent-Tiering adapts without you rewriting rules.</li>
+<li>Cost drift protection: As usage shifts, your storage class follows behavior, not last year’s guess.</li>
+<li>Operational simplicity: Fewer rules, fewer policies, fewer misconfigs. This matters at tens of billions of objects.</li>
+</ul>
+<p>The best combo? Use lifecycle to enforce retention and deletion. Rely on Intelligent-Tiering for dynamic cost-optimization inside those windows. If you’re Googling “s3 intelligent-tiering vs lifecycle policy,” the answer is usually both. Intelligent-Tiering on replica buckets and lifecycle for governance gates.</p>
+<p>Example: keep 90 days of snapshots for time-travel. Then expire older snapshots with lifecycle. Inside that 90-day window, let Intelligent-Tiering place older, less-touched partitions in cheaper tiers. You meet audits and still squeeze the bill.</p>
+<h2 id="whatsavingslooklike">What savings look like</h2>
+<h3 id="backoftheenvelopemodel">Back of the envelope model</h3>
+<p>Say you manage a 200 TB Iceberg dataset in us-east-1. You replicate to eu-west-1 for DR and low-latency reads. Historically, you’d pick one storage class upfront, often overpaying. With S3 Intelligent-Tiering on the destination bucket, objects cool down automatically.</p>
+<p>If 70–85% of replica objects aren’t read in a month, tiering kicks in. Intelligent-Tiering shifts a big chunk to cheaper access tiers while keeping a hot subset ready. A conservative pattern many teams see: low double-digit savings at small scale. Moving toward 20–40% as replicas get larger and colder. Your number depends on access frequency, object sizes, and Region pricing.</p>
+<p>The bigger the replica, the more likely Intelligent-Tiering wins. The cold majority drags your mean cost down. Just don’t forget the per-object automation charge. Especially with tiny objects or trillions of files.</p>
+<p>How to validate in your account:</p>
+<ul>
+<li>Establish a baseline: measure current replica costs by Region and bucket.</li>
+<li>Use S3 Storage Lens or similar to see object counts by size and access frequency.</li>
+<li>Turn on Intelligent-Tiering for a pilot table or partition prefix.</li>
+<li>Track month-over-month costs and tier distribution. Expand once the pattern holds.</li>
+</ul>
+<h3 id="gotchastoavoid">Gotchas to avoid</h3>
+<ul>
+<li>Access storms: You can rewarm tiers fast, but mind budgets if you hit Archive tiers. Archive Instant Access helps, deeper archive behaves differently and may add fees.</li>
+<li>Over-partitioning: Too many tiny objects blunt savings due to per-object charges. Use compaction.</li>
+<li>Assuming “minutes” means “instant”: Replication is fast, not synchronous. Set SLAs accordingly.</li>
+<li>Tier blindness: Always tag and observe. Track which tiers hold most bytes. Watch trends after launches or seasonal spikes.</li>
+<li>KMS request costs: Encrypt with SSE-KMS (good), but remember key request costs during heavy write or compaction bursts. Budget for it and consider bucket keys.</li>
+<li>Version sprawl: Watch object versioning and Iceberg snapshot retention. Don’t quietly double-store data you meant to expire.</li>
+</ul>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>Replication preserves commit order for Iceberg metadata and snapshots.</li>
+<li>Read-only replicas are queryable by Athena, Redshift, and EMR.</li>
+<li>S3 Intelligent-Tiering on replica buckets cuts costs automatically.</li>
+<li>Use lifecycle for deterministic retention; Intelligent-Tiering for dynamic tiering.</li>
+<li>Expect bigger savings as replicas grow and access gets spiky.</li>
+</ul>
+<p><em>If that’s your checklist, you’re already ahead of most teams.</em></p>
+<h2 id="faqspricingandsetup">FAQs pricing and setup</h2>
+<h3 id="howfastisreplication">How fast is replication</h3>
+<p>It’s asynchronous and typically completes within minutes of source updates. That’s fast enough for most analytics and DR use cases. But it’s not synchronous. Build SLAs with that in mind.</p>
+<h3 id="queryreplicaswithathena">Query replicas with Athena</h3>
+<p>Yes. Replicas stay consistent with ordered commits. They’re safe to query with Iceberg-compatible engines like Athena, Redshift, and EMR. Point the engine to the replica’s catalog or table path per your setup.</p>
+<h3 id="archiveinstantaccesstier">Archive Instant Access tier</h3>
+<p>Archive Instant Access is an extra Intelligent-Tiering option for colder, still-instant data. It offers lower storage rates than frequent or infrequent tiers. While keeping millisecond access. It’s great when data cools off but must remain immediately available. Check the AWS docs for Region pricing and behavior.</p>
+<h3 id="isintelligenttieringcheaper">Is Intelligent Tiering cheaper</h3>
+<p>They’re different tools. Lifecycle policies move or delete objects at fixed ages. Great for compliance and deterministic retention. S3 Intelligent-Tiering reacts to real access to reduce costs without manual tuning. Many teams use lifecycle for retention and Intelligent-Tiering for dynamic optimization inside those windows.</p>
+<h3 id="wherefinds3pricing">Where find S3 pricing</h3>
+<p>Pricing varies by Region and tier. See the AWS S3 pricing page for the latest numbers. Intelligent-Tiering avoids retrieval fees for standard access tiers. There’s a small per-object monitoring and automation charge. Archive and deep archive have different retrieval behavior. Review the docs before enabling them.</p>
+<h3 id="replicateacrossaccountsregions">Replicate across accounts Regions</h3>
+<p>Yes. You can configure multiple destination buckets across Regions and accounts. Replication preserves commit order and consistency. Each replica can be queried independently.</p>
+<h3 id="needtocrawldata">Need to crawl data</h3>
+<p>Not necessarily. Iceberg stores table metadata in a catalog. Engines like Athena, Redshift, and EMR can use that catalog to discover schema and files. Crawlers aren’t required to infer schema from data files. If you already use a catalog integration, point it to the replica and go.</p>
+<h3 id="deletesandcompactionwithreplication">Deletes and compaction with replication</h3>
+<p>Iceberg tracks data and delete files through snapshots. When you compact or perform row/position deletes, those changes land in the next snapshot. Replication replays them in order. The replica ends up with the same logical table state as the source.</p>
+<h3 id="timetravelonreplicas">Time travel on replicas</h3>
+<p>Yes, as long as snapshots and metadata are retained per your rules. Align snapshot expiration between source and destination if you rely on historical reads.</p>
+<h3 id="testfailoversafely">Test failover safely</h3>
+<p>Use a staging account or a non-critical table. Point queries at the replica for a day. Verify row counts and results against the primary. Document promotion steps. Practice cutover, rollback, and re-promotion until it’s muscle memory.</p>
+<h2 id="turnthisoninminutes">Turn this on in minutes</h2>
+<h3 id="enablereplication">Enable replication</h3>
+<p>1) In the AWS Management Console or CLI, open S3 Tables and select the source Iceberg table.
+2) Add one or more destination table buckets. Same Region, cross-Region, and/or cross-account as needed. Ensure IAM roles and bucket policies allow writes.
+3) Choose which table updates to replicate: snapshots, metadata, data files. Save and enable.</p>
+<p>Tips that save time:</p>
+<ul>
+<li>Start with a single high-value table. Measure lag and costs, then scale out.</li>
+<li>Set basic alarms on replication metrics. Know if lag grows beyond your comfort zone.</li>
+<li>Document who can promote a replica and exactly how to do it.</li>
+</ul>
+<h3 id="enables3intelligenttiering">Enable S3 Intelligent Tiering</h3>
+<p>4) For each replica bucket, set the storage class to S3 Intelligent-Tiering. Use console or PUT Object with the right storage class.
+5) Optionally enable Archive Instant Access or deeper archive tiers per workload needs.
+6) Monitor with S3 Storage Lens or metrics to validate tier movement and cost trends.</p>
+<p>You now have near real-time replicas that self-optimize storage costs. <em>No cron jobs required.</em></p>
+<p>Here’s the quiet superpower you just gained. Iceberg tables that replicate across Regions/accounts in minutes. And replicas that auto-tune storage costs as access changes. That’s operational leverage. Less policy sprawl, fewer “wrong class” surprises, and a cleaner DR story that doesn’t crush your budget. Use lifecycle rules for the guardrails you must have. Let Intelligent-Tiering do the rest.</p>
+<p>If you’re planning multi-Region analytics, start by placing replicas where reads actually happen. Turn on S3 Intelligent-Tiering there, watch the data cool, and let savings stack up. Your future postmortem will thank you.</p>
+<p>For real-world outcomes and architectures, browse our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intelligent-tiering.html">Amazon S3 Intelligent-Tiering overview</a></li>
+<li><a href="https://aws.amazon.com/s3/pricing/#S3_Intelligent-Tiering">Amazon S3 pricing (Intelligent-Tiering section)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intelligent-tiering.html#intelligent-tiering-access-tiers">Archive Instant Access tier (S3 Intelligent-Tiering)</a></li>
+<li><a href="https://docs.aws.amazon.com/athena/latest/ug/querying-iceberg.html">Amazon Athena with Apache Iceberg</a></li>
+<li><a href="https://docs.aws.amazon.com/redshift/latest/dg/iceberg-overview.html">Amazon Redshift + Iceberg overview</a></li>
+<li><a href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-iceberg.html">Amazon EMR and Iceberg</a></li>
+<li><a href="https://iceberg.apache.org/">Apache Iceberg project</a></li>
+<li><a href="https://iceberg.apache.org/spec/#table-metadata">Apache Iceberg table metadata and snapshots</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html">Amazon S3 Storage Lens</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html">Amazon S3 Lifecycle policies</a></li>
+<li><a href="https://aws.amazon.com/kms/pricing/">AWS Key Management Service pricing considerations</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="s3-tables-replication-tiering.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq501e.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Cut+S3+Iceberg+Costs+With+Replication+And+Intelligent-Tiering&amp;pi=268779067116&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=268779067116&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fs3-tables-replication-tiering&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/s3-tables-replication-tiering?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:29:44 GMT -->
+</html>

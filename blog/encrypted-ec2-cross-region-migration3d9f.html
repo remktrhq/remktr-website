@@ -1,0 +1,445 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/encrypted-ec2-cross-region-migration?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:40:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Move Encrypted EC2 Across Regions Without Breaking Compliance</title>
+    <link rel="canonical" href="encrypted-ec2-cross-region-migration.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn how to move EC2 instances to another region safely using AWS MGN, with AWS EC2 encryption at rest and AWS Nitro encryption in transit—maintain compliance">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Move Encrypted EC2 Across Regions Without Breaking Compliance",
+        "datePublished": "2025-10-20T20:58:16Z",
+        "dateModified": "2025-10-20T20:58:16.966Z",
+        "mainEntityOfPage": "https://remktr.com/blog/encrypted-ec2-cross-region-migration",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na1.net/hubfs/50136663/rss_to_hubspot_content/temp-Oct-20-2025-08-45-17-7693-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="encrypted-ec2-cross-region-migration.html">Move Encrypted EC2 Across Regions Without Breaking Compliance</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Oct 20, 2025 8:58:16 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p><em>You don’t need to share KMS keys across Regions to move encrypted EC2—copy, re-encrypt, launch.</em></p>
+<p>Here’s the nightmare. You need to move EC2 to another Region, and it’s all encrypted. KMS keys, EBS volumes, snapshots, the whole thing. Compliance hawks circling overhead. One wrong move and you’re writing a post‑mortem no one wants.</p>
+<p>Here’s the relief. AWS gives you clean ways to move encrypted stuff across Regions without sharing KMS keys. You pick the lane, re‑encrypt in the target, and keep auditors calm.</p>
+<p>If you’re a solutions architect at a big retail shop that’s migrating, this is your playbook. We’ll cover AWS MGN for minimal downtime, AMI and snapshot copy for stateless fleets, AWS Backup for policy‑driven DR, and how AWS Nitro handles in‑transit encryption by default.</p>
+<p><em>The punchline: plan your KMS setup before you copy a single byte. Everything else gets predictable.</em></p>
+<p>One more thing before we dive in. Migrations feel scary because they mix speed with risk. <em>The win is to break it into repeatable steps, test every assumption, and log everything.</em> You’re not just moving servers—you’re proving control.</p>
+<ul>
+<li>TL;DR</li>
+<li>Use AWS MGN for “lift‑and‑shift” with minimal downtime. It encrypts in transit and supports EBS encryption at rest in the target Region.</li>
+<li>Copy encrypted AMIs or EBS snapshots across Regions and re‑encrypt with a KMS key in the destination—no key sharing required.</li>
+<li>AWS Nitro provides encryption in transit between EC2 and EBS when EBS encryption is enabled.</li>
+<li>Design KMS: create destination keys, set policies/grants, log with CloudTrail, and validate IAM least privilege.</li>
+<li>For compliance, automate evidence with AWS Config rules, CloudTrail, and AWS Backup reporting.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-46-46-7820-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatencryptedandcompliantmeans">What encrypted and compliant means</h2>
+<h3 id="atrestvsintransit">At rest vs in transit</h3>
+<p>“AWS EC2 encryption at rest” means EBS volumes, snapshots, and AMIs use KMS keys. When you copy an encrypted EBS snapshot to another Region, AWS decrypts it in the source Region with the source key, then re‑encrypts it with a KMS key you pick in the destination Region. You never expose the source key or share key material.</p>
+<p>“In transit” is handled by the AWS Nitro System for Nitro‑based instances. With EBS encryption on, Nitro encryption in transit protects data moving between EC2 and EBS automatically. You focus on picking the right keys and policies—Nitro handles the wire.</p>
+<p>Add a couple practical notes:</p>
+<ul>
+<li>Encryption by default: Many accounts enable EBS encryption by default. That means any new volume and any snapshot or AMI you create will be encrypted unless you override it. With that default on, your copy and launch flows inherit encryption without extra clicks.</li>
+<li>Snapshot lineage: A snapshot copied to another Region is a new snapshot with its own ID and its own KMS key in that Region. Treat it like a new asset with its own lifecycle, tags, and retention.</li>
+<li>Access context: The service doing the copy needs permission to use the source key to decrypt in the source Region and permission to use the destination key to encrypt in the target Region. You don’t move keys; you allow specific actions.</li>
+</ul>
+<h3 id="kmskeysareregional">KMS keys are regional</h3>
+<p>KMS keys are Regional resources. That’s a feature, not a bug. Instead of sharing keys, copy encrypted artifacts and re‑encrypt in the target Region. If you need consistent crypto identities across Regions, consider KMS multi‑Region keys. Those are distinct keys in each Region that are cryptographically equivalent and built for cross‑Region use.</p>
+<p>Werner Vogels said it best: “Dance like nobody’s watching; encrypt like everyone is.” Assume someone will ask you to prove the encryption story end to end.</p>
+<p>Helpful docs: EC2 EBS encryption and AMI or snapshot copy behavior; KMS multi‑Region keys.</p>
+<p>And a quick MRK sanity check:</p>
+<ul>
+<li>MRKs don’t “replicate” key material like a database. AWS creates related keys in different Regions that are designed to work together.</li>
+<li>You still enforce Region‑level blast radius. Rotate keys on your schedule, and document who can create grants and aliases in each Region.</li>
+<li>Use MRKs when apps or logs need the same key ID semantics across Regions, like dedup or signature checks. For most EC2 or EBS moves, a standard customer managed key per Region is plenty.</li>
+</ul>
+<h2 id="pickyourmigrationlane">Pick your migration lane</h2>
+<h3 id="awsmgn">AWS MGN</h3>
+<p>AWS Application Migration Service (AWS MGN) replicates your servers into a staging area in the destination Region over TLS. You can configure EBS encryption at rest for staging and for the final launched instances using an AWS managed key or a customer managed key in the target Region. MGN handles block‑level replication, test launches, and cutover with minimal downtime.</p>
+<p>Use this when you can’t handle long maintenance windows or you’re moving complex, stateful workloads that don’t love being baked into AMIs.</p>
+<p>How to make MGN predictable:</p>
+<ul>
+<li>Before replication: Pre‑create the destination KMS keys and aliases you want MGN to use. Confirm the MGN service has permission to use those keys for Encrypt and Decrypt as needed.</li>
+<li>Staging area: Choose instance profiles, subnets, and security groups in the target Region that match production closely. Encrypt staging disks too—compliance will ask.</li>
+<li>Test launches: Use them. Boot replicas in an isolated subnet, run health checks, and confirm bootstrapping and app secrets retrieval, like from SSM Parameter Store using KMS, work.</li>
+<li>Cutover: Plan a short freeze, sync the delta, and flip traffic. Keep rollback steps ready in your runbook.</li>
+</ul>
+<p>Pitfalls to avoid:</p>
+<ul>
+<li>Skipping key policy updates. If the MGN service‑linked role can’t use your CMK, replication or launch might fail late.</li>
+<li>Forgetting to tag replicas. Without tags, your cost and audit views get messy fast.</li>
+<li>Under‑sizing replication servers or staging disks, causing backlog and long catch‑up windows.</li>
+</ul>
+<h3 id="amisnapshotcopy">AMI snapshot copy</h3>
+<p>If your app is stateless or easy to rehydrate, copy the encrypted AMI to the target Region. During the copy, select a KMS key that lives in the destination Region. AWS decrypts with the source key in the source Region, re‑encrypts with the destination key, and hands you a Region‑local AMI. Launch and go.</p>
+<p>This path is simple, scriptable, and pairs well with IaC and EC2 Image Builder pipelines.</p>
+<p>Make AMI copy a one‑button move:</p>
+<ul>
+<li>Clean images: Bake images that include only what you need. Smaller AMIs copy faster and restore faster.</li>
+<li>Launch templates: In the target Region, create or update launch templates to reference the new AMI ID and the right KMS key alias for new EBS volumes.</li>
+<li>Permissions: If the source AMI is encrypted with a customer key, make sure the account doing the copy has permission on that key to use it for the copy. Same story in the destination with the destination key.</li>
+<li>Validate boot: After copy, launch a small instance and verify userdata runs, agents connect, like SSM or CloudWatch, and storage mounts as expected.</li>
+</ul>
+<p>Common gotchas:</p>
+<ul>
+<li>Copying the AMI but forgetting parameters or secrets, like Parameter Store SecureStrings using a different key alias in the new Region. Map those dependencies.</li>
+<li>Assuming old AMI IDs work in other Regions. They don’t. Treat AMI IDs as Region‑scoped.</li>
+</ul>
+<h3 id="awsbackup">AWS Backup</h3>
+<p>AWS Backup can copy backups across Regions on a schedule, enforce backup policies, and use Backup Vault Lock for immutability. For EC2 or EBS, it creates restorable images and volumes in the destination Region, encrypted with the KMS key you choose there. Great for DR readiness and audit trails.</p>
+<p>Real‑world example: you’re moving retail catalog services across Regions. For the payment gateway, which is stateful, you pick AWS MGN. For the stateless image resizer fleet, you copy encrypted AMIs. For databases and EFS shares, you use AWS Backup with cross‑Region copy and vault lock.</p>
+<p>To get the most from AWS Backup:</p>
+<ul>
+<li>Centralize policies: Use backup plans to define frequency, lifecycle, and cross‑Region copy rules. Tag resources so policies catch new workloads automatically.</li>
+<li>Vault Lock: Enable it to enforce write‑once, read‑many controls. This helps satisfy immutability and retention requirements.</li>
+<li>Reporting: Turn on built‑in compliance reports so you can show coverage, last successful backup, and copy status during audits.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-47-37-4235-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="designthekmsplan">Design the KMS plan</h2>
+<h3 id="keysinthetargetregion">Keys in the target Region</h3>
+<p>Decide your KMS key strategy up front. Options:</p>
+<ul>
+<li>AWS managed key, aws/ebs: easiest, good for many workloads.</li>
+<li>Customer managed key: needed when you want custom rotation, grants, key policies, and strict access boundaries.</li>
+<li>KMS multi‑Region keys: keep crypto continuity across Regions without moving key material.</li>
+</ul>
+<p>Use clear aliases per environment and Region, like alias/prod‑ebs‑usw2. Document which services can use which keys and why.</p>
+<p>Add a naming rubric you can live with:</p>
+<ul>
+<li>Alias: alias/-- (example: alias/prod‑payments‑use1)</li>
+<li>Key policy comments: why this key exists, which services use it, and who owns it.</li>
+<li>Tags: Environment, DataClassification, Owner, RotationOwner, and Ticket or ChangeID for migration traceability.</li>
+</ul>
+<h3 id="policiesgrantsandorgguardrails">Policies grants and org guardrails</h3>
+<p>Write explicit key policies that allow needed principals to use the key for encryption and decryption, including service‑linked roles, like MGN, Backup, or EC2 copy operations. Use least privilege with IAM, and prefer KMS grants for time‑bound access during migration.</p>
+<p>Add organization‑level guardrails. Service Control Policies to restrict Regions, CloudTrail to log every KMS API call, and AWS Config rules to flag unencrypted EBS volumes and snapshots.</p>
+<p>Helpful refinements:</p>
+<ul>
+<li>Grants vs policy edits: use KMS grants for short‑lived permissions, like a migration automation role. They’re easy to revoke and audit.</li>
+<li>Endpoint policies: if you use VPC interface endpoints for KMS, apply endpoint policies to restrict which principals and which KMS API calls can traverse the endpoint.</li>
+<li>Separation of duties: keep key admins separate from key users. Admins manage policy and rotation; apps and services use Encrypt and Decrypt.</li>
+</ul>
+<h3 id="validatebeforecutover">Validate before cutover</h3>
+<p>Dry‑run the copy with a non‑production instance. Confirm that:</p>
+<ul>
+<li>The AMI or snapshot lands encrypted with the destination Region’s KMS key.</li>
+<li>Launch templates reference the right key alias.</li>
+<li>CloudTrail shows expected kms:Decrypt and kms:Encrypt events.</li>
+<li>Instances boot and apps can read any encrypted data they need, like user data secrets via KMS plus SSM Parameter Store.</li>
+</ul>
+<p>Also validate:</p>
+<ul>
+<li>Backup restore: restore a volume or AMI from AWS Backup in the destination Region and boot it. Measure time‑to‑restore.</li>
+<li>Failure modes: temporarily remove a grant or deny kms:Decrypt to the instance role. Confirm the app fails closed and shows a clear error.</li>
+<li>Monitoring: alarms on KMS throttling, EBS burst balance, and instance status checks during migration windows.</li>
+</ul>
+<h2 id="halftimecheatsheet">Halftime cheat sheet</h2>
+<ul>
+<li>Pick the lane by workload: AWS MGN for stateful, AMI copy for stateless, AWS Backup for DR policy and immutability.</li>
+<li>Never share KMS keys across Regions; copy and re‑encrypt with a destination key.</li>
+<li>Nitro handles encryption in transit between EC2 and EBS when EBS encryption is on.</li>
+<li>Pre‑create KMS keys, policies, and aliases in the destination Region.</li>
+<li>Prove compliance: CloudTrail logs, Config rules, and backup reports.</li>
+<li>If you google “aws move resources to another region,” you’ll see many paths—these are the safe defaults.</li>
+</ul>
+<p>Bonus sanity checks:</p>
+<ul>
+<li>Map dependencies like Parameter Store or Secrets Manager keys and aliases across Regions.</li>
+<li>Track AMI and snapshot lineage with tags so you can trace the chain during audits or rollbacks.</li>
+<li>Keep a cleanup checklist for staging artifacts post‑cutover.</li>
+</ul>
+<h2 id="makethenetworkboring">Make the network boring</h2>
+<h3 id="awsnitroencryptionintransit">AWS Nitro encryption in transit</h3>
+<p>On Nitro‑based instances, enabling EBS encryption ensures data between your instance and EBS volumes is encrypted in transit. Combine that with encryption at rest on volumes and snapshots, and you cover the critical paths. This is one reason Nitro anchors modern EC2 security.</p>
+<p>If you still run legacy instance types, check compatibility and plan upgrades. The security and performance gains are worth it.</p>
+<p>What to check:</p>
+<ul>
+<li>Instance families: confirm your instance types are Nitro‑based so you get in‑transit protection when EBS encryption is on.</li>
+<li>EBS encryption default: turn it on at the account and Region level so every new volume and snapshot follows the rule without manual steps.</li>
+<li>Benchmark: run basic IO tests before and after enabling Fast Snapshot Restore to understand performance at launch.</li>
+</ul>
+<h3 id="keepcallsoffinternet">Keep calls off internet</h3>
+<p>Lock down your API paths:</p>
+<ul>
+<li>Use VPC endpoints, AWS PrivateLink, for KMS so encryption and decryption API calls don’t hit the public internet.</li>
+<li>Add VPC endpoints for EC2, SSM, and CloudWatch where it makes sense.</li>
+<li>Route migration traffic over AWS Direct Connect or VPN if you’re replicating from on‑prem and need predictable, private connectivity.</li>
+</ul>
+<p>These steps cut attack surface and simplify your compliance story.</p>
+<p>Extra credit:</p>
+<ul>
+<li>Endpoint policies can restrict which IAM roles in which subnets can hit KMS.</li>
+<li>Use SSM Session Manager for maintenance access to test instances so you can avoid opening SSH during migration.</li>
+<li>Flow logs: enable VPC Flow Logs on the subnets used for migration to verify traffic stays private.</li>
+</ul>
+<h3 id="throughputquotasandwarmreads">Throughput quotas and warm reads</h3>
+<p>Plan for service limits and performance:</p>
+<ul>
+<li>Snapshot copy and KMS request quotas exist—check and request increases before big moves.</li>
+<li>Enable Fast Snapshot Restore in the destination Region for critical volumes so instances launch with predictable IO.</li>
+<li>For MGN, right‑size the replication servers and staging disks to avoid bottlenecks.</li>
+</ul>
+<p>Bandwidth, quotas, and pre‑warming often decide whether cutover takes minutes or hours.</p>
+<p>More tuning tips:</p>
+<ul>
+<li>Stagger large snapshot copies to avoid blasting past KMS or EBS API quotas.</li>
+<li>Use parallelism wisely. A few well‑sized copies beat dozens of tiny, competing jobs.</li>
+<li>Time your FSR enablement so you’re not paying for idle pre‑warmed snapshots longer than needed.</li>
+</ul>
+<h2 id="proveit">Prove it</h2>
+<h3 id="evidenceyourauditorswilllove">Evidence your auditors will love</h3>
+<p>Turn on CloudTrail in all Regions and verify it logs KMS and EC2 events. Enable AWS Config rules such as encrypted‑volumes and encrypted‑snapshots to flag drift. For AWS Backup, use built‑in reports and Backup Vault Lock to show immutability and retention compliance.</p>
+<p>Come audit time, you want to export reports, not write essays.</p>
+<p>Evidence you can export fast:</p>
+<ul>
+<li>CloudTrail queries showing who did kms:CreateKey, kms:Encrypt, kms:Decrypt, and snapshot copy actions.</li>
+<li>AWS Backup reports showing last successful backup, cross‑Region copy status, and vault lock compliance.</li>
+<li>Config compliance snapshots showing all volumes and snapshots are encrypted in the target Region.</li>
+</ul>
+<h3 id="taggingandlineagematter">Tagging and lineage matter</h3>
+<p>Tag everything: source Region, destination Region, workload, data classification, and key alias. Capture lineage, like source snapshot ID and new snapshot ID, so you can trace an AMI or volume across Regions. This makes rollback and investigations sane.</p>
+<p>Keep an inventory of KMS keys per environment, with who‑can‑use‑what documented. Avoid “mystery keys” that no one wants to rotate.</p>
+<p>Useful tag examples:</p>
+<ul>
+<li>MigrationBatch: 2025‑BlackFriday‑DR</li>
+<li>SourceRegion: us‑east‑1</li>
+<li>TargetRegion: us‑west‑2</li>
+<li>KeyAlias: alias/prod‑ebs‑usw2</li>
+<li>DataClass: Confidential</li>
+<li>Owner: retail‑platform</li>
+</ul>
+<h3 id="runagameday">Run a game day</h3>
+<p>Do a full test. Replicate, launch test instances, run health checks, measure performance, and validate encryption. Practice failure. Revoke a grant and confirm the app fails securely. Document time to restore and your MTTR. Then do it again until it’s boring.</p>
+<p>When your runbook feels like muscle memory, you’re ready.</p>
+<p>Include in your game day:</p>
+<ul>
+<li>A mock change window with real stakeholders and paging.</li>
+<li>A rollback drill: terminate the target, roll back traffic, and restore the source in minutes.</li>
+<li>A log roundup: gather CloudTrail, Config, and Backup evidence into a single folder for quick review.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="moveencryptedec2withoutsharing">Move encrypted EC2 without sharing</h3>
+<p>Yes. Copy the encrypted AMI or EBS snapshot to the destination Region and choose a KMS key in that Region. AWS decrypts with the source key in the source Region and re‑encrypts with the destination key. No key sharing or export required.</p>
+<h3 id="decryptvolumesbeforecopying">Decrypt volumes before copying</h3>
+<p>No. You copy encrypted snapshots or AMIs as‑is. The service performs decrypt‑then‑re‑encrypt under the hood. You just need permissions to use the source key for the copy and access to the destination Region’s key for encryption.</p>
+<h3 id="lowestdowntimeoption">Lowest downtime option</h3>
+<p>AWS MGN. It replicates blocks continuously over TLS and supports test launches. At cutover, you stop the source, sync the tail, and boot in the target Region. Use EBS encryption at rest on staging and final volumes to maintain compliance.</p>
+<h3 id="ec2andnitroencryption">EC2 and Nitro encryption</h3>
+<p>EBS encryption with KMS protects data at rest on volumes and snapshots. On Nitro‑based instances, enabling EBS encryption also encrypts data in transit between the instance and EBS. Together, they cover storage and the data path.</p>
+<h3 id="crossaccountorganizationmigrations">Cross account organization migrations</h3>
+<p>Create or replicate keys in the destination account and Region. Use KMS key policies and grants to permit copy operations. AWS Backup supports cross‑account, cross‑Region copies with vaults in each account. Multi‑Region keys help keep crypto continuity without sharing material.</p>
+<h3 id="planforcosts">Plan for costs</h3>
+<p>Snapshot storage, cross‑Region data transfer for copies, KMS API requests, Fast Snapshot Restore, and temporary MGN resources. Right‑size replication, compress where possible, and clean up staging artifacts post‑cutover to avoid drift costs.</p>
+<h3 id="needprivatelinktobecompliant">Need PrivateLink to be compliant</h3>
+<p>It depends on your controls. Many teams require private API paths for KMS, EC2, SSM, and CloudWatch to prove no control‑plane calls hit the public internet. PrivateLink plus endpoint policies makes that story simple.</p>
+<h3 id="automateallofthis">Automate all of this</h3>
+<p>Yes. Use IaC, like CloudFormation or Terraform, for KMS keys, aliases, endpoint policies, and launch templates. EC2 Image Builder for AMIs. AWS Backup policies for DR. And scripted snapshot or AMI copy pipelines. Automation reduces drift and creates repeatable evidence.</p>
+<h2 id="yourencryptedec2moveplaybook">Your encrypted EC2 move playbook</h2>
+<ul>
+<li>Pick the migration lane: AWS MGN for stateful, AMI copy for stateless, or AWS Backup for policy and DR.</li>
+<li>In the destination Region: create KMS keys, aliases, and key policies; enable CloudTrail and Config rules.</li>
+<li>Set up private access: VPC endpoints for KMS and EC2; confirm SSM connectivity.</li>
+<li>For MGN: install agent, configure staging area with EBS encryption, start replication, test launch.</li>
+<li>For AMI or snapshot: copy with “encrypt with destination KMS key”; document source and destination IDs.</li>
+<li>Enable Fast Snapshot Restore where needed; request quota increases if required.</li>
+<li>Cut over during a window; validate app health, encryption, and logs; decommission sources.</li>
+<li>Export evidence: CloudTrail, Config, Backup reports; tag and archive runbooks.</li>
+</ul>
+<p>Add a pre‑flight checklist:</p>
+<ul>
+<li>Keys created and aliases set in target Region</li>
+<li>Key policies reviewed; temporary grants created as needed</li>
+<li>Endpoint policies applied; PrivateLink tested</li>
+<li>Launch templates updated; AMI IDs swapped for target Region</li>
+<li>Backup plans enabled and reporting on</li>
+<li>Cost monitors set for snapshots, FSR, and data transfer</li>
+</ul>
+<p><em>Here’s the bottom line: multi‑Region isn’t a science project—it’s process. If you’re deliberate about keys, policies, and logs, moving encrypted EC2 across Regions becomes repeatable, fast, and boring, the good kind. Nitro covers encryption in transit; KMS covers at rest; you cover the paper trail. Start small with a canary workload, prove the flow, then scale it across your fleet. Your future self—and your auditors—will thank you.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EC2 EBS encryption at rest and in transit on Nitro</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html#copy-ebs-snapshot">Copy an Amazon EBS snapshot across Regions, re‑encrypt</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copy an AMI across Regions, encrypted</a></li>
+<li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">AWS KMS multi‑Region keys overview</a></li>
+<li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html">VPC interface endpoint for AWS KMS, PrivateLink</a></li>
+<li><a href="https://docs.aws.amazon.com/mgn/latest/ug/what-is-aws-application-migration-service.html">AWS Application Migration Service, AWS MGN overview</a></li>
+<li><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html">AWS Backup cross‑Region and cross‑account backup</a></li>
+<li><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-reporting.html">AWS Backup reporting</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-fast-snapshot-restore.html">Fast Snapshot Restore for Amazon EBS</a></li>
+<li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html">Logging AWS KMS API calls with AWS CloudTrail</a></li>
+<li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">AWS KMS grants</a></li>
+<li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/quotas.html">AWS KMS quotas</a></li>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html">AWS Config managed rules, including encrypted‑volumes</a></li>
+<li><a href="https://aws.amazon.com/ec2/nitro/">AWS Nitro System overview</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-ec2.html">Interface VPC endpoint for Amazon EC2</a></li>
+<li><a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html">AWS Direct Connect overview</a></li>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems Manager Parameter Store, SecureString</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="encrypted-ec2-cross-region-migration.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq851e.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Move+Encrypted+EC2+Across+Regions+Without+Breaking+Compliance&amp;pi=197890426808&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=197890426808&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fencrypted-ec2-cross-region-migration&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/encrypted-ec2-cross-region-migration?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:40:08 GMT -->
+</html>

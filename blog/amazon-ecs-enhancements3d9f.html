@@ -1,0 +1,370 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/amazon-ecs-enhancements?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship Faster with New Amazon ECS Orchestration Enhancements</title>
+    <link rel="canonical" href="amazon-ecs-enhancements.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore Amazon ECS enhancements for simplified container orchestration. Use ECS Exec for secure live troubleshooting and auto scaling to boost performance.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship Faster with New Amazon ECS Orchestration Enhancements",
+        "datePublished": "2025-12-15T20:25:19Z",
+        "dateModified": "2025-12-15T20:25:19.692Z",
+        "mainEntityOfPage": "https://remktr.com/blog/amazon-ecs-enhancements",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-15-2025-08-16-00-9378-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="amazon-ecs-enhancements.html">Ship Faster with New Amazon ECS Orchestration Enhancements</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 15, 2025 8:25:19 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’re still SSH-ing into containers? <em>In 2025?</em> That’s like mailing yourself DVDs to watch Netflix.</p>
+<p>The new Amazon ECS upgrades cut mean-time-to-fix from hours to minutes. You do it <em>without opening a single port</em>, which feels so good.</p>
+<p>Here’s the big unlock: ECS Exec runs commands inside live containers from console or CLI. No sidecars. No jump boxes. No SSH keys floating around Slack like a compliance time bomb.</p>
+<p>Pair it with ECS Capacity Provider Auto Scaling and your cluster flexes on demand. Teams see up to 40% faster scaling during spikes while paying less, thanks to EC2 Auto Scaling and Spot. It’s in all commercial AWS Regions, and included beyond standard ECS pricing.</p>
+<p>If you want a practical container orchestration example, this is the one. <em>Stop firefighting, start shipping.</em> Below is the why, the how, and a checklist to turn it on fast.</p>
+<p>And because it’s AWS-native, security won’t chase you with a broom. IAM handles access, Systems Manager runs the tunnel, CloudWatch keeps the receipts. You lower mental load, speed up incidents, and keep audits clean, all without changing daily dev flow.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>ECS Exec = secure, <em>zero-SSH</em> live troubleshooting via IAM + Systems Manager.</li>
+<li>Capacity Provider Auto Scaling = 40% faster scale-ups and better cost control.</li>
+<li>Works across Fargate, EC2, and external (hybrid) launch types.</li>
+<li>EKS network observability adds pod-to-pod visibility for hybrid ECS–EKS shops.</li>
+<li>No extra charge beyond standard ECS pricing; available in all commercial Regions.</li>
+<li>See the quick-start steps in the <a href="#launch-ecs-like-a-pro">checklist</a>.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-15-2025-08-16-58-2031-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="skipsshecsexecsuperpower">Skip SSH ECS Exec Superpower</h2>
+<h3 id="whatitdoes">What it does</h3>
+<p>ECS Exec lets you run commands inside a running container from the AWS Console or CLI. Think: inspect env vars, tail logs live, run one-off diagnostics, or check a grumpy process. It works on Fargate, EC2, and external launch types, so your workflow stays steady everywhere.</p>
+<p>Here’s the kicker: no SSH tunnels, bastions, or opened ports, ever. You ride AWS Systems Manager (SSM) channels with IAM-backed auth. That shrinks your blast radius and gets security off your case.</p>
+<p>Add this to your mental model: keep services in private subnets, leave security groups closed, still get interactive access to the exact task. The SSM tunnel is short-lived, logged, and permission-scoped. That’s the opposite of spraying SSH keys and hoping.</p>
+<h3 id="securitysetupinplainenglish">Security setup in plain English</h3>
+<p>Access is gated by IAM permissions and task roles. You enable exec when creating or updating the task definition or service. Once enabled, only IAM principals with ecs:ExecuteCommand and the right SSM permissions can hop in. That’s zero-trust 101: authenticate each command and log everything.</p>
+<p>“As a rule, remove SSH keys from your threat model,” security really wants you to say it. ECS Exec gives you that path.</p>
+<p>Here’s how to set it up safely without a PhD in IAM:</p>
+<ul>
+<li>Grant developers a role with ecs:ExecuteCommand for only the clusters, services, and task definitions they own. Scope by resource ARN—skip wildcards unless you must.</li>
+<li>Add required SSM session permissions. At minimum, allow starting and ending a session. Session Manager runs the encrypted channels behind the scenes.</li>
+<li>Turn on exec command logging. Send session logs to CloudWatch Logs or S3, and encrypt with your KMS key. Now you have a tamper-evident record of who did what, when.</li>
+<li>If you run in private subnets, add VPC interface endpoints for Systems Manager so sessions skip NAT. This keeps traffic inside your VPC and cuts cost.</li>
+</ul>
+<p>Small but important: make “break glass” roles time-bound. Use short-lived creds or require approval via your identity provider before anyone can execute in prod.</p>
+<h3 id="realworldfix">Real world fix</h3>
+<p>You ship a new build. CPU spikes. Latency creeps upward. Instead of redeploying blind, you use ECS Exec to shell into the task taking traffic, dump thread stacks, confirm a bad connection pool. One env var tweak, redeploy, done. Minutes not hours, because you skipped SSH dances and guesswork.</p>
+<p>Pro move: add ECS Exec to runbooks and incident templates. Your on-call will thank you later.</p>
+<p>Zooming in on the mechanics:</p>
+<ul>
+<li>Identify the hot task in the service. CloudWatch or your APM points to a task ID.</li>
+<li>Run a targeted command: list open connections, check thread counts, curl the internal health endpoint from inside the namespace.</li>
+<li>Capture output to your exec logs automatically. Paste snippets back into the incident channel for context.</li>
+<li>Apply a config fix, redeploy with your pipeline, then confirm via another quick exec.</li>
+</ul>
+<p>No bastions. No hunting for the right port. No “who still has the SSH key?” <em>Just direct action with a clean audit trail.</em></p>
+<h3 id="commongotchasandwins">Common gotchas and wins</h3>
+<ul>
+<li>Ensure the container image has the tools you want for triage. A tiny shell plus curl, ps, and netstat equivalents go far.</li>
+<li>Exec is enabled at the service or task level. If you flip the switch, new tasks get it; existing ones need a redeploy.</li>
+<li>Keep the ECS agent and Fargate platform current so exec features are there. AWS updates improve reliability and logs.</li>
+<li>Lock down who can exec into prod to the bare minimum. Split roles for dev, staging, and prod to avoid footguns.</li>
+<li>For private subnets, configure VPC endpoints for Systems Manager to avoid routing issues and public internet.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-15-2025-08-17-50-3241-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="scalelikeaslinky">Scale Like a Slinky</h2>
+<h3 id="howitworks">How it works</h3>
+<p>Capacity Providers let services declare how to get compute: EC2, Fargate, or Spot. With Cluster Auto Scaling, ECS watches pending tasks and adjusts the EC2 Auto Scaling group automatically. Services pick a provider strategy, like 70% Spot and 30% On-Demand, and ECS syncs capacity with deploys.</p>
+<p>In plain terms: you scale tasks, and the cluster scales instances to match. No more hand-tuning instance counts before a release, no more guessing games. Teams reported up to 40% faster scale-ups during spikes. That protects real revenue on promo days.</p>
+<p>Under the hood, ECS watches placement. If tasks wait because instance slots are short, ECS nudges the Auto Scaling group to add capacity. When demand drops and tasks drain, capacity scales back. You set the strategy, ECS does the choreography on time.</p>
+<h3 id="whyitbeatsmanualscaling">Why it beats manual scaling</h3>
+<p>Manual alarms fire late, and warm pools only hide the lag. Misfit instance sizes waste cash. Capacity Providers react to real task placement needs in the moment. You keep unit costs tight while giving the scheduler room to breathe. Rolling deploys behave better when capacity shows up on time.</p>
+<p>“Let your scheduler talk directly to your capacity,” it’s unsexy, but it’s worth billions.</p>
+<p>Think of it as cutting the middleman. Instead of guessing instance counts, you ask the service how many tasks, and let the platform fetch the right compute.</p>
+<h3 id="costtips">Cost tips</h3>
+<ul>
+<li>Mix Spot with On-Demand for resilience and savings you can feel.</li>
+<li>Align task CPU and memory with instance types to reduce bin-packing waste.</li>
+<li>Use Service Auto Scaling for task counts; let Capacity Providers run the fleet.</li>
+<li>Pre-scale briefly before known spikes; let auto scaling ride the tail.</li>
+</ul>
+<p>Want the quick path? Jump to the <a href="#launch-ecs-like-a-pro">checklist</a>.</p>
+<p>Extra pointers when you’re tuning:</p>
+<ul>
+<li>Use provider strategies with base and weight. Example: set a small On-Demand base for a floor, then weight Spot and On-Demand evenly beyond it.</li>
+<li>Turn on managed termination protection so EC2 won’t kill an instance until tasks drain. Deployments stay smooth during scale-in.</li>
+<li>Watch placement constraints. If you pin too hard to an instance type or AZ, scaling can stall even when ASG adds nodes. Keep constraints lean and intentional.</li>
+<li>If you use GPU or high-memory instances, make a dedicated Capacity Provider per group. Scaling signals stay relevant for each workload type.</li>
+</ul>
+<h3 id="resiliencewithspot">Resilience with Spot</h3>
+<p>Spot is fantastic when used sanely:</p>
+<ul>
+<li>Run stateless services on Spot; keep stateful or latency-sensitive parts on On-Demand.</li>
+<li>Spread across multiple instance families and Availability Zones to absorb interruptions.</li>
+<li>Ensure instance draining is enabled so tasks stop gracefully when interruptions happen.</li>
+<li>Keep a modest On-Demand base to shield p99 latency during churn.</li>
+</ul>
+<p><em>Bottom line: you get cloud elasticity with a safety net that matches your SLOs.</em></p>
+<h2 id="oneplatformmanylanes">One Platform Many Lanes</h2>
+<h3 id="whentopickeachlane">When to pick each lane</h3>
+<ul>
+<li>Fargate: best when you want zero VM management, fast iteration, and per-task pricing. Great for spiky or small-to-medium services.</li>
+<li>EC2: choose when you need GPUs, custom AMIs, daemon sidecars, or extreme tuning. Also great when SPs or RIs matter.</li>
+<li>External (ECS Anywhere): for hybrid or on-prem edge nodes with ECS scheduling and one control plane.</li>
+</ul>
+<p><em>Good news: ECS Exec works across all three.</em> Your debugging muscle memory just transfers.</p>
+<h3 id="securityandopsconsistency">Security and ops consistency</h3>
+<p>IAM plus SSM-based exec standardizes access. Centralized logging keeps your audit trail clean. Capacity Providers unify scale logic whether you pack onto EC2 or spin up Fargate.</p>
+<p>Here’s a simple aws ecs architecture mental model: services describe desired tasks. The scheduler picks a capacity provider using your strategy. Tasks land on Fargate or EC2. ECS Exec gives secure touch-through for diagnostics. Observability tools catch weirdness. One pipeline, many lanes.</p>
+<h3 id="examplepattern">Example pattern</h3>
+<p>A media company runs encoding on EC2 with GPUs, metadata APIs on Fargate, and an on-prem cache with ECS Anywhere. Same deploy model, same incident playbooks, one SSO path to touch containers. That’s real operational leverage.</p>
+<p>To keep everything boring, in the best way:</p>
+<ul>
+<li>Standardize logging to CloudWatch across all lanes. One place to search, one set of alarms.</li>
+<li>Use the same CI/CD flow and IaC for task definitions and services. Less drift, fewer surprises.</li>
+<li>Apply consistent network policies with awsvpc mode and per-service security groups. You get crisp boundaries, easier audits, and clearer blast radius control.</li>
+</ul>
+<p>And when you need to go deep—like kernel tweaks on EC2 or pinning ENIs for throughput—you can, without losing the simplicity Fargate gives everywhere else.</p>
+<h2 id="seethenetwork">See the Network</h2>
+<h3 id="whyitmattersin2025">Why it matters in 2025</h3>
+<p>Modern outages rarely start with “server down.” They start with “p95 latency jumped 60ms between two pods,” or “packet drops spiked on a node.” If ECS runs services and EKS runs data or ML, you need cross-service traffic and latency, fast.</p>
+<p>Amazon EKS’s container network observability shows pod-to-pod flows, latency, and packet drops. Combine that with ECS metrics and you can map requests across both platforms. It’s the difference between guessing and actually knowing.</p>
+<h3 id="whattolookfor">What to look for</h3>
+<ul>
+<li>Sudden packet drops between specific pods or nodes</li>
+<li>Latency hotspots in a single AZ or node group</li>
+<li>Over-subscribed ENIs that cause throttling</li>
+<li>Weird east-west traffic paths during deploys</li>
+</ul>
+<p>Use CloudWatch metrics and logs plus open-source exporters to build golden signals. Latency, traffic, errors, and saturation, keep it simple. <em>The goal isn’t more dashboards, it’s faster root cause and fewer 3 a.m. pages.</em></p>
+<h3 id="ecseksonemap">ECS EKS one map</h3>
+<p>If your frontend runs on ECS and your feature store or inference runs on EKS, a single network view is priceless. You’ll tie a slow checkout to a noisy EKS node, not the ECS service. Fix the right layer on the first try.</p>
+<p>If you’re hybrid, bake this into your <a href="#faq-answers-you-actually-need">FAQ</a> runbooks.</p>
+<p>Making this real, fast:</p>
+<ul>
+<li>Turn on Container Insights for ECS and EKS to collect service metrics without sidecars.</li>
+<li>Track VPC CNI metrics for node ENI usage so you avoid IP exhaustion. When ENIs saturate, networking gets spiky.</li>
+<li>Add dependency maps to incident templates: ECS service → EKS namespace → data store. When it breaks, you already have the map.</li>
+<li>Treat packet drops and flow latency as first-class alarms next to CPU and memory. Most mystery incidents show up there first.</li>
+</ul>
+<h2 id="fastrecap">Fast Recap</h2>
+<ul>
+<li>Enable ECS Exec to replace SSH with IAM + SSM-backed access.</li>
+<li>Turn on Capacity Providers and Cluster Auto Scaling to match capacity to tasks.</li>
+<li>Use Fargate for speed, EC2 for control, and External for hybrid—one playbook.</li>
+<li>Add EKS network observability for pod-to-pod flows, latency, and packet drops.</li>
+<li>Standardize incident workflows: exec, capture, rollback, and learn.</li>
+<li>Revisit cost levers: Spot, right-sizing, and scale policies by service.</li>
+</ul>
+<h2 id="faqanswersyouactuallyneed">FAQ Answers You Actually Need</h2>
+<h3 id="whatisamazonecs">What is Amazon ECS</h3>
+<p>Amazon Elastic Container Service (ECS) is AWS’s fully managed container orchestrator. It schedules, runs, and scales containers on Fargate or EC2, with deep integrations for IAM, networking, logs, and autoscaling.</p>
+<h3 id="isecsareplacement">Is ECS a replacement</h3>
+<p>ECS is managed and opinionated for AWS. Kubernetes, and Amazon EKS, is more portable and extensible. Many teams run both: ECS for streamlined app services, EKS for workloads that need the Kubernetes ecosystem. Pick the right tool for the job.</p>
+<h3 id="howdoesecsexecwork">How does ECS Exec work</h3>
+<p>ECS Exec uses AWS Systems Manager Session Manager tunnels authorized by IAM to execute commands in containers. You don’t open inbound ports or manage SSH keys. Access is audited, least-privileged, and can be limited per task or user.</p>
+<h3 id="capacityproviderautoscaling">Capacity Provider Auto Scaling</h3>
+<p>Yes. Capacity Providers target Fargate or EC2, including Spot, and use Cluster Auto Scaling for EC2 fleets. Services define strategies, like prefer Spot, and ECS orchestrates capacity as tasks scale.</p>
+<h3 id="anyextracost">Any extra cost</h3>
+<p>No extra charge beyond standard ECS pricing. You pay for compute you use, Fargate vCPU and GB-hours or EC2 instances, and supporting services like CloudWatch. The features are included in all commercial AWS Regions.</p>
+<h3 id="howdoesecscompare">How does ECS compare</h3>
+<p>ECS optimizes for simplicity and AWS-native workflows. Kubernetes or EKS gives more extensibility and vendor-neutral APIs. Tools like Nomad are lighter for some cases. For many AWS-first teams, ECS speeds time-to-value with fewer moving parts.</p>
+<h3 id="ecsexecprerequisites">ECS Exec prerequisites</h3>
+<p>You need the AWS CLI and Session Manager plugin locally, proper IAM permissions, and exec enabled on the cluster or service. For private networks, configure VPC endpoints for Systems Manager so sessions stay inside your VPC. Keep images stocked with basic troubleshooting tools.</p>
+<h3 id="restrictexec">Restrict exec</h3>
+<p>You can’t make a shell read-only, but you can control who can exec, where, and what they access. Combine scoped IAM, SSM session logging, and separate prod roles to reduce risk. Pair with change management in your pipeline for writes.</p>
+<h2 id="launchecslikeapro">Launch ECS Like a Pro</h2>
+<ul>
+<li>Enable ECS Exec on your task definition and service; grant ecs:ExecuteCommand and SSM permissions to the right IAM roles.</li>
+<li>Install the AWS CLI and Session Manager plugin locally; test a dry run in non-prod.</li>
+<li>Turn on Cluster Auto Scaling; attach Capacity Providers and set service strategies, mix Spot and On-Demand where safe.</li>
+<li>Add Service Auto Scaling policies per service; pre-scale for planned events.</li>
+<li>Standardize runbooks: exec into task, capture diagnostics, patch config, redeploy.</li>
+<li>Wire EKS network observability for hybrid shops; alert on latency, drops, and ENI saturation.</li>
+</ul>
+<p>Wrap this into your next sprint. <em>The ROI hits on day one of your next incident.</em></p>
+<p>Here’s the punchline: these updates aren’t just “nice.” They compress feedback loops. Less yak-shaving, more shipping. Replace SSH with IAM, let capacity follow demand, and get one view of your network. That’s how you make ‘five-nines’ a habit, not a hope.</p>
+<p><em>“Debugging used to mean opening ports and praying. Now it’s IAM, a click, and a fix.”</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li>Using Amazon ECS Exec (docs): <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html">https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html</a></li>
+<li>New – ECS Exec announcement: <a href="https://aws.amazon.com/blogs/containers/new-ecs-exec-now-run-commands-in-a-running-container-on-aws-fargate-and-amazon-ec2/">https://aws.amazon.com/blogs/containers/new-ecs-exec-now-run-commands-in-a-running-container-on-aws-fargate-and-amazon-ec2/</a></li>
+<li>Amazon ECS Cluster Auto Scaling &amp; Capacity Providers: <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-auto-scaling.html">https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-auto-scaling.html</a></li>
+<li>Capacity providers concepts: <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-capacity-providers.html">https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-capacity-providers.html</a></li>
+<li>Amazon EC2 Auto Scaling: <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html">https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html</a></li>
+<li>Amazon ECS container instance draining: <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html">https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html</a></li>
+<li>Amazon ECS pricing: <a href="https://aws.amazon.com/ecs/pricing/">https://aws.amazon.com/ecs/pricing/</a></li>
+<li>AWS Systems Manager Session Manager: <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html">https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html</a></li>
+<li>Systems Manager VPC endpoints setup: <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html">https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html</a></li>
+<li>Amazon EKS observability overview: <a href="https://docs.aws.amazon.com/eks/latest/userguide/observability.html">https://docs.aws.amazon.com/eks/latest/userguide/observability.html</a></li>
+<li>Amazon VPC CNI metrics for EKS: <a href="https://github.com/aws/amazon-vpc-cni-k8s#metrics">https://github.com/aws/amazon-vpc-cni-k8s#metrics</a></li>
+<li>CloudWatch Container Insights: <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights.html">https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights.html</a></li>
+<li>Amazon ECS Anywhere: <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-anywhere.html">https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-anywhere.html</a></li>
+<li>EC2 Spot best practices: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="amazon-ecs-enhancements.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqeff7.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+Faster+with+New+Amazon+ECS+Orchestration+Enhancements&amp;pi=276742446802&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=276742446802&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Famazon-ecs-enhancements&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/amazon-ecs-enhancements?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:59 GMT -->
+</html>

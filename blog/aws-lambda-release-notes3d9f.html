@@ -1,0 +1,454 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-lambda-release-notes?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>AWS Lambda runtime updates you can use right now</title>
+    <link rel="canonical" href="aws-lambda-release-notes.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore AWS Lambda release notes and aws lambda runtime versions: Rust GA, Java 25, Swift client, and update lambda runtime changes for speed. Cut cold starts.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "AWS Lambda runtime updates you can use right now",
+        "datePublished": "2025-11-17T20:34:30Z",
+        "dateModified": "2025-11-17T20:34:30.488Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-lambda-release-notes",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-17-2025-08-22-35-5458-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-lambda-release-notes.html">AWS Lambda runtime updates you can use right now</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 17, 2025 8:34:30 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Rust just went GA on AWS Lambda, and that’s a big swing. Java 25 landed too, right on time for fall deployments. SnapStart cuts cold starts by up to 10x without extra math. You also get cleaner logging costs and standardized init billing across functions. If you run serverless in prod, this week’s drop is a budget lever.</p>
+<p>You’re getting more languages, faster startups, and knobs that map cost to reality. And yes, we’ll cover Node.js 20 versus Node.js 24 on Lambda. We’ll show the safest upgrade path without breaking your pipeline, or your weekend.</p>
+<p>Here’s the play: ship faster code with Rust, and modernize JVMs with Java 25 plus SnapStart. Tighten observability with CloudWatch logs, and keep AI agents measurable with Bedrock metrics via Lambda. By the end, you’ll know which runtime to pick and why it matters. You’ll learn how to update-function-code without downtime and trim real dollars from logs.</p>
+<p>If you’ve been juggling cold starts, noisy logs, and runtime EOL warnings, breathe. This is your clean reset, with moves you can repeat next quarter. Dial in speed, stabilize costs, and set up a rollout muscle you’ll reuse. Nothing flashy here—just practical upgrades that make prod feel boring, in a good way.</p>
+<p>Expect clear steps, safe defaults, and real examples you can copy-paste today. Think of this like your week-one plan to move fast without 2 a.m. alerts.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Rust runtime is GA on Lambda; great for speed and memory safety.</li>
+<li>Java 25 support + SnapStart = dramatically faster cold starts.</li>
+<li>Experimental Swift runtime interface client expands options.</li>
+<li>CloudWatch Logs tiered pricing + new destinations lower costs.</li>
+<li>Lambda init-phase billing is now standardized for clarity.</li>
+<li>Node.js 20 is rock-solid; Node 24 requires a plan (custom image/runtime).</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-23-23-2556-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="rustserverlessperformancecheatcode">Rust serverless performance cheat code</h2>
+<h3 id="whyrustonlambdamatters">Why Rust on Lambda matters</h3>
+<p>You want faster, safer functions without a garbage collector pause mid-request. Rust gives you both, and then some without drama or surprise. With the Rust runtime now generally available on AWS Lambda, it’s go time. The runtime interface client also hit v1.0.0, which is nice. You can build low-latency handlers that stay stable under bursty load.</p>
+<p>Rust’s compile-time safety wipes out whole classes of production bugs, like data races. It also slams the door on nulls and keeps memory tight and predictable. That matters when you’re billed by duration and every millisecond counts. If Python starts wheezing on CPU-heavy tasks, Rust will carry the load.</p>
+<p>If you’ve tiptoed around Java due to startup overhead, Rust is a clean move. Think JSON transformation at scale and steady event enrichment work. Think image processing or pre-LLM feature extraction without jitter. You’ll feel the smoothness as traffic spikes and resets.</p>
+<p>Beyond raw speed, Rust wins on predictability under stress and bursts. No GC means fewer latency spikes when it matters most. Smaller memory footprints let you right-size functions with confidence. You won’t need to over-provision RAM just to feel safe anymore.</p>
+<p>The AWS Rust ecosystem also matured a lot, which really shows. You’ve got crates for Lambda handlers and structured logging that don’t bloat. You’ve got metrics and a solid AWS SDK so your code stays focused. The pieces fit clean and don’t fight you during build or deploy.</p>
+<p><em>Practical wins you’ll notice:</em></p>
+<ul>
+<li>Stable p95 and p99 latency under bursty traffic and weird spikes</li>
+<li>Lower tail latency on stacked, concurrent invocations under pressure</li>
+<li>Flat memory usage over long runs with no slow drift creeping in</li>
+<li>Fewer retries from flaky timeouts and noisy neighbors in bursts</li>
+</ul>
+<h3 id="shiprusttolambda">Ship Rust to Lambda</h3>
+<p>A straightforward path that just works in most shops:</p>
+<ul>
+<li>Build a static binary for Linux on x86_64 or arm64 using Cargo.</li>
+<li>Use the official Rust Lambda crates to wire up your handler function.</li>
+<li>Zip the binary and push with the CLI so you keep it simple.</li>
+</ul>
+<p>Example flow you can copy:</p>
+<ul>
+<li>Build: <code>cargo build --release --target x86_64-unknown-linux-gnu</code></li>
+<li>Package: <code>zip function.zip bootstrap</code> (name your binary <code>bootstrap</code> if you’re using the Runtime API)</li>
+<li>Deploy: <code>aws lambda update-function-code --function-name my-rust-fn --zip-file fileb://function.zip</code></li>
+</ul>
+<p><em>First-hand example:</em> migrate a Python JSON sanitizer to Rust this week. Keep the exact logic, just port and measure behavior under load. The Rust build trims duration variance and holds memory flat nicely. You’ll likely reduce configured memory and also total cost. You won’t need to touch concurrency or rush alarms.</p>
+<p><em>Pro tip:</em> target AWS Graviton arm64 for better price and performance. If you need fast local iteration, use a container image. Wrap your binary and run it with docker before you ship to prod.</p>
+<p><em>Extra polish for a smooth Rust rollout:</em></p>
+<ul>
+<li>Prefer arm64: build with <code>--target aarch64-unknown-linux-gnu</code> to run on Graviton.</li>
+<li>Keep the binary lean: compile in release and prune unused features. Use Cargo feature flags to keep extras off by default.</li>
+<li>Structured logs: add <code>tracing</code> with a JSON formatter and write to stdout. CloudWatch will parse fields and keep it tidy.</li>
+<li>Metrics: emit custom metrics via PutMetricData or log-embedded dimensions. Wire alerts to p95 latency and error counts right away.</li>
+<li>Native deps: cross-compile inside an Amazon Linux container. That matches Lambda’s environment and avoids runtime surprises.</li>
+</ul>
+<p><em>Measuring the win the right way:</em></p>
+<ul>
+<li>Baseline current runtime for a week, include p50 and p95 with memory. Track cold and warm split plus error rate across bursts.</li>
+<li>A/B on a canary alias by sending Rust ten percent of traffic first. Compare tail latency and errors before you flip the rest.</li>
+<li>Tune memory: bump RAM until duration flattens clearly, then stop increasing. Use AWS Lambda Power Tuning to find the sweet spot.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-24-24-3467-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="java25snapstartcoldstarts">Java 25 SnapStart cold starts</h2>
+<h3 id="whatjava25changesforfunctions">What Java 25 changes for functions</h3>
+<p>Java on Lambda has matured a lot, and Java 25 tightens the loop. AWS notes improved startup characteristics and lower overhead versus older releases. That matches what you actually care about on busy endpoints. Sub-second p95s and predictable init when traffic gets weird.</p>
+<p>If you’re on Java 11 or 17 because that’s where the team settled, fine. You can finally justify the switch with real, measurable gains. It’s especially true for functions that spin frameworks or heavy classloading. That first hit will feel lighter and less spiky under load.</p>
+<p><em>Key benefits you’ll feel in production environments quickly:</em></p>
+<ul>
+<li>Faster cold starts even before you touch SnapStart configuration</li>
+<li>Newer JIT optimizations and runtime improvements across common paths</li>
+<li>Cleaner path to adopt newer libraries and timely security updates</li>
+</ul>
+<p>Small but meaningful tweaks add up really fast across busy services. Faster classloading and better default GC behavior reduce noise. Modern language features also let you simplify code and tests. If plugins blocked you before, re-check vendor support matrices now.</p>
+<h3 id="snapstartperformancelever">SnapStart performance lever</h3>
+<p>For Java functions, SnapStart pre-initializes your execution environment cleanly. It restores from a snapshot on cold starts with no extra cost. You can see up to 10x faster first-hit performance on endpoints. Perfect for APIs and event flows where every millisecond matters a lot.</p>
+<p><em>Action plan that fits most teams without extra tools:</em></p>
+<ul>
+<li>Enable SnapStart on your Java 25 function in console or CLI.</li>
+<li>Move expensive setup into static init blocks and keep them pure.</li>
+<li>Confirm initialization is deterministic and won’t leak per-instance state.</li>
+</ul>
+<p><em>First-hand example:</em> a Spring Boot Lambda using Provisioned Concurrency today. You flip to Java 25 with SnapStart enabled and measure again. You keep peak performance and drop steady-state costs immediately. No more pre-warming instances around the clock for safety.</p>
+<p><em>Caveats:</em> encrypt secrets correctly and avoid freezing raw credentials. Re-check library compatibility with SnapStart before you roll broadly. Monitor Init Duration and cold start metrics to validate the change. Keep dashboards visible to the team during rollout.</p>
+<p><em>More SnapStart hygiene you should follow:</em></p>
+<ul>
+<li>Randomness: don’t seed PRNGs during snapshot; reseed on first invoke. That avoids reused entropy and security issues later.</li>
+<li>Connections: don’t rely on open sockets from snapshot images. Reconnect on restore or lazily on first real use.</li>
+<li>Caches: in-memory caches baked into snapshots can go stale quietly. Validate TTLs or rebuild on restore to stay correct.</li>
+<li>Observability: confirm X-Ray or telemetry IDs are per-invoke. Don’t bake a single ID into the snapshot by accident.</li>
+</ul>
+<p><em>How to validate the impact with real traffic:</em></p>
+<ul>
+<li>Before and after on the same function name using aliases. Keep infra identical and only change what’s needed.</li>
+<li>Track cold-start median and p95 for a full day with spikes. Include deploy events and cron bursts to see edges.</li>
+<li>Compare cost and remove provisioned concurrency if no longer needed. Do the math and decommission it to realize savings.</li>
+</ul>
+<h2 id="swiftexperimentsandruntimes">Swift experiments and runtimes</h2>
+<h3 id="swiftexperimentalruntimeclient">Swift experimental runtime client</h3>
+<p>Swift isn’t just for iOS, not anymore really. With an experimental runtime interface client, Swift on Lambda is open. You can trial serverless Swift for backend endpoints or build tools safely. Also handy for Apple ecosystem workflows tied to releases.</p>
+<p>It’s experimental, so treat this as a careful pilot, not a bet. Wrap critical logic in tests and stage traffic slowly to prove stability. Keep a rollback alias ready so mistakes don’t hurt users. Learn fast and only then expand to more flows.</p>
+<p>If your team ships Apple apps and already lives in Swift daily, try it. One language across CI tools and app metadata processors feels great. Even lightweight API handlers tied to your build process can benefit, honestly. Cohesion wins when context switches drop for the team.</p>
+<p><em>Practical tips if you test Swift in a real project:</em></p>
+<ul>
+<li>Keep dependencies slim to reduce binary size and startup time.</li>
+<li>Cross-compile using an Amazon Linux compatible container to match Lambda.</li>
+<li>Prefer arm64 for price and performance, especially on Apple silicon dev machines.</li>
+<li>Gate traffic behind a feature flag and keep a short rollback window.</li>
+</ul>
+<h3 id="node20and24plan">Node 20 and 24 plan</h3>
+<p>Node.js 20.x is a stable, supported runtime on Lambda today. It’s a safe default for production across most teams. If you’re still on Node 16 or 18, it’s time to move. You’ll gain performance, security fixes, and nicer ESM ergonomics right away.</p>
+<p>About Node.js 24: Lambda might not have first-class support yet everywhere. If it’s not listed for your region or account, you’ve got two paths. Both are straightforward and well known in most shops today.</p>
+<ul>
+<li>Container image: package Node 24 in an AWS Lambda base image. Ship it as a container and pin versions tightly.</li>
+<li>Custom runtime: use the Runtime API and bring your own bootstrap with Node 24.</li>
+</ul>
+<p>Either way, pin dependencies and run your full test suite in CI. Use the exact image you deploy to avoid surprise behavior later. When managed Node 24 lands in Lambda, watch the runtimes page. Then switch your function config with one clean command in place.</p>
+<ul>
+<li><code>aws lambda update-function-configuration --function-name my-fn --runtime nodejs20.x</code> (replace when 24 is supported)</li>
+</ul>
+<p><em>First-hand example:</em> upgrade a Node 18 API to Node 20 this sprint. Bump the runtime, repackage, and ship your new ZIP bundle. Run: <code>aws lambda update-function-code --function-name my-fn --zip-file fileb://dist.zip</code>. Shift ten percent traffic via alias and watch latency and errors. Give it thirty minutes before going one hundred percent safely.</p>
+<p><em>Helpful Node upgrade guardrails that catch most issues:</em></p>
+<ul>
+<li>Build for the right arch and use Amazon Linux for native deps.</li>
+<li>Bundle smart and tree-shake to keep your ZIP small for speed.</li>
+<li>Use AWS SDK v3 modular clients to reduce size and init time.</li>
+<li>Test ESM and CJS edges so loaders match runtime expectations.</li>
+</ul>
+<h2 id="costandopstoolkit">Cost and ops toolkit</h2>
+<h3 id="loggingcostsanddestinations">Logging costs and destinations</h3>
+<p>CloudWatch Logs added tiered pricing and expanded destination options. That’s huge if your Lambda fleet gets chatty often. You can keep high-signal logs hot and move the rest cheaper. Your bill will start reflecting actual value, not just volume.</p>
+<p><em>Strategy you can roll out without painful refactors:</em></p>
+<ul>
+<li>Separate hot and cold logs by intent and signal strength. Keep structured, high-signal events in hot storage for quick lookups.</li>
+<li>Stream verbose debug to S3 via Kinesis Firehose with lifecycle rules. That preserves detail without burning money on routine storage.</li>
+<li>Drop PII at the edge and filter before it hits any store. Add filters at the app layer so junk doesn’t sneak in quietly.</li>
+<li>Sample where it won’t hurt your understanding of system health. High-volume, low-value traces can be sampled safely.</li>
+</ul>
+<p><em>First-hand example:</em> move JSON debug logs to S3 with lifecycle rules enabled. Retain for thirty to sixty days depending on compliance needs. Keep only errors and warns in CloudWatch for quick triage. You preserve forensic depth and shrink the recurring bill nicely.</p>
+<p><em>More levers you can pull with low risk and high payoff:</em></p>
+<ul>
+<li>Subscription filters: route patterns to a processing Lambda or Firehose. Or send to a partner tool for cheaper storage and search.</li>
+<li>Data protection: use CloudWatch Logs data protection to mask sensitive data. Detect and scrub before it lands in storage anywhere.</li>
+<li>Retention defaults: set short default retention at log group creation. Seven to fourteen days by default, extend only for critical groups.</li>
+<li>Compression and format in S3: write NDJSON or Parquet to cut storage. Then speed queries with Athena when you need deep dives.</li>
+</ul>
+<h3 id="billingclarityandaimetrics">Billing clarity and AI metrics</h3>
+<p>Lambda’s billing for the initialization phase is now standardized clearly. Your cost model finally matches how your code behaves. Cold starts won’t feel like a black box anymore frankly. You can measure it and decide with real numbers.</p>
+<p><em>You should do a few simple things this week:</em></p>
+<ul>
+<li>Track init duration as a first-class metric on dashboards.</li>
+<li>Shift heavy setup into SnapStart-friendly paths for Java functions.</li>
+<li>Lazy-load where it makes sense to keep cold starts lighter.</li>
+<li>Right-size memory by measuring duration versus cost per runtime.</li>
+</ul>
+<p>On the AI side, Amazon Bedrock Agents can publish detailed metrics. They can send CloudWatch metrics via Lambda for clean visibility. Intelligent Prompt Routing is generally available as well. If you orchestrate model calls from Lambda, you get strong insights.</p>
+<p>That combo gives you per-agent latencies and success rates by call. It also helps smarter model selection by cost and quality goals. Pair it with structured logging and you get a tight feedback loop. You can test prompts in production without flying blind anymore.</p>
+<p><em>First-hand example:</em> a chatbot orchestrator Lambda logs token usage and latency. It exports key metrics to CloudWatch for easy alerting and graphs. Intelligent Prompt Routing picks a cheaper model for simple requests automatically. You hit SLAs and drop spend without changing the UI at all.</p>
+<p><em>Reality check on costs that holds up under audits:</em></p>
+<ul>
+<li>Cold starts are less scary when you can observe and attribute init. Clear metrics make trade-offs obvious and repeatable.</li>
+<li>Memory tuning often beats code tweaks for immediate savings fast. Measure before refactoring and stop guessing under pressure.</li>
+<li>If logs are your biggest bill after compute, you’ve got instant wins. Move verbose streams and set firm retention everywhere.</li>
+</ul>
+<h2 id="runtimeupgradeplaybook">Runtime upgrade playbook</h2>
+<h3 id="mapestateanddeprecation">Map estate and deprecation</h3>
+<p>Step one: inventory every Lambda function and runtime with region and alias. Tag owners and business criticality so nothing falls through. If you’re on older Node, Python, or Java versions, set deprecation dates. Get buy-in early so timelines don’t slip again.</p>
+<p>A runtime upgrade is a great moment to pay down tech debt. Clean up env vars and logging format with a single standard. Tighten IAM scoping while you’re in there already touching config. You’ll thank yourself when audits show up, trust me.</p>
+<p><em>Checklist for each function before you touch anything:</em></p>
+<ul>
+<li>Runtime and memory size with clear defaults captured in code</li>
+<li>Dependencies and native binaries you must compile correctly</li>
+<li>Cold start profile including init duration and SnapStart eligibility</li>
+<li>Observability coverage including logs, metrics, and tracing paths</li>
+</ul>
+<p><em>First-hand example:</em> a payments workflow with five Lambdas stuck on Node 16. You batch the upgrade to Node 20 within one sprint cleanly. Align secrets to AWS Secrets Manager as the one source. Standardize JSON logs, and cap CloudWatch retention at thirty days.</p>
+<p><em>Add process glue so teams move smoothly and independently:</em></p>
+<ul>
+<li>Infrastructure as code: capture runtime, memory, timeouts, and env vars.</li>
+<li>Pre-flight checks: scan for deprecated Node APIs or Java libs proactively.</li>
+<li>Parallel tracks: split by runtime family so teams can ship alone.</li>
+</ul>
+<h3 id="deploywithsafetyrails">Deploy with safety rails</h3>
+<p>Your two levers are update-function-configuration and update-function-code. Use them in a controlled pipeline with clear checkpoints and alarms. Keep the blast radius tiny while you learn how the new runtime behaves. Let CodeDeploy manage the traffic shift with canaries.</p>
+<ul>
+<li>Build artifact</li>
+<li>Deploy new version</li>
+<li>Shift traffic with an alias, canary ten percent then one hundred</li>
+<li>Watch error rates, duration, memory, and cold starts closely</li>
+<li>Roll back by pointing the alias to the previous version quickly</li>
+</ul>
+<p><em>Commands you’ll actually use in the real world:</em></p>
+<ul>
+<li>Update runtime: <code>aws lambda update-function-configuration --function-name my-fn --runtime nodejs20.x</code></li>
+<li>Update code: <code>aws lambda update-function-code --function-name my-fn --zip-file fileb://dist.zip</code></li>
+<li>Publish version: <code>aws lambda publish-version --function-name my-fn</code></li>
+<li>Point alias: <code>aws lambda update-alias --function-name my-fn --name prod --function-version 42</code></li>
+</ul>
+<p><em>First-hand example:</em> moving a Java 17 analytics function to Java 25 now. You enable SnapStart, redeploy, and run a fifteen-minute canary. Confirm p95 dropped on cold hits, then lock it with an alias. Close the ticket and move to the next function calmly.</p>
+<p><em>Bonus guardrails that save you when nerves spike:</em></p>
+<ul>
+<li>Health bar: set CloudWatch alarms on 5xx rate, duration, and init duration. Tie them to the canary alias so noise stays low.</li>
+<li>Freeze window: block deploys for thirty minutes after go-live. Keep the system stable while metrics settle and recover.</li>
+<li>Rollback muscle: always keep the N-1 version warm and documented. Practice the rollback so it’s muscle memory under stress.</li>
+</ul>
+<h2 id="quickpitstopsummary">Quick pit stop summary</h2>
+<ul>
+<li>Rust runtime is GA and ships real performance gains for CPU-heavy tasks.</li>
+<li>Java 25 + SnapStart gives you cold-start wins without provisioned concurrency.</li>
+<li>Swift’s experimental client is worth a pilot if you’re deep in Apple ecosystems.</li>
+<li>Node.js 20 is the safe target now; plan Node 24 via containers/custom runtime until native support lands.</li>
+<li>CloudWatch Logs: push verbose streams to S3, keep high-signal logs hot.</li>
+<li>Init-phase billing is standardized; track it and optimize your startup path.</li>
+</ul>
+<h2 id="faqruntimeandrollout">FAQ runtime and rollout</h2>
+<ol>
+<li><p>Q: Is Node.js 24 supported on Lambda today?
+A: Node.js 20 is supported broadly and safe to use right now. For Node 24, check the Lambda runtimes page before planning. If it’s not listed yet, deploy via a Lambda container image. Or use a custom runtime using the Runtime API for clean control. When native support appears, switch your function runtime with one update.</p></li>
+<li><p>Q: Should I move all Java functions to Java 25 immediately?
+A: Prioritize functions that are user-facing or cold-start sensitive today. Java 25 improves startup and trims init overhead in practice. If you can enable SnapStart, you’ll see the biggest impact there. For batch or async jobs, the benefit is smaller but still real.</p></li>
+<li><p>Q: What’s the simplest way to try Rust on Lambda?
+A: Start with one CPU-bound function, like parsing or enrichment. Compile for Linux, package the binary, and deploy with update-function-code. Measure duration and memory versus your current runtime baseline. If performance stabilizes or costs drop, expand the footprint confidently.</p></li>
+<li><p>Q: How do I keep CloudWatch Logs costs in check without losing visibility?
+A: Separate signals and pick the right store for each type. Errors and warns stay in CloudWatch with shorter retention periods. Verbose and debug streams go to S3 via Firehose with lifecycle rules. Add sampling and sanitize payloads at the edge every time.</p></li>
+<li><p>Q: Does SnapStart change my security posture?
+A: Treat snapshots like production memory with the same care. Don’t embed secrets directly in static initializers in any case. Use Secrets Manager or Parameter Store and fetch at restore-time. Validate that all libraries support snapshot and restore semantics.</p></li>
+<li><p>Q: What’s the difference between update-function-code and update-function-configuration?
+A: Code updates ship new artifacts via ZIP or container image. Configuration updates change runtime, memory, env vars, or timeouts. In practice, you’ll use both in a release with a canary. Push code, publish a version, then point an alias and observe.</p></li>
+<li><p>Q: Arm64 or x86<em>64 for Lambda?
+A: Prefer arm64 Graviton for better price and performance when possible. Test native modules and compile binary addons for arm64 correctly. If a dependency blocks you, stick with x86</em>64 until you can swap. Keep the migration on your backlog with owners and dates.</p></li>
+<li><p>Q: ZIP or container images for deployment?
+A: Use ZIP for small, simple functions to move fast and easy. Choose container images when you need custom runtimes or system packages. They also shine with large dependencies or language previews. Keep images slim to reduce cold start and pull time.</p></li>
+<li><p>Q: Do VPCs still hurt cold starts?
+A: VPC networking is much better than it used to be, honestly. There’s still overhead on first attach during cold starts though. Keep Lambdas out of VPC unless they need private resources. If they must, warm critical paths or use SnapStart for Java.</p></li>
+<li><p>Q: X-Ray or OpenTelemetry for tracing?
+A: If you’re all-in on AWS tooling, start with X-Ray for simplicity. If you’re multi-cloud, use OpenTelemetry and ship traces where needed. Either way, don’t skip tracing on public-facing functions please. It pays off during incidents and postmortems every single time.</p></li>
+</ol>
+<h2 id="10stepruntimeupgradechecklist">10 step runtime upgrade checklist</h2>
+<ul>
+<li>Inventory functions by runtime, region, and owner; tag critical paths.</li>
+<li>Decide targets: Rust for CPU-heavy, Java 25 + SnapStart for JVM apps, Node 20 for JS today.</li>
+<li>Create an observability baseline: p50/p95 latency, errors, cold-start rate, memory.</li>
+<li>Build and test artifacts on the exact Linux architecture (x86_64/arm64).</li>
+<li>Deploy to a staging alias; run load tests mirroring production traffic.</li>
+<li>Use <code>update-function-configuration</code> to switch runtimes; publish a version.</li>
+<li>Canary with CodeDeploy: 10% traffic first; monitor metrics and logs.</li>
+<li>Tune memory for perf and cost sweet spot; re-run the canary test.</li>
+<li>Cut over to 100%; keep the old version for instant rollback paths.</li>
+<li>Trim CloudWatch retention, stream verbose logs to S3, and set alerts on init duration.</li>
+</ul>
+<p>You’re looking at a rare alignment across speed, language options, and costs. More speed, better choices, and costs that map to reality well. The big win isn’t just shaving milliseconds off a graph. It’s building a rollout muscle you can reuse for every bump.</p>
+<p>If you remember one thing, pick one function and upgrade it this week. Measure the results and write them down for the next sprint. Momentum compounds more than we think when we keep it moving.</p>
+<p>Building Lambda-based pipelines for Amazon Marketing Cloud? Streamline them with <a href="../amc-cloud.html">AMC Cloud</a> and automate query orchestration with <a href="../requery.html">Requery</a>.</p>
+<p><em>“A good serverless upgrade is boring: precise inventory, small canary, measurable win.”</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">AWS Lambda runtimes and support policy</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-api.html">AWS Lambda Runtime API and custom runtimes</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">AWS Lambda Java with SnapStart</a></li>
+<li><a href="https://aws.amazon.com/lambda/pricing/">AWS Lambda pricing (init and duration)</a></li>
+<li><a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Logs pricing and tiers</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html">CloudWatch Logs subscription filters (stream to Kinesis/Firehose/Lambda)</a></li>
+<li><a href="https://github.com/awslabs/aws-lambda-rust-runtime">AWS Lambda Rust runtime (GitHub)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html">Amazon Bedrock Agents (metrics and integration)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-ipr.html">Intelligent Prompt Routing in Amazon Bedrock (overview)</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html">AWS Lambda container images</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/protect-sensitive-log-data.html">CloudWatch Logs data protection</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html">AWS X-Ray with Lambda</a></li>
+<li><a href="https://github.com/alexcasalboni/aws-lambda-power-tuning">AWS Lambda Power Tuning (GitHub)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-lambda-release-notes.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq960f.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=AWS+Lambda+runtime+updates+you+can+use+right+now&amp;pi=260684605138&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=260684605138&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-lambda-release-notes&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-lambda-release-notes?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:30 GMT -->
+</html>

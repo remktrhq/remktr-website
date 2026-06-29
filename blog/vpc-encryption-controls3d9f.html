@@ -1,0 +1,371 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/vpc-encryption-controls?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Make Every AWS VPC Packet Encrypted In Transit</title>
+    <link rel="canonical" href="vpc-encryption-controls.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Monitor and enforce VPC encryption in transit AWS to meet HIPAA, PCI DSS, and FedRAMP. Use modes and flow logs to prove compliance and security best practices.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Make Every AWS VPC Packet Encrypted In Transit",
+        "datePublished": "2025-11-21T20:24:50Z",
+        "dateModified": "2025-11-21T20:24:50.683Z",
+        "mainEntityOfPage": "https://remktr.com/blog/vpc-encryption-controls",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-21-2025-08-14-33-6871-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="vpc-encryption-controls.html">Make Every AWS VPC Packet Encrypted In Transit</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 21, 2025 8:24:50 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You can't fix what you can't see. In the cloud, plaintext in transit is an invisible landmine. It can turn into a compliance mess fast.</p>
+<p>Here’s the good news: AWS just made it much harder to miss. VPC Encryption Controls give you one switch to watch and enforce encryption in transit across your VPCs, without duct-taping tons of service policies. Translation: <em>less audit panic, more proof.</em></p>
+<p>If you’ve ever tried to prove HIPAA or PCI DSS with screenshots and vibes, this flips things. You get flow logs with an encryption-status signal, a two-step rollout (monitor first, enforce later), and support that covers Nitro, Fargate, and Transit Gateway. You see who sends plaintext, you fix it, then you lock it down.</p>
+<p>You want aws encryption in transit to be boring and automatic. This gets you there.</p>
+<p>Think of it like seatbelts for your VPC. First you check who’s buckled (monitor). Then you tighten straps (remediate). Then you make buckling the default (enforce). <em>Simple, repeatable, and visible.</em> So when someone asks, 'Are we encrypted?', you can say 'Yes' and show receipts.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Turn on monitor mode to spot plaintext across VPCs before enforcing.</li>
+<li>Flow logs add encryption-status: Nitro, TLS at the app layer, or both.</li>
+<li>Enforce mode blocks features that allow unencrypted traffic.</li>
+<li>Works with Nitro, Fargate, ALB, and Transit Gateway (enable TGW separately).</li>
+<li>Map to HIPAA, PCI DSS, FedRAMP, and NYDFS for easier evidence and audits.</li>
+<li>For older instances, upgrade to supported types to keep traffic encrypted.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-21-2025-08-15-30-2358-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="killsplaintextbydesign">Kills plaintext by design</h2>
+<h3 id="monitorfirstthenenforce">Monitor first then enforce</h3>
+<p>VPC Encryption Controls run in two gears:</p>
+<ul>
+<li>Monitor mode: You audit flows within and across VPCs and see where plaintext appears. This is your safety net. Fix issues before you flip the switch.</li>
+<li>Enforce mode: After validation, AWS blocks features or paths that allow unencrypted traffic inside the VPC boundary. For new VPCs, you can start here on day one.</li>
+</ul>
+<p>A practical rollout looks like this: enable monitor on existing VPCs, watch the new encryption-status field in VPC Flow Logs, squash the plaintext hotspots, then upgrade to enforce. For greenfield VPCs, start with enforce to make vpc encryption in transit aws the default, not a wishlist.</p>
+<p><em>Add a lightweight checklist and a change window.</em> Your checklist can be as simple as: 1) turn on monitor, 2) confirm logs are flowing, 3) fix the top three plaintext paths, 4) run clean for 1–2 weeks across peak hours, 5) switch to enforce during a scheduled window with a rollback plan. This keeps the drama low and the signal high.</p>
+<p>Want to avoid surprise app issues? Announce the plan to service owners ahead of time. Give them this note: if you see alerts for plaintext between these services, switch that HTTP call to HTTPS or enable mTLS. Most fixes are one-line config changes, not rewrites.</p>
+<h3 id="onecontrolpervpc">One control per VPC</h3>
+<p>Each VPC gets exactly one encryption control. You can tag the control for env, app, and owner. That is gold if you manage dozens of accounts. It helps you line up enforcement with blast-radius boundaries.</p>
+<p><em>First-hand example:</em> a healthcare team in a multi-account setup enabled monitor in dev, found an ALB listener exposing HTTP from a migration, switched to HTTPS with TLS 1.2+, validated zero plaintext for a week, then enforced across dev, stage, and prod in waves.</p>
+<p>At scale, treat tagging as your map and your memory. Pick a simple scheme like: env=prod|stage|dev, system=payments|ehr|analytics, owner=email. With tags in place, you can query controls, prioritize fixes by critical systems, and prove scope to auditors. Bonus: those tags make dashboards and on-call handoffs much easier.</p>
+<h2 id="howtheencryptionhappens">How the encryption happens</h2>
+<h3 id="nitrotlsorbothsignal">Nitro TLS or both signal</h3>
+<p>AWS enriches VPC Flow Logs with encryption-status to show if traffic is protected by:</p>
+<ul>
+<li>Nitro hardware encryption in transit, which is transparent link protection in AWS’s network fabric.</li>
+<li>Application-layer encryption such as TLS, like HTTPS, database TLS, or mTLS for services.</li>
+<li>Or both, giving you defense in depth.</li>
+</ul>
+<p>This matters because encrypted isn’t one thing. Nitro-level protection reduces plaintext exposure inside AWS’s infrastructure. App-layer TLS gives you end-to-end crypto and identity. You’ll use the signal to prioritize fixes where neither protection exists.</p>
+<p><em>Quick mental model:</em></p>
+<ul>
+<li>Nitro: fast, transparent, handled by hardware. Great for risk reduction inside AWS paths.</li>
+<li>TLS: visible to your app, terminates at known endpoints, gives identity, cipher control, and audits.</li>
+<li>Both: the happy place, defense in depth with speed and certainty.</li>
+</ul>
+<p>VPC Flow Logs don’t capture payloads; they capture metadata. That’s good for privacy and scale. Here, the key metadata is was this flow protected? You can spot weak links without packet sniffers or inline proxies.</p>
+<h3 id="beyondec2fargatealb">Beyond EC2 Fargate ALB</h3>
+<p>This isn’t limited to EC2 Nitro instances. The enforcement model extends to Fargate tasks, Application Load Balancers, and AWS Transit Gateway. The catch: if your VPCs route through Transit Gateway, you must enable encryption controls on the TGW to protect inter-VPC traffic end to end. Good news: turning it on doesn’t disrupt existing flows.</p>
+<p>Got older instance types without native in-transit encryption? You’ll need to upgrade to supported generations to fully benefit. Until then, app-layer TLS is still a must.</p>
+<p><em>Practical tip:</em> verify every hop. ALB should terminate HTTPS, pass traffic to targets over HTTPS or mTLS, and your databases should require TLS from clients. If you use PrivateLink for cross-account access, keep TLS on as well. A private network plus an encrypted session is stronger than either alone.</p>
+<h2 id="thecomplianceunlock">The compliance unlock</h2>
+<h3 id="mapcontrolstohipaa">Map controls to HIPAA</h3>
+<p>If you live in regulated land, this is your fast pass. Encryption in transit is table stakes across frameworks:</p>
+<ul>
+<li>HIPAA: Protect ePHI in transit with strong encryption and solid key management.</li>
+<li>PCI DSS: Encrypt cardholder data in transit over open networks and segment hard.</li>
+<li>FedRAMP: Enforce FIPS-validated algorithms and document your controls.</li>
+<li>NYDFS 500.15(a): Encrypt nonpublic information in transit over external networks.</li>
+</ul>
+<p>VPC Encryption Controls give you centralized, authoritative enforcement and evidence. Instead of proving a negative, you produce flow logs and config states that show encryption-status over time.</p>
+<p>Translate this to policy-speak: all connections between workloads, load balancers, databases, caches, and inter-VPC paths must be encrypted in transit. Deviations must be approved, time-bound, and tagged. Now you’ve got a crisp rule and a way to verify it.</p>
+<h3 id="provingittoauditors">Proving it to auditors</h3>
+<p><em>Make it mechanical:</em></p>
+<ul>
+<li>Evidence: flow logs with encryption-status trends, change tickets for fixes, and a record of the switch from monitor to enforce.</li>
+<li>Policy: a written requirement for all VPC traffic encrypted in transit with deviations tracked.</li>
+<li>Scope: include Transit Gateway, inter-VPC paths, and service-to-service flows like ALB and PrivateLink.</li>
+<li>Exceptions: time-bound, approved, and tagged. If you must allow plaintext in a lab VPC, document it and restrict egress.</li>
+</ul>
+<p>A financial services team we worked with cut audit prep time by half. No sprawling screenshots. Just export flow-log slices, map to tickets, and attach a signed change record for the enforce switch.</p>
+<p><em>Pro tip:</em> build a recurring report. Each month, pull flows where encryption-status equals none, list affected services, show remediation dates, and include a sign-off. That single PDF answers three classic questions: what’s the rule, how do you monitor it, and what happens when it breaks?</p>
+<h2 id="theplaybook">The playbook</h2>
+<h3 id="pinpointwhereplaintextleaks">Pinpoint where plaintext leaks</h3>
+<p>Use monitor mode like a flashlight. Look for these encryption in transit examples of issues:</p>
+<ul>
+<li>ALB listener still serving HTTP because a legacy health check never moved.</li>
+<li>Internal service calls using HTTP between ECS or EKS microservices, not HTTPS or mTLS.</li>
+<li>RDS or client not enforcing TLS; apps quietly downgrade.</li>
+<li>Redis or ElastiCache without in-transit encryption enabled.</li>
+<li>Transit Gateway attached VPCs not covered, leaving an unencrypted interconnect path.</li>
+</ul>
+<p>For each, you can test fixes in place and watch encryption-status turn green.</p>
+<p>When you triage, start with systems touching sensitive data like payments, health, or PII. Then anything internet-facing. Then high-traffic internal services. Reduce the biggest risks first and build momentum.</p>
+<h3 id="quickwinsacrosspopularservices">Quick wins across popular services</h3>
+<ul>
+<li>ALB: redirect HTTP to HTTPS, enforce TLS 1.2+, and use ACM for certs.</li>
+<li>S3: enforce HTTPS with a bucket policy using aws:SecureTransport = true. That covers encryption in transit for S3.</li>
+<li>RDS: require TLS, update JDBC or psql clients, and pin CA bundles.</li>
+<li>EKS or ECS: terminate TLS at the sidecar or app, consider mTLS if you need workload identity.</li>
+<li>PrivateLink: keep access inside AWS networks while still using TLS.</li>
+</ul>
+<p>Once flows look clean in monitor mode for a solid window, say two weeks, move to enforce.</p>
+<p>If you’re worried about client breakage, roll out redirects first at ALB. Then tighten server-side to TLS-only. For databases, turn on require SSL or TLS in nonprod, fix client configs, then promote to prod. For caches, enable in-transit encryption and rotate clients accordingly.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-21-2025-08-16-27-3210-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="forgettheedges">Forget the edges</h2>
+<h3 id="transitgatewayenableit">Transit Gateway enable it</h3>
+<p>If two VPCs talk via Transit Gateway and only the VPCs are in enforce, you still need encryption controls on the TGW. Do it via Console or API using modify-transit-gateway. AWS says enabling on an existing TGW won’t cut traffic.</p>
+<p>After enabling, with both TGW and all attached VPCs in enforce and no exclusions, you get encryption end to end for inter-VPC traffic.</p>
+<p>Double-check attachments and routes. It’s common to fix one side and forget the other. Keep a simple table: VPC name, TGW attachment ID, control status, and last reviewed date. That turns tribal knowledge into a shared checklist.</p>
+<h3 id="rolloutwithoutchaos">Rollout without chaos</h3>
+<ul>
+<li>Sequence: dev to staging to low-risk prod to high-throughput prod.</li>
+<li>Communication: publish a short aws encryption in transit standard and the enforcement calendar.</li>
+<li>Observability: build a dashboard around encryption-status trends; alert on plaintext sightings.</li>
+<li>Upgrades: plan instance family moves if you’re on older generations without hardware support.</li>
+<li>Tags: tag VPC encryption controls by owner and system; it’s your breadcrumb trail during incidents.</li>
+</ul>
+<p><em>When in doubt, treat enforce like a firewall rule change.</em> Use a change window, a rollback plan, and a crisp runbook.</p>
+<p><em>People and process make or break this.</em> Nominate a small encryption champions crew from platform, networking, and app teams. Give them shared dashboards and a weekly 15-minute stand-up until all prod VPCs are green. Momentum beats perfection.</p>
+<h2 id="quickpitstop">Quick pit stop</h2>
+<ul>
+<li>Start in monitor mode; baseline with encryption-status in flow logs.</li>
+<li>Fix ALB, S3, RDS, EKS or ECS, and TGW gaps first; those remove most hotspots.</li>
+<li>Run clean for 1–2 weeks; then flip enforce in waves.</li>
+<li>Enable enforcement on Transit Gateway for end-to-end inter-VPC protection.</li>
+<li>Keep exceptions rare, documented, time-bound, and tagged.</li>
+</ul>
+<p>Add two more habits and you’ll stay ahead:</p>
+<ul>
+<li>Budget for logs: VPC Flow Logs volume grows with traffic. Pick S3 when you need longer retention and use Athena for queries to keep costs predictable.</li>
+<li>Bake it into templates: make enforce on the default in your VPC IaC module and landing zone, so new environments start compliant.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="doesthisreplacetls">Does this replace TLS</h3>
+<p>No. Nitro encryption protects links within AWS infrastructure. Application-layer TLS like HTTPS, database TLS, or mTLS protects end to end and provides identity. Best practice is both. The encryption-status signal helps you verify coverage across layers.</p>
+<h3 id="enableenforcemodeonvpcs">Enable enforce mode on VPCs</h3>
+<p>Not recommended. For existing VPCs, start in monitor mode. Use the findings to fix plaintext. After you’ve verified encryption everywhere, switch to enforce. For new VPCs, you can start with enforce at creation.</p>
+<h3 id="covertrafficbetweenvpcs">Cover traffic between VPCs</h3>
+<p>If you connect VPCs with Transit Gateway, you must enable encryption controls on the TGW too. With TGW and all attached VPCs in enforce and no exclusions, traffic is encrypted end to end across VPC boundaries.</p>
+<h3 id="olderec2instancetypes">Older EC2 instance types</h3>
+<p>Older generations may lack hardware encryption in transit. You should upgrade to supported instance types to fully benefit. Either way, keep application TLS in place for end-to-end protection.</p>
+<h3 id="provecompliancetoauditors">Prove compliance to auditors</h3>
+<p>Export VPC Flow Logs with the encryption-status field as evidence. Bundle remediation tickets and include change records showing the move from monitor to enforce. Map the control to HIPAA, PCI DSS, FedRAMP, and NYDFS. Logs plus written policy usually satisfy control families for aws encryption in transit.</p>
+<h3 id="enablingencryptionontransitgateway">Enabling encryption on Transit Gateway</h3>
+<p>AWS indicates enabling encryption controls on an existing TGW does not interrupt flows. Still, treat it like a sensitive change. Schedule a window, monitor closely, and validate paths.</p>
+<h3 id="lookforplaintextflowsfast">Look for plaintext flows fast</h3>
+<p>Send VPC Flow Logs to a place you can search at scale, like CloudWatch Logs or S3 with Athena. Create a simple query for encryption-status equals none, group by source and destination, and sort by bytes. That points you to the loudest offenders first.</p>
+<h3 id="needprivatelinkorvpcpeering">Need PrivateLink or VPC peering</h3>
+<p>Yes. Private networking reduces exposure and data egress. Encryption in transit reduces risk if someone taps a link or misconfigures a path. Together, they’re stronger. Keep both, and keep TLS on top.</p>
+<h2 id="pathtoenforcedencryption">Path to enforced encryption</h2>
+<ul>
+<li>Enable VPC Encryption Controls in monitor mode on one nonprod VPC.</li>
+<li>Turn on VPC Flow Logs and route them to a searchable destination.</li>
+<li>Build a query or dashboard for encryption-status and hunt plaintext flows.</li>
+<li>Fix low-hanging fruit: ALB HTTPS-only, RDS with TLS required, S3 aws:SecureTransport.</li>
+<li>Patch service-to-service calls to HTTPS or mTLS in ECS or EKS.</li>
+<li>Upgrade any unsupported instance families where needed.</li>
+<li>Enable encryption controls on Transit Gateway if you use TGW.</li>
+<li>Run clean for 1–2 weeks under peak load; document evidence.</li>
+<li>Move that VPC to enforce; monitor; repeat across environments.</li>
+<li>Lock in a standard: all new VPCs launch with enforce mode on day one.</li>
+</ul>
+<p><em>A few extras to smooth the ride:</em></p>
+<ul>
+<li>Keep a known gaps list with owners and dates. If something needs time, like a third-party agent that’s HTTP-only, track it and review weekly.</li>
+<li>Rotate certificates on a schedule. Use ACM to issue and auto-renew where possible, so you don’t swap plaintext risk for expired cert outages.</li>
+<li>Add a lightweight SLO: 99.9% of flows must show encrypted status. That gives teams a number to watch and improve.</li>
+</ul>
+<p>You want this to end with one outcome: <em>zero plaintext</em>. VPC Encryption Controls give you a safe, observable path to get there. Start in monitor, fix what’s noisy, then make encryption non-optional. The compounding benefit is huge: cleaner audits, lower breach risk, and a cloud posture that grows with you.</p>
+<p>If you already enforce TLS at the app and S3 bucket level, this is your missing layer. Continuous, VPC-wide pressure that turns data encryption in transit best practices into defaults, not chores. Make encryption boring and automated, and your team can actually build.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html">Amazon VPC Flow Logs documentation</a></li>
+<li><a href="https://aws.amazon.com/ec2/nitro/">AWS Nitro System overview</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html">AWS Transit Gateway documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/modify-transit-gateway.html">AWS CLI modify-transit-gateway</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html">Application Load Balancer docs</a></li>
+<li><a href="https://aws.amazon.com/fargate/">AWS Fargate overview</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-policies.html#example-bucket-policies-use-case-HTTPS">Amazon S3: Require HTTPS (aws:SecureTransport) example policy</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/transport-layer-security.html">Amazon S3 transport layer security</a></li>
+<li><a href="https://aws.amazon.com/compliance/hipaa-eligible-services-reference/">AWS HIPAA compliance</a></li>
+<li><a href="https://aws.amazon.com/compliance/services-in-scope/pci-dss/">AWS PCI DSS compliance</a></li>
+<li><a href="https://aws.amazon.com/compliance/fedramp/">AWS FedRAMP compliance</a></li>
+<li><a href="https://www.dfs.ny.gov/industry_guidance/cybersecurity">NYDFS Cybersecurity Regulation (23 NYCRR 500)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Amazon RDS: Using SSL/TLS to encrypt a connection</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/in-transit-encryption.html">Amazon ElastiCache in-transit encryption</a></li>
+<li><a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">AWS Certificate Manager (ACM) overview</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html">AWS PrivateLink overview</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html">CloudWatch Logs Insights</a></li>
+<li><a href="https://docs.aws.amazon.com/athena/latest/ug/vpc-flow-logs.html">Query Amazon VPC Flow Logs with Athena</a></li>
+<li><a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a></li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html">AWS Well-Architected Framework, Security Pillar</a></li>
+<li><a href="https://csrc.nist.gov/publications/detail/sp/800-52/rev-2/final">NIST SP 800-52r2 (TLS guidance)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="vpc-encryption-controls.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq02ea.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Make+Every+AWS+VPC+Packet+Encrypted+In+Transit&amp;pi=263266365174&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=263266365174&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fvpc-encryption-controls&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/vpc-encryption-controls?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:34 GMT -->
+</html>

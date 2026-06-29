@@ -1,0 +1,493 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/sts-identity-provider-claims?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Lock Down AWS Access With IdP Claims Validation</title>
+    <link rel="canonical" href="sts-identity-provider-claims.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn how AWS STS validates aws identity provider claims to enforce zero trust, verifying roles and groups from Okta and Azure AD before assuming roles.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Lock Down AWS Access With IdP Claims Validation",
+        "datePublished": "2026-02-10T23:18:09Z",
+        "dateModified": "2026-02-10T23:18:09.789Z",
+        "mainEntityOfPage": "https://remktr.com/blog/sts-identity-provider-claims",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-10-2026-11-07-48-2388-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="sts-identity-provider-claims.html">Lock Down AWS Access With IdP Claims Validation</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 10, 2026 11:18:09 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You don’t lose cloud environments in big movie hacks; you lose them through tiny trust leaks.
+Think a token without the right guardrails, a role anyone can assume, or an unchecked IdP group.</p>
+<p>Here’s the fix: AWS STS now validates IdP claims before issuing temporary credentials.
+If the token’s claims, like groups, roles, audience, or subject, miss policy, the door stays shut.</p>
+<p><em>No more assume first and then sort it out later.</em>
+This tightens zero trust and blocks lateral movement before it starts.
+<em>It’s like checking guests at the door against the real list first.</em></p>
+<p>If you use Okta, Azure AD (Entra ID), Amazon Cognito, or GitHub OIDC, make this your default.
+You verify who’s asking, what they claim, and if those claims match expectations.
+Do it in the role trust policy and with session tags.
+It’s clean, fast, and ruthlessly consistent every single time.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>STS validates IdP claims for OIDC and SAML before issuing temporary creds.</li>
+<li>Enforce zero trust by matching aud, sub, groups, and roles in the trust policy.</li>
+<li>Use session tags and ABAC to enforce fine-grained controls on resources.</li>
+<li>Configure the OIDC provider correctly, like issuer, JWKS, and client IDs, to avoid breaks.</li>
+<li>Log and test with CloudTrail, sts:DecodeAuthorizationMessage, and token introspection to save hours.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-11-08-43-6080-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<p>If you only read this, you can finally make identity checks deterministic.
+Your IdP states who the caller is, with proof inside the token.
+Your trust policy checks exactly what you care about, like audience, subject, groups, and app.
+STS either issues creds or it doesn’t, with no gray zone or later band-aids.</p>
+<p>And because this happens before a session exists, cleanup time drops hard.
+A bad token dies at the door and never gets a session.
+A misconfigured app can’t accidentally slide in and cause trouble.
+That’s a huge win for least privilege and incident response sanity.</p>
+<h2 id="claimsfirstsecurity">Claims First Security</h2>
+<h3 id="whatclaimsvalidationactuallymeans">What claims validation actually means</h3>
+<p>When STS evaluates AssumeRoleWithWebIdentity or AssumeRoleWithSAML, it can demand claim matches first.
+Practically, you put the checks in the role’s trust policy for OIDC or SAML.
+You can also pass session tags from IdP attributes, then gate access with ABAC using aws:PrincipalTag.
+If the token’s aud, sub, or mapped attributes don’t align, the AssumeRole call fails.</p>
+<p>First-hand example: You map your Okta group cloud-admins into the token’s groups claim.
+Then you write a trust policy that only allows AssumeRole when groups includes cloud-admins.
+Folks outside that group never even get a session, which is perfect.</p>
+<p><em>This is identity-first authorization, simple and direct.</em>
+For OIDC, your trust policy references claim keys namespaced by the OIDC provider you registered.
+For example, idp.example.com:aud or idp.example.com:sub in the policy conditions.
+For SAML, AWS exposes attributes so you can apply the same claims-must-match pattern.
+No session, no access, no problem, and logs explain why.</p>
+<h3 id="twoquickrealitiestointernalize">Two quick realities to internalize</h3>
+<ul>
+<li><em>Claims are not nice-to-have metadata; they’re the contract you must honor.</em></li>
+<li>Mapping attributes from the IdP matters a lot, and you control what crosses.</li>
+</ul>
+<h3 id="bigforzerotrust">Big for zero trust</h3>
+<p>Zero trust says never trust, always verify, even inside your walls.
+With STS claims validation, the verification happens right at the blast door.
+This isn’t post-hoc authorization or logs you’ll read tomorrow or later.
+It’s a hard deny at call time that shrinks attack paths fast.</p>
+<p>Real-world vibe: same dev machine and same VPN, but different Okta group.
+One button works, the other doesn’t, because the claim didn’t match.
+That’s zero trust doing reps, every hour, every day.</p>
+<p>Another way to see it: an attacker steals a web token, but cannot satisfy aud or sub.
+Your trust policy requires those exact values to match or the call dies.
+They can’t even start a session, so a whole class of incidents vanishes.
+Bonus: CloudTrail shows who tried what, which claims, and the deny reason.</p>
+<h2 id="oidcprovidersetup">OIDC Provider Setup</h2>
+<h3 id="issueranddiscovery">Issuer and discovery</h3>
+<p>Before claims can be validated, your AWS OIDC provider configuration must be exact.
+Point AWS to the IdP’s issuer and keys using the discovery document at:</p>
+<ul>
+<li>https:///.well-known/openid-configuration</li>
+<li>Its jwks_uri for signing keys, usually at /.well-known/jwks.json</li>
+</ul>
+<p>Pro move: Confirm the iss in real tokens exactly matches the issuer you register.
+The ARN format for an IAM OIDC provider is: arn:aws:iam:::oidc-provider/.</p>
+<h3 id="avoidcommonmisconfig">Avoid common misconfig</h3>
+<p>A frequent mix-up is pasting the discovery URL as the provider URL in IAM.
+Do not include protocol paths or the well-known path in the provider URL.
+The provider URL must equal the token’s iss claim, including any fixed path.
+If you see <code>the identity provider url cannot be same as openid connect oidc issuer url</code>, check issuer alignment.</p>
+<h3 id="clisetupviaoidc">CLI setup via OIDC</h3>
+<p><code>aws iam create-open-id-connect-provider --url https://idp.example.com --client-id-list sts.amazonaws.com --thumbprint-list &lt;SHA1_THUMBPRINT&gt;</code></p>
+<p>First-hand example: With Azure AD (Entra ID), the issuer often includes a tenant path.
+If your iss is https://login.microsoftonline.com//v2.0, that is what you register.
+Do not add the /.well-known suffix anywhere inside the provider URL.</p>
+<h3 id="whereteamstripmostoften">Where teams trip most often</h3>
+<ul>
+<li>Thumbprints: The IAM OIDC provider needs a thumbprint for the IdP’s TLS chain.
+If it’s wrong or the IdP rotates to an unknown cert, calls fail closed.
+Capture the right thumbprint, and list multiple thumbprints to hedge rotation.</li>
+<li>Audience: For OIDC with STS, the audience must be sts.amazonaws.com unless customized.
+Don’t guess; check a real token and match the trust policy conditions.</li>
+<li>Multiple tenants or environments: Each unique issuer value is a distinct provider.
+Prod and staging issuers must be separate IAM OIDC entries to work right.</li>
+</ul>
+<h3 id="idpspecificbreadcrumbs">IdP specific breadcrumbs</h3>
+<ul>
+<li>Okta: Create a custom Authorization Server if needed and add custom claims.
+Put groups into the ID token for your AWS app and scope tightly.
+Verify the Include in token settings and filters so only right groups flow.</li>
+<li>Azure AD (Entra ID): Stick to v2.0 endpoints if your apps use them today.
+Azure groups may not flow by default; configure claims mapping or switch to session tags.</li>
+<li>GitHub OIDC: The issuer is https://token.actions.githubusercontent.com for all workflows.
+Set audience to sts.amazonaws.com and pin sub to repos or branches in trust policy.
+This prevents any repo from deploying by mistake, which is the goal.</li>
+<li>Amazon Cognito: The user pool is your issuer, confirm it in a real token.
+Add custom attributes in Cognito if you need teams or environments as claims.</li>
+</ul>
+<h2 id="trustpoliciescheckclaims">Trust policies check claims</h2>
+<h3 id="matchaudandsub">Match aud and sub</h3>
+<p>In the role trust policy, key off claims like aud and sub.
+For OIDC, use the provider namespace keys you registered in IAM for checks.
+For example: idp.example.com:aud == sts.amazonaws.com and idp.example.com:sub == app:backend:ci-runner.
+For Kubernetes IRSA, sub often looks like system:serviceaccount:namespace:serviceaccount value.</p>
+<h3 id="bringgroupsorrolesintothedecision">Bring groups or roles into the decision</h3>
+<p>Need group-based gates from Okta or Cognito for access controls?
+You can map groups into a custom OIDC claim and check it in the policy.
+Or pass groups as session tags and enforce aws:PrincipalTag/Group in resource policies.</p>
+<p>First-hand example: Require claim idp.example.com:groups to contain billing-ops for finance roles.
+Anyone outside that group gets a hard deny on AssumeRoleWithWebIdentity requests immediately.</p>
+<h3 id="patternsthatsaveyoupain">Patterns that save you pain</h3>
+<ul>
+<li>Lock down sub to an immutable identity your users cannot spoof.
+For workloads, use a stable subject like a service account or a GitHub ref.</li>
+<li>Prefer StringEquals over StringLike unless a pattern is truly needed here.
+If you do need patterns, pin fixed prefixes and avoid vague wildcards.</li>
+<li>Combine claims like aud and sub with environment or team for precision.
+The more precise your claim cocktail, the smaller your blast radius gets.</li>
+</ul>
+<h3 id="githubactionsbaseline">GitHub Actions baseline</h3>
+<p>Use aud=sts.amazonaws.com and iss=https://token.actions.githubusercontent.com for the provider.
+Then restrict sub to repo:ORG/REPO:ref:refs/heads/main or your release tag pattern.
+That only lets your intended workflow on your intended branch assume the role.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-11-09-35-3602-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="sessiontagsabac">Session Tags ABAC</h2>
+<h3 id="turnidpattributesintotags">Turn IdP attributes into tags</h3>
+<p>When federating with AssumeRoleWithWebIdentity or AssumeRoleWithSAML, pass chosen IdP attributes as tags.
+Then write resource policies that only allow actions when aws:PrincipalTag values match.
+This is ABAC, and you avoid provisioning lots of similar IAM roles.</p>
+<h3 id="exampleflow">Example flow</h3>
+<ul>
+<li>IdP assertion contains department=finance and data_sensitivity=restricted attributes.</li>
+<li>STS session is tagged with those exact pairs on session creation time.</li>
+<li>The S3 bucket policy allows s3:GetObject when those PrincipalTag values match restricted and finance.</li>
+</ul>
+<h3 id="whyabacpairsperfectly">Why ABAC pairs perfectly</h3>
+<p>Claims validation filters who even gets a session in the first place.
+ABAC then decides what that session can do across resources later.
+It’s two gates: first the front door, then the hallway, nicely layered.</p>
+<p>First-hand example: One analytics-engineer role covers many teams across regions.
+ABAC policies limit Glue, Athena, and S3 prefixes by team=analytics-east or analytics-west.
+You scale access with tags instead of a huge sprawl of roles.</p>
+<h3 id="abacbestpractices">ABAC best practices</h3>
+<ul>
+<li>Treat tag keys like APIs and standardize names and allowed values.
+Use names like Team, Env, and DataClass and then document them.
+If two apps use different tags for the same thing, ABAC loses power.</li>
+<li>Push tags from the source of truth, like HR for department.
+Have the IdP include department, not ad hoc tags from random scripts.</li>
+<li>Keep policies readable by using clear allow rules with focused conditions.
+Avoid sprawling deny lists, your future self will actually thank you.</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="logtestrepeat">Log test repeat</h3>
+<ul>
+<li>CloudTrail records AssumeRoleWithWebIdentity and AssumeRoleWithSAML attempts, even failures.
+Failed entries are gold for debugging claims that don’t match or align.</li>
+<li>sts:DecodeAuthorizationMessage helps untangle complex denies when policies stack.</li>
+<li>With the AWS CLI or SDK, log the raw OIDC ID token securely for review.
+Inspect iss, aud, sub, exp, and any custom claims for drift.</li>
+</ul>
+<h3 id="theusualsuspects">The usual suspects</h3>
+<ul>
+<li>Issuer mismatch: iss in the token doesn’t equal the OIDC provider URL.</li>
+<li>Using the discovery path: don’t set /.well-known/openid-configuration as the provider URL.</li>
+<li>Bad thumbprint: wrong CA thumbprint means AWS can’t validate the IdP TLS chain.</li>
+<li>aud drift: the IdP isn’t minting aud=sts.amazonaws.com, so fix the app settings.</li>
+<li>Group claim not present: the IdP app may not include groups by default, configure it.</li>
+</ul>
+<p>First-hand example: A team assumed the role locally, but the CI pipeline failed.
+Reason was the CI IdP app used a different audience than the local setup.
+Matching idp.example.com:aud to sts.amazonaws.com surfaced the misconfig right away.</p>
+<h3 id="morequickwins">More quick wins</h3>
+<ul>
+<li>Check time first; if exp is past or nbf is future, STS denies.
+Sync clocks on CI runners and IdPs since drift bites hard sometimes.</li>
+<li>Session duration: the role’s maxSessionDuration must match the workflow’s request.
+Asking for longer than allowed will just not work, it’s blocked.</li>
+<li>JWKS freshness: if your IdP rotated signing keys, AWS needs to fetch them.
+Retry after a minute and confirm the JWKS endpoint responds correctly.</li>
+<li>Simulate: use IAM Policy Simulator for resource policies after tagging design.
+It won’t mint tokens, but it checks ABAC logic and expected effects.</li>
+</ul>
+<h2 id="quickpulse">Quick Pulse</h2>
+<ul>
+<li>STS validates IdP claims like aud, sub, and groups or roles before creds.</li>
+<li>OIDC provider must match the token’s issuer, not the well-known config path.</li>
+<li>Trust policies enforce who can assume; ABAC policies enforce allowed actions.</li>
+<li>Session tags carry IdP attributes for scalable, fine-grained resource controls.</li>
+<li>CloudTrail and decode-authorization-message make debugging misaligned claims doable.</li>
+</ul>
+<p>You’ve basically moved identity checks to the exact right layer here.
+They run at the moment of assumption, before anything dangerous can happen.
+That shrinks attack paths, makes access predictable, and pleases your auditors.
+They get neat, timestamped receipts for every accept and deny event.</p>
+<h2 id="faq">FAQ</h2>
+<ol>
+<li>How does this differ from traditional role trust policies?</li>
+</ol>
+<p>Traditional trust policies could rely on broad principals and simple conditions that were vague.
+With claims validation for OIDC or SAML, you match token attributes directly.
+If claims don’t match, STS denies the session up front, every single time.</p>
+<ol start="2">
+<li>Do I need multiple roles for every group?</li>
+</ol>
+<p>Not necessarily, and that’s the good news for your team.
+Use ABAC, pass groups or team attributes as session tags from the IdP.
+Then enforce access in resource policies with aws:PrincipalTag for least privilege.</p>
+<ol start="3">
+<li>What’s the correct value for the OIDC provider URL in AWS?</li>
+</ol>
+<p>It must exactly match the token’s iss claim without the well-known path.
+For example, if iss is https://idp.example.com, register that as the URL.
+For Azure AD, the issuer can include a tenant path, so match it precisely.</p>
+<ol start="4">
+<li>Why does my AssumeRoleWithWebIdentity call fail with aud errors?</li>
+</ol>
+<p>Your IdP likely isn’t minting aud=sts.amazonaws.com or the expected audience claim.
+In OIDC, aud identifies the intended recipient for tokens without confusion.
+Update the IdP app configuration so the audience matches your trust policy.</p>
+<ol start="5">
+<li>Should I validate groups in the trust policy or via ABAC?</li>
+</ol>
+<p>If the group appears as an OIDC claim, enforce it in the trust policy.
+That gives a hard front-door check that denies early and clearly.
+If easier, pass groups as session tags and enforce them with ABAC.
+Many teams do both for defense in depth across the stack.</p>
+<ol start="6">
+<li>Can I use Cognito as the IdP?</li>
+</ol>
+<p>Yes, Amazon Cognito can issue OIDC tokens that AWS will accept.
+Ensure the issuer, JWKS, and audiences are correct and consistent values.
+Then reference claims in your trust policy and pass custom attributes as tags.</p>
+<ol start="7">
+<li>How do I test this locally without guessing?</li>
+</ol>
+<p>Capture a real token from your IdP app securely, then decode it.
+Review iss, aud, sub, and custom claims to see the real values.
+Call sts:AssumeRoleWithWebIdentity using that token with the AWS CLI.
+Use CloudTrail to confirm the deny reason and tune the trust policy.</p>
+<ol start="8">
+<li>What about token expiration and max session duration?</li>
+</ol>
+<p>Tokens must be valid at call time or else STS will deny fast.
+If tokens expire too quickly, refresh them or shorten the job length.
+Your role’s maxSessionDuration is an upper bound for STS credentials.
+Don’t request longer than allowed because it will not be granted.</p>
+<ol start="9">
+<li>Does this help with supply-chain risk in CI/CD?</li>
+</ol>
+<p>Yes, you can bind roles to specific repos, branches, or environments now.
+Use sub and aud to lock roles to exact workflows that you approve.
+A rogue fork won’t match your subject pattern, so it cannot assume.</p>
+<h2 id="shipit">Ship It</h2>
+<ul>
+<li>Register the OIDC provider with the exact issuer and confirm JWKS and thumbprint.</li>
+<li>In the role trust policy, require aud=sts.amazonaws.com and a strict sub match.</li>
+<li>Map groups or roles in the IdP, or pass them as session tags for ABAC.</li>
+<li>Test with a real token and verify iss, aud, sub, exp, and custom claims.</li>
+<li>Observe denials in CloudTrail and use sts:DecodeAuthorizationMessage for clarity.</li>
+<li>Iterate by tightening conditions, removing wildcards, and documenting expected claims.</li>
+</ul>
+<p>One more pragmatic tip: roll this out in slices to reduce risk.
+Start with CI roles since they are most predictable and easier to reason.
+Then service workloads like Kubernetes service accounts with clear subjects.
+Finally, move to human access and document expected claims next to code.
+You’re building muscle memory so future changes feel smooth and safe.</p>
+<p>Here’s the kicker: STS claims validation makes zero trust actually practical.
+When trust policies and ABAC align with real IdP claims, access turns deterministic.
+No surprise entitlements, no mystery escalations, and no worked in staging ghosts.
+Make identity a crisp contract that’s codified, enforced, and fully logged.
+Start by locking down aud and sub in every trust policy you own.
+Then add groups or roles and session tags, and watch blast radius shrink.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html">AWS STS AssumeRoleWithWebIdentity</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html">IAM OIDC Providers (Creating and Managing)</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html">Session Tags with SAML/OIDC (ABAC)</a></li>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html">EKS IRSA (Trust policy with aud/sub conditions)</a></li>
+<li><a href="https://openid.net/specs/openid-connect-discovery-1_0.html">OpenID Connect Discovery 1.0</a></li>
+</ul>
+<p>Zero trust isn’t no trust. It’s prove it, every time.</p>
+<h2 id="references-1">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html">AWS STS AssumeRoleWithWebIdentity</a></li>
+<li><a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithSAML.html">AWS STS AssumeRoleWithSAML</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html">IAM OIDC Providers (Creating and Managing)</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html">Logging IAM and STS API calls with CloudTrail</a></li>
+<li><a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_DecodeAuthorizationMessage.html">sts:DecodeAuthorizationMessage API</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html">Attribute-based access control (ABAC) for AWS</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html">Using session tags</a></li>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html">EKS IRSA (IAM roles for service accounts)</a></li>
+<li><a href="https://docs.github.com/en/actions/security-guides/security-hardening-your-deployments/configuring-openid-connect-in-github-actions">GitHub Actions OIDC (GitHub Docs)</a></li>
+<li><a href="https://aws.amazon.com/blogs/security/use-oidc-to-allow-github-actions-to-access-aws-resources/">AWS Security Blog – Use OIDC to allow GitHub Actions to access AWS</a></li>
+<li><a href="https://learn.microsoft.com/azure/active-directory/develop/id-tokens">Azure AD (Entra ID) ID tokens</a></li>
+<li><a href="https://developer.okta.com/docs/guides/customize-tokens-returned-from-okta/overview/">Okta – Customize tokens and add claims</a></li>
+<li><a href="https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-oidc-id-tokens.html">Amazon Cognito user pools – OIDC tokens</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html">IAM quotas and limits (for awareness)</a></li>
+<li><a href="https://doi.org/10.6028/NIST.SP.800-207">NIST SP 800-207 (Zero Trust Architecture)</a></li>
+<li><a href="https://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect Core 1.0</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="sts-identity-provider-claims.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq736f.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Lock+Down+AWS+Access+With+IdP+Claims+Validation&amp;pi=313635104458&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=313635104458&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fsts-identity-provider-claims&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/sts-identity-provider-claims?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:05 GMT -->
+</html>

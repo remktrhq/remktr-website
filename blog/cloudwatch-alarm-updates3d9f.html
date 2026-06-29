@@ -1,0 +1,381 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/cloudwatch-alarm-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Cut MTTR With Smarter CloudWatch Alarms And Anomaly Detection</title>
+    <link rel="canonical" href="cloudwatch-alarm-updates.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore aws cloudwatch set-alarm state, aws cloudwatch alarm api, and cloudwatch alarm cdk to cut MTTR with anomaly detection, embedded graphs, and canaries.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cut MTTR With Smarter CloudWatch Alarms And Anomaly Detection",
+        "datePublished": "2025-12-15T21:06:34Z",
+        "dateModified": "2025-12-15T21:06:35.316Z",
+        "mainEntityOfPage": "https://remktr.com/blog/cloudwatch-alarm-updates",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-15-2025-08-57-28-5823-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="cloudwatch-alarm-updates.html">Cut MTTR With Smarter CloudWatch Alarms And Anomaly Detection</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 15, 2025 9:06:34 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>If you’re still treating CloudWatch like a basic metric dashboard, you’re leaving uptime and sleep on the table. The new wave—anomaly detection with metric math, cross-account dashboards, embedded graphs in alarm messages, and synthetic canaries for APIs—turns CloudWatch from rearview mirror to radar.</p>
+<p><em>Here’s the kicker:</em> teams running ECS with CloudWatch’s AI-powered insights saw MTTR drop by 50%. Not from luck—because the signals came stitched together: metrics, logs, traces, and context, right where you need them.</p>
+<p>You don’t need a giant SRE team or a six-figure observability bill. You need smarter alarms, sharper baselines, and a workflow that pushes clarity into Slack before customers notice. Let’s build that.</p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>Use anomaly detection with metric math to baseline multi-signal behavior, auto-flag weirdness before SLAs wobble.</li>
+<li>Cross-account dashboards plus embedded graphs in SNS alarms equals faster triage with fewer hops.</li>
+<li>Synthetics canaries hit REST, GraphQL, and WebSocket APIs; add failure injection to prove recovery.</li>
+<li>The aws cloudwatch alarm api (PutMetricAlarm, SetAlarmState) plus cloudwatch alarm cdk keep configs DRY and testable.</li>
+<li>Mind aws alarm period and cloudwatch alarm name restrictions to avoid flaky alarms and deploy failures.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-15-2025-08-58-22-1587-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<p><em>“Incidents love ambiguity. Great alarms murder ambiguity fast.”</em></p>
+<h2 id="anomalydetectionmeetsmetricmath">Anomaly Detection Meets Metric Math</h2>
+<h3 id="whatactuallychanged">What actually changed</h3>
+<p>CloudWatch Anomaly Detection now plays nicely with metric math, so you can baseline composite signals, not just one metric. Think: CPUUtilization from ECS tasks plus memory from a Lambda function and a custom throughput expression. Instead of static thresholds, you get a rolling, seasonality-aware band that adapts and flags odd stuff.</p>
+<p>AWS docs say it plain: “You can create anomaly detection models for metric math expressions.” That unlocks multi-metric context without shipping data elsewhere. It’s the difference between “CPU spiked” and “CPU spiked while memory and 99p latency stayed normal—probably a noisy neighbor.”</p>
+<p>Behind the scenes, anomaly detection learns from your historical patterns. It adapts as seasons, traffic waves, and deploy rhythms change. You don’t hard-code “9 a.m. Monday spike rules”; the band flexes to reality. And because it runs natively in CloudWatch, you keep dashboards, alarms, and math in one place instead of duct tape.</p>
+<h3 id="whyyoucare">Why you care</h3>
+<ul>
+<li>SLAs fail when you chase false positives or miss slow-burn regressions. Anomaly detection reduces both.</li>
+<li>Multi-metric baselines catch compound issues, like cache misses plus I/O waits, that fixed thresholds miss.</li>
+<li>You gain signal without pricey sidecar tools—still pay-as-you-go inside CloudWatch.</li>
+<li>It’s portable: the same math expression can power dashboards, alarms, and embedded graphs.</li>
+<li>It evolves: as traffic shifts to new regions or features, your band learns with you.</li>
+</ul>
+<h3 id="exampleyoucanuse">Example you can use</h3>
+<p>You run a payments API. Create a metric math expression: successful requests per second minus error responses, normalized by CPU across your ECS service. Apply anomaly detection to that math expression. If throughput dips while CPU stays flat, you likely have dependency latency upstream, not a capacity issue. You get the alarm before checkout errors spike.</p>
+<p><em>Pro move:</em> use a composite alarm that depends on this anomaly alarm plus a log-pattern alarm from Error-level spikes. That’s a high-signal incident page with evidence attached.</p>
+<blockquote>
+  <p>“You can apply anomaly detection to metric math expressions, which use one or more metrics.” — Amazon CloudWatch Docs</p>
+</blockquote>
+<h3 id="howtochoosemetrics">How to choose metrics</h3>
+<ul>
+<li>Pair a demand signal, like requests or jobs, with a saturation signal like CPU or memory.</li>
+<li>Normalize across hosts or tasks: divide by TaskCount or use SUM/AVG by dimension to reduce noise.</li>
+<li>Add a latency percentile (p95 or p99) to catch brownouts that hide from error rates.</li>
+<li>Use error budgets or SLO-aligned metrics, like p99 latency under 300 ms, as the dependent variable.</li>
+<li>Consider upstream and downstream metrics, like queue depth and cache hit ratio, to catch drift.</li>
+</ul>
+<h3 id="careandfeeding">Care and feeding</h3>
+<ul>
+<li>Give it time; the model improves with more history. Early days can feel twitchy.</li>
+<li>Keep deployments in view; big infra or traffic shifts will move baselines, so bands rebuild.</li>
+<li>Plot the anomaly band on dashboards so the team can see normal and reason about alerts.</li>
+<li>When behavior changes for good, leave the alarm running; the band will adapt on its own.</li>
+<li>If a metric is sparse or bursty, pair anomaly detection with “datapoints to alarm” for stability.</li>
+</ul>
+<h2 id="alarmsthatexplainthemselves">Alarms That Explain Themselves</h2>
+<h3 id="buildviaapi">Build via API</h3>
+<p>The aws cloudwatch alarm api gives you the primitives: PutMetricAlarm to create or update, and aws cloudwatch set-alarm state (the SetAlarmState API) to simulate ALARM, OK, or INSUFFICIENT_DATA for game days. That lets you test Slack, SNS, and PagerDuty routes without real load or errors.</p>
+<ul>
+<li>PutMetricAlarm: define metrics, thresholds, anomaly detection settings, datapoints-to-alarm, treat-missing-data, and actions.</li>
+<li>SetAlarmState: force an alarm into ALARM to validate runbooks and responders. Roll it back to OK when done.</li>
+</ul>
+<p><em>First-hand example:</em> a fintech team wired SetAlarmState into a monthly GameDay. They fake an ALARM, the on-call clicks the embedded graph, confirms the runbook is current, and logs a 7-minute response time improvement on average.</p>
+<h3 id="anatomyofhighsignalalarm">Anatomy of high signal alarm</h3>
+<ul>
+<li>Clear name and description with service, environment, and symptom.</li>
+<li>Metric or metric math expression that maps to real user pain, not vanity numbers.</li>
+<li>DatapointsToAlarm tuned, like 3 of 5, to reduce flapping during short traffic wobbles.</li>
+<li>treat-missing-data set on purpose (breaching, notBreaching, missing) so gaps don’t page you.</li>
+<li>Actions routed to the right channel, like SNS or AWS Chatbot, with runbook and dashboard links.</li>
+</ul>
+<h3 id="periodsthatmatter">Periods that matter</h3>
+<p>Your aws alarm period controls sensitivity and cost. Standard-resolution metrics support a minimum 1-minute period. High-resolution metrics support 10- and 30-second periods—great for spiky workloads and fast rollback. But tighter periods mean more data points and maybe chattier alarms. Pair short periods with anomaly detection or “datapoints to alarm” to cut noise.</p>
+<p><em>Rule of thumb:</em> pick the shortest period that matches how long real pain lasts for users. A 10-second period for WebSocket disconnect spikes might make sense; for batch ETL, five minutes is fine.</p>
+<p>Practical examples:</p>
+<ul>
+<li>Interactive APIs: 30–60 seconds with 3-out-of-5 datapoints.</li>
+<li>Stream consumers: 60 seconds with a backlog or depth metric in the expression.</li>
+<li>Cron and ETL: 5 minutes with a longer window to avoid false positives on job spin-up.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-15-2025-08-59-43-7423-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="namerestrictionsyoullavoid">Name restrictions you’ll avoid</h3>
+<p>CloudWatch alarm names must be unique per Region and account and follow length limits. Keep names descriptive, avoid trailing spaces, and standardize with a prefix like “prod-ecs-payments-5xx-anomaly.” In infrastructure as code, use stable naming so deletes and creates don’t orphan alarms during deploys.</p>
+<p><em>Naming recipe that scales:</em></p>
+<ul>
+<li>Prefix: env (prod | stage | dev)</li>
+<li>Domain: platform, service, or component</li>
+<li>Symptom: 5xx-rate, latency-p99, backlog, anomaly</li>
+<li>Context: region or criticality if you need it</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>prod-ecs-api-latency-p99-anomaly</li>
+<li>stage-queue-consumer-backlog-high</li>
+<li>prod-edge-websocket-disconnects-spike</li>
+</ul>
+<p>Tag alarms with team, service, and owner so you can search, report, and rotate on-call cleanly. Use consistent dimensions in metrics so dashboard widgets and math expressions compose across services.</p>
+<h2 id="crossaccountdashboardsandgraphs">Cross Account Dashboards And Graphs</h2>
+<h3 id="onepanemanyaccounts">One pane many accounts</h3>
+<p>If you run multiple accounts, like dev, staging, prod, or per-customer, cross-account dashboards give you one secure view across all. No more logging in and out or juggling STS role tabs. You can visualize metrics, logs, and alarms from multiple accounts and Regions on one dashboard. That’s huge for NOC workflows and exec status updates.</p>
+<p>Example: a platform team builds a “golden signals” dashboard—latency, traffic, errors, saturation—pulling in prod and pre-prod. During a deploy window, they watch both. A spike in pre-prod error rate? Roll back, investigate, and avoid a 2 a.m. pager.</p>
+<p><em>Security tip:</em> lock dashboard editing to a small group and grant view-only more broadly. Use least-privilege IAM roles for any cross-account reads. If you pull traces and logs across accounts, check AWS cross-account observability features for standard sharing and access control.</p>
+<h3 id="graphsinsnsalerts">Graphs in SNS alerts</h3>
+<p>Embedded graphs in alarm notifications change the incident tempo. Instead of an opaque “ALARM” with a metric name, responders see the graph inside the SNS message or linked in chat. You know if the spike is sharp or gradual, and when it started. That slashes the “what is happening?” loop.</p>
+<p><em>First-hand example:</em> an e-commerce team used embedded graphs to find a noisy cache tier. The visual showed CPU flat but 99p latency drifting up over 20 minutes. They rerouted reads within five minutes—no major checkout impact.</p>
+<p>Pair dashboards with alarms: the alert lands with a graph, and your runbook links the exact cross-account dashboard panel. Fewer clicks, faster root cause.</p>
+<p><em>Operational habit:</em> every critical alarm should include three links—runbook, dashboard panel, and relevant logs or a trace search. The less hunting on-call has to do, the faster MTTR falls.</p>
+<h2 id="syntheticcanariesandgrafana">Synthetic Canaries And Grafana</h2>
+<h3 id="canariesthatactlikeusers">Canaries that act like users</h3>
+<p>CloudWatch Synthetics canaries give you serverless health checks for REST, GraphQL, and WebSocket flows. You script happy paths and edge cases, then schedule them. Failure injection, like timeouts, 500s, and auth errors, lets you validate alarms and auto-remediation safely—before production finds out.</p>
+<p>Example: you script a GraphQL checkout query and a WebSocket subscription. The canary verifies auth tokens, measures TTFB and latency, and writes structured results back to CloudWatch. An anomaly on “time to first data” triggers your composite alarm tied to API Gateway and DynamoDB metrics.</p>
+<p><em>More good stuff:</em></p>
+<ul>
+<li>Store artifacts like screenshots, HAR-like payloads, and logs in S3 for debugging.</li>
+<li>Pipe canary logs to CloudWatch Logs and correlate with traces for end-to-end timelines.</li>
+<li>Run canaries from multiple Regions to catch edge-only issues and DNS or CDN weirdness.</li>
+<li>Schedule canaries more often during deploy windows, then scale back after.</li>
+</ul>
+<h3 id="grafanahandofffordeeperviz">Grafana handoff for deeper viz</h3>
+<p>Amazon Managed Grafana integrates natively with CloudWatch. You can take those canary metrics, logs, and traces, build custom panels, and export alerts or snapshots to Slack or Teams. It’s the best of both worlds: CloudWatch for collection and alarm routing; Grafana for power dashboards and ad hoc analysis.</p>
+<p><em>Real-world pattern:</em> CloudWatch handles initial detection and paging; Grafana hosts the SLO dashboards leadership stares at during launches. When the page hits, the embedded alarm graph gives you the clue; your Grafana panel gives you the timeline.</p>
+<p><em>Practical workflow:</em></p>
+<ul>
+<li>CloudWatch alarm fires with an embedded graph.</li>
+<li>AWS Chatbot pipes it to the right Slack channel with runbook and dashboard links.</li>
+<li>On-call opens Grafana for a zoomed view across dependent services.</li>
+<li>If it’s a canary failure, jump to the S3 artifact and exact request or response.</li>
+</ul>
+<p>Pricing stays pay-as-you-go, and the <em>Free Tier</em> covers 10 metrics and 5 dashboards per account. That’s enough to prove value before you scale.</p>
+<h2 id="halftimerecap">Half Time Recap</h2>
+<ul>
+<li>Build anomaly detection on top of metric math to baseline multi-metric reality, not one-metric myths.</li>
+<li>Use aws cloudwatch set-alarm state to test paging and runbooks without breaking prod.</li>
+<li>Tune aws alarm period to match user pain windows; pair with datapoints-to-alarm to cut flapping.</li>
+<li>Cross-account dashboards consolidate context; embedded graphs in SNS trim triage time.</li>
+<li>Synthetics canaries probe GraphQL and WebSockets and feed both CloudWatch and Grafana.</li>
+</ul>
+<h2 id="faqcloudwatchalarms">FAQ CloudWatch Alarms</h2>
+<ol>
+<li><p>Q: How do I safely use aws cloudwatch set-alarm state?
+A: Use the SetAlarmState API in a maintenance window or a GameDay role. Flip to ALARM, confirm routes and runbook links, then set back to OK. Never leave test alarms impacting real on-call rotations.</p></li>
+<li><p>Q: What’s the difference between a regular alarm and a composite alarm?
+A: A regular alarm evaluates a single metric or metric math expression. A composite alarm evaluates Boolean logic over multiple alarms, like (anomaly<em>alarm AND 5xx</em>alarm) OR (synthetics_alarm). Composite alarms reduce noise and allow multi-signal paging.</p></li>
+<li><p>Q: What aws alarm period should I choose?
+A: Standard-res metrics go as low as one minute; high-res supports 10s and 30s. Use shorter periods for interactive APIs or autoscaling triggers, longer for batch. Combine with anomaly detection and “datapoints to alarm,” like 3 out of 5, to prevent flapping.</p></li>
+<li><p>Q: Can I use anomaly detection on metric math?
+A: Yes. CloudWatch supports anomaly detection models over metric math expressions. That lets you baseline combinations like CPU, memory, and latency instead of single metrics.</p></li>
+<li><p>Q: What are cloudwatch alarm name restrictions?
+A: Names must be unique per account and Region and follow length limits, roughly 1–255 chars. Avoid leading or trailing spaces. In multi-env setups, standardize prefixes like dev-, stage-, and prod- to prevent collisions.</p></li>
+<li><p>Q: Can I manage alarms with cloudwatch alarm cdk or CloudFormation?
+A: Yes. In AWS CDK, use cloudwatch.Alarm constructs; in CloudFormation, use AWS::CloudWatch::Alarm. Treat alarms as code so reviews catch bad thresholds before deploys.</p></li>
+<li><p>Q: How do I route CloudWatch alarms to Slack or Teams without custom code?
+A: Use AWS Chatbot with an SNS topic. Point alarm actions at the topic; Chatbot delivers messages, including embedded graphs, into Slack channels or Microsoft Teams. Keep separate channels for prod versus non-prod.</p></li>
+<li><p>Q: How do I stop a “noisy neighbor” metric from drowning real incidents?
+A: Use composite alarms to require multiple signals, like latency and error rate, and set datapoints to alarm above 1/1. Tame bursty metrics with longer windows or anomaly detection, which understands variance better than static thresholds.</p></li>
+<li><p>Q: Should I scale on anomaly detection alarms?
+A: For autoscaling, stick to clear metrics, like CPU, queue depth, or RPS, with simple thresholds. Use anomaly detection for paging and investigation. Keep scale policies predictable and debuggable.</p></li>
+<li><p>Q: How do I handle missing or sparse metrics?
+A: Set treat-missing-data to notBreaching for metrics that go quiet by design, like zero errors overnight. For sparse metrics, smooth with longer periods or use math expressions that fill gaps before applying anomaly detection.</p></li>
+<li><p>Q: What’s the best way to test Synthetics canaries without spamming alarms?
+A: Use a separate test canary that targets a staging endpoint and a staging-only SNS topic. For prod canaries, temporarily disable alarm actions during script changes, then re-enable after a clean dry run.</p></li>
+</ol>
+<h2 id="zerotoalarmflow">Zero To Alarm Flow</h2>
+<ul>
+<li>Define the key metric math expression, like normalized throughput, and attach anomaly detection.</li>
+<li>Set a sensible aws alarm period, start at one minute; go 10–30 seconds if needed.</li>
+<li>Configure datapoints-to-alarm and treat-missing-data to cut flapping.</li>
+<li>Wire SNS topics to Slack or Email; enable embedded graphs in notifications.</li>
+<li>Add a composite alarm combining anomaly plus error-rate or canary failure.</li>
+<li>Use aws cloudwatch set-alarm state to dry-run paging, then revert.</li>
+<li>Bake all of this into cloudwatch alarm cdk or AWS::CloudWatch::Alarm templates.</li>
+</ul>
+<p>Level up even further:</p>
+<ul>
+<li>Add tags to alarms, like service, owner, and severity, for search and reporting.</li>
+<li>Standardize runbook links in alarm descriptions so every page lands on instructions.</li>
+<li>Review alarms quarterly: retire stale ones, split broad ones, and add new anomaly baselines as features ship.</li>
+<li>Track MTTR and false-positive rates; the goal is fewer, clearer, faster pages.</li>
+</ul>
+<p><em>This is the move:</em> upgrade your alarms to narrate, not just notify. Use anomaly detection where static thresholds fail, and compose your signals like a mini control room—metrics, logs, traces, and canaries working together.</p>
+<p>Do this, and incidents get shorter, calmer, and honestly a bit boring. That’s the goal. The best on-calls are uneventful because your system tells you what’s wrong, where, and why before customers feel it. Ship that confidence.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html">Amazon CloudWatch Anomaly Detection docs (incl. metric math)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html">Using Metric Math</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html">PutMetricAlarm API</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_SetAlarmState.html">SetAlarmState API</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html">AWS::CloudWatch::Alarm (CloudFormation)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Composite_Alarm.html">Composite Alarms</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation">Alarm evaluation periods and datapoints-to-alarm</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#using-metric-math-treat-missing">TreatMissingData parameter</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics">High-resolution metrics</a></li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/2020/11/amazon-cloudwatch-launches-cross-account-dashboards/">Cross-account dashboards (What’s New)</a></li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/2023/08/amazon-cloudwatch-alarms-graphs-messages/">Graphs in alarm messages (What’s New)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html">CloudWatch Synthetics canaries</a></li>
+<li><a href="https://aws.amazon.com/grafana/">Amazon Managed Grafana</a></li>
+<li><a href="https://docs.aws.amazon.com/chatbot/latest/adminguide/what-is-chatbot.html">AWS Chatbot (Slack/Teams integration)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ServiceLens.html">CloudWatch ServiceLens (traces/logs/metrics together)</a></li>
+<li><a href="https://aws.amazon.com/cloudwatch/pricing/">CloudWatch Pricing</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="cloudwatch-alarm-updates.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq6c8b.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Cut+MTTR+With+Smarter+CloudWatch+Alarms+And+Anomaly+Detection&amp;pi=276789397228&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=276789397228&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fcloudwatch-alarm-updates&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/cloudwatch-alarm-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:58 GMT -->
+</html>

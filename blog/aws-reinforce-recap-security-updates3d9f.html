@@ -1,0 +1,258 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-reinforce-recap-security-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>AWS re:Inforce 2025: Top Security Innovations to Know</title>
+    <link rel="canonical" href="aws-reinforce-recap-security-updates.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover AWS re:Inforce updates on IAM Access Analyzer, MFA enforcement, and Valkey GLIDE 2.0. Enhance your cloud security strategies.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "AWS re:Inforce 2025: Top Security Innovations to Know",
+        "datePublished": "2025-06-24T06:07:38Z",
+        "dateModified": "2025-06-24T06:07:39.191Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-reinforce-recap-security-updates",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na1.net/hubfs/50136663/rss_to_hubspot_content/temp-Jun-24-2025-06-05-06-3608-AM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-reinforce-recap-security-updates.html">AWS re:Inforce 2025: Top Security Innovations to Know</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jun 24, 2025 6:07:38 AM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Well, AWS re:Inforce 2025 is over, but the passion remains, and it all revolves around AWS’s next-level security tactics. This isn’t just an annual tech shindig — it's AWS's premier pedestal for announcing innovations that will help to shape the future of the cloud. </p>
+<p>Ready to jump in and explore some of the hot topics and updates for this year that may reshape your cloud strategy? re:Inforce was always home to security pros. With a list of big name speakers and mind-blowing innovation, AWS can't help but get notice. These year’s announcements were packed with security enhancements, broader integrations, and useful utilities grounded in real-world application in the current tech context. </p>
+<p>But it is more than just displaying these features. Every update is a purposeful one, helping you navigate the security tangle easily and efficiently. Hold on for the full AWS re:Inforce 2025 track announcements!</p>
+<h2 id="tldrkeytakeaways">TL;DR / Key Takeaways</h2>
+<ul>
+<li>AWS bolsters security integrations with new IAM Access Analyzer features.  </li>
+<li>AWS root users must now have MFA (multi-factor authentication).  </li>
+<li>Valkey GLIDE 2.0 reinforces additional language support for services such as Go, Java, Python, and Node.js.  </li>
+<li>The <code>RenameObject</code> API within S3 disrupts how data can be managed by reducing the friction around object renaming.  </li>
+<li>AWS Lambda Avro and Protobuf support simplifies processing events, allowing software engineers to focus on critical work rather than infrastructure.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jun-24-2025-06-05-59-5899-AM.png" alt="AWS re:Inforce" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="excellinginsecurityspace">Excelling in Security Space</h2>
+<p>Security was at the forefront, with AWS announcing preventative approaches to address the current cybersecurity landscape. Definitely one of the high notes of the week was IAM Access Analyzer, with new features for helping you verify who has permissions to access your sensitive resources, removing the guesswork, and providing proactive security advice at your fingertips. </p>
+<p>Expanding upon that is the new MFA requirement for root users. AWS Making Sure that Account Provacteurs Get Blurred Out of Focus So, AWS is focusing your account security and enhancing those bastions against unauthorized access attempts. Treading into a career in cybersecurity may seem as treacherous as a minefield, but with these high-octane actions, consider it detonated.</p>
+<blockquote>
+  <p>"Security is a process, not a product" – Bruce Schneier</p>
+</blockquote>
+<h2 id="decodingtheenhancediamaccess">Decoding The Enhanced IAM Access</h2>
+<p>The IAM Access Analyzer now promotes you to admin-in-residence as it picks apart who can do what across your AWS universe. Take, for example, a situation where your dev team needs to work on your code and you want to provide temporary access to your private code repositories for a project sprint. These fine tunable controls allow accurate permission assignment without compromising your intellectual property.</p>
+<h2 id="easierdatamanagementwiths3">Easier Data Management with S3</h2>
+<p>AWS S3 users, rejoice! New <code>RenameObject</code> API One of the most difficult and multi-step operations has been simplified with the new <code>RenameObject</code> API. If you have a lifecycle log rename that involves hundreds of gigabytes of data needed for an enterprise audit, call it done. </p>
+<p>For industry sectors such as media processing or data analytics, this means more than user convenience — it’s a way to reduce operational costs and speed workflows.</p>
+<h2 id="buildingefficiencynewinawslambda">Building Efficiency: New in AWS Lambda</h2>
+<p>Eliminate scaffolding with App development made fun again with AWS Lambda support for Avro and Protobuf. Its seamless integration with Apache Kafka lets developers get rid of annoying serialization work. All the wasted time pouring over data visualizer schemas, now you can concentrate on delivering dynamic functionalities. </p>
+<p>It’s your green light to make that app you’ve been dreaming of and cuts your work a mile while doing it.</p>
+<h2 id="therevolutionofvalkeyglide20">The Revolution of Valkey GLIDE 2.0</h2>
+<p>Let's talk about Valkey GLIDE 2.0, built with the Google and community! This is not just about adding language support or enhancements to batch processing. It is built from the ground up to support multi-language operation management with better power using open-telemetry tools. </p>
+<p>Deploying Node.js applications and still have full visibility on telemetry is no longer juggling. As your teams expand the expertise, GLIDE 2.0 comes to stabilize your agility and effectiveness.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jun-24-2025-06-06-52-8947-AM.png" alt="Valkey GLIDE 2.0" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="quicksummaryinnovationsataglance">Quick Summary: Innovations at a Glance</h2>
+<ul>
+<li>More robust IAM capabilities maintains security while allowing you to leverage the cloud.  </li>
+<li><code>RenameObject</code> API for faster and smoother S3 operations.  </li>
+<li>Avro and Protobuf support for Lambda to ease app development.  </li>
+<li>GLIDE 2.0 further expands language support to help developers work more productively.</li>
+</ul>
+<h2 id="awsreinforceannouncementsfaqs">AWS re:Inforce Announcements FAQs</h2>
+<ol>
+<li><p><strong>What is the biggest announcement from AWS re:Inforce 2025?</strong><br>
+Making MFA enabled for all root users in a particular AWS account becomes a very important improvement in account security.</p></li>
+<li><p><strong>Why is the new <code>RenameObject</code> API a win for AWS users?</strong><br>
+It provides simple API to rename data in a very complex multicolumn multi step procedure, to save time and money to do all the copying and probing to handle data.</p></li>
+<li><p><strong>Why is AWS Lambda support for Avro and Protobuf needed?</strong><br>
+It eases the requirement of handling event processing -- you don't have to write custom code -- and makes an application's development flow more efficient.</p></li>
+<li><p><strong>What are the advantages of Valkey GLIDE 2.0?</strong><br>
+The extended language support along with better performance when using OpenTelemetry support, make it effortless to orchestrate API calls in a variety of languages.</p></li>
+<li><p><strong>How do IAM Access Analyzer updates come into play?</strong><br>
+The improvements provide fine-grained control over permission management inside AWS organizations, allowing for better security, as managers are able to see precisely who has access to which resources.</p></li>
+</ol>
+<h2 id="awsupdatesyourchecklistforsuccess">AWS Updates: Your Checklist for Success</h2>
+<ol>
+<li><strong>Turn on MFA for Root Users:</strong> Enable now to improve the security of your account.</li>
+<li><strong>Leverage IAM access improvements:</strong> Monitor and maintain access over time with new access guidance.</li>
+<li><strong>Play around with S3 APIs:</strong> Test the <code>RenameObject</code> API to help simplify the way you process your data.</li>
+<li><strong>Try Lambda’s New Features:</strong> Use Avro and Protobuf to natively handle functions more efficiently.</li>
+<li><strong>Adopt Valkey GLIDE 2.0:</strong> Validate with your applications and use more supported languages!</li>
+</ol>
+<p>The announcements at AWS re:Inforce 2025 demonstrate a cloud environment that is stronger, faster, and friendlier to developers. As the cybersecurity world changes, AWS makes sure you’re not just keeping pace but staying ahead. These are not just technical re-calibrations, but strategic advances to make your cloud strategy more robust and more effective. </p>
+<p>The Point The thing to keep in mind as you surf the latest AWS waves: As long as AWS is pushing these waves of innovation at you, you need to understand and implement these changes in order to remain competitive. Apply that wisdom now, and enjoy the benefits for years! Visit our <a href="../case-studies.html">Case Studies</a> to see how businesses are benefiting from these.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>“Highlights from AWS re:Inforce 2025” – AWS Official Blog</li>
+<li><a href="#">7 June 2017 to 29 Jan quotes-all.html</a> Quotes of the Day: Security Industry Insights ( Cryptoe There are 29 journal entries in 7 Jun-29 Jan… emails sent with the subject line "quotes"…. To get a journal with all entries, click "archive" at the left. From: Julian Assange RE: Our conversation Date: Tue, 28 Aug Cryptoe. 10/04/ Autocyber. Many computer security threats today are spread by worms a worm can take advantage of a software vulnerability on one computer, and then spread itself to other computers via.</li>
+<li>“Using MFA with AWS” - howto video that shows you how to set up …</li>
+<li>Refining Permissions by Using IAM Access Analyzer - AWS Documentation</li>
+<li>New 'RenameObject' API Enumerated Below is the syntax for the corresponding RenameObject API: – AWS S3 Blog</li>
+<li>Lambda Adds Avro and Protobuf Support - This is Big!</li>
+<li>“ Valkey GLIDE 2.</li>
+</ol>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-reinforce-recap-security-updates.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqc79d.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=AWS+re%3AInforce+2025%3A+Top+Security+Innovations+to+Know&amp;pi=191747837570&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=191747837570&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-reinforce-recap-security-updates&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-reinforce-recap-security-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:46 GMT -->
+</html>

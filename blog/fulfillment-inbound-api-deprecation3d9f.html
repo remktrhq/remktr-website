@@ -1,0 +1,479 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/fulfillment-inbound-api-deprecation?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Switch to Fulfillment Inbound API v2024-03-20 Without Downtime</title>
+    <link rel="canonical" href="fulfillment-inbound-api-deprecation.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn about the Amazon Fulfillment Inbound API deprecation and v2024-03-20 updates. Migrate from v0 by Jan 21, 2025 to ensure SP-API continuity, no disruption.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Switch to Fulfillment Inbound API v2024-03-20 Without Downtime",
+        "datePublished": "2025-11-04T16:23:28Z",
+        "dateModified": "2025-11-04T16:23:29.536Z",
+        "mainEntityOfPage": "https://remktr.com/blog/fulfillment-inbound-api-deprecation",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-04-2025-04-15-21-1929-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="fulfillment-inbound-api-deprecation.html">Switch to Fulfillment Inbound API v2024-03-20 Without Downtime</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 4, 2025 4:23:28 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Amazon quietly retired the old Fulfillment Inbound API v0 in early 2025.
+If you were still calling it, your inbound pipeline probably felt it — hard.</p>
+<p>Here’s the plot twist: on October 17, 2025, Amazon also upgraded v2024-03-20.
+Shipment placement got faster and smarter out of the box.
+Translation: less guesswork, better options, fewer nasty surprises in fees and lead times.</p>
+<p>If you ship FBA inventory, this isn’t some nice-to-have feature.
+It’s the lane change that keeps your trucks moving today.
+You’ll get multiple placement options per plan, clearer tradeoffs, and more predictable routing.
+And yes — you can migrate without nuking ops or sleep.</p>
+<p><em>Let’s make your inbound flow boring, in the best way, and fast.</em></p>
+<p>If you’ve been juggling seasonality, ad pushes, and supplier slippage, this is leverage.
+It’s not just technical, it’s operational leverage you’ll feel every week.
+Cleaner inputs and steady placement mean fewer late-night messages about weird FCs.
+That buys time to focus on revenue, not chaos in Seller Central.</p>
+<p>Give yourself a week to map models, and a day to canary.
+Take two weeks to tune option rules, then lock them in.
+By the end, you’ll know fees before you commit to anything.
+Your team won’t be playing detective in Seller Central anymore.</p>
+<ul>
+<li>TL;DR</li>
+<li>v0 is deprecated and unsupported; v2024-03-20 is the path forward.</li>
+<li>October 17, 2025 changes improved shipment placement efficiency and options.</li>
+<li>You can generate multiple placement options per inbound plan and choose the best tradeoff.</li>
+<li>Map models, use idempotency keys, and canary rollout to avoid downtime.</li>
+<li>Monitor placement options, fees, lead times, and error rates in production.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-04-2025-04-16-16-6765-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whereyoustand">Where you stand</h2>
+<h3 id="deprecationtimeline">Deprecation timeline</h3>
+<p>Amazon officially deprecated Fulfillment Inbound API v0, with a window through January 21, 2025.
+After that date, the old endpoints were just unsupported.
+If your tools still pointed at v0, you saw failures or placement blind spots.
+Sometimes nothing happened at all, which is even worse.</p>
+<p>What you need to know now is simple.
+The supported and improved path is v2024-03-20 under SP-API today.
+It’s where Amazon ships placement logic, tight validation, and steady usability updates.</p>
+<blockquote>
+  <p>“Sellers and developers must migrate to the new API version v2024-03-20 as soon as possible to ensure continued service.” — Amazon Developer Changelog</p>
+</blockquote>
+<p>In practice, unsupported shows up as brittle retries and opaque errors.
+Or a plan that never moves to a clean placement decision.
+Your team maybe worked around it, doing manual label downloads and tweaks.
+Changing ship-from details and nudging plans in the UI, over and over.
+That’s not durable or sane for ops at any scale.
+The current version keeps those choices in the API, where they belong.
+The machine handles the routine work, your team handles real exceptions.</p>
+<p>If you paused migration because of risk, that risk flipped already.
+Staying put now costs more in fees and time, plain and simple.
+You’ll see higher fee variance and longer lead times from rework.
+Plus dead hours debugging flows that won’t get fixed upstream.
+Move to v2024-03-20 to get back to stable and scalable.
+Also, easier to observe and explain when things go weird.</p>
+<h3 id="october172025placementupdates">October 17 2025 placement updates</h3>
+<p>On October 17, 2025, Amazon rolled out changes to v2024-03-20.
+They aimed to improve shipment placement efficiency without breaking core behavior.
+It still supports multiple placement options for a single inbound plan.</p>
+<p>These updates matter because placement decides your FBA cost and speed.
+Multiple options per plan help you pick routing for budget and SLA.
+In practice, teams see fewer reworks and more predictable FC assignments.
+That happens after you validate inbound data cleanly up front.</p>
+<p>Put simply, the system got better at turning good inputs into outcomes.
+That doesn’t mean you can skip validation, not even close.
+If your SKUs, prep flags, and addresses are clean, options become consistent.
+You’ll also see reliable fees and ETAs you can trust.
+Use that predictability to standardize rules, not reinvent the wheel per plan.</p>
+<h2 id="fasterplacementsavesmoney">Faster placement saves money</h2>
+<h3 id="multipleoptionsperplan">Multiple options per plan</h3>
+<p>The standout feature is multiple placement options for the same inbound plan.
+Instead of one take-it-or-leave-it choice, you get structured tradeoffs.
+Commonly a cheaper multi-node split, or a pricier single-node consolidation.
+The latter is faster for inbound availability when speed actually matters.</p>
+<p>That choice is gold, and it’s now in your hands.
+If cash is tight, pick multi-node to cut placement service fees.
+If a seasonal spike looms, pick single-node to get buyable days sooner.
+The API moves this choice upstream, where you can measure first.
+You choose before you commit, with eyes open on tradeoffs.</p>
+<p>To scale it, treat option selection like ad bidding or repricing.
+Define inputs like margin, demand, and stockout risk, then score options.
+Pick the winner based on the score, every single time.
+If two options tie, use a small threshold to break ties.
+Default to lower fees or faster ETA, based on your goal.</p>
+<h3 id="quickexampleyoucancopy">Quick example you can copy</h3>
+<p>Say you’re sending 2,000 units across three ASINs:</p>
+<ul>
+<li>Option A: Two FCs, lower fees, estimated receiving finish in 6–8 days.</li>
+<li>Option B: Single FC, higher fees, receiving in 3–4 days.</li>
+</ul>
+<p>If you’re in a price war, Option A protects margin.
+If influencer demand peaks next week, Option B is worth it.
+The point is simple: you’re not guessing, you’re choosing.
+And with v2024-03-20, that choice is API-first and automatable.
+Drive it by SKU speed, seasonality, or contribution margin rules.</p>
+<p>Basic math to guide you:</p>
+<ul>
+<li>Estimate added revenue from going buyable sooner, based on demand and contribution.</li>
+<li>Compare that estimate to the incremental placement fee for consolidation.</li>
+<li>If added revenue beats the extra fee, take the faster option.</li>
+</ul>
+<p>You don’t need a PhD model for this to work.
+<em>Start simple with a clear rule for faster option picks.</em>
+Use it when the extra fee per unit is below X percent.
+Also when stockout risk forecasts above Y percent for that SKU.
+You can refine the rule later as you learn more.</p>
+<h2 id="cleanmigrationpath">Clean migration path</h2>
+<h3 id="mapoldcalls">Map old calls</h3>
+<p>Start with a simple diff of your old and new calls.
+Plan creation, prep flags, and shipment confirm now live under SP-API.
+Schemas and validation changed, so expect a few sharp edges.</p>
+<p>The biggest shifts you’ll handle:</p>
+<ul>
+<li>Stricter validation on item quantities, prep/label requirements, and address structures.</li>
+<li>Placement options returned per inbound plan, not inferred later in the flow.</li>
+<li>More explicit error codes and throttling behavior, which is good for observability.</li>
+</ul>
+<p>Treat mapping like a contract rewrite you really care about.
+Update request bodies and check every required field twice.
+Codify parsing for the options array, then write solid tests.
+Keep a JSON schema harness so changes don’t break serialization.</p>
+<p>Create a simple compat layer, an adapter around your internal plan.
+It should output a clean v2024-03-20 request every time.
+Future API tweaks hit the adapter, not your business rules.
+Lock it down with contract tests for good and bad paths.
+Let CI catch drift long before anything reaches prod.</p>
+<p>If you run many services, centralize Amazon creds and signing logic.
+Do it behind a tiny gateway or a shared lib, your pick.
+You want one place to rotate keys and configure retries.
+Also one place to log request IDs for fast debugging.</p>
+<h3 id="gotchastohandleearly">Gotchas to handle early</h3>
+<ul>
+<li>Idempotency: Use stable client tokens for create/update calls to avoid accidental dupes.</li>
+<li>Backwards leakage: Nix any legacy fallback to v0—fail fast in test if a code path tries it.</li>
+<li>Address normalization: Validate ship-from addresses and contact info before plan creation.</li>
+<li>Pack and prep: Confirm packaging/label flags per-ASIN; stop mixing “we’ll fix it in the warehouse.”</li>
+</ul>
+<p>Teams that front-load validation see fewer placement surprises and less rework.
+Put simply: <em>clean in, clean out, and everyone sleeps better.</em></p>
+<p>Also, consider concurrency before it bites you in prod.
+If your UI allows many edits, protect plans with version numbers.
+Or just serialize updates so the last writer always wins.
+Idempotency blocks dupes, concurrency control blocks silent overwrites.</p>
+<p>Finally, build a dry-run mode your ops team will love.
+Let them simulate plans and view options with estimated fees.
+Compare results against your rules without committing anything live.
+It’s great training and a safety valve during peak season.</p>
+<h2 id="permissionslimitsfailuremodes">Permissions limits failure modes</h2>
+<h3 id="rolesscopesauthinprod">Roles scopes auth in prod</h3>
+<p>This is SP-API, so think roles, auth, and tight permissions.
+Confirm your app has the Fulfillment Inbound scope in every marketplace.
+Rotate keys safely and verify LWA tokens refresh on schedule.
+Keep prod and sandbox credentials separate, like church and state.</p>
+<p>If you sell across regions, double-check IDs and endpoints each time.
+Many so-called API issues are just mismatched endpoints or roles.
+Bake checks into startup health probes to catch auth drift early.
+Fix it before a morning load hits and everything catches fire.</p>
+<h3 id="ratelimitspaginationerrorhygiene">Rate limits pagination error hygiene</h3>
+<p>Respect usage plans, always, even when you’re in a rush.
+If you burst, backoff with jitter and instrument your retries.
+For list endpoints, paginate and cap payload sizes per call.
+Big payloads make small network blips hurt far more.</p>
+<p>Log the trifecta on every request by default.
+That’s request ID, idempotency token, and HTTP status code.
+Build alerts for these patterns before they nail you.</p>
+<ul>
+<li>429 or quota breaches over a rolling window</li>
+<li>5xx spikes by endpoint you can’t explain</li>
+<li>Rising variance in placement options, a hint of upstream changes
+<em>A boring pipeline is the durable pipeline you actually want.</em>
+Design for failure so you don’t have to live it.</li>
+</ul>
+<p>Go further and tag logs by inbound plan ID and marketplace.
+Then you can link spikes to a region or catalog change.
+When support asks for proof, you’ll have IDs ready to go.
+That turns a long back-and-forth into a short, clean fix.</p>
+<h2 id="shipsafelytestrollout">Ship safely test roll out</h2>
+<h3 id="usesandboxthencanary">Use sandbox then canary</h3>
+<p>Start in the SP-API sandbox to verify schemas, auth, and flows.
+When you hit prod, canary five to ten percent of plans first.
+Compare results against your legacy process, then promote gradually.
+Keep a rollback that routes plan creation to last-known-good code.
+Stay on v2024-03-20, just roll back your implementation, not v0.</p>
+<p>During canary, measure fee deltas, receiving ETAs, and exception rates.
+<em>The goal is not just no errors, it’s better unit economics.</em></p>
+<h3 id="observabilityknowifbetter">Observability know if better</h3>
+<p>Instrument these KPIs so you know what improved.</p>
+<ul>
+<li>Time-to-placement-option at P95</li>
+<li>Option acceptance rate and reason codes, price versus speed</li>
+<li>Placement service fees per unit, by ASIN and plan size</li>
+<li>Receiving to buyable lead time, forecast versus actual</li>
+<li>Error classes, 4xx validation versus 5xx transient</li>
+</ul>
+<p>Set a fourteen day review after the full rollout finishes.
+If fees or lead times drift, revisit your option rules fast.
+The power move is programmatic selection by margin and velocity.
+Not the lazy rule of always picking the cheapest every time.</p>
+<p>Bonus tip, annotate dashboards with major catalog and packaging changes.
+Also carrier cutoffs and promo periods that shift behavior.
+When a KPI moves, that context tells you what happened faster.
+Code issue, bad inputs, or just seasonal noise, you’ll know.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-04-2025-04-17-17-3604-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>v0 is gone; v2024-03-20 is the maintained path.</li>
+<li>October 17, 2025 brought placement efficiency upgrades.</li>
+<li>You’ll get multiple options per plan—choose cost vs. speed.</li>
+<li>Migrate with schema mapping, idempotency, and canary rollout.</li>
+<li>Watch fees, lead times, and error patterns post-migration.</li>
+</ul>
+<h2 id="faqwhatsellersanddevs">FAQ what sellers and devs</h2>
+<h3 id="isv0stillusable">Is v0 still usable</h3>
+<p>No. Amazon deprecated v0, with support ending January 21, 2025.
+If anything still points at v0, remove or refactor it now.
+Production support lives in v2024-03-20 under SP-API only.</p>
+<h3 id="whatchangedoctober172025">What changed October 17 2025</h3>
+<p>Amazon updated v2024-03-20 to improve shipment placement efficiency.
+It still supports multiple placement options for each inbound plan.
+You should see clearer options and predictable routing once inputs validate cleanly.</p>
+<h3 id="multipleplacementoptionshelpmargin">Multiple placement options help margin</h3>
+<p>You pick the routing that matches your economics right now.
+Cheaper multi-node can cut fees, which helps margin.
+Single-node often speeds receiving, which can boost sales.
+Tie selection to margin and demand forecasts to avoid leaving money.</p>
+<h3 id="gotchaswithspapiauthpermissions">Gotchas with SP API auth permissions</h3>
+<p>Yes. Ensure the Fulfillment Inbound scope is granted per marketplace.
+Keep LWA token refresh tight and stable in production.
+Isolate prod and sandbox credentials and verify endpoints and IDs.</p>
+<h3 id="avoidcreatingduplicateinboundplans">Avoid creating duplicate inbound plans</h3>
+<p>Use idempotency tokens on create and update operations always.
+Persist the token per client action so retries don’t dupe plans.
+Watch for 409 Conflict responses and handle them gracefully.</p>
+<h3 id="trackdeprecationsandupdates">Track deprecations and updates</h3>
+<p>Follow the Amazon SP-API Changelog and Deprecation Schedule closely.
+Subscribe to updates and add checks to quarterly tech reviews.
+That keeps you from getting caught flat-footed again.</p>
+<h3 id="rebuildlabelingandprepflows">Rebuild labeling and prep flows</h3>
+<p>Usually no, you keep the business rules but validate earlier.
+Confirm prep and labeling at plan creation instead of at the dock.
+That shift cuts exceptions and surprise fees later.</p>
+<h3 id="previewfeesbeforecommitting">Preview fees before committing</h3>
+<p>Yes. Evaluate options and their tradeoffs before you accept.
+A small UI can show estimated fees and ETAs side-by-side.
+Then ops can choose, or your rules engine can.</p>
+<h3 id="specialhandlinghazmatmeltable">Special handling hazmat meltable</h3>
+<p>Treat them as separate policy lanes from the start.
+Validate restrictions upfront and confirm meltable season windows.
+Avoid mixing special handling SKUs with standard ones in a plan.</p>
+<h2 id="sevenstepstoship">Seven steps to ship</h2>
+<p>1) Inventory your current inbound calls and kill any v0 fallbacks.
+2) Map requests/responses to v2024-03-20 schemas; add strict validation.
+3) Implement idempotency tokens and structured error handling with retries.
+4) Add telemetry: request IDs, tokens, status, placement fees, ETAs.
+5) Test in SP-API sandbox; run contract tests on schemas and auth.
+6) Canary 5–10% of plans; compare fees, lead times, and exceptions.
+7) Roll out gradually; set a 14-day post-migration review and adjust selection rules.</p>
+<p>A bit more color:</p>
+<ul>
+<li>Step 1 is detective work — search repos and schedulers for legacy endpoints.
+If you find one, fix the root cause, don’t just patch it.</li>
+<li>Step 2 is your safety net — reject bad plans early with validation.
+Your ops team won’t be stuck cleaning it up later.</li>
+<li>Step 3 assumes the network isn’t your friend, especially on Mondays.
+Retries with idempotency turn chaos into consistency.</li>
+<li>Step 4 means you’ll know what changed, when, and why, at a glance.
+Telemetry is how you prevent “it just started happening.”</li>
+<li>Step 5 catches most issues before anything gets near production.
+It saves you stress and money.</li>
+<li>Step 6 prevents a small mistake from becoming a big outage fast.
+Gradual promote beats big-bang every time.</li>
+<li>Step 7 is where the ROI lands, for real.
+Tune rules to your economics, not someone else’s template.</li>
+</ul>
+<p><em>Here’s the takeaway: your inbound pipeline can be a profit center.</em>
+When you control placement tradeoffs, money stops leaking out.
+v2024-03-20 gives you that control, straight from the API.
+Migrate cleanly and automate selection by SKU economics and velocity.
+Watch the metrics that move cash, fees and time-to-buyable.
+Teams who treat inbound like a product ship more and spend less.
+They also react faster to demand spikes without chaos.
+That’s the whole game, and you can win it.</p>
+<p>Need help instrumenting KPIs and catching SP-API issues early?
+Check out <a href="../requery.html">Requery</a> for centralized observability and alerting.</p>
+<p>Want proof of what tight ops can do in the real world?
+Explore our <a href="../case-studies.html">Case Studies</a> to see teams scale without chaos.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/changelog">Amazon SP-API Changelog</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/deprecation-schedule">SP-API Deprecation Schedule</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/fulfillment-inbound-api">Fulfillment Inbound API overview (SP-API)</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/authorization-and-authentication">SP-API Authorization and Authentication</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits">SP-API Usage Plans and Rate Limits</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="fulfillment-inbound-api-deprecation.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqd576.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Switch+to+Fulfillment+Inbound+API+v2024-03-20+Without+Downtime&amp;pi=255666150114&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=255666150114&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Ffulfillment-inbound-api-deprecation&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/fulfillment-inbound-api-deprecation?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:05 GMT -->
+</html>

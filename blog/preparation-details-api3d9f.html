@@ -1,0 +1,382 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/preparation-details-api?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:35:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Nail Amazon Prep With New SP API Details</title>
+    <link rel="canonical" href="preparation-details-api.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Access and set preparation details for shipments with listPrepDetails. Streamline packaging and compliance so items meet Amazon fulfillment requirements.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Nail Amazon Prep With New SP API Details",
+        "datePublished": "2025-11-04T17:28:34Z",
+        "dateModified": "2025-11-04T17:28:34.924Z",
+        "mainEntityOfPage": "https://remktr.com/blog/preparation-details-api",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-04-2025-05-21-02-5804-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="preparation-details-api.html">Nail Amazon Prep With New SP API Details</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 4, 2025 5:28:34 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Amazon just made prep a first-class citizen in the SP API. Translation: fewer chargebacks, fewer receiving delays, and way less back-and-forth with your 3PL.</p>
+<p>If you’ve ever had a shipment stalled over a missed poly-bag or wrong bundle label, you know the pain. One missed instruction ripples into unplanned service fees, defects, and customers stuck in Pending Hell.</p>
+<p>Now there’s a fix. With the new preparation details support—headlined by listPrepDetails—you can pull, with code, the exact prep Amazon expects and set it before any box leaves your warehouse. No guessing. No spreadsheet digging. No “we’ve always done it this way.”</p>
+<p>This upgrade doesn’t just tidy your workflow. It hardwires compliance into your inbound pipeline. That means fewer dock surprises, faster receiving, and clean metrics on the KPI that actually matters: units available for sale.</p>
+<p><em>Bottom line: turn policy into data, and data into muscle memory. When prep is explicit and your system enforces it, teams stop improvising and shipments stop drifting. That’s how you get speed without chaos.</em></p>
+<p>TL;DR</p>
+<ul>
+<li>New prep details endpoint (listPrepDetails) lets you retrieve Amazon’s item-level prep needs before creating or finalizing inbound shipments.</li>
+<li>You can also set prep details on shipment items, aligning your WMS and 3PL with Amazon’s rules.</li>
+<li>Expect fewer unplanned services, faster receiving, and more predictable lead times.</li>
+<li>Wire it into your inbound flow right after item validation and before cartonization.</li>
+<li>Build guardrails: idempotency keys, retries, and drift checks when guidance changes.</li>
+<li>Cache guidance per ASIN with a sensible TTL so you don’t hammer the API or use stale rules.</li>
+<li>Use results to auto-quote labor and materials, then compare Amazon vs. in-house prep costs in real time.</li>
+<li>Track before/after: inbound exceptions, unplanned service line items, and time-to-available should trend down.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-04-2025-05-22-12-8595-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whythistinyapitweak">Why this tiny API tweak</h2>
+<h3 id="thecostofguessing">The cost of guessing</h3>
+<p>Inbound compliance is a quiet profit leak. When items arrive missing bubble wrap, suffocation warnings, or proper FNSKU labels, Amazon may apply unplanned services, delay receiving, or flag defects. Alone, each one looks small. At scale, they add up to slower sell-through, extra fees, and Buy Box drag.</p>
+<p>Multiply “one small miss” by a few thousand units a week and it becomes real money. More touches at the FC, more back-and-forth with support, and more days where inventory sits in limbo. Your cash flow feels it. Your ads budget feels it. Your ops team definitely feels it.</p>
+<h3 id="turningpolicyintocode">Turning policy into code</h3>
+<p>The prep details update means you can ask Amazon, with code: “How should these SKUs be prepped for this shipment to this fulfillment center?” No more scraping help pages or fragile rules. You get structured guidance, and your system enforces it every time.</p>
+<p>That clarity reduces tribal knowledge. New warehouse associate? No problem—your WMS prints the right label and blocks carton close if prep isn’t confirmed. New 3PL? Send machine-readable instructions instead of a PDF novel. Less interpretation, fewer exceptions.</p>
+<h3 id="wherethisshowsup">Where this shows up</h3>
+<ul>
+<li>Fewer unplanned services: You preempt bagging, bubble wrap, labeling, and set prep before items ship.</li>
+<li>Faster receiving: The right prep reduces exceptions and manual handling at FCs.</li>
+<li>Predictable labor: Your team and 3PL work from the same machine-enforced instructions.</li>
+</ul>
+<p>Example scenario: You’re sending a mixed case of toys, candles, and a glassware set. listPrepDetails flags bubble wrap for glass, poly-bag and suffocation warning for plush toys, and set labeling for bundles. Your WMS prints the right labels, your 3PL uses the right materials, and your shipment lands clean.</p>
+<p>Add one more twist: if the API says manufacturer barcode eligible on certain SKUs, you skip FNSKU labeling for those and speed up the line. Less label printing. Less peeling. More units per hour.</p>
+<h2 id="howlistprepdetailsfits">How listPrepDetails fits</h2>
+<h3 id="suggestedintegrationpoint">Suggested integration point</h3>
+<p>Drop listPrepDetails right after catalog validation and before cartonization or pick-wave creation. That’s the sweet spot: you know the ASINs or SKUs and destination, but you haven’t locked cartons or booked carrier labels yet.</p>
+<p>If you place it too early, you’ll fetch guidance you can’t apply. Too late, and you’ll find prep changes when cartons are taped and ready. <em>Right after item validation is the Goldilocks zone.</em></p>
+<h3 id="whatyoullrequestandreceive">What you’ll request and receive</h3>
+<p>While exact payloads vary by version, expect to send item identifiers, destination FC or marketplace, and quantities. The response typically includes:</p>
+<ul>
+<li>Required prep types (poly-bag, bubble wrap, taping, set labeling)</li>
+<li>Labeling guidance (FNSKU required vs. manufacturer barcode eligible)</li>
+<li>Ownership fields (who applies prep: you vs. Amazon)</li>
+<li>Notes for special handling (fragile, sharp, liquid, adult)</li>
+</ul>
+<p>You can then persist these instructions on each shipment line and push them to work orders for your warehouse or 3PL. If the API shows Amazon will own some prep, show the estimated costs to your ops team for approval.</p>
+<p>Add context fields like ship method and planned ship date to your own records. If dates slip, your drift checker can re-validate guidance and surface any changes automatically.</p>
+<h3 id="aligningwithinboundcreation">Aligning with inbound creation</h3>
+<p>When you create or update inbound shipments through the Fulfillment Inbound API, include the returned prep details on each item line. Pair this with labeling info so your process is exact. Your WMS knows which label to print and which material to use, and your 3PL gets a work order that mirrors Amazon’s rules.</p>
+<p>Pro tip: cache guidance per ASIN with a TTL and invalidate on marketplace or FC changes. Prep rules can vary by region or FC capabilities.</p>
+<p>For audit, store a copy of the guidance payload alongside the shipment record. If a dispute pops up later, you can prove what instructions were returned, when, and what your team applied.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-04-2025-05-23-06-6182-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="shipsmarter">Ship smarter</h2>
+<h3 id="embedrulesinyourwms">Embed rules in your WMS</h3>
+<ul>
+<li>Map prep types to bill-of-materials: “Bubble wrap” maps to material SKU WRAP-12 and labor standard 0.6 min per unit.</li>
+<li>Autoprint labels: If guidance says FNSKU required, force FNSKU label printing at the pack station.</li>
+<li>Gate packing: Block carton close if any unit lacks required prep sign-off.</li>
+<li>Visual prompts: Show photo-level hints for common prep types to reduce mistakes.</li>
+<li>Material checks: Don’t start a wave if on-hand poly-bags or wrap rolls are below needs.</li>
+</ul>
+<h3 id="3plcollaborationthatdoesntsuck">3PL collaboration that doesn’t suck</h3>
+<p>Pass prep instructions to your 3PL as structured data, not a PDF attachment. If they use a standard WMS, like 3PL Central or ShipHero, include:</p>
+<ul>
+<li>Line-level prep types</li>
+<li>Label files or label data</li>
+<li>SLA dates tied to booked pickup</li>
+</ul>
+<p>Add a “prep compliance” tick box in their portal. If they deviate, like running out of poly-bags, force an exception record and alert your ops.</p>
+<p>Tie exceptions to billing. If the 3PL misses prep you asked them to handle, it should trigger a chargeback chat—or at least a review—so the cost doesn’t quietly bleed your margins.</p>
+<h3 id="labelingbarcodesandsetbuilds">Labeling, barcodes, and set builds</h3>
+<p>listPrepDetails pairs nicely with barcode guidance. If the item is manufacturer barcode eligible, skip FNSKU labeling and save time. If it requires set labeling, force the “sold as set” label and shrink-wrap or poly-bag the bundle so it can’t separate.</p>
+<p><em>“Good prep systems make compliance the default,” as one operations lead at a high-volume FBA brand told me. “The second anything becomes a judgment call, your receiving times double.”</em></p>
+<p>Strengthen set builds by generating a single work ticket for bundle components and blocking the ticket until all component scans are complete. No complete set, no label.</p>
+<h2 id="guardrails">Guardrails</h2>
+<h3 id="expecttheusualapichaos">Expect the usual API chaos</h3>
+<ul>
+<li>Timeouts and rate limits: Implement retries with jitter and backoff. Respect the documented rate quotas in the Fulfillment Inbound API.</li>
+<li>Partial results: If some items fail guidance, surface it early so ops can reroute or split shipments.</li>
+<li>Idempotency: Use idempotency keys on shipment creation and updates so you don’t double-apply prep.</li>
+<li>Monitoring: Add alerts on guidance error rates and latency so your team knows when to switch to a fallback playbook.</li>
+</ul>
+<h3 id="catalogandmarketplacemismatches">Catalog and marketplace mismatches</h3>
+<ul>
+<li>New-to-catalog SKUs may return incomplete guidance. Default to conservative: FNSKU label and poly-bag if there’s any risk of spills or scuffs.</li>
+<li>Marketplace-specific rules: Packaging and labeling can differ by region. Don’t reuse US guidance for EU shipments.</li>
+<li>Multi-ASIN kits: Ensure each component’s guidance is met before sealing the outer bundle.</li>
+</ul>
+<h3 id="hazmatmeltablesandadultproducts">Hazmat, meltables, and adult products</h3>
+<p>Dangerous goods and temperature-sensitive items trigger stricter handling. If guidance flags these categories, require special materials and hold shipments until all checks pass. For meltable or restricted windows, your system should block inbound creation outside acceptable dates.</p>
+<p>Add a “category lock” rule: once a SKU is flagged hazmat or meltable, require approval to override any prep or routing steps. Append a checklist, like battery terminals taped or inner poly-bag thickness, to the work order.</p>
+<h3 id="ownershipandfees">Ownership and fees</h3>
+<p>If the API indicates Amazon-owned prep for certain steps, show that to finance and ops. Sometimes paying Amazon to do it is cheaper than slowing your dock. Other times, it’s a margin leak you want to avoid.</p>
+<p>Keep a drift detector. If guidance changes between planning and ship date, re-validate and generate a delta task list for the warehouse. <em>Better a late line stop than a receiving exception at the FC.</em></p>
+<h3 id="securityandpermissions">Security and permissions</h3>
+<p>Limit who can override prep guidance in your tools. Tie overrides to user roles and require a reason code. Store a full audit trail so you can trace any exception to a person and timestamp.</p>
+<h2 id="whatthisunlocksnext">What this unlocks next</h2>
+<h3 id="predictableinboundleadtimes">Predictable inbound lead times</h3>
+<p>Cleaner prep leads to fewer FC exceptions and smoother receiving. That tightens the standard deviation on your “PO to available for sale” metric. With that, your demand planning and ad spend get less whiplash.</p>
+<p>Once variance shrinks, you can push inventory later without risking stockouts. Or launch promos knowing your inbound won’t jam the FC.</p>
+<h3 id="automationopportunities">Automation opportunities</h3>
+<ul>
+<li>Auto-quote 3PLs: Turn prep guidance into a per-unit labor and material quote and compare against Amazon’s prep fees.</li>
+<li>Dynamic cartonization: If the item needs bubble wrap, expand carton dimensions and adjust dunnage so weights and dims stay valid.</li>
+<li>Labeling robots: Feeding consistent, exact label files to automated applicators is easier with an API-driven prep source of truth.</li>
+<li>Dock scheduling: Prioritize dock time for guidance-compliant cartons least likely to trigger FC holds.</li>
+</ul>
+<h3 id="complianceasadataset">Compliance as a dataset</h3>
+<p>Store guidance per ASIN and measure defect rates before and after enforcement. If exceptions drop, you’ll see it in fewer inbound emails, fewer unplanned service line items, and faster receiving scans in FC-level metrics.</p>
+<p>A smart angle: annotate ASINs with a “prep complexity score” to forecast labor and decide whether to push more of that category to FBM during peak.</p>
+<p>Then feed that score into purchasing. High-complexity items may need different carton setups, more generous lead times, or alternate packaging from the supplier to reduce prep time.</p>
+<h2 id="technicalquickstart">Technical quick-start</h2>
+<ul>
+<li>Inputs you need: ASIN or SKU, destination FC or marketplace, quantities.</li>
+<li>Call order: validate items → call listPrepDetails → persist guidance → generate labels and work orders → create inbound shipment with prep details → cartonize → buy labels.</li>
+<li>Storage: create a guidance table keyed by ASIN plus marketplace plus version. Include returned prep types, labeling status, ownership, and timestamp.</li>
+<li>UI hooks: display required materials and labels at pick and pack, and block next steps until all prep checks pass.</li>
+<li>Exceptions: if guidance is missing, default to conservative prep and flag the shipment for manual review.</li>
+</ul>
+<h2 id="testingplaybook">Testing playbook</h2>
+<ul>
+<li>Unit tests: mock API responses for common prep types and verify WMS rules fire correctly.</li>
+<li>Sandbox runs: push a fake inbound with a variety of SKUs, like fragile, plush, liquids, and bundles, and confirm work orders look right.</li>
+<li>Pilot shipment: choose two to three SKUs with known prep, run the full flow, and compare with historical receiving times and unplanned services.</li>
+<li>Rollout: expand SKU coverage in waves. Watch exceptions and flip back to manual for edge cases until stable.</li>
+</ul>
+<h2 id="metricstowatch">Metrics to watch</h2>
+<ul>
+<li>Receiving time, from shipment to “available for sale,” and variance.</li>
+<li>Inbound exceptions per 1,000 units.</li>
+<li>Unplanned services fees as a percentage of COGS.</li>
+<li>Prep-related defect rate or performance notifications.</li>
+<li>Throughput at pack stations, units per hour, before vs. after enforcement.</li>
+</ul>
+<p>When these trend the right way, you’ll feel it in inventory turns and ad efficiency.</p>
+<h2 id="changemanagement">Change management</h2>
+<ul>
+<li>Train with pictures: show examples of correct poly-bagging, bubble wrap, and label placement.</li>
+<li>Keep materials stocked: prep fails when someone reaches for a bag that isn’t there.</li>
+<li>Make the system the boss: don’t rely on memory; let the WMS block close when prep isn’t complete.</li>
+<li>Celebrate the wins: share the inbound exception drop with the floor; it proves the process works.</li>
+</ul>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>Run listPrepDetails before cartonization to lock in correct materials and labels.</li>
+<li>Persist guidance on shipment lines and send it to your 3PL as structured data.</li>
+<li>Add guardrails: retries, idempotency, and drift checks if guidance changes.</li>
+<li>Use guidance to auto-quote labor and choose between Amazon vs. in-house prep.</li>
+<li>Track before and after: receiving time, exceptions, and unplanned fees should all improve.</li>
+</ul>
+<p><em>Bookmark this list and bake it into your SOP. The whole point is to remove interpretation. The more exact your flow, the faster your freight moves and the steadier your margins get.</em></p>
+<h2 id="faqsonprepdetails">FAQs on prep details</h2>
+<h3 id="whatdoeslistprepdetailsreturn">What does listPrepDetails return</h3>
+<p>It returns structured instructions for item prep and labeling based on the ASIN or SKU, destination, and marketplace. Think prep types like poly-bag, bubble wrap, and taping, labeling needs like FNSKU vs. manufacturer barcode, and ownership of steps.</p>
+<h3 id="canisetprepdetails">Can I set prep details</h3>
+<p>Yes. Include the prep details on inbound shipment items so your shipment reflects the guidance you retrieved. This keeps your WMS, 3PL, and Amazon aligned on what prep was applied and by whom.</p>
+<h3 id="willthisreducefees">Will this reduce fees</h3>
+<p>It should. When you apply the required prep before items arrive, Amazon doesn’t need to fix issues on the dock. That lowers the odds of unplanned services, exceptions, and delays. Always watch your fee and defect reports to confirm impact.</p>
+<h3 id="dopreprulesdiffer">Do prep rules differ</h3>
+<p>They can. Regulations, barcode programs, and facility capabilities differ by region. Call the endpoint with the proper marketplace and destination context. Don’t assume US guidance applies to EU or JP.</p>
+<h3 id="howshouldihandleguidancechanges">How should I handle guidance changes</h3>
+<p>Add a final validation step before confirming carrier labels. If guidance changes, generate a delta task list, like add poly-bags to items A and B, and block carton close until updated.</p>
+<h3 id="whataboutdangerousgoods">What about dangerous goods</h3>
+<p>Expect stricter handling needs and extra checks. If guidance flags special categories, require approval and materials before you ship. When in doubt, follow Amazon’s prep and restricted products policies.</p>
+<h3 id="whatifmy3plcant">What if my 3PL can’t</h3>
+<p>Start simple: send a CSV with line-level prep types and required labels, and ask for a confirmation file back. Then move to API or EDI once they’re ready.</p>
+<h3 id="howdoihandlebundles">How do I handle bundles</h3>
+<p>Treat the bundle as its own SKU for labeling, but ensure each component’s guidance is met before sealing. Use scans to confirm all components are present, then apply the “sold as set” label and protective packaging.</p>
+<h2 id="shipreadyinhours">Ship-ready in hours</h2>
+<ul>
+<li>Wire listPrepDetails after catalog validation, before cartonization.</li>
+<li>Cache guidance per ASIN with a short TTL; invalidate on marketplace or FC change.</li>
+<li>Map prep types to materials, labor standards, and label templates in your WMS.</li>
+<li>Enforce at pack: block carton close if required prep or labels are missing.</li>
+<li>Include prep details on inbound shipment items; store who did what, you vs. Amazon.</li>
+<li>Add drift checks pre-label purchase; re-fetch if the shipment date slips.</li>
+<li>Monitor impacts: receiving time, exceptions, and unplanned services lines.</li>
+<li>Add audit logs: keep copies of guidance and applied steps per shipment line.</li>
+<li>Train staff and 3PLs with photo examples and short checklists.</li>
+<li>Review weekly: spot SKUs with persistent exceptions and update SOPs.</li>
+</ul>
+<p>Here’s the punchline: <em>compliance isn’t a policy problem—it’s a data problem.</em> listPrepDetails turns fuzzy guidance into structured data your systems can actually enforce. If you embed it where decisions happen—label printing, pack stations, 3PL work orders—you’ll feel it in fewer surprises, faster receiving, and cleaner margins.</p>
+<p>The brands that win inbound don’t “work harder at prep.” They remove the guesswork entirely. With prep instructions now in the SP API—and the ability to set them on shipment items—you can make the compliant path also the fastest path.</p>
+<p>Want help operationalizing these SP-API workflows without rebuilding your WMS? Explore our platform <a href="../features.html">Features</a>.</p>
+<p>See how peers cut unplanned services and tightened receiving SLAs in our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api">Amazon Selling Partner API Documentation</a></li>
+<li><a href="https://github.com/amzn/selling-partner-api-models">Fulfillment Inbound API (Models and Changelog on GitHub)</a></li>
+<li><a href="https://sellercentral.amazon.com/help/hub/reference/G200202070">FBA Product Preparation Requirements (Seller Central Help)</a></li>
+<li><a href="https://sellercentral.amazon.com/help/hub/reference/G201817070">FBA Unplanned Services and Fees (Seller Central Help)</a></li>
+<li><a href="https://sellercentral.amazon.com/help/hub/reference/G202119070">Barcode (FNSKU vs. Manufacturer) Guidance (Seller Central Help)</a></li>
+<li><a href="https://sellercentral.amazon.com/help/hub/reference/G2HF3N7J2XGMMX6">Dangerous goods (hazmat) program and requirements (Seller Central Help)</a></li>
+<li><a href="https://sellercentral.amazon.com/help/hub/reference/G200285160">FBA meltable product guidelines and calendar (Seller Central Help)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="preparation-details-api.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq6cc0.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Nail+Amazon+Prep+With+New+SP+API+Details&amp;pi=255673700062&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=255673700062&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fpreparation-details-api&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/preparation-details-api?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:35:24 GMT -->
+</html>

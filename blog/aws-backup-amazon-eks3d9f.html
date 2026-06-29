@@ -1,0 +1,327 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-backup-amazon-eks?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Back Up And Restore EKS Clusters The Easy Way</title>
+    <link rel="canonical" href="aws-backup-amazon-eks.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn how AWS Backup now supports Amazon EKS to secure EKS clusters and app data. Define policies, cross-region copies, and granular restores to speed recovery.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Back Up And Restore EKS Clusters The Easy Way",
+        "datePublished": "2025-11-11T20:25:04Z",
+        "dateModified": "2025-11-11T20:25:04.803Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-backup-amazon-eks",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-11-2025-08-16-41-6925-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-backup-amazon-eks.html">Back Up And Restore EKS Clusters The Easy Way</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 11, 2025 8:25:04 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’ve probably duct-taped EKS backups with scripts, snapshots, and a prayer.</p>
+<p>Good news, you can finally retire all that duct tape.</p>
+<p>AWS Backup now supports Amazon EKS natively, which is huge.</p>
+<p>You get managed, centralized, policy-driven protection for clusters and app data.</p>
+<p>No third-party tools, no cron jobs, no snowflake scripts anymore.</p>
+<p><em>This isn’t a small quality-of-life fix. It’s a reset for protecting EKS in production.</em></p>
+<p>You choose what to back up: namespaces, PVCs, or entire clusters. Then set retention, encryption, cross-Region copies, and cross-account copies too. And—<em>chef’s kiss</em>—you can restore at any level, including provisioning a brand-new EKS cluster from the recovery point.</p>
+<p>If you run stateful workloads on EKS, this finally lands right. Or if you just want a clean, compliant DR story, this is it. Fewer manual steps. Fewer late-night rollbacks. More confidence you’ll be back fast and clean when stuff breaks.</p>
+<p>And yes, this scales like you need. One dev cluster or dozens across accounts, same deal. Set policies once, prove compliance on demand, and stop managing backups with sticky notes. <em>Less busywork, more sleep, and a DR story your auditor understands.</em></p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>AWS Backup now supports Amazon EKS with managed, centralized protection.</li>
+<li>Back up cluster state, metadata, and persistent storage (EBS, EFS, S3).</li>
+<li>Restore entire clusters, specific namespaces, or individual volumes.</li>
+<li>Immutable vaults + cross-Region/account copies boost ransomware/DR.</li>
+<li>AWS Backup can now provision a new EKS cluster during restore.</li>
+<li>Use IAM managed policies and EKS authorization modes (API/API<em>AND</em>CONFIG_MAP).</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-11-2025-08-17-41-7081-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="nomorescripts">No More Scripts</h2>
+<h3 id="theoldreality">The old reality</h3>
+<p>If you’ve run EKS for a while, you know the drill well. Back up YAMLs, snapshot volumes, sync S3, then hope the playbook matches reality. Every cluster had its own little quirks, which drifted. Platform teams turned into backup babysitters. You were one namespace deletion away from a painful “learning experience.”</p>
+<p>That setup also invited quiet failures that hid for weeks. A CronJob missed its window. A script lost permissions after a role change. A snapshot caught storage, but missed the matching Kubernetes objects. Restores worked in theory, but rarely matched the label-driven world your services expect. Then the one person who understood the bash glue left.</p>
+<h3 id="whatchanged">What changed</h3>
+<p>With native EKS support, AWS Backup plugs into the EKS control plane using service permissions. You choose scope—whole clusters, namespaces, or specific PVCs—then set schedule, retention, encryption, and replication from one console. Backups appear as composite recovery points with child artifacts per resource, keeping app data and cluster state aligned.</p>
+<p>Centralizing this matters more than it sounds. Instead of every team inventing a scheme, you define a reusable plan. Then apply it across clusters and accounts. The service handles orchestration, tagging, and lifecycle for you. You can inspect jobs, copy recovery points, and audit all of it in one place.</p>
+<h3 id="whyyoucare">Why you care</h3>
+<p><em>This is less about convenience and more about reliability you can prove.</em> Centralized policies mean fewer snowflakes. Restores that rehydrate labels, annotations, and configs mean fewer surprises. Granular scope means faster, safer drills when testing.</p>
+<p>A platform lead at a fintech said their old EKS DR exercise took a full day. It also needed three engineers juggling steps. With centralized policies and granular restores, they cut it under two hours with one on-call. <em>That’s the difference between we think and we know.</em></p>
+<p>It also shifts your operational posture in a real way. Instead of hoping snapshots are good, you run routine, low-blast-radius drills. Restore a single namespace and prove your RTO and RPO often. When the real incident hits, it’s muscle memory, not a scramble.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-11-2025-08-18-36-1429-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="insidethesnapshot">Inside The Snapshot</h2>
+<h3 id="statestorage">State storage</h3>
+<p>You don’t just need volume snapshots; you need the cluster back as it was. AWS Backup protects cluster configuration and state—deployments, services, RBAC, and other resource definitions—alongside app data. Persistent storage coverage spans Amazon EBS, Amazon EFS, and Amazon S3 objects your apps need. It aligns infra and data in one recovery point.</p>
+<p>By capturing Kubernetes metadata and storage together, restores match what workloads expect. That includes selectors, labels, and service endpoints too. Those small details travel with the backup, which brings apps up cleanly.</p>
+<p>If you care about consistency, think in layers that complement. By default, you get crash-consistent protection for volumes. That’s fine for many workloads today. For apps needing extra care, add pre or post-backup steps to flush buffers. Or pause writers briefly to tighten guarantees under load.</p>
+<h3 id="granularscopewithoutthechaos">Granular scope without the chaos</h3>
+<p>Pick your precision level based on the moment. Whole cluster for DR. Namespaces for blast-radius control during drills. Or individual persistent volumes for targeted recoveries. You can fix one broken workload without nuking everything else nearby. It’s also huge for pre-upgrade guardrails and safe rollbacks.</p>
+<p>Label-driven selections are your friend here, honestly. Define backup selections with namespace labels like environment=prod. New workloads then inherit protection automatically, no extra tickets. When a team ships a microservice into a protected namespace, it rides your plan.</p>
+<h3 id="consistencyandcompliancebakedin">Consistency and compliance baked in</h3>
+<p>During restore, AWS Backup preserves Kubernetes metadata for you. Labels, annotations, and configs come back intact. What you restore then matches what you backed up, not almost. That’s critical for debugging across environments and clean audit trails.</p>
+<p>First-hand example: a healthtech team replicated a production namespace to staging. They were chasing a thorny admission controller bug. Because labels and annotations came through intact, the bug reproduced instantly. No risky prod poking, hours saved, stress down.</p>
+<p>For audit and governance, you get the full paper trail on demand. Job logs, copy jobs, retention policies, and vault immutability are visible in console and APIs. CloudTrail captures API activity. AWS Backup Audit Manager helps validate plans meet your org’s standards.</p>
+<h2 id="drandransomware">DR And Ransomware</h2>
+<h3 id="centralizedpoliciesandscheduling">Centralized policies and scheduling</h3>
+<p>From one console, define backup plans that run daily, weekly, or on-demand. Use lifecycle retention to control storage and cost upfront. Apply a plan to all your EKS clusters, so no one “forgets the cron” again. Cross-account enforcement is clutch for platform orgs herding dozens of clusters.</p>
+<p>Turn this into a safety net with real teeth, not vibes. Use short RPOs for critical namespaces, relaxed schedules for sandbox clusters. Pair lifecycle rules with copy policies to ensure recovery points exist where you’ll need them during a regional event.</p>
+<h3 id="immutablevaultsrealprotection">Immutable vaults real protection</h3>
+<p>Immutable backup vaults add a protective break-glass shield against ransomware and deletion. As AWS documents, "You can use AWS Backup Vault Lock to prevent recovery points from being deleted or altered." This isn’t marketing fluff—immutability is table stakes now.</p>
+<p><em>Source: AWS Backup Vault Lock documentation (link in References).</em></p>
+<p>You can choose governance or compliance modes for Vault Lock policies. Pick based on how strict your org needs to be today. The practical outcome is simple: once a backup lands, even a stressed admin can’t delete it early. That buys you time and options during ugly incidents.</p>
+<h3 id="granularrestoresandprovisioning">Granular restores and provisioning</h3>
+<p>Granularity cuts RTO in real ways. Restore a namespace to fix a bad rollout fast. Or restore a single PVC for data oops moments. For full-on disasters, AWS Backup can provision a new EKS cluster from a backup. That removes the old bootstrap dance entirely.</p>
+<p>Pair that with cross-Region and cross-account copies for geographic redundancy. Now you’ve got an actual DR plan, not just a hope and wiki page.</p>
+<p>Example: during a Region outage test, a gaming studio restored prod to a clean Region. AWS Backup created the cluster, then they pulled in the critical namespaces quickly. Minimal manual steps, fast DNS cutover, weekend saved.</p>
+<p><em>A note on realism you should plan for.</em> After a full cluster restore, validate add-ons and integrations. CNI, CoreDNS, ingress controllers, admission webhooks, and external systems like auth or observability. Reduce manual re-configs before game day to speed RTO.</p>
+<h2 id="rolloutplaybook">Rollout Playbook</h2>
+<h3 id="prerequisitesyoushouldactuallycheck">Prerequisites you should actually check</h3>
+<ul>
+<li>IAM: Attach AWSBackupServiceRolePolicyForBackup to the service role backing up EKS. If backing up S3 data, include AWSBackupServiceRolePolicyForS3Backup policy and its prerequisites.</li>
+<li>Cluster access: Set EKS authorization mode to API or API<em>AND</em>CONFIG_MAP. AWS Backup needs this to create Access Entries for your cluster.</li>
+<li>Regions: Availability mirrors the overlap of AWS Backup and EKS. That includes commercial Regions (excluding China) and AWS GovCloud (US).</li>
+</ul>
+<p>Also confirm basics you might gloss over. The cluster’s OIDC provider is configured for IRSA. KMS keys are accessible to the backup role without weird denies. Network egress rules allow AWS Backup to talk with the EKS control plane. Small misses here become big delays later.</p>
+<h3 id="commonpitfallstoavoid">Common pitfalls to avoid</h3>
+<ul>
+<li>Scope drift: Define selections by namespace labels so new workloads inherit protection.</li>
+<li>Encryption: Align KMS keys for EBS, EFS, and backup vaults across accounts.</li>
+<li>Schedules: Stagger jobs to reduce I/O spikes; use lifecycle rules to control growth.</li>
+<li>Testing: Run quarterly restore drills. Measure RTO and RPO. Fix the slowest link first.</li>
+</ul>
+<p>Two more gotchas to handle early, you’ll thank yourself. Ensure IAM roles for service accounts exist in the target account for restores. Also pre-provision external dependencies like databases, queues, or secrets managers your workloads assume.</p>
+<h3 id="costsandopshygiene">Costs and ops hygiene</h3>
+<p>Backups aren’t free, but downtime costs more than you think. Use incremental EBS snapshots, EFS lifecycle, and targeted selections to tune spend. Tag recovery points for chargeback and clarity. Monitor status in the AWS Backup console, wire alerts into on-call. End state: fewer scripts, fewer heroics, a sane auditable safety net.</p>
+<p>Expect storage costs for backup vaults and copy jobs across Regions. Cross-Region copies duplicate data in your target Region by design. Use high-frequency schedules only for namespaces needing tight RPO. Everything else can run daily or even weekly.</p>
+<h3 id="observabilitythatmatters">Observability that matters</h3>
+<p>Hook AWS Backup events into Amazon EventBridge and your alerting tool of choice. Track failed jobs, long-running restores, and copy lag across Regions. Build a tiny dashboard with three things you care about. Latest recovery point per cluster or namespace, Vault Lock state, and copy status by Region. If you can see it fast, you’ll fix it fast.</p>
+<h2 id="quickpulsecheck">Quick Pulse Check</h2>
+<ul>
+<li>Native EKS integration means no more custom scripting or third-party tools for backups.</li>
+<li>Protect cluster state, Kubernetes metadata, and persistent storage in one policy-driven motion.</li>
+<li>Restore at any scope—from full cluster to individual PVCs—with metadata intact.</li>
+<li>Immutable vaults plus cross-Region/account copies fortify ransomware and DR posture.</li>
+<li>AWS Backup can provision a new EKS cluster during restore, slashing RTO.</li>
+<li>Ensure IAM policies and EKS authorization modes are set correctly before go-live.</li>
+</ul>
+<h2 id="faqoneksbackups">FAQ On EKS Backups</h2>
+<ol>
+<li><p>Q: What exactly can I back up with AWS Backup for EKS?
+A: You can protect cluster configuration and state, plus Kubernetes metadata like labels and annotations. You also protect persistent data on EBS, EFS, and S3 your apps use. Choose the scope: full cluster, selected namespaces, or specific persistent volumes.</p></li>
+<li><p>Q: Do I need to pre-create an EKS cluster to restore?
+A: Not anymore. You can restore to an existing cluster or let AWS Backup create one. It uses the backup’s configuration, removing bootstrap bottlenecks and speeding disaster recovery.</p></li>
+<li><p>Q: How does immutable protection work?
+A: Use AWS Backup Vault Lock to make recovery points tamper-resistant. Once locked, recovery points can’t be changed or deleted before retention expires. That defends against ransomware and accidental deletion.</p></li>
+<li><p>Q: Can I copy EKS backups across Regions and accounts?
+A: Yes. Backup plans support automatic cross-Region and cross-account copies. You get geographic redundancy and isolation from account-level incidents. That’s foundational for DR and compliance goals.</p></li>
+<li><p>Q: What permissions and cluster settings are required?
+A: Attach AWSBackupServiceRolePolicyForBackup to the service role doing backups. If workloads include S3 data, add AWSBackupServiceRolePolicyForS3Backup and complete its prerequisites. Set EKS authorization mode to API or API<em>AND</em>CONFIG_MAP for Access Entries.</p></li>
+<li><p>Q: How should I test restores without disrupting production?
+A: Use namespace or PVC-level restores into staging clusters, and sanitize sensitive data. Schedule quarterly game days timing full-cluster restores, measure RTO and RPO, and document lessons learned.</p></li>
+<li><p>Q: What about Kubernetes Secrets and sensitive data in backups?
+A: Kubernetes objects—including Secrets—can be captured as cluster state. Encrypt backup vaults with customer-managed KMS keys and lock vaults for immutability. Restrict access with IAM so only minimal roles can restore or read sensitive points.</p></li>
+<li><p>Q: Can I restore to a different EKS version or VPC?
+A: Plan to restore to the same or a compatible supported EKS version. Verify network parity like VPC, subnets, and security groups so services and ingress behave. If you must change environments, test thoroughly and document any remaps.</p></li>
+<li><p>Q: How does this fit in a multi-tenant cluster?
+A: Use namespaces with label-based selections to control who gets backed up, and how often. Apply stricter policies to gold namespaces and lighter ones to bronze, within the same cluster.</p></li>
+<li><p>Q: Do I need to change my CI/CD pipelines?
+A: Usually not. Treat backups as platform plumbing the teams rely on. Still, add pre-deploy hooks that run on-demand namespace backups before risky changes.</p></li>
+<li><p>Q: How do I monitor success and compliance?
+A: Use the AWS Backup console, CloudWatch metrics, and EventBridge notifications. For policy conformance and reports, use AWS Backup Audit Manager. It checks that resources meet the right plan, retention, and copy rules.</p></li>
+</ol>
+<h2 id="launcheksbackupsin15">Launch EKS Backups In 15</h2>
+<p>1) Create or pick a backup vault, then enable Vault Lock if you need immutability.
+2) Attach AWSBackupServiceRolePolicyForBackup to your AWS Backup service role. Add the S3-specific policy if needed for app data.
+3) Verify your EKS cluster uses authorization mode API or API<em>AND</em>CONFIG_MAP. Ensure Access Entries can be created successfully.
+4) Define a backup plan with schedule, lifecycle retention, encryption, and cross-Region or account copies.
+5) Create a resource selection targeting your EKS cluster, namespaces, or PVCs. Use labels for future-proofing and less drift.
+6) Run an on-demand backup to seed and create your first recovery point.
+7) Perform a test restore—PVC or namespace first. Then simulate a full-cluster restore and validate RTO.</p>
+<p>Close the loop by wiring alerts and tagging recovery points for chargeback.</p>
+<p><em>Here’s the punchline: resilience is a habit, not a one-time setup.</em> With AWS Backup’s native EKS support, you can make that habit the default setting. Central policies keep every cluster inside guardrails automatically. Immutable vaults and cross-Region copies give real teeth against ransomware. Granular restores and automated cluster provisioning cut RTO when things go sideways. Your job shifts from 'Did it back up?' to 'How fast can we get back?'—and the answer becomes fast enough.</p>
+<p>If you do one thing this week, pick a non-critical namespace and run a full drill. Time it carefully. Fix the slow parts now while you can. Then scale that playbook to prod. <em>The best DR story is the one you’ve already practiced.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/what-is-backup.html">AWS Backup: What Is AWS Backup?</a></li>
+<li><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-vault-lock.html">AWS Backup Vault Lock (immutability)</a></li>
+<li><a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsbackup.html">AWS Backup IAM permissions (service authorization reference)</a></li>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html">Amazon EKS: Cluster access entries and authorization modes</a></li>
+<li><a href="https://aws.amazon.com/eks/">Amazon EKS product overview</a></li>
+<li><a href="https://aws.amazon.com/backup/pricing/">AWS Backup pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes.html">Amazon EBS volumes (persistent storage)</a></li>
+<li><a href="https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html">Amazon EFS overview (shared file storage)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html">Amazon S3 user guide</a></li>
+<li><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/supported-services.html">AWS Backup supported services and resources</a></li>
+<li><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/audit-manager.html">AWS Backup Audit Manager</a></li>
+<li><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">Monitoring AWS Backup with CloudWatch and EventBridge</a></li>
+<li><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/copy-backups.html">Copying backups across Regions and accounts (copy jobs)</a></li>
+<li><a href="https://docs.aws.amazon.com/general/latest/gr/aws-backup.html">AWS General Reference for AWS Backup (Regions and endpoints)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-backup-amazon-eks.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq5dd5.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Back+Up+And+Restore+EKS+Clusters+The+Easy+Way&amp;pi=257743556287&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=257743556287&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-backup-amazon-eks&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-backup-amazon-eks?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:31 GMT -->
+</html>

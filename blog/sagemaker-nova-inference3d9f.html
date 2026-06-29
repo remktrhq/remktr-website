@@ -1,0 +1,434 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/sagemaker-nova-inference?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:12:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Deploy Custom Nova Models Faster With SageMaker Inference Today</title>
+    <link rel="canonical" href="sagemaker-nova-inference.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Deploy and scale custom Amazon Nova models on SageMaker Inference. Configure instance types, auto scaling, and concurrency, and evaluate endpoints with AWS AI.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Deploy Custom Nova Models Faster With SageMaker Inference Today",
+        "datePublished": "2026-02-17T21:00:26Z",
+        "dateModified": "2026-02-17T21:00:26.744Z",
+        "mainEntityOfPage": "https://remktr.com/blog/sagemaker-nova-inference",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-17-2026-08-45-58-8358-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="sagemaker-nova-inference.html">Deploy Custom Nova Models Faster With SageMaker Inference Today</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 17, 2026 9:00:26 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You can stop duct-taping notebooks to servers. AWS just flipped the switch on Amazon SageMaker Inference for custom Amazon Nova models, and it’s a big swing. You pick instance types, set auto scaling, tune concurrency, and ship full-rank custom Nova models to prod without wrestling GPUs at 2 a.m.</p>
+<p><em>Here’s the kicker.</em> The same place you customize Nova Micro, Lite, or Pro (via SageMaker Training Jobs or Amazon HyperPod) now pushes straight to managed, production-grade endpoints. No gap between training and traffic. No bespoke ops.</p>
+<p>If you’ve been waiting for an “enterprise-ready but flexible” path to ship reasoning-capable Nova models, this is it. Real-time endpoints, streaming token responses, and evaluation hooks, wired end to end. <em>Let’s make your path from experiment to customers stupid simple.</em></p>
+<p><em>It’s the good kind of boring.</em> Resilient infra, predictable latency, and knobs you can actually turn. You keep your model weights and design the behavior. AWS worries about the plumbing. Translation: fewer 2 a.m. incidents, more daylight iterations, and a faster loop from “idea” to “it’s already live.”</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Configure instance types, auto scaling, and concurrency for custom Nova deployments.</li>
+<li>Train (SFT, DPO, RFT, LoRA/PEFT, CPT, PPO, full-rank) and deploy—same platform.</li>
+<li>Real-time endpoints plus streaming API for interactive apps; async for batch.</li>
+<li>Import your custom Nova into Amazon Bedrock for extra capabilities.</li>
+<li>Evaluate with Inspect AI across benchmarks like MMLU, TruthfulQA, HumanEval.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-17-2026-08-46-46-3140-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whythissagemakernovacombo">Why this SageMaker Nova combo</h2>
+<h3 id="enterprisegradebridgeyouwanted">Enterprise grade bridge you wanted</h3>
+<p>AWS calls it a “production-grade, configurable, and cost-efficient managed inference” path for custom Nova models. Translation: you keep control of model weights and behavior while AWS handles scaling, networking, and uptime. You’re not stuck with one-size-fits-none serving.</p>
+<ul>
+<li>Real-time endpoints with custom instance selection let you choose compute that fits your budget and latency goals.</li>
+<li>Auto Scaling adapts to traffic so you’re not burning cash during off-peak or throttling users at peak.</li>
+<li>Streaming API support returns tokens as they’re generated—critical for chat UX and tools that need partial results fast.</li>
+</ul>
+<p>You also avoid the “mystery box” problem. With SageMaker Inference, you can set concrete policies—instance families, min/max counts, and concurrency—so your operations stay predictable. Need network isolation or private traffic? Configure VPC access on the endpoint. Want strict IAM control over who can invoke? Lock it down at the endpoint and role level. It feels like real infrastructure because it is, without the hardware drama.</p>
+<p>What you don’t have to build from scratch:</p>
+<ul>
+<li>Health checks and automatic failover for endpoints</li>
+<li>Request- and token-level logging with CloudWatch</li>
+<li>Integration to managed storage for async jobs (S3)</li>
+<li>Safe rollouts using multiple endpoint variants or blue/green patterns</li>
+</ul>
+<p>What you still control end to end:</p>
+<ul>
+<li>The model’s training data, fine-tuning method, and system prompts</li>
+<li>Inference settings (max tokens, temperature, top-p), and concurrency</li>
+<li>Cost/performance tradeoffs via instance choice and scaling policies</li>
+</ul>
+<h3 id="whyitmattersnow">Why it matters now</h3>
+<p>You’ve probably tried three paths: roll-your-own GPUs (expensive ops), serverless black boxes (limited control), or fine-tuning elsewhere and hoping prod works. This closes the loop. As the announcement puts it, SageMaker Inference provides an “end-to-end customization journey” from Nova training to deployment.</p>
+<p><em>Pragmatically, this is about speed to learning.</em> When your model hits real traffic quickly, and your ops are natively elastic, you iterate faster. That’s how you beat teams still arguing about which inference container to use.</p>
+<p><em>“Announcing Amazon SageMaker Inference for custom …” isn’t just PR; it’s your shortest line from idea → live endpoint.</em></p>
+<p><em>The practical win: fewer hard context switches.</em> Train, evaluate, and deploy in one place. Keep your mental model stable. Your team can pilot a feature on Friday and start A/B traffic Monday. That’s not hype—just process removing drag.</p>
+<h2 id="fromtrainingtotraffic">From training to traffic</h2>
+<h3 id="chooseyourrecipe">Choose your recipe</h3>
+<p>SageMaker ships Nova recipes that support:</p>
+<ul>
+<li>Supervised Fine-Tuning (SFT) to nail domain style and facts</li>
+<li>Direct Preference Optimization (DPO) to align with user choices—no heavy reward model</li>
+<li>Reinforcement Fine-Tuning (RFT) and PPO for policy-shaped behavior</li>
+<li>PEFT/LoRA for cost-efficient deltas on big models</li>
+<li>Full-rank fine-tuning when you want maximal control</li>
+<li>Continued Pre-Training (CPT) to extend domain knowledge</li>
+</ul>
+<p>Use the smallest technique that moves the metric you care about (accuracy, refusal rate, latency). If your domain shift is modest, start with LoRA. If your app needs reasoning shifts and guardrails, layer DPO or PPO.</p>
+<p>“Users can train Nova Micro, Nova Lite, and Nova 2 Lite … then seamlessly deploy”—the takeaway is consistency. You don’t rewrite your stack for each technique.</p>
+<p>A quick decision guide:</p>
+<ul>
+<li>Try LoRA/PEFT first when you’re adapting style, terminology, or light task behavior.</li>
+<li>Use SFT when you have solid input→output pairs and want clear supervised behavior.</li>
+<li>Add DPO to prefer certain answers over others without building a separate reward model.</li>
+<li>Use PPO/RFT when you need policy-shaped behavior that reacts to feedback.</li>
+<li>Reach for full-rank fine-tuning only if lighter methods stop moving your KPIs.</li>
+<li>Use CPT when your corpus is underrepresented and you need stronger domain recall.</li>
+</ul>
+<p>Data tips that save time:</p>
+<ul>
+<li>Deduplicate aggressively; repeated patterns can overfit tone and hurt generalization.</li>
+<li>Keep your instructions crisp and consistent; messy prompts in training become messy outputs.</li>
+<li>Add negative examples to teach refusals and safety edges early.</li>
+</ul>
+<h3 id="pickyourtrainingenvironment">Pick your training environment</h3>
+<ul>
+<li>Amazon SageMaker Training Jobs: fully managed, no cluster babysitting. You focus on configs and data.</li>
+<li>Amazon HyperPod: for teams needing more control over distributed training at scale.</li>
+</ul>
+<p>When to pick which:</p>
+<ul>
+<li>Training Jobs if your runs fit on a small to mid-size cluster, or you want quick spins without orchestration work.</li>
+<li>HyperPod if you’re coordinating many nodes, running long CPT jobs, or want advanced scheduling and failure recovery knobs.</li>
+</ul>
+<p>Operational hygiene:</p>
+<ul>
+<li>Save checkpoints on long runs so you can resume instead of restarting.</li>
+<li>Version your datasets and prompts; small changes can shift behavior.</li>
+<li>Track runs with consistent names and tags. You’ll thank yourself when you compare outcomes.</li>
+</ul>
+<p>First-hand example (pattern you can copy):</p>
+<ul>
+<li>Legal summarizer: Start with CPT on contracts, then LoRA on annotated summaries, then light DPO to prefer concise outputs with citations. Deploy to a streaming endpoint for responsive UI. Evaluate with MMLU-law subsets and a custom rubric via Inspect AI. This stack is repeatable across verticals.</li>
+</ul>
+<p>Two more patterns:</p>
+<ul>
+<li>Healthcare intake assistant: Use LoRA on de-identified transcripts to learn phrasing, then SFT on structured triage outputs. Add DPO to down-rank non-actionable answers. Stream responses for clinicians; cap tokens to keep notes tight.</li>
+<li>Developer helper: Start with LoRA on your codebase, then SFT on internal tool usage docs. Evaluate with HumanEval-style tasks plus your own repo tasks. Keep async endpoints for nightly bulk refactors.</li>
+</ul>
+<h2 id="shiptoprod">Ship to prod</h2>
+<h3 id="clicksinstudio">Clicks in Studio</h3>
+<p>Non-DevOps folks can deploy in minutes via SageMaker Studio:</p>
+<p>1) Pick your trained Nova model from Models.
+2) Click Deploy → SageMaker AI.
+3) Create a new endpoint.
+4) Set endpoint name, instance type, instance count, max count, permissions, VPC.
+5) Click Deploy.</p>
+<p>You get real-time endpoints with custom instance selection, auto scaling, and streaming API support for immediate token output. It feels like flipping a switch because… it is.</p>
+<p>Pro tips as you click:</p>
+<ul>
+<li>Choose an instance that matches your average prompt+completion size. Overprovisioning hurts margins.</li>
+<li>Set min instance count to 1 for low-latency cold starts; scale up with traffic.</li>
+<li>Enable VPC if you need private connectivity to data sources or downstream systems.</li>
+<li>Give the endpoint a dedicated IAM role with only what it needs.</li>
+</ul>
+<p>Common gotchas:</p>
+<ul>
+<li>Huge max token limits can quietly spike latency and costs. Start conservative and raise slowly.</li>
+<li>If you see timeouts, check concurrency and p95 latency before jumping to a bigger instance.</li>
+</ul>
+<h3 id="sdkroute">SDK route</h3>
+<p>Prefer code? The SageMaker AI SDK lets you:</p>
+<ul>
+<li>Create a model object pointing to your model artifacts and a region-specific container image.</li>
+<li>Define endpoint configuration: instance type(s), scaling, concurrency, networking.</li>
+<li>Create the endpoint and invoke via HTTPS.</li>
+</ul>
+<p>Tip: treat concurrency and max tokens as levers, not set-and-forget. For chat, enable streaming and constrain max new tokens to protect tail latency. For batch, spin up asynchronous endpoints that push results to S3.</p>
+<p><em>Quote to remember: “Auto Scaling automatically adjusts capacity based on traffic patterns, optimizing both costs and GPU utilization.” That’s your margin talking.</em></p>
+<p>Extra knobs worth knowing:</p>
+<ul>
+<li>Timeouts: Set them slightly above your p99 generation times to avoid false failures.</li>
+<li>Content types: Standardize your request/response payloads (JSON in, JSON out) for easier logging.</li>
+<li>Versioning: Keep a stable endpoint name and swap model variants under it for safer rollouts.</li>
+</ul>
+<h2 id="evaluateiterateexpandbedrock">Evaluate iterate expand Bedrock</h2>
+<h3 id="putnumbersonit">Put numbers on it</h3>
+<p>Once live, evaluate your customized Nova with Inspect AI. The framework supports:</p>
+<ul>
+<li>Evaluating fine-tuned or distilled variants at scale</li>
+<li>Parallel inference across multiple instances for speed</li>
+<li>Research benchmarks like MMLU, TruthfulQA, HumanEval</li>
+</ul>
+<p>Why you care: standard benchmarks give you a sanity baseline, but you should add task-specific rubrics (accuracy on your form types, refusal behavior, tone) and measure against business KPIs (CSAT, ticket deflection, first-pass success).</p>
+<p>“Evaluation … at scale” is how you avoid shipping vibes instead of outcomes.</p>
+<p>A simple evaluation loop:</p>
+<ul>
+<li>Establish a frozen test set with clear instructions and expected behaviors.</li>
+<li>Run baseline (pre-tune) scores, then re-run after each tuning step.</li>
+<li>Track latency and cost per request next to quality metrics.</li>
+<li>Add failure case tagging (hallucination, refusal, formatting) so fixes target root causes.</li>
+<li>Re-test before rollouts; compare variants side by side.</li>
+</ul>
+<p>Don’t skip qualitative checks. Pair metrics with spot checks from SMEs. If the model sounds right but fails subtle rules, you’ll catch it faster with expert eyes.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-17-2026-08-47-50-7386-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="bringitintobedrock">Bring it into Bedrock</h3>
+<p>You can import custom Nova models into Amazon Bedrock to access additional platform features.</p>
+<ul>
+<li>Train/customize in SageMaker AI.</li>
+<li>Use the CreateCustomModel API in Bedrock.</li>
+<li>Deploy with Bedrock capabilities while preserving your custom weights.</li>
+</ul>
+<p>Constraints matter: use US East (N. Virginia) and stick to supported Nova families (Lite, Micro, or Pro) for import. Bedrock validates artifacts from the Amazon-managed S3 bucket SageMaker AI creates during your first training job. Clean handoff, fewer surprises.</p>
+<p>Why import?</p>
+<ul>
+<li>Unify access for teams already building on Bedrock services.</li>
+<li>Tap into additional tooling available in Bedrock for orchestration or safety, where supported.</li>
+<li>Standardize monitoring and governance across multiple models.</li>
+</ul>
+<h2 id="costandreliabilitylevers">Cost and reliability levers</h2>
+<h3 id="rightsizefirstscalesecond">Right size first scale second</h3>
+<p>Your three biggest dials: instance type, auto scaling, and concurrency.</p>
+<ul>
+<li>Instance types: Start with the smallest GPU that hits your latency SLOs for your typical prompt size. Bigger isn’t always better—token throughput and KV cache efficiency matter more than headline TFLOPs.</li>
+<li>Auto scaling: Tie scale-out to request rate or utilization so you’re paying for traffic, not silence. Set cool-downs to avoid thrash.</li>
+<li>Concurrency: Raise it carefully; it improves utilization but can nuke tail latency if your prompts bloat. Monitor p95s.</li>
+</ul>
+<p><em>Quote worth taping to your monitor: SageMaker Inference is “configurable and cost-efficient,” but only if you treat these as live controls, not defaults.</em></p>
+<p>Simple optimization playbook:</p>
+<ul>
+<li>Profile a day of real prompts; find your median and 95th percentile prompt sizes.</li>
+<li>Set max tokens to cover 90–95% of cases; bump only if you truly need longer outputs.</li>
+<li>Enable streaming to improve perceived latency for chat; users relax when they see tokens flow.</li>
+<li>Separate batch jobs to async so your real-time fleet stays lean.</li>
+</ul>
+<h3 id="guardrailsthatkeepprodcalm">Guardrails that keep prod calm</h3>
+<ul>
+<li>Streaming for interactive apps: Perceived latency beats raw latency. Serve tokens as they’re generated.</li>
+<li>Max token caps: Protect your endpoint from prompt explosions.</li>
+<li>Async for batch: S3-based asynchronous endpoints keep your real-time fleet focused and cheap.</li>
+<li>Canary and blue/green: Stage new fine-tunes and compare with Inspect AI to avoid silent regressions.</li>
+</ul>
+<p><em>If you implement just these five controls, you’ll eliminate 80% of surprise GPU spend.</em></p>
+<p>Add a few more calm-makers:</p>
+<ul>
+<li>Input validation: Reject malformed or oversized requests early.</li>
+<li>Backpressure: If concurrency spikes, queue or deflect gracefully instead of crashing.</li>
+<li>Observability: Track tokens/sec, p50/p95/p99, 4xx/5xx rates, and timeouts in dashboards.</li>
+<li>Circuit breakers: If error rates jump, auto-rollback to the previous model variant.</li>
+</ul>
+<h2 id="speedcheck">Speed check</h2>
+<ul>
+<li>You can train Nova with SFT/DPO/RFT/LoRA/CPT/PPO and deploy to real-time or async endpoints.</li>
+<li>Configure instance type, auto scaling, and concurrency to match workload and budget.</li>
+<li>Use streaming for chatty UX; async for heavy batch.</li>
+<li>Evaluate with Inspect AI on MMLU/TruthfulQA/HumanEval plus your own rubrics.</li>
+<li>Import your custom Nova into Bedrock (us-east-1, supported families) when needed.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="whatmodelscanicustomize">What models can I customize</h3>
+<p>Amazon Nova families supported include Nova Micro, Nova Lite, and (per the announcement) options with reasoning capabilities like “Nova 2 Lite,” plus import support for Lite, Micro, or Pro into Bedrock. You can fine-tune with SFT, DPO, RFT, PEFT/LoRA, CPT, PPO, or full-rank.</p>
+<h3 id="realtimeandasynchronousendpoints">Real time and asynchronous endpoints</h3>
+<p>Use real-time for interactive apps (chatbots, tools) and enable streaming for fast token feedback. Use async for large batches or long-running jobs—requests land in S3, and you process results without tying up real-time capacity.</p>
+<h3 id="controlcostswithoutsacrificinglatency">Control costs without sacrificing latency</h3>
+<p>Yes. Right-size instance types, set auto scaling tied to traffic/utilization, and tune concurrency carefully. Cap max tokens and enable streaming to improve perceived latency. Offload batch traffic to async endpoints.</p>
+<h3 id="evaluatemodelsonsagemakerinference">Evaluate models on SageMaker Inference</h3>
+<p>Use Inspect AI to run standardized and custom evaluations. Test against community benchmarks (MMLU, TruthfulQA, HumanEval) and your domain tasks. Run in parallel across multiple endpoint instances to accelerate feedback loops.</p>
+<h3 id="pathtoamazonbedrock">Path to Amazon Bedrock</h3>
+<p>Customize in SageMaker AI, then call Bedrock’s CreateCustomModel to import. Use the US East (N. Virginia) region and supported Nova families for import. Bedrock validates and ingests artifacts from the Amazon-managed S3 bucket created during your first training job.</p>
+<h3 id="needdevopsexperts">Need DevOps experts</h3>
+<p>Not necessarily. SageMaker Studio covers click-to-deploy, and the SageMaker AI SDK lets engineers codify deployments. Networking, scaling, and monitoring are managed; you focus on configs, data, and evaluation.</p>
+<h3 id="keeptrafficprivatecontrolaccess">Keep traffic private control access</h3>
+<p>Yes. Place your endpoint in a VPC for private networking and use IAM policies to restrict who can invoke it. Limit access to specific roles or services so only approved apps can call your model.</p>
+<h3 id="thinkaboutsafetyandrefusals">Think about safety and refusals</h3>
+<p>Bake safety into training (SFT with negative examples) and tuning (DPO that prefers safe outputs). Add runtime checks in your app (input filters, output scanning). Evaluate refusal behavior alongside quality so you don’t drift.</p>
+<h3 id="handleversioningandrollbacks">Handle versioning and rollbacks</h3>
+<p>Treat model variants like app versions. Keep a stable endpoint, deploy a new variant, send a small slice of traffic (canary), and monitor. If errors rise or quality drops, roll back quickly to the previous variant.</p>
+<h3 id="longandmemoryheavyprompts">Long and memory heavy prompts</h3>
+<p>Plan for KV cache use and memory limits. Keep context windows tight, trim irrelevant history, and store facts in external systems you can retrieve on demand. If you still hit limits, move to a bigger instance or reduce concurrency.</p>
+<h2 id="novaonsagemakerlaunchplan">Nova on SageMaker launch plan</h2>
+<p>1) Define SLOs (p50/p95 latency, cost/request).
+2) Pick Nova size (Micro/Lite/Pro) and technique (LoRA → DPO → PPO as needed).
+3) Train in SageMaker Training Jobs or HyperPod.
+4) Store artifacts and pick region-appropriate container image.
+5) Create model + endpoint config (instance type, scaling, concurrency).
+6) Deploy real-time endpoint; enable streaming for chat.
+7) Add async endpoint for batch.
+8) Run Inspect AI evaluations (MMLU/TruthfulQA/HumanEval + custom rubrics).
+9) Tune tokens, concurrency, and scaling based on p95s and cost.
+10) Optionally import to Bedrock via CreateCustomModel.</p>
+<p><em>In short: ship small, measure hard, scale what works.</em></p>
+<p>Wrap-up: This launch kills the distance between “we trained a great model” and “our users can feel it.” You keep control—data, weights, behavior—while tapping managed infra for elasticity, streaming, and evaluation. Start with the lightest customization that moves your KPI, deploy to a right-sized fleet, and iterate with Inspect AI until the numbers sing. When you need more platform capabilities, import to Bedrock and keep cruising.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html">Amazon SageMaker real-time endpoints</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/endpoint-auto-scaling.html">SageMaker endpoint auto scaling</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointWithResponseStream.html">Streaming inference (InvokeEndpointWithResponseStream)</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/async-inference.html">Asynchronous inference</a></li>
+<li><a href="https://aws.amazon.com/sagemaker/hyperpod/">Amazon SageMaker HyperPod</a></li>
+<li><a href="https://github.com/openai/inspect_ai">Inspect AI (open-source evaluations)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateCustomModel.html">Amazon Bedrock CreateCustomModel API</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="sagemaker-nova-inference.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq010b.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Deploy+Custom+Nova+Models+Faster+With+SageMaker+Inference+Today&amp;pi=316137351898&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=316137351898&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fsagemaker-nova-inference&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/sagemaker-nova-inference?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:12:50 GMT -->
+</html>

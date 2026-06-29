@@ -1,0 +1,418 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/reimagine-mainframe-modernization?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:29:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Reimagine Legacy Mainframes With AI: Practical AWS Examples</title>
+    <link rel="canonical" href="reimagine-mainframe-modernization.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover reimagine capabilities examples that rebuild legacy mainframes with AI, microservices, and data lineage to drive agility and performance at scale.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Reimagine Legacy Mainframes With AI: Practical AWS Examples",
+        "datePublished": "2025-12-01T20:17:35Z",
+        "dateModified": "2025-12-01T20:17:35.953Z",
+        "mainEntityOfPage": "https://remktr.com/blog/reimagine-mainframe-modernization",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-01-2025-08-09-51-6247-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="reimagine-mainframe-modernization.html">Reimagine Legacy Mainframes With AI: Practical AWS Examples</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 1, 2025 8:17:35 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You don’t fix a 30-year-old mainframe by duct taping APIs on it. You reimagine it instead. That’s the leap from “we migrated” to “we move faster than the market.”</p>
+<p>Here’s the twist. An AI-led reimagine move doesn’t just port COBOL. It rebuilds the app into event-driven microservices. It extracts business logic you can’t afford to lose. It gives you data lineage so you’re not refactoring blind.</p>
+<p>If you’ve been hunting for reimagine help on Reddit, this is your field guide. Or collecting “examples that actually work,” same thing here. We’ll show how teams use AWS patterns. Think microservices, real-time functions, and generated docs. They turn monoliths into systems you can ship and scale.</p>
+<p>And yes, you keep the core logic your business runs on. You just make it faster, safer, and cheaper to change.</p>
+<p>Think of it like moving from a flip phone to a smartphone. Same contacts, way more capability. You’re not rewriting history. You’re upgrading how the business thinks, ships, and learns.</p>
+<p>This guide keeps it real. Concrete patterns, pitfalls to dodge, and a 30-day pilot you can run. <em>No hype. Just a repeatable playbook your team can copy and adapt.</em></p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li><em>Reimagine &gt; refactor: you redesign the app, not only the codebase.</em></li>
+<li>AI analysis plus org knowledge preserves core business rules during rebuild.</li>
+<li>Data lineage and automated data dictionaries stop broken assumptions.</li>
+<li>Event-driven microservices replace brittle batch jobs for agility.</li>
+<li>Generated, end-to-end docs align architects, devs, and business owners.</li>
+<li>Start with a tight pilot, instrument everything, and iterate fast.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-01-2025-08-11-24-3337-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="reimaginevsmigrate">Reimagine vs migrate</h2>
+<h3 id="monolithtoevents">Monolith to events</h3>
+<p>The reimagine path transforms legacy mainframe apps, not just ports them. Instead of lifting JCL-driven batch jobs and hoping for the best, you split them into cloud-native microservices triggered by events. For example, a nightly claims batch becomes real-time events. Files land in Amazon S3. Events route with Amazon EventBridge. AWS Step Functions orchestrate the flow. Steps run in parallel on AWS Lambda or containerized services.</p>
+<p>This shift turns a big-bang batch into bite-sized, observable work units. You gain auto scaling, fault isolation, and the freedom to ship changes independently.</p>
+<h3 id="underthehood">Under the hood</h3>
+<ul>
+<li>Idempotency becomes a first-class rule so retries don’t double charge or double notify.</li>
+<li>Ordering is handled on purpose, with state machines or FIFO queues where needed.</li>
+<li>Backpressure is managed with queues and dead-letter policies, not 3 a.m. firefights.</li>
+<li>Failures are contained. One bad event hurts only that message, not the job.</li>
+</ul>
+<p>A practical pattern looks like this. S3 to EventBridge for fan out. SQS for buffering and retry control. Step Functions for orchestration. Lambda or ECS for compute. You can scale hot paths without scaling the whole estate.</p>
+<h3 id="logicstaysintact">Logic stays intact</h3>
+<p>Reimagine does not mean “throw out the rules.” You extract the rules with AI-assisted analysis and institutional knowledge. The approach described as AWS Transform blends deep system analysis with your subject experts. It produces accurate business and technical docs. You get a clear map of decision tables, checks, and domain workflows before touching architecture.</p>
+<p>First-hand example. A pension calculation module with dense COBOL paragraphs gets documented. It becomes modular decision trees and sequence diagrams. Engineers implement these as stateless services with well tested rules in code. Business stakeholders can validate the logic in plain language.</p>
+<h3 id="protectlogic">Protect logic</h3>
+<ul>
+<li>Build a golden dataset with known inputs and outputs from the mainframe.</li>
+<li>Convert business rules into unit tests and contract tests, not only requirements docs.</li>
+<li>Use decision tables and rules engines only where they cut complexity. Keep most rules as readable code with tests.</li>
+<li>Hold short SME workshops, 60–90 minutes, to confirm edge cases stuck in people’s heads.</li>
+</ul>
+<p>When rules live as tests, they travel with the system. <em>That’s how you make change safe.</em></p>
+<h2 id="dataasnorthstar">Data as north star</h2>
+<h3 id="maprealflows">Map real flows</h3>
+<p>Legacy systems hide business rules inside copybooks, JCL, and odd file layouts. Reimagine forces clarity with data lineage across jobs and datasets. You trace which jobs produce which files. You track which programs change which fields. You map how downstream consumers rely on each column before redesigning schemas.</p>
+<p>Practically, you catalog sources. For example, VSAM exports into Amazon S3. You crawl them with AWS Glue to identify structures. You visualize lineage with Amazon DataZone to see upstream and downstream blast radius. That lets you refactor with confidence, not superstition.</p>
+<h3 id="automatedatadictionary">Automate data dictionary</h3>
+<p>You also generate an automated data dictionary. Every field gets a source, description, and owner. That dictionary becomes the contract for your new data plan. Maybe Amazon Aurora or Amazon DynamoDB for ops data. Amazon S3 plus Athena for analytics.</p>
+<p>First-hand example. A billing workload exposes fixed-length COBOL files. You crawl to infer schema. You map to normalized tables with constraints. You add lineage diagrams showing how each downstream report is produced. When you cut over, you know which dashboards to verify. You know which consumers to notify and which transforms to re-run.</p>
+<p>References on AWS. Glue crawlers for schema discovery. DataZone lineage for impact analysis. EventBridge for data-change events.</p>
+<h3 id="safeschemachanges">Safe schema changes</h3>
+<ul>
+<li>Track schemas with a registry so producers and consumers negotiate changes with versions.</li>
+<li>Tag sensitive fields, like PII or PHI, and enforce encryption and masking.</li>
+<li>Add data quality checks, like null rates and valid ranges, to catch regressions early.</li>
+<li>Keep OLTP and analytics separate so reports don’t drive transactional design.</li>
+</ul>
+<p><em>Data lineage plus a live dictionary gives you speed without breaking trust.</em></p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-01-2025-08-12-36-7695-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="usefuldocumentation">Useful documentation</h2>
+<h3 id="generateblueprints">Generate blueprints</h3>
+<p>Good docs are usually the first casualty in migrations. Reimagine flips that by generating end-to-end modernization docs as part of the work. The pattern described as AWS Transform creates complete artifacts. Current-state maps. Target architectures. Sequence diagrams. Domain models. API contracts.</p>
+<p>This is not busywork. It keeps parallel teams aligned. It simplifies security reviews. It de-risks change control. It also lets non-technical leaders confirm the modern system still enforces the rules that protect revenue.</p>
+<h3 id="alignbusinessandtech">Align business and tech</h3>
+<p>When product, compliance, and engineering share one living blueprint, you decide faster. You link each microservice to the original business capability. You link each data transform to a policy. You link each SLA to a real system SLO.</p>
+<p>First-hand example. A policy issuance flow becomes a domain-driven set of services. Quote, underwriting, bind, issue. Each with a clear API and data contract. Security and audit attach controls to the services. Operations attach SLOs to the workflows. You ship features without relitigating the whole design every sprint.</p>
+<h3 id="makedocsliving">Make docs living</h3>
+<ul>
+<li>Keep OpenAPI and AsyncAPI definitions in the repo, versioned with the code.</li>
+<li>Store diagrams as code so updates get reviewed like any change.</li>
+<li>Use Architecture Decision Records to capture why, not only what.</li>
+<li>Auto generate runbooks and onboarding checklists from pipeline metadata.</li>
+</ul>
+<p><em>If docs live where engineers live, the repo and the pipeline, they’ll stay accurate.</em></p>
+<h2 id="awspatterns">AWS patterns</h2>
+<h3 id="microservicesbaseline">Microservices baseline</h3>
+<p>Event-driven microservices are the backbone of the reimagine playbook. A common baseline:</p>
+<ul>
+<li>Ingestion: Files land in Amazon S3, which generates events.</li>
+<li>Routing: Amazon EventBridge fans events to the right domains.</li>
+<li>Orchestration: AWS Step Functions coordinates multi-step flows with retries and breakers.</li>
+<li>Compute: AWS Lambda for bursty, stateless steps. Amazon ECS or EKS for long-running services.</li>
+<li>Data: Amazon Aurora for relational. DynamoDB for key value. S3 plus Athena for analytics. Amazon OpenSearch Service for search.</li>
+<li>Observability: Amazon CloudWatch metrics and logs, and AWS X-Ray tracing.</li>
+</ul>
+<p>This setup turns nightly batches into steady flows. You don’t wait 24 hours to see failures.</p>
+<h3 id="datafirstrefactor">Data first refactor</h3>
+<p>Most mainframe programs are quietly ETL. As you reimagine, split operational data paths from analytical ones. Keep OLTP in Aurora or DynamoDB. Push analytics to S3, catalog with Glue, and query with Athena. Or feed your warehouse.</p>
+<p>First-hand example. A premium rating batch once wrote to flat files. Now it publishes domain events like QuoteCalculated and PolicyIssued. Microservices consume those events. They also land in S3 for analytics. Auditors can trace a premium change from event to storage to report, thanks to lineage.</p>
+<p>You can phase this with a Strangler Fig pattern. Wrap the old system with new services. Route traffic gradually. Retire legacy modules as coverage expands.</p>
+<h3 id="reliabilitypatterns">Reliability patterns</h3>
+<ul>
+<li>Transactional outbox to move from DB writes to events without losing atomicity.</li>
+<li>Dead-letter queues and replay tools so transient failures don’t become outages.</li>
+<li>Canary and blue/green deploys to cut over safely and roll back fast.</li>
+<li>Quotas, alarms, and circuit breakers to protect downstream systems from surges.</li>
+</ul>
+<p><em>Build these in early.</em> They are your seatbelts when traffic spikes or a dependency hiccups.</p>
+<h2 id="halfwayoutcomes">Halfway outcomes</h2>
+<ul>
+<li>You rebuild around events, not nightly batches.</li>
+<li>Your business rules are documented and tested, not trapped in COBOL.</li>
+<li>Lineage and a data dictionary de-risk schema redesigns.</li>
+<li>Docs are generated as part of the work, not afterthoughts.</li>
+<li>You can explain the architecture to execs and auditors in one page.</li>
+<li>You have a pilot slice running with observability and rollback.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="reimaginevsrefactor">Reimagine vs refactor</h3>
+<p>Refactor changes code structure while keeping behavior. Reimagine redesigns the architecture and the experience. You break a monolith into event-driven microservices. You rethink data flows. You automate docs and lineage so you move fast without losing rules.</p>
+<h3 id="preservebusinesslogic">Preserve business logic</h3>
+<p>Use AI-assisted system analysis plus institutional knowledge. The approach described as AWS Transform produces complete business and technical documentation before you cut code. Then you implement rules as tests and domain services. Stakeholders validate the outputs.</p>
+<h3 id="awsbuildingblocks">AWS building blocks</h3>
+<p>Common pieces: Amazon S3 for ingestion. Amazon EventBridge for events. AWS Step Functions for orchestration. AWS Lambda, ECS, or EKS for compute. Amazon Aurora and DynamoDB for data. AWS Glue and Amazon DataZone for catalog and lineage. CloudWatch and X-Ray for observability. You can also use AWS Mainframe Modernization services for refactor and replatform paths.</p>
+<h3 id="batchtoeventsrisk">Batch to events risk</h3>
+<p>You lower risk with progressive delivery. Run events alongside batches. Validate outputs with parity tests. Use a Strangler Fig routing layer. Cut over domain by domain. Lineage maps and a live data dictionary reduce surprises.</p>
+<h3 id="pilottimeline">Pilot timeline</h3>
+<p>A focused pilot that slices one batch into events often fits in weeks. Not months. You need tight scope, clear owners, and automated tests. The goal is learning speed and a repeatable template, not boiling the ocean.</p>
+<h3 id="moreexamples">More examples</h3>
+<p>Scan community threads for patterns, sure. But anchor choices in your domain. Use the examples here as starting points. Then validate with your data, constraints, and compliance rules.</p>
+<h2 id="30daypilotplan">30 day pilot plan</h2>
+<ul>
+<li>Pick one batch flow with high business value and limited dependencies.</li>
+<li>Extract business rules. Interview SMEs, generate docs, write parity tests.</li>
+<li>Catalog data sources with Glue. Map lineage with DataZone.</li>
+<li>Design events and APIs. Define success metrics and SLOs.</li>
+<li>Implement ingestion (S3), routing (EventBridge), and orchestration (Step Functions).</li>
+<li>Build services on Lambda or ECS. Wire Aurora or DynamoDB as needed.</li>
+<li>Stand up observability with CloudWatch and X-Ray. Enable tracing and alerts.</li>
+<li>Run batches and events in parallel. Compare outputs. Fix deltas.</li>
+<li>Gradually shift traffic. Monitor. Document learnings as reusable templates.</li>
+</ul>
+<p>You don’t modernize by hoping. You modernize by instrumenting.</p>
+<h3 id="weekbyweeksnapshot">Week by week snapshot</h3>
+<ul>
+<li>Week 1: Scope the pilot slice. Confirm owners. Capture existing inputs and outputs. Build a golden dataset. Stand up a skeleton repo with CI/CD and a basic event bus.</li>
+<li>Week 2: Generate documentation from analysis. Define APIs and event schemas. Build the first service path end to end behind a feature flag.</li>
+<li>Week 3: Add parity tests. Wire lineage and data cataloging. Turn on observability with useful dashboards and alerts. Start parallel runs.</li>
+<li>Week 4: Fix deltas. Run canaries. Do a controlled cutover for a subset of traffic. Write up the template playbook for the next slice.</li>
+</ul>
+<h3 id="whattomeasure">What to measure</h3>
+<ul>
+<li>Lead time from change to deploy for the pilot path.</li>
+<li>Parity score, percent of outputs matching the golden dataset.</li>
+<li>Mean time to detect and resolve when a step fails.</li>
+<li>Cost per 1,000 events versus batch run cost.</li>
+<li>Onboarding time for a new engineer using the docs and runbooks.</li>
+</ul>
+<h2 id="securityandgovernance">Security and governance</h2>
+<p>Security is not a separate lane. It’s part of the blueprint.</p>
+<ul>
+<li>Identity and access: Least-privilege IAM roles per service. Scoped dataset access, not blanket buckets.</li>
+<li>Encryption: KMS for keys. Default encryption for S3, Aurora, and DynamoDB. TLS in transit everywhere.</li>
+<li>Secrets: Store in Secrets Manager, not env vars. Rotate on a schedule.</li>
+<li>Audit: CloudTrail enabled in all accounts. Structured logs with immutable storage for retention.</li>
+<li>Config and drift: AWS Config rules ensure encryption, logging, and tagging don’t drift.</li>
+<li>Data protections: Tag PII and PHI. Mask in non-prod. Apply fine-grained access to analytics.</li>
+</ul>
+<p><em>It’s part of the blueprint.</em></p>
+<h2 id="testingandquality">Testing and quality</h2>
+<ul>
+<li>Parity tests: Replay golden inputs through both systems. Compare outputs field by field.</li>
+<li>Contract tests: Validate APIs and events with schemas to catch breaking changes early.</li>
+<li>Replay strategy: Keep dead-letter queues and S3 archives so you can reprocess safely.</li>
+<li>Backfill plan: Script historical loads with checkpoints to avoid double counting.</li>
+<li>Chaos drills: Kill a dependency in test and confirm graceful degradation.</li>
+</ul>
+<p><em>The goal isn’t zero bugs.</em> It’s fast detection, safe rollback, and no surprises.</p>
+<h2 id="observability">Observability</h2>
+<ul>
+<li>Metrics: Emit at every step. Latency, throughput, error rate, and saturation.</li>
+<li>Traces: End-to-end request traces with IDs flowing through events.</li>
+<li>Logs: Structured logs with correlation IDs and context for easy grep.</li>
+<li>SLOs: Tie service-level objectives to goals like “quote time under 2s.”</li>
+<li>Synthetic checks: Ping critical flows nonstop, not only during business hours.</li>
+</ul>
+<p>Observability tells you what happened and why. <em>That’s how you move from firefighting to engineering.</em></p>
+<h2 id="costandperformance">Cost and performance</h2>
+<ul>
+<li>Right size compute. Use Lambda for spiky, short tasks. Use containers for steady, long work.</li>
+<li>Storage classes: Choose S3 classes wisely for archives, analytics, and hot paths.</li>
+<li>Autoscaling: Scale on real signals like queue depth and latency, not wishes.</li>
+<li>Caching: Cache hot reads at the edge or in memory to cut latency and cost.</li>
+<li>Cost visibility: Tag everything. Set budgets and alerts by team and product.</li>
+</ul>
+<p><em>Cost is a feature.</em> Design it early so finance loves the new world too.</p>
+<h2 id="peopleandprocess">People and process</h2>
+<ul>
+<li>Team topology: Align teams to business domains, not layers of the stack.</li>
+<li>Platform team: Offer golden paths, templates, and paved roads so app teams move fast.</li>
+<li>Change cadence: Small, frequent releases with checks beat quarterly big bangs.</li>
+<li>Shared language: Product, engineering, and compliance use the same blueprint and metrics.</li>
+</ul>
+<p>Technology change fails without people change. <em>Bring the humans along.</em></p>
+<h2 id="antipatternstoavoid">Anti patterns to avoid</h2>
+<ul>
+<li>Lift and shift the batch as one giant container, then wonder why nothing improved.</li>
+<li>Rewriting rules from memory and skipping parity tests because “we know the system.”</li>
+<li>Pushing analytics through OLTP tables, then blaming the database for slowness.</li>
+<li>Docs in a slide deck no one updates.</li>
+<li>Over-optimizing for a tool instead of a business outcome.</li>
+</ul>
+<p>If a choice makes change slower or riskier, it’s not reimagine. <em>It’s rearrange.</em></p>
+<p>The big unlock here isn’t a tool. It’s a mindset. You’re not just moving off mainframe. You’re designing a system that can adapt. New markets, new products, new regs. And still ship weekly. AI-assisted analysis helps you keep your rules. Event-driven microservices help you scale and evolve. Data lineage helps you not break trust. Start with a narrow pilot, measure everything, and turn the first win into a factory. Future you will thank present you for not just refactoring, but reimagining.</p>
+<p>If you want a simple first move this week, do this. Pick the smallest high-value batch. Sketch the event flow on one page. Book two SME sessions. By Friday, you’ll know your golden dataset, your first event, and your parity plan. That’s momentum.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>AWS Mainframe Modernization service overview: <a href="https://aws.amazon.com/mainframe-modernization/">AWS Mainframe Modernization service overview</a></li>
+<li>AWS Mainframe Modernization features (refactor, replatform): <a href="https://aws.amazon.com/mainframe-modernization/features/">AWS Mainframe Modernization features (refactor, replatform)</a></li>
+<li>Amazon EventBridge documentation: <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html">Amazon EventBridge documentation</a></li>
+<li>AWS Step Functions documentation: <a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html">AWS Step Functions documentation</a></li>
+<li>AWS Glue Crawlers (schema discovery): <a href="https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">AWS Glue Crawlers (schema discovery)</a></li>
+<li>Amazon DataZone data lineage: <a href="https://docs.aws.amazon.com/datazone/latest/userguide/lineage.html">Amazon DataZone data lineage</a></li>
+<li>Amazon Aurora overview: <a href="https://aws.amazon.com/rds/aurora/">Amazon Aurora overview</a></li>
+<li>Amazon DynamoDB documentation: <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html">Amazon DynamoDB documentation</a></li>
+<li>AWS Lambda developer guide: <a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS Lambda developer guide</a></li>
+<li>Amazon ECS documentation: <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html">Amazon ECS documentation</a></li>
+<li>Amazon EKS documentation: <a href="https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html">Amazon EKS documentation</a></li>
+<li>Amazon S3 event notifications: <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/NotificationHowTo.html">Amazon S3 event notifications</a></li>
+<li>Amazon SQS developer guide: <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html">Amazon SQS developer guide</a></li>
+<li>Amazon SNS developer guide: <a href="https://docs.aws.amazon.com/sns/latest/dg/welcome.html">Amazon SNS developer guide</a></li>
+<li>Amazon Kinesis Data Streams: <a href="https://docs.aws.amazon.com/streams/latest/dev/introduction.html">Amazon Kinesis Data Streams</a></li>
+<li>AWS Glue Schema Registry: <a href="https://docs.aws.amazon.com/glue/latest/ug/schema-registry.html">AWS Glue Schema Registry</a></li>
+<li>Amazon Athena documentation: <a href="https://docs.aws.amazon.com/athena/latest/ug/what-is.html">Amazon Athena documentation</a></li>
+<li>Amazon OpenSearch Service: <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html">Amazon OpenSearch Service</a></li>
+<li>Amazon CloudWatch: <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html">Amazon CloudWatch</a></li>
+<li>AWS X-Ray: <a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html">AWS X-Ray</a></li>
+<li>AWS Key Management Service (KMS): <a href="https://docs.aws.amazon.com/kms/latest/developerguide/overview.html">AWS Key Management Service (KMS)</a></li>
+<li>AWS CloudTrail: <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html">AWS CloudTrail</a></li>
+<li>AWS Config: <a href="https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html">AWS Config</a></li>
+<li>AWS Secrets Manager: <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager</a></li>
+<li>Strangler Fig Application pattern (Martin Fowler): <a href="https://martinfowler.com/bliki/StranglerFigApplication.html">Strangler Fig Application pattern (Martin Fowler)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="reimagine-mainframe-modernization.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq3244.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Reimagine+Legacy+Mainframes+With+AI%3A+Practical+AWS+Examples&amp;pi=268144324283&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=268144324283&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Freimagine-mainframe-modernization&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/reimagine-mainframe-modernization?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:29:45 GMT -->
+</html>

@@ -1,0 +1,343 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/s3-performance-metrics?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:29:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Turn S3 Storage Lens Metrics Into Real Speed Gains</title>
+    <link rel="canonical" href="s3-performance-metrics.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore performance metrics insights and examples in Amazon S3 Storage Lens. Identify inefficient requests, analyze access patterns, and export daily reports.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Turn S3 Storage Lens Metrics Into Real Speed Gains",
+        "datePublished": "2025-12-02T20:49:06Z",
+        "dateModified": "2025-12-02T20:49:06.969Z",
+        "mainEntityOfPage": "https://remktr.com/blog/s3-performance-metrics",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-02-2025-08-43-06-5603-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="s3-performance-metrics.html">Turn S3 Storage Lens Metrics Into Real Speed Gains</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 2, 2025 8:49:06 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>If your app feels slow, but CloudWatch looks fine, you’re flying blind. The real bottleneck hides in how objects get requested, how often, and from where. And yes, those tiny GETs are stealing speed.</p>
+<p>Here’s the good news. Amazon S3 Storage Lens just added eight new performance metric categories. They aggregate daily across your org, accounts, buckets, and prefixes. Translation: you finally get performance insights with examples you can actually act on.</p>
+<p>You’ll spot patterns like small, frequent requests, the small-request tax hitting hard. You’ll see cross-Region hops and hot objects that deserve faster storage. Then you’ll fix them. Batch small reads, cache the top 1%, or move latency-sensitive sets to S3 Express One Zone.</p>
+<p><em>This isn’t just a nice dashboard. It’s a roadmap to faster load times, happier users, and lower network overhead.</em></p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>New S3 performance metrics expose inefficient access patterns and cross-Region hops.</li>
+<li>Read Request Size highlights small GETs; fix with batching or S3 Express One Zone.</li>
+<li>Request Origin reveals latency from cross-Region access. Cache or colocate data.</li>
+<li>Object Access Count finds hot objects worth caching or tiering up.</li>
+<li>Export daily metrics to CSV or Parquet, or publish to CloudWatch for alerts.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-44-26-4672-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="yournews3speedometereightsignalsyouactuallyneed">Your new S3 speedometer: eight signals you actually need</h2>
+<h3 id="whatchanged">What changed</h3>
+<p>Amazon S3 Storage Lens now ships eight new performance metric categories. They appear across four scopes: organization, account, bucket, and prefix. You’ll see them in the S3 console dashboard. Metrics are aggregated and published daily. You can export reports in CSV or Parquet to any S3 bucket you own. Or publish them to Amazon CloudWatch for deeper analysis and alerting.</p>
+<p>These aren’t vanity stats. Think metrics Amazon teams actually use. Read Request Size distributions, Access Pattern metrics, Request Origin counts, and Object Access Count. In plain English: how big your reads are, how often you hit S3, where traffic comes from, and which objects get hammered.</p>
+<p>If you’ve used Storage Lens before, you know the vibe. Organization-wide visibility with drill-down by account, bucket, and prefix. The new performance categories slot right into that model. You can investigate a slow user flow, zoom from org → account → bucket → exact prefix, and see daily patterns behind your p95. No more chasing hunches across services.</p>
+<p>One practical note. These performance metrics live in the advanced tier. Enable them per dashboard, pick your scopes, and choose exports. For larger environments, wire Parquet export on day one. You’ll want history for trend analysis and to prove your fixes moved the needle.</p>
+<h3 id="whyyoucare">Why you care</h3>
+<p>This is where performance metrics in data analysis meets reality. You’re done guessing which prefixes are killing p95 latency. You can pinpoint a workload sending 10K tiny GETs per minute from another Region, then fix it fast. If you wanted performance metrics insights with examples you can apply, this is it.</p>
+<blockquote>
+  <p><em>“Batch small objects or leverage the Amazon S3 Express One Zone storage class for high-performance small object workloads.”</em> — AWS guidance</p>
+</blockquote>
+<p>Even better, these metrics map to clear owner actions. If you run platform, you can nudge app teams with evidence, not opinions. If you own an app, you’ll spot bad patterns you introduced by accident. Like a refactor that turned one 2 MB GET into 400 chatty reads. That’s an easy rollback or a quick batch job.</p>
+<p>And yes, this helps with cost governance too. Cross-Region requests add latency and potentially higher transfer costs. Unnecessary request storms mean more operations to pay for. Performance and cost are a two-for-one when you remove wasted work.</p>
+<h2 id="stoppayingthesmallrequesttaxandwinbackmilliseconds">Stop paying the small-request tax (and win back milliseconds)</h2>
+<h3 id="spottingfragmentationwithreadrequestsize">Spotting fragmentation with Read Request Size</h3>
+<p>Small reads feel cheap, until they multiply. The Read Request Size metric shows daily GET size distributions. If your workload leans into tiny ranges or small objects, you pay overhead. Network chatter, TLS handshakes, and client churn stack up. That’s the small-request tax.</p>
+<p>This metric highlights datasets or prefixes where object layout fights your access pattern. If you see spikes in the smallest buckets, that’s your smoking gun.</p>
+<p>What does small look like in practice? Thumbnail images pulled one-by-one. JSON blobs fetched piecemeal. A streaming reader grabbing a few kilobytes at a time. If SDK retries, pagination, or concurrency are off, you multiply tiny reads. Latency can spike during peak traffic.</p>
+<p>Use Read Request Size over a few days to spot trends. Separate one-off spikes from structural issues. A batch job or migration looks different than a service pattern. If the smallest bucket dominates across days and prefixes, fix the layout, not just code.</p>
+<h3 id="fixingitfastbatchingandbetterplacement">Fixing it fast: batching and better placement</h3>
+<p><em>Two proven fixes:</em></p>
+<ul>
+<li>Batch or bundle: Combine related small objects into larger blobs or manifests. Fewer, larger GETs cut overhead and improve throughput. If you can’t repackage, use range GETs against a structured container format.</li>
+<li>Upgrade the hot path: For latency-sensitive small-object workloads, move them to S3 Express One Zone. It’s built for consistent, single-digit millisecond access at high request rates. AWS literally recommends it for this scenario.</li>
+</ul>
+<p>Add a canary. Publish Read Request Size to CloudWatch and alarm when tiny buckets jump. That turns hidden performance drift into a visible page.</p>
+<p>Make the change surgical, not scary. Start with a narrow prefix and a rollout plan. For bundling, create a manifest mapping object IDs to byte ranges. Then your app can read only what it needs via range GET. For placement, promote just the hot path to S3 Express One Zone. Keep the rest in your current storage class. Validate by comparing Read Request Size before versus after. If you use a CDN, watch cache hit ratios climb.</p>
+<p>Extra credit: check client settings. Right-size connection pools, tune timeouts, and avoid retry storms. Even with better layout, a chatty client can erase gains.</p>
+<h2 id="latencylivesingeographymakerequestoriginyourfriend">Latency lives in geography: make Request Origin your friend</h2>
+<h3 id="seethepathyourdataactuallytakes">See the path your data actually takes</h3>
+<p>Request Origin metrics show when requests cross Regions. That’s a double hit. Higher latency and potentially higher transfer costs. If your app in us-east-1 keeps calling S3 in eu-west-1, you’re adding avoidable roundtrips.</p>
+<p>You can slice this at org, account, bucket, and prefix. Find the exact namespace doing the cross-Region dance. Spoiler: it’s often a microservice nobody realized moved. Or a data science job with a hardcoded bucket.</p>
+<p>This visibility shines during reorganizations, migrations, and multi-Region expansions. Teams shift compute to a new Region but reuse the old bucket “for now.” That temporary choice sticks. Request Origin exposes it. Add it to change management. When a service moves Regions, confirm the S3 access pattern moved too.</p>
+<h3 id="reduceroundtripsthenoptimizecost">Reduce roundtrips, then optimize cost</h3>
+<p>Your playbook:</p>
+<ul>
+<li>Colocate data and compute: Keep hot datasets in the same Region as the app. If you run multi-Region, replicate the hotset.</li>
+<li>Add an edge: Front S3 with Amazon CloudFront for static content. Reduce latency and offload reads.</li>
+<li>Use Multi-Region Access Points for global workloads. Route to the closest Region.</li>
+<li>Monitor drift: If cross-Region counts spike in Request Origin, alert and investigate. That’s performance debt you don’t want.</li>
+</ul>
+<p>This is one of those performance metrics examples that also saves money. Speed and cost control can share the same lever.</p>
+<p><em>Reality check.</em> Not every workload can be perfectly colocated. Compliance, residency, or legacy ties may force cross-Region access. In those cases, cache aggressively. Push large immutable assets closer to users. Document exceptions so they don’t bite later.</p>
+<p><em>Pro move:</em> pair Request Origin with deployment events. When a new Region goes live, measure cross-Region access. It should drop as expected. If it doesn’t, a routing rule, configuration, or DNS setting needs love.</p>
+<h2 id="halftimehuddlewhatsworkingandwhattofixnext">Half-time huddle: what’s working (and what to fix next)</h2>
+<ul>
+<li>Read Request Size reveals the small-request tax; batch or promote to S3 Express One Zone.</li>
+<li>Access Pattern metrics flag too-small or too-frequent requests.</li>
+<li>Request Origin shows when cross-Region access adds latency and cost.</li>
+<li>Object Access Count isolates your hot 1%—perfect for caching or higher-performance tiers.</li>
+<li>Export daily to S3 (CSV or Parquet) or publish to CloudWatch to automate alerts.</li>
+</ul>
+<p>Use this checklist to prioritize. Start with quick wins. Stop cross-Region thrash, promote the tiny-object hot path, and batch the loudest offenders. Then build weekly reviews. If you ship fast, patterns drift fast. Storage Lens makes those drifts visible before they become incidents.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-02-2025-08-46-03-9117-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whenafewobjectscarrytheloadtreatthemlikevips">When a few objects carry the load, treat them like VIPs</h2>
+<h3 id="findthehot1withobjectaccesscount">Find the hot 1% with Object Access Count</h3>
+<p>Most workloads are Pareto. A small subset drives most traffic. Object Access Count surfaces prefixes and objects with outsized reads. That’s your VIP list. If your CDN or app cache isn’t tuned to that set, you’re leaving wins on the table.</p>
+<p>Map the hotset across buckets and prefixes. If it’s small enough, move it to faster storage. If it’s large, cache it more aggressively and review TTLs.</p>
+<p>Object Access Count also helps release hygiene. When you add new content or a model version, watch its rise. If a new hotset appears, pre-warm caches and ensure origin capacity. If an old hotset cools off, drop its TTLs or demote it to a cheaper class.</p>
+<h3 id="upgradestrategycachetierupandsimplifypaths">Upgrade strategy: cache, tier up, and simplify paths</h3>
+<p>Three upgrades that compound:</p>
+<ul>
+<li>Cache first: Push the hotset to CloudFront with the right cache keys and TTLs. For APIs, consider application caches like Redis or Memcached for repeated S3 reads.</li>
+<li>Tier up for performance: Put latency-critical hotsets on S3 Express One Zone. You’ll improve throughput and p95 latency consistency.</li>
+<li>De-duplicate access paths: If multiple services pull the same assets through different prefixes, consolidate. You’ll reduce requests and cache misses.</li>
+</ul>
+<p><em>Pro tip:</em> combine Object Access Count with Access Pattern metrics. If the same objects are hot and hit by tiny GETs, bundle them. Or store them in a layout optimized for ranged reads. That’s performance metrics insights, Amazon edition.</p>
+<p>Two common gotchas to avoid:</p>
+<ul>
+<li>Mismatched cache keys: If your key includes noisy query params or headers, you’ll miss easy hits. Normalize them.</li>
+<li>Overlong TTLs: If content changes often, long TTLs cause stale responses and chaos. Keep TTLs sane and use ETags for validation where it fits.</li>
+</ul>
+<h2 id="fromdashboardstoactionexportsalarmsandqueriesthatpayoff">From dashboards to action: exports, alarms, and queries that pay off</h2>
+<h3 id="getitoutoftheconsole">Get it out of the console</h3>
+<p>Pretty charts don’t page anyone. Storage Lens can export metrics to S3 in CSV or Parquet, daily, across your scopes. Parquet plus Amazon Athena gives instant SQL over performance history. That’s where real performance metrics in data analysis pipelines live.</p>
+<p>Examples:</p>
+<ul>
+<li>Trend Read Request Size for a key prefix after a deployment.</li>
+<li>Correlate Request Origin spikes with a new Region launch.</li>
+<li>Identify buckets where Access Pattern metrics show request bursts.</li>
+</ul>
+<p>Map the basic data flow:</p>
+<ul>
+<li>Export to a dedicated S3 bucket with lifecycle rules. Keep history without blowing up storage.</li>
+<li>Register the dataset in AWS Glue Data Catalog. Athena and QuickSight can discover it easily.</li>
+<li>Partition by date, and optionally by account or bucket. Keep queries fast and cheap.</li>
+<li>Create saved queries for common checks. Tiny-GET spike by prefix and cross-Region by service.</li>
+</ul>
+<p>Once this hums, build a weekly report. Keep it light. The three worst prefixes by small reads, the top cross-Region offenders, and the new hot objects. Share wins so teams see the feedback loop working.</p>
+<h3 id="wirealertsandbuildthefeedbackloop">Wire alerts and build the feedback loop</h3>
+<p>Publish to Amazon CloudWatch and set alarms:</p>
+<ul>
+<li>Alarm when tiny-read distribution crosses a threshold for a given prefix.</li>
+<li>Alarm on cross-Region Request Origin counts for latency-sensitive services.</li>
+<li>Alarm when Object Access Count shifts and a new hotset emerges. Pre-warm caches or promote to faster storage.</li>
+</ul>
+<p>Close the loop with a runbook. If alarm X fires, batch small objects, flip a routing rule, or move a hotset to S3 Express One Zone. That’s how insights become deployment-time automation.</p>
+<p>Don’t forget permissions and guardrails. Limit who can change dashboards, exports, and alarms. Tag Storage Lens resources by environment and owner. Then you know who to ping when a metric goes sideways. Document thresholds—why they exist and how to tune them.</p>
+<h2 id="faqsquickanswerswhileyourexportruns">FAQs: quick answers while your export runs</h2>
+<h3 id="1howdoienablethesenews3performancemetrics">1. How do I enable these new S3 performance metrics?</h3>
+<p>In the S3 console, create or edit a Storage Lens dashboard. Enable activity and performance metrics for your scope: org, account, bucket, or prefix. Choose export options, CSV or Parquet to S3. Optionally publish to CloudWatch for alerting. Metrics are aggregated and published daily.</p>
+<h3 id="2whatsthedifferencebetweenstoragelensands3requestmetricsincloudwatch">2. What’s the difference between Storage Lens and S3 request metrics in CloudWatch?</h3>
+<p>S3 request metrics in CloudWatch are near real-time per-bucket or prefix counters. Think 4xx errors and total requests. Storage Lens aggregates broader usage and performance insights daily. It spans organization to prefix granularity. It adds Read Request Size, Request Origin, Access Pattern, and Object Access Count.</p>
+<h3 id="3howdorequestoriginmetricshelpwithlatencyandcost">3. How do Request Origin metrics help with latency and cost?</h3>
+<p>They show cross-Region access patterns. If your app hits a bucket in another Region, latency rises. Transfer costs can rise too. With visibility, you can relocate data, add CloudFront caching, or use Multi-Region Access Points.</p>
+<h3 id="4whatshouldidoifreadrequestsizeshowslotsoftinygets">4. What should I do if Read Request Size shows lots of tiny GETs?</h3>
+<p>Batch objects, restructure into larger containers, or use range requests. For low-latency small-object workloads, consider S3 Express One Zone. Also check client behavior. Retry storms and chatty pagination hurt. Tune SDK timeouts and concurrency.</p>
+<h3 id="5isthisthesameasperformancemetricsforemployees">5. Is this the same as performance metrics for employees?</h3>
+<p>No. These are storage performance metrics for S3 workloads. If you want performance metrics for employees, that’s HR or people analytics. Totally different.</p>
+<h3 id="6canianalyzestoragelensparquetexportswithsql">6. Can I analyze Storage Lens Parquet exports with SQL?</h3>
+<p>Yes. Register the exported Parquet dataset in AWS Glue Data Catalog. Query it with Amazon Athena. It’s a clean way to build recurring reports and QuickSight dashboards on trends.</p>
+<h3 id="7dothesemetricsprovidehistoricaldatabeforeienablethem">7. Do these metrics provide historical data before I enable them?</h3>
+<p>Metrics populate after you enable a dashboard. They’re delivered daily. Plan ahead and turn them on before a big launch. Then you’ll have a clean before-and-after.</p>
+<h3 id="8willenablingadvancedperformancemetricscostextra">8. Will enabling advanced performance metrics cost extra?</h3>
+<p>Advanced metrics are a paid feature. Check AWS pricing and scope carefully. Many teams enable them on a focused set of accounts, buckets, and prefixes. You get signal without overspending.</p>
+<h2 id="shipafasters3inoneafternoonthechecklist">Ship a faster S3 in one afternoon: the checklist</h2>
+<ul>
+<li>Turn on Storage Lens performance metrics for your key buckets and prefixes.</li>
+<li>Export to Parquet in S3 and wire Athena for ad-hoc queries.</li>
+<li>Publish to CloudWatch. Create alarms for tiny-read spikes and cross-Region requests.</li>
+<li>Identify the top hotset via Object Access Count. Cache it or promote it.</li>
+<li>Batch small objects or switch the hot path to S3 Express One Zone.</li>
+<li>Re-run Read Request Size and Request Origin. Confirm the before and after delta.</li>
+</ul>
+<p><em>You don’t need a six-month migration to make S3 feel faster.</em> You need better signals and tighter loops. Storage Lens gives you both. Start with ugly truths. Tiny reads, cross-Region hops, and a handful of objects doing most of the work. Then turn those into wins. Batch more, cache smarter, and promote your hot path to faster storage when it counts.</p>
+<p>If you build the habit—export, analyze, alert, fix—you’ll watch p95s drop. Incidents will shrink. That’s the compounding effect of performance metrics insights, applied at the prefix level, not just the whiteboard.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>Amazon S3 Storage Lens overview: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html</li>
+<li>Storage Lens metrics glossary and dimensions: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage<em>lens</em>metrics_glossary.html</li>
+<li>Publish Storage Lens metrics to CloudWatch: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage<em>lens</em>cloudwatch.html</li>
+<li>Amazon S3 Express One Zone: https://aws.amazon.com/s3/storage-classes/express-one-zone/</li>
+<li>Optimize performance for Amazon S3: https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance.html</li>
+<li>Amazon CloudFront for S3 content: https://aws.amazon.com/cloudfront/</li>
+<li>S3 Multi-Region Access Points: https://aws.amazon.com/s3/features/multi-region-access-points/</li>
+<li>Amazon S3 pricing for Storage Lens: https://aws.amazon.com/s3/pricing/#Amazon<em>S3</em>Storage_Lens</li>
+<li>Amazon Athena documentation: https://docs.aws.amazon.com/athena/latest/ug/what-is.html</li>
+<li>AWS Glue Data Catalog: https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html</li>
+<li>Amazon QuickSight overview: https://docs.aws.amazon.com/quicksight/latest/user/welcome.html</li>
+<li>S3 GET Object API (Range support): https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html</li>
+<li>Amazon ElastiCache (Redis/Memcached): https://aws.amazon.com/elasticache/</li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="s3-performance-metrics.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq4a16.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Turn+S3+Storage+Lens+Metrics+Into+Real+Speed+Gains&amp;pi=268899670731&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=268899670731&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fs3-performance-metrics&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/s3-performance-metrics?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:29:44 GMT -->
+</html>

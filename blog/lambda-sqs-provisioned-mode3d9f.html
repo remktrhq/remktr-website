@@ -1,0 +1,437 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/lambda-sqs-provisioned-mode?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Crush SQS Latency With Lambda Provisioned Pollers Now</title>
+    <link rel="canonical" href="lambda-sqs-provisioned-mode.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover AWS Lambda provisioned mode for SQS event source mapping to achieve 3x faster scaling, lower latency, and controlled concurrency via min/max pollers.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Crush SQS Latency With Lambda Provisioned Pollers Now",
+        "datePublished": "2025-11-14T20:50:33Z",
+        "dateModified": "2025-11-14T20:50:34.385Z",
+        "mainEntityOfPage": "https://remktr.com/blog/lambda-sqs-provisioned-mode",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-14-2025-08-41-56-6068-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="lambda-sqs-provisioned-mode.html">Crush SQS Latency With Lambda Provisioned Pollers Now</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 14, 2025 8:50:33 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You can cut SQS-triggered Lambda latency by turning on provisioned mode for the SQS event source mapping. It keeps dedicated pollers warm, so scale-up is about 3x faster. It supports up to 20,000 concurrent invokes. Each poller can push about 1 MB/s and up to 10 concurrent invokes.</p>
+<p>If your Lambda wakes up slow or queue spikes shake your p95, this helps. Provisioned mode keeps a pool of pollers hot, ready to grab messages right away. No waiting for the normal scale-up logic to wake and ramp.</p>
+<p><em>Think of it like preheating an oven. Cold starts aren’t only about your Lambda code. SQS polling has its own warm-up and ramp. Provisioned mode shortens that ramp, cuts jitter, and gives you knobs for cost and speed.</em></p>
+<p>If you run sharp bursts—adtech auctions, market data, personalization, or matchmaking—this is great. Provisioned pollers give your system a head start without drama. You set minimum pollers for steady state and maximum for burst ceilings. Your Lambdas stay fed, latency stays boring, and on-call gets their evening back.</p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>Dedicated pollers stay warm; faster scaling and steadier latency</li>
+<li>Up to 20,000 concurrent invokes; scale rate up to ~1,000 conc/min</li>
+<li>Control cost and performance with min/max pollers you set</li>
+<li>Per poller: up to 1 MB/s throughput and 10 concurrent invokes</li>
+<li>Great for finance, gaming, ecommerce, IoT, adtech, observability</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-14-2025-08-42-54-4084-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<p>If you're shipping this for adtech workloads, check out <a href="../requery.html">Requery</a>. It does high-velocity event querying and measurement next to your Lambda + SQS pipelines.</p>
+<p>Provisioned mode doesn’t change how you build; it changes how fast you react. You still write the same handler, use the same queue, same IAM roles. What you gain is control. You set the poller floor and ceiling, and Lambda keeps them hot. When messages show up, invokes begin right away instead of waiting to scale. That’s why p95s get steadier in load tests.</p>
+<h2 id="whatprovisionedpollersdo">What provisioned pollers do</h2>
+<p>SQS event source mappings bridge your queue and your Lambda function. By default, they scale reactively. Messages arrive, AWS adds pollers, and your concurrency ramps up. That works, but there’s a small delay while sizing happens.</p>
+<p>Provisioned mode flips that. You configure a minimum number of pollers that stay alive even idle. These pollers long-poll SQS nonstop and hand batches to Lambda. Invocations keep flowing without the warm-up gap. When traffic spikes, the service scales faster up to your max pollers and regional quotas.</p>
+<h3 id="keyideas">Key ideas</h3>
+<ul>
+<li>Dedicated pollers are always on, so no warm-up needed. First message moves fast. The next hundred do too.</li>
+<li>Each poller can drive about 10 concurrent invokes and roughly 1 MB/s of data. This depends on message size, batch size, window, and function duration.</li>
+<li>You choose min pollers (your latency floor and base cost) and max pollers (your burst safety ceiling). This is the cost vs p95/p99 trade.</li>
+<li>All the usual SQS + Lambda rules still apply: visibility timeouts, partial batch responses, DLQs, IAM, and CloudWatch metrics.</li>
+</ul>
+<p>If you already tune batch size and window, provisioned mode multiplies those gains. Smaller windows lower latency. Bigger windows boost throughput. Provisioned pollers just make scaling faster and more predictable when queues get spicy.</p>
+<h2 id="howtosize">How to size</h2>
+<ul>
+<li>Concurrency ~= pollers * 10</li>
+<li>Pick min pollers for steady state; max pollers for bursts</li>
+<li>Ensure Lambda account concurrency quotas match your targets</li>
+</ul>
+<h3 id="deepdivesizingexamples">Deep dive sizing examples</h3>
+<p>Start by choosing your target p95 latency and expected burst size. Then back into pollers using your function’s average duration and message size.</p>
+<h3 id="exampleasmallmessages">Example A small messages</h3>
+<ul>
+<li>Messages: ~5 KB each, standard queue</li>
+<li>Function duration: 100 ms avg</li>
+<li>Desired burst concurrency: 2,000</li>
+<li>Pollers needed: 2,000 / 10 = ~200 max pollers</li>
+<li>If you want a steady p95 during micro-bursts, set min pollers to 40–60. That keeps 400–600 concurrent invokes ready now, and it will scale toward 2,000 as load rises.</li>
+</ul>
+<h3 id="exampleblongerwork">Example B longer work</h3>
+<ul>
+<li>Messages: ~100 KB each</li>
+<li>Function duration: 1 second</li>
+<li>Desired steady throughput: ~500 messages/sec</li>
+<li>Each poller can drive roughly 10 concurrent invokes. With 1-second duration, that’s ~10 msgs/sec/poller in steady state.</li>
+<li>Pollers needed for steady state: 500 / 10 = 50 min pollers</li>
+<li>For bursts to 1,500 msgs/sec, set max pollers to ~150</li>
+</ul>
+<h3 id="examplecfifoordering">Example C FIFO ordering</h3>
+<ul>
+<li>With FIFO and message groups, parallelism is gated by the number of active groups.</li>
+<li>If you need 1,000 concurrent invokes, you need at least 1,000 active groups. Provisioned pollers ramp faster, but ordering still rules. Plan pollers around active groups, not only raw concurrency.</li>
+</ul>
+<p><em>Pro tip: right-size batch size before chasing pollers. Bigger batches add efficiency and reduce cost, but can raise perceived latency. If you want p95 under 200 ms, keep the window tight and use more pollers. If you want throughput at lowest cost, widen the window and maybe lower pollers.</em></p>
+<h2 id="operationaltips">Operational tips</h2>
+<ul>
+<li>Tune batch size/window (small window for low latency)</li>
+<li>Visibility timeout &gt; worst-case processing time (with headroom)</li>
+<li>Enable partial batch responses; send failures to an SQS DLQ</li>
+</ul>
+<h2 id="tuningthatactuallymovesp95p99">Tuning that actually moves p95p99</h2>
+<h3 id="batchsizeandmaxbatchingwindowinseconds">Batch size and MaxBatchingWindowInSeconds</h3>
+<ul>
+<li>Small window = faster first-byte-to-exec time. Try 0–1s for low-latency paths.</li>
+<li>Larger window = better efficiency and fewer invokes per N messages. Consider 2–10s for heavy throughput or cost control.</li>
+<li>Calibrate with your function’s average duration. If it runs in 50–150 ms, a 0–1s window keeps queues fresh without starving throughput.</li>
+</ul>
+<h3 id="visibilitytimeout">Visibility timeout</h3>
+<ul>
+<li>Set it greater than worst-case processing time with a safe buffer. This avoids duplicates from long tails or blips.</li>
+<li>If downstream calls sometimes spike, keep a generous multiplier. Use 2x–6x your 99th percentile duration, based on idempotency.</li>
+<li>Watch ApproximateAgeOfOldestMessage and adjust if you see reprocessing or odd inflight churn.</li>
+</ul>
+<h3 id="partialbatchresponses">Partial batch responses</h3>
+<ul>
+<li>This is a must. When one record fails, only return the failed ones. The rest move forward, keeping the line moving.</li>
+<li>Combine with a Dead-Letter Queue so poison messages don’t clog retries.</li>
+<li>Build idempotency into handlers to safely retry only failed items.</li>
+</ul>
+<h3 id="otherknobsworthchecking">Other knobs worth checking</h3>
+<ul>
+<li>Memory size and CPU: CPU scales with memory in Lambda. If CPU-bound, bump memory to cut duration and boost per-poller throughput.</li>
+<li>Cold starts: Provisioned Concurrency helps if init time dominates. Provisioned pollers don’t replace it; they complement it.</li>
+<li>Timeouts: Keep Lambda timeouts below SQS visibility timeout, with room for retries.</li>
+</ul>
+<h2 id="whentouse">When to use</h2>
+<ul>
+<li>Latency-sensitive, bursty workloads (market data, matchmaking, personalization, fraud checks)</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-14-2025-08-44-04-7234-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whereprovisionedpollersshine">Where provisioned pollers shine</h2>
+<h3 id="financeandmarketdata">Finance and market data</h3>
+<ul>
+<li>Price updates, order routing, and position checks hit in bursts at open/close. Provisioned pollers reduce jitter, so checks feel instant even during spikes.</li>
+</ul>
+<h3 id="gamingandmatchmaking">Gaming and matchmaking</h3>
+<ul>
+<li>Player joins and leaves create spiky demand. You want matching to start right away. Provisioned pollers keep response times flat during surges.</li>
+</ul>
+<h3 id="ecommerceandpersonalization">Ecommerce and personalization</h3>
+<ul>
+<li>Flash sales and drops crush queues in minutes. Faster scale-up keeps recs, cart checks, and promos from lagging during surges.</li>
+</ul>
+<h3 id="frauddetectionandriskscoring">Fraud detection and risk scoring</h3>
+<ul>
+<li>Low latency matters or people bounce. Keep windows tight, use more pollers, and feed scoring logic without delay.</li>
+</ul>
+<h3 id="iotandobservability">IoT and observability</h3>
+<ul>
+<li>Device bursts and telemetry spikes need steady drain rates. Provisioned pollers smooth the ramp so you stay near real time.</li>
+</ul>
+<h2 id="rolloutchecklist">Rollout checklist</h2>
+<ul>
+<li>Benchmark p95 time and choose a target</li>
+<li>Set min/max pollers</li>
+<li>Configure batch size/window and visibility timeout</li>
+<li>Enable partial batch responses and DLQ</li>
+<li>Load test and monitor concurrency, queue depth, DLQ inflow, p95/p99</li>
+</ul>
+<h2 id="howtoruntheplaybook">How to run the playbook</h2>
+<h3 id="1baselineyourcurrentsetup">1 Baseline your current setup</h3>
+<ul>
+<li>Measure p50/p95/p99, function duration, errors, and SQS ApproximateAgeOfOldestMessage. Note latency during a 5–10x synthetic burst.</li>
+</ul>
+<h3 id="2picktargets">2 Pick targets</h3>
+<ul>
+<li>Choose a realistic p95 target, like 150–250 ms end-to-end. Decide your max burst and acceptable drain time. Example: clear 1M messages in 10 minutes.</li>
+</ul>
+<h3 id="3setminmaxpollers">3 Set min max pollers</h3>
+<ul>
+<li>Start with min pollers to cover steady state plus 20–30% headroom. Set max pollers for your burst goal without hitting account limits.</li>
+</ul>
+<h3 id="4tunebatchsizewindow">4 Tune batch size window</h3>
+<ul>
+<li>If latency is king, keep window at 0–1s and use modest batches. If cost is king, widen the window and let bigger batches win.</li>
+</ul>
+<h3 id="5configuresafetyrails">5 Configure safety rails</h3>
+<ul>
+<li>Visibility timeout: 2–6x worst-case. DLQ attached. Partial batch responses on. Idempotency keys in payloads or storage.</li>
+</ul>
+<h3 id="6loadtestiterate">6 Load test iterate</h3>
+<ul>
+<li>Drive real traffic patterns: message size, fan-out, payload mix. Watch ConcurrentExecutions, ApproximateNumberOfMessagesVisible, OldestMessageAge, Errors, and DLQ inflow. Adjust pollers in small steps.</li>
+</ul>
+<h2 id="docs">Docs</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html">Event source mappings</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html">Lambda concurrency</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html">SQS visibility timeout</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html">SQS dead-letter queues</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-batch-failures">Partial batch responses</a></li>
+</ul>
+<p>For real-world wins in streaming and adtech, check our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="costandquotaguardrails">Cost and quota guardrails</h2>
+<ul>
+<li>Lambda account concurrency: Make sure your Regional limit covers max pollers * 10. If not, request an increase before launch.</li>
+<li>Scaling rate: Even with faster ramp, you’re bound by regional quotas and rules. Keep expectations realistic in runbooks and alarms.</li>
+<li>DLQ volume: Faster pipelines move failures faster too. During bad deploys, DLQ may spike—alert on DLQ inflow and size.</li>
+<li>Storage and downstream capacity: Faster delivery shifts load downstream. Check that databases, caches, and APIs can take the extra heat.</li>
+</ul>
+<h2 id="patternsforprovisionedpollers">Patterns for provisioned pollers</h2>
+<ul>
+<li>Idempotent processing: Generate a stable key, like order<em>id or event</em>id. Use it to guard against duplicates.</li>
+<li>Strangler deploys: Turn on provisioned pollers in canary first. Then ramp min/max in prod during a quiet window.</li>
+<li>Backpressure via queue design: If downstream is fragile, split queues by workload or priority. Provision pollers per queue.</li>
+<li>FIFO and message groups: For strict ordering, make message groups match real parallelism, like customer_id or region.</li>
+</ul>
+<h2 id="observabilitywhattowatch">Observability what to watch</h2>
+<ul>
+<li>SQS ApproximateNumberOfMessagesVisible: Your queue depth. If it grows faster than it drains, increase pollers or shrink the window.</li>
+<li>SQS ApproximateAgeOfOldestMessage: If this rises during normal load, you’re under-provisioned or downstream is choking.</li>
+<li>Lambda ConcurrentExecutions: Confirms you hit the expected concurrency from pollers.</li>
+<li>Lambda Duration, Errors, and Throttles: Duration creep raises your visibility timeout needs. Throttles may mean quotas.</li>
+<li>DLQ inflow rates and sample records: Early sign a deploy broke something or a dependency is flaky.</li>
+</ul>
+<h2 id="faqquickanswers">FAQ quick answers</h2>
+<ol>
+<li>Does provisioned mode change my code?</li>
+</ol>
+<ul>
+<li>No. It changes how the event source mapping polls and scales. Your handler and IAM stay the same.</li>
+</ul>
+<ol>
+<li>Is this the same as Provisioned Concurrency for Lambda?</li>
+</ol>
+<ul>
+<li>Different layers. Provisioned Concurrency warms execution environments. Provisioned pollers warm the SQS polling layer. Use both for the lowest latency.</li>
+</ul>
+<ol>
+<li>Does it work with FIFO queues?</li>
+</ol>
+<ul>
+<li>Yes, but ordering still applies. Parallelism depends on the number of active message groups. Provisioned pollers ramp faster within those rules.</li>
+</ul>
+<ol>
+<li>What batch size/window should I start with?</li>
+</ol>
+<ul>
+<li>For latency-sensitive paths, use a small window (0–1s) and moderate batches. For throughput, try a larger window and measure cost per 1,000 messages.</li>
+</ul>
+<ol>
+<li>How do I avoid reprocessing messages?</li>
+</ol>
+<ul>
+<li>Set visibility timeout &gt; worst-case time, enable partial batch responses, and make handlers idempotent. Attach a DLQ for the stubborn ones.</li>
+</ul>
+<ol>
+<li>What if my messages are large?</li>
+</ol>
+<ul>
+<li>Watch the ~1 MB/s per poller guidance as a planning rule. Test with your real payload mix. Larger messages often like more memory and a slightly bigger window.</li>
+</ul>
+<ol>
+<li>Can I tune per environment?</li>
+</ol>
+<ul>
+<li>Yes. Different queues can have different mapping settings. Use lower min pollers in dev and staging, and scale in prod.</li>
+</ul>
+<h2 id="examplerollforwardplan">Example roll forward plan</h2>
+<ul>
+<li>Week 1: Enable partial batch responses and set DLQs in all envs. Build CloudWatch dashboards for SQS and Lambda metrics. Add alarms on queue age and DLQ inflow.</li>
+<li>Week 2: Turn on provisioned mode in staging. Pick min/max pollers at ~50% of prod steady state. Run synthetic bursts. Validate p95 hits target.</li>
+<li>Week 3: Enable in prod with conservative min pollers and aggressive max. Run an off-peak canary, 5–10% for an hour. Check downstream saturation.</li>
+<li>Week 4: Raise min pollers to meet p95 goals during the busiest hour. Document rollback: set min pollers to 0 and cut max by half if alarms fire.</li>
+</ul>
+<h2 id="realworldpitfallstoavoid">Real world pitfalls to avoid</h2>
+<ul>
+<li>Too-short visibility timeout: A few slow downstream calls and you’ll see duplicates. Give headroom.</li>
+<li>Forgetting quotas: Pollers * 10 adds up fast. Check Lambda regional concurrency and reserved concurrency.</li>
+<li>Over-batching on latency paths: Big batches help cost but add wait time. Keep the window small if user latency matters.</li>
+<li>Ignoring DLQs: Poison messages can hammer retries. DLQ plus partial batch responses keeps pipelines healthy.</li>
+<li>Not load testing with real payloads: Include big messages, slow third-party calls, and error cases in tests.</li>
+</ul>
+<p><em>If you like boring graphs and happy on-call, this is a strong move. Provisioned pollers for SQS + Lambda trade a little fixed cost for a lot more predictability. Start with small min pollers, keep batch windows tight, and scale only when your metrics ask.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">AWS Lambda: Using Amazon SQS as an event source</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html">AWS Lambda: Event source mappings</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html">AWS Lambda: Managing Lambda concurrency</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html">Amazon SQS: Visibility timeout</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html">Amazon SQS: Dead-letter queues</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-batch-failures">AWS Lambda with SQS: Partial batch responses (reporting batch item failures)</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-monitoring-using-cloudwatch.html">Amazon SQS: Monitoring with Amazon CloudWatch</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html">Amazon SQS: FIFO queues and message groups</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="lambda-sqs-provisioned-mode.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqaf0e.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Crush+SQS+Latency+With+Lambda+Provisioned+Pollers+Now&amp;pi=259102546621&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=259102546621&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Flambda-sqs-provisioned-mode&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/lambda-sqs-provisioned-mode?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:30 GMT -->
+</html>

@@ -1,0 +1,402 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/sp-api-deprecations?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Beat Amazon SP-API Deadlines Without Breaking Your App Stack</title>
+    <link rel="canonical" href="sp-api-deprecations.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Prepare for Amazon SP-API deprecations: review deadlines, migrate from XML/flat file to JSON, update billing in the Solution Provider Portal to avoid disruption.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Beat Amazon SP-API Deadlines Without Breaking Your App Stack",
+        "datePublished": "2025-12-04T16:20:27Z",
+        "dateModified": "2025-12-04T16:20:27.493Z",
+        "mainEntityOfPage": "https://remktr.com/blog/sp-api-deprecations",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-04-2025-04-13-28-5709-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="sp-api-deprecations.html">Beat Amazon SP-API Deadlines Without Breaking Your App Stack</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 4, 2025 4:20:27 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>When a deprecated SP-API resource hits removal, success drops from 100% to zero overnight. No soft landings. No partial credit. Just instant failures.</p>
+<p>If your app still leans on XML or flat files, or ignores Solution Provider Portal billing prompts, you’re playing chicken with revenue. Amazon already flagged what’s ending, what replaces it, and when charges start. Your next move decides if your logs scream errors or your roadmap keeps shipping.</p>
+<p>The good news: you can future-proof this. Amazon’s JSON-first Listings pipeline is cleaner, easier to validate, and simpler to watch. The fees and portal migration hurt, sure—but they’re predictable. You have a playbook here.</p>
+<p>Zoom out for a second. Deprecations aren’t gentle warnings; they’re timers. The new Listings flow gives real schemas, live validation, and clearer errors. The Solution Provider Portal gives billing that won’t blindside your CFO. Plan now, and you’ll hit the deadline like a green light. Wait, and you’ll debug 500s while sellers flood your inbox.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Deprecated SP-API endpoints work until removal, then every call fails hard.</li>
+<li>Migrate XML or flat file listings to JSON (Listings Items or JSON<em>LISTINGS</em>FEED).</li>
+<li>Move dev operations into the Solution Provider Portal and set up billing.</li>
+<li>Track Amazon’s posted dates for billing, Appstore removals, and SP-API access.</li>
+<li>Use validation mode, push notifications, and PTD schemas to cut listing errors.</li>
+<li>Subscribe to Amazon’s deprecation announcements and the changelog to stay ahead.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-04-2025-04-14-30-2033-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatschangingandwhy">What’s changing and why</h2>
+<h3 id="deprecatedvsremoved">Deprecated vs removed</h3>
+<p>Amazon’s position is explicit: <em>“Deprecated SP-API resources are no longer in active development. Calls to deprecated SP-API resources will continue to be successful until their removal date. After the removal date, calls will fail.”</em> That’s from the Amazon Developer Docs, and it’s the only SLA that matters for migrations.</p>
+<p>Practically, don’t treat deprecations like optional refactors. They’re expiring contracts. If an endpoint is on the clock, your maintenance window is scheduled. You just haven’t booked it yet.</p>
+<p>Here’s the simple mental model: deprecation = warning light; removal = engine stall. Shift your timelines to treat removal dates as hard release deadlines. Put the date on the team calendar, assign a DRI, and tie it to a sprint. If last-mile tests still hit a deprecated route two weeks before removal, escalate now.</p>
+<p>Also, watch downstream effects. If you rely on a partner library that still calls the old route, you inherit their risk. Ask vendors for their migration plan and pin a version verified on the new API.</p>
+<h3 id="thenewbillingreality">The new billing reality</h3>
+<p>Starting in late 2025, Amazon opened billing setup in the Solution Provider Portal and rolled out a new SP-API fee model. Then come enforcement dates: add a valid charge method and tax info by the deadlines, or Amazon removes your app from the Selling Partner Appstore, blocks new authorizations, and finally cuts SP-API access.</p>
+<p>Expert quote (Amazon Docs): <em>“Applications without valid charge information will lose access to SP-API.”</em> Translation: this isn’t a UI nag; it’s a service gate.</p>
+<p>If you build or maintain apps for sellers, your operating model changes. Billing and compliance are now first-class build tasks—just like OAuth and throttling.</p>
+<p>A quick setup checklist so Finance and Dev don’t ping-pong:</p>
+<ul>
+<li>Solution Provider Portal access confirmed for the right accounts and roles.</li>
+<li>Primary charge method added (corporate card or debit) and a backup method.</li>
+<li>Legal entity and tax profile completed per region, with IDs where required.</li>
+<li>Company contacts set (technical, billing, compliance) so notices don’t vanish.</li>
+<li>App metadata updated in the Appstore so sellers aren’t confused by notices.</li>
+</ul>
+<p>Pro tip: add recurring calendar reviews, quarterly, to re-check billing data and card expiry. Lots of cutoffs happen because a card expired or an email alias died.</p>
+<h2 id="xmltojsonpivot">XML to JSON pivot</h2>
+<h3 id="whatactuallymoved">What actually moved</h3>
+<p>Amazon deprecated XML and flat file listing inputs in favor of JSON via Listings Items APIs or the JSON<em>LISTINGS</em>FEED submitted through the Feeds API. This touches pricing, inventory, relationships, images, and attribute-rich product data.</p>
+<p>The backbone now is the Product Type Definitions (PTD) API, which gives fresh JSON schemas per product type. You stop guessing required attributes and start generating payloads the catalog actually expects.</p>
+<p>In practice, your old flat files like Price, Inventory, and Product get replaced by:</p>
+<ul>
+<li>Listings Items APIs for real-time, item-level PUT or PATCH calls and attributes.</li>
+<li>JSON<em>LISTINGS</em>FEED for bulk submissions with many SKUs or heavy attributes.</li>
+<li>PTD API for schema discovery, required fields, allowed enums, and data types.</li>
+</ul>
+<p>With PTD, you’ll query product type definitions per marketplace and locale. That matters because required attributes can change by category and region. Build payloads from the schema, not from memory.</p>
+<h3 id="whyjsonlistingswin">Why JSON listings win</h3>
+<ul>
+<li>One source of truth: PTD exposes the latest required and optional attributes.</li>
+<li>Clean validation paths: you can validate before sending to the catalog.</li>
+<li>Better error visibility: you’ll get clearer synchronous and async error details.</li>
+<li>Event-driven ops: push notifications for listing status and issue changes.</li>
+</ul>
+<p>Quote (Amazon Docs): <em>“Use the Product Type Definitions API to retrieve product type schemas and requirements.”</em> It’s the schema contract you build around.</p>
+<p>Add the speed factor: JSON APIs return clear, machine-checked responses you can route fast. Instead of a cryptic flat file result, you’ll see structured issues with codes and paths. That shortens triage and ends the “works on my machine” fights.</p>
+<h3 id="apragmaticmigrationmap">A pragmatic migration map</h3>
+<ul>
+<li>Inventory your feed types. Map XML flat files to their JSON equivalents.</li>
+<li>Use PTD to pull the schema for each product type your catalog touches.</li>
+<li>Implement validation-mode first with Listings Items to catch issues early.</li>
+<li>Add Feeds API for bulk cadence (JSON<em>LISTINGS</em>FEED) where it fits best.</li>
+<li>Subscribe to Notifications API for listing changes and faster triage.</li>
+</ul>
+<p>First-hand example: a mid-market apparel seller split workflows—real-time price and quantity via Listings Items patch, bulk new ASINs via JSON<em>LISTINGS</em>FEED. Result: fewer post-submit surprises and faster recovery when attributes change.</p>
+<p>A few ground rules that save your weekends:</p>
+<ul>
+<li>Treat PTD like a living spec. Cache schemas, diff daily, and flag changes in Slack.</li>
+<li>Build one payload builder that takes a PTD schema plus your product model and outputs JSON. No one-off serializers.</li>
+<li>Start with one high-volume product type. Ship end-to-end, then clone the pattern.</li>
+<li>Use preview or validation requests before publishing. Fix at build time, not after.</li>
+</ul>
+<p>Common pitfalls to avoid:</p>
+<ul>
+<li>Assuming attributes are global. They’re not; marketplace and product type matter.</li>
+<li>Forgetting relationships. Variations need the right parent and child structure upfront.</li>
+<li>Skipping image rules. Meet size, count, and role requirements per schema.</li>
+<li>Ignoring enums. If the schema says NEW or USED<em>LIKE</em>NEW, don’t invent values.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-04-2025-04-15-25-7264-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="datesthatnukeuptime">Dates that nuke uptime</h2>
+<h3 id="2025to2026recap">2025 to 2026 recap</h3>
+<p>Amazon’s published milestones consolidate around portal migration, billing enforcement, and access control. Key dates, per Amazon:</p>
+<ul>
+<li>August 31, 2025: Existing SP-API developers migrate operations to the Solution Provider Portal.</li>
+<li>November 3, 2025: Billing setup opens in the portal (new fee structure).</li>
+<li>January 31, 2026: Annual Subscription Fee billing begins; charge method due.</li>
+<li>February 9, 2026: Apps without valid payment or tax info removed from the Appstore; new authorizations blocked.</li>
+<li>February 16, 2026: Apps without valid charge info lose SP-API access; sellers notified.</li>
+</ul>
+<p>Always verify current deprecations and dates in Amazon’s changelog and Deprecations table before shipping.</p>
+<p>Build your internal timeline backwards from the last possible day. Set a code freeze a week prior, with rollback to the last known-good JSON flow. Run a full catalog dry run, validation-only, two weeks out. Run product-type contract tests nightly during the final month.</p>
+<h3 id="whatbreaksandwho">What breaks and who</h3>
+<ul>
+<li>Miss billing setup: Appstore removal lands first, and new auths get blocked.</li>
+<li>Miss charge or tax validation: full SP-API access is cut off entirely.</li>
+<li>Ignore endpoint deprecations: those calls hard-fail the day after removal.</li>
+</ul>
+<p>Crucially, Amazon notifies selling partners when an app they authorized becomes unavailable. If you’re that app, downtime becomes a trust problem, not just an error budget. Loop CS and partner teams in early to prevent churn.</p>
+<p>Expert quote (Amazon Docs): <em>“After the removal date, calls will fail.”</em> Architect like it’s certain—because it is.</p>
+<p>Prep your comms now:</p>
+<ul>
+<li>Draft a seller email: what’s changing, zero action for them, cutover date, monitoring plan.</li>
+<li>Draft internal runbooks: rollback steps, who approves, and how to silence noisy alerts.</li>
+<li>Draft a Status Page post template: concise, with issue code links and next update time.</li>
+</ul>
+<h2 id="futureproofyourspapi">Futureproof your SP API</h2>
+<h3 id="versioningandteststrategy">Versioning and test strategy</h3>
+<ul>
+<li>Treat PTD schemas as code: cache, diff, and alert when they change.</li>
+<li>Add validation-mode to CI: fail builds on schema drift or new required attributes.</li>
+<li>Blue or green your feeds: switch producers without pausing ingestion.</li>
+<li>Build contract tests per product type: schema updates should fail tests loudly.</li>
+</ul>
+<p>Take it one step further:</p>
+<ul>
+<li>Use idempotency keys so retries don’t duplicate changes across systems.</li>
+<li>Track feedId and requestId across logs. Keep correlation IDs end-to-end.</li>
+<li>Run nightly sandbox or small-marketplace trials to catch regressions early.</li>
+</ul>
+<h3 id="monitoringandobservability">Monitoring and observability</h3>
+<ul>
+<li><p>Instrument per operation: Feeds, Listings Items, and Notifications. Track 4xx, 5xx, and throttling.</p></li>
+<li><p>Add dead-letter queues for failed feed documents with replay controls ready.</p></li>
+<li><p>Subscribe to Notifications API for listing issues; route on-call with context.</p></li>
+<li><p>Create synthetic checks for deprecated endpoints—alert if they’re still called.</p></li>
+</ul>
+<p>Extra signals to add:</p>
+<ul>
+<li>Alert on sudden drops in feed processing or spikes in issue counts.</li>
+<li>Watch for schema mismatch errors and bucket by product type.</li>
+<li>Capture Amazon headers for rate limits and request IDs to debug trends.</li>
+</ul>
+<h3 id="governancethatsticks">Governance that sticks</h3>
+<ul>
+<li>Owner map: name a DRI for deprecations, billing, and PTD schema updates.</li>
+<li>Change calendars: line up deprecation dates with your sprint and release cycles.</li>
+<li>Documentation: standardize JSON payload builders; avoid one-off serializers.</li>
+<li>Comms: write seller status emails before you actually need them.</li>
+</ul>
+<p>Add two simple controls:</p>
+<ul>
+<li>A weekly 15-minute “SP-API pulse” to scan the changelog and deprecations table.</li>
+<li>A quarterly audit where engineering, finance, and support confirm billing and scopes.</li>
+</ul>
+<p>Quote (Amazon Changelog): <em>“Refer to the Deprecations table and changelog for deprecation and removal dates.”</em> Bake those docs into your weekly ops review.</p>
+<h2 id="quickgutcheck">Quick gut check</h2>
+<ul>
+<li>Deprecated ≠ optional; removal flips working traffic into hard failures.</li>
+<li>JSON is now table stakes: PTD schemas, validation-mode, and notifications.</li>
+<li>Portal and billing aren’t admin chores—they’re uptime requirements now.</li>
+<li>Dates are public; your runbook should be public internally too.</li>
+<li>Monitor deprecated calls and schema drift like you would security issues.</li>
+</ul>
+<p>If you can’t answer “Who owns each deprecation?” and “Are our top three product types passing validation today?”—that’s your to-do this week.</p>
+<h2 id="faqsforbusybuilders">FAQs for busy builders</h2>
+<h3 id="sellingaccountneeded">Selling account needed</h3>
+<p>No. Amazon says third-party developers can operate via the Solution Provider Portal without a Selling on Amazon account. If you keep a seller account for Seller Central access, normal Selling on Amazon fees still apply. But it’s not required for SP-API.</p>
+<h3 id="fastestpathoffxml">Fastest path off XML</h3>
+<p>Start with your highest-volume feeds. Use the Product Type Definitions API to fetch schemas, implement Listings Items PUT or PATCH with validation-mode for real-time updates, and use JSON<em>LISTINGS</em>FEED via the Feeds API for bulk. Ship one product type end-to-end, then templatize.</p>
+<h3 id="whichendpointsandwhen">Which endpoints and when</h3>
+<p>Check Amazon’s Deprecations table and the public changelog. Both list deprecation and removal dates. Subscribe to release notes so changes hit your inbox, not your pager.</p>
+<h3 id="missedbillingdeadlines">Missed billing deadlines</h3>
+<p>Amazon will remove your app from the Selling Partner Appstore, block new authorizations, and then cut SP-API access if valid charge and tax information aren’t on file by the dates. Your authorized sellers get notified that your app is unavailable.</p>
+<h3 id="jsonfeedvslistingsitems">JSON feed vs Listings Items</h3>
+<p>They complement each other. Use Listings Items for low-latency updates like price and quantity. Use JSON<em>LISTINGS</em>FEED for bulk, high-throughput tasks like new listings and large attribute sets. Many teams run both for coverage and cost control.</p>
+<h3 id="differentpayloadspermarketplace">Different payloads per marketplace</h3>
+<p>Yes. Pull PTD schemas per marketplace and locale. Required attributes and allowed values vary by region and category. Don’t assume US and EU share the same rules.</p>
+<h3 id="batchingbulkfeeds">Batching bulk feeds</h3>
+<p>Keep batches small enough to retry safely and large enough to be efficient. Group SKUs by product type and marketplace. Track each feedId and reprocess only failed items when possible.</p>
+<h3 id="mixxmlduringtransition">Mix XML during transition</h3>
+<p>You can run a staged rollout, but plan to replace all XML or flat file flows before removal dates. Keep the JSON pipeline as the primary path and limit XML to legacy corners while you migrate.</p>
+<h3 id="reducenoisyerrors">Reduce noisy errors</h3>
+<p>Use validation or preview first. Add strict schema checks in CI. Normalize error codes into a common format in your logs. Route listing issues to a specialized queue so the right person sees them fast.</p>
+<h3 id="sandboxtesting">Sandbox testing</h3>
+<p>Yes, but expect partial coverage. Use the SP-API sandbox where available to test shapes. Still run small, controlled tests in live marketplaces to confirm behavior before a full cutover.</p>
+<h3 id="performancewins">Performance wins</h3>
+<ul>
+<li>Reuse feed documents when possible and compress with GZIP to speed uploads.</li>
+<li>Cache PTD responses with a sensible TTL and invalidate on changelog alerts.</li>
+<li>Parallelize feed creation and document uploads, but respect throttling and backoff.</li>
+</ul>
+<h3 id="whatlogstokeep">What logs to keep</h3>
+<p>Retain request payload hashes, feedIds, requestIds, marketplaceIds, productType, schema version, and issue lists. That’s your black box when sellers ask, “what happened to my listing?”</p>
+<h2 id="shipyourspapimigration">Ship your SP API migration</h2>
+<ul>
+<li>Audit: inventory deprecated endpoints and all XML or flat file usage.</li>
+<li>Dates: pull current deprecations and enforcement dates from Amazon’s docs.</li>
+<li>Schemas: fetch PTD schemas for top product types; version them in Git.</li>
+<li>Validate: add Listings Items validation-mode to CI; fail on schema drift.</li>
+<li>Convert: replace XML with JSON payload builders; add JSON<em>LISTINGS</em>FEED for bulk.</li>
+<li>Monitor: alert on deprecated calls, 4xx or 5xx spikes, and PTD changes.</li>
+<li>Portal: complete Solution Provider Portal migration and add charge and tax info.</li>
+<li>Comms: prewrite seller notices and internal runbooks for cutover day.</li>
+</ul>
+<p>Here’s the punchline: Amazon told you the rules and gave you dates. Your risk is time, not uncertainty. Migrate to JSON using PTD schemas, wire validation into CI, instrument your feeds, and lock billing in the Solution Provider Portal. Do this now and you’ll glide past removal dates while others scramble.</p>
+<p>Skip it, and you’ll be writing apology emails while your sellers scramble.</p>
+<p>Looking for a faster path to validation, monitoring, and cutover? Explore our platform <a href="../features.html">Features</a> and see real outcomes in our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>Amazon SP-API Developer Hub: <a href="https://developer-docs.amazon.com/sp-api">Amazon SP-API Developer Hub</a></li>
+<li>Deprecation reminders (November 2025): <a href="https://developer-docs.amazon.com/sp-api/v2.0/changelog/deprecation-reminders-november-2025">Deprecation reminders (November 2025)</a></li>
+<li>SP-API Changelog: <a href="https://developer-docs.amazon.com/sp-api/v2.0/changelog">SP-API Changelog</a></li>
+<li>Deprecations table: <a href="https://developer-docs.amazon.com/sp-api/docs/deprecations">Deprecations table</a></li>
+<li>Product Type Definitions API guide: <a href="https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-use-case-guide">Product Type Definitions API guide</a></li>
+<li>Product Type Definitions API reference: <a href="https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-v2020-09-01-reference">Product Type Definitions API reference</a></li>
+<li>Listings Items API reference: <a href="https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-reference">Listings Items API reference</a></li>
+<li>Listings Items API use case guide: <a href="https://developer-docs.amazon.com/sp-api/docs/listings-items-api-use-case-guide">Listings Items API use case guide</a></li>
+<li>Feeds API reference: <a href="https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-reference">Feeds API reference</a></li>
+<li>Feeds API use case guide: <a href="https://developer-docs.amazon.com/sp-api/docs/feeds-api-use-case-guide">Feeds API use case guide</a></li>
+<li>Notifications API guide: <a href="https://developer-docs.amazon.com/sp-api/docs/notifications-api-use-case-guide">Notifications API guide</a></li>
+<li>Notifications API reference: <a href="https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-reference">Notifications API reference</a></li>
+<li>Usage plans and rate limits: <a href="https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits">Usage plans and rate limits</a></li>
+<li>SP-API sandbox overview: <a href="https://developer-docs.amazon.com/sp-api/docs/sandbox">SP-API sandbox overview</a></li>
+<li>Authorization and authentication overview: <a href="https://developer-docs.amazon.com/sp-api/docs/conceptual-overview-of-authorization-and-authentication">Authorization and authentication overview</a></li>
+<li>Registering your application: <a href="https://developer-docs.amazon.com/sp-api/docs/registering-your-application">Registering your application</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="sp-api-deprecations.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq3e83.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Beat+Amazon+SP-API+Deadlines+Without+Breaking+Your+App+Stack&amp;pi=269888925431&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=269888925431&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fsp-api-deprecations&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/sp-api-deprecations?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:49 GMT -->
+</html>

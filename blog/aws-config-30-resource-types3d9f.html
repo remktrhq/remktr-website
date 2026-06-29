@@ -1,0 +1,336 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-config-30-resource-types?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Turn AWS Config’s 30 New Types Into Compliance Wins</title>
+    <link rel="canonical" href="aws-config-30-resource-types.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover AWS Config now supports 30 new resource types for EKS, Amazon Q, and IoT. Enforce compliance, detect drift, automate remediation via conformance packs.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Turn AWS Config\u2019s 30 New Types Into Compliance Wins",
+        "datePublished": "2026-02-10T21:43:43Z",
+        "dateModified": "2026-02-10T21:43:44.122Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-config-30-resource-types",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-10-2026-09-31-25-0131-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-config-30-resource-types.html">Turn AWS Config’s 30 New Types Into Compliance Wins</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 10, 2026 9:43:43 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You wake up, open your AWS dashboard, and your cloud just grew teeth. Kubernetes nodes here. An AI app over there. A few dozen IoT devices doing who-knows-what at the edge. Fun… until an auditor asks, "Show me exactly what changed, where, and when."</p>
+<p>Here’s the twist: AWS Config now supports 30 new resource types. It spans Amazon EKS, Amazon Q, and AWS IoT. Now you can track, audit, and fix stuff in one place. Less swivel-chair ops, fewer blind spots, and a cleaner compliance story.</p>
+<p>If you’ve been duct-taping spreadsheets and tagging policies, this is your exit. You get drift detection on autopilot. You get policy-as-code with AWS Config Rules. And built-in fixes through AWS Systems Manager. Regulated teams get conformance packs for HIPAA, PCI DSS, and SOC 2.</p>
+<p><em>You want proof, not promises.</em> Below is the how, why, and Monday plan. Use these 30 new resource types to move faster and sleep better.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>AWS Config adds 30 new resource types across EKS, Amazon Q, and AWS IoT.</li>
+<li>You get end-to-end visibility: inventory, change history, and compliance posture.</li>
+<li>Use AWS Config Rules and conformance packs to enforce policy-as-code.</li>
+<li>Wire remediation via AWS Systems Manager Automation for one-click fixes.</li>
+<li>Ideal for HIPAA, PCI DSS, SOC 2 teams; map controls to resources fast.</li>
+<li>Scale across accounts with aggregators; query posture with Advanced Queries.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-32-10-4129-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatjustlanded">What Just Landed</h2>
+<h3 id="theheadlineexpansion">The headline expansion</h3>
+<p>You can now bring EKS node groups, Amazon Q apps, and AWS IoT fleets together. They land in the same compliance and drift pipeline as EC2, S3, and IAM. That’s the unlock: one timeline for cloud apps, AI helpers, and edge devices.</p>
+<ul>
+<li>Amazon EKS: Track managed node groups and cluster-linked resources. Know when capacity, AMIs, or configs change.</li>
+<li>Amazon Q: Track Amazon Q applications and understand configuration posture for your AI footprint.</li>
+<li>AWS IoT: Inventory things and fleets. Watch certs and policies. Prove what changed at the edge.</li>
+</ul>
+<p>If you searched "aws config now supports 10 new resource types," here’s the upgrade. You’re getting 30. Big visibility without big overhead.</p>
+<p>Here’s why this matters today. A dev tweaks a node group or spins a new Amazon Q app. Maybe the tags are missing, or the AMI isn’t approved. You’ll see it fast. <em>Not by rumor. Not during a quarterly audit.</em> It’s right in Config timelines, diffs, and compliance status you can act on. Better than learning when a bill or incident blows up your day.</p>
+<h3 id="whyyoucaretoday">Why you care today</h3>
+<p>Once these resource types are recorded, they flow into your normal motion. Timelines, snapshots, rules, and remediation all kick in. Fold them into account aggregators for an org-wide view.</p>
+<p>Example to steal: build a view that flags EKS node groups with non-approved AMIs. Add Amazon Q apps missing required tags. Add IoT devices with expired certs. Tie each finding to an automated runbook for the fix.</p>
+<p>First-hand style scenario: a platform team sees an EKS node group changed at 2 a.m. No guessing. They open the AWS Config timeline, see the delta, and check a rule. The AMI isn’t on the approved list, so they trigger a rollback runbook. All before morning standup.</p>
+<p>Operational tip: turn on recording where these resources live, not everywhere. If IoT is global but Amazon Q is US-only, be selective. Get full coverage without paying to record ghosts in unused regions.</p>
+<h2 id="governancewithouthandticking">Governance Without Hand Ticking</h2>
+<h3 id="policyascode">Policy as code</h3>
+<p>AWS Config Rules let you write guardrails, then skip manual checks. Maybe it’s "EKS node groups must use approved AMIs." Or "Amazon Q apps need cost-center tags." Or "IoT policies can’t allow broad actions." Turn each statement into a rule. Use managed rules where they exist. Write custom rules with Lambda when you need special logic.</p>
+<p>Conformance packs bundle rules and remediation actions to match frameworks. Think HIPAA, PCI DSS, and SOC 2. Instead of gluing controls one by one, apply a pack. You get out-of-the-box coverage for these new resource types.</p>
+<p>Want a quick start? The managed required-tags rule is perfect for Amazon Q app tagging. Keep your approved AMI list in Parameter Store or a small config map. Reference it from a custom rule for EKS node groups. For IoT, flag wildcard actions in policies. Then remediate by swapping in a least-privilege policy.</p>
+<p>Pro move: match rule names to control IDs, like PCI-7.2-ApprovedAMIs. Audits will map cleanly. When asked, "Which control enforces node group hardening?" you can point to the rule and history.</p>
+<h3 id="oneclickfixes">One click fixes</h3>
+<p><em>Fixes shouldn’t need Slack pings and wishful thinking.</em> With Systems Manager Automation, tie noncompliance to a runbook. Re-tag a resource, rotate an IoT cert, or update an EKS AMI version. Findings become actions, not tickets that rot.</p>
+<p>Practical example: an IoT device drifts to an insecure policy. A remediation swaps it for least-privilege. For EKS, a runbook can cordon and drain nodes. Then update the AMI to a compliant build and rejoin safely.</p>
+<p>Pro tip: version-control custom rules and runbooks. <em>Treat governance like code.</em> You’ll roll out safer changes and roll them back fast.</p>
+<p>Extra guardrails you’ll thank yourself for later:</p>
+<ul>
+<li>Dry runs first: use manual approval mode. Flip to auto after a week of clean runs.</li>
+<li>Least privilege: scope SSM Automation roles to only what each runbook needs.</li>
+<li>Idempotent steps: make runbooks safe to re-run after failures or timeouts.</li>
+<li>Logs on: ship Automation logs and final state to a central S3 bucket.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-32-54-6842-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="regulated">Regulated</h2>
+<h3 id="compliancewithoutthespreadsheettrauma">Compliance without the spreadsheet trauma</h3>
+<p>In healthcare, finance, or other regulated work, this coverage is huge. Your audit trail now includes Kubernetes, AI assistants, and edge fleets. It happens automatically. That helps prove HIPAA, PCI DSS, or SOC 2 controls.</p>
+<p>AWS ships conformance packs aligned to these frameworks. Apply a pack, scope it to accounts and regions, and go. You’ll see where you’re good and where you’re not. This includes the new resource types.</p>
+<p>To keep your compliance story crisp:</p>
+<ul>
+<li>Deploy packs in staging first. Tune rules to your needs, like IoT test fleet exceptions.</li>
+<li>Document exception processes. Not all noncompliance is fire. Sometimes it’s a planned change.</li>
+<li>Tie each pack to an evidence folder. Drop rule results, remediation logs, and final states there.</li>
+</ul>
+<h3 id="requiredresourcesforcontrolfindings">Required resources for control findings</h3>
+<p>Many security tools use AWS Config as the source of truth. If your controls depend on Config data, make sure recording is on. That means turn on the new EKS, Amazon Q, and IoT resource types. Do it in the accounts and regions where they actually run. <em>No recorder, no findings.</em></p>
+<p>Example mapping: a PCI DSS control wants tight IAM and network boundaries. For EKS, enforce approved AMIs and limited node IAM roles. For IoT, use least-privilege policies and rotate certs. For Amazon Q, require encryption and tagging. Conformance packs help stitch this story together. You get one view for evidence.</p>
+<p>One more sanity check: match your pack scope to your aggregator scope. If you aggregate org-wide but attach packs to two accounts, dashboards go red. <em>Make the picture match reality, please.</em></p>
+<h2 id="makeitusable">Make It Usable</h2>
+<h3 id="askbetterquestions">Ask better questions</h3>
+<p>You can’t fix what you can’t find. With Advanced Queries, slice across accounts and regions. Answer questions like:</p>
+<ul>
+<li>Show EKS node groups not using the latest approved AMI baseline.</li>
+<li>List Amazon Q applications missing owner or environment tags.</li>
+<li>Find IoT things with policies that grant wildcard actions.</li>
+</ul>
+<p>As new resource types are recorded, they become queryable with the rest. This moves you from "we think we’re compliant" to a ranked list you can work.</p>
+<p>Practical workflow:</p>
+<ul>
+<li>Start with tags first: owner, environment, data sensitivity. Untagged stuff is your fastest win.</li>
+<li>Move to baselines: approved AMIs, encryption required, least-privilege policies.</li>
+<li>Save common queries. Run weekly and drop results in your evidence folder.</li>
+</ul>
+<h3 id="seeitalertonit">See it alert on it</h3>
+<ul>
+<li>Dashboards: use AWS Config and aggregators for an org-level view. Group by account, region, service, and control.</li>
+<li>Alerts: pipe noncompliant events to EventBridge, then to SNS or ChatOps. On-call sees issues fast, not months later.</li>
+<li>Evidence: timelines and rule evaluations are your audit trail. <em>Snapshots beat screenshots, every time.</em></li>
+</ul>
+<p>Example workflow: your aggregator shows five IoT fleets with certs expiring in 30 days. An Advanced Query pulls the list. EventBridge triggers a Systems Manager runbook to rotate certs. You drop success logs and final states into your evidence folder.</p>
+<p>Bonus: color-code your dashboard by framework, like HIPAA, PCI, and SOC. Teams can triage by this quarter’s audits. Less noise, faster fixes.</p>
+<h2 id="halfwaycheck">Halfway Check</h2>
+<ul>
+<li>Record the new EKS, Amazon Q, and IoT resource types in every active region.</li>
+<li>Attach conformance packs mapped to HIPAA, PCI DSS, or SOC 2 where needed.</li>
+<li>Pair rules with Systems Manager Automation for clean, fast remediation.</li>
+<li>Use Advanced Queries to find drift patterns and high-risk gaps.</li>
+<li>Aggregate across accounts to avoid perimeter-only compliance.</li>
+<li>Treat governance like code. Review, version, and roll out with CI/CD.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="dothesecostschange">Do these costs change</h3>
+<p>Costs depend on recorded configuration items and evaluations. Adding coverage can increase recorded changes. So scope carefully and use aggregators wisely. Check AWS Config pricing before rollout and pilot in nonprod.</p>
+<h3 id="howdoienablerecording">How do I enable recording</h3>
+<p>Use the AWS Config console, API, or CLI to update the recorder. Include EKS node groups, Amazon Q apps, and IoT resources. Or opt into record all supported resources if that fits your model. Validate in each active region.</p>
+<h3 id="caniuseconformancepacks">Can I use conformance packs</h3>
+<p>Yes, AWS provides conformance packs for these types. Start with packs aligned to HIPAA, PCI DSS, or SOC 2. Then customize rules or runbooks for your needs.</p>
+<h3 id="howdoesremediationwork">How does remediation work</h3>
+<p>Associate a failed AWS Config rule with an Automation document. When the rule fails, the runbook applies a fix. It might update an EKS AMI, add a tag to an Amazon Q app, or rotate an IoT cert.</p>
+<h3 id="whataboutmultiaccount">What about multi account</h3>
+<p>Use AWS Config aggregators to centralize findings. You’ll get one surface for queries and dashboards. Pair with EventBridge for cross-account alerts and central remediation.</p>
+<h3 id="howdotheseupdateshelp">How do these updates help</h3>
+<p>Security Hub relies on AWS Config for many checks. Make sure required resource types are recorded in each account and region. No recorded config means missing evidence and empty findings.</p>
+<h3 id="anytipstokeepsignal">Any tips to keep signal</h3>
+<p>Start with a small, high-impact rule set. Focus on tags, encryption, and AMI baselines. Add rules in batches and watch alerts. Use exceptions to avoid alert fatigue during changes.</p>
+<h3 id="howfastwillchangesshow">How fast will changes show</h3>
+<p>Recording is near real time, with short processing delays. For critical guardrails, pair Config with preventive controls. SCPs or service policies can block risky changes upfront.</p>
+<h3 id="wheredoistoreevidence">Where do I store evidence</h3>
+<p>Use Config snapshots and SSM Automation logs. Centralize them in S3 with lifecycle rules and access controls. Link each piece of evidence to a control ID for traceability.</p>
+<h2 id="fliptheswitch">Flip The Switch</h2>
+<ul>
+<li>Identify accounts and regions running EKS, Amazon Q, and IoT.</li>
+<li>In each, enable recording for the new resource types in AWS Config.</li>
+<li>Attach conformance packs that match your target frameworks.</li>
+<li>Enable or write rules for AMI baselines, tags, and IoT policy scope.</li>
+<li>Wire Systems Manager Automation to each rule for remediation.</li>
+<li>Create an aggregator for org-wide visibility and queries.</li>
+<li>Run an Advanced Query to list top noncompliant resources.</li>
+<li>Trigger runbooks, verify fixes, and export evidence for audit.</li>
+</ul>
+<p>A few extra steps that pay off fast:</p>
+<ul>
+<li>Tag everything you care about: owner, environment, and data classification. Your queries will thank you.</li>
+<li>Document rollback paths in runbooks. If a fix misfires, you wont need a war room.</li>
+<li>Review costs monthly. Tune recording scope and rule frequency if bills spike.</li>
+</ul>
+<p><em>You don’t get points for spotting drift.</em> You get points for fixing it early. With 30 new resource types in the AWS Config lens, you can extend discipline to the edge. Record broadly, control carefully, automate fixes, and put evidence on autopilot. That’s how you ship faster and still pass the audit.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/what-is-config.html">What is AWS Config</a></li>
+<li><a href="https://aws.amazon.com/config/pricing/">AWS Config pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">AWS Config Rules (evaluate configuration changes)</a></li>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/required-tags.html">Managed rule for required tags</a></li>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/remediation.html">Remediation with AWS Systems Manager Automation</a></li>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation.html">AWS Systems Manager Automation overview</a></li>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/conformance-packs.html">AWS Config conformance packs</a></li>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/aggregate-data.html">AWS Config aggregators (org-wide view)</a></li>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/querying-AWS-resources.html">AWS Config Advanced Queries</a></li>
+<li><a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-prereqs.html">AWS Security Hub prerequisites (Config required for some standards)</a></li>
+<li><a href="https://docs.aws.amazon.com/iot/latest/developerguide/managing-device-certs.html">AWS IoT device certificate management</a></li>
+<li><a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html">Amazon EKS managed node groups</a></li>
+<li><a href="https://aws.amazon.com/q/">Amazon Q overview</a></li>
+<li><a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html">Amazon EventBridge overview (for routing alerts)</a></li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/?whats-new-content-all=AWS%20Config">AWS “What’s New” for AWS Config</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-config-30-resource-types.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq208e.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Turn+AWS+Config%E2%80%99s+30+New+Types+Into+Compliance+Wins&amp;pi=313634830025&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=313634830025&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-config-30-resource-types&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-config-30-resource-types?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:56 GMT -->
+</html>

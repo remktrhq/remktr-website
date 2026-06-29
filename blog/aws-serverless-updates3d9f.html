@@ -1,0 +1,445 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-serverless-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Cut Latency, Costs: AWS Updates You Need Now</title>
+    <link rel="canonical" href="aws-serverless-updates.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover AWS updates on Lambda ALB targets, Rust runtime, QUIC, and DCV Mac. Use this additional information context example to build faster, resilient apps.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cut Latency, Costs: AWS Updates You Need Now",
+        "datePublished": "2025-11-17T22:17:41Z",
+        "dateModified": "2025-11-17T22:17:41.899Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-serverless-updates",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-17-2025-10-08-58-1253-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-serverless-updates.html">Cut Latency, Costs: AWS Updates You Need Now</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 17, 2025 10:17:41 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’re shipping features fast, but the stack’s creaking in bad spots. Cold starts, flaky mobile links, and dev envs that die when a laptop shuts. Meanwhile, your CFO wants lower costs and more resilience. Fun combo, right.</p>
+<p>Here’s the good news: AWS just handed you a cheat code. Load balance straight to Lambda. Health-check your serverless like an adult. Ship in Rust for speed. Run HTTP/3 over QUIC for faster mobile. And give iOS/macOS folks real cloud Macs with pixel-perfect remoting.</p>
+<p>If you’re thinking “okay, what extra context do I need to decide smart?” you’re in the right place. You’ll get the why, examples, and a checklist you can paste in runbooks. Also in your “additional information” slots for exec decks. Let’s get you faster, cheaper, and harder to break.</p>
+<p>We’ll turn shiny features into real moves. How ALB pairs with Lambda, where Rust and modern Java fit, and how QUIC helps folks on a train. <em>No fluff. Just steps, watch-outs, and templates you can copy.</em></p>
+<p>By the end, you’ll have a 9-step plan for two sprints. A clean failover playbook. And a tiny template to sell this to finance and security without a 40-slide deck. <em>Sharp, simple, and ready to ship.</em></p>
+
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>Register AWS Lambda as targets behind an ALB to handle HTTP/S at scale without EC2.</li>
+<li>Turn on Lambda health checks and use Route 53 failover to dodge downtime.</li>
+<li>Build performance-first with the Rust runtime and modern Java support.</li>
+<li>Use QUIC/HTTP/3 on NLB paths for lower latency on mobile and streaming.</li>
+<li>Stream macOS desktops with Amazon DCV on EC2 Mac for real Apple workflows.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-17-2025-10-10-45-3307-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="albtargetslambda">ALB targets Lambda</h2>
+<h3 id="whatchanged">What changed</h3>
+<p>You can now put Lambda functions in an ALB target group. You handle HTTP/S traffic without spinning up EC2 or containers. Set function versions, aliases, and timeouts to control requests. ALB health checks work with Lambda too. So you can plug into Amazon Route 53 failover for high availability.</p>
+<p>You also keep normal ALB features. Listeners, rules, auth actions, and WAF still apply. The request hits your function with method, path, headers, query string, and body. Your function returns a status code, headers, and a body. It feels like writing a tiny web server, without running servers.</p>
+<h3 id="whyitmatters">Why it matters</h3>
+<p>This fuses serverless with battle-tested L7 load balancing. You keep ALB goodies like path routing, WAF, and auth. You ditch server hosting. For bursty stuff—webhooks, APIs, mobile backends, and scheduled fan-out—it’s a cost and ops win. You also get predictable behavior. ALB buffers requests, normalizes headers, and gives you a simple request context inside Lambda.</p>
+<p>It also shrinks blast radius. Instead of a mix of EC2, containers, and Lambda, centralize HTTP/S entry on ALB. Apply WAF once. Route to function aliases for blue/green. That’s less surface for security and fewer moving parts on-call.</p>
+<h3 id="firsthandexample">First hand example</h3>
+<p>Say you ingest webhooks from 20 SaaS vendors. Skip a fleet of autoscaling instances. Put an ALB in front. Route /stripe to one Lambda alias and /zendesk to another. Use function aliases for phased rollouts. Set a 15-second timeout for low-latency hooks and 60 seconds for heavy transforms. If a function misbehaves, health checks mark it out. Route 53 then fails over to a standby region.</p>
+<p>Go further. Ship JSON logs from each Lambda with vendor name and request ID. Push ALB access logs to S3. Wire CloudWatch alarms to unhealthy target counts. When Stripe changes a field at 2 a.m., you find it fast. Flip traffic to a safe alias while you patch.</p>
+<h3 id="operationalguardrailstocopy">Operational guardrails to copy</h3>
+<ul>
+<li>Set per-route listener rules and per-function timeouts. Keep ALB and Lambda timeouts aligned.</li>
+<li>Use function aliases for safe rollouts. Shift a small percentage before going all in.</li>
+<li>Add WAF on the ALB for basics like SQLi and XSS rules, plus rate limits.</li>
+<li>Keep requests idempotent. If a webhook retries, your function should handle it.</li>
+<li>Use least-privilege IAM for Lambda. Avoid broad wildcards when you can.</li>
+<li>Log ALB access and Lambda execution logs. Tag everything with correlation IDs.</li>
+</ul>
+<h3 id="costandtradeoffs">Cost and tradeoffs</h3>
+<ul>
+<li>ALB gives flexible routing and WAF. That’s great for multi-tenant APIs and webhooks.</li>
+<li>API Gateway may still win for deep API features. Quotas, usage plans, and request validation. Mix and match if needed.</li>
+<li>For static files, keep S3 plus CloudFront. Don’t turn Lambda into a file server.</li>
+</ul>
+<h3 id="linkstogetitdone">Links to get it done</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/lambda-functions.html">ALB plus Lambda target groups</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Route 53 failover routing</a></li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-17-2025-10-12-27-3233-PM.html" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="rustandmodernjava">Rust and modern Java</h2>
+<h3 id="theperformanceplay">The performance play</h3>
+<p>Serverless costs love two things. Fast starts and low memory. Rust nails both. The AWS Lambda Rust runtime builds small compiled binaries with steady performance. For Java teams, modern LTS support like Java 21 and better tooling help tune memory. You reduce cold starts and keep developer speed.</p>
+<h3 id="whyitmatters-1">Why it matters</h3>
+<ul>
+<li>Rust: predictable latency, fewer runtime deps, smaller memory, and lower cost. Great for latency-sensitive endpoints, streaming transforms, and compute-heavy logic.</li>
+<li>Java: keep your ecosystem and frameworks. Upgrade to a current LTS. Trim reflection, warm critical paths in init, and right-size memory to avoid thrash.</li>
+</ul>
+<h3 id="firsthandexample-1">First hand example</h3>
+<p>You have an image-processing microservice. The Python version is clean but struggles during spikes. Rewrite the hot loop in Rust, or the whole function in Rust. You cut average execution time and reduce memory usage. p95 latency stabilizes. For your Java API, upgrade to the latest LTS. Move startup work to init, cache config, and keep handler code hot. You’ll feel it in latency and the monthly bill.</p>
+<h3 id="tuningchecklistyoucansteal">Tuning checklist you can steal</h3>
+<ul>
+<li>Use the smallest memory setting that meets p95 latency goals. Adjust until CPU-bound work keeps up.</li>
+<li>Put heavy SDK clients and connection pools outside the handler. Reuse them across invocations.</li>
+<li>For Java, keep reflection low and prefer AOT-friendly libraries when possible.</li>
+<li>Consider Provisioned Concurrency for paths that must stay warm 24/7. Scope it tightly.</li>
+<li>Where supported, try Lambda SnapStart for Java to snapshot init state.</li>
+<li>Test on arm64 Graviton for better price and perf. It’s a quick config flip.</li>
+</ul>
+<h3 id="benchmarkplaninoneafternoon">Benchmark plan in one afternoon</h3>
+<ul>
+<li>Pick one function with clear SLOs. Create a baseline using the current runtime.</li>
+<li>Build a Rust or tuned Java version. Same inputs and same outputs.</li>
+<li>Run a load test with cold starts and bursty traffic, plus steady-state.</li>
+<li>Track duration, memory used, p95 and p99 latency, and error rates.</li>
+<li>Pick the winner by latency and cost. Not just average time.</li>
+</ul>
+<h3 id="linkstoshipfaster">Links to ship faster</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-rust.html">Rust on AWS Lambda</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">AWS Lambda supported runtimes for Java</a></li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/2024/10/aws-lambda-supports-java-21/">What’s New: AWS Lambda supports Java 21 LTS</a></li>
+</ul>
+<h2 id="quiconnlb">QUIC on NLB</h2>
+<h3 id="theprotocolupgrade">The protocol upgrade</h3>
+<p>QUIC, the transport under HTTP/3, runs over UDP. It reduces connection setup to 1-RTT and supports 0-RTT resumption. It also has better loss recovery than TCP. AWS Network Load Balancer supports UDP. You can front QUIC-based services and improve performance on lossy, mobile, or long routes.</p>
+<blockquote>
+  <p>QUIC is “a UDP-based, stream-multiplexed, secure transport protocol.” — IETF RFC 9000</p>
+</blockquote>
+<h3 id="whyitmatters-2">Why it matters</h3>
+<p>Mobile and streaming users live with flaky networks. They switch between cell towers, Wi‑Fi, and 5G. TCP resets and TLS handshakes add pain. QUIC bakes in TLS 1.3, connection migration, and smarter congestion control. You get quicker starts, fewer drops, and better throughput under jitter.</p>
+<h3 id="firsthandexample-2">First hand example</h3>
+<p>Imagine a real-time sports app. Your update feed and live comments ride over HTTP/3 and QUIC. Put an NLB in front of your UDP listeners. When users walk from subway to street-level 5G, QUIC keeps sessions alive. It uses connection migration instead of tearing down and re-handshaking. Result: updates feel instant, not laggy.</p>
+<h3 id="rolloutwithoutbreakingthings">Rollout without breaking things</h3>
+<ul>
+<li>Run dual-stack. Keep HTTP/2 over TCP and add HTTP/3 over QUIC. Let clients upgrade.</li>
+<li>Terminate QUIC at your service tier like Envoy, NGINX, or app servers with HTTP/3. NLB is UDP pass-through.</li>
+<li>Monitor both paths. Track latency, error rates, and upgrade rates to HTTP/3.</li>
+<li>Educate client teams. Mobile apps may need updated SDKs or gRPC and HTTP libraries.</li>
+</ul>
+<h3 id="securitynotes">Security notes</h3>
+<ul>
+<li>QUIC uses TLS 1.3 under the hood. Keep certs and cipher suites modern.</li>
+<li>0-RTT resumption is fast but can be replayed in some cases. Gate sensitive writes.</li>
+<li>UDP gets blocked in some corporate networks. Keep a clean HTTP/2 fallback.</li>
+</ul>
+<h3 id="opsrunbookstarters">Ops runbook starters</h3>
+<ul>
+<li>NLB targets: autoscale the backend fleet and keep health checks strict.</li>
+<li>Observability: capture server-side HTTP/3 metrics like handshakes, loss, and RTT. Add VPC Flow Logs for UDP.</li>
+<li>SLOs: pick user metrics like time-to-first-update and stall counts. Watch them during rollout.</li>
+</ul>
+<h3 id="linkstobeprotocolsmart">Links to be protocol smart</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html">NLB protocol support for TCP, UDP, and TLS</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc9000">QUIC core RFC 9000</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9114.html">HTTP/3 RFC 9114</a></li>
+</ul>
+<h2 id="dcvonec2mac">DCV on EC2 Mac</h2>
+<h3 id="realappleworkflowscloudscale">Real Apple workflows cloud scale</h3>
+<p>You can run macOS on EC2 Mac instances and stream the desktop with Amazon DCV. That means Xcode, Swift, iOS Simulator, and asset pipelines. All on elastic hardware with low-latency streaming and pixel-perfect rendering.</p>
+<h3 id="whyitmatters-3">Why it matters</h3>
+<p>Distributed teams and heavy pipelines make laptops feel quaint. Compliance too. DCV’s remote protocol handles 2D UIs, high DPI, and GPU acceleration when supported. Your iOS team gets persistent, reproducible environments. Security sleeps better with centralized access, audit logs, and VPC-bound networking.</p>
+<h3 id="firsthandexample-3">First hand example</h3>
+<p>Your mobile org standardizes on EC2 Mac for nightly builds and review envs. Designers connect to a known-good macOS image via DCV. They validate animations in the iOS Simulator and ship assets to S3. Developers spin up short-lived Mac hosts for tests. Then tear them down. No more queues for the big laptop.</p>
+<h3 id="pilotthisinaweek">Pilot this in a week</h3>
+<ul>
+<li>Create a golden macOS image with Xcode, Homebrew, and your standard tools.</li>
+<li>Install and configure the DCV server. Validate audio, video, and clipboard.</li>
+<li>Put instances in a private subnet. Reach them via a bastion or SSM.</li>
+<li>Map IAM roles to S3 buckets for artifacts. Set up build caches.</li>
+<li>Define a simple scheduler to turn instances on and off during work hours.</li>
+</ul>
+<h3 id="securityandgovernancetips">Security and governance tips</h3>
+<ul>
+<li>Lock access to your VPC. Use security groups and per-session audit logs.</li>
+<li>Prefer SSM Session Manager for admin actions. Avoid inbound SSH.</li>
+<li>Use separate images for prod signing vs. dev and test. Reduce risk.</li>
+<li>Encrypt volumes and keep snapshots of clean images for fast recovery.</li>
+</ul>
+<h3 id="whattomeasure">What to measure</h3>
+<ul>
+<li>Time-to-first-frame on DCV, input latency, and dropped frames.</li>
+<li>Build time reductions versus local laptops.</li>
+<li>Environment drift should be zero. Time to replace a bad machine should be minutes.</li>
+</ul>
+<h3 id="linkstolaunch">Links to launch</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/dcv/latest/adminguide/what-is-dcv.html">Amazon DCV overview</a></li>
+<li><a href="https://aws.amazon.com/ec2/instance-types/mac/">EC2 Mac instances</a></li>
+</ul>
+<h2 id="additionalinformationcontext">Additional information context</h2>
+<h3 id="whythissectionexists">Why this section exists</h3>
+<p><em>Stakeholders don’t buy tech. They buy outcomes.</em> The fastest way to win buy-in is adding sharp context. Treat this like the Additional Information box on an application. Short, surgical, and outcome-focused. If someone asks for an additional information context example, you’ve got one ready.</p>
+<h3 id="reusabletemplateyoucanpaste">Reusable template you can paste</h3>
+<ul>
+<li>Summary: We’re adopting ALB→Lambda to remove idle EC2. Health checks plus Route 53 failover will cut downtime.</li>
+<li>Impact: Target a 30–50% cost drop on webhook ingestion. p95 stabilizes under 300ms.</li>
+<li>Risks: Cold starts under burst. Mitigate with provisioned concurrency on hot paths.</li>
+<li>Dependencies: NLB UDP for QUIC endpoints. DCV for EC2 Mac developer workflows.</li>
+<li>Rollout: Blue/green via Lambda aliases. Region failover tested every quarter.</li>
+</ul>
+<h3 id="examplesacrossorgs">Examples across orgs</h3>
+<ul>
+<li>Additional information context example, engineering: QUIC rides over UDP via NLB. Safer handoffs on flaky mobile.</li>
+<li>Additional information section example, finops: Moving to Rust reduces memory size. That lowers Lambda GB-seconds cost.</li>
+<li>Additional information context Oracle or Oracle Fusion: If your ERP layer sits on Oracle Fusion, document how ALB→Lambda adapters normalize headers and auth before Fusion APIs.</li>
+<li>Examples of additional information on college application—style analogy: short, specific, and relevant. Don’t write a novel. Give reviewers what they need to say yes.</li>
+</ul>
+<h3 id="makeitskimmable">Make it skimmable</h3>
+<ul>
+<li>Lead with one sentence. Bold the result you promise.</li>
+<li>Add three bullets: impact, risk, rollback.</li>
+<li>Link to a one-pager with diagrams for anyone who wants more.</li>
+</ul>
+
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>ALB can route directly to Lambda with function aliases, timeouts, and health checks.</li>
+<li>Pair health checks with Route 53 failover to keep traffic up during incidents.</li>
+<li>Rust runtime and modern Java support give you faster starts and lower memory.</li>
+<li>QUIC over UDP via NLB improves latency and reliability for mobile and streaming.</li>
+<li>Amazon DCV on EC2 Mac unlocks real macOS dev at cloud scale.</li>
+</ul>
+<p><em>This is a strong backbone. Resilient entry points, fast runtimes, modern transport, and reliable dev desktops. You’ll feel it in incident response, build speed, and user experience.</em></p>
+<h2 id="9stepplan">9 step plan</h2>
+<p>1) Map candidates for ALB→Lambda like webhooks and lightweight APIs.
+2) Create Lambda target groups and listeners. Set sane timeouts by route.
+3) Enable health checks. Wire Route 53 failover between regions.
+4) Pick one Lambda to port to Rust. Benchmark memory and cold starts.
+5) Upgrade Java functions to the latest supported LTS. Trim init and deps.
+6) Identify a mobile or streaming path. Front it with NLB UDP for QUIC.
+7) Stand up EC2 Mac plus DCV for a pilot iOS workflow. Capture metrics.
+8) Document an additional information section with impact, risks, and rollback.
+9) Run a game day. Failover, cold-start bursts, QUIC migration, and DCV login.</p>
+<h3 id="implementationnotes">Implementation notes</h3>
+<ul>
+<li>(1) List current endpoints. Tag by spiky versus steady traffic, latency needs, and dependencies.</li>
+<li>(2) Create an ALB listener rule per route. Use Lambda aliases in target groups to roll forward and back instantly.</li>
+<li>(3) Set health check success codes and thresholds. Add Route 53 health checks. Test full failover in staging.</li>
+<li>(4) Start small in Rust. Replace only the hot path. Measure p95s before and after.</li>
+<li>(5) On Java, move heavy init to static init, reduce classpath, and test SnapStart where supported.</li>
+<li>(6) For QUIC, add UDP on NLB and keep HTTP/2 fallback. Roll out to 10% first.</li>
+<li>(7) Build a golden EC2 Mac AMI. Document who can access DCV and how to request a seat.</li>
+<li>(8) Keep your additional information under 150 words. Add a rollback line.</li>
+<li>(9) Simulate bad days. Kill a region, spike cold starts, and drop to HTTP/2 when UDP is blocked. Take notes and fix gaps.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="albtriggeringlambda">ALB triggering Lambda</h3>
+<p>Yes. Create a Lambda target group, register your function version or alias, and attach rules to an ALB listener. The ALB invokes Lambda with the full request context. See: <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/lambda-functions.html">https://docs.aws.amazon.com/elasticloadbalancing/latest/application/lambda-functions.html</a></p>
+<h3 id="lambdahealthchecks">Lambda health checks</h3>
+<p>Configure success codes and thresholds per target group. If the function fails health checks, ALB marks it unhealthy and stops routing traffic. Combine with Amazon Route 53 failover so DNS shifts to a healthy region automatically. Docs: <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html</a></p>
+<h3 id="timeoutsandpayloads">Timeouts and payloads</h3>
+<p>Set per-route timeouts in the ALB listener and function timeouts in Lambda. ALB supports request and response sizes based on service limits. For large uploads, use pre-signed S3 URLs and pass metadata through Lambda.</p>
+<h3 id="loadbalancerforquic">Load balancer for QUIC</h3>
+<p>QUIC runs over UDP. Network Load Balancer supports UDP pass-through, so terminate QUIC at your service tier. For HTTP/3 at the balancer layer, check service support. NLB handles transport while your stack implements HTTP/3.</p>
+<h3 id="rustcostsavings">Rust cost savings</h3>
+<p>Rust builds small, fast binaries with low memory. Lower memory cuts GB-seconds cost. Faster execution reduces billed duration. You also get steadier p95 latency, which avoids over-provisioning provisioned concurrency.</p>
+<h3 id="dcvreplacinglocalmacs">DCV replacing local Macs</h3>
+<p>For many workflows, yes. Builds, reviews, and asset prep are great fits. DCV streams a responsive macOS desktop, centralizes management, and scales up or down. For device-heavy tasks, keep a device lab in the loop.</p>
+<h3 id="albvsapigateway">ALB vs API Gateway</h3>
+<p>Use ALB when you want L7 load balancing and path routing with WAF and simple HTTP/S. Use API Gateway when you need deep API features like per-key throttling, usage plans, built-in authorizers, or request validation.</p>
+<h3 id="authinfrontoflambda">Auth in front of Lambda</h3>
+<p>Use ALB authentication actions with Amazon Cognito or an OIDC provider. Users get authenticated at the edge before Lambda runs. This keeps auth logic centralized and consistent.</p>
+<h3 id="multiregionstatetips">Multi region state tips</h3>
+<p>Keep the data layer ready to shift regions. Use multi-Region storage patterns like async replication. Keep caches warm in the standby region. Design idempotent writes for eventual consistency during failovers.</p>
+<h3 id="udpblocksandquic">UDP blocks and QUIC</h3>
+<p>Keep an HTTP/2 over TCP fallback. Most clients try HTTP/3 first, then drop back if UDP is blocked. Monitor the split so you know how much traffic is on QUIC.</p>
+<h3 id="x86vsarm64">x86 vs arm64</h3>
+<p>Test both. arm64 Graviton often gives better price and performance for CPU-bound work. Switching is usually just changing the architecture setting and rebuilding your package.</p>
+<h3 id="lowercoldstarts">Lower cold starts</h3>
+<p>Start with the big rocks. Move heavy init outside the handler, shrink dependencies, and upgrade Java to a better-startup LTS. Consider Provisioned Concurrency on hot paths. Measure before and after so you can prove gains.</p>
+<p>You want the fastest path to value? Pair ALB→Lambda for HTTP/S, failover with Route 53, and push performance-critical code into Rust or tuned Java. Put QUIC over NLB where mobile users feel it. Give your Apple team DCV-powered EC2 Macs so dev envs stop being the bottleneck. Then write a crisp additional information section that calls your shot on impact, risks, and rollbacks. <em>That’s how you get sign-off and ship.</em></p>
+<p><em>“Blockbuster laughed at Netflix. Your latency won’t laugh back.”</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/lambda-functions.html">ALB plus Lambda target groups</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Route 53 failover routing</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">AWS Lambda runtimes for Rust and Java</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-rust.html">Rust on AWS Lambda developer guide</a></li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/2024/10/aws-lambda-supports-java-21/">AWS What’s New: Lambda supports Java 21 LTS</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html">Provisioned Concurrency for AWS Lambda</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">AWS Lambda SnapStart</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html">Configure memory and CPU for Lambda</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html">Using arm64 Graviton with Lambda</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html">Amazon S3 pre-signed URLs</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html">Network Load Balancer protocols</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc9000">QUIC Core Protocol RFC 9000</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9001.html">Using TLS to secure QUIC RFC 9001</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9114.html">HTTP/3 RFC 9114</a></li>
+<li><a href="https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/http/http3">Envoy HTTP/3 guide</a></li>
+<li><a href="https://nginx.org/en/docs/http/ngx_http_v3_module.html">NGINX HTTP/3 module</a></li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF developer guide</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/listener-authenticate-users.html">Authenticate users with an Application Load Balancer</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html">ALB access logs</a></li>
+<li><a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html">AWS X-Ray developer guide</a></li>
+<li><a href="https://docs.aws.amazon.com/dcv/latest/adminguide/what-is-dcv.html">Amazon DCV</a></li>
+<li><a href="https://aws.amazon.com/ec2/instance-types/mac/">EC2 Mac instances</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html">EC2 Mac user guide</a></li>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html">AWS Systems Manager Session Manager</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-serverless-updates.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq58c8.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Cut+Latency%2C+Costs%3A+AWS+Updates+You+Need+Now&amp;pi=260835571410&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=260835571410&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-serverless-updates&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-serverless-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:29 GMT -->
+</html>

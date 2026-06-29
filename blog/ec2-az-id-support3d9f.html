@@ -1,0 +1,428 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/ec2-az-id-support?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Nail EC2 placement with Availability Zone IDs</title>
+    <link rel="canonical" href="ec2-az-id-support.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn how to place EC2 in the same zone using AZ IDs. Simplify migrations, DR, and HA across accounts; clarify aws availability zones list and aws regions list.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Nail EC2 placement with Availability Zone IDs",
+        "datePublished": "2026-01-05T21:35:14Z",
+        "dateModified": "2026-01-05T21:35:14.637Z",
+        "mainEntityOfPage": "https://remktr.com/blog/ec2-az-id-support",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-05-2026-09-27-07-4275-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="ec2-az-id-support.html">Nail EC2 placement with Availability Zone IDs</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 5, 2026 9:35:14 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You see “us-east-1a” on your screen? Surprise: your coworker’s “us-east-1a” isn’t the same place.
+That mismatch has caused latency spikes, surprise data transfer, and flimsy HA builds for years.</p>
+<p>Now there’s a clean fix. EC2 supports Availability Zone IDs (AZ IDs) across its APIs.
+Stop relying on account-specific AZ names. Target the same physical zone with IDs like “use1-az1.”</p>
+<p>If you run multi-account, multi-region, or DR-heavy stacks, this is big.
+You can co-locate with certainty, simplify migrations, and make “same-zone” actually same.
+<em>Less guesswork. More reliability. Fewer 2 a.m. incidents.</em></p>
+<p>Here’s why this matters in real life. Shared services like NAT gateways, queues, and caches sit in one account.
+Apps live in another. If “same AZ” labels don’t align, traffic silently hairpins across zones.
+That adds milliseconds (annoying for p99s) and shows up as cross-AZ transfer on your bill.
+AZ IDs stop that drift and put everything exactly where you intend—no detective work.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>AZ names lie (kinda). AZ IDs are consistent across accounts.</li>
+<li>Use AZ IDs (e.g., use1-az1) to ensure true co-location for EC2, subnets, and more.</li>
+<li>Discover your mapping with DescribeAvailabilityZones; encode IDs in IaC.</li>
+<li>You can’t “change” an EC2 instance’s AZ; you recreate it in the target AZ.</li>
+<li>For region counts and AZ options, use the AWS Global Infrastructure page.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-27-53-5577-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="azidsovernames">AZ IDs over names</h2>
+<h3 id="whyaznamestripup">Why AZ names trip up</h3>
+<p>AZ names are per-account labels. Your “us-west-2a” could be my “us-west-2c.”
+That’s fine if you live in a single account. It breaks fast at org scale.
+You think two services are in the “same AZ,” but they’re different physical zones.
+Cue latency and cross-AZ data transfer.</p>
+<blockquote>
+  <p>“Because AZ names are mapped to underlying AZs differently for each account, you can use AZ IDs (for example, use1-az1) to uniquely and consistently identify an AZ across accounts.” — AWS documentation</p>
+</blockquote>
+<h3 id="commonaznamesymptoms">Common AZ name symptoms</h3>
+<ul>
+<li>Cross-AZ data transfer when you expected none (for example, app in Account A talks to a database in Account B that’s actually in a different physical zone).</li>
+<li>Latency outliers between services labeled “same AZ” that don’t behave like it.</li>
+<li>DR tests fail because replicas weren’t spread across distinct physical zones as planned.</li>
+<li>NAT gateway or load balancer traffic hairpinning across zones because subnets don’t line up.</li>
+</ul>
+<h3 id="meetazids">Meet AZ IDs</h3>
+<p><em>AZ IDs are static, region-scoped identifiers like “use1-az1.”</em>
+They represent the actual physical zone and stay consistent across accounts.
+If you launch with the same AZ ID in two accounts, you land in the same place.
+That’s the key to reliable co-location in multi-account designs.</p>
+<h3 id="quickazidnotes">Quick AZ ID notes</h3>
+<ul>
+<li>AZ IDs are unique within a Region. “use1-az1” is in us-east-1; “usw2-az1” is in us-west-2.</li>
+<li>The friendly AZ name you see (us-east-1a) is an alias. The AZ ID is the real coordinate.</li>
+<li>Some UIs and APIs still show only the AZ name. When that happens, anchor placement with subnets created using an AZ ID.</li>
+</ul>
+<h3 id="whythisunlocksbetterarchitectures">Why this unlocks better architectures</h3>
+<ul>
+<li>Deterministic placement: lower latency for tight services that need true same-zone placement.</li>
+<li>Cleaner DR: mirror exact zone layouts across accounts without guessing.</li>
+<li>Safer migrations: move apps across accounts or VPCs and keep zone affinity.</li>
+<li>Clearer debugging: when you say “same AZ,” it’s actually the same AZ.</li>
+<li>Smarter capacity planning: with zonal Capacity Reservations, AZ IDs place instances where capacity exists.</li>
+</ul>
+<h2 id="azidsbydefault">AZ IDs by default</h2>
+<h3 id="discoverazidmapping">Discover AZ ID mapping</h3>
+<p>First, map AZ names to AZ IDs in each Region you care about. With the AWS CLI:</p>
+<ul>
+<li>aws ec2 describe-availability-zones --region us-east-1 --query 'AvailabilityZones[*].{Name:ZoneName,Id:ZoneId,State:State}' --output table</li>
+</ul>
+<p>You’ll see ZoneName (e.g., us-east-1a) and ZoneId (e.g., use1-az1).
+Store this mapping if you must reference names for legacy pieces, but prefer IDs.</p>
+<h3 id="discoveryandinventorytips">Discovery and inventory tips</h3>
+<ul>
+<li>Capture mappings in all active Regions often and commit them to a shared repo.</li>
+<li>Expose a tiny internal API or config package returning allowed AZ IDs per Region.</li>
+<li>In each account, tag subnets with the AZ ID and a human-readable label.</li>
+</ul>
+<h3 id="useazidsforsubnets">Use AZ IDs for subnets</h3>
+<p>Subnets anchor resources to a specific zone.
+Create subnets with an AZ ID, and everything launched inherits the right location.
+Do this across accounts for consistent results. It’s your foundation for deterministic placement.</p>
+<ul>
+<li>Example: create subnets with an AZ ID parameter so “public-a” means the same place everywhere.</li>
+<li>Launch EC2 into those subnets. Even if an API lacks AZ ID for instances, the subnet handles it.</li>
+</ul>
+<p><em>Tip: many EC2 APIs and IaC tools now support AZ IDs.</em>
+Subnet creation takes Availability Zone IDs. Prefer the AZ ID option where possible.</p>
+<h3 id="moreimplementationtips">More implementation tips</h3>
+<ul>
+<li>CloudFormation: use AvailabilityZoneId on AWS::EC2::Subnet, not just AvailabilityZone.</li>
+<li>Terraform: prefer availability<em>zone</em>id in aws<em>subnet over availability</em>zone.</li>
+<li>Launch Templates: don’t hard-code AZ names. Use subnets tied to AZ IDs.</li>
+</ul>
+<h3 id="hardcodepolicyparameterizeplacement">Hard code policy parameterize placement</h3>
+<ul>
+<li>In IaC, parameterize target AZ IDs per Region: [“use1-az1”, “use1-az2”, …].</li>
+<li>Keep an org-wide mapping so platform and app teams stay aligned.</li>
+<li>In CI/CD, validate requested zones are AZ IDs, not names.</li>
+</ul>
+<p>This creates a single source of truth and kills ambiguous deployments.
+You keep flexibility without surprise shifts.</p>
+<h3 id="guardrailsthatcatchmistakesearly">Guardrails that catch mistakes early</h3>
+<ul>
+<li>Add a linter that rejects values like “us-east-1a” and accepts “use1-az1.”</li>
+<li>Require subnet selection for EC2 placements so curated subnets drive placement.</li>
+<li>Add a step that lists final subnets and their AvailabilityZoneId before merge.</li>
+</ul>
+<h2 id="drandmultiaccountgains">DR and multi-account gains</h2>
+<h3 id="truecolocationfordependencies">True colocation for dependencies</h3>
+<p>If you run latency-sensitive microservices, brokers, or shared caches, same-zone matters.
+<em>AZ IDs guarantee you’re pointing to the same physical zone across accounts.</em>
+No accidental cross-zone hops.</p>
+<ul>
+<li>Example: a payments API in Account A and a risk engine in Account B can deploy to “use1-az1” and avoid hairpins.</li>
+</ul>
+<h3 id="deepdivescenario">Deep dive scenario</h3>
+<ul>
+<li>Shared Redis or Memcached clusters often sit in a platform account. If app pods live in different physical zones than the cache nodes, tail latency jumps and cross-AZ transfer starts ticking. Pin both to the same AZ ID to steady p95/p99 and cut surprise costs.</li>
+</ul>
+<h3 id="cleanerbluegreenmigrations">Cleaner blue green migrations</h3>
+<p>When moving from a legacy account to a new landing zone, you want like-for-like.
+With AZ IDs, mirror subnets and instances in precise zones.
+Testing becomes apples-to-apples. Cutovers go smoother.</p>
+<ul>
+<li>Strategy: build the target VPC with subnets pinned to the same AZ IDs, then shift traffic gradually using DNS or target groups.</li>
+</ul>
+<h3 id="extranotes">Extra notes</h3>
+<ul>
+<li>Keep AMIs and Launch Templates identical across accounts; only the subnet changes.</li>
+<li>During cutover, validate by querying AvailabilityZoneId via DescribeInstances or the console.</li>
+</ul>
+<h3 id="drmatchesblastradius">DR matches blast radius</h3>
+<p>You design for AZ independence in a Region and Region failover for disasters.
+AZ IDs help you:</p>
+<ul>
+<li>Ensure spread: place replicas in distinct AZ IDs (e.g., use1-az1 + use1-az3).</li>
+<li>Align infra: ensure networking, compute, and storage replicas match intended zones across accounts.</li>
+</ul>
+<p>Paired with quotas, reservations, and warm failover, AZ IDs reduce surprises.
+They matter most when you need them most.</p>
+<h3 id="practicaladditions">Practical additions</h3>
+<ul>
+<li>If you use zonal On-Demand Capacity Reservations, place instances in those AZ IDs.</li>
+<li>For stateful systems, align data replication with your AZ spread for real failover.</li>
+</ul>
+<h2 id="regionsandazsoverview">Regions and AZs overview</h2>
+<h3 id="whatisanawsregion">What is an AWS Region</h3>
+<p>A Region is a separate geographic area (e.g., us-east-1 in Northern Virginia).
+Each Region has multiple isolated Availability Zones.
+Regions help with residency, compliance, and latency needs.
+Services are priced and deployed per Region. That affects budget and strategy.</p>
+<h3 id="howmanyazsperregion">How many AZs per Region</h3>
+<p>Most Regions have three or more AZs, though some have two.
+The exact count varies by Region and changes over time.
+The only reliable source is the official AWS list. Use it to plan spread.</p>
+<h3 id="findawsregionsandazs">Find AWS Regions and AZs</h3>
+<p>Bookmark this for the canonical “aws regions and availability zones list”:
+<a href="https://aws.amazon.com/about-aws/global-infrastructure/regions_az/">AWS Global Infrastructure: Regions and Availability Zones</a></p>
+<p>You’ll get the “aws regions list,” each Region’s “aws availability zones list,” and new expansions.
+Pair that with AZ ID discovery to build stable, portable architectures.</p>
+<h3 id="extratips">Extra tips</h3>
+<ul>
+<li>New AZs can appear in existing Regions. Don’t assume a fixed count.</li>
+<li>Local Zones and Wavelength Zones have different naming. This guide sticks to standard AZs.</li>
+</ul>
+<h2 id="azidreadinesscheck">AZ ID readiness check</h2>
+<ul>
+<li>If you use AZ names for placement, you risk cross-account mismatches.</li>
+<li>Discover AZ IDs via DescribeAvailabilityZones and document them.</li>
+<li>Create subnets with AZ IDs; launch EC2 into those subnets.</li>
+<li>Parameterize AZ IDs in Terraform/CloudFormation and validate in CI/CD.</li>
+<li>For migrations/DR, mirror AZ IDs across accounts for true topology parity.</li>
+</ul>
+<h3 id="quickverificationtrick">Quick verification trick</h3>
+<ul>
+<li>Query a few running instances: list InstanceId, Placement.AvailabilityZone, and Placement.AvailabilityZoneId. If you see only names in tooling, route placement through subnets created with AZ IDs.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-28-44-3878-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="azidfaqs">AZ ID FAQs</h2>
+<h3 id="changeec2instanceaz">Change EC2 instance AZ</h3>
+<p>No. You can’t edit an instance’s AZ in place.
+To “move” it, create an AMI or snapshot, then launch a new instance in the target AZ.
+Update IPs or target groups, then retire the old one.</p>
+<p>Pro tip: if you use Elastic IPs or ENIs, plan the handoff.
+Some identifiers are AZ-scoped. Test this in non-prod first.</p>
+<h3 id="sameaznameacrossaccounts">Same AZ name across accounts</h3>
+<p>No. AZ names are account-specific labels. Your “us-east-1a” might be my “us-east-1c.”
+That’s why AZ IDs (e.g., use1-az1) exist—to consistently identify the same physical zone.</p>
+<h3 id="findazidmapping">Find AZ ID mapping</h3>
+<p>Use the EC2 API or CLI to call DescribeAvailabilityZones in a Region.
+You’ll get ZoneName and ZoneId for each AZ.
+Record and use the ZoneId for deterministic placement across accounts.</p>
+<p>Bonus: store the mapping in Parameter Store, Secrets Manager, or a tiny config service.</p>
+<h3 id="servicesupportforazids">Service support for AZ IDs</h3>
+<p>Coverage varies by service and API. EC2 and networking constructs support AZ IDs.
+Some APIs still expect AZ names.
+When launching compute, placing storage, or creating subnets, prefer flows that take AZ IDs.</p>
+<p>A safe default: if a service doesn’t accept AZ IDs, place it inside a subnet that does.</p>
+<h3 id="seeregionsandazslist">See Regions and AZs list</h3>
+<p>Check the AWS Global Infrastructure page.
+It’s the source of truth for the aws regions list and each Region’s aws availability zones list.
+Numbers change as AWS expands, so don’t hard-code them.</p>
+<h3 id="howmanyazsperregion-1">How many AZs per Region</h3>
+<p>It varies by Region and time.
+Many Regions offer three or more AZs, some have two.
+Confirm current counts on the Global Infrastructure page, then plan your spread.</p>
+<h3 id="costlatencyanddr">Cost, latency, and DR</h3>
+<p>Both. Misaligned AZs create cross-AZ data transfer, which is billable in many cases.
+Aligning with AZ IDs often reduces that hidden tax.
+Plus, fewer 2 a.m. incidents saves real money.</p>
+<h2 id="moveanec2instance">Move an EC2 instance</h2>
+<ul>
+<li>Stop trying to “edit” the AZ—it’s immutable.</li>
+<li>Create an AMI from the instance (or snapshot volumes, then use a launch template).</li>
+<li>Choose a subnet in the target AZ (created with the correct AZ ID).</li>
+<li>Launch a replacement instance from the AMI or template into that subnet.</li>
+<li>Reattach or restore data volumes as needed; update security groups or ENIs.</li>
+<li>Shift traffic (ALB target group, DNS, or service registry) and retire the old instance.</li>
+</ul>
+<p>Close gaps by scripting this flow so “change availability zone of EC2 instance” becomes a safe redeploy.</p>
+<h3 id="moregotchastowatch">More gotchas to watch</h3>
+<ul>
+<li>If your NAT gateway lives in a different AZ than your instance, outbound may cross AZs. Keep one NAT gateway per AZ and route locally.</li>
+<li>Placement Groups and EBS volumes are AZ-scoped—recreate or attach in the right AZ.</li>
+<li>If you rely on static private IPs, plan ENI reattachment or DNS updates in the move.</li>
+</ul>
+<p>Strong move: adopt AZ IDs at the edges—subnets, templates, and policies.
+Then every launch lands exactly where you intend.
+That’s how you kill the “same name, different place” chaos for good.</p>
+<p><em>“Infrastructure gets easier when your coordinates stop changing.”</em>
+The punchline is simple: AZ IDs turn fuzzy labels into precise locations.
+Use them by default, especially across accounts.
+If you build VPCs, subnets, and templates around AZ IDs, you get predictable performance, smoother migrations, and DR that behaves.</p>
+<p>Next step: audit your Regions, discover AZ IDs, lock them into IaC, and standardize subnet creation with AZ IDs.
+Flip this switch early, and you’ll dodge a pile of future surprises.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regions_az/">AWS Global Infrastructure: Regions and Availability Zones</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html">EC2 API: DescribeAvailabilityZones</a></li>
+<li><a href="https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html">Working with Availability Zone IDs (AWS docs)</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSubnet.html">EC2 API: CreateSubnet (supports Availability Zone ID)</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html">AWS CloudFormation: AWS::EC2::Subnet (AvailabilityZoneId)</a></li>
+<li><a href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet">Terraform AWS Provider: aws<em>subnet (availability</em>zone_id)</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations.html">Amazon EC2 On-Demand Capacity Reservations</a></li>
+<li><a href="https://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer">Amazon EC2 pricing: Data transfer</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html">NAT gateways (best practices and availability)</a></li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_reliability_pillar.html">AWS Well-Architected Framework: Reliability Pillar</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="ec2-az-id-support.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqe769.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Nail+EC2+placement+with+Availability+Zone+IDs&amp;pi=289019736802&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=289019736802&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fec2-az-id-support&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/ec2-az-id-support?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:08 GMT -->
+</html>

@@ -1,0 +1,327 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/sp-api-reporting-analytics?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Crack Amazon growth with the new Analytics Reporting API</title>
+    <link rel="canonical" href="sp-api-reporting-analytics.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Leverage analytics API in Amazon&#39;s SP-API Reporting to build custom reports, track sales in real time, and act on AI-driven insights with API analytics tools.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Crack Amazon growth with the new Analytics Reporting API",
+        "datePublished": "2025-12-04T17:27:37Z",
+        "dateModified": "2025-12-04T17:27:38.251Z",
+        "mainEntityOfPage": "https://remktr.com/blog/sp-api-reporting-analytics",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-04-2025-05-17-31-6542-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="sp-api-reporting-analytics.html">Crack Amazon growth with the new Analytics Reporting API</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 4, 2025 5:27:37 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Amazon just made your spreadsheets feel prehistoric.</p>
+<p>In November 2025, Amazon rolled out a new Reporting API in SP-API. You get fresher signal, richer metrics, and AI nudges that push action. In plain words, build a live retail cockpit with minutes, not days, of lag. Finally connect sales, traffic, and finance in one place that actually syncs. Move from “what happened last week?” to “what’s happening now, and what do next?”</p>
+<p>If you juggle CSVs, Vendor Central exports, and six Looker dashboards, breathe. This is the unlock you waited for. Get programmable access to sales and traffic with tighter financial rollups. And recommendations you can actually use without waiting for the weekly ops sync. Fewer manual merges, fewer broken sheets, more signal, faster moves. Hours instead of days.</p>
+<p>Prime Day 2024 was Amazon’s “biggest ever,” and the train isn’t slowing. <em>In a market this wild, lag kills.</em> Winners spot the signal early and act even earlier. The gap between a good week and a great month is one quick call. Fix a leaky ad, defend the Buy Box, or run a price test now. Do it while you still have stock to ride the wave.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Real-time Reporting API in SP-API speeds up sales, traffic, and finance data.  </li>
+<li>Build custom dashboards and trigger workflows from live metrics: pricing, ads, inventory.  </li>
+<li>AI recommendations rank actions for you—no more hunting for the why.  </li>
+<li>Borrow playbooks from GA4, YouTube, and Salesforce analytics APIs.  </li>
+<li>Start with one high-leverage KPI loop; expand after you prove ROI.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-18-34-1294-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatthereportingapiunlocks">What the Reporting API unlocks</h2>
+<h3 id="realtimeretailsignal">Real time retail signal</h3>
+<p>The SP-API Reporting upgrade moves you past stale, batchy pulls. Now you can query what’s happening right now, with less friction. That matters when a promo hits, you win the Buy Box, or a rival undercuts price. On big days like Prime Day or holidays, minutes swing thousands of dollars. Faster reads mean fewer missed windows and tighter experiments.</p>
+<p>First-hand example: You run a 10% coupon on a hero SKU. Within an hour, traffic spikes but conversion drops 4 points. A quick pull shows CPCs jumped and a competitor launched a bundle. You pivot fast—raise bids on the converting term, cap the leaky one. Add an image tile calling out the coupon for clarity. Conversion rebounds same day, not next week.</p>
+<p>One more twist: inventory coverage on that SKU falls to 9 days. In near-real time, you trim broad spend by 15% and keep exact hot. You nudge price up 1% to slow the burn without tanking demand. You protect contribution margin while inbound clears. That’s riding demand instead of stockouts wrecking the flywheel.</p>
+<h3 id="fromdatatodecisions">From data to decisions</h3>
+<p><em>It isn’t just more data; it’s actions you can take.</em> Think rules like: traffic up + conversions down + CPC up? Change bids and refresh creative. Served as an AI nudge you accept, ignore, or automate. You set thresholds and costs; the system bubbles up top ROI moves. It’s triage for chaos—show the 5 actions that pay, not 50 charts.</p>
+<p>Mental model: Reporting API is sensors; AI is triage. You’re still the pilot. You choose when to change price, pause a keyword, or pull a listing for fixes. Guardrails matter—cap daily budget deltas and require review for high-impact changes. Log every accepted nudge for post-mortems later.</p>
+<p>Proof point: Amazon called 2024 Prime Day its biggest ever. Volatility is normal now, not rare. Your edge is speed in linking traffic, price, and supply to a real decision. Winners bake this loop into operations, not just dashboards.</p>
+<h2 id="buildyourretailcockpit">Build your retail cockpit</h2>
+<h3 id="dataflowataglance">Data flow at a glance</h3>
+<p>Simple stack:</p>
+<ul>
+<li>Ingest: Call SP-API Reporting endpoints on a steady cadence with cron or a queue. Use short windows for near-real-time deltas and longer for financials.  </li>
+<li>Store: Land raw in object storage, model in a warehouse like Snowflake, BigQuery, or Redshift. Keep immutable raw plus a curated layer.  </li>
+<li>Model: Materialize KPI views—sales velocity, glance views, ROAS, ship-ready units, and contribution margin.  </li>
+<li>Activate: Pipe signals to apps—ad bidding, pricing engines, or alerts in Slack or Teams.</li>
+</ul>
+<p>Need to turn signals into programmatic lift? <a href="../dsp-services.html">DSP Services</a> ties retail intent to Amazon DSP audiences and bidding. Your media reacts in real time.</p>
+<p>First-hand example: A 15-SKU supplements brand builds a “Daily Revenue at Risk” tile. It’s sales velocity x days of cover x price, simple and loud. If days of cover &lt; 7 and velocity &gt; trailing median, trigger a PO. Also throttle ads 10% to stretch stock until inbound lands.</p>
+<p>Add a little structure:</p>
+<ul>
+<li>Dimensions to standardize: date, marketplace, ASIN, SKU, parent ASIN, brand, fulfillment type, promo flag, ad campaign/ad group/keyword, device type.  </li>
+<li>Metrics to materialize: sessions (glance views), unit session percentage (conversion), ordered units, ordered revenue, net revenue after fees, ad spend, CPC, ROAS, return rate, contribution margin dollars, on-hand units, days of cover.  </li>
+<li>Business rules to encode: one source of truth for price, currency normalization by marketplace, mapping between ASIN and SKU, and Buy Box status.</li>
+</ul>
+<h3 id="pickyourapianalyticstools">Pick your API analytics tools</h3>
+<p>If you’ve used the GA4 Data API, the muscle memory carries over. Define dimensions, metrics, filters, and date ranges, same rhythm. YouTube Analytics API and the older YouTube Reporting API organize around channel and video. That’s a handy pattern for brand → ASIN → SKU hierarchies.</p>
+<p>Also note analytics api salesforce, the Analytics REST API. It handles big paginated results and long-running jobs with polling. Those patterns help with retail reports at scale.</p>
+<p>Tools to consider:</p>
+<ul>
+<li>Warehouses: BigQuery, Snowflake, Redshift for low-latency joins.  </li>
+<li>Orchestration: Airflow, Dagster, or serverless schedulers for steady runs.  </li>
+<li>BI: Looker, Power BI, Mode—plus metric layers with dbt for governance.  </li>
+<li>Alerting/activation: webhooks, Lambdas, or a thin Flask or FastAPI app.</li>
+</ul>
+<p><em>Pro tip: Design jobs to be idempotent—re-runs shouldn’t double-count anything.</em> Partition by date + ASIN and upsert with stable keys.</p>
+<p>Helpful patterns to borrow:</p>
+<ul>
+<li>Incremental loads: query the last N hours plus a small overlap window. Catch late arrivals, then dedupe cleanly.  </li>
+<li>Job fencing: only one ingest job per marketplace or brand runs at once. Others queue patiently.  </li>
+<li>Metadata tables: track query start and end, rows returned, checksum totals, and source version.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-19-33-3811-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="scaleacrossmarketplacesandbrands">Scale across marketplaces and brands</h3>
+<p>As you scale, two pain points hit fast: currency and time zones. Normalize into a base currency at reporting time, store originals too. Align timestamps to UTC in storage; convert to local time in BI later. Keep a marketplace dimension table with locale, currency, Prime flags, and tax quirks.</p>
+<p>If you manage multiple brands or seller accounts, enforce global IDs. Create a stable brand_id, map ASINs to brand and category, and name campaigns consistently. Then roll up “margin by category across 7 marketplaces” without bespoke logic.</p>
+<h2 id="retailmetricsthatmovepl">Retail metrics that move PL</h2>
+<h3 id="salesandtrafficheartbeat">Sales and traffic heartbeat</h3>
+<p>Your base loop ties sales, sessions, conversion rate, and price. That’s the daily pulse. Layer ad data—spend, clicks, CPC, ROAS—to find waste and winners. Link price elasticity to traffic; some categories are touchy, others shrug. Watch Buy Box share if you aren’t the only seller. Lose it and conversion tanks even with steady traffic.</p>
+<p>First-hand example: Conversion dips after a 5% price hike. Traffic holds, CPC stable. Elasticity looks high, so you roll back price and test a bundle. You keep original margin with add-ons. A week later, total margin dollars beats baseline even with lower ASP.</p>
+<p>Another scenario: traffic climbs 18% on a seasonal keyword, yet units stay flat. Your “What changed?” tile shows the main image updated two days ago and bullets shortened. You revert copy and test a comparison chart in A+ content. Push exact-match ads on that seasonal term to reinforce. Conversion recovers within 48 hours.</p>
+<h3 id="cashreturnsmessymiddle">Cash returns messy middle</h3>
+<p><em>Revenue is vanity; contribution margin is sanity; cash is reality.</em> Stitch fees, returns, and shipping in your models. Flag SKUs where return rate x cost-to-serve nukes margin hard. Link inventory aging to price and ads. No point buying clicks if inbound is weeks out or stock is stale. Add a simple “cost per return” line. Everyone sees the penalty from heavy discounts without quality controls.</p>
+<p>Causality watch-out: Don’t over-credit ads for swings driven by stock or listing edits. Add annotation tables—launch dates, image swaps, seasonality notes—to explain spikes without stories.</p>
+<p><em>Pro tip: Build a “What changed?” view.</em> Side-by-side yesterday vs. trailing 7-day for price, promo, stock, sessions, conversion, and ad spend. Make it the first tab you open each morning.</p>
+<h3 id="forecastingandplanningloops">Forecasting and planning loops</h3>
+<p>You don’t need fancy models to get leverage.</p>
+<ul>
+<li>Moving averages: 7-day and 28-day for velocity, by SKU and marketplace.  </li>
+<li>Exponential smoothing: reads trend fast without overreacting to one day.  </li>
+<li>Simple reorder math: reorder point = lead time demand + safety stock. Tune safety by variability and supplier reliability.  </li>
+<li>Promo overlays: label promo days so you don’t “learn” from warped weeks.</li>
+</ul>
+<p>Use Reporting API data to refresh forecasts daily, like clockwork. Tie alerts to gaps, e.g., projected stockout date &lt; 10 days. Goal is fewer fire drills and more planned pushes when you have stock.</p>
+<h2 id="governancelimitspotholestoavoid">Governance limits potholes to avoid</h2>
+<h3 id="ratelimitsanddataintegrity">Rate limits and data integrity</h3>
+<p>APIs have opinions, and they will time out. Expect rate limits and random errors. Use exponential backoff, job queues, and dead-letter retries. Validate row counts against prior days and alert on weird deltas. If traffic = 0 across all SKUs, probably a failed job. Do small, frequent pulls for ops and bigger windows for finance reconciliation.</p>
+<p>First-hand example: Your midnight job fails quietly and dashboards show zero revenue. A simple checksum—sum(revenue) &gt; 0, else alert—saves two hours of panic. And fewer bad Slack threads, thankfully.</p>
+<p>To automate freshness checks, anomaly alerts, and smart re-runs, try <a href="../requery.html">Requery</a>.</p>
+<p>Sampling and granularity: prefer atomic data when you can, aggregate in-warehouse. Avoid double-counting across overlapping windows—pick one metric source with versioned SQL. Use slowly changing dimensions for product attributes. That keeps history stable when titles change.</p>
+<p>Observability basics:</p>
+<ul>
+<li>Freshness SLAs: set max lag by metric, like 60 min for ops, 24 hrs for P&amp;L.  </li>
+<li>Data tests: non-null key checks, valid ranges like conversion 0–100%, and uniqueness on composite keys.  </li>
+<li>Drift detection: alert when a metric’s distribution slips outside historic bands.</li>
+</ul>
+<h3 id="securitycomplianceandkeys">Security compliance and keys</h3>
+<p>Treat SP-API credentials like prod secrets. Store in a vault, rotate often, and scope by role. Log all access, especially for write flows like pricing and ads. Map data flows so you know what leaves your VPC and why. Encrypt at rest and in transit. Keep audit logs for who approved AI-driven changes and when.</p>
+<p>Benchmark with peers: GA4 and YouTube APIs are read-heavy and public-facing. Your Amazon retail data holds sensitive financials. Use the stricter standard. Salesforce’s permissioned analytics endpoints are a solid north star for least privilege.</p>
+<p><em>Optional but smart: add a data contract.</em> Define schemas, freshness SLAs, and table ownership. Future you will thank present you when a launch breaks a column name. Also, don’t mix PII with ops metrics unless you have a clear reason and controls.</p>
+<h2 id="halfwaycheckpointdontmissbeats">Halfway checkpoint dont miss beats</h2>
+<ul>
+<li>Build a tight KPI loop: sales, sessions, conversion, price, and ROAS.  </li>
+<li>Automate the boring stuff: schedules, retries, and alerts with real thresholds.  </li>
+<li>Use AI recommendations as triage, not gospel—you decide priorities.  </li>
+<li>Borrow patterns from GA4, YouTube, and Salesforce APIs to scale clean.  </li>
+<li>Guard keys, version metrics, and document your models.</li>
+</ul>
+<h2 id="faqsyourtopquestionsanswered">FAQs your top questions answered</h2>
+<h3 id="isthenewspapirealtime">Is the new SPAPI realtime</h3>
+<p>It’s built for fresher, more frequent access than old file exports. “Real-time” varies by metric, so plan accordingly. Use near-real-time for ops signals and longer windows for finance. Build jobs around how fast decisions must happen, not just data speed.</p>
+<h3 id="howisthisdifferent">How is this different</h3>
+<p>Legacy flows were batchy and slower to refresh. The new approach gives more granular access, faster availability, and AI-suggested actions. You should still keep batch reports for backfills and audits. Think streaming for daily moves, batch for month-end truth.</p>
+<h3 id="doineedawarehouse">Do I need a warehouse</h3>
+<p>Not strictly, but you’ll want one once you grow. Past a few SKUs and marketplaces, a warehouse saves your brain. You’ll model consistent KPIs, avoid double-counting, and power fast dashboards and automations. Even a lightweight setup beats endless CSV merges.</p>
+<h3 id="howdoesthiscompare">How does this compare</h3>
+<p>Different domain, same playbook. YouTube Analytics and YouTube Reporting focus on video and channel performance. GA4’s Data API tracks web and app behavior. All reward clean schemas, clear metrics, and automated jobs. Declarative metrics and labeled dimensions save pain later.</p>
+<h3 id="wheredoairecommendationsfit">Where do AI recommendations fit</h3>
+<p>Use them to rank actions—bid changes, price tests, and inventory throttles. Base on your rules and costs to stay sane. Keep human review for big swings like price or large budget changes. Log accepted and rejected tips and learn what truly drives ROI.</p>
+<h3 id="whataboutaccessquotascost">What about access quotas cost</h3>
+<p>Expect auth, role-scoped permissions, and rate limits everywhere. Design for retries and idempotency, always. Your real costs are compute, storage, and any third-party tools. Keep queries tight, cache smartly, and compress raw files to save storage.</p>
+<h3 id="handlemultiplecurrenciesandtaxes">Handle multiple currencies and taxes</h3>
+<p>Normalize sales and ad spend into a base currency for rollups. But store original currency for audits and clarity. Keep a daily FX table and stamp each conversion with the rate used. Centralize fee and tax logic in your curated layer for consistent P&amp;L.</p>
+<h2 id="shipyourfirstreportingdashboard">Ship your first Reporting dashboard</h2>
+<ul>
+<li>Define the loop: pick 5 KPIs—revenue, sessions, CVR, CPC, margin. Write exact formulas and sources so math matches.  </li>
+<li>Provision access: set SP-API creds and a secure secret store. Keep read-only where possible and rotate keys on schedule.  </li>
+<li>Ingest: schedule a small, frequent job every 15–60 minutes for core metrics. Start with one marketplace and a few ASINs to reduce blast radius.  </li>
+<li>Model: create a curated table with date, marketplace, and ASIN as stable dims. Add derived fields like days<em>of</em>cover and is<em>promo</em>day early.  </li>
+<li>Visualize: build a “What changed?” dashboard with day vs. trailing 7. Put it on a big screen or set it as your start page.  </li>
+<li>Alert: add thresholds like CVR down &gt; 2 pts and spend up to ping Slack. Include links back to dashboards and the dataset for context.  </li>
+<li>Iterate: run one weekly experiment—price, creative, or bid—then measure. Close the loop with a retro. Did it move the KPI you planned?</li>
+</ul>
+<p><em>Here’s the punchline: the new Reporting API gives speed and clarity.</em> You still need taste—what to push, what to ignore, and when to press. Start with one tight loop, sales ↔ traffic ↔ price ↔ ads, wired end-to-end. Let AI handle triage while you make the calls that drive P&amp;L. The compounding hits fast once you cut latency and ambiguity.</p>
+<p><em>One last promise to yourself: automate anything you do twice. Document anything someone asks about twice. Revisit alert thresholds monthly.</em> That’s how you go from “we built a dashboard” to “we built an engine.”</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs">Amazon Selling Partner API documentation</a>  </li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/reports-api-v2021-06-30-reference">Reports API (SP-API) reference</a>  </li>
+<li><a href="https://www.aboutamazon.com/news/retail/prime-day-2024-results">Amazon: 2024 Prime Day was the biggest ever</a>  </li>
+<li><a href="https://developers.google.com/analytics/devguides/reporting/data/v1">Google Analytics Data API (GA4) documentation</a>  </li>
+<li><a href="https://developers.google.com/youtube/analytics">YouTube Analytics API documentation</a>  </li>
+<li><a href="https://developers.google.com/youtube/reporting">YouTube Reporting API documentation</a>  </li>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_resources_analytics_rest_api.htm">Salesforce Analytics REST API documentation</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="sp-api-reporting-analytics.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq90c5.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Crack+Amazon+growth+with+the+new+Analytics+Reporting+API&amp;pi=269971794628&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=269971794628&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fsp-api-reporting-analytics&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/sp-api-reporting-analytics?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:47 GMT -->
+</html>

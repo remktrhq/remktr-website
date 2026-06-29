@@ -1,0 +1,500 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/amazon-linux-2023-highlights?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Top Amazon Linux 2023 highlights to harden your cloud</title>
+    <link rel="canonical" href="amazon-linux-2023-highlights.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover Amazon Linux 2023 highlights—security, stability, LTS—plus AWS updates on serverless, load balancing, and cloud ops; release date, GitHub, download.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Top Amazon Linux 2023 highlights to harden your cloud",
+        "datePublished": "2025-11-17T21:53:18Z",
+        "dateModified": "2025-11-17T21:53:18.775Z",
+        "mainEntityOfPage": "https://remktr.com/blog/amazon-linux-2023-highlights",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-17-2025-09-43-26-2526-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="amazon-linux-2023-highlights.html">Top Amazon Linux 2023 highlights to harden your cloud</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 17, 2025 9:53:18 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’re not paid to babysit servers. You’re paid to ship.
+But when your OS image drifts, patching turns into whack-a-mole.
+Then CVEs pile up, and stress climbs fast.
+Someone asks, “Why is this still on Amazon Linux 2?” You sigh.</p>
+<p><em>Here’s the fix: Amazon Linux 2023.</em>
+It’s the latest Amazon Linux for cloud workloads, built for real teams.
+You get predictable releases, long-term support, and hardened defaults.
+So you focus on features, not firefighting or weird edge cases.</p>
+<p>Want the fast path? Release date, GitHub, downloads, even the ISO question.
+It’s all below, nice and tidy.
+Want the why, not just the what? You’ll get a clear playbook.
+Roll AL2023 into your stack without wrecking your velocity.</p>
+<p>Think of it like a reset button for base images.
+Fewer surprises. Cleaner builds. A simple, shared foundation.
+Your OS layer gets boring in the right ways. <em>That’s the point.</em>
+Your roadmap moves faster, and your pager finally quiets down.</p>
+<p>And yes, AWS is still shipping.
+Serverless keeps improving. Load balancing gets smarter. Cloud ops feels cleaner.
+Pair that with AL2023, and your foundation gets boring, in the best way.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Amazon Linux 2023 focuses on security, stability, and long-term support.</li>
+<li>GA launched in March 2023 with a predictable cadence and an LTS window.</li>
+<li>Download via EC2 AMIs or container images; source code lives on GitHub.</li>
+<li>No official ISO download today; use AMIs, containers, or VM images instead.</li>
+<li>Quarterly updates keep you current without surprise breakage in your stack.</li>
+<li>Strong fit alongside ongoing AWS serverless and load balancing upgrades.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-17-2025-09-44-30-4520-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="essentialsyoucareaboutal2023">Essentials you care about AL2023</h2>
+<h3 id="securityfirstclouddesign">Security first cloud design</h3>
+<p>Amazon Linux 2023 (AL2023) is built for modern cloud workloads.
+Lean packages, tighter defaults, and reproducible, deterministic builds.
+You’re not wrangling a random community spin anymore.
+You’re standardizing on an OS tuned for EC2 and containers.</p>
+<p>Expert quote you can ship: “Amazon Linux 2023 provides a secure, stable, and high-performance execution environment to develop and run your applications.”
+That’s straight from AWS, and it’s the north star for AL2023.</p>
+<p>Under the hood, the big win is consistency.
+Your base image isn’t a stream of surprise upgrades anymore.
+It’s curated and predictable, which helps your supply chain story.
+Cleaner dependency graphs, easier SBOM generation, and fewer unknowns in prod.
+You also get better compatibility across EC2, ECS, and EKS.
+Standardize your Dockerfiles on the 2023 base, and life gets easier.</p>
+<h3 id="predictablereleasecadencelts">Predictable release cadence LTS</h3>
+<p>AL2023 is designed for planning, not surprises.
+You get a predictable cadence with quarterly updates and long-term support.
+Lock your base images, pass audits, and standardize across teams.
+Translation: fewer emergency OS sprints and calmer change windows.</p>
+<p>In practice, that cadence lets you schedule patch windows reliably.
+Bake new golden images every quarter, then move them dev → stage → prod.
+For regulated environments, this is gold and saves headaches.
+Auditors love known-good baselines with a clear update rhythm.
+Teams love not getting dragged into surprise rebuilds midweek.</p>
+<h3 id="wheretogetit">Where to get it</h3>
+<ul>
+<li>EC2 AMIs: Available broadly; spin up in minutes from the console.</li>
+<li>Containers: Pull the official image at public.ecr.aws/amazonlinux/amazonlinux:2023 (see ECR Public Gallery).</li>
+<li>Source: Packages and build specs live on the Amazon Linux org on GitHub.</li>
+</ul>
+<p>Stuck on a mix of base images? AL2023 helps you consolidate cleanly.
+You’ll simplify patching and reduce mental load across teams.</p>
+<p>Add one note on images: pin by digest for containers in prod.
+Also document the AMI ID used for each release.
+That tiny bit of discipline saves hours when reproducing or rolling back.</p>
+<h2 id="whythisosmovepaysoffforyou">Why this OS move pays off for you</h2>
+<h3 id="stabilitythatspeedsyouup">Stability that speeds you up</h3>
+<p>Stability isn’t about moving slow. It’s about removing chaos.
+With AL2023’s predictable updates and curated repos, chaos drops.
+Fewer “works on laptop, fails in prod” moments. That’s real peace.
+You get consistent pipelines, cleaner SBOMs, and fewer late-night rollbacks.</p>
+<p>It also standardizes your developer experience across the org.
+One baseline means shared Dockerfiles and shared CI templates.
+Fewer “where did this come from?” mysteries clogging reviews.
+New engineers onboard faster, and SREs aren’t detectives anymore.
+When the quarterly patch lands, you roll forward with confidence.
+No gambling on emergency fixes during a busy Wednesday.</p>
+<h3 id="securitythatscaleswithorg">Security that scales with org</h3>
+<p>Smaller, hardened images mean a smaller attack surface by default.
+Pair that with AWS-native tools like Systems Manager Patch Manager.
+Add Inspector for image scanning and CloudWatch for drift detection.
+AL2023 helps centralize vulnerability management with less patch whiplash.
+You’ll have more confidence shipping on Fridays, which feels nice.</p>
+<p>Security teams also get traceability as a real feature.
+Known base images, known repos, and a steady, mapped cadence.
+Set up image scanning on push and block deploys on critical CVEs.
+Keep your roadmap moving while staying inside policy guardrails.
+<em>Pro tip: treat your base OS like an application.</em>
+Version it, scan it, promote it, and never “just patch in prod.”</p>
+<h3 id="costandopswins">Cost and ops wins</h3>
+<p>When every team uses the same baseline, you cut duplicated work.
+No more bespoke images and random upgrade paths across squads.
+It’s easier to standardize CI/CD and share base Dockerfiles.
+You can templatize Terraform or CloudFormation modules quickly.
+Your SREs will thank you when the patch dashboard turns green.</p>
+<p>You also squeeze more out of automation with less variance.
+Runbooks and scripts don’t fork endlessly for edge cases.
+Run times get faster, and change failure rates drop a bit.
+Your toil metrics look better. Boring suddenly equals efficient.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-17-2025-09-45-24-9756-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="downloadandinstall">Download and install</h2>
+<h3 id="ec2andparameterstore">EC2 and Parameter Store</h3>
+<p>On EC2, use the console or Systems Manager public parameters.
+Fetch the latest AL2023 AMI IDs programmatically without guesswork.
+This keeps builds deterministic and avoids hardcoding those AMI IDs.</p>
+<p>Most teams wrap this in a tiny helper script or function.
+Query SSM Parameter Store for the latest AL2023 AMI automatically.
+Tag it in your build system and pass it into launch templates.
+Combine with EC2 Image Builder or Packer for easy rebakes.
+You get a one-button path to rebake base images each quarter.</p>
+<h3 id="containersthefastestonramp">Containers the fastest on ramp</h3>
+<p>Using containers? Pull from ECR Public: public.ecr.aws/amazonlinux/amazonlinux (use the 2023 tag).
+It’s a clean baseline for multi-arch images across x86 and Arm.
+Works great with ECS, EKS, or straight Docker on your laptop.</p>
+<p>Two practical tips:</p>
+<ul>
+<li>Pin by digest for prod promotions, so the “2023” tag doesn’t drift.</li>
+<li>Bake quarterly: when AL2023 updates land, rebuild, scan, and promote.</li>
+</ul>
+<h3 id="isodownloadheresthedeal">ISO download heres the deal</h3>
+<p>Looking for “amazon linux 2023 iso download” today? No luck, sorry.
+As of now, AWS does not publish a bootable ISO for AL2023.
+Instead, use these supported paths for your workflows:</p>
+<ul>
+<li>EC2 AMIs (cloud-native and simple)</li>
+<li>Official container images (great for CI/CD and microservices)</li>
+<li>Vendor or VM images where available, or build with Packer</li>
+</ul>
+<p>This model keeps the distribution focused on cloud-first workflows.</p>
+<p>Need a lab or on-prem test environment anyway? You have options.
+Many teams export AMIs to VMDK or VHD for testing.
+Some build from the container image as a rootfs for experiments.
+But the smoother path is testing in EC2 where the OS is native.
+Your telemetry, IAM roles, and controls are already there and trusted.</p>
+<h3 id="pdfdocsandgithub">PDF docs and GitHub</h3>
+<p>You won’t find an official “amazon linux 2023 highlights pdf” handout.
+But the Amazon Linux 2023 User Guide is fully documented online.
+Use the PDF option on the docs page if you need something portable.
+For source and package specs, start at the Amazon Linux org on GitHub.</p>
+<p>The GitHub org is useful beyond curiosity or browsing.
+Need to explain package provenance to an auditor? It’s all there.
+Compare spec changes across releases from a clean, central source.
+Link it in your internal wiki under “Base Image Reference.”</p>
+<h2 id="releasetimingandupdate">Release timing and update</h2>
+<h3 id="releasedateataglance">Release date at a glance</h3>
+<p>Amazon Linux 2023 hit General Availability in March 2023.
+Since then, AWS ships quarterly updates on security and reliability.
+Everything stays predictable for infra teams planning ahead.</p>
+<p>Still on Amazon Linux 2? Treat that GA date like a starting pistol.
+The longer you wait, the more one-off patches build up.
+They’ll get thrown away during migration anyway, which is frustrating.
+Move a small service first and codify the pattern carefully.</p>
+<h3 id="amazonlinux2024isnt">Amazon Linux 2024 isnt</h3>
+<p>You’ll see searches for “amazon linux 2024,” but there’s no separate major.
+AL2023 is the current major, and 2024 brought quarterly updates under it.
+The year-based naming gives clarity without yearly replatform panic.</p>
+<p>That naming also helps your non-technical stakeholders track changes.
+Say, “we’re standardizing on Amazon Linux 2023 with quarterly updates.”
+It sets clear expectations for when changes land and how they’re controlled.</p>
+<h3 id="updatedisciplinethatwontwreck">Update discipline that wont wreck</h3>
+<p>AL2023’s cadence is your friend and not your foe.
+Plan patch windows around quarterly cycles and bake on schedule.
+Bake updates into golden AMIs or containers, then roll forward.
+Keep a small canary fleet to catch regressions early every time.
+Lock dev, stage, and prod in a clean, controlled progression.
+<em>Predictable ops beats heroics, every single time.</em></p>
+<p>Set these guardrails:</p>
+<ul>
+<li>Ring deployments: canary → 10% → 50% → 100%, with timeboxed observation.</li>
+<li>Rollback plan: the previous golden AMI or digest is one click away.</li>
+<li>Telemetry: health checks plus error budgets, so you know when to pause.</li>
+<li>Freeze windows: don’t stack OS updates with big feature launches.</li>
+</ul>
+<h3 id="upgradingfromamazonlinux2">Upgrading from Amazon Linux 2</h3>
+<p>There’s no magic in-place upgrade from Amazon Linux 2 to 2023.
+The clean path is new AL2023 images and real testing.
+Validate your workloads, then cut over carefully.
+Yes, it’s extra work, but it pays down years of drift.
+You’ll end with a shared, standardized base across teams.</p>
+<p>A simple migration checklist:</p>
+<ul>
+<li>Inventory: list services by criticality and dependency risk clearly.</li>
+<li>Pick a pilot: start with a low-risk service to test the pipeline.</li>
+<li>Rebuild: create an AL2023-based container or AMI and run tests.</li>
+<li>Scan: run security scans and fix any build-time vulnerabilities.</li>
+<li>Shadow or canary: run both images and compare metrics honestly.</li>
+<li>Cutover: promote when error rates and performance match SLOs.</li>
+<li>Rinse and repeat: templatize for the next batch of services.</li>
+</ul>
+<p>Pro tip: use feature flags or traffic mirroring to validate behavior.
+You can test without switching every user in a single shot.</p>
+<h2 id="awsmomentumserverlessops">AWS momentum serverless ops</h2>
+<h3 id="serverlesskeepscompounding">Serverless keeps compounding</h3>
+<p>AWS keeps shipping features and performance gains across Lambda and eventing.
+Build tooling is smoother, and cold starts keep shrinking over time.
+The effect is smaller cold-starts and simpler event pipes altogether.
+CI/CD for packaging functions gets nicer and faster.
+Pair that with AL2023-based containers for consistency everywhere.</p>
+<p>Running a hybrid of Lambda and container services together?
+Standardize on AL2023 images for container-based tasks right now.
+Your dependencies stay aligned across batch, services, and jobs.
+That symmetry simplifies utility layers, CI steps, and security policies.</p>
+<h3 id="loadbalancingsmarterbydefault">Load balancing smarter by default</h3>
+<p>Elastic Load Balancing keeps getting smarter across features and routing.
+Better protocol support, security modernizations, and cleaner defaults.
+Running gRPC behind ALB or high-throughput TCP behind NLB?
+Aligning on AL2023 keeps TLS stacks and userland libraries consistent.</p>
+<p>Consistency matters a lot in real production systems.
+TLS configs, cipher suites, and CA bundles stay in sync.
+That reduces hard-to-debug handshake issues that waste hours.
+You’ll be ready for new ALB or NLB features faster too.
+Your userland is current and predictable across all services.</p>
+<h3 id="cloudopsgetscleaner">Cloud ops gets cleaner</h3>
+<p>Systems Manager, Inspector, and CloudWatch have matured nicely.
+Patching, drift detection, and inventory work better with a standard OS.
+Moving to AL2023 reduces variance and boosts automation effectiveness.
+Less yak-shaving, more buttons that actually do things on time.</p>
+<p>You’ll feel the quiet productivity win within one quarter.
+Patch Tuesdays become patch Tuesdays again, not multi-week projects.
+Compliance reports read like a checklist instead of a long novel.</p>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>AL2023 equals security, stability, and predictable updates you can trust.</li>
+<li>GA since March 2023; quarterly refreshes keep you current safely.</li>
+<li>Use EC2 AMIs or ECR Public containers; source lives on GitHub.</li>
+<li>No official ISO today; focus on cloud-native images instead.</li>
+<li>Standardize now to simplify patching, audits, and CI/CD pipelines.</li>
+</ul>
+<h2 id="faqeverythingpeoplekeepslacking">FAQ everything people keep Slacking</h2>
+<h3 id="whenwasamazonlinux2023">When was Amazon Linux 2023</h3>
+<p>Amazon Linux 2023 hit General Availability in March 2023.
+Since then, AWS continues quarterly updates focused on security and stability.
+There’s long-term support to keep enterprise teams very comfortable.</p>
+<h3 id="wheredownloadamazonlinux2023">Where download Amazon Linux 2023</h3>
+<ul>
+<li>EC2: Launch via console or use Systems Manager public parameters for AMI IDs.</li>
+<li>Containers: Pull from ECR Public at public.ecr.aws/amazonlinux/amazonlinux (use the 2023 tag).</li>
+<li>Source: Explore packages and specs under the Amazon Linux org on GitHub.</li>
+</ul>
+<h3 id="amazonlinux2023highlightspdf">amazon linux 2023 highlights pdf</h3>
+<p>There isn’t a separate “highlights” PDF at the moment.
+But the official User Guide is online with a PDF download option.
+Grab it on the docs page if you need an offline copy.</p>
+<h3 id="amazonlinux2023isodownload">Amazon Linux 2023 ISO download</h3>
+<p>No. AWS does not publish a bootable ISO for AL2023.
+Use EC2 AMIs, official container images, or vendor or VM images instead.
+Those paths work for on-prem or lab setups with fewer hassles.</p>
+<h3 id="amazonlinux2024release">Amazon Linux 2024 release</h3>
+<p>No separate major release exists by that name.
+AL2023 remains the current major with 2024 quarterly updates under it.
+The cadence is designed for predictability and long-term support.</p>
+<h3 id="upgradefromamazonlinux2">Upgrade from Amazon Linux 2</h3>
+<p>Not recommended and not supported as a one-click path today.
+Best practice is creating new AL2023 images and testing compatibility.
+Then migrate incrementally without breaking your production setups.</p>
+<h3 id="manageamiidsandtags">Manage AMI IDs and tags</h3>
+<p>Use Systems Manager public parameters to resolve the latest AMI at build time.
+Then freeze that ID in your golden images for predictability.
+For containers, promote by digest, not only by tag, to avoid drift.
+Document both in your release notes for clean traceability.</p>
+<h3 id="rightpatchingrhythm">Right patching rhythm</h3>
+<p>Align with the quarterly AL2023 updates for sane planning.
+Bake a new golden AMI or container when updates land.
+Push it through dev and staging with your normal gates.
+Flip to prod once telemetry looks clean and stable.
+Smaller changes more often beats big-bang pain every time.</p>
+<h3 id="keepauditssimple">Keep audits simple</h3>
+<p>Stick to one baseline with AL2023 across your environments.
+Automate scanning on image build and at deploy time.
+Keep a short paper trail for each release and environment.
+Base image version, AMI ID or digest, scan reports, and approvals.
+When asked which systems use which image, answer from a dashboard.
+Not from a spreadsheet that’s always out of date.</p>
+<h2 id="launchamazonlinux2023">Launch Amazon Linux 2023</h2>
+<ul>
+<li>Pick a target workload, a low-risk service, for your first rollout.</li>
+<li>Pull public.ecr.aws/amazonlinux/amazonlinux:2023 and rebuild your container.</li>
+<li>For EC2, fetch the current AL2023 AMI via SSM public parameters.</li>
+<li>Stand up a staging environment and run integration and security scans.</li>
+<li>Bake a golden AMI or container and promote through canary, then prod.</li>
+<li>Document the base image and lock it in your CI/CD templates.</li>
+</ul>
+<p>Then layer in day-2 operations:</p>
+<ul>
+<li>Add alarms for drift; if an instance deviates, page the right team.</li>
+<li>Rotate keys and certs alongside quarterly OS updates to bundle work.</li>
+<li>Track CVEs against base image versions for hotfix or quarterly decisions.</li>
+</ul>
+<p><em>Here’s the punchline: boring infrastructure is a feature.</em>
+When your OS layer is predictable and supported, you ship faster.
+Amazon Linux 2023 gives you that in a clean, practical way.
+Security-centric defaults and a sane update cadence, with broad tooling support.
+Across EC2 and containers, it just works like you’d expect.
+Pair it with serverless and load balancing improvements from AWS.
+You get a stack that’s faster to build on and easier to keep clean.</p>
+<p>If you’ve been waiting for the right moment to standardize, this is it.
+Move a small service, codify the pattern, then scale the migration.
+Your future self, and your pager, will be very happy indeed.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/linux/amazon-linux-2023/">Amazon Linux 2023 product page</a></li>
+<li><a href="https://docs.aws.amazon.com/linux/al2023/ug/what-is-amazon-linux.html">What is Amazon Linux? (AL2023 User Guide)</a></li>
+<li><a href="https://aws.amazon.com/blogs/aws/announcing-amazon-linux-2023/">AWS News Blog — Announcing Amazon Linux 2023</a></li>
+<li><a href="https://gallery.ecr.aws/amazonlinux/amazonlinux">Amazon Linux on ECR Public (official container images)</a></li>
+<li><a href="https://github.com/amazonlinux">Amazon Linux organization on GitHub</a></li>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-public-parameters-ami.html">Systems Manager public parameters for Amazon Linux AMIs</a></li>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-patch.html">AWS Systems Manager Patch Manager</a></li>
+<li><a href="https://docs.aws.amazon.com/inspector/latest/user/inspector_image_scanning.html">Amazon Inspector — container image scanning</a></li>
+<li><a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/what-is-image-builder.html">EC2 Image Builder (for golden AMIs)</a></li>
+<li><a href="https://aws.amazon.com/elasticloadbalancing/">Elastic Load Balancing — product overview</a></li>
+<li><a href="https://aws.amazon.com/lambda/">AWS Lambda — product overview</a></li>
+</ul>
+<p><em>2005: Netflix wanted $50M from Blockbuster. Blockbuster laughed. 2025: You’re deciding between ship fast or patch forever. Pick boring foundations early; the compounding is real.</em></p>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="amazon-linux-2023-highlights.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqb019.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Top+Amazon+Linux+2023+highlights+to+harden+your+cloud&amp;pi=260791450328&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=260791450328&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Famazon-linux-2023-highlights&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/amazon-linux-2023-highlights?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:29 GMT -->
+</html>

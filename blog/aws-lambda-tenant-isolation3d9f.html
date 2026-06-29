@@ -1,0 +1,353 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-lambda-tenant-isolation?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship Secure Multi-Tenant SaaS Faster With Lambda Isolation</title>
+    <link rel="canonical" href="aws-lambda-tenant-isolation.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn how AWS Lambda Tenant Isolation Mode secures multi-tenant SaaS, enforces IAM and tagging, and scales cost-efficiently. Build AWS multi-tenant architecture">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship Secure Multi-Tenant SaaS Faster With Lambda Isolation",
+        "datePublished": "2025-11-19T20:34:53Z",
+        "dateModified": "2025-11-19T20:34:53.822Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-lambda-tenant-isolation",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-19-2025-08-24-58-3814-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-lambda-tenant-isolation.html">Ship Secure Multi-Tenant SaaS Faster With Lambda Isolation</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 19, 2025 8:34:53 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You know that gut drop when one tenant can peek at another’s data? In multi-tenant SaaS, that’s the nightmare. The quick “fix” is a stack per tenant, usually. You pay the tax in cost, chaos, and ops pain.</p>
+<p>Here’s the plot twist: AWS Lambda just added Tenant Isolation Mode. You run one function. Each tenant gets a sealed runtime, scoped by IAM, tags, and context. You keep the speed of shared infra without the shared blast radius.</p>
+<p>Translation: you can design a multi-tenant app that checks SOC 2, ISO 27001, and CFO boxes. No rats’ nest of per-tenant code paths or forks.</p>
+<p>If you waited for clean, scalable isolation that won’t kneecap dev speed or unit costs, this is it. Let’s break how it works, what to watch, and how to ship it this week.</p>
+<p>If that sounds like magic, it’s three boring but strong ideas working together: IAM perms, resource tags, and tenant-aware runtime context. You stop trusting app code to “remember” isolation and hand that job to the control plane. <em>Best part: you can adopt it slowly.</em> Enable it for one flow, prove it with tests and dashboards, then roll it across your stack.</p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>Lambda Tenant Isolation Mode gives each tenant its own execution isolation inside one function.</li>
+<li>Isolation is enforced with IAM roles, ABAC-style tagging, and tenant-aware runtime context.</li>
+<li>You get fewer stacks to manage, lower cost, and stronger security boundaries.</li>
+<li>Works for SaaS, internal multi-tenant platforms, and regulated workloads.</li>
+<li>Start by enabling the mode, tagging resources by tenant, and wiring IAM to those tags.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-19-2025-08-26-01-3321-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatisolationmodedoes">What Isolation Mode Does</h2>
+<h3 id="computeandcontextisolation">Compute and context isolation</h3>
+<p>Tenant Isolation Mode spins up isolated runtimes per tenant while you use a single Lambda. Each call carries tenant context—think tenantId, plan tier, and routing hints. Your code decides what to touch and what to skip. You write shared business logic once, while the platform enforces isolation.</p>
+<p>Under the hood, the runtime gets tenant-aware attributes on every call. You don’t hardcode ARNs. You derive them from tenantId. Even if a dev points at the wrong prefix or table, IAM says “nope” before the request leaves. Your code stays simple—just business logic—while the platform acts like your bouncer.</p>
+<h3 id="iamandabaccontrol">IAM and ABAC control</h3>
+<p>You scope each tenant to its own IAM role and use ABAC. Roles and policies reference tags like TenantId=1234. Even if two tenants hit the same Lambda, the caller can’t read or write without matching tags. <em>The boundary is not your code—it’s IAM.</em></p>
+<p>In practice, attach a TenantId tag to the principal via role tags or session tags. Require a matching TenantId tag on all resources too. Policies check aws:PrincipalTag/TenantId against aws:ResourceTag/TenantId. Add deny-by-default, and you get tight least privilege. Use permission boundaries so dev roles can’t escape ABAC rules. Use SCPs to require tags across the org.</p>
+<h3 id="resourcetaggingdoneright">Resource tagging done right</h3>
+<p>Tag everything that moves: S3 buckets and objects, DB rows or parts, queues, topics, even logs. The rule: no tag, no touch. Standardize a tag key like aws:ResourceTag/TenantId and enforce it in CI/CD. The upside is cleaner audits, safer refactors, and faster tenant onboarding.</p>
+<p>First-hand example: You’ve got a billing function. Tenant A calls it and the runtime injects TenantId=A. IAM only allows access to resources tagged TenantId=A. If your code points at Tenant B’s S3 prefix, the request dies with AccessDenied. That’s real isolation.</p>
+<p>Common footguns to avoid:</p>
+<ul>
+<li>Don’t rely only on bucket tags; tag S3 objects too, since checks hit object tags.</li>
+<li>Enforce tags at deploy time. Pipelines should fail if required tags are missing.</li>
+<li>Standardize casing and spelling. TenantId is not tenantID.</li>
+</ul>
+<h2 id="impactandaudits">Impact and audits</h2>
+<h3 id="securitythatauditorslike">Security that auditors like</h3>
+<p>SaaS audits boil down to proof. With Tenant Isolation Mode, you show tag-led scoping, per-tenant roles, and deny-by-default policies. “Security is job zero” isn’t fluff here—it’s hard lines enforced by the control plane. That reduces cross-tenant risk and shortens audit cycles.</p>
+<p>You also get clean evidence: IAM policies with condition keys, logs with tenantId fields, and AccessDenied events for cross-tenant attempts. Pair with change control—PRs and ticket numbers in commits—and you walk into audits with receipts, not excuses.</p>
+<h3 id="fewerstacksfewerheadaches">Fewer stacks, fewer headaches</h3>
+<p>Running one function for 500 tenants beats 500 functions. Fewer deploy units equals fewer things to break. Devs maintain shared code once, while policy and data paths stay split. Rollouts are simpler, flags are cleaner, and incidents have a smaller, traceable blast radius.</p>
+<p>It lowers brain load too. New hires learn one pipeline, not a maze of forks. Troubleshooting gets repeatable. With consistent tags, you can query the org fast. “Show all resources for Tenant 1234,” and you get the list right away.</p>
+<h3 id="costmaththatmakessense">Cost math that makes sense</h3>
+<p>More tenants, same function. Warm paths, shared cache, fewer idle bits. You pay for calls and duration, not hundreds of dormant copies. Since you tag everything, showback or chargeback per tenant is easy. Great for unit economics and pricing talks.</p>
+<p>First-hand example: A data analytics SaaS merges 120 per-tenant Lambdas into one function. It uses Tenant Isolation Mode. Result: one pipeline to deploy, 120 IAM roles with tag filters, and a dashboard by tenant ID. Ops time drops, and on-call stops hating Fridays.</p>
+<p>If you want more, reserve extra concurrency or memory for premium tenants. Keep one codebase but tune runtime settings or upstream throttles. VIPs get steadier latency. The books stay clear because everything is tagged.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-19-2025-08-27-09-2245-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="blueprintenabletaglock">Blueprint Enable Tag Lock</h2>
+<h3 id="enabletenantisolationmode">Enable Tenant Isolation Mode</h3>
+<p>Flip it on in the console or CLI for your function. The runtime starts receiving tenant-aware context. Your code uses that context to pick tenant resources, like the right schema or S3 prefix.</p>
+<p>Roll it out slow. Start with a low-risk path like reports or exports. Validate with negative tests. Cross-tenant attempts should fail. Use dashboards so per-tenant metrics light up. Then expand to hot paths.</p>
+<h3 id="tagandstandardize">Tag and standardize</h3>
+<p>Pick a canonical tag key: TenantId. Apply it to S3 prefixes, DB parts, queues, and log groups. Bake tag checks into CI/CD so untagged resources can’t ship.</p>
+<p>Use org guardrails. Tag Policies can require tags and allowed values. Combine with AWS Config rules or conformance packs to flag missing TenantId. Goal is simple: missing tags never hit prod.</p>
+<h3 id="iampolicypatternabac">IAM policy pattern ABAC</h3>
+<p>Here’s a minimalist ABAC policy sketch you can adapt: [policy example omitted]</p>
+<p>For reference, this style of policy is common:</p>
+<p>Attach the TenantId as a role tag or pass it as a session tag when assuming the role. Validate with the IAM policy simulator and Access Analyzer.</p>
+<h3 id="wiretheruntimecontext">Wire the runtime context</h3>
+<p>Your handler reads tenant context from the event or auth claims. Avoid any hardcoded names. A simple pattern:</p>
+<ul>
+<li>Use tenantId to compute S3 key prefixes: s3://myapp-data/tenantId=1234/…</li>
+<li>Use tenantId as the first DynamoDB partition key token.</li>
+<li>Pass tenantId along headers for downstream services and logs.</li>
+</ul>
+<p>First-hand example: Ingest API gets tenantId from the auth token. It sets it in logger context and builds resource ARNs on the fly. If a dev tests a cross-tenant call, IAM blocks it. Safety rails by default.</p>
+<p>Add language helpers. Wrap S3, DynamoDB, and queue clients with a tiny helper. It takes tenantId and returns a pre-scoped client. Every call comes from context, not constants.</p>
+<h2 id="architectingdatapaths">Architecting Data Paths</h2>
+<h3 id="databasesisolationlayer">Databases isolation layer</h3>
+<p>For DynamoDB, a common path is one table with tenantId as the partition key. Add IAM conditions on dynamodb:LeadingKeys so callers only touch their partition. For Aurora, use one schema per tenant or row-level security. Add tenantId columns and route by tags from the app layer.</p>
+<p>DynamoDB tips:</p>
+<ul>
+<li>Put tenantId first in the key to enable IAM leading-key checks.</li>
+<li>Add a GSI by (tenantId, type) for fast per-tenant queries.</li>
+<li>Use TTL for auto-expiring per-tenant temp data.</li>
+</ul>
+<p>Aurora tips:</p>
+<ul>
+<li>Postgres row-level security can enforce tenantId rules in the database.</li>
+<li>Separate schemas per tenant help with noisy neighbors. Mind connections though. Use pooling and short transactions.</li>
+</ul>
+<h3 id="s3prefixesandobjecttags">S3 prefixes and object tags</h3>
+<p>Create a standard prefix: s3://bucket/data/tenantId=XYZ/. Tag all objects with TenantId=XYZ. Enforce IAM on s3:ExistingObjectTag/TenantId. Lifecycle rules can be tenant-scoped too. Great for plan-based data retention.</p>
+<p>If you need client-side access, issue short-lived STS creds with a token vending pattern. Tenants upload to their own prefixes without your servers proxying bytes.</p>
+<p>Gotchas:</p>
+<ul>
+<li>Enforce object tags at write time with a bucket policy. Require x-amz-tagging with TenantId.</li>
+<li>Use separate KMS keys or grants for extra isolation on premium tenants. You can tag keys too and condition on them.</li>
+</ul>
+<h3 id="asynchronousflows">Asynchronous flows</h3>
+<p>Make queues and topics multi-tenant by tagging resources and using message attributes. For EventBridge, use tenantId for routing. Enforce perms with resource tags and input transformers. Each consumer Lambda runs under the tenant’s role, keeping reads and writes scoped.</p>
+<p>First-hand example: A file import flow drops raw objects into s3://ingest/tenantId=ABC/. EventBridge routes a message with tenantId=ABC to one normalizing Lambda. That Lambda, running with TenantId=ABC, can read ABC’s sources and write to ABC’s targets. Same code path, no leaks.</p>
+<p>Add dead-letter queues per tenant if you want tight retries and alerts. Tag the DLQs so only the right tools can read them. For high-volume tenants, shard queues by tenantId for steady throughput.</p>
+<h2 id="observabilityandtesting">Observability and Testing</h2>
+<h3 id="pertenanttelemetry">Per-tenant telemetry</h3>
+<p>Instrument logs and metrics with tenantId. In CloudWatch Logs, include a field tenantId. In metrics, use tenantId as a dimension for latency, errors, and cost per tenant. For tracing, set tenantId in X-Ray annotations so you can filter by tenant. This proves isolation and speeds up debug.</p>
+<p>Use the Embedded Metric Format for logs and add a tenantId dimension. Build per-tenant dashboards: p50 and p95 latency, error rates, cold starts, and cost per action. If an audit asks for Tenant 9’s access last week, filter by tag instantly.</p>
+<h3 id="guardrailsandtests">Guardrails and tests</h3>
+<p>Write a negative test. Try to access Tenant B resources while under Tenant A’s role. Expect AccessDenied, every time. Also test missing tags. Unlabeled resources should fail and block in pipelines. Add a canary that simulates cross-tenant access to catch drift.</p>
+<p>Automate policy checks with Access Analyzer and unit tests on policy docs. Run the IAM policy simulator in CI. Add AWS Config rules so untagged resources ping an alert and a ticket within minutes.</p>
+<h3 id="performanceisolation">Performance isolation</h3>
+<p>Track cold starts and p95 latency per tenant. If a noisy neighbor spikes, use concurrency and throttles to cap impact. You can route premium tenants to higher memory or separate compute parts, while keeping shared logic.</p>
+<p>Tune cold starts with provisioned concurrency or smart language picks. For Java, SnapStart can help a lot. For bursty tenants, front the function with a queue to smooth spikes. Always watch per-tenant metrics so you catch regressions early.</p>
+<p>First-hand example: During load test, one tenant floods the import endpoint. Because concurrency and queues are tagged and IAM-scoped, others keep running fine. You see the spike on per-tenant dashboards and throttle that tenant at the edge.</p>
+<h2 id="halfwaycheck">Halfway Check</h2>
+<ul>
+<li>You’ve enabled Tenant Isolation Mode and standardized a TenantId tag.</li>
+<li>IAM policies use ABAC so principals only touch resources with matching tags.</li>
+<li>Data paths are tenant-aware: DB keys, S3 prefixes, and message attrs include tenantId.</li>
+<li>Logs, metrics, and traces carry tenantId for visibility and auditability.</li>
+<li>Negative tests prove cross-tenant attempts fail with AccessDenied.</li>
+</ul>
+<p>If any of these feel shaky, pause and fix before more tenants. <em>Isolation is a habit, not one setting.</em></p>
+<h2 id="faq">FAQ</h2>
+<h3 id="1pertenantfunctions">1. Per-tenant functions</h3>
+<p>Tenant Isolation Mode gives per-tenant isolation inside one function. You avoid hundreds of deploy units, reduce fleet cold starts, and keep shared code. IAM, tags, and runtime context enforce the walls.</p>
+<h3 id="2mixedisolationplans">2. Mixed isolation plans</h3>
+<p>Yes. Keep one shared path for most tenants. For premium or high-reg tenants, add more guardrails. Use dedicated DBs, separate queues, or reserved concurrency. The same isolation rules still apply. Just point them to their tagged resources.</p>
+<h3 id="3preventcrosstenantreads">3. Prevent cross-tenant reads</h3>
+<p>Don’t trust code for isolation. Push isolation into IAM and tags. Make tenantId required input and build ARNs from that ID. If code points wrong, IAM denies the call. Add negative tests and sims to catch slips.</p>
+<h3 id="4clientsides3transfers">4. Client-side S3 transfers</h3>
+<p>Use short-lived creds via STS and scope them to tenant prefixes and tags. Clients upload direct to s3://…/tenantId=XYZ/ without your backend proxying bytes. IAM and tags enforce the walls.</p>
+<h3 id="5compliancesupport">5. Compliance support</h3>
+<p>Yes. You can show role split, least privilege, tag-based access, per-tenant logs and metrics, and deny-by-default. Pair with process controls to make auditors happy.</p>
+<h3 id="6calculatepertenantcost">6. Calculate per-tenant cost</h3>
+<p>Tag metrics with tenantId and roll up Lambda duration, S3 use, DynamoDB RCU and WCU, and data transfer. Since resources are tagged, use cost allocation tags to break spend by tenant in Cost Explorer.</p>
+<h3 id="7missingtaghandling">7. Missing tag handling</h3>
+<p>Your pipeline should block it. Use pre-deploy checks that fail on missing TenantId. At runtime, policies should deny untagged access by default. Add a periodic scan that finds untagged stuff and auto-quarantines it.</p>
+<h3 id="8crossaccountsetup">8. Cross-account setup</h3>
+<p>Yes, if you want stronger blast radius walls. Put tenant data in per-tenant accounts or groups per account. Use role assume with session tags to carry TenantId. You still keep one codebase with account guardrails.</p>
+<h3 id="9fasttenantonboarding">9. Fast tenant onboarding</h3>
+<p>Automate it. A small “tenant factory” creates the IAM role with TenantId. It provisions S3 prefixes, seeds DynamoDB parts, and registers dashboards. The factory logs every step with tenantId for clean audits.</p>
+<h2 id="yourlaunchplan">Your Launch Plan</h2>
+<ul>
+<li>Define a TenantId tag standard and bake it into CI/CD checks.</li>
+<li>Enable Tenant Isolation Mode on your Lambda function(s).</li>
+<li>Create per-tenant IAM roles; add PrincipalTag/TenantId.</li>
+<li>Write ABAC policies that only allow resources with matching TenantId tags.</li>
+<li>Tag S3 objects, DynamoDB items or parts, queues, topics, and log groups.</li>
+<li>Inject tenantId into runtime context; build resource ARNs on the fly.</li>
+<li>Instrument logs, metrics, and traces with tenantId.</li>
+<li>Add negative tests for cross-tenant access and untagged resources.</li>
+<li>Set concurrency and throttling guardrails to prevent noisy neighbors.</li>
+<li>Roll out slowly; watch per-tenant error and latency dashboards.</li>
+</ul>
+<p>Here’s a rollout rhythm that works: week 1, set tag standards and write ABAC policies. Week 2, enable the mode on a low-risk function and wire runtime context. Week 3, add telemetry and build per-tenant dashboards. Week 4, run blast drills and expand to core flows. Keep lights green for a week, then migrate the rest.</p>
+<p>You don’t need a separate architecture per customer. <em>You need a clean isolation line with receipts.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS Lambda Developer Guide</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html">AWS Identity and Access Management (ABAC)</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">IAM tags on principals and resources</a></li>
+<li><a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">AWS Resource Tagging</a></li>
+<li><a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">AWS Organizations Tag Policies</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html">IAM Access Analyzer policy validation</a></li>
+<li><a href="https://docs.aws.amazon.com/config/latest/developerguide/conformance-packs.html">AWS Config Conformance Packs</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/abac.html">Amazon S3 ABAC and object tagging</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/amazon-s3-policy-keys.html#amazon-s3-policy-keys-objtag">Amazon S3 condition keys (ExistingObjectTag)</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/using-identity-based-policies.html#iam-policy-conditions">DynamoDB IAM policy conditions (LeadingKeys)</a></li>
+<li><a href="https://docs.aws.amazon.com/STS/latest/APIReference/Welcome.html">AWS Security Token Service (STS)</a></li>
+<li><a href="https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html">Amazon Cognito Identity Pools</a></li>
+<li><a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html">AWS X-Ray Developer Guide</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Embedded_Metric_Format.html">CloudWatch Embedded Metric Format</a></li>
+<li><a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">AWS Cost Allocation Tags</a></li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/saas-lens/welcome.html">AWS Well-Architected SaaS Lens</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html">Lambda Provisioned Concurrency</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Lambda SnapStart for Java</a></li>
+<li><a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html">API Gateway request throttling</a></li>
+<li><a href="https://serverlessland.com/patterns">Serverless patterns (reference implementations)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-lambda-tenant-isolation.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqa071.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+Secure+Multi-Tenant+SaaS+Faster+With+Lambda+Isolation&amp;pi=261966530238&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=261966530238&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-lambda-tenant-isolation&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-lambda-tenant-isolation?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:35 GMT -->
+</html>

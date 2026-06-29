@@ -1,0 +1,394 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/amazon-nova-web-grounding?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Build Accurate AI Fast with Amazon Nova Web Grounding</title>
+    <link rel="canonical" href="amazon-nova-web-grounding.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover how Amazon Nova models now support Web Grounding to build accurate AI apps, retrieve up-to-date cited data, cut hallucinations, and boost trust.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build Accurate AI Fast with Amazon Nova Web Grounding",
+        "datePublished": "2025-11-01T19:23:19Z",
+        "dateModified": "2025-11-01T19:23:20.860Z",
+        "mainEntityOfPage": "https://remktr.com/blog/amazon-nova-web-grounding",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-01-2025-07-15-37-1670-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="amazon-nova-web-grounding.html">Build Accurate AI Fast with Amazon Nova Web Grounding</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 1, 2025 7:23:19 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Your AI sounds sure of itself. Then it cites 2022 on a 2025 question and eats dirt in front of users. <em>Hallucinations aren’t cute when they hit production.</em> They burn trust, spike support tickets, and quietly kneecap conversion.</p>
+<p>Here’s the fix: Amazon Nova Web Grounding on Amazon Bedrock. It pulls fresh, public info from the web automatically and cites sources in the reply. No DIY retrieval pipeline. No frantic fact-checking. Just answers that are current and verifiable.</p>
+<p>If you’re building assistants, search, content tools, or research flows, this is your reliability button. You get RAG without the baggage: the Nova model decides when to retrieve, injects context, and returns answers with citations. You keep accuracy, ship faster, and stop betting your product on stale model weights.</p>
+<p>Picture the last time a user asked something time-sensitive—policy, pricing, compliance—and your bot improvised. That’s avoidable. Grounding turns “nice guess” into <em>“verified answer with receipts,”</em> so your team stops firefighting and starts shipping. Bonus: when users see sources, they stop arguing and start trusting it.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Nova Web Grounding auto-retrieves current, public web data and cites sources.</li>
+<li>It’s built into Nova models on Amazon Bedrock—no custom RAG pipeline.</li>
+<li>Ships now with Nova Premier (US East N. Virginia/Ohio; US West Oregon).</li>
+<li>Best for knowledge assistants, research, and content that must be up-to-date.</li>
+<li>Expect better accuracy, higher trust; tradeoffs include latency, cost, filtering.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-16-33-7458-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="groundtruthbeatsswagger">Ground Truth Beats Swagger</h2>
+<h3 id="theproblemyouresolving">The problem you’re solving</h3>
+<p>LLMs are great at pattern-matching. They’re not great at yesterday’s news, today’s policy shifts, or a spec updated last week. That’s why hallucinations happen: the model predicts words, not reality. When your app needs current facts, pretraining alone becomes a liability.</p>
+<p>Think of a frozen snapshot vs. a live feed. Pretraining is the snapshot: strong context, but fixed. Grounding is the live feed: it brings in what changed since that snapshot. If a question depends on something that moved, you want the live feed.</p>
+<h3 id="whygroundingflipsthescript">Why grounding flips the script</h3>
+<p>Web Grounding lets Nova fetch relevant, public sources at inference time, inject them into context, and generate a cited answer. Your chatbot stops winging it and starts acting like a careful researcher.</p>
+<ul>
+<li>Current info: Pulls the latest public web data.</li>
+<li>Transparent answers: Returns citations so users can verify.</li>
+<li>Less hallucination: Tethers generation to verifiable sources.</li>
+<li>Auditable: You can see which sources influenced the answer and review them.</li>
+</ul>
+<h3 id="quickrealworldexample">Quick real world example</h3>
+<p>Imagine your support assistant gets, “What’s the newest return policy for refurbished devices?” Yesterday’s policy changed. With Web Grounding, Nova checks official pages, cites the update, and responds with the new policy—no manual retraining, no brittle scrapers. Your answer is timely and defensible.</p>
+<p>“As a builder, you need reliability more than rhetoric.” Grounding delivers it.</p>
+<p>Another quick one: a travel app gets, “Do I need a visa for a 5-day stay?” Those rules shift. With grounding, the model pulls official consulate pages and airline advisories, cites both, and avoids turning a trip into a border problem.</p>
+<h2 id="autopilotragwithoutplumbing">Autopilot RAG Without Plumbing</h2>
+<h3 id="hownovadecidestoretrieve">How Nova decides to retrieve</h3>
+<p>When your app sends a prompt, Nova analyzes intent. If the question likely needs fresh or niche info, the model triggers web retrieval. That context gets injected into the prompt window before generation. No stitching a vector DB, search API, and re-ranking logic—the model orchestrates it.</p>
+<p>Practical tip: nudge behavior by being explicit in your prompt (e.g., “Use up-to-date public sources and include citations”). You can also gate which user intents allow grounding by routing those prompts to a deployment with grounding enabled.</p>
+<h3 id="citationsbydefault">Citations by default</h3>
+<p>Every grounded response includes references to the public sources used. That’s not compliance theater; it’s UX. Users can click, skim, and trust. Developers can log sources for review and QA.</p>
+<p>Treat citations like part of the product, not an afterthought. Place them where users can see them without endless scrolling. Consider grouping by domain (e.g., vendor docs vs. standards bodies) so power users can judge credibility at a glance.</p>
+<h3 id="whatsavailablenow">What’s available now</h3>
+<ul>
+<li>Model availability: Web Grounding is currently supported on Nova Premier.</li>
+<li>Regions: Cross-region inference is available in US East (N. Virginia), US East (Ohio), and US West (Oregon).</li>
+<li>Modality: Nova models span text and multimodal tasks; Web Grounding retrieves public web content to inform text answers with citations.</li>
+</ul>
+<h3 id="firsthandflow">First hand flow</h3>
+<p>Prompt: “Summarize the latest security best practices for passwordless auth and cite sources.”</p>
+<ul>
+<li>Nova flags it as “fresh info needed.”</li>
+<li>Retrieves recent guidance from reputable public sources.</li>
+<li>Inserts snippets into context.</li>
+<li>Generates a summary with citations to those sources.
+That’s <em>RAG, minus the plumbing.</em></li>
+</ul>
+<p>To keep this operationally tight: log the final answer, the list of citations, and a short “why this source” note when possible. In your UI, render citations inline for short answers and as a “Sources” block for long ones. In QA, sample these logs weekly, spot-check links, and record false-positive rates.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-17-33-6710-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whereitwins">Where It Wins</h2>
+<h3 id="bestfitusecases">Best fit use cases</h3>
+<ul>
+<li>Knowledge assistants: Customer support, help centers, onboarding guides that must reflect the latest docs and policies.</li>
+<li>Research co-pilots: Analysts and students who need synthesis across multiple fresh sources.</li>
+<li>Content generation: Drafts that must be current and cite sources (reports, blog posts, briefs).</li>
+<li>Product data: Specs, pricing changes, stock updates—where “last month” is too old.</li>
+</ul>
+<p>A first-hand example: An e-commerce assistant compares two laptops. Without grounding, it repeats an old spec sheet. With grounding, it checks official product pages, cites both, and surfaces the updated GPU and warranty terms. That’s a conversion, not a complaint.</p>
+<h3 id="moreplacesitshines">More places it shines</h3>
+<ul>
+<li>Policy-heavy workflows (HR, finance, healthcare) where the “latest update” matters.</li>
+<li>Incident response and security advisories that change daily.</li>
+<li>Market intelligence: tracking feature releases across competitors using official blogs and docs.</li>
+<li>Travel, tax, and regulatory questions with jurisdiction-specific rules.</li>
+</ul>
+<h3 id="tradeoffsandpracticalconstraints">Tradeoffs and practical constraints</h3>
+<ul>
+<li>Latency: Retrieval adds a network hop. If you need sub-second replies, choose where grounding is truly needed.</li>
+<li>Cost: More retrieval and larger contexts can increase inference cost. Monitor and cap depth.</li>
+<li>Source quality: Public web varies. Apply allow/deny lists and post-response checks if your domain needs high trust.</li>
+<li>Compliance: Watch copyright and privacy. Don’t paste unlicensed content verbatim; summarize and cite.</li>
+</ul>
+<h3 id="maketradeoffswork">Make tradeoffs work</h3>
+<ul>
+<li>Progressive responses: Show a quick “Working with sources…” indicator, then stream the grounded answer.</li>
+<li>Caching with TTLs: Cache answers to common, low-risk questions for short windows. Bust cache when upstream pages change.</li>
+<li>Intent routing: Only ground where freshness matters; keep static FAQs on a fast, non-grounded path.</li>
+<li>Confidence gates: If retrieval returns weak or conflicting sources, ask a clarifying question or escalate.</li>
+</ul>
+<p>If your north star is “fast, accurate, traceable,” Web Grounding is <em>an asymmetric upgrade.</em></p>
+<h2 id="buildlikeapro">Build Like a Pro</h2>
+<h3 id="accessandenablement">Access and enablement</h3>
+<ul>
+<li>Get access to Nova Premier in Amazon Bedrock.</li>
+<li>Enable Web Grounding in the console or through the Bedrock API for that deployment.</li>
+<li>Start with a small, controlled rollout (one or two intents) to measure latency and quality.</li>
+<li>Ensure IAM roles are scoped right, and log citations for QA.</li>
+</ul>
+<h3 id="promptpatternsthatwork">Prompt patterns that work</h3>
+<ul>
+<li>Be explicit: “Use up-to-date public sources and include citations.”</li>
+<li>Scope the task: “Summarize in 5 bullet points; cite 2–3 reputable sources.”</li>
+<li>Define tone/format: “Answer concisely for a customer-facing chat.”</li>
+<li>Add constraints: “Prefer official docs and standards bodies over forums.”</li>
+</ul>
+<p>Copy-ready templates you can adapt:</p>
+<ul>
+<li>Decision support: “Compare [Option A] vs [Option B] using current, public sources. List 3 key differences. Include links to official pages.”</li>
+<li>Policy checks: “What changed in [Policy X] in the last 60 days? Summarize changes and cite the official announcement.”</li>
+<li>Risk flags: “If sources conflict, call it out and request clarification instead of guessing.”</li>
+</ul>
+<h3 id="qualityloopsyoullactuallyuse">Quality loops you’ll actually use</h3>
+<ul>
+<li>Grounded eval sets: Create prompts that require current info (e.g., version numbers, new policy dates) and check citation accuracy.</li>
+<li>Source policy: Maintain an allowlist (official docs, newsrooms, standards orgs) and a denylist as needed.</li>
+<li>Human-in-the-loop: Auto-approve low-risk intents; queue complex, high-impact answers for review.</li>
+</ul>
+<h3 id="addmeasurableguardrails">Add measurable guardrails</h3>
+<ul>
+<li>Grounding hit rate: % of answers with valid citations when freshness is required.</li>
+<li>Citation coverage: Average number of unique, high-quality sources per answer.</li>
+<li>Freshness score: Edge cases where content is older than a set threshold.</li>
+<li>User trust proxy: Downstream metrics like fewer escalations and higher clicks on cited links.</li>
+</ul>
+<p>First-hand example: A fintech bot gets “What’s the most recent CFPB guidance on credit card late fees?” Your prompt requires citations; your policy prioritizes official pages. The response cites the CFPB newsroom. That’s the outcome you want in regulated workflows.</p>
+<h3 id="architectureroutingandfallbacks">Architecture routing and fallbacks</h3>
+<ul>
+<li>Smart routing: Detect intents like “policy,” “pricing,” “release notes,” and route those to a grounding-enabled deployment.</li>
+<li>Fallback tiers: If retrieval fails or returns weak sources, ask a clarifying question or escalate to a human.</li>
+<li>Safe summaries: Summarize long pages; avoid copying large chunks. Always attribute.</li>
+<li>Link hygiene: Prefer stable URLs (official docs, standards bodies) over volatile posts.</li>
+</ul>
+<h3 id="costandlatencycontrols">Cost and latency controls</h3>
+<ul>
+<li>Cap retrieval depth: Limit the number of sources per answer for most intents; allow more for research flows.</li>
+<li>Cache wisely: Cache source lists for popular queries and re-verify on a short cadence.</li>
+<li>Stream output: Start rendering while the model writes; users feel it as speed.</li>
+<li>Batch QA: Review top queries weekly; refine prompts and allowlists.</li>
+</ul>
+<h2 id="quickpulsecheck">Quick Pulse Check</h2>
+<ul>
+<li>You’re not duct-taping a brittle RAG stack—Nova handles retrieval and citations.</li>
+<li>Your app can finally answer with “what’s true now,” not “what the model once read.”</li>
+<li>Latency and cost are tradeoffs you’ll tune per intent—ground only where it matters.</li>
+<li><em>Trust is a feature: citations turn skepticism into confidence.</em></li>
+<li>Start narrow, measure, and expand—this compounds fast across user journeys.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<p>1.</p>
+<h3 id="howiswebgroundingdifferent">How is Web Grounding different</h3>
+<p>DIY RAG needs a search layer, retrieval logic, ranking, chunking, and prompt assembly—plus maintenance. Nova Web Grounding automates retrieval and citation inside the model workflow on Bedrock, so you focus on product logic, not plumbing.</p>
+<p>Pragmatically, that means fewer services to wire, fewer moving parts to maintain, and less drift between your prompt logic and retrieval logic.</p>
+<p>2.</p>
+<h3 id="webgroundingdatasources">Web Grounding data sources</h3>
+<p>Web Grounding retrieves public web data to ground responses. For proprietary content, you can still use Bedrock with your secure data sources and patterns; treat them as complementary based on the use case.</p>
+<p>A common pattern: use private document grounding for internal policies, and enable Web Grounding only for gaps needing public, up-to-date sources.</p>
+<p>3.</p>
+<h3 id="novamodelswithwebgrounding">Nova models with Web Grounding</h3>
+<p>Support is available with Nova Premier on Amazon Bedrock, with more Nova models planned. Check current availability in the AWS console and service docs for the latest status.</p>
+<p>4.</p>
+<h3 id="latencyandcost">Latency and cost</h3>
+<p>Retrieval adds a network round trip and expands context, which can raise latency and cost. Scope grounding to intents where freshness and citations are essential, cap retrieval depth, and cache safe, short-lived results when appropriate.</p>
+<p>If your workflow is time-sensitive, like live chat, stream responses, cache aggressively, and reserve deep retrieval for escalations or summary modes.</p>
+<p>5.</p>
+<h3 id="citationspresentedtousers">Citations presented to users</h3>
+<p>Grounded answers include references to the public sources used. You can display them inline (footnote-style links) or as a separate “Sources” block, and you should log them for monitoring and QA.</p>
+<p>Aim for clarity over clutter: 2–4 high-quality sources beat 10 marginal ones.</p>
+<p>6.</p>
+<h3 id="ensuresourcequalityandcompliance">Ensure source quality and compliance</h3>
+<p>Use allowlists and denylists, prioritize official docs and standards bodies, summarize rather than copy, and apply your compliance checks. For sensitive domains, add human review on high-impact answers.</p>
+<p>Consider aligning with known frameworks for governance and risk management, and build a simple audit trail that ties each answer to its sources and reviewer.</p>
+<h2 id="shipagroundedmvp">Ship a Grounded MVP</h2>
+<ul>
+<li>Enable Nova Premier in Bedrock and switch on Web Grounding for your target app.</li>
+<li>Pick two high-value intents where freshness matters (e.g., policy, pricing).</li>
+<li>Write prompts that demand citations and specify preferred source types.</li>
+<li>Add a source allowlist and log every citation for QA.</li>
+<li>Set thresholds: when uncertain, ask a clarifying question or defer.</li>
+<li>Test on a grounded eval set; measure accuracy, latency, and user satisfaction.</li>
+<li>Roll out gradually; expand intents as metrics hold.</li>
+</ul>
+<h3 id="executionchecklist">Execution checklist</h3>
+<ul>
+<li>Instrumentation: Track grounding hit rate, latency p95, and citation click-through.</li>
+<li>Alerts: Trigger on broken links or repeated denials from your denylist.</li>
+<li>Reviews: Weekly sample of 50 grounded answers scored for correctness and source quality.</li>
+<li>Feedback loop: A one-click “Was this accurate?” in your UI that flags answers for QA.</li>
+</ul>
+<p>Your next release should ship grounded by default.</p>
+<p>You want your AI to be trusted. Trust is earned by receipts—fresh facts and clear citations—not just pretty paragraphs. Nova Web Grounding turns “sounds right” into “is right, and here’s the source.” Start narrow, wire in quality checks, and let the wins stack: fewer escalations, faster approvals, better conversion. In a world where everyone claims AI, the apps that cite homework will quietly win the market. Ground once, scale everywhere.</p>
+<p>Want to see grounded assistants delivering measurable results? Explore our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/bedrock/">Amazon Bedrock product page</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html">Amazon Bedrock documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Guardrails for Amazon Bedrock (policy and safety)</a></li>
+<li><a href="https://aws.amazon.com/new/">What’s New with AWS (service announcements)</a></li>
+<li><a href="https://arxiv.org/abs/2005.11401">Retrieval-Augmented Generation paper (Lewis et al., 2020)</a></li>
+</ul>
+<p><em>Tweet-sized take: “LLMs write prose. Grounding adds proof. Nova Web Grounding turns ‘trust me’ into ‘verify me’—and that’s how AI earns a seat in production.”</em></p>
+<h2 id="references-1">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/bedrock/">Amazon Bedrock product page</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html">Amazon Bedrock documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Guardrails for Amazon Bedrock (policy and safety)</a></li>
+<li><a href="https://aws.amazon.com/new/">What’s New with AWS (service announcements)</a></li>
+<li><a href="https://arxiv.org/abs/2005.11401">Retrieval-Augmented Generation paper (Lewis et al., 2020)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-bases.html">Knowledge Bases for Amazon Bedrock</a></li>
+<li><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a></li>
+<li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">OWASP Top 10 for LLM Applications</a></li>
+<li><a href="https://aws.amazon.com/bedrock/pricing/">Amazon Bedrock Pricing</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="amazon-nova-web-grounding.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq9dd1.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Build+Accurate+AI+Fast+with+Amazon+Nova+Web+Grounding&amp;pi=254834542276&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=254834542276&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Famazon-nova-web-grounding&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/amazon-nova-web-grounding?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:07 GMT -->
+</html>

@@ -1,0 +1,469 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/inbound-shipment-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:35:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Shipments Change Make Your API Fix Mistakes Fast</title>
+    <link rel="canonical" href="inbound-shipment-updates.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover how the API enables post-confirmation updates for inbound shipments: rename plans &amp; shipments and adjust SKU quantities for accuracy and flexibility.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Shipments Change Make Your API Fix Mistakes Fast",
+        "datePublished": "2025-11-04T18:11:58Z",
+        "dateModified": "2025-11-04T18:11:59.126Z",
+        "mainEntityOfPage": "https://remktr.com/blog/inbound-shipment-updates",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-04-2025-06-05-30-6088-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="inbound-shipment-updates.html">Shipments Change Make Your API Fix Mistakes Fast</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 4, 2025 6:11:58 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p><em>“No plan survives first contact with receiving.”</em></p>
+<p>Your inbound will change after you confirm. Count on it. Someone miscounts a pallet. You find damage after sealing cartons. A vendor renames a batch at the last minute. If your API can’t bend, you pay. Delays, chargebacks, and endless “why is inventory off again?” Slack threads.</p>
+<p>Here’s the fix. Bake post-confirmation updates and corrections into your workflow. Two high-leverage moves unlock most wins. Rename inbound plans and shipments for clarity. Update per-SKU unit counts after confirmation for accuracy. That combo keeps reality synced to the record. And it won’t blow up receiving.</p>
+<p>This isn’t “move fast and break pallets.” It’s <em>controlled agility, not chaos.</em> You get a clean audit trail. Your warehouse won’t run on bad data. And finance stops chasing ghosts. Let’s break down how to design it, ship it, and govern it. Without turning your API into the Wild West.</p>
+<p>If you run inbound ops at any real volume, you’ve felt this. Confirmed plans drift. Trucks show up with surprises. People scramble. The win isn’t killing surprises. It’s absorbing them without chaos. A tight, safe correction lane turns “uh-oh” into “handled.” And every system points at the same, current truth.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Allow safe post-confirmation edits: rename plans/shipments and adjust per-SKU unit quantities.</li>
+<li>Use PATCH, idempotency keys, and versioned ETags to prevent race conditions.</li>
+<li>Enforce clear guardrails: cutoffs, permissions, validations, and immutable fields.</li>
+<li>Integrate with receiving: update ASNs/DESADV, notify 3PLs, log every change.</li>
+<li>Measure impact: fewer receiving exceptions, faster putaway, cleaner inventory.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-04-2025-06-06-30-0005-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="designforpostconfirmationchanges">Design For Post Confirmation Changes</h2>
+<h3 id="theminimalsetofupdates">The minimal set of updates</h3>
+<p>Your API should support two surgical edits after a shipment is confirmed:</p>
+<ul>
+<li>Rename inbound plans and shipments: Keep labels human-friendly. Match vendor docs, 3PL portals, and WMS screens.</li>
+<li>Update per-SKU unit quantities: You confirmed 500 units of SKU A. You find 22 damaged. Adjust to 478 before the truck hits the dock.</li>
+</ul>
+<p>That’s it. You’re not swapping SKUs or changing destinations. You’re not rewriting history. You’re aligning the record with physical reality right before receiving.</p>
+<p>A practical picture helps. Your vendor confirmed <code>PO-8421</code>. Their freight team and the 3PL say <code>LOAD-17 WEST</code>. Rename your plan to <code>PO-8421 | LOAD-17 | West DC | 11-04</code>. Humans then match screens, labels, and emails in seconds. On quantities, treat the shipment like a frozen roster. Same SKUs, but you can change minutes for each player. No new players. No venue changes.</p>
+<p>What renaming looks like in practice:</p>
+<ul>
+<li>Standardize a pattern: <code>[PO or Vendor Ref] | [Load/Container] | [Destination] | [ETA]</code>.</li>
+<li>Enforce character limits and avoid ambiguous letters like O vs 0. Labels should scan clean.</li>
+<li>Mirror the name everywhere humans work—WMS screens, portals, PDFs, and pick tickets.</li>
+</ul>
+<p>Quantity adjustment edge cases to handle gracefully:</p>
+<ul>
+<li>Inner packs and master packs: If SKU A ships in cases of 24, use 24-step adjustments. Unless you clearly support each-pick.</li>
+<li>Multipacks/kits: For kitted SKUs, adjust the kit count, not components. Unless your team explodes kits at receiving.</li>
+<li>Lot/expiry: You can reduce a lot’s quantity pre-receipt. Don’t add a new lot at this stage.</li>
+</ul>
+<h3 id="whyitmatterstooperations">Why it matters to operations</h3>
+<p>Small inaccuracies snowball fast. Receiving wastes time chasing exceptions. Inventory goes “poof” in the ERP. Replenishment triggers early or not at all. The National Retail Federation pegged retail shrink at about 1.6% of sales in 2022. Miscounts and process gaps are part of that drag. Tight inbound corrections cut exceptions. They speed putaway and boost forecast trust.</p>
+<p>For finance, this isn’t just tidy data. It’s working capital and unit economics. Cleaner receipts mean fewer phantom stockouts. Also fewer “ghost” units puffing up available-to-promise. That means steadier revenue and fewer expedited freight burns. And saner accruals. Your forecast models trust receiving more. So you spend less time reconciling and more time planning.</p>
+<p>Operational ripple effects worth calling out:</p>
+<ul>
+<li>Receiving clocks: When quantities match, teams stop detective work and start putaway.</li>
+<li>Slotting and labor planning: Accurate expected units drive staffing and bin prep.</li>
+<li>Vendor scorecards: Pre-receipt corrections are a signal for coaching and contract terms.</li>
+</ul>
+<h3 id="definitionofcorrectionvschange">Definition of correction vs change</h3>
+<ul>
+<li>Corrections: Rename entities. Adjust unit counts for SKUs already on the shipment.</li>
+<li>Changes to reject: Add or remove SKUs. Change destination. Alter compliance fields that drive routing or labeling.</li>
+</ul>
+<p>Clear lines stop “scope creep” edits that break downstream processes.</p>
+<p>Borderline cases and how to treat them:</p>
+<ul>
+<li>Barcode or alias tweaks: If the SKU identity changes, that’s not a correction. Reject and re-plan.</li>
+<li>Packaging notes: Clarifying “stackable” or “do not top load” is usually safe metadata. But if it affects carrier, service, or labeling, treat it as a change request.</li>
+<li>Renaming a SKU vs. a shipment: Shipment rename is a correction. A SKU rename is a catalog change—out of scope here.</li>
+</ul>
+<h2 id="engineeringplaybooksafetynets">Engineering Playbook Safety Nets</h2>
+<h3 id="usepatchidempotencyoptimisticconcurrency">Use PATCH idempotency optimistic concurrency</h3>
+<ul>
+<li>PATCH over PUT: Partial updates touch only fields meant to change, like name or quantity.</li>
+<li>Idempotency keys: Ensure one-and-only-one effective update, even with retries. As Stripe notes, “idempotency keys guarantee that the API performs an action only once for a given key.”</li>
+<li>ETags and If-Match: The client sends the last seen version when patching. If versions don’t match, return 412 Precondition Failed.</li>
+</ul>
+<p>Together, these stop “last write wins” chaos and accidental double updates.</p>
+<h3 id="happypath">Happy path</h3>
+<ul>
+<li>Client reads the shipment and captures ETag <code>v12</code>.</li>
+<li>Client sends PATCH with idempotency key <code>abc-123</code> and <code>If-Match: v12</code>. It sets <code>name</code> and reduces SKU A by 22 units.</li>
+<li>Server validates, applies, emits an <code>InboundShipmentUpdated</code> event, and returns 200 with ETag <code>v13</code>.</li>
+<li>Client retries? Server recognizes <code>abc-123</code> within the idempotency window. It returns the same <code>v13</code> without reapplying the change.</li>
+</ul>
+<h3 id="implementationnotesthatsaveheadaches">Implementation notes that save headaches</h3>
+<ul>
+<li>Scope idempotency keys to a route plus payload hash. Expire them after a sane TTL, like 24–72 hours.</li>
+<li>Include the effective diff in responses. Clients can log what actually changed.</li>
+<li>Version events. If downstream misses <code>v12</code> and gets <code>v13</code>, they can fetch the latest state cleanly.</li>
+</ul>
+<h3 id="validatelikeabouncer">Validate like a bouncer</h3>
+<ul>
+<li>Strong validation: Quantity can’t be negative. Can’t exceed carton or pallet constraints. SKUs must already exist on the shipment. Renames must meet length and charset rules.</li>
+<li>Guardrails by state: Allow updates while the shipment is Confirmed. Once “Receiving Started” or after cutoff, edits are blocked.</li>
+<li>Immutable IDs: Never change entity IDs or SKUs post-confirmation.</li>
+<li>Audit trail: For every correction, store who, when, previous value, new value, reason code, and source.</li>
+</ul>
+<h3 id="turnvalidationintoaguide">Turn validation into a guide</h3>
+<ul>
+<li>Pre-validate in the UI with inline hints: “SKU A adjusts in packs of 24. Closest valid number: 480.”</li>
+<li>Reason code taxonomy: Damage, Supplier Short, Count Correction, Repack, Compliance, Other with free text.</li>
+<li>Batch previews: For CSV uploads, show the proposed diff and expected new totals before commit.</li>
+</ul>
+<h3 id="securebydefault">Secure by default</h3>
+<ul>
+<li>Least-privilege scopes: Separate <code>shipment.update.name</code> and <code>shipment.update.quantity</code> from destructive permissions.</li>
+<li>Fine-grained roles: Vendors can rename. Only internal planners adjust quantities. 3PLs get read-only.</li>
+<li>OWASP API Security Top 10: Watch for BOLA and excessive data exposure.</li>
+</ul>
+<h3 id="threatpatternstodesignagainst">Threat patterns to design against</h3>
+<ul>
+<li>Cross-tenant access: Always check the actor’s rights to the shipment’s org. Not just the ID.</li>
+<li>Replay attempts: Pair idempotency with short-lived auth tokens. Rotate vendor keys.</li>
+<li>Over-broad responses: Return only fields needed for the task. Don’t leak labels, cost, or unrelated PII.</li>
+</ul>
+<h2 id="keepthenetworkinsync">Keep The Network In Sync</h2>
+<h3 id="speaksupplychainslanguage">Speak supply chains language</h3>
+<p>In EDI, corrections must reach partners before receiving. GS1’s DESADV is the common tongue. As GS1 explains, “The Despatch Advice (DESADV) provides detailed information about the contents of a shipment prior to arrival,” enabling faster, more accurate receiving.</p>
+<ul>
+<li>When quantity changes, emit an event and regenerate the ASN or DESADV with updated counts.</li>
+<li>Notify the 3PL: Webhook plus email backup for critical edits inside 24 hours of arrival.</li>
+<li>On rename: Update labels, portals, and any human-facing references. People search by names, not GUIDs.</li>
+</ul>
+<h3 id="sequencesonobodyissurprised">Sequence so nobody is surprised</h3>
+<ul>
+<li>Apply the correction, persist, and stamp the audit entry.</li>
+<li>Push an internal event to fan out updates to WMS, ERP, and the portal.</li>
+<li>Re-issue ASN or DESADV to partners, or send an API update if not on EDI. Use the new expected quantities.</li>
+<li>Send a human-readable summary of the delta: <code>PO-8421</code> reduced SKU A by 22 (<code>500 → 478</code>). Reason: Damage.</li>
+</ul>
+<h3 id="tightfeedbackloopswithwarehouse">Tight feedback loops with warehouse</h3>
+<ul>
+<li>Receiving start signal: The WMS flips the state to “Receiving Started.” That locks further edits automatically.</li>
+<li>Exception codes: If receiving finds a mismatch, log it and reconcile with your last correction. Make it clear which wins.</li>
+<li>SLA timers: Edits inside T-24 hours need a reason code and manager approval.</li>
+</ul>
+<h3 id="makethetiebreakersexplicit">Make the tie breakers explicit</h3>
+<ul>
+<li>Before receiving: The latest correction is <em>the expected truth</em>.</li>
+<li>After receiving: <em>The dock count wins.</em> Push a reconciliation event upstream. Adjust expected inventory and capture the financial impact.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-04-2025-06-07-28-2947-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="smalluxdetailswithroi">Small UX details with ROI</h3>
+<ul>
+<li>Pre-filled reason codes: Damage, miscount, supplier short-ship, repack.</li>
+<li>Inline deltas: “You changed SKU A from 500 to 478 (-22).”</li>
+<li>Bulk edit guardrails: Let users propose CSV changes. Validate and preview the diff before commit.</li>
+</ul>
+<h3 id="nicetiesthatreduceerrorrate">Niceties that reduce error rate</h3>
+<ul>
+<li>Confirmation modals for large deltas, like greater than 5%: “This is a large change. Proceed?”</li>
+<li>Time zone labels on ETAs and cutoffs. Late-night edits shouldn’t miss deadlines.</li>
+<li>Undo window for renames, not quantities, within a short interval. Cosmetic and safe.</li>
+</ul>
+<h2 id="governancecutoffslist">Governance Cutoffs List</h2>
+<h3 id="thecorrectionwindow">The correction window</h3>
+<ul>
+<li>Open: From confirmation until receiving starts. Or a hard cutoff, like truck scheduled or checked in.</li>
+<li>Closed: After receiving starts, or if regulatory or compliance locks apply.</li>
+<li>Override: Emergency override by privileged roles with two-person approval and extra logging.</li>
+</ul>
+<h3 id="timelinetemplateyoucanadapt">Timeline template you can adapt</h3>
+<ul>
+<li>T-72 to T-24 hours: Normal corrections allowed with reason codes.</li>
+<li>T-24 to T-2 hours: Manager approval required. Auto-notify the 3PL.</li>
+<li>T-2 hours to dock time: Renames only. Quantity edits blocked unless emergency override.</li>
+</ul>
+<h3 id="immutableandderivedfields">Immutable and derived fields</h3>
+<ul>
+<li>Immutable after confirm: Destination, carrier, service level, SKU identity, compliance attributes.</li>
+<li>Derived fields: Totals and statuses recompute from line items. Don’t accept writes to <code>total_units</code> if it’s derived.</li>
+</ul>
+<h3 id="drawabrightline">Draw a bright line</h3>
+<ul>
+<li>Write endpoints for line-level quantities.</li>
+<li>Read-only aggregation fields on the shipment.</li>
+<li>Separate catalog endpoints for SKU identity changes outside this flow.</li>
+</ul>
+<h3 id="monitoringandalerts">Monitoring and alerts</h3>
+<ul>
+<li>Alert on outliers: More than 5% quantity change triggers review. More than N changes within 24 hours triggers investigation.</li>
+<li>Dashboard hygiene: Track corrections by vendor, lane, and planner. Spot training or supplier-quality issues.</li>
+</ul>
+<h3 id="metricsthattellastory">Metrics that tell a story</h3>
+<ul>
+<li>Correction rate by shipment count and by units.</li>
+<li>Time-to-receive versus correction timing.</li>
+<li>Post-receipt accuracy variance: How often does the dock disagree with last expected?</li>
+</ul>
+<h3 id="borrowapagefromcompliance">Borrow a page from compliance</h3>
+<p>Regulated programs exist to clean up mistakes without chaos. For retirement plans, the Department of Labor’s Voluntary Fiduciary Correction Program formalizes “fix it right.” Different domain, same mindset. Correct transparently, quantify impact, document it well.</p>
+<ul>
+<li>Quote: “The VFCP allows plan officials to correct certain violations of the law,” says the DOL. That’s the spirit you want—structured, auditable, fair.</li>
+</ul>
+<h3 id="translatethatmindsettoinbound">Translate that mindset to inbound</h3>
+<ul>
+<li>Clear eligibility: What counts as a correction.</li>
+<li>Documented procedure: Who approves, what gets logged, how partners are notified.</li>
+<li>Measured result: What improved—exceptions, cycle time, accuracy.</li>
+</ul>
+<h2 id="mathofmistakes">Math Of Mistakes</h2>
+<h3 id="reconcilewithintent">Reconcile with intent</h3>
+<ul>
+<li>Before receiving: Your corrections should become the new “expected.”</li>
+<li>After receiving: Dock counts are source of truth. If they conflict with your last correction, log the delta and push it upstream for planning.</li>
+</ul>
+<h3 id="buildasimplereconciliationloop">Build a simple reconciliation loop</h3>
+<ul>
+<li>Compare last-expected versus received per SKU.</li>
+<li>Classify variance: damage, short-ship, mislabel, or count error.</li>
+</ul>
+<h3 id="closetheloopwithplanning">Close the loop with planning</h3>
+<ul>
+<li>If variance stems from supplier shorts, feed vendor scorecards.</li>
+<li>If variance comes from miscounts, coach teams or improve pack standards.</li>
+</ul>
+<h3 id="quantifytheimpactofcorrections">Quantify the impact of corrections</h3>
+<p>Treat corrections like performance signals, not just fixes. Which suppliers are short most often? Which lanes need better packaging? What share of confirmed units gets adjusted pre-receipt? Trend it monthly.</p>
+<ul>
+<li>Operational KPIs: Receiving exception rate, average putaway time, inventory accuracy post-receipt.</li>
+<li>Financial proxy: Estimate cost-of-delay for stockouts avoided by timely corrections. The analogy is “lost earnings” in another world.</li>
+</ul>
+<h3 id="lightweightformulastogetstarted">Lightweight formulas to get started</h3>
+<ul>
+<li>Avoided stockout risk per SKU = Probability(stockout without correction) × Units corrected × Contribution margin.</li>
+<li>Carrying cost impact = Change in expected on-hand days × Carrying cost rate × Unit cost.</li>
+<li>Exception handling savings = (Baseline exception minutes – Current) × Labor cost per minute.</li>
+</ul>
+<h3 id="analogytocompliancecalculators">Analogy to compliance calculators</h3>
+<p>You’ll see phrases like “vfcp self-correction,” “voluntary fiduciary correction program (vfcp online calculator),” and “EPCRS.” Also “DOL calculator,” “lost earnings 401k,” and “Rev Proc 2021-30” when fixing retirement plan issues. Not shipments. But the concept carries over. Quantify the error, apply a method, document the fix. For inbound, your “calculator” is exception time, avoided stockouts, and carrying cost. Not interest on late contributions. Keep the rigor, just change the variables.</p>
+<h2 id="correctionsystemscorecard">Correction System Scorecard</h2>
+<ul>
+<li>You support PATCH with idempotency keys and ETags, so retries and races don’t break data.</li>
+<li>You allow renaming plans or shipments and adjusting per-SKU quantities. You block adding or removing SKUs.</li>
+<li>You lock edits at receiving start and push update events to partners, like ASN or DESADV.</li>
+<li>You log who, what, when, and why for every correction, with reason codes.</li>
+<li>You monitor correction rates and tie them to vendor quality and receiving SLAs.</li>
+</ul>
+<h3 id="howtousethisscorecard">How to use this scorecard</h3>
+<ul>
+<li>Run it monthly with ops and engineering.</li>
+<li>Pick one weak area to improve each cycle.</li>
+<li>Share the before and after with leadership so wins get funded.</li>
+</ul>
+<h2 id="faqsaboutpostconfirmationupdates">FAQs About Post Confirmation Updates</h2>
+<h3 id="addorremoveskusafter">Add or remove SKUs after</h3>
+<p>You shouldn’t. Safe corrections focus on renaming and quantity changes for existing SKUs. Adding or removing SKUs post-confirmation breaks partner expectations, labeling, and compliance docs. If a SKU truly doesn’t belong, cancel and create a new shipment. Or handle it as a receiving exception with full audit.</p>
+<h3 id="preventdoubleupdatesinapi">Prevent double updates in API</h3>
+<p>Use idempotency keys on the client for retries. Use optimistic concurrency on the server with versioned ETags and <code>If-Match</code> headers. If the version doesn’t match, return 412 and prompt the client to refetch. Log every attempt with the idempotency key to help debugging.</p>
+<h3 id="differencebetweencorrectionandchange">Difference between correction and change</h3>
+<p>A correction aligns the record with reality without changing scope. Rename or adjust counts. A change request re-scopes the shipment. Add or remove SKUs, switch destinations, or change the carrier. Corrections are allowed up to a cutoff. Change requests need a new plan and re-approval.</p>
+<h3 id="relatedtovfcpselfcorrectionepcrs">Related to vfcp self-correction EPCRS</h3>
+<p>No. Those are retirement plan correction frameworks. VFCP from the DOL and EPCRS from the IRS, see Rev Proc 2021-30. They govern how plan sponsors fix compliance mistakes, sometimes using a “lost earnings 401k” calculator. We reference them only as analogies for disciplined, documented corrections. Not as logistics tools.</p>
+<h3 id="keeppartnersinsync">Keep partners in sync</h3>
+<p>Set a tight notification protocol. Emit an event immediately and regenerate the ASN or DESADV. Notify the 3PL via webhook plus email backup. Require a reason code for edits inside a 24-hour window. If receiving has already started, lock corrections. Manage differences as dock-side exceptions.</p>
+<h3 id="howlatetoeditquantities">How late to edit quantities</h3>
+<p>Use your cutoff policy. A common pattern is free edits until T-24 hours. Manager approval between T-24 and T-2. Hard lock at T-2 unless emergency override. Once the WMS marks “Receiving Started,” the window closes. All differences flow through exceptions.</p>
+<h3 id="whataboutlotsbatchesexpiry">What about lots batches expiry</h3>
+<p>Treat identity as immutable. You can lower expected quantity for an existing lot on the shipment. Don’t add new lots or change lot IDs post-confirmation. New lots need a new plan or dock-side exception handling.</p>
+<h3 id="letvendorsrenameshipments">Let vendors rename shipments</h3>
+<p>Yes. This is a great default. Vendors often need names that match their docs and labels. Quantity power usually stays with internal planners who own inventory risk. Separate scopes let you grant the right power to the right actor.</p>
+<h2 id="implementationchecklist">Implementation Checklist</h2>
+<ul>
+<li>Expose PATCH endpoints for plan or shipment names and per-SKU quantities.</li>
+<li>Require idempotency keys. Respond with the same result for duplicate keys.</li>
+<li>Implement ETags and <code>If-Match</code>. Return 412 on version conflicts.</li>
+<li>Validate hard: only existing SKUs, non-negative integers, and reasonable deltas.</li>
+<li>Enforce states: Allow while Confirmed. Lock at “Receiving Started” or at cutoff.</li>
+<li>Separate scopes: name-update and quantity-update permissions.</li>
+<li>Emit events. Sync ASN or DESADV. Notify 3PLs on late edits.</li>
+<li>Log every change with reason code and actor. Retain for audit.</li>
+<li>Track KPIs: exception rates, putaway time, inventory accuracy, and supplier trends.</li>
+</ul>
+<h3 id="nicetohaves">Nice to haves</h3>
+<ul>
+<li>Feature flag the correction flow and canary it with one vendor first.</li>
+<li>Sandbox environment with fake ASNs so partners can test their side.</li>
+<li>Dry-run API mode that returns the diff and validations without applying changes.</li>
+<li>Health dashboard showing correction volume by hour and failure rates.</li>
+</ul>
+<p>The goal isn’t more edits. It’s fewer surprises. Your API just makes reality cheaper to handle.</p>
+<p>Here’s the punchline. Corrections aren’t a failure. They’re proof you build for the real world. By narrowing what’s editable and hardening your endpoints, you move faster. Wire clean notifications and you speed receiving. You stabilize inventory and give planning better data. Do the boring bits—idempotency, ETags, audit logs. You get the fun part. Fewer fire drills, more throughput, and dashboards you can trust. Your warehouse will thank you. So will your CFO.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://stripe.com/docs/idempotency">Stripe Docs: Idempotency for safely retrying requests</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc7232">IETF RFC 7232: HTTP/1.1 Conditional Requests (ETags, If-Match)</a></li>
+<li><a href="https://owasp.org/API-Security/editions/2023/en/0x00-overview/">OWASP API Security Top 10 (2023 Edition)</a></li>
+<li><a href="https://www.gs1.org/standards/edi/desadv">GS1 EDI: Despatch Advice (DESADV)</a></li>
+<li><a href="https://nrf.com/research/2023-national-retail-security-survey">National Retail Federation: 2023 National Retail Security Survey</a></li>
+<li><a href="https://www.dol.gov/agencies/ebsa/employers-and-advisers/plan-administration-and-compliance/correction-programs/vfcp">U.S. Department of Labor: Voluntary Fiduciary Correction Program (VFCP)</a></li>
+<li><a href="https://www.dol.gov/agencies/ebsa/employers-and-advisers/plan-administration-and-compliance/correction-programs/vfcp/calculator">DOL VFCP Online Calculator (lost earnings)</a></li>
+<li><a href="https://www.irs.gov/retirement-plans/correcting-plan-errors-epcrs">IRS: Employee Plans Compliance Resolution System (EPCRS)</a></li>
+<li><a href="https://www.irs.gov/pub/irs-drop/rp-21-30.pdf">IRS Rev. Proc. 2021-30 (EPCRS)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="inbound-shipment-updates.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq0db8.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Shipments+Change+Make+Your+API+Fix+Mistakes+Fast&amp;pi=255697177305&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=255697177305&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Finbound-shipment-updates&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/inbound-shipment-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:35:23 GMT -->
+</html>

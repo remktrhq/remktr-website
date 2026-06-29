@@ -1,0 +1,267 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/ecr-cross-repo-layer-sharing?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Slash ECR Costs With Cross-Repository Layer Sharing Now</title>
+    <link rel="canonical" href="ecr-cross-repo-layer-sharing.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn amazon ecr cross repository layer sharing via blob mounting to speed pushes up to 70% and cut storage costs up to 50%. Integrates with ECS, EKS, Lambda.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Slash ECR Costs With Cross-Repository Layer Sharing Now",
+        "datePublished": "2026-01-26T20:39:08Z",
+        "dateModified": "2026-01-26T20:39:09.151Z",
+        "mainEntityOfPage": "https://remktr.com/blog/ecr-cross-repo-layer-sharing",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-26-2026-08-35-14-3677-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="ecr-cross-repo-layer-sharing.html">Slash ECR Costs With Cross-Repository Layer Sharing Now</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 26, 2026 8:39:08 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’re probably storing duplicate container layers across many ECR repos. And you’re re-uploading those unchanged layers on every single push.</p>
+<p>Amazon ECR now lets you share layers across repos with blob mounting. <em>Push once, and reuse everywhere across your services and environments.</em> Teams report up to 70 percent faster pushes in real tests. And up to 50 percent lower storage for multi-repo setups when services share common runtimes.</p>
+<h2 id="highlights">Highlights</h2>
+<ul>
+<li>Blob mounting in ECR reuses layers across repos in the same registry and region.</li>
+<li>It works with Docker and BuildKit, with no Dockerfile changes required.</li>
+<li>It integrates with ECS, EKS, and Lambda, with no runtime changes.</li>
+<li>Keep repos separate, while still sharing the same common base layers.</li>
+<li>Verify via push logs, layer digests, and repository storage metrics.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-26-2026-08-36-04-5692-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whyithelps">Why it helps</h2>
+<ul>
+<li>Many services share the same base OS and language runtime. But they push them repeatedly into separate repos, wasting time and storage.</li>
+<li>Blob mounting lets the target repo reference a layer already in the source repo. No re-uploading needed at all during the push process, really.</li>
+<li>Think of it like a registry-side link for identical, content-addressed layers.</li>
+</ul>
+<h2 id="setupbasics">Setup basics</h2>
+<ul>
+<li>Use the same account registry and region for source and target repos.</li>
+<li>Create a dedicated base repo for common shared runtimes today. For example, ecr-base/runtime and service repos like services/orders too.</li>
+<li>Ensure IAM permissions cover reading from the base repo and writing to service repos. Typical actions: ecr:BatchCheckLayerAvailability, ecr:InitiateLayerUpload, ecr:UploadLayerPart, ecr:CompleteLayerUpload, ecr:PutImage, ecr:BatchGetImage, ecr:GetAuthorizationToken.</li>
+<li>Modern Docker and BuildKit will automatically attempt cross-repo mounts when pushing if the content digest matches.</li>
+</ul>
+<h2 id="workflowimpact">Workflow impact</h2>
+<ul>
+<li><em>Push once, reuse everywhere</em>: service repos mount base layers instead of uploading them again.</li>
+<li>Faster CI and less flaky uploads because fewer large blobs are transmitted.</li>
+<li>Lower storage because identical bytes are no longer duplicated across repos.</li>
+</ul>
+<h2 id="howtorolloutquickly">How to roll out quickly</h2>
+<p>1) Create a base repository and push a hardened runtime image. Then record the digest for that image in your notes.
+2) In service Dockerfiles, use FROM with the base image pinned by digest.
+3) Push each service image to its own repo for isolation.
+4) Verify pushes show mounted or reused layers and that service repo storage does not balloon.</p>
+<h2 id="verificationtips">Verification tips</h2>
+<ul>
+<li>Inspect docker push output carefully for mounted or reused layer messages.</li>
+<li>Compare layer digests across repos to confirm layers are actually shared.</li>
+<li>Watch ECR repository size metrics; base-layer bytes should accumulate in the base repo, not the service repos.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-26-2026-08-36-56-2515-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="designformaximumreuse">Design for maximum reuse</h2>
+<ul>
+<li>Keep base layers stable and versioned; pin OS packages and runtimes.</li>
+<li>Use multi-stage builds to separate heavy builder layers and the runtime.</li>
+<li>Order Dockerfile steps to keep heavy layers unchanged when app code changes.</li>
+</ul>
+<h2 id="mountingmaynotoccur">Mounting may not occur</h2>
+<ul>
+<li>Base drift from tag updates happens; prefer digest pinning for stability.</li>
+<li>Permissions can prevent reading from the source repo, blocking mounts.</li>
+<li>Source and target are in different regions or different registries.</li>
+<li>Very old clients that do not issue cross-repo mount hints.</li>
+</ul>
+<h2 id="scopeandlimits">Scope and limits</h2>
+<ul>
+<li>Mounting only occurs within the same ECR registry and region.</li>
+<li>Cross-account scenarios may fall back to uploads even with pull access.</li>
+<li>Pull behavior for ECS, EKS, and Lambda is unchanged.</li>
+</ul>
+<h2 id="measuringimpact">Measuring impact</h2>
+<ul>
+<li>Baseline push durations and ECR storage before rollout, then compare after.</li>
+<li>Expect pushes dominated by small app layer deltas rather than large base layers.</li>
+</ul>
+<h2 id="securityandcompliance">Security and compliance</h2>
+<ul>
+<li>ECR scanning, encryption, repository immutability, and signatures behave the same.</li>
+<li>Signatures tied to image digests remain valid across repos when layers are shared.</li>
+</ul>
+<h2 id="quickstartplaybook">Quick start playbook</h2>
+<p>1) Create a dedicated base repo for your common runtimes first.
+2) Push the base image once, and record its digest for reference.
+3) Pin all service Dockerfiles to that base digest for consistency.
+4) Push services, then check push logs for mounted or reused layers.
+5) Monitor repository sizes and costs; expand the pattern across services.</p>
+<h2 id="bottomline">Bottom line</h2>
+<p><em>Blob mounting in ECR is a standards-based, low-friction way to speed up pushes and cut storage. Start with one shared base, pin by digest, and let the registry reuse identical layers across your repos.</em></p>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="ecr-cross-repo-layer-sharing.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq5165.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Slash+ECR+Costs+With+Cross-Repository+Layer+Sharing+Now&amp;pi=303822117588&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=303822117588&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fecr-cross-repo-layer-sharing&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/ecr-cross-repo-layer-sharing?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:43 GMT -->
+</html>

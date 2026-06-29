@@ -1,0 +1,423 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/sp-api-deprecations-dec-2025?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:23:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Amazon SP-API Deprecations You Must Tackle Before 2026</title>
+    <link rel="canonical" href="sp-api-deprecations-dec-2025.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Review Amazon SP-API deprecations, dates, and actions for December 2025. Stay compliant by migrating Listings, Notifications, and Portal to avoid failures.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Amazon SP-API Deprecations You Must Tackle Before 2026",
+        "datePublished": "2025-12-23T16:23:05Z",
+        "dateModified": "2025-12-23T16:23:06.057Z",
+        "mainEntityOfPage": "https://remktr.com/blog/sp-api-deprecations-dec-2025",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-23-2025-04-16-09-9794-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="sp-api-deprecations-dec-2025.html">Amazon SP-API Deprecations You Must Tackle Before 2026</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 23, 2025 4:23:05 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You don’t want another fire drill in Q4, or on some random Tuesday at 2 a.m. But ignore Amazon’s SP-API deprecations, and that’s what you’ll get. <em>Calls keep working… until they don’t.</em> Then orders fail, inventory gets stuck, and your team scrambles.</p>
+<p>Here’s what most folks miss: deprecated resources aren’t optional. <em>They’re a fuse.</em> Amazon already lit it—some deadlines passed, others barreling toward 2025, and the rest will bite in 2026 if you coast.</p>
+<p>The fix is simple: map what breaks, move to modern endpoints, test like a paranoid SRE, and match your releases to Amazon’s monthly updates. Do that, and you’ll ship faster, cut failures, and sleep better.</p>
+<p>Bold claim? Sure. But since the MWS sunset, Amazon’s been clear: evolve or get paged. Let’s keep you on the right side of that.</p>
+<p>If you’re thinking, “we’re fine, it still works,” that’s the trap. Deprecated endpoints are like cards with an expiration date. They swipe… until they suddenly don’t. A little planning now beats a panicked rollback later. Let’s turn a surprise outage into a boring, predictable release.</p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>Amazon SP-API is deprecating legacy resources on rolling timelines; after removal, calls fail outright.</li>
+<li>Prioritize migrations for Listings Items, Catalog Items, Notifications (v2 payloads), and Solution Provider Portal.</li>
+<li>Implement Restricted Data Tokens (RDT) for PII-sensitive operations; test in sandbox before prod.</li>
+<li>Track the monthly SP-API changelog; plan releases like “Patch Tuesday.”</li>
+<li>Amazon Ads API: migrate impression-generating campaigns before Amazon auto-migrates by Dec 31, 2025.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-23-2025-04-17-01-3134-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatschangingnow">What’s Changing Now</h2>
+<h3 id="deadlinesthattriggeroutages">Deadlines That Trigger Outages</h3>
+<p>Amazon’s stance is very clear. The docs say, “Calls to deprecated SP-API resources will continue to be successful until their removal date. After the removal date, calls will fail.” <em>Translation: there’s no friendly grace period coming.</em></p>
+<p>Key items:</p>
+<ul>
+<li>Fulfillment Inbound v0 feed-style operations (e.g., POST<em>FLAT</em>FILE<em>LISTINGS</em>DATA, POST<em>PRODUCT</em>PRICING_DATA) were deprecated Mar 27, 2024 and scheduled for removal by Dec 20, 2024. If you still rely on feed-based product/pricing updates, prioritize Listings Items and Catalog Items APIs immediately.</li>
+<li>Notifications: LISTING<em>ITEM</em>ISSUES_CHANGE payload v1.0 was deprecated Feb 28, 2024, removed Sep 25, 2024. Upgrade to v2 to keep real-time issue alerts.</li>
+<li>Solution Provider Portal migration: all SP-API developers must migrate by Aug 31, 2025. This consolidates app management, auth, and scaling. Miss it and expect access headaches.</li>
+<li>Amazon Ads API: migrate impression-generating campaigns by Sep 30, 2025 or expect forced auto-migration by Dec 31, 2025.</li>
+</ul>
+<h3 id="whythismatters">Why this matters</h3>
+<ul>
+<li>Listing changes won’t push, pricing will stall, and stock won’t sync. That cascades into buy box losses and canceled orders—especially painful in holidays.</li>
+<li>Compliance signals depend on Notifications. Lose those, and you’ll miss listing errors and policy issues.</li>
+<li>Portal migration centralizes your developer footprint. If you manage multiple marketplaces or roles, this reduces auth sprawl.</li>
+</ul>
+<p>Expert note: Amazon’s changelog cadence is monthly, so anchor your engineering calendar to it. <em>Treat it like Microsoft’s Patch Tuesday—predictable, plannable, non-negotiable.</em></p>
+<h3 id="verifyyourrisk">Verify Your Risk</h3>
+<ul>
+<li>Pull a 90-day log sample of outbound calls. Look for any feed submissions or endpoints flagged as “deprecated” in the official deprecations page.</li>
+<li>Map each legacy call to its modern replacement: feeds → Listings Items and Catalog Items; old Notifications payloads → v2; any PII access → Tokens API + RDT.</li>
+<li>Cross-check with the SP-API Changelog for breaking notes or removal dates. If a removal date is past or within a quarter, escalate to Priority 1.</li>
+<li>Open a tracker per migration: owner, deadline, rollback plan, and test cases. You’re not replacing “an API”—you’re replacing business-critical workflows.</li>
+</ul>
+<h2 id="migrationmap">Migration Map</h2>
+<h3 id="catalogandlistings">Catalog and Listings</h3>
+<p>If you’re still on v0 feed workflows, you’re building on sand. Move to:</p>
+<ul>
+<li>Listings Items API v2021-08-01 for create/update inventory, quantities, and pricing</li>
+<li>Catalog Items API for item details and offers</li>
+</ul>
+<p>This shift unlocks granular updates, better checks, and fewer silent failures. As Amazon’s guidance says, “Adopt modern endpoints … for robust inventory control” and “enhance authorization … for PII-protected calls.”</p>
+<p>Expert quote: <em>“Flat files mask errors. The Listings Items API surfaces them. You’ll fix more issues before they hit buyers.” — senior marketplace engineer, large aggregator</em></p>
+<p>Practical mapping tips:</p>
+<ul>
+<li>Prices: start with a thin slice—migrate price updates via Listings Items PATCH to reduce payload size. Validate currency codes and confirm the marketplaceId on each request.</li>
+<li>Quantities and fulfillment latency: move inventory quantities and lead-times next. Keep payloads minimal to isolate failures quickly.</li>
+<li>Attributes/content: handle last. Content updates are noisy; run them after your SKU-level price/quantity flows are solid.</li>
+<li>Idempotency: include an idempotency key on writes where supported, so retries don’t double-apply changes.</li>
+</ul>
+<p>Validation checklist:</p>
+<ul>
+<li>Confirm each SKU’s latest version/ETag if the API requires it, to avoid 409 conflicts.</li>
+<li>For multi-marketplace sellers, test a representative SKU in each region—edge-case attributes differ by locale.</li>
+<li>Compare pre/post update effects with live read-backs (GET) to confirm your changes stuck and didn’t trigger unintended suppressions.</li>
+</ul>
+<h3 id="notificationsupgrade">Notifications Upgrade</h3>
+<p>If you used LISTING<em>ITEM</em>ISSUES_CHANGE v1.0, upgrade to v2.0. You’ll keep critical signals like suppressions, image failures, or attribute conflicts. Losing these alerts slows fixes and dings performance metrics.</p>
+<p>Notifications checklist:</p>
+<ul>
+<li>Verify Destinations (SQS, SNS, or EventBridge) and permissions. Use a dead-letter queue to catch poison messages.</li>
+<li>Subscribe to v2 payloads for listing issues and any other events you depend on (e.g., order or FBA events in your flow).</li>
+<li>Implement retries with backoff. Deduplicate events using messageId or your own correlation key.</li>
+<li>Alert on “suppression” or “image failure” keywords. Pipe them into your ops channel so humans see them fast.</li>
+</ul>
+<h3 id="tokensandrdt">Tokens and RDT</h3>
+<p>For operations touching PII, Amazon states, “Restricted Data Tokens (RDT) are required.” That means integrating the Tokens API, using minimum scopes, and rotating tokens with discipline. Good news: once you add RDT, audits get easier and risk drops.</p>
+<p><em>Pro tip: ship migrations in thin vertical slices.</em> Example: migrate price updates first (listings patch), then quantities (inventory), then content attributes. Each slice gets its own rollback plan.</p>
+<p>RDT implementation steps:</p>
+<ul>
+<li>Identify PII touchpoints: buyer info, addresses, phone numbers, or order details that include sensitive fields.</li>
+<li>Update auth flow: obtain an RDT from the Tokens API only when needed, and keep it short-lived. Do not cache longer than required for a single workflow.</li>
+<li>Least privilege: request only the minimum data elements required for your use case. Over-scoping risks denial and audit flags.</li>
+<li>Storage and logging: never log PII or raw RDTs. Mask sensitive fields in app logs and encrypt secrets in transit and at rest.</li>
+<li>Access review: schedule quarterly reviews of RDT scopes and usage. Remove scopes that aren’t used.</li>
+</ul>
+<h2 id="shipwithoutincidents">Ship Without Incidents</h2>
+<h3 id="sandboxfirst">Sandbox First</h3>
+<p>Use the SP-API sandbox and test endpoints before touching live listings. Amazon’s own guidance: “Leverage SP-API’s test endpoints to validate migrations without live disruptions.” Build a lightweight harness that:</p>
+<ul>
+<li>Replays your top 10 production workflows with synthetic data</li>
+<li>Compares response schemas and error surfaces between old and new endpoints</li>
+<li>Fails fast on permission or throttling errors</li>
+</ul>
+<p>Add a canary release: route 1%–5% of updates through the new path. Watch metrics, then scale.</p>
+<p>Extra test tips:</p>
+<ul>
+<li>Rate limits: rehearse 429 scenarios. Implement exponential backoff and jitter; confirm you honor the headers that show limits and resets.</li>
+<li>Idempotency and sequencing: verify that out-of-order updates don’t create stale state. Price before quantity; child before parent SKU, etc.</li>
+<li>Rollback: write a one-click rollback for each slice. If error rates spike, flip back within minutes, not hours.</li>
+<li>Traceability: propagate a correlation ID from request to logs and alerts. Keep sample requests and responses for faster debugging.</li>
+</ul>
+<h3 id="monitorlikeansre">Monitor like an SRE</h3>
+<ul>
+<li>Track 4xx/5xx rates by operationId</li>
+<li>Alert on latency spikes and throttling (x-amzn-RateLimit-Limit headers tell you plenty)</li>
+<li>Log payload diffs for Listings and Catalog field-level changes</li>
+</ul>
+<p>What to watch specifically:</p>
+<ul>
+<li>403 spikes: usually missing permissions or missing RDT for sensitive calls.</li>
+<li>409 conflicts: versioning or ETag mismatch. Implement read-modify-write patterns when needed.</li>
+<li>422 unprocessable: schema mismatch or invalid attribute. Capture the error body; surface it to the team that owns the data.</li>
+<li>Throughput: watch not just request counts but “successful updates per minute” and “SKU coverage per hour.” Your ops team cares about business throughput.</li>
+</ul>
+<h3 id="monthlychangeplan">Monthly Change Plan</h3>
+<p>Amazon posts monthly changelogs. Set your review to the same rhythm used in enterprise IT. If you’re wondering “when is Patch Tuesday December 2025?”—it’s the second Tuesday, December 9, 2025. November 2025’s falls on November 11. Use that cadence as a planning anchor: review SP-API changes that week, run regression tests, then ship.</p>
+<p>Expert note: teams that stick to a predictable cadence cut incidents by avoiding random Tuesdays. <em>That’s the point.</em></p>
+<p>How to operationalize it:</p>
+<ul>
+<li>Calendar block: 60 minutes, second Tuesday monthly. Attendees: app owner, QA, SRE, product ops.</li>
+<li>One-pager: summarize changelog impact, migrations in-flight, new tests required, and go/no-go.</li>
+<li>Ticket hygiene: open tasks the same day, tagged by API and marketplace. Assign an owner and a test date.</li>
+<li>SLA: aim to validate changes within one week. Ship in the following sprint.</li>
+</ul>
+<h3 id="teamrolesplan">Team Roles Plan</h3>
+<ul>
+<li>Product owner: sets priority by business risk (Buy Box, holiday readiness, SLA impact).</li>
+<li>Tech lead: defines the migration slices, rollout, and rollback strategies.</li>
+<li>QA/Automation: builds the harness and regression packs.</li>
+<li>SRE/Platform: rate-limit strategy, alerts, dashboards, and incident playbooks.</li>
+</ul>
+<p>Timeline:</p>
+<ul>
+<li>30 days: inventory deprecated calls, map to modern endpoints, spin up sandbox harness, and finish the first canary (prices or quantities).</li>
+<li>60 days: migrate the rest of Listings and Catalog flows; enable v2 Notifications; add alerts and dashboards.</li>
+<li>90 days: RDT across all PII flows; Portal migration plan approved; monthly changelog rhythm established.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-23-2025-04-18-05-3209-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="thenextyear">The Next Year</h2>
+<h3 id="solutionproviderportal">Solution Provider Portal</h3>
+<p>“All existing SP-API developers must migrate to the Solution Provider Portal by August 31, 2025.” This isn’t cosmetic. Expect consolidated app management, cleaner auth flows, and more scalable org-level controls. If you manage many regions, the Portal cuts key sprawl and permission drift.</p>
+<p>Expert quote: <em>“We pulled three apps into the Portal and cut onboarding time for new markets from weeks to days.” — principal engineer, cross-border seller</em></p>
+<p>Migration checklist:</p>
+<ul>
+<li>Confirm organization ownership and roles in the new Portal.</li>
+<li>Recreate app configs (redirect URIs, scopes) and rotate secrets.</li>
+<li>Validate LWA auth flows in a lower environment before moving prod apps.</li>
+<li>Audit developers and roles; remove unused access and stale keys.</li>
+<li>Update internal runbooks and incident docs with new URLs and procedures.</li>
+</ul>
+<h3 id="amazonadsapi">Amazon Ads API</h3>
+<p>If you run impression-generating campaigns via API, migrate by September 30, 2025. Otherwise, Amazon will auto-migrate you by December 31, 2025. Your QA window is better than Amazon’s automatic fallback—own it before year-end freeze. If this touches your upper-funnel mix or DSP workflows, our team’s <a href="../dsp-services.html">DSP Services</a> can help plan and validate the migration without losing reach or frequency.</p>
+<p>Recommended approach:</p>
+<ul>
+<li>Create a copy of top campaigns in a staging profile and validate metrics tracking.</li>
+<li>Run a split test: 10% budget to migrated objects for two weeks. Watch pacing, reach, and frequency.</li>
+<li>Freeze changes during cutover day; verify creatives, audiences, and placements before resuming normal ops.</li>
+</ul>
+<h3 id="awspartnercentral">AWS Partner Central</h3>
+<p>Partner Central pushed new verification, benefits, and selling features and retired older endpoints/sandboxes. If you integrate leads, opportunities, and Marketplace offers across AWS + Amazon retail, confirm endpoint names, required parameters (catalog), and sandbox availability. Breaking changes in supporting systems are how “random” outages sneak in.</p>
+<p>Bottom line: <em>2025 is a consolidation year.</em> Get your house in order before 2026 turns steady changes into emergency work.</p>
+<h2 id="commonpitfalls">Common Pitfalls</h2>
+<h3 id="stayingonfeeds">Staying On Feeds</h3>
+<p>Problem: flat-file feeds like POST<em>FLAT</em>FILE<em>LISTINGS</em>DATA are past-due. After removal dates, calls fail. Even before, they hide errors and slow feedback.</p>
+<p>Fix: move to Listings Items API v2021-08-01. Use partial updates (PATCH) to reduce payload size and error scope. Validate schemas in CI.</p>
+<p>Pro move: run a side-by-side for a week. If the API update and the old feed disagree, fix upstream data, then retire the feed.</p>
+<h3 id="skippingrdt">Skipping RDT</h3>
+<p>Problem: operations touching PII require RDT. Without it, you’ll get denials—or worse, compliance exposure.</p>
+<p>Fix: integrate Tokens API. Grant least privilege. Rotate tokens. Log access for audits. As Amazon’s docs note, RDT is mandatory for sensitive data access.</p>
+<p>Bonus: centralize RDT requests in a small internal service. Everything else calls that service, so you standardize scopes and logging.</p>
+<h3 id="notestharness">No test harness</h3>
+<p>Problem: manual spot testing doesn’t catch schema or throttling edge cases.</p>
+<p>Fix: build a tiny, durable harness that replays your highest-impact workflows with synthetic orders/listings and raises alarms on diffs.</p>
+<p>What “good” looks like: assertions on status codes, field-level comparisons, throttle simulation, and a single pass/fail gate you can run in CI or pre-release.</p>
+<h3 id="ignoringthechangelog">Ignoring The Changelog</h3>
+<p>Problem: surprise changes.</p>
+<p>Fix: assign a DR (Deprecation Ranger). Their job: read the SP-API changelog monthly, update a single source doc, and schedule tests/releases.</p>
+<p>Expert quote: “If nobody owns the changelog, you’re choosing outages by default.” — head of platform, 8-figure seller</p>
+<h2 id="quickpulsecheck">Quick Pulse Check</h2>
+<ul>
+<li>You’ve mapped all deprecated resources you touch, with removal dates and owners.</li>
+<li>Listings and Catalog updates run on modern endpoints, not legacy feeds.</li>
+<li>Notifications payloads are v2+; listing issue alerts flow into your ops channel.</li>
+<li>RDT is implemented for any PII-sensitive operation; scopes are least-privilege.</li>
+<li>A sandbox and canary process exist; you watch error rates by operationId.</li>
+<li>Your team reviews the SP-API changelog monthly and ships on a set cadence.</li>
+</ul>
+<p>If you hesitated on any bullet, pick one area and fix it this week. <em>Momentum beats perfection.</em></p>
+<h2 id="faqs">FAQs</h2>
+<ol>
+<li><p>Q: What happens after a resource’s removal date?
+A: Calls fail outright. Amazon’s guidance is explicit: deprecated calls work until removal; after that, they return errors. Plan migrations well before the cutoff.</p></li>
+<li><p>Q: Which feed-based operations are most urgent to replace?
+A: The Fulfillment Inbound v0-style feeds (e.g., POST<em>FLAT</em>FILE<em>LISTINGS</em>DATA, POST<em>PRODUCT</em>PRICING_DATA) were slated for removal by Dec 20, 2024. Move those to Listings Items and Catalog Items APIs immediately if you haven’t.</p></li>
+<li><p>Q: Do I need Restricted Data Tokens (RDT)?
+A: Yes for PII-related access. RDT is required via the Tokens API for sensitive data operations. Implement least-privilege scopes and rotate tokens.</p></li>
+<li><p>Q: What’s the latest on the Solution Provider Portal migration?
+A: All SP-API developers must migrate by August 31, 2025. The Portal streamlines app management, auth, and scaling. Delay risks app access issues.</p></li>
+<li><p>Q: How do Amazon Ads API changes affect me in 2025?
+A: If you manage impression-generating campaigns via API, migrate by September 30, 2025. Amazon will auto-migrate by December 31, 2025, but you should validate earlier.</p></li>
+<li><p>Q: How does this compare to Microsoft topics like Patch Tuesday or the NTLM deprecation timeline?
+A: Use Patch Tuesday’s cadence as a mental model—second Tuesday each month (e.g., December 9, 2025; November 11, 2025). For NTLM, Microsoft signaled deprecation and ongoing reduction in use, but there isn’t a single universal “NTLM deprecation date.” The parallel: both are phased, not overnight.</p></li>
+<li><p>Q: How should we handle 429 throttling during rollout?
+A: Respect the usage-plan headers, back off with jitter, and queue non-urgent updates. Start canaries at low concurrency, then scale once error rates stay flat.</p></li>
+<li><p>Q: We sell across NA and EU. Do we need different tests per marketplace?
+A: Yes. Attributes, compliance rules, and offer behavior can vary by region. Test at least one SKU per category in each marketplace you sell in.</p></li>
+<li><p>Q: Do we have to re-authorize our LWA app when moving to the Solution Provider Portal?
+A: Plan for secret rotation and re-validate redirects/scopes. Test in a lower environment first, then schedule a short maintenance window for prod cutover.</p></li>
+<li><p>Q: How do we keep PII safe in logs while debugging?
+A: Mask or drop all sensitive fields, log only hashes or IDs, and store full payloads exclusively in encrypted, access-controlled stores when strictly required.</p></li>
+</ol>
+<h2 id="shipyourmigration">Ship Your Migration</h2>
+<ul>
+<li>Inventory your endpoints and map to replacements (Listings, Catalog, Notifications v2).</li>
+<li>Implement RDT via Tokens API where PII is in scope.</li>
+<li>Build a sandbox harness and run canary releases in production.</li>
+<li>Set a monthly “changelog review” meeting and assign an owner.</li>
+<li>Migrate developer access to the Solution Provider Portal early.</li>
+<li>Document rollback plans for each migration slice.</li>
+</ul>
+<p><em>You don’t need to be first—you just can’t be late.</em> Amazon’s SP-API deprecations are a forcing function: you either modernize your stack or you fight fires. Pick the first path.</p>
+<p>Treat this like a product release, not a scramble. Move core listings and catalog flows to modern endpoints, wire up RDT, and hammer your test harness until it squeals. Align to Amazon’s monthly rhythm, keep a human assigned to the changelog, and you’ll turn “breaking changes” into “routine releases.” That’s how you grow through 2026 without waking to a red dashboard.</p>
+<p>For real-world examples of migrations and performance lifts, explore our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/deprecations">Amazon SP-API Deprecations</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/changelog">SP-API Changelog</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-reference">Listings Items API v2021-08-01 Reference</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference">Catalog Items API Reference</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-reference">Notifications API v1 Reference</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/restricted-data-token">Restricted Data Token (RDT) Guide</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/tokens-api-v2021-03-01-reference">Tokens API v2021-03-01 Reference</a></li>
+<li><a href="https://docs.aws.amazon.com/partnercentral/latest/userguide/what-is-partner-central.html">AWS Partner Central — What is Partner Central?</a></li>
+<li><a href="https://advertising.amazon.com/apis">Amazon Ads API overview</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/usage-plans-and-rate-limits">SP-API Usage Plans and Rate Limits</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/sp-api-sandbox">SP-API Sandbox</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/destinations-api-v1-reference">Destinations API v1 Reference</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/data-protection-policy">SP-API Data Protection Policy</a></li>
+<li><a href="https://learn.microsoft.com/windows/release-health/release-channel#b-releases">Microsoft monthly “B release” (Patch Tuesday) overview</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="sp-api-deprecations-dec-2025.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqf826.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Amazon+SP-API+Deprecations+You+Must+Tackle+Before+2026&amp;pi=281729109752&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=281729109752&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fsp-api-deprecations-dec-2025&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/sp-api-deprecations-dec-2025?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:23:55 GMT -->
+</html>

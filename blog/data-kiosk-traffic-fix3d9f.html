@@ -1,0 +1,404 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/data-kiosk-traffic-fix?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Win Smarter With Amazon Data Kiosk Traffic Data Fix</title>
+    <link rel="canonical" href="data-kiosk-traffic-fix.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover the fix adding traffic data to Data Kiosk Vendor Analytics sourcingView in Amazon SP-API. Learn how accurate metrics improve analysis and decisions.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Win Smarter With Amazon Data Kiosk Traffic Data Fix",
+        "datePublished": "2025-12-10T16:28:56Z",
+        "dateModified": "2025-12-10T16:28:56.961Z",
+        "mainEntityOfPage": "https://remktr.com/blog/data-kiosk-traffic-fix",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-10-2025-04-21-23-8931-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="data-kiosk-traffic-fix.html">Win Smarter With Amazon Data Kiosk Traffic Data Fix</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 10, 2025 4:28:56 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’ve been watching sales without traffic context. Like checking the scoreboard with the lights off.</p>
+<p>Good news: Amazon just flipped the switch for vendors. On Dec 3, 2025, the Selling Partner API changelog confirmed traffic now shows up in Data Kiosk’s sourcingView. Translation: you can finally tie page views and glance views to products you supply via POs.</p>
+<p>Also notable: Amazon added lostFeaturedOffer to the Traffic data set. Now you can see when you weren’t in the Featured Offer (aka Buy Box) and how that links to traffic and sales. <em>More signal. Less guessing.</em></p>
+<p>If you’ve been exporting manufacturingView for context but running ops from sourcingView, this fix closes a giant gap. You can put sales and traffic on one canvas, by vendor code, aggregated by day, week, month, or quarter. That means better demand planning, smarter promo calls, and fewer painful “why did sales dip?” post‑mortems.</p>
+<p>Here’s what that means in plain English: the dataset that powers PO‑based decisions finally includes the visibility your team was missing. Instead of guessing if a dip was demand, a Buy Box issue, or a content problem, you can see the funnel from glance view to conversion to units in one place.</p>
+<p>If you’re a vendor leader, this is a permission slip to align retail, ads, and ops around the same KPIs. And if you’re the data person, it’s your cue to standardize definitions, document joins, and ship dashboards that explain the “why,” not just the “what.”</p>
+<p>—</p>
+<h2 id="keytakeaways">Key Takeaways</h2>
+<ul>
+<li>Traffic data is now available in Data Kiosk’s sourcingView via SP‑API—no more zeros or nulls.</li>
+<li>You can tie glance views, page views, CTR, and lostFeaturedOffer to the products you actually source.</li>
+<li>Use traffic + sales to improve forecasting, promo timing, pricing tests, and retail readiness.</li>
+<li>Sourcing vs. manufacturing views serve different questions—use both, but don’t mix them up.</li>
+<li>Start with light QA: confirm joins (ASIN/SKU), date granularity, and marketplace scope before rolling dashboards.</li>
+<li>Track Featured Offer stability alongside ads; media without the box burns budget.</li>
+<li>Version your metric definitions (glance views, CTR, conversion rate proxy) so teams stop arguing and start fixing.</li>
+<li>Pilot in one marketplace, then scale—don’t refactor mid‑rollout.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-10-2025-04-22-14-8009-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatchangedandwhy">What Changed And Why</h2>
+<h3 id="thefixinoneline">The fix in one line</h3>
+<blockquote>
+  <p>"Traffic data is now included and correctly reported in the sourcingView queries of the Data Kiosk Vendor Analytics dataset." — Amazon SP‑API Changelog (Dec 3, 2025)</p>
+</blockquote>
+<p>Before this, you’d request traffic in sourcingView and get nothing useful—zeros, nulls, or half‑filled fields. That broke the basic ecommerce loop: impressions → engagement → conversion → sales. Now you can run that loop for the inventory you actually supply to Amazon, aggregated by date. You’ll see how many shoppers looked, clicked, and converted—tied directly to your PO‑sourced catalog.</p>
+<p><em>This unlocks a clear operational story.</em> When glance views rise, you know demand is there. If conversion sags while traffic climbs, check Buy Box status, delivery promise, price, and PDP content. If both traffic and conversion fall, you’re likely seeing external demand shifts. It’s the difference between steering by vibes and steering by instruments.</p>
+<h3 id="whyvendorsfeltblind">Why vendors felt blind</h3>
+<ul>
+<li>Planning without traffic is guesswork. Sales can be flat because demand fell or because you lost the Featured Offer. Without traffic metrics (glance views, page views), you can’t tell.</li>
+<li>ManufacturingView ≠ SourcingView. ManufacturingView shows your brand footprint regardless of supplier. SourcingView focuses on your supplied products by vendor code. If your ops are PO‑based (they are), sourcingView is the control room.</li>
+<li>Marketing and retail teams were de‑synced. Media drives traffic; retail wins the conversion. Missing traffic made attribution look broken and made Ops overcorrect on price or inventory.</li>
+<li>Seasonality was easy to misread. A dip looked like “Q4 softness” when it was a week‑long Buy Box loss.</li>
+<li>3P competition masked issues. ManufacturingView might look fine while your own supply underperformed in sourcingView.</li>
+</ul>
+<p>If you need to quantify media’s contribution and tie exposures to on‑site traffic and conversion, consider <a href="../amc-cloud.html">AMC Cloud</a> to build audience and attribution analyses that align with your new sourcingView visibility.</p>
+<h3 id="thenewupside">The new upside</h3>
+<ul>
+<li>Tie promos to traffic surges in real time. If a price drop spikes glance views but conversion flatlines, check lostFeaturedOffer or detail page quality.</li>
+<li>Build conversion ladders by category and seasonality. When traffic is healthy but conversion lags, you know where to focus.</li>
+<li>Align marketing with Ops. Traffic patterns inform replenishment, PDP fixes, and PDP content testing.</li>
+<li>Validate retail media. Map paid search or DSP bursts to next‑day glance views and downstream sales movement.</li>
+<li>Benchmark elasticities. See where a 5% price change moves traffic versus conversion, then codify rules by category.</li>
+</ul>
+<p><em>This is the data completeness vendors were asking for. Now it’s on you to turn it into a process.</em></p>
+<h2 id="sourcingvsmanufacturing">Sourcing vs Manufacturing</h2>
+<h3 id="quickdefinitionsyoullactuallyuse">Quick definitions you’ll actually use</h3>
+<ul>
+<li>SourcingView: Metrics tied to products you directly supply to Amazon (PO‑based), aggregated by date. This is your operational truth for inventory, price, promo, and ship plans.</li>
+<li>ManufacturingView: Metrics tied to products your brand manufactures, regardless of supplier. Great for brand‑wide footprint analysis and competitive context, but not a proxy for your PO performance.</li>
+</ul>
+<p>Think of ManufacturingView as your brand’s aerial map and SourcingView as your cockpit. The aerial map shows the whole landscape; the cockpit gives you the instruments you can actually control.</p>
+<h3 id="whentopickwhich">When to pick which</h3>
+<ul>
+<li>Use sourcingView when you care about: vendor code, PO‑driven revenue, inbound planning, cost‑of‑goods impacts, lostFeaturedOffer effects, and store readiness.</li>
+<li>Use manufacturingView when you care about: brand halo, category benchmarking, third‑party activity, and where your brand is winning/losing across supply paths.</li>
+</ul>
+<p><em>A simple rule: if the action ends with a PO, price change, or content update you own, start in sourcingView.</em></p>
+<h3 id="whythisseparationmatters">Why this separation matters</h3>
+<p>Mixing them muddies questions like “Did our price drop work?” In manufacturingView, conversion changes might reflect another supplier’s inventory or pricing. In sourcingView, you’re isolating your supply.</p>
+<p>It also keeps teams honest: brand leads can chase category share in ManufacturingView without disrupting replenishment math driven by SourcingView.</p>
+<h3 id="thenewcombomove">The new combo move</h3>
+<ul>
+<li>Top‑down: Scan manufacturingView to see brand‑level demand and gaps.</li>
+<li>Bottom‑up: Execute in sourcingView with traffic + sales + lostFeaturedOffer to validate if your changes (price, content, promo) moved the needle.</li>
+</ul>
+<p>As W. Edwards Deming put it, “If you can’t measure it, you can’t improve it.” You now have the missing measurements in the view that runs your business.</p>
+<h2 id="gettingthedata">Getting The Data</h2>
+<h3 id="whatyoucanpull">What you can pull</h3>
+<ul>
+<li>Traffic: glanceViews, pageViews, clickThroughRate, add‑to‑cart rate (when available), lostFeaturedOffer.</li>
+<li>Sales: unitsOrdered, orderedRevenue, conversion rate proxies.</li>
+<li>Dimensions: date, marketplace, ASIN, SKU, and vendor code.</li>
+<li>Aggregations: day, week, month, quarter.</li>
+</ul>
+<p>If you’re centralizing this in a warehouse, keep raw fields intact and compute derived metrics (e.g., conversion proxy = unitsOrdered/glanceViews) in a modeled layer so you can tweak definitions later.</p>
+<h3 id="apracticalflow">A practical flow</h3>
+<p>Note: Field names vary by API version; treat this as a pattern, not exact code.</p>
+<ul>
+<li>Query sourcingView by date range and marketplace.</li>
+<li>Request traffic + sales blocks together.</li>
+<li>Join outputs on ASIN/SKU + date in your warehouse.</li>
+<li>Add “lostFeaturedOffer” to your monitoring—spikes often explain conversion dips.</li>
+</ul>
+<p>Example shape:</p>
+<ul>
+<li>Inputs: startDate, endDate, marketplace, aggregateBy.</li>
+<li>Outputs: [asin, sku, date, traffic.glanceViews, traffic.pageViews, traffic.clickThroughRate, traffic.lostFeaturedOffer, sales.unitsOrdered, sales.orderedRevenue].</li>
+</ul>
+<p>Implementation tips:</p>
+<ul>
+<li>Batch by marketplace and date to manage pagination and retries.</li>
+<li>Store a watermark (last successful date) and re‑pull T‑1 and T‑2 for late posts.</li>
+<li>Keep idempotent loads: upsert on [asin, sku, date, marketplace].</li>
+</ul>
+<h3 id="sanitychecksbeforetrust">Sanity checks before trust</h3>
+<ul>
+<li>Time windows: Confirm timezone and posting delays; many vendor datasets post on a T+1 or T+2 cadence.</li>
+<li>Dupes and joins: Standardize ASIN/SKU casing; confirm one row per ASIN/SKU/day.</li>
+<li>Marketplace scope: Don’t blend US/CA/UK by accident.</li>
+<li>Outliers: A sudden jump to 0 traffic rarely happens organically—flag and re‑pull.</li>
+<li>Definitions: Align on whether “conversion rate” uses glanceViews or pageViews as the denominator.</li>
+<li>Coverage: Spot‑check a handful of ASINs in Vendor Central or your BI to ensure non‑zero traffic lines up with known promos.</li>
+</ul>
+<h3 id="asmallrealworldexample">A small real world example</h3>
+<p>A mid‑market CPG vendor saw flat sales in October. With the new sourcingView traffic, they found glance views rose 18% while lostFeaturedOffer spiked for a week—pricing fell below the floor at a competing seller, knocking them out of the Featured Offer. Fix price, win back the box, conversion normalized. Without traffic + lostFeaturedOffer in sourcingView, they would’ve misdiagnosed it as a demand issue.</p>
+<p>Another: a seasonal home brand expected lower November traffic. Instead, glance views were flat, but CTR slid after a content refresh. They reverted hero images and restored bullet order. CTR rebounded, units followed. The lesson: traffic volume wasn’t the problem—merchandising was.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-10-2025-04-23-08-9382-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="turnmetricsintomoney">Turn Metrics Into Money</h2>
+<h3 id="demandplanningthatdoesntoverreact">Demand planning that doesn’t overreact</h3>
+<ul>
+<li>If traffic up, conversion flat: investigate Featured Offer, delivery promise, and PDP content. Don’t auto‑order more inventory—fix the funnel.</li>
+<li>If traffic down, conversion stable: you might be under‑marketed or buried in search. Shift spend or test price.</li>
+<li>If both down: external demand likely cooled; trim POs and preserve working capital.</li>
+</ul>
+<p>Add nuance:</p>
+<ul>
+<li>Break out new vs. existing ASINs; new items often have low review counts and lagging conversion even with healthy traffic.</li>
+<li>Watch lead times; pair “traffic up” with “weeks cover” so you don’t stock out while fixing conversion.</li>
+</ul>
+<h3 id="marketingthatprovesitskeep">Marketing that proves its keep</h3>
+<ul>
+<li>Tie paid search bursts to glance views in sourcingView by day/week. No lift? Shift terms or creative.</li>
+<li>Use clickThroughRate as a proxy for on‑site appeal; if CTR improves but conversion doesn’t, fix readiness (images, bullets, A+ Content, reviews).</li>
+<li>Layer lostFeaturedOffer as a guardrail. No Featured Offer = ads waste.</li>
+</ul>
+<p>Quick experiment:</p>
+<ul>
+<li>Run a 7‑day keyword test; log daily glance views and conversion. If traffic rises but conversion dips, pause spend, fix PDP, then restart. Document the delta.</li>
+</ul>
+<h3 id="pricingandpromowithspine">Pricing and promo with spine</h3>
+<ul>
+<li>Track price tests alongside glance views and conversion. Look for elasticity sweet spots by category.</li>
+<li>If a promo spikes traffic but tanks margin, check if you lost the box to a reseller during the promo window; that’s fixable.</li>
+<li>Use post‑promo readouts: did traffic revert or hold a portion of the lift? Codify re‑promo cadences accordingly.</li>
+</ul>
+<h3 id="retailreadinessassystem">Retail readiness as system</h3>
+<ul>
+<li><p>Use traffic‑to‑conversion ladders to prioritize PDP fixes.</p></li>
+<li><p>Monitor add‑to‑cart rate (when available) and returns to catch misaligned expectations.</p></li>
+<li><p>Keep a playbook: image swaps, title tweaks, bullets, A+ blocks, Q&amp;A hygiene—one change at a time so you can attribute impact.</p></li>
+</ul>
+<p>This is a traffic data Data Kiosk Vendor Analytics review you can act on—not another dashboard you admire.</p>
+<h2 id="halfwayhitlist">Halfway Hit List</h2>
+<ul>
+<li>Use sourcingView for PO‑based truth; manufacturingView for brand context.</li>
+<li>Pull traffic + sales together and QA joins, timezones, and marketplaces.</li>
+<li>Monitor lostFeaturedOffer alongside traffic to explain conversion swings.</li>
+<li>Convert findings into process: forecasting, promo timing, pricing, and PDP fixes.</li>
+</ul>
+<p>If your team only does the four bullets above for 30 days, you’ll catch 80% of avoidable revenue leaks.</p>
+<h2 id="howtoimplement">How To Implement</h2>
+<h3 id="keepitmodular">Keep it modular</h3>
+<ul>
+<li>Create a new dataset for sourcingView traffic; don’t overwrite historical manufacturingView logic.</li>
+<li>Version your metrics dictionary: define glanceViews, pageViews, CTR, and lostFeaturedOffer explicitly.</li>
+<li>Keep derivations (e.g., conversion proxy) in a modeled layer, not raw.</li>
+</ul>
+<h3 id="warehousingandbi">Warehousing and BI</h3>
+<ul>
+<li>Warehouse: Land raw, stage with standardized keys (asin, sku, marketplace, date), then model.</li>
+<li>BI: Build a single daily panel with [date, ASIN/SKU, marketplace, traffic metrics, sales metrics, lostFeaturedOffer].</li>
+<li>Alerts: Threshold‑based alerts for “traffic up, conversion down” and “lostFeaturedOffer spike.”</li>
+</ul>
+<p>Need resilient SP‑API ingestion with retries, pagination management, and schema‑drift guardrails? Check out <a href="../requery.html">Requery</a>.</p>
+<h3 id="governanceandaccess">Governance and access</h3>
+<ul>
+<li>Permissions: Limit write access; keep a data steward for SP‑API schemas.</li>
+<li>Documentation: Add a one‑pager in your wiki: what changed, when, and how to use it.</li>
+<li>Change control: Announce metric definition updates and keep a changelog.</li>
+<li>Privacy: While these datasets avoid PII, enforce least privilege and audit access.</li>
+</ul>
+<h3 id="rolloutchecklist">Rollout checklist</h3>
+<ul>
+<li>Pilot with one category and one marketplace for two weeks.</li>
+<li>Compare old decisions vs. new decisions enabled by traffic data.</li>
+<li>Lock the definitions; then scale to all marketplaces.</li>
+<li>Backfill 60–90 days once you trust QA so you can run pre/post analyses.</li>
+</ul>
+<p>If you’re wondering “traffic data data kiosk vendor analytics example,” this rollout is the blueprint.</p>
+<h2 id="faqsvendorsthisweek">FAQs Vendors This Week</h2>
+<h3 id="trafficfixforsourcingview">traffic fix for sourcingView</h3>
+<p>Yes, the correction specifically addressed missing traffic in sourcingView. ManufacturingView already supported traffic. With the fix, sourcingView traffic is now available and correctly reported. Always confirm in your environment since access and entitlements can vary.</p>
+<h3 id="whatsthedealwithlostfeaturedoffer">What’s the deal with lostFeaturedOffer</h3>
+<p>Amazon added lostFeaturedOffer to the Traffic data, which lets you see when your product wasn’t in the Featured Offer. Correlate spikes in lostFeaturedOffer with dips in conversion to diagnose pricing or availability issues fast.</p>
+<h3 id="doesthisusegraphql">Does this use GraphQL</h3>
+<p>Data Kiosk supports flexible, GraphQL‑style querying so you can request only the metrics you need. Field names and schemas can evolve, so check the official SP‑API docs and examples before you code your integration.</p>
+<h3 id="howsoonwilldatapost">How soon will data post</h3>
+<p>Posting cadences can vary by dataset and marketplace (often T+1 to T+2). Validate in your account: pull the last three days daily and track completion times to inform your ETL schedule and alerting.</p>
+<h3 id="blendsourcingviewandmanufacturingview">Blend sourcingView and manufacturingView</h3>
+<p>Yes—but label it clearly. They answer different questions. Keep a clean dimension for “view_type” and avoid mixing them in the same KPI unless you’re explicitly showing the difference.</p>
+<h3 id="wherecanfindexamplequeries">Where can find example queries</h3>
+<p>Check the official SP‑API documentation and the Amazon SP‑API GitHub repo for patterns. Many teams share examples and best practices in those channels, including field lists and pagination tips.</p>
+<h3 id="areglanceviewssessions">Are glance views sessions</h3>
+<p>Treat glance views as detail page views; sessions are broader site visits. Use glance views for product‑level funnel math and consult SP‑API documentation for exact definitions in your dataset version.</p>
+<h3 id="needtoreprocesshistory">Need to reprocess history</h3>
+<p>Re‑pulling recent history (e.g., last 60 days) after the fix is smart to fill prior gaps. Keep original extracts in a cold layer so you can compare and validate changes.</p>
+<h3 id="anyratelimitstowatch">Any rate limits to watch</h3>
+<p>SP‑API enforces rate limits. Batch requests, implement exponential backoff, and cache stable dimensions. The official docs outline limits by endpoint—design for retries and idempotency.</p>
+<h2 id="firstsourcingviewtrafficpull">First SourcingView Traffic Pull</h2>
+<ul>
+<li>Confirm SP‑API access and Data Kiosk entitlements for sourcingView.</li>
+<li>Define scope: marketplace(s), date range, and aggregation (day/week/month).</li>
+<li>Request traffic + sales + lostFeaturedOffer together for the same dimensions.</li>
+<li>Land raw data, standardize keys (asin, sku, marketplace, date), and de‑duplicate.</li>
+<li>Create a daily panel: traffic → conversion → sales with clear field definitions.</li>
+<li>QA with a spot‑check: 10 ASINs across three days; verify non‑zero traffic.</li>
+<li>Build two visuals: (1) Traffic vs. conversion over time, (2) lostFeaturedOffer vs. conversion.</li>
+</ul>
+<p>Two nice‑to‑haves: auto‑flag “traffic up, conversion down” and annotate charts with price changes, promos, and media bursts. Your readouts will go from descriptive to diagnostic.</p>
+<p><em>You’ve got the missing puzzle piece back in the box.</em> Use it. Run your next promo only if Featured Offer stability looks solid. Let traffic trends drive your PO timing, not hunches. And when sales dip, you’ll know whether it’s a demand issue, a box issue, or a page issue in minutes—not after a quarter‑end review.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs">Amazon Selling Partner API Documentation</a></li>
+<li><a href="https://github.com/amzn/selling-partner-api-docs">Amazon Selling Partner API Docs (GitHub)</a></li>
+<li><a href="https://graphql.org/">GraphQL (official)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="data-kiosk-traffic-fix.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq9b51.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Win+Smarter+With+Amazon+Data+Kiosk+Traffic+Data+Fix&amp;pi=273811704538&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=273811704538&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fdata-kiosk-traffic-fix&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/data-kiosk-traffic-fix?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:59 GMT -->
+</html>

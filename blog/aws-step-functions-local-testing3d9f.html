@@ -1,0 +1,406 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-step-functions-local-testing?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Test AWS Step Functions Locally: Faster, Safer, No Cloud</title>
+    <link rel="canonical" href="aws-step-functions-local-testing.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Master testing AWS Step Functions locally with the enhanced TestState API. Mock services, validate state types, and speed CI/CD with local testing examples.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Test AWS Step Functions Locally: Faster, Safer, No Cloud",
+        "datePublished": "2025-11-20T20:49:53Z",
+        "dateModified": "2025-11-20T20:49:54.340Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-step-functions-local-testing",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-20-2025-08-37-45-4860-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-step-functions-local-testing.html">Test AWS Step Functions Locally: Faster, Safer, No Cloud</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 20, 2025 8:49:53 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You ship faster when you break the deploy-to-test hamster wheel. AWS Step Functions’ enhanced TestState API finally does that. You can test whole workflows locally, mock service calls, validate state types, and even test single states—without deploys or juggling IAM.</p>
+<p>Wait, what? Yep. No AWS account round-trips. No flaky integration tests blasting real services. Just tight feedback loops on your laptop, with production-grade behavior every run.</p>
+<p>If you’ve waited minutes to redeploy a state machine for a tiny tweak, same. Then rolled it back because a Map edge case bit you. This flips the script. <em>Local-first Step Functions means faster iteration, fewer bugs in prod, and confident CI/CD.</em></p>
+<p>The kicker: you can simulate retries, catches, errors, and service responses down to the contract. So the test that passes in dev, is the test that passes in prod.</p>
+<p><em>Think of it like a flight simulator for workflows.</em> You practice takeoff, intentional stalls, and messy landings—without burning fuel or risking a crash. Same rules of the sky, just safer, faster, and cheaper. <em>That’s the difference between “hope it works” and “we know it works.”</em></p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Test full Step Functions workflows locally—no AWS deployment and no IAM permissions required.</li>
+<li>Mock AWS integrations with contract validation that mirrors actual service responses closely.</li>
+<li>Validate all major state types: Task, Choice, Pass, Map, and Parallel states.</li>
+<li>Run tests in Jest or pytest and wire them straight into CI/CD.</li>
+<li>Use DEBUG or TRACE to inspect inputs, outputs, and Choice logic deeply.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-20-2025-08-39-12-7359-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="localfirststepfunctions">Local-first Step Functions</h2>
+<h3 id="whatactuallychanged">What actually changed</h3>
+<p>The TestState API turns Step Functions into a local-first dev experience. Before, you had to deploy state machines to an AWS account to test behavior. Now, you can:</p>
+<ul>
+<li>Validate entire workflows on your machine with the same semantics as production.</li>
+<li>Test individual states in isolation, which is great for tight unit tests.</li>
+<li>Run without AWS credentials or IAM permissions during tests at all.</li>
+<li>Keep your existing tools: AWS SDK, AWS CLI, or IDE integrations work fine.</li>
+</ul>
+<p>That means you iterate where the code lives—your laptop or your CI runner. Not in a distant account with slow and noisy feedback.</p>
+<p>Here’s a useful mental model: TestState gives you a simulated engine that runs Amazon States Language exactly how Step Functions would. You feed it definitions and inputs, attach mocks for external calls, and get precise outputs plus inspection detail. No hidden magic, no “it behaves differently in the cloud.”</p>
+<p>It also lets you write tests that map one-to-one with business logic. A Choice that routes VIP customers. A retry policy for throttled writes. A Map that standardizes payloads before fan-out. You stop testing infrastructure and start testing the logic that actually matters.</p>
+<h3 id="whyyoucarerightnow">Why you care right now</h3>
+<ul>
+<li>Faster feedback: tweak a Choice rule and rerun locally within seconds.</li>
+<li>Lower risk: simulate retries and catches before prod, not at 2 a.m.</li>
+<li>Lower cost: stop paying for test API calls when good mocks are enough.</li>
+<li>Better coverage: explore error paths you’d never hit safely on live services.</li>
+</ul>
+<p>First-hand example: you change a Map state ItemSelector and fear you’ll bork the payload shape. With local testing, you run a quick suite over multiple inputs, catch a missing path, and fix it in one pass—no deploy needed.</p>
+<p>A quick reality check: local tests don’t replace all integration tests. You’ll still want a small set of end-to-end tests that hit real services. Use them to validate permissions, quota behavior, and cross-account wiring. But the heavy lifting—transforms, branches, and error handling—moves to fast, reliable local suites. That’s how teams shrink lead time without dropping quality.</p>
+<h2 id="mockawsservices">Mock AWS services</h2>
+<h3 id="howmockingworks">How mocking works</h3>
+<p>The enhanced TestState API lets you define mock responses for AWS service integrations. Instead of calling real Lambda, SQS, DynamoDB, Bedrock, or HTTP endpoints, you simulate responses and errors locally. You can:</p>
+<ul>
+<li>Return success payloads to prove your happy paths behave exactly as intended.</li>
+<li>Inject specific errors to drive retry and catch logic across branches.</li>
+<li>Control latency to simulate timeouts, jitter, or throttling scenarios easily.</li>
+</ul>
+<p>Practical AWS Step Functions local testing example: for a Lambda Task state, you supply a mock payload that includes a body, statusCode, or custom fields your workflow expects. Then you assert that ResultPath, Parameters, and your Choice branches react correctly.</p>
+<p>Want to try more than “success or fail”? Great—mock the weird stuff:</p>
+<ul>
+<li>Intermittent throttling that only succeeds on the third attempt for realism.</li>
+<li>A 200 OK with an unexpected body shape, just to verify your guards.</li>
+<li>A partial response in one Parallel branch while the others succeed.</li>
+</ul>
+<p><em>This lets you cover the 5% edge cases that cause 95% of incidents.</em></p>
+<h3 id="contractvalidationkeepsyouhonest">Contract validation keeps you honest</h3>
+<p>Mocking often fails when your fake payload doesn’t match the real API contract. The TestState API solves this with optional contract validation. It checks whether your mocked response conforms to the expected schema for the integration. If your test “succeeds” but would fail in prod due to a field mismatch, validation throws a flag.</p>
+<p>This closes the classic “works locally, breaks in prod” gap. It’s especially useful for services with picky structures. Looking at you, DynamoDB AttributeValue maps and Step Functions’ HTTP response shapes. You keep tests fast and cheap—without drifting from reality.</p>
+<p>First-hand example: you simulate an SQS SendMessage response with a missing MessageId. Contract validation fails locally, you fix the mock, and you dodge a nasty prod surprise.</p>
+<p>Build a small mock catalog in your repo for repeatability:</p>
+<ul>
+<li>Canonical happy-path responses per service: Lambda, SQS, DynamoDB, and HTTP.</li>
+<li>Error responses you actually see in the wild, like throttling and invalid token.</li>
+<li>Nasty but realistic shapes that your code must reject cleanly and loudly.</li>
+</ul>
+<p>With those saved as JSON fixtures, new tests become composition. Drop them into multiple workflows and tweak only what’s unique.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-20-2025-08-40-03-9264-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="shipfaster">Ship faster</h2>
+<h3 id="fromyoureditor">From your editor</h3>
+<p>You don’t need a special harness for this. The TestState API works through the AWS SDK and CLI, so you plug it into your unit testing framework of choice. With Jest or pytest, you:</p>
+<ul>
+<li>Spin up local tests that call TestState for a state or full definition.</li>
+<li>Provide input payloads alongside mocked service responses for each case.</li>
+<li>Assert on outputs, error types, and transitions across branches carefully.</li>
+</ul>
+<p>Because there’s no AWS account dance, the suite runs fast in your inner loop. That’s how you catch regressions when refactoring Choice logic or ResultSelector. Or tweaking JSON transformations that used to be fragile and confusing.</p>
+<p>A few assertion patterns that pay dividends:</p>
+<ul>
+<li>Validate branch selection: assert which Choice rule evaluated to true.</li>
+<li>Verify data shape: check exact paths after ResultPath and Parameters.</li>
+<li>Ensure resiliency: assert retry counts and backoff or proper Catch capture.</li>
+<li>Guarantee invariants: field always present, array never empty, IDs normalized.</li>
+</ul>
+<p>Integrate with your IDE:</p>
+<ul>
+<li>Add a “Run workflow tests” task that triggers your test command.</li>
+<li>Use watch mode to rerun tests on file save instantly, no excuses.</li>
+<li>Pipe DEBUG or TRACE output to a panel so you can skim transitions.</li>
+</ul>
+<h3 id="makeciyourgatekeeper">Make CI your gatekeeper</h3>
+<p>Local doesn’t mean ad hoc chaos. Add these tests to CI so every PR gets the same scrutiny as your app code:</p>
+<ul>
+<li>Run on every workflow change to block any breaking edits immediately.</li>
+<li>Include failure-path tests: throttling, branches, and malformed responses.</li>
+<li>Produce artifacts: store inspection logs from DEBUG or TRACE for review.</li>
+</ul>
+<p>A simple pattern: a workflow-tests job that installs your testing framework. It pulls workflow definitions, runs TestState with mocks, and posts results. Your CI becomes a reliable, repeatable verifier for testing aws step functions—no cloud infra required at all.</p>
+<p>First-hand example: a team gates merges on a test that simulates DynamoDB ProvisionedThroughputExceededException. The workflow’s retry policy is verified per branch, preventing a class of on-call incidents.</p>
+<p>Make failure obvious:</p>
+<ul>
+<li>Separate jobs for unit tests on states versus end-to-end with minimal live calls.</li>
+<li>Tag tests by feature area so owners know who fixes which failure.</li>
+<li>Upload final payloads to CI artifacts so reviewers can inspect diffs easily.</li>
+</ul>
+<p>And yes—fast tests mean developers actually run them before pushing. Hello, shorter feedback loops. DORA research links faster feedback with better delivery performance consistently. Local-first testing is how you get there.</p>
+<h2 id="debugdeep">Debug deep</h2>
+<h3 id="makeinputsoutputsobvious">Make inputs outputs obvious</h3>
+<p>Distributed workflows fail at data cracks—wrong path, empty value, mismatched shape. The TestState API’s DEBUG and TRACE inspection levels show how each state consumes and emits data. You see:</p>
+<ul>
+<li>Effective Parameters and ResultSelector transforms in detail.</li>
+<li>Evaluated Choice conditions and exactly which branch fired in context.</li>
+<li>Final payloads at each transition, including ResultPath merges and overrides.</li>
+</ul>
+<p><em>This is gold for debugging complex fan-out and fan-in patterns with Map and Parallel.</em> It’s also how you validate that your error metadata is captured and handled cleanly.</p>
+<p>Pro tips for using inspection output:</p>
+<ul>
+<li>Keep a known-good TRACE log in your repo for core flows. Diff changes.</li>
+<li>Annotate logs in PRs: paste before and after fragments to show a Choice flip.</li>
+<li>When a test fails, start at the first TRACE divergence, not the last error.</li>
+</ul>
+<h3 id="validatejsonlogic">Validate JSON logic</h3>
+<p>If you’re using data transformations, you want deterministic behavior locally. Step Functions supports JSONata-based payload templates for rich data shaping in many scenarios. With local tests, you hammer input variations to confirm output shape and values before prod. If step functions local jsonata is on your checklist, this pins down edge cases.</p>
+<p>Practical scenario: your HTTP Task returns nested headers and a JSON body. With TRACE on, you confirm your JSONata expression extracts a token and normalizes casing. Then writes it to context for a downstream Choice. One test, zero redeploys, and no surprises.</p>
+<p>For folks still running step functions local docker for offline experiments, it’s still useful. But TestState’s higher-fidelity API and mocking make day-to-day iteration smoother. It’s closer to production semantics by default.</p>
+<p>Common pitfalls TRACE catches fast:</p>
+<ul>
+<li>A Map ItemSelector pulls the wrong path, which causes empty items downstream.</li>
+<li>A ResultPath merge overwrites an upstream field that you needed later.</li>
+<li>A Choice uses a string comparison where a number was expected.</li>
+<li>A Parallel branch returns a slightly different shape that breaks a Join.</li>
+</ul>
+<h2 id="realworldscenarios">Real-world scenarios</h2>
+<h3 id="lambdatask">Lambda Task</h3>
+<ul>
+<li>Happy path: mock a Lambda response with a body and headers included. Assert your ResultPath merges correctly and downstream Choice rules activate.</li>
+<li>Error path: throw a handled error in the mock on purpose. Validate the Catch branch writes error metadata and fully recovers.</li>
+</ul>
+<h3 id="httptask">HTTP Task</h3>
+<ul>
+<li>401 or 403 scenarios: simulate token expiry and see the real behavior. Confirm retries don’t loop forever, and a fallback path triggers correctly.</li>
+<li>Schema drift: change a field name in the mock and run validation. Use contract validation to catch it before it hurts you.</li>
+</ul>
+<h3 id="mapandparallel">Map and Parallel</h3>
+<ul>
+<li>Map transforms: verify ItemSelector and ResultSelector across many inputs. Test empty arrays, large arrays, and mixed shapes to be safe.</li>
+<li>Parallel coordination: test partial failures and confirm error aggregation behaves.</li>
+</ul>
+<p>You can combine these with CI to block merges that break your core flows. If you’re searching for aws step functions local testing github examples, start with community samples. Then adapt them to your mocks, contracts, and specific workflow needs.</p>
+<p>More day-one scenarios worth adding:</p>
+<ul>
+<li>DynamoDB put or update: simulate conditional check failures and throughput limits. Assert retry backoff and fallback storage logic kick in properly.</li>
+<li>SQS send and receive: mock message IDs and receipt handles deliberately. Test dedupe and visibility timeouts so queues don’t clog.</li>
+<li>EventBridge put events: verify shape, detail-type, and source before they fan out.</li>
+<li>Bedrock or external ML API: simulate slow or partial outputs reliably. Confirm your timeout and circuit breaker path works as expected.</li>
+</ul>
+<h2 id="thehalftimerewind">The halftime rewind</h2>
+<ul>
+<li>Local-first Step Functions via TestState with no deploys and no IAM.</li>
+<li>Full-workflow validation plus super tight unit tests on individual states.</li>
+<li>Service mocking with contract validation so tests match reality closely.</li>
+<li>Plug-and-play with Jest or pytest and existing CI pipelines with ease.</li>
+<li>Deep debugging with DEBUG or TRACE to fix data and Choice logic quickly.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<p>1)</p>
+<h3 id="doistillneedaws">Do I still need AWS</h3>
+<p>No. The enhanced local testing experience doesn’t require AWS deployment or IAM permissions. You run locally via SDK, CLI, or IDE and simulate service calls with mocks. It’s built for fast, credential-free iteration in dev and CI.</p>
+<p>2)</p>
+<h3 id="canitestentireworkflows">Can I test entire workflows</h3>
+<p>Both. You can validate full state machine definitions end-to-end, including retries and catches. And you can unit test individual states to isolate logic and shorten feedback loops.</p>
+<p>3)</p>
+<h3 id="howdomocksstayaccurate">How do mocks stay accurate</h3>
+<p>Use optional API contract validation. It checks your mocked responses against expected service formats. If a field is missing or typed wrong, the test fails locally before you ship.</p>
+<p>4)</p>
+<h3 id="whataboutexistingstepfunctions">What about existing Step Functions</h3>
+<p>step functions local docker is still useful for certain offline simulations, for sure. But the TestState API’s local-first approach offers mocking, inspection levels, and validation. It delivers a tighter, production-faithful feedback loop for most cases.</p>
+<p>5)</p>
+<h3 id="caniintegratethesetests">Can I integrate these tests</h3>
+<p>Yes. Add TestState-powered tests to your Jest or pytest suites and run them on every PR. Since tests don’t hit live services, they’re fast, deterministic, and cost effective.</p>
+<p>6)</p>
+<h3 id="doesthissupportadvancedpatterns">Does this support advanced patterns</h3>
+<p>You can validate Map and Parallel logic locally, including complex branching and error handling. That means you can stress-test fan-out and failure aggregation before prod.</p>
+<p>7)</p>
+<h3 id="shouldistillrunany">Should I still run any</h3>
+<p>Yes—but fewer of them. Keep a slim set of smoke tests that verify permissions, VPC and networking, plus cross-service quotas in staging. Everything else goes local-first.</p>
+<p>8)</p>
+<h3 id="howdoteamskeepmocks">How do teams keep mocks</h3>
+<p>Treat them like code. Store fixtures next to workflows, review them in PRs, and pin versions of external API schemas. With contract validation on, drift gets flagged automatically.</p>
+<h2 id="firstlocaltest">First local test</h2>
+<p>1) Define the smallest slice: pick one state or a slimmed workflow.
+2) List happy-path and failure-path scenarios you must cover thoroughly.
+3) Write input payloads for each scenario, including edge cases and nulls.
+4) Create mocks for every external service call, success and error variants.
+5) Run locally with DEBUG or TRACE to verify data transforms and branches.
+6) Add assertions on outputs, errors, and which branch actually executed.
+7) Wire tests into Jest or pytest and run them in CI on every PR.</p>
+<p>Bonus moves once you’re rolling:</p>
+<ul>
+<li>Add a regression suite for every incident you’ve had. Never get paged twice.</li>
+<li>Capture and check invariants in one helper: IDs present, enums valid, arrays non-empty.</li>
+<li>Track test coverage for states and branches to find and close gaps.</li>
+</ul>
+<p><em>You don’t get paid to wait on deploys. You get paid to ship reliable workflows.</em> The enhanced TestState API finally makes Step Functions feel like modern app dev. Local-first, mock-friendly, and absolutely CI-ready. Start with your flakiest edge case today. That retry that never seems right, or the JSONata expression that fails on Tuesdays. Lock it down locally and move on.</p>
+<p>If you’re orchestrating retail media or Amazon Marketing Cloud data pipelines with Step Functions, explore our <a href="../amc-cloud.html">AMC Cloud</a> for end-to-end AMC workflows—and see how teams ship and scale in our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html">AWS Step Functions Developer Guide</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/apireference/welcome.html">AWS Step Functions API Reference</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-service-integrations.html">Step Functions service integrations</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/sfn-local.html">Step Functions Local (Docker)</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-jsonata.html">Amazon States Language JSONata</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/stepfunctions/">AWS CLI for Step Functions</a></li>
+<li><a href="https://github.com/aws-samples/aws-stepfunctions-examples">AWS Samples — Step Functions examples on GitHub</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-error-handling.html">AWS Step Functions error handling (Retry/Catch)</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html">Map state (standard and Distributed Map)</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/connectors-http.html">HTTP service integration for Step Functions</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/connectors-lambda.html">AWS Lambda service integration</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/connectors-sqs.html">Amazon SQS service integration</a></li>
+<li><a href="https://docs.aws.amazon.com/step-functions/latest/dg/connectors-ddb.html">Amazon DynamoDB service integration</a></li>
+<li><a href="https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/stepfunctions.html">AWS Toolkit for VS Code — Step Functions</a></li>
+<li><a href="https://cloud.google.com/devops/state-of-devops">DORA/Google Cloud — Accelerate State of DevOps Report</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-step-functions-local-testing.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqbc36.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Test+AWS+Step+Functions+Locally%3A+Faster%2C+Safer%2C+No+Cloud&amp;pi=262650221303&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=262650221303&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-step-functions-local-testing&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-step-functions-local-testing?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:35 GMT -->
+</html>

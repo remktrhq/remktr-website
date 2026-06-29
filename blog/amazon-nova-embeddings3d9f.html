@@ -1,0 +1,392 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/amazon-nova-embeddings?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Build multimodal RAG fast with Amazon Nova embeddings</title>
+    <link rel="canonical" href="amazon-nova-embeddings.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover Amazon Nova Multimodal Embeddings in Amazon Bedrock to power RAG semantic search across text, images, video, and audio. Build fast at low cost.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build multimodal RAG fast with Amazon Nova embeddings",
+        "datePublished": "2025-11-01T19:46:41Z",
+        "dateModified": "2025-11-01T19:46:41.924Z",
+        "mainEntityOfPage": "https://remktr.com/blog/amazon-nova-embeddings",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-01-2025-07-40-00-5036-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="amazon-nova-embeddings.html">Build multimodal RAG fast with Amazon Nova embeddings</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 1, 2025 7:46:41 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’ve been duct-taping search across PDFs, screenshots, videos, and call audio. It works, until it doesn’t. One query hits text, another hits images. The video archive might as well be a black box. Users ask normal questions. Your stack answers like it learned English yesterday.</p>
+<p>Here’s the unlock. A single embedding model that understands text, documents, images, video, and audio. It maps them into one vector space. That’s Amazon Nova Multimodal Embeddings in Amazon Bedrock. <em>One model. One space. Cross-modal search at industry-leading cost.</em></p>
+<p>If multimodal RAG is your next roadmap checkbox, this changes the physics. Take a voice memo, a product clip, a slide deck with charts, and a long FAQ. You can make all of it retrievable, and consistent. Less plumbing. Fewer edge cases. More, wow, that actually worked.</p>
+<p><em>The kicker: you don’t touch infra.</em> Bedrock handles provisioning, endpoints, and scaling. You focus on ingestion, indexing, and prompts. With 8K-token context and 30-second media segments, you’re set. Use smart chunking for longer files. You can tune for speed, accuracy, and storage.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>One unified model: map text, docs, images, video, and audio into one vector space for cross-modal search.</li>
+<li>Built for RAG: power agentic retrieval with high recall and simpler pipelines.</li>
+<li>Flexible I/O: up to 8K tokens, 30s video/audio segments; segment bigger files.</li>
+<li>Right-fit costs: pick embedding dimensions to balance accuracy versus storage and latency.</li>
+<li>Operated in Bedrock: synchronous for real-time; async for high-volume or batch.</li>
+<li>Use cases: e-commerce visual and textual search, media archive discovery, compliance docs, and more.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-41-02-0577-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="oneembeddingspacechangessearch">One embedding space changes search</h2>
+<h3 id="theoldwayisbroken">The old way is broken</h3>
+<p>You probably stitched separate models: a text embedder for docs, a vision model for images. Then something bespoke for audio or video transcripts. That splits your index and complicates ranking. It makes “What’s the clip where the engineer says ‘latency dropped’ while the graph spikes?” nearly impossible.</p>
+<p>Nova flips that. As Amazon describes it, it’s “the industry’s first embedding model that supports text, documents, images, video, and audio through a single unified model.” It enables cross-modal retrieval with leading accuracy and cost efficiency. Translation: fewer models, fewer heuristics, better recall.</p>
+<h3 id="crossmodalretrievalthatworks">Cross modal retrieval that works</h3>
+<ul>
+<li>One query, many modalities: Ask in natural language. Retrieve a chart image, a relevant video moment, and a paragraph in a PDF. Do it all via nearest-neighbor search in one vector space.</li>
+<li>Mixed content is native: Documents with interleaved text and images just work. Videos with visuals, audio, and captions too. Nova understands those relationships.</li>
+<li>Cleaner ranking: Stop hacking per-modality scores. Rank by one consistent similarity metric instead.</li>
+</ul>
+<p><em>A common result: higher user trust.</em> When search returns the chart, the timestamp, and the sentence that explains it, users believe your system gets it. Wire that into RAG and your model cites stronger evidence. That usually reduces hallucinations and speeds task completion.</p>
+<p>Behind the scenes, this works through a shared representation across formats. Think of a multilingual friend who speaks content, not English versus pixels or audio waves. If your query mentions “the chart that spikes after Q2,” the space places that phrase near the exact image region. It also sits near the paragraph explaining the spike. You’re not translating between separate systems. You’re asking one brain to recall one memory.</p>
+<p>If you’ve tried cross-modal models like CLIP, the intuition will feel familiar. Align text and visuals so similar concepts cluster. The difference is Nova’s scope. Not just images and captions, but documents, audio, and video moments in one space. That unlocks “find the moment,” not just “find the file.”</p>
+<p>Move from simple search to real workflows. Think triaging customer tickets or auditing marketing claims. The reliability from consistent retrieval keeps projects alive past the demo. Teams stop babysitting edge cases, and start building features.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-01-2025-07-41-59-4703-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="novamultimodalembeddingsinsidebedrock">Nova Multimodal Embeddings inside Bedrock</h2>
+<h3 id="inputslimitsandsegmentation">Inputs limits and segmentation</h3>
+<p>Nova accepts text and documents up to 8K tokens. It handles video and audio segments up to 30 seconds. Larger assets? Segment them. For video, chunk by scene or slide transitions. For audio, chunk by silence or speaker turns. For long PDFs, chunk by headings or logical sections. For example, per chart with its caption. You then embed each chunk. Retrieval reassembles the answer.</p>
+<p>“As a single, unified model that supports text, documents, images, video, and audio,” Nova maps them into a unified embedding space. That breaks data silos without you maintaining modality-specific pipelines.</p>
+<p>A few practical hints for clean segmentation:</p>
+<ul>
+<li>For PDFs with mixed text and images, keep charts with the paragraph that interprets them. That pairing boosts relevance because meaning often lives in the caption.</li>
+<li>Use gentle overlap for text, around 10–15% of tokens. Avoid chopping key sentences in half. Each chunk should be independently useful.</li>
+<li>Align video chunks to natural boundaries like scene cuts, slide changes, or speaker turns. That keeps a chunk coherent, better for retrieval and playback.</li>
+<li>Normalize media first. Standardize frame rates and audio sample rates. This avoids oddities from mixed encodings.</li>
+</ul>
+<h3 id="apisandworkloads">APIs and workloads</h3>
+<p>In Amazon Bedrock, you choose:</p>
+<ul>
+<li>Synchronous API for near real-time use, like chat assistants, live search bars, or agent loops.</li>
+<li>Asynchronous API for “nova batch inference” workflows. Think overnight indexing, bulk ingestion, or media library backfills.</li>
+</ul>
+<p>Because Bedrock is fully managed, you skip instance sizing and endpoints. You also skip networking glue. You focus on payloads and retrieval logic. Doing an internal “amazon nova multimodal understanding workshop”? This simplicity helps teams ship a proof-of-concept in hours, not weeks.</p>
+<p>Operationally, treat synchronous calls like a hot path. Set clear timeouts. Use small chunk sizes for on-the-fly embeds. Cache aggressively to cut repeat work. For async, design for throughput. Batch payloads and parallelize across collections. Track progress so you can resume if a job fails midway. Build idempotency into ingestion. You don’t want duplicate vectors when a job retries.</p>
+<p>A clean workflow looks like this. A streaming sync path embeds ad hoc user inputs, like queries and uploads. A steady async pipeline keeps your corpus fresh, like new docs, product media, and edited transcripts. Both feed the same vector store.</p>
+<h3 id="accuracyvscostyourcall">Accuracy vs cost your call</h3>
+<p>Nova offers multiple embedding dimensionalities. Higher dimensions can improve retrieval fidelity. But they produce larger vectors, more storage, and slightly higher latency. Lower dimensions cut costs and can still be strong for many workloads. Pilot both. Measure nDCG and recall@K on a labeled set. Choose what moves your metrics at the best price per query.</p>
+<p>Expert tip: normalize vectors and test cosine versus dot product in your vector database. Ranking can shift meaningfully with the right metric.</p>
+<p>Napkin math to keep you honest:</p>
+<ul>
+<li>Vector size ≈ dimension × 4 bytes for float32. So 512-d ≈ 2 KB, and 1024-d ≈ 4 KB per vector.</li>
+<li>10 million chunks at 1024-d is about 40 GB of raw vector data. That’s before index overhead. HNSW or IVF indexes add overhead, so plan headroom.</li>
+<li>Latency scales with both index type and hardware. HNSW gives strong recall with predictable latency. IVF can cut memory footprint with a training step. Benchmark on your corpus.</li>
+</ul>
+<p>If your search quality is already good enough at a lower dimension, take the win. Spending 2× on storage to chase a 1–2% recall bump may not move the business.</p>
+<h2 id="designingmultimodalragthatperforms">Designing multimodal RAG that performs</h2>
+<h3 id="indexingstrategythatdoesntcrumble">Indexing strategy that doesnt crumble</h3>
+<ul>
+<li>Separate but searchable: keep a single index, but tag chunks with metadata. Include modality, source, timestamp, page, and section. This powers faceted filters and layout-aware ranking.</li>
+<li>Field-aware rerank: retrieve top-K by vector similarity. Then rerank using a lightweight model or rules using modality and metadata. Example: prioritize a chart image when the query mentions trend or spike.</li>
+</ul>
+<p>“Asynchronous API for efficient processing of larger files” lets you pipeline ingestion. Detect, extract, chunk, embed, and index. For PDFs, capture images and nearby text together. For videos, align visuals, ASR text, and optional captions per 20–30 second chunk.</p>
+<p>Build a minimal, stable schema:</p>
+<ul>
+<li>Core fields: id, modality, source<em>uri, created</em>at, and updated_at.</li>
+<li>Context fields: page or slide, timestamp_start and end, speaker, language, and entities.</li>
+<li>Governance fields: sensitivity like PII or finance, access policy, and retention date.</li>
+</ul>
+<p>This lets you filter stale or restricted chunks at query time. It keeps answers relevant and compliant.</p>
+<h3 id="chunkingvideoandaudio">Chunking video and audio</h3>
+<ul>
+<li>Use VAD, or silence detection, to define audio chunks.</li>
+<li>For product demos, align to scene or feature boundaries. Users search by feature names.</li>
+<li>Carry context metadata like speaker, section, and slide timecode. It boosts precision and grounds RAG citations.</li>
+</ul>
+<p>Also consider confidence weighting. If your transcript includes ASR confidence scores, store them. At rerank time, slightly downweight segments with poor ASR confidence. Users notice when quotes are crisp and accurate.</p>
+<p>When in doubt, sample your chunks. Manually label 50–100 random segments. If a human can’t tell what the chunk is about fast, your chunking is too coarse or messy.</p>
+<h3 id="retrievalthatfeedsyourllm">Retrieval that feeds your LLM</h3>
+<ul>
+<li>Hybrid search: combine vector with sparse BM25 on captions or transcripts. Great for rare terms and numeric symbols.</li>
+<li>Query rewriting: expand queries with synonyms and modality hints. For example, “find image of login screen,” or “clip where CFO mentions margin.”</li>
+<li>Evidence packing: when sending to the LLM, include multiple modalities. Add the snippet text, the chart image reference, and the video timestamp. Answer quality jumps when the model sees diverse, relevant evidence.</li>
+</ul>
+<p>“As Amazon Bedrock is fully managed,” your LLM and retrieval can share one platform. That cuts latency and ops. Need on-the-fly embeddings during a chat? The synchronous API handles it. The rest lives in batch pipelines.</p>
+<p>Add a thin relevance guardrail. If top results fall below a similarity threshold, ask a clarifying question. It’s better to ask “Do you mean the 2022 or 2023 report?” than to fake confidence.</p>
+<h2 id="architectureblueprintfromcontent">Architecture blueprint from content</h2>
+<ul>
+<li>Ingestion: watch folders or buckets for new files. Extract text with OCR for images and screenshots. Pull captions for video. Normalize media formats.</li>
+<li>Segmentation: apply rules by modality. Use headings for docs and scenes or speaker turns for video or audio. Keep charts with captions.</li>
+<li>Embedding: call Nova via Bedrock. Store vectors plus rich metadata. Use async for bulk adds. Use sync for ad hoc uploads.</li>
+<li>Indexing: build or update your ANN index like HNSW or IVF. Maintain a sparse index on text fields for hybrid search.</li>
+<li>Retrieval: at query time, run vector and BM25. Merge, then rerank using modality-aware rules.</li>
+<li>Generation: feed the top evidence into your LLM. Include direct citations like page numbers, timestamps, and image IDs.</li>
+<li>Feedback loop: capture clicks, copy events, and thumbs up or down. Use this to refine chunking, rerank rules, and dimension choices.</li>
+</ul>
+<p><em>This blueprint is simple on purpose.</em> Plug in your favorite vector DB like OpenSearch, pgvector, or a managed service. The flow stays the same.</p>
+<h2 id="evaluationandguardrailsthatscale">Evaluation and guardrails that scale</h2>
+<ul>
+<li>Build a gold set: 100–500 query and answer pairs across all modalities. Don’t skip edge cases like numbers, acronyms, or brand names.</li>
+<li>Metrics that matter: track recall@K and MRR. Also track nDCG to see ordering. Watch latency p95 and cost per query alongside quality.</li>
+<li>Regression tests: when you tweak chunk size or dimension, re-run the full suite. If correctness dips, roll back.</li>
+<li>Human-in-the-loop: sample 1–2% of sessions for review. Label good enough versus needs work. Tag failure reasons like bad chunking or wrong modality. Fix the biggest issues first.</li>
+<li>Guardrails: add minimum similarity thresholds and redaction for sensitive fields. Use fallback prompts that ask for clarification when results are ambiguous.</li>
+</ul>
+<h2 id="securityprivacyandgovernance">Security privacy and governance</h2>
+<ul>
+<li>Access control: tie index reads to user roles. Filter chunks by access labels at query time. Avoid leaking restricted content.</li>
+<li>Data handling: encrypt in transit and at rest, always. Keep audit logs for who accessed what and when.</li>
+<li>PII awareness: tag sensitive material during ingestion, like emails or phone numbers. Redact or restrict as needed.</li>
+<li>Lifecycle management: set retention policies and purge vectors when a document is deleted. Maintain a tombstone log so you can trace removals.</li>
+</ul>
+<p><em>This isn’t busywork.</em> Clean governance speeds legal reviews and keeps your rollout unblocked.</p>
+<h2 id="pitfallstoavoid">Pitfalls to avoid</h2>
+<ul>
+<li>Overlapping indexes by modality: if you keep separate indexes, you’ll reconcile ranks for months. <em>Start unified.</em></li>
+<li>Monster chunks: 10-page chunks or 2-minute clips seem efficient. They kill precision. Keep chunks tight and meaningful.</li>
+<li>Ignoring metadata: just vectors feels elegant, until you need date or product filters. Metadata is your friend.</li>
+<li>Silent drift: as content grows, index recall can quietly slip. Schedule periodic re-evaluation and re-indexing.</li>
+<li>One-shot dimension choice: set up an A/B for dimensions. Let metrics, not opinions, pick winners.</li>
+</ul>
+<h2 id="realworldplays">Real world plays</h2>
+<h3 id="ecommercedescribeit">E commerce describe it</h3>
+<p>A shopper types, “sleek black running shoes with reflective strip like the Vaporfly, under $120.” Nova embeds the query, then matches product images, lifestyle photos, and spec sheets in one hop. You show the right images and specs. An LLM summarizes fit and care from reviews. This is the “amazon nova multimodal embeddings RAG semantic search example” you can demo to any VP in five minutes.</p>
+<p>Bonus: handle user-uploaded images for “find similar.” Handle natural-language follow-ups like “show men’s sizes with wide toe box.” One vector space makes image-to-text and text-to-image retrieval symmetric and predictable.</p>
+<h3 id="mediaandentertainmentarchive">Media and entertainment archive</h3>
+<p>You’ve got a decade of shows, podcast episodes, and promo clips. With Nova, producers search, “the episode where the guest explains ‘fallacy of sunk cost’ while gesturing at a whiteboard.” Retrieve the exact 25-second clip and the transcript snippet. Editors stitch faster. Fans get better search inside your app.</p>
+<p>A content lead put it best. “Our creators don’t remember filenames; they remember moments.” Cross-modal vectors find moments.</p>
+<h3 id="enterprisedocscompliance">Enterprise docs compliance</h3>
+<p>Financial and legal teams live in PDFs packed with charts, footnotes, and tables. Nova maps the chart image and the paragraph that explains it into the same space. A compliance analyst can ask, “Show the stress-test chart where Tier 1 capital dips below 10% and the note that explains why.” The system returns both.</p>
+<p>Working in SAP landscapes? You can embed policy PDFs, export table screenshots, and training videos. Then wire Nova’s vectors into your existing governance portal. That satisfies “amazon nova sap” style needs without a platform overhaul.</p>
+<h3 id="customersupportresolvefaster">Customer support resolve faster</h3>
+<p>Agents and bots pull answers from screenshots, how-to videos, and long KB articles. With a single embedding space, a user can ask, “Why does login keep failing with code 8127?” They get a screenshot of the exact dialog. They get the paragraph that explains the fix. They also get a 15-second clip showing the steps. Less bouncing between tools. More first-contact resolution.</p>
+<h2 id="pulsecheckwhattoremember">Pulse check what to remember</h2>
+<ul>
+<li>One model, all modalities: text, docs, images, video, and audio in a single space.</li>
+<li>8K-token text and 30s media segments; segment larger assets.</li>
+<li>Synchronous for real-time; async for “nova batch inference” at scale.</li>
+<li>Dimensionality choice equals accuracy versus cost. Benchmark on your data.</li>
+<li>Tagging and rerank beats monolithic scores. Hybrid search helps rare terms.</li>
+<li>Multimodal evidence improves RAG grounding and user trust.</li>
+</ul>
+<h2 id="costandperformanceplaybook">Cost and performance playbook</h2>
+<ul>
+<li>Start small: embed a single product line or one department’s docs. Measure baseline recall, MRR, p95 latency, and cost per query.</li>
+<li>Scale smart: shard by business unit or modality if memory runs tight. Keep a global router that knows where to look first.</li>
+<li>Cache everywhere: cache query embeddings and top-K neighbors for popular questions. Most users ask the same 100 things.</li>
+<li>Monitor drift: track the percent of queries with no good results. If it creeps up, revisit chunking or retraining.</li>
+<li>Keep a rollback plan: version your indexes. If a new ingest corrupts results, flip back fast.</li>
+</ul>
+<h2 id="faqstraightanswers">FAQ straight answers</h2>
+<h3 id="whatisamazonnovaembeddings">What is Amazon Nova Embeddings</h3>
+<p>It’s an embedding model in Amazon Bedrock. It converts text, documents, images, video, and audio into vectors in one unified space. You use those vectors for semantic search, cross-modal retrieval, and RAG pipelines.</p>
+<h3 id="whereisnovaavailable">Where is Nova available</h3>
+<p>Per AWS, it’s available in the US East (N. Virginia) region via Amazon Bedrock. You invoke it through Bedrock’s managed runtime without provisioning infrastructure.</p>
+<h3 id="whataretheinputlimits">What are the input limits</h3>
+<p>Nova supports up to 8K tokens for text and document inputs. It supports video or audio segments up to 30 seconds. For longer content, segment into chunks and embed each chunk. Retrieval stitches relevant chunks at query time.</p>
+<h3 id="synchronousandasynchronoususagedifference">Synchronous and asynchronous usage difference</h3>
+<p>Use the synchronous API for near real-time scenarios like chat, agent loops, or interactive search. Use the asynchronous API for high-volume or large-file processing. Think “nova batch inference” overnight jobs that index a media library or a compliance archive.</p>
+<h3 id="balanceaccuracyandcost">Balance accuracy and cost</h3>
+<p>Choose the embedding dimensionality that fits your goals. Higher dimensions can improve recall and ranking, but increase storage and latency. Benchmark on your own corpus. Measure recall@K, MRR, and nDCG. Pick the minimal dimension that meets your quality bar.</p>
+<h3 id="usenovawithenterprisesystems">Use Nova with enterprise systems</h3>
+<p>Yes. Nova outputs standard vectors you can store in your preferred vector database. Associate them with records from systems like SAP. You’re not changing SAP. You’re augmenting search and RAG over exported documents, images, and media.</p>
+<h3 id="needanewvectordatabase">Need a new vector database</h3>
+<p>Not necessarily. Many teams start with what they already run. OpenSearch k-NN, PostgreSQL with pgvector, or a managed vector service. The key is support for your similarity metric, metadata filters, and hybrid search. Start with the simplest option your team can operate.</p>
+<h3 id="handleupdatesanddeletions">Handle updates and deletions</h3>
+<p>Treat your index like a source of truth with versioning. When a document changes, write a new version and mark old chunks inactive. Run a background purge. For deletions, remove vectors and invalidate caches right away. Keep a lightweight audit trail for compliance and debugging.</p>
+<h3 id="whataboutmultilingualcontent">What about multilingual content</h3>
+<p>If your corpus spans multiple languages, store language as metadata. Evaluate retrieval quality per language. You can route queries through translation for consistency, or keep parallel indexes. Measure with a multilingual test set before you scale.</p>
+<h3 id="tipstoreducelatency">Tips to reduce latency</h3>
+<p>Keep chunk sizes tight. Retrieve fewer but higher-precision candidates, like top-20. Push heavy rerankers off the critical path. Precompute and cache embeddings for common queries. Use streaming responses so users see partial results fast, then refine.</p>
+<h2 id="shipthisfastmultimodalrag">Ship this fast multimodal RAG</h2>
+<p>1) Ingest: collect PDFs, slide decks, images, and short video or audio clips. Extract text and captions.</p>
+<p>2) Chunk: 1–2 paragraph text chunks. 20–30 second media chunks aligned to scenes. Pair charts with captions.</p>
+<p>3) Embed: call Nova via Bedrock. Pick a dimension that fits your budget.</p>
+<p>4) Index: store vectors and metadata like modality, source, and timestamps in your vector DB. Enable hybrid search.</p>
+<p>5) Retrieve: top-K by vector similarity. Then rerank with metadata rules.</p>
+<p>6) Generate: feed multimodal evidence into your LLM. Cite timestamps and pages.</p>
+<p>7) Evaluate: track recall@K, MRR, latency, and cost per query. Iterate.</p>
+<p>You don’t need a forklift upgrade. Start with one journey, like e-commerce search or policy Q&amp;A, then scale.</p>
+<p>Here’s the takeaway. The gap between “we have all this content” and “users can find what matters” is no longer a moat of glue code. With Nova, you collapse modalities into one language, vectors. Then let search and RAG do the rest. If you’ve been waiting for a simple, accurate, affordable way to unify retrieval across formats, <em>this is the green light.</em></p>
+<p>If you want help pressure-testing queries and tightening retrieval quality, take a look at <a href="../requery.html">Requery</a>.</p>
+<p>For real-world outcomes and patterns you can borrow, explore our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html">Amazon Bedrock documentation: What is Amazon Bedrock?</a></li>
+<li><a href="https://www.ibm.com/topics/unstructured-data">IBM: What is unstructured data?</a></li>
+<li><a href="https://arxiv.org/abs/2103.00020">OpenAI CLIP (context on cross-modal embeddings)</a></li>
+<li><a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html">Amazon OpenSearch Service: k-NN (vector) search documentation</a></li>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regions_az/">AWS Global Infrastructure (regions)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference.html">Amazon Bedrock: Batch inference (asynchronous)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/security.html">Amazon Bedrock: Security and compliance</a></li>
+<li><a href="https://arxiv.org/abs/1702.08734">FAISS: A library for efficient similarity search</a></li>
+<li><a href="https://arxiv.org/abs/1603.09320">HNSW: Efficient and robust approximate nearest neighbor search</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Okapi_BM25">Okapi BM25 overview (sparse retrieval)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Discounted_cumulative_gain">Discounted cumulative gain (nDCG)</a></li>
+<li><a href="https://webrtc.googlesource.com/src/+/refs/heads/main/modules/audio_processing/vad/">WebRTC Voice Activity Detection (VAD)</a></li>
+<li><a href="https://www.scenedetect.com/">PySceneDetect (video scene detection)</a></li>
+<li><a href="https://github.com/pgvector/pgvector">pgvector: Open-source vector similarity for Postgres</a></li>
+<li><a href="https://docs.pinecone.io/">Pinecone documentation</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="amazon-nova-embeddings.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqf48b.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Build+multimodal+RAG+fast+with+Amazon+Nova+embeddings&amp;pi=254849610439&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=254849610439&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Famazon-nova-embeddings&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/amazon-nova-embeddings?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:07 GMT -->
+</html>

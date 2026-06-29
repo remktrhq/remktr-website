@@ -1,0 +1,373 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/dec-2024-attribute-enum-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Prepare For Amazon’s December 2024 SP‑API Attribute Overhaul</title>
+    <link rel="canonical" href="dec-2024-attribute-enum-updates.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Prepare for the Dec 15, 2024 Amazon SP-API updates to listing attribute usage and enumeration values. Learn what changes, stay compliant, and avoid errors.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Prepare For Amazon\u2019s December 2024 SP\u2011API Attribute Overhaul",
+        "datePublished": "2025-11-18T16:33:17Z",
+        "dateModified": "2025-11-18T16:33:17.815Z",
+        "mainEntityOfPage": "https://remktr.com/blog/dec-2024-attribute-enum-updates",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-18-2025-04-26-57-7563-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="dec-2024-attribute-enum-updates.html">Prepare For Amazon’s December 2024 SP‑API Attribute Overhaul</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 18, 2025 4:33:17 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You know that sinking feeling when a clean bulk upload explodes with weird errors? December 15, 2024 is that day—at scale. Amazon’s SP‑API is changing attribute usage and enum values across many product types and marketplaces. Translation: the rules for what goes where, and which values are allowed, are shifting under you.</p>
+<p>This isn’t a scary memo. <em>It’s your playbook.</em> If you’re a seller, integrator, or platform touching listings, you must align schemas, refresh validation, and harden pipelines. Skip it, and you’ll spend the holidays chasing enum mismatches instead of shipping sales.</p>
+<p>Good news though: Amazon tells you what changed and how to stay compliant—programmatically. Use Product Type Definitions (PTD) to pull fresh schemas and allowed values in near real time. Build a fast feedback loop now, and December becomes a small patch, not a fire drill.</p>
+<p>Quick translation for humans: <em>it’s mostly housekeeping with real impact.</em> Listings that were “good enough” yesterday might fail tomorrow, especially across marketplaces. If your app checks against stale rules—or your team updates picklists by hand—you’ll feel it. Wire PTD into your flow, adapt fast, protect conversion, and maybe improve discoverability. That’s the move.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>December 15: attribute usage and enum values change across many product types.</li>
+<li>Mandatory vs. optional attributes are shifting; some values will be deprecated.</li>
+<li>Pull Product Type Definitions before listing to stay in sync.</li>
+<li>Expect marketplace nuance—one size won’t fit all.</li>
+<li>Update validation, mapping, and feeds to avoid listing errors.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-18-2025-04-27-58-2449-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatschangingandwhy">Whats Changing And Why</h2>
+<h3 id="attributeusagerescored">Attribute usage rescored</h3>
+<p>Some attributes you treated as optional may now be required for certain product types. Others will get deprecated. That affects listing creation, partial updates, and error handling. If your mapper assumes yesterday’s rules, you’ll hit today’s rejections.</p>
+<p>Example: You list Apparel with a “Material” attribute. If Amazon tightens accepted values or flips it from optional to required for subtypes, your payloads might pass in one marketplace and fail in another.</p>
+<p>A practical implication here: required-by-variation. Parent-child relationships can have different requirements. Parents may need standardized attributes like Brand and ItemTypeKeywords. Children could require size or color. If that flips or tightens, one missing child attribute can suppress the whole variation family.</p>
+<h3 id="enumerationvaluesareupdating">Enumeration values are updating</h3>
+<p>Enums are those fields where you must choose from a set list. Amazon is refining allowed values to reduce catalog noise. Values like “Other” or legacy spellings often get removed. If your code validates against stale enums, you’ll see 400s and schema violations.</p>
+<p>Example: “Stainless Steel” vs. “Stainless_Steel.” If the official enum switches to underscores, your friendly text breaks. You need a translation layer.</p>
+<p>Also watch casing, spacing, and localization. “Grey” vs. “Gray” seems harmless, but machines don’t wink. Your translation tables should normalize inputs and keep exact mapping per marketplace.</p>
+<h3 id="marketplacesarentidentical">Marketplaces arent identical</h3>
+<p>This update spans many marketplaces. Don’t copy a US mapping into DE and hope it works. Treat PTD as the per-market source of truth to avoid subtle failures.</p>
+<p><em>First-hand example:</em> Teams that cache definitions weekly drift. Teams that pull PTD on demand, or at deploy, catch differences early and ship cleanly.</p>
+<p>One more wrinkle: attribute descriptions and help text vary by locale. That affects UI hints and seller workflows. If your interface says “optional” but PTD says “required” for that marketplace, users trust the UI and send bad data. Sync those labels.</p>
+<h2 id="whythisupdatematters">Why This Update Matters</h2>
+<h3 id="betterdatabetterdiscovery">Better data better discovery</h3>
+<p>Amazon wants consistent, accurate detail pages. Cleaner attribute usage and tighter enums help the algorithm categorize and rank products. For you, that means higher search relevance and fewer suppressed listings.</p>
+<p>Example: Standardized “Material,” “Size,” or “Energy Efficiency” values improve facet filters. Your product appears where buyers actually browse.</p>
+<p>Think of filters like mini search engines. Cleaner attributes mean you appear in filtered results more often. You also waste fewer clicks. That’s free reach earned by being precise.</p>
+<h3 id="reducedredundancyclearerrules">Reduced redundancy clearer rules</h3>
+<p>Refined attribute usage cuts duplicate fields and conflicting inputs. When sellers use the same required attributes and accepted values, the catalog stabilizes. Less ambiguity means fewer support tickets and fewer mystery suppressions.</p>
+<p>If you’ve chased a suppressed listing with “missing attributes,” you know the pain. Aligning early saves cycles later. It also keeps your ops team out of spreadsheet jail.</p>
+<h3 id="codequalitydividends">Code quality dividends</h3>
+<p>Invest in a strong schema-sync process now, and you de-risk future changes. Amazon iterates. This December update follows prior cycles, like April 2024. It’s part of an ongoing effort. A resilient mapping and validation layer pays off whenever rules shift.</p>
+<p><em>First-hand example:</em> A small brand wired schema refresh into CI. They fetch PTD, diff enums, and run contract tests. They cut listing failures to near zero during the last attribute shake-up.</p>
+<p>That discipline compounds over time. Every new product type becomes easier because your foundation isn’t hardcoded. It’s driven by definitions.</p>
+<h3 id="yourbuyerexperienceimproves">Your buyer experience improves</h3>
+<p>When attributes are precise, PDPs look cleaner. Filters work. Comparison tables line up. Returns drop because expectations match reality. That’s margin in your pocket.</p>
+<p>Clear, correct attributes turn “maybe” buyers into “yes” buyers. If size, material, capacity, or compatibility are crisp, you skip the back-and-forth. You win the cart.</p>
+<h2 id="migrationplan">Migration Plan</h2>
+<h3 id="step1inventoryeverything">Step 1 Inventory everything</h3>
+<p>List your product types, marketplaces, and the APIs you use. Think Listings Items, Feeds, and Catalog Items. Identify where you hardcode enums, validate attributes, or transform payloads. Anywhere you assume a value is a risk.</p>
+<p>Example: Search code for enum lists like size, color, fit, voltage, or material. These often live in helpers, JSON files, or translation dictionaries.</p>
+<p>Add a governance layer. Name owners for each product type and marketplace. If everyone owns it, no one owns it. Clear owners speed fixes when PTD changes.</p>
+<h3 id="step2pullptd">Step 2 Pull PTD</h3>
+<p>Use the Product Type Definitions API to fetch the latest schemas per product type and marketplace. Compare required, optional, deprecated flags and enum values against your code’s expectations.</p>
+<p>Example: Generate a diff report. Show old vs. new required attributes, newly deprecated fields, and enum adds or removals. Flag high-risk product types with volume and strictness.</p>
+<p><em>Pro tip:</em> store retrieved PTD with metadata. Include timestamp, marketplace, product type, and your build or deploy version. When a listing fails, you’ll know which schema you validated against.</p>
+<h3 id="step3updatevalidationmappers">Step 3 Update validation mappers</h3>
+<p>Refactor validation to be schema-driven, not hardcoded. Map internal values to Amazon enums through an adapter. Where Amazon requires new fields, update your data model and inputs.</p>
+<p><em>First-hand example:</em> A DTC brand added a color translation table across marketplaces. “Gray” vs. “Grey” gets handled. A nightly job syncs to PTD, so mapping never goes stale.</p>
+<p>If you collect user data via forms or imports, update labels, tooltips, and required indicators. Do it with your back-end validation. Misaligned front-end rules will guarantee errors.</p>
+<h3 id="step4testinsandboxes">Step 4 Test in sandboxes</h3>
+<p>Run dry-runs using the updated schemas. Validate payloads locally before calling SP‑API. Then deploy by product type or marketplace to limit blast radius.</p>
+<p>Start with low-volume product types or marketplaces to build confidence. Monitor, then expand. If something spikes, you’ll know exactly where to look.</p>
+<h2 id="engineeringtacticsthatscale">Engineering Tactics That Scale</h2>
+<h3 id="makeschemasfirstclasscitizens">Make schemas first class citizens</h3>
+<ul>
+<li>Cache PTD per product type and marketplace with an expiry.</li>
+<li>Add a pre-publish check to retrieve latest definitions and validate.</li>
+<li>Store a commit hash of the schema used for each listing event.</li>
+</ul>
+<p>Extend that with a validation contract. Treat your internal model like an API too. If PTD changes, your model migration plan should be explicit. Fields added, fields deprecated, and removal timing.</p>
+<h3 id="automatediffsandalerts">Automate diffs and alerts</h3>
+<p>Build a scheduled job that:</p>
+<ul>
+<li>Fetches PTD.</li>
+<li>Diffs required, optional, deprecated attributes and enums.</li>
+<li>Alerts owners when a breaking change is detected.</li>
+</ul>
+<p>Example: If “BatteryType” becomes required for certain Electronics, open a ticket. Link the PTD doc section and block deploys until the field is populated.</p>
+<p>Alert channels should match urgency. Breaking required-field changes get paging. Enum additions can be informational. Deprecations trigger migration tasks with deadlines.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-18-2025-04-28-53-4015-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="strongadaptersbeatbrittleconstants">Strong adapters beat brittle constants</h3>
+<p>Move enum lists out of code and into a managed adapter with versioning. Translation tables should map variations, like “Stainless Steel” to “Stainless_Steel,” and reject unknowns.</p>
+<p><em>Developer note if you came from WCF land:</em> enumeration types in data contracts serialize strictly. Treat Amazon enums the same way. Unknown values should fail fast in preflight, not at runtime.</p>
+<p><em>First-hand example:</em> One integrator introduced a “strict mode” that refuses any enum not in current PTD. Error rates dropped right away.</p>
+<p><em>Bonus:</em> expose your adapter as a small internal service. Then UI, bulk importer, and feed generator share the same source of truth.</p>
+<h3 id="buildacleanrollbackpath">Build a clean rollback path</h3>
+<ul>
+<li>Keep previous PTD snapshots for a short window.</li>
+<li>Ship feature flags to toggle adapters by marketplace.</li>
+<li>If a regression sneaks in, revert quickly while you fix.</li>
+</ul>
+<p>Rollbacks aren’t just code—they’re data too. Keep last-known-good mappings handy to regenerate payloads if needed.</p>
+<h2 id="marketplacenuance">Marketplace Nuance</h2>
+<h3 id="nocrossborderparity">No cross border parity</h3>
+<p>Even if two marketplaces sell the same product type, enums can differ. Pull PTD by marketplace and localize mapping. Also watch for language-specific enum strings.</p>
+<p>Example: Color values vary across regions and spellings. Your translation layer should normalize internal data to each marketplace’s set.</p>
+<p>Beyond language, some attributes are regional by nature. Think voltage, plug type, or regulatory fields. Treat these as first-class differences, not edge cases.</p>
+<h3 id="respectdeprecationsnotjustrequirements">Respect deprecations not just requirements</h3>
+<p>Deprecated attributes may still accept values for a time. They can be removed later. Treat deprecations as work orders. Migrate now while you still have overlap.</p>
+<p>Make a deprecation board with target removal dates. Assign owners and track progress. If you wait until removal day, you’ll scramble.</p>
+<h3 id="coordinatefeedsuiandsupport">Coordinate feeds UI and support</h3>
+<p>If you power a multi-tenant platform, align Seller Central guidance, help docs, and UI picklists with updated enums. A stale dropdown is the fastest path to bad data.</p>
+<p><em>First-hand example:</em> A marketplace tool added “definition freshness” badges next to attribute groups. Merchants see if they’re editing against the latest rules.</p>
+<p>Train your support team too. Give them a simple playbook. How to read a PTD-driven error, where to find required fields, and how to fix common mismatches.</p>
+<h2 id="quickpulsecheck">Quick Pulse Check</h2>
+<ul>
+<li>You can list all product types and marketplaces you touch, with owners.</li>
+<li>Your PTD fetch and cache strategy is implemented and tested.</li>
+<li>Enum translation tables exist, with a plan for unknowns.</li>
+<li>You have a diff report showing new required fields and deprecated attributes.</li>
+<li>A sandbox or dry-run step catches schema violations before publish.</li>
+<li>Your UI picklists and bulk templates match the new enums.</li>
+</ul>
+<p>If any single line above makes you pause, start there. <em>One clean pass through this list is usually enough to dodge the big landmines.</em></p>
+<h2 id="faqdecember2024changes">FAQ December 2024 Changes</h2>
+<p>1.
+Q: What exactly is changing on December 15, 2024?</p>
+<p>A: Amazon is updating how certain listing attributes are used. Required vs. optional vs. deprecated. They’re also revising allowed enum values for many product types across multiple marketplaces.</p>
+<p>2.
+Q: How do I find the latest required attributes and enums?</p>
+<p>A: Use the Product Type Definitions API to pull current schemas and allowed values per product type and marketplace.</p>
+<p>3.
+Q: Do I need different mappings per marketplace?</p>
+<p>A: Often, yes. Treat each marketplace like its own rulebook. Pull PTD per marketplace and localize enum mappings.</p>
+<p>4.
+Q: What breaks if I don’t update?</p>
+<p>A: You’ll see validation failures, 4xx responses, suppressed or incomplete listings, and downstream catalog issues. Deprecated attributes may work briefly, then get removed.</p>
+<p>5.
+Q: Does this affect Feeds and Listings Items alike?</p>
+<p>A: Yes. Any path that creates or updates listings must match current attribute usage and enums. Feeds API or Listings Items API both apply.</p>
+<p>6.
+Q: We already handled changes in late 2023. Is this different?</p>
+<p>A: The pattern is similar. Tighten attribute consistency and refine enums. But specifics differ. Always trust the latest PTD, not last year’s assumptions.</p>
+<p>7.
+Q: Should I prefer Feeds or Listings Items for these changes?</p>
+<p>A: Use whatever you run well today. The key is validating against PTD before sending. Feeds batch large updates; Listings Items can be faster for surgical fixes. Both must match current schemas.</p>
+<p>8.
+Q: How often should I refresh PTD?</p>
+<p>A: At minimum, refresh on deploy and on a schedule. Many teams add a pre-publish validation that checks against the latest PTD right before sending.</p>
+<p>9.
+Q: What’s a safe rollout plan?</p>
+<p>A: Start with low-risk product types and one marketplace. Watch error rates and catalog health, then expand. Keep feature flags and revert paths ready.</p>
+<p>10.
+Q: How do I handle unknown or new enum values from upstream systems?</p>
+<p>A: Route them through your adapter. If not recognized, fail fast with a friendly error. Guide users to the closest accepted value per marketplace.</p>
+<h2 id="sevenstepstoship">Seven Steps To Ship</h2>
+<p>1) Enumerate product types and marketplaces you support.
+2) Fetch PTD for each; cache with expiry and provenance.
+3) Diff required, optional, deprecated attributes and enumerate values.
+4) Update validation and build enum translation tables per marketplace.
+5) Backfill new required fields in your catalog.
+6) Dry-run payloads against current schemas; fix violations.
+7) Roll out by cohort; monitor errors; keep PTD refresh automated.</p>
+<h2 id="practicalgotchas">Practical Gotchas</h2>
+<ul>
+<li>Units and formats: Some attributes require specific units or numeric-only formats. Normalize units and formats per PTD.</li>
+<li>Length limits: Titles, bullets, and descriptions have tight limits. When PTD trims lengths, your templates should too.</li>
+<li>Parent-child rules: Parents carry shared attributes; children carry variations. Validate both layers independently.</li>
+<li>Partial updates: If an attribute flips to required, a simple patch may fail. Re-validate the whole item, not just the diff.</li>
+<li>Hidden dependencies: Some attributes become required only when another field is set. Your validator should handle conditional requirements.</li>
+<li>Legacy “Other” buckets: If those get removed, map them to a real enum or block them. Leaving them will nuke submissions.</li>
+</ul>
+<h2 id="metricstowatch">Metrics To Watch</h2>
+<ul>
+<li>Preflight validation pass rate: Aim for near 100% before calling SP‑API.</li>
+<li>4xx error rate by marketplace and product type: Spikes mean mapping drift.</li>
+<li>Suppression rate and reasons: Correlate to PTD diffs and your changes.</li>
+<li>Time-to-fix for schema violations: Track from alert to successful publish.</li>
+<li>Coverage of required attributes: Watch newly required fields closely.</li>
+</ul>
+<p><em>Dashboards beat guesswork.</em> Tie alerts to these metrics so you can act quickly.</p>
+<h2 id="teamplaybook">Team Playbook</h2>
+<ul>
+<li>Engineering: Own PTD fetch, diff, validation, and adapters. Ship feature flags and rollbacks.</li>
+<li>Product/Operations: Update templates, workflows, and internal SOPs. Plan backfill for new required fields.</li>
+<li>Support/Success: Train on new validations and errors. Share quick-fix guides with screenshots.</li>
+<li>QA: Build sandbox test cases that mimic high-volume types and edge marketplaces.</li>
+</ul>
+<p>A short daily standup during rollout week helps a lot. Keep it tight: what failed, why, who owns the fix, and when it ships.</p>
+<p><em>In short:</em> Amazon is tightening the game, but you’re not flying blind. Use PTD, automate diffs, and ship adapters, not hardcoded constants. Do that, and this December push will feel like a Tuesday.</p>
+<p>Want help implementing this without reinventing the wheel? See our <a href="../features.html">Features</a> for schema-driven validation, PTD diffing, and marketplace mapping. Use <a href="../requery.html">Requery</a> to monitor listing errors and automate triage.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/whats-new">Amazon SP‑API: What’s New</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-v2020-09-01-use-case-guide">Product Type Definitions API: Use Case Guide</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/product-type-definitions-api-v2020-09-01-reference">Product Type Definitions API: Reference</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/listings-items-api-v2021-08-01-reference">Listings Items API (2021-08-01): Reference</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-reference">Feeds API (2021-06-30): Reference</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference">Catalog Items API (2022-04-01): Reference</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="dec-2024-attribute-enum-updates.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqfda9.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Prepare+For+Amazon%E2%80%99s+December+2024+SP%E2%80%91API+Attribute+Overhaul&amp;pi=261335924424&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=261335924424&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fdec-2024-attribute-enum-updates&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/dec-2024-attribute-enum-updates?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:36 GMT -->
+</html>

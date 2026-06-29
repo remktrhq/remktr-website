@@ -1,0 +1,241 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/bedrock-agentcore-device-agent?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:40:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Build Scalable IoT Device Agents with Amazon Bedrock AgentCore</title>
+    <link rel="canonical" href="bedrock-agentcore-device-agent.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn to build a device management agent with Amazon Bedrock AgentCore. Explore amazon bedrock agentcore documentation to scale IoT device management.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build Scalable IoT Device Agents with Amazon Bedrock AgentCore",
+        "datePublished": "2025-10-20T21:15:20Z",
+        "dateModified": "2025-10-20T21:15:20.929Z",
+        "mainEntityOfPage": "https://remktr.com/blog/bedrock-agentcore-device-agent",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na1.net/hubfs/50136663/rss_to_hubspot_content/temp-Oct-20-2025-09-09-59-5621-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="bedrock-agentcore-device-agent.html">Build Scalable IoT Device Agents with Amazon Bedrock AgentCore</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Oct 20, 2025 9:15:20 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Build a production-ready IoT device management agent with Amazon Bedrock AgentCore and AWS IoT primitives.</p>
+<h2 id="keyoutcomes">Key outcomes</h2>
+<ul>
+<li>Safer rollouts using canaries and waves, with <em>auto pause or rollback if errors spike</em>.</li>
+<li><em>Natural language intents</em> map to tool calls, like IoT Jobs, Shadows, and inventory checks.</li>
+<li><em>Strong governance</em> with approvals for big scope, auditable choices, and strict tool contracts.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-20-2025-09-11-11-4988-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="corearchitecture">Core architecture</h2>
+<ul>
+<li>Reasoning: Bedrock AgentCore plans steps and calls the tools when needed.</li>
+<li>Tools (via Lambda):</li>
+<li>CreateFirmwareRollout: starts IoT Jobs with a wave plan, concurrency, and abort thresholds.</li>
+<li>GetFleetInventory: queries device groups and device health across your fleet.</li>
+<li>GetDeviceShadow / UpdateDeviceShadow: <em>read before write with etag checks for safety</em>.</li>
+<li>Knowledge base (optional): <em>SOPs and compatibility matrices</em> to guide safe actions.</li>
+<li>Observability: CloudWatch logs and metrics, plus <em>CloudTrail audit of key events</em>.</li>
+</ul>
+<h2 id="guardrails">Guardrails</h2>
+<ul>
+<li><em>Default to a 5% canary</em>, expand only if errors stay under the threshold.</li>
+<li><em>Reject empty target groups</em> and firmware that does not match devices.</li>
+<li><em>Dry run mode</em> for plan preview, approvals above device count or multi-region limits.</li>
+</ul>
+<h2 id="securityandnetworking">Security and networking</h2>
+<ul>
+<li><em>Least privilege IAM</em> with separate roles for the agent and tools, tag-scoped IoT permissions.</li>
+<li>Private access over VPC interface endpoints for Bedrock and Lambda services.</li>
+<li><em>Encrypt artifacts and secrets with KMS</em>, and use signed URLs for firmware.</li>
+</ul>
+<h2 id="operationsandobservability">Operations and observability</h2>
+<ul>
+<li>Metrics: success or failure per wave, retries, and online or offline device mix.</li>
+<li>Logs: reasoning notes and tool I/O with secrets scrubbed, correlate by request IDs.</li>
+<li>Dashboards: wave progress, top error reasons, and ETA, with <em>alerts on threshold breaches</em>.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-20-2025-09-12-35-0885-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="costnotes">Cost notes</h2>
+<ul>
+<li>You pay for Bedrock model use, Lambda calls, and IoT Core or Jobs traffic.</li>
+<li><em>Optimize</em> by picking the smallest reliable model, capping steps, batching inventory queries, and caching snapshots.</li>
+</ul>
+<h2 id="9steplaunchplan">9-step launch plan</h2>
+<p>1) Define the top tasks: rollout, rollback, audit, inventory query, and config update.
+2) Write a crisp system prompt with canary-first policy, thresholds, and approvals.
+3) Implement strict, versioned tool schemas. Always return structured results.
+4) Add a dry run. Require a plan summary before any run.
+5) Load SOPs and compatibility data into the knowledge base.
+6) Lock down IAM. Enable CloudWatch and CloudTrail.
+7) Use VPC endpoints. Keep traffic private.
+8) <em>Start with a small canary group.</em> Expand in waves based on live metrics.
+9) Track costs and agent steps. Right-size the model and the retry plan.</p>
+<p><em>Result: predictable rollouts, fewer 3 a.m. incidents, and auditable choices without rewriting your IoT stack.</em></p>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="bedrock-agentcore-device-agent.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq1330.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Build+Scalable+IoT+Device+Agents+with+Amazon+Bedrock+AgentCore&amp;pi=197890431527&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=197890431527&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fbedrock-agentcore-device-agent&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/bedrock-agentcore-device-agent?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:40:08 GMT -->
+</html>

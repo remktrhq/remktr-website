@@ -1,0 +1,410 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/ec2-c8id-m8id-r8id?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Cut Build Times with EC2 C8id, M8id, R8id Instances</title>
+    <link rel="canonical" href="ec2-c8id-m8id-r8id.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover Amazon EC2 C8id, M8id, and R8id instances with up to 22.8 TB NVMe SSD and Intel Xeon 6. Boost AI, HPC, and analytics with faster local I/O. More speed.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cut Build Times with EC2 C8id, M8id, R8id Instances",
+        "datePublished": "2026-02-05T20:24:15Z",
+        "dateModified": "2026-02-05T20:24:15.699Z",
+        "mainEntityOfPage": "https://remktr.com/blog/ec2-c8id-m8id-r8id",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-05-2026-08-14-04-4151-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="ec2-c8id-m8id-r8id.html">Cut Build Times with EC2 C8id, M8id, R8id Instances</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 5, 2026 8:24:15 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Your bottleneck isn’t CPU. It’s your scratch disk.</p>
+<p>You’ve felt it before: fast CPUs, big memory, then everything crawls during shuffles, spills, staging. That’s the classic EBS tax for jobs that live and die on local I/O.</p>
+<p>Here’s the switch flip: AWS just launched Amazon EC2 C8id, M8id, and R8id with up to 22.8 TB of local NVMe SSD attached to the host. Translation: less time watching spinners, more time shipping. They run custom Intel Xeon 6 processors tuned for AWS, with DDR5 and AVX-512, and tie into Nitro with up to 100 Gbps networking and EFA for low-latency HPC moves.</p>
+<p>If your jobs need fast temporary space—Spark shuffles, in-memory databases with spill, video encoding, scientific scratch, CPU inference—this is your new favorite button. You’re not just getting more storage. You’re getting 3x vCPUs, memory, and local storage versus prior-gen families, and R8id specifically posts a 43% performance jump over R6id.</p>
+<p>Use the instance store right, and you can squeeze &gt;7 GB/s per drive in RAID setups, crush tail latencies, and stop overpaying for IOPS you don’t use.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>New: Amazon EC2 C8id, M8id, and R8id with up to 22.8 TB local NVMe SSD.</li>
+<li>Powered by custom Intel Xeon 6, DDR5, AVX-512; up to 100 Gbps networking and EFA.</li>
+<li>R8id: +43% vs. R6id; C8id: 15–60% faster on web/AI/cache benchmarks.</li>
+<li>Ideal for Spark, HANA/Redis, video encode, CPU inference, EDA, risk modeling.</li>
+<li>Local NVMe slashes scratch I/O latency; keep state ephemeral and back it up smart.</li>
+<li>Price-performance improves up to 15% with Savings Plans and Spot options.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-05-2026-08-14-52-0723-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="yourrealbottleneck">Your real bottleneck</h2>
+<h3 id="whylocalnvmematters">Why local NVMe matters</h3>
+<p>When your workload spills or shuffles, EBS (even io2 Block Express) can choke. With instance store NVMe physically on the host, you trade network hops for PCIe lanes. Net result: huge sequential throughput and microsecond access that speeds your “throwaway” data paths.</p>
+<p>AWS’ launch pitch is clear: “up to 22.8 TB of local NVMe SSD storage” on C8id, M8id, and R8id. In practice, RAID 0 across multiple NVMe devices gives linear throughput gains, often pushing beyond 7 GB/s per drive for sequential reads and writes. If your Spark jobs spend half their time on shuffle I/O, that lever moves your wall-clock.</p>
+<p>Think of it this way: moving shuffle, temp, and cache reads from network storage to on-host NVMe cuts a round trip. EBS is great, but it’s still a network hop with per-volume throughput and IOPS limits. Local NVMe gives microseconds not milliseconds, and wide lanes you don’t reserve ahead of time. For big sequential spills (ETL, sorting, encoding) and high-entropy shuffles, that’s the gap between CPUs idling and CPUs sprinting.</p>
+<p>To be clear, io2 Block Express can deliver serious performance—hundreds of thousands of IOPS and multi-GB/s per volume when provisioned right. But if your pattern is “generate, chew, discard,” the provisioning tax and network hop often become the bottleneck under concurrency. Instance store flips that script.</p>
+<p>Pro tip: don’t judge by a single-thread test. NVMe shines under concurrency. Use a multi-threaded workload (or a tool like fio with parallel jobs and queue depth) to measure the real curve your app will see.</p>
+<h3 id="whereebsstillfits">Where EBS still fits</h3>
+<p>EBS stays gold for durable state, database volumes that need snapshots, and workloads that like decoupled storage and compute scaling. <em>Instance store is ephemeral.</em> If the instance stops or fails, data is gone. The winning pattern: keep hot scratch on NVMe and persist data you care about to EBS or S3.</p>
+<p>As AWS docs put it, “An instance store is temporary block-level storage for your instance.” Use it deliberately, and you get both speed and safety.</p>
+<blockquote>
+  <p>"An instance store is temporary block-level storage for your instance." — AWS EC2 Documentation</p>
+</blockquote>
+<p>Use this split-brain approach:</p>
+<ul>
+<li>Put logs, checkpoints, model artifacts, and job outputs on S3 or EBS. Automate the copy.</li>
+<li>Keep temp tables, intermediate Parquet files, caches, and shuffle on instance store.</li>
+<li>If you must mirror scratch (rare), RAID 1 across NVMe tolerates a single drive failure—but it won’t survive an instance stop or termination. <em>RAID is not a backup.</em></li>
+</ul>
+<p>Two common patterns:</p>
+<ul>
+<li>Build farms: pull dependencies and containers into NVMe-backed caches to avoid re-downloading. Persist the final build to S3 or ECR.</li>
+<li>Analytics clusters: Spark uses instance store for spark.local.dir. Periodically checkpoint to S3, and write final tables to durable storage.</li>
+</ul>
+<h2 id="pickyourweapon">Pick your weapon</h2>
+<h3 id="c8idcpubound">C8id CPU bound</h3>
+<p>C8id extends the compute-optimized C8i family and adds local NVMe. You still get the tight 2:1 memory-to-vCPU profile for CPU-heavy tasks—web proxies, encoding, CPU inference—and now you feed them fast scratch. AWS benchmarks show 60% faster NGINX, 40% faster AI recommendation inference (e.g., TensorFlow Serving), and 35% faster Memcached vs. prior gen C7id. The c8id.96xlarge tops out at 384 vCPUs, 768 GiB memory, and 22.8 TB NVMe.</p>
+<p>If you’ve been running inference with batch pre and post-processing that spills to disk, this is a clean win. Keep transient tensors, feature caches, and logs on NVMe to shave tail latency.</p>
+<p>Try this mapping to get started fast:</p>
+<ul>
+<li>Set your model server to write temporary transforms to an NVMe-backed path.</li>
+<li>Keep model weights and config on EBS for persistence, but copy them to NVMe on boot for faster cold starts.</li>
+<li>If you run NGINX or Envoy sidecars, point their cache directories (TLS session, OCSP or stapling, content cache) at NVMe to smooth p99s under load.</li>
+</ul>
+<h3 id="m8idgeneralpurpose">M8id general purpose</h3>
+<p>M8id balances compute and memory while layering in big local storage. Think mid-tier databases with temp tables, ERP workloads that burst during ETL windows, CI or CD pipelines that fan out builds and cache artifacts locally. Sample sizes scale from m8id.large with 0.95 TB NVMe up to m8id.96xlarge with 22.8 TB NVMe and 3,072 GiB of RAM. It’s the versatile choice when your architecture has many moving parts but you don’t want to overfit a specialized family.</p>
+<p>The twist: you can keep durable data on EBS, but move temp tables, package caches, and build artifacts to NVMe for immediate gains.</p>
+<p>Real-world examples that map well to M8id:</p>
+<ul>
+<li>CI fleets that pull dozens of language runtimes and node_modules: warm the cache on NVMe and watch build times drop.</li>
+<li>ETL systems that run nightly: sort, aggregate, and join on instance store; write the curated datasets to S3.</li>
+<li>Web apps that do heavy image or video transforms at request time: stage inputs and outputs on NVMe and only persist the final asset.</li>
+</ul>
+<h3 id="r8idmemorymonster">R8id memory monster</h3>
+<p>R8id is memory-optimized plus local NVMe. It’s built for in-memory databases (SAP HANA, Redis), real-time analytics (Spark), big caches, simulation workloads, and EDA. AWS reports up to 43% higher performance than R6id, 3.3x higher memory bandwidth, and triple the local storage—topping at 22.8 TB on r8id.96xlarge with 3 TB of DDR5.</p>
+<p>If your HANA box spills during delta merges or your Redis snapshot pipeline thrashes, R8id shrinks the penalty by keeping temporary I/O on-device. Pair with EFA for tightly coupled HPC patterns when you need low-latency east-west traffic.</p>
+<blockquote>
+  <p>"R8id provides up to 43% higher performance than R6id." — AWS launch materials</p>
+</blockquote>
+<p>Best practices for memory-first stacks:</p>
+<ul>
+<li>Redis: keep RDB or AOF on EBS for durability, but stream snapshot staging to NVMe to avoid blocking. Use faster local fsync paths and copy completed snapshots out.</li>
+<li>HANA: place temp and trace directories on NVMe; keep data and log volumes on EBS. This reduces merge pain and restart times.</li>
+<li>Spark: on big joins that exceed RAM, many NVMe lanes keep spill from becoming a parking lot.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-05-2026-08-15-44-5110-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="architecturepatterns">Architecture patterns</h2>
+<h3 id="treatinstancestore">Treat instance store</h3>
+<p>Instance store is ephemeral by design. Great for scratch, terrible for irreplaceable state. The playbook:</p>
+<ul>
+<li>Use RAID 0 across multiple NVMe devices for throughput on temporary datasets.</li>
+<li>Persist checkpoints, logs, and outcomes to S3 or EBS on a schedule.</li>
+<li>On reboot or stop, expect a clean whiteboard. Automate provisioning via cloud-init or user data to rehydrate caches and directories.</li>
+</ul>
+<p>AWS says it plainly in docs: instance store is temporary block-level storage. That’s not a bug; it’s a feature when you’re optimizing throughput with acceptable risk boundaries.</p>
+<p>Operational add-ons that save headaches:</p>
+<ul>
+<li>Use Auto Scaling groups with launch templates that create the RAID, format, and mount on boot. <em>Treat nodes as cattle, not pets.</em></li>
+<li>Add lifecycle hooks to drain work and flush outputs to S3 before termination.</li>
+<li>Tag scratch volumes and write a health check that fails fast if the mount isn’t present. <em>Fail early, not halfway into your ETL.</em></li>
+</ul>
+<h3 id="squeezethroughputsafely">Squeeze throughput safely</h3>
+<ul>
+<li>Filesystems: XFS or ext4 often deliver consistent performance for large sequential I/O.</li>
+<li>Queue depth: tune iodepth (e.g., fio) to find the knee of the curve for your workload.</li>
+<li>NUMA awareness: pin high-traffic processes to cores local to NVMe controllers when applicable.</li>
+<li>Networking: use EFA for MPI-style HPC or latency-sensitive east-west traffic; ENA and enhanced networking for everything else.</li>
+</ul>
+<p><em>Don’t forget placement groups for full-bisection bandwidth across nodes.</em> And when you’re mixing EBS and instance store, ensure your EBS bandwidth (up to 80 Gbps on the largest sizes) isn’t your new bottleneck.</p>
+<blockquote>
+  <p>"Use RAID 0 on instance store to increase volume size and to provide higher I/O performance." — AWS EC2 User Guide (RAID)</p>
+</blockquote>
+<p>A few more low-effort wins:</p>
+<ul>
+<li>Set noatime on mounts to cut metadata churn. Consider increasing read-ahead on large sequential jobs.</li>
+<li>For NVMe, the default I/O scheduler is often optimal, but test mq-deadline versus none for your pattern.</li>
+<li>Keep block sizes aligned with your access pattern. Large blocks help sequential scans and writes.</li>
+<li>Warm caches during bootstrap if you know your working set. Pre-fetching avoids a cold-start cliff.</li>
+</ul>
+<h2 id="costmath">Cost math</h2>
+<h3 id="stoppayingforidleiops">Stop paying for idle IOPS</h3>
+<p>If you’re throwing EBS io2 Block Express at scratch problems, you might be paying a premium for durability and provisioned IOPS you don’t need. Local NVMe gives you raw, attached performance without per-IOPS pricing. For shuffle-heavy analytics or build farms, that really matters.</p>
+<p>A simple framing for finance: if your job runtime drops 30–50% by moving scratch to instance store, your compute-hours fall accordingly. Combine that with up to 15% better price-performance on C8id versus C7id and the savings stack fast. Add Savings Plans for baseline capacity and Spot Instances for burst windows.</p>
+<p>Two extra levers to remember:</p>
+<ul>
+<li>Instance store is included in the instance price. No extra per-GB-month for scratch.</li>
+<li>EBS is fantastic for persistence, but you pay for capacity and, with io2, provisioned IOPS. Keep it for data you must keep.</li>
+</ul>
+<h3 id="backofenvelopescenario">Back of envelope scenario</h3>
+<ul>
+<li>Before: 100-node Spark cluster on instances without local NVMe, heavy on EBS io2 for shuffle. 2-hour jobs, frequent tail latency stalls.</li>
+<li>After: same node count on R8id with RAID 0 across NVMe for shuffle. Jobs complete in ~70–90 minutes.</li>
+</ul>
+<p>You didn’t just buy performance. <em>You bought back time.</em> And time is the only non-renewable resource in your roadmap.</p>
+<blockquote>
+  <p>"Savings Plans provide flexible pricing for EC2 usage in exchange for a 1- or 3-year term." — AWS Savings Plans</p>
+</blockquote>
+<p>If you want to push savings further:</p>
+<ul>
+<li>Run on-demand for canaries and nightly for stability; move bursty daytime backfills to Spot with diversification.</li>
+<li>Use instance fleets, multiple sizes in one ASG or EMR cluster, to grab the best availability and price.</li>
+<li>Right-size aggressively. With faster scratch, you may finish within the same billable hour on fewer nodes.</li>
+</ul>
+<h2 id="whatthisunlocks">What this unlocks</h2>
+<h3 id="todayswins">Todays wins</h3>
+<ul>
+<li>AI or ML inference on CPUs: AVX-512 plus fast local feature stores reduce p99 latency.</li>
+<li>Real-time analytics: Spark shuffle and spill accelerate with on-host NVMe; EMR or self-managed.</li>
+<li>In-memory DB headroom: faster merges, snapshots, and restarts when paired with durable EBS for state.</li>
+<li>HPC and scientific workloads: scratch-heavy simulations benefit from NVMe and EFA.</li>
+</ul>
+<p>These families snap into AWS Nitro for security isolation, support IMDSv2, and can leverage Nitro Enclaves for confidential compute when you need to segment sensitive workloads on the same host.</p>
+<p>Add in the operational niceties:</p>
+<ul>
+<li>Placement groups to keep nodes close for low-latency east-west chatter.</li>
+<li>CloudWatch Agent on each node to watch disk throughput and iowait. Alert when p95 latencies creep.</li>
+<li>S3 lifecycle policies so intermediate outputs age out automatically. Keep storage bills tidy.</li>
+</ul>
+<h3 id="thenearfuture">The near future</h3>
+<p>As the Xeon 6 lineup matures, expect tighter perf-per-watt curves and broader region availability. In parallel, Graviton remains the ARM path for specific price-performance wins—but in x86-heavy stacks (legacy software, proprietary binaries, AVX-accelerated libraries), C8id, M8id, and R8id are the straightforward upgrade. The big story isn’t CPU versus CPU; it’s end-to-end throughput from core to cache to disk to network.</p>
+<blockquote>
+  <p>"Elastic Fabric Adapter provides low-latency, high-throughput communications for tightly coupled HPC applications." — AWS Documentation</p>
+</blockquote>
+<p>If you’re modernizing, consider a two-lane approach:</p>
+<ul>
+<li>For services that can recompile and benefit from ARM, test Graviton for steady-state fleets.</li>
+<li>For everything x86-bound, move to 8id families now so you stop leaving throughput on the table.</li>
+</ul>
+<h2 id="fastfacts">Fast facts</h2>
+<ul>
+<li>Local NVMe on C8id, M8id, R8id turns scratch from a drag into a glide path.</li>
+<li>R8id posts +43% vs. R6id with 3.3x memory bandwidth; C8id delivers 15–60% gains on web, AI, and cache benchmarks.</li>
+<li>Use RAID 0 for throughput on ephemeral data; persist outcomes to EBS or S3.</li>
+<li>Pair with EFA and placement groups for low-latency multi-node work.</li>
+<li>Price-performance improves when you stop paying for scratch IOPS you don’t need.</li>
+</ul>
+<h2 id="launchplan">Launch plan</h2>
+<ul>
+<li>Pick the family: C8id (CPU-bound), M8id (balanced), R8id (memory-heavy).</li>
+<li>Right-size: aim for headroom in vCPU and memory; don’t starve your app threads.</li>
+<li>Choose AMI: latest kernel with NVMe optimizations; enable ENA or EFA as needed.</li>
+<li>Create RAID 0 across NVMe devices (mdadm) for scratch.</li>
+<li>Format with XFS or ext4; set noatime for fewer metadata writes.</li>
+<li>Mount scratch under /mnt or /local; set permissions for app users.</li>
+<li>Wire your app: point temp dirs, shuffle, and caches to the NVMe mount.</li>
+<li>Add persistence: periodic checkpoints to S3 or EBS; rotate logs off-host.</li>
+<li>Tune: iodepth, queue sizes, thread pools; test with fio before production.</li>
+<li>Automate bootstrap in user data; test stop or start semantics (remember: ephemeral).</li>
+</ul>
+<p>Bonus guardrails that pay off:</p>
+<ul>
+<li>Put node drains and checkpoint hooks in your autoscaling termination policies.</li>
+<li>Keep a tiny “canary” job that runs every hour to validate disk speed and mount health.</li>
+<li>Document recovery: if scratch is empty on boot (it will be), does your node self-heal in under 2 minutes? Make it so.</li>
+</ul>
+<h2 id="faqs">FAQs</h2>
+<h3 id="durability">Durability</h3>
+<p>No. Instance store volumes are ephemeral. If the instance stops, fails, or is terminated, data on instance store is lost. Keep irreplaceable data on EBS or S3 and use instance store for caches, shuffles, and other scratch paths.</p>
+<h3 id="howfastisnvme">How fast is NVMe</h3>
+<p>AWS indicates sequential reads and writes can exceed 7 GB/s per drive. With multiple devices in RAID 0, throughput scales nearly linearly for large sequential workloads. Your actual performance depends on filesystem, queue depth, and workload profile.</p>
+<h3 id="supportedsizes">Supported sizes</h3>
+<p>The largest c8id.96xlarge, m8id.96xlarge, and r8id.96xlarge configurations offer up to 22.8 TB of NVMe instance storage, alongside up to 384 vCPUs. R8id also reaches 3 TB of DDR5 memory on its largest sizes.</p>
+<h3 id="whentochooseebs">When to choose EBS</h3>
+<p>When you need durable, high-IOPS storage with snapshots, encryption at rest, and decoupled scaling from compute. Databases that require persistence across reboots should keep primary volumes on EBS, while offloading temp and spill files to instance store.</p>
+<h3 id="efaandnetworking">EFA and networking</h3>
+<p>Yes. They integrate with Nitro and support ENA up to 100 Gbps networking on larger sizes. Elastic Fabric Adapter is available for HPC-style, low-latency communications. Always confirm instance-size-specific limits in the latest AWS documentation.</p>
+<h3 id="controlcosts">Control costs</h3>
+<p>Use Savings Plans for steady-state capacity and EC2 Spot for bursty or fault-tolerant jobs. Right-size instances, move scratch to NVMe to reduce runtime, and monitor utilization. The combination can deliver up to 15% better price-performance versus prior gens, plus time savings.</p>
+<h3 id="snapshotinstancestore">Snapshot instance store</h3>
+<p>Not directly. Instance store doesn’t support snapshots like EBS. If you need to preserve data, copy it to EBS or S3 on a schedule or at job boundaries.</p>
+<h3 id="instancestoreencryption">Instance store encryption</h3>
+<p>On Nitro-based instances, instance store data is encrypted at rest and is securely wiped when the instance is stopped or terminated. You still control application-layer encryption for data written to EBS or S3.</p>
+<h3 id="instancestorefordocker">Instance store for Docker</h3>
+<p>Yes. Point your container runtime’s image and cache directories to the NVMe mount. You’ll see faster pulls and layer extraction, especially in CI or CD pipelines.</p>
+<p>You don’t need more servers—you need more throughput where it counts. These new EC2 families put fat NVMe lanes right next to your CPUs, so your hot code paths stop tripping over storage. Move scratch, spills, and temp artifacts onto instance store, keep your state safe on EBS or S3, and let the CPUs breathe. Your jobs get shorter, your bills get saner, and your team gets weekends back.</p>
+<p><em>In 2026, the fastest “upgrade” isn’t more cores—it’s fewer I/O hops.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html">AWS EC2 Instance Store (ephemeral storage)</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/raid-config.html">AWS EC2 RAID configurations</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html">AWS Enhanced Networking with ENA</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html">AWS Elastic Fabric Adapter (EFA)</a></li>
+<li><a href="https://aws.amazon.com/ec2/nitro/">AWS Nitro System</a></li>
+<li><a href="https://aws.amazon.com/ebs/io2/">Amazon EBS io2 volumes</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html">EBS-optimized instances and bandwidth</a></li>
+<li><a href="https://aws.amazon.com/savingsplans/">AWS Savings Plans</a></li>
+<li><a href="https://aws.amazon.com/ec2/spot/">EC2 Spot Instances</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html">IMDSv2 (Instance Metadata Service)</a></li>
+<li><a href="https://aws.amazon.com/ec2/nitro/nitro-enclaves/">Nitro Enclaves</a></li>
+<li><a href="https://spark.apache.org/">Apache Spark (shuffle-intensive analytics)</a></li>
+<li><a href="https://www.tensorflow.org/tfx/serving/overview">TensorFlow Serving</a></li>
+<li><a href="https://memcached.org/">Memcached</a></li>
+<li><a href="https://aws.amazon.com/sap/solutions/sap-hana/">SAP HANA on AWS</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">EC2 Placement Groups</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html">Amazon CloudWatch Agent (installation)</a></li>
+<li><a href="https://aws.amazon.com/ebs/pricing/">Amazon EBS pricing</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="ec2-c8id-m8id-r8id.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq0325.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Cut+Build+Times+with+EC2+C8id%2C+M8id%2C+R8id+Instances&amp;pi=311688210152&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=311688210152&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fec2-c8id-m8id-r8id&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/ec2-c8id-m8id-r8id?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:57 GMT -->
+</html>

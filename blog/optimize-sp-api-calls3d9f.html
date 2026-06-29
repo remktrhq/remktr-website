@@ -1,0 +1,466 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/optimize-sp-api-calls?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Cut SP-API Costs: Smarter Calls, Faster Sales Now</title>
+    <link rel="canonical" href="optimize-sp-api-calls.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Optimize calls to the Selling Partner API with event-driven design, batching and error handling to reduce SP-API fees and stay reliable in peak seasons">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cut SP-API Costs: Smarter Calls, Faster Sales Now",
+        "datePublished": "2025-12-04T17:54:30Z",
+        "dateModified": "2025-12-04T17:54:30.654Z",
+        "mainEntityOfPage": "https://remktr.com/blog/optimize-sp-api-calls",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-04-2025-05-42-04-1425-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="optimize-sp-api-calls.html">Cut SP-API Costs: Smarter Calls, Faster Sales Now</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 4, 2025 5:54:30 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’re paying for every noisy API call now. That stings during Prime Day or the holiday crush when traffic 10x’s and your integration decides to poll like it’s 2012.</p>
+<p>Here’s the fix: design your stack to <em>call less and deliver more</em>. Amazon’s guidance is clear — use event-driven patterns, batch the heavy stuff, harden retries, and stop wasting requests on stale data. That combo trims your Selling Partner API (SP-API) bill and makes your ops feel faster.</p>
+<p>Looking for tooling that helps eliminate noisy polls and consolidate requests? Explore <a href="../requery.html">Requery</a>.</p>
+<p>If you’re a large-scale seller or integrator, this isn’t optional. Under the new SP-API cost framework, unnecessary calls hit margins and increase latency risks right when you need reliability. The move is obvious: <em>fewer, smarter calls.</em></p>
+<p>Below is the playbook. <em>No fluff.</em> You’ll get the best practices Amazon expects, how to wire them, and where teams usually overspend. You’ll go from reactive polling to a durable, event-driven engine that scales cleanly during peaks and sleeps quietly off-peak.</p>
+<ul>
+<li>TL;DR</li>
+<li>Use events over polling to slash request volume and latency bursts.</li>
+<li>Replace per-entity calls with Reports for reads and Feeds for writes.</li>
+<li>Backoff with jitter, respect 429 and 5xx, and make retries idempotent.</li>
+<li>Cache aggressively, filter narrowly, paginate safely, and dedupe.</li>
+<li>Pre-warm for peaks: bigger queues, scheduled reports, circuit breakers.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-43-26-5793-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="stoppollingletevents">Stop Polling Let Events</h2>
+<h3 id="whyeventsbeatpolls">Why events beat polls</h3>
+<p><em>Polling is the tax you pay for not listening.</em> With SP-API Notifications routed through Amazon EventBridge or SQS, you flip the model: Amazon tells you when something changes, and you react. That means fewer wasted calls and fresher data.</p>
+<p>AWS CTO Werner Vogels said it best: 'Everything fails, all the time.' Events localize failures. If orders spike, you scale your consumers — not your pollers. If a marketplace is quiet, your system stays quiet.</p>
+<p>Events also shrink your “freshness window.” If you poll every 5 minutes, your worst-case delay is 5:00 plus queueing and processing. With events, you’re usually working within seconds. That can hit a service-level goal instead of chasing it.</p>
+<p>A simple migration path works:</p>
+<ul>
+<li>Step 1: Keep your pollers, but add Notifications for one workflow (e.g., orders) and consume them first when available.</li>
+<li>Step 2: As your event consumers prove stable, reduce poll frequency and use polling only as a backstop.</li>
+<li>Step 3: Turn your pollers into reconciliation jobs that run hourly or daily, not minute-by-minute.</li>
+</ul>
+<h3 id="whattosubscribeto">What to subscribe to</h3>
+<p>Start with the changes that drive money or operations:</p>
+<ul>
+<li>Orders and order status changes</li>
+<li>Feed processing/completion</li>
+<li>Report processing finished</li>
+<li>Shipment and fulfillment status</li>
+</ul>
+<p>The pattern: subscribe only to events you act on. Don’t chase vanity signals.</p>
+<p>Noise-control checklist:</p>
+<ul>
+<li>If your team never changes behavior from a signal, unsubscribe from it.</li>
+<li>If a signal creates duplicate work (e.g., multiple updates to the same order in seconds), debounce in your queue layer.</li>
+<li>Add a small 'coalescing' delay (e.g., 1–3 seconds) for high-churn entities so you process one merged update instead of five small ones.</li>
+</ul>
+<h3 id="wiringitup">Wiring it up</h3>
+<ul>
+<li>Use the SP-API Notifications API to create a destination (EventBridge or SQS) and subscribe to relevant event types.</li>
+<li>Validate message signatures and treat the queue as your truth.</li>
+<li>Store event metadata for idempotency; process each event once.</li>
+</ul>
+<p>Operational hardening that pays off:</p>
+<ul>
+<li>Put an SQS dead-letter queue (DLQ) behind your consumer. If a message fails N times, it lands in DLQ for manual review instead of thrashing.</li>
+<li>Use visibility timeouts that exceed your worst-case processing time, and extend them on long-running work.</li>
+<li>Keep message payloads small; stash large artifacts (like reports) in S3 and pass references.</li>
+<li>Build a replayer: the ability to re-enqueue DLQ messages or historical events lets you fix bugs without live-fire risk.</li>
+</ul>
+<p>Example: You’re polling the Orders API every 5 minutes across 7 marketplaces. That’s 288 calls/day/marketplace — 2,016 calls/day — just to check 'anything new?' Switch to order events and your polling shrinks to near zero while your order processing gets faster.</p>
+<p>The missing safety net: run a scheduled reconciliation (e.g., hourly or daily) using a recent Order report to find any records you may have missed due to downstream issues. When you detect drift, queue corrective actions and update your last-known checkpoints.</p>
+<h2 id="batcheverything">Batch Everything</h2>
+<h3 id="replacenreads">Replace N reads</h3>
+<p>If you’re fetching inventory, pricing, or order summaries object-by-object, you’re burning requests. The Reports API exists to give you a point-in-time snapshot in one go. Generate the report, pick up the file, and hydrate your internal store.</p>
+<p>What to move to Reports first:</p>
+<ul>
+<li>Inventory levels and reserved quantities</li>
+<li>Pricing and Buy Box analytics</li>
+<li>Order summaries for analytics or reconciliation</li>
+</ul>
+<p>Best practice: Schedule recurring reports at the smallest cadence your business needs (often 15–60 minutes for most analytics) and stop making per-item reads in that window. Use the report as your cache-of-record until the next run.</p>
+<p>Picking cadences that stick:</p>
+<ul>
+<li>Operational decisions (reprices, low-stock alerts): 5–30 minutes if you’re also using events.</li>
+<li>Analytics and dashboards: 15–60 minutes.</li>
+<li>Deep accounting or catalog audits: daily.</li>
+</ul>
+<p>Implementation tips that save rework:</p>
+<ul>
+<li>Land raw report files in S3 with object versioning on. Keep raw, parsed, and curated layers so you can reprocess when parsers change.</li>
+<li>Store a report manifest: report type, marketplace, time window, row count, and checksum. If counts don’t match expectations, don’t promote the data.</li>
+<li>Normalize to your internal model on ingest and index by marketplace + SKU/ASIN for fast lookups.</li>
+</ul>
+<h3 id="writeinbatcheswithfeeds">Write in batches with Feeds</h3>
+<p>Updating hundreds or thousands of SKUs? Feeds are your friend. Build deltas and send a batch update rather than firing singular updates. You get fewer requests and more predictable throughput.</p>
+<p>Practical flow:</p>
+<ul>
+<li>Compute per-marketplace deltas.</li>
+<li>Chunk into deterministic batches (e.g., 5k SKUs per feed).</li>
+<li>Submit feeds with metadata for traceability.</li>
+<li>Listen for 'feed processing finished' notifications, then reconcile.</li>
+</ul>
+<p>Example: Instead of 10,000 individual price updates (10,000 calls), you push two feed files with 5,000 updates each (2 calls plus document upload). Call volume drops by orders of magnitude, and your failure surface shrinks.</p>
+<p>Feed patterns that work:</p>
+<ul>
+<li>Separate change types: price updates and quantity updates in distinct feeds improve observability and retries.</li>
+<li>Make feed IDs deterministic per batch (timestamp + marketplace + hash). That’s your idempotency handle.</li>
+<li>Keep feed sizes consistent. It’s easier to reason about throughput when batches are uniform.</li>
+<li>Track end-to-end latency: submission → processing started → processing finished → downstream effects observed (e.g., price reflected on a listing).</li>
+</ul>
+<p>When to go real-time instead of feeds:</p>
+<ul>
+<li>A single, urgent change that must land within seconds.</li>
+<li>Customer support actions where immediacy beats efficiency.</li>
+</ul>
+<p>Even then, cap the per-minute updates and fold everything else back into your next feed cycle.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-04-2025-05-44-52-0698-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="errorbudgetsbackoffidempotency">Error Budgets Backoff Idempotency</h2>
+<h3 id="backoffwithjitter">Backoff with jitter</h3>
+<p>When SP-API returns 429 (throttled) or 5xx (transient), you should retry — slowly and randomly. Exponential backoff with jitter is the standard: double the delay each time and add randomness to avoid retry storms. Respect any Retry-After header if provided.</p>
+<p>Simple pattern (pseudo):</p>
+<ul>
+<li>Try request</li>
+<li>On 429/5xx: wait base * 2^n + random(0, jitter)</li>
+<li>Cap max delay; use deadlines/cancellation</li>
+<li>Log backoff, not just failures</li>
+</ul>
+<p>AWS guidance specifically recommends jitter to avoid synchronized retries that amplify outages. Treat that as table stakes.</p>
+<p>A practical recipe:</p>
+<ul>
+<li>Base delay: 200–500 ms per attempt.</li>
+<li>Max attempts: 5–7 for reads, 3–5 for writes.</li>
+<li>Max delay: 30–60 seconds.</li>
+<li>Total deadline: 90 seconds for user-facing paths, longer for async jobs.</li>
+</ul>
+<p>Tie retries to context:</p>
+<ul>
+<li>If a user is waiting, budget fewer tries with tighter timeouts.</li>
+<li>If it’s a background job, allow more relaxation but keep a clear max.</li>
+</ul>
+<h3 id="idempotencyeverywhere">Idempotency everywhere</h3>
+<p>Your integration must tolerate duplicates and partial failures. Generate idempotency keys for write operations (e.g., deterministic batch IDs per feed, or stable correlation IDs in your queue). Store processed IDs to drop duplicates. Make your internal state machines re-entrant.</p>
+<p>Idempotency toolbox:</p>
+<ul>
+<li>Keyed writes: include a unique operation ID in metadata.</li>
+<li>Exactly-once-ish: store a small ledger of processed operation IDs with timestamps and hashes.</li>
+<li>Re-entrant processors: if a step crashes mid-way, rerun safely without double-applying side effects.</li>
+</ul>
+<h3 id="observeratelimits">Observe rate limits</h3>
+<p>Rate limits are per-operation. Expose them to your scheduler. Keep a per-operation token bucket and budget retries against it. When you hit the wall, degrade gracefully: queue work, run reports, or delay non-critical jobs.</p>
+<p>Example: You hit a 429 on getCatalogItem. Old you would retry immediately and fail harder. New you backs off with jitter, queues the request behind a token bucket, and uses report data to answer non-urgent queries in the meantime.</p>
+<p>Token bucket quick-start:</p>
+<ul>
+<li>Define tokens-per-second per operation (align to documented limits).</li>
+<li>Allow a burst (bucket size) to handle short spikes.</li>
+<li>Each request consumes a token; retries consume tokens, too.</li>
+<li>If the bucket is empty, wait or defer to batch pathways (reports/feeds).</li>
+</ul>
+<p>Observability signals to watch:</p>
+<ul>
+<li>Throttle rate (429s) and retry counts per operation.</li>
+<li>P50/P95 latency, especially during backoffs.</li>
+<li>Queue depth and DLQ counts.</li>
+<li>Deadline cancellations vs hard failures.</li>
+</ul>
+<h2 id="cachefiltersandpaging">Cache Filters and Paging</h2>
+<h3 id="cachelikeyourmargin">Cache like your margin</h3>
+<p><em>It does.</em> Caching high-fanout reads (catalog attributes, ASIN metadata, brand info) turns 100s of calls into 1. Pick TTLs that match business needs: 15–60 minutes for slow-moving catalog data; seconds to minutes for pricing if you also have events.</p>
+<p>Tactics that work:</p>
+<ul>
+<li>Cache by marketplace + ASIN; invalidate on relevant events</li>
+<li>Keep a warm store for frequently accessed SKUs</li>
+<li>Memoize expensive transforms so you don’t recompute on every request</li>
+</ul>
+<p>Design a two-level cache:</p>
+<ul>
+<li>L1 in-process for ultra-fast reads of hot keys (milliseconds, per-instance).</li>
+<li>L2 shared (Redis/Memcached) for cross-service reuse and higher hit rates.</li>
+</ul>
+<p>Avoid cache stampedes:</p>
+<ul>
+<li>Use request coalescing so the first miss populates the cache while others wait.</li>
+<li>Add jitter to TTLs so many keys don’t expire at the same time.</li>
+<li>Prefer 'refresh-ahead' for very hot items rather than hard expirations.</li>
+</ul>
+<h3 id="filternarrowlyandpagethoughtfully">Filter narrowly and page thoughtfully</h3>
+<p>Most SP-API reads support filters (createdSince, updatedAfter, statuses) and pagination. Use them. Fetch only what changed since your last checkpoint. Never request 'everything' when you only need 'what’s new'.</p>
+<p>Paging safety:</p>
+<ul>
+<li>Always iterate until nextToken is empty; capture checkpoints so you can resume</li>
+<li>Enforce per-page limits that fit your rate budget</li>
+<li>Dedupe at the boundary: merge by orderId/sku to avoid double work on page overlaps</li>
+</ul>
+<p>Checkpoint design:</p>
+<ul>
+<li>Store the last successful createdSince/updatedAfter timestamp per marketplace.</li>
+<li>Write checkpoints only after processing is fully complete (post-commit).</li>
+<li>If a run fails mid-way, restart from the last durable checkpoint.</li>
+</ul>
+<p>Example: Instead of listing all orders for a day (which could be thousands), query createdSince=last_run and only page through new/updated orders. Then cache the result for downstream services so they don’t trigger their own SP-API reads.</p>
+<h2 id="peakseasonplaybook">Peak Season Playbook</h2>
+<h3 id="beforeprimeday">Before Prime Day</h3>
+<p>Peak behavior isn’t a surprise — the dates are on your calendar. Two weeks out, schedule more frequent reports for high-change datasets and increase queue depth. One week out, raise concurrency for event consumers and pre-scale your worker autoscaling targets.</p>
+<p>Make it concrete:</p>
+<ul>
+<li>Double DLQ retention and alerting so nothing gets lost in noise.</li>
+<li>Increase report frequency for inventory/pricing to reduce ad-hoc reads.</li>
+<li>Dry-run a feed submission with production-sized batches.</li>
+<li>Warm caches by preloading top 1–5% SKUs by traffic and revenue.</li>
+</ul>
+<h3 id="circuitbreakersandgracefuldegradation">Circuit breakers and graceful degradation</h3>
+<p>When the world gets hot, your system should choose what to drop. If you hit sustained throttling, pause non-critical syncs (e.g., catalog enrichments) and reserve your budget for revenue-critical flows (orders, fulfillment). Surface graceful fallbacks in dashboards and alert on backlogs, not just error counts.</p>
+<p>Playbook during trouble:</p>
+<ul>
+<li>Trip a per-operation circuit breaker at a defined error or throttle rate.</li>
+<li>Route user-visible queries to cached data when possible.</li>
+<li>Defer batch jobs and free tokens for real-time order flows.</li>
+<li>Increase backoff windows system-wide until error rates normalize.</li>
+</ul>
+<h3 id="budgetyourcallslikecash">Budget your calls like cash</h3>
+<p>Model worst-case traffic. Example: if your median day does 25k orders and Prime Day does 8x, you’ll see ~200k order events. Can your consumers handle that with at-most-once semantics? Can your queues buffer a few hours at peak? Does your rate budget cover retries plus scheduled syncs? Answer those now, not during the spike.</p>
+<p>A quick capacity checklist:</p>
+<ul>
+<li>Max events per minute you can consume without lag.</li>
+<li>Max queue depth before SLA impact.</li>
+<li>Peak tokens per second available per SP-API operation.</li>
+<li>Longest allowed retry delay before a user-facing timeout.</li>
+</ul>
+<p>And because it will come up: as SP-API usage moves to more explicit cost models (and yes, you’ve seen posts like 'an update on SP-API fees' and the chatter on 'amazon sp-api 2026 fees: how to optimize your …'), the playbook above is the difference between scalable margins and surprise bills.</p>
+<h2 id="quickreboot">Quick Reboot</h2>
+<ul>
+<li>Events replace polling and cut waste; subscribe only to signals you act on.</li>
+<li>Use Reports for bulk reads and Feeds for bulk writes; stop per-entity chatter.</li>
+<li>Backoff with jitter, treat 429/5xx as normal, and design idempotent retries.</li>
+<li>Cache aggressively, filter by time/status, and paginate with checkpoints.</li>
+<li>Pre-warm capacity, add circuit breakers, and protect call budgets during peaks.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="fastestwaytocutvolume">Fastest way to cut volume</h3>
+<p>Switch from polling to event-driven. Subscribe to order, feed, and report events and process from queues. Then move heavy reads to scheduled Reports and heavy writes to Feeds. That two-step change typically slashes call volume while improving freshness.</p>
+<h3 id="handlethrottlingwithoutslowing">Handle throttling without slowing</h3>
+<p>Respect 429s with exponential backoff and jitter, cap retry attempts, and budget retries using a token-bucket per operation. Deprioritize non-critical jobs when you approach rate ceilings and lean on your cached/report data to answer non-urgent queries.</p>
+<h3 id="needbothcachingandreports">Need both caching and Reports</h3>
+<p>Yes. Reports give you bulk, point-in-time truth; caching serves that truth quickly to internal services without extra SP-API calls. Invalidate caches via events and scheduled report checkpoints so you stay fresh without spamming the API.</p>
+<h3 id="arefeedsalwaysbetter">Are Feeds always better</h3>
+<p>For large batches, yes. Feeds reduce the number of requests and provide predictable processing. For tiny updates that must be real-time, single calls can make sense — but measure the impact on rate limits and costs.</p>
+<h3 id="prepforprimeday">Prep for Prime Day</h3>
+<p>Two weeks out, increase report frequency, queue depth, and autoscaling targets. One week out, run failover tests and add circuit breakers. During the event, pause non-critical syncs to protect your rate budget for orders and fulfillment.</p>
+<h3 id="wherecanilearnmore">Where can I learn more</h3>
+<p>You’ll see discussions like 'diving into amazon sp-api hot topics! 🔥👋 #4270' in dev communities. For authoritative guidance, start with Amazon’s SP-API docs for Notifications, Reports, Feeds, rate limits, and error handling (linked below).</p>
+<h3 id="handlescalewithoutchaos">Handle scale without chaos</h3>
+<p>Partition everything by marketplace. That means queues per marketplace (or partition keys), per-marketplace checkpoints, and per-marketplace rate budgets. If one region gets noisy, it shouldn’t starve others.</p>
+<h3 id="authenticationandtokenchurn">Authentication and token churn</h3>
+<p>Cache LWA access tokens with their expiry and refresh them early. Avoid requesting a new token on every call. Centralize token management so internal services don’t each hit the auth endpoints independently.</p>
+<h3 id="picktherightbatchsize">Pick the right batch size</h3>
+<p>Choose a size that finishes within your target end-to-end latency while keeping failure blast radius small. Many teams start with 2k–5k records per feed, then tune based on processing times and error rates. Keep the size stable to simplify monitoring.</p>
+<h3 id="monitorcostsproactively">Monitor costs proactively</h3>
+<p>Expose three metrics: requests per operation, throttles per operation, and report/feed counts per day. Tag each workload by business function so you can spot runaway jobs quickly. Set alerts on unusual growth day-over-day or week-over-week.</p>
+<h2 id="optimizationsprint">Optimization Sprint</h2>
+<ul>
+<li>Days 1–2: Map every SP-API call by operation and volume; tag by business criticality.</li>
+<li>Days 3–4: Enable Notifications; route to EventBridge or SQS; process idempotently.</li>
+<li>Days 5–6: Migrate top 2 read-heavy workflows to Reports; add scheduled runs.</li>
+<li>Days 7–8: Migrate top write-heavy workflow to Feeds; implement delta batching.</li>
+<li>Days 9–10: Add exponential backoff with jitter and per-operation token buckets.</li>
+<li>Days 11–12: Add caches for catalog/pricing and filter queries by updatedSince.</li>
+<li>Days 13–14: Pre-warm peak settings; add circuit breakers; run a failover game day.</li>
+</ul>
+<p>What good looks like at the end:</p>
+<ul>
+<li>A dashboard showing request volume, throttles, queue depth, and feed/report throughput.</li>
+<li>Pollers replaced or reduced to reconciliation-only jobs.</li>
+<li>Bulk reads (reports) and bulk writes (feeds) stable in production.</li>
+<li>Backoff and token buckets verified under load tests.</li>
+<li>Cache hit rates climbing; stale reads minimized via event-driven invalidation.</li>
+</ul>
+<p><em>You don’t win peak week by calling more APIs.</em> You win by calling the right ones, at the right time, in the right shape.</p>
+<p>In 120 seconds, here’s the mindset shift: your integration isn’t a hose sucking on SP-API — it’s a smart valve. Events trigger action. Reports set the baseline. Feeds apply change in bulk. Retries are calm and patient. Caches absorb read traffic. And your peak plan makes sure the revenue paths stay wide open when the flood hits.</p>
+<p>Do this and two things happen: your call volume drops and your experience gets faster. That’s the rare optimization that saves money and makes customers happier.</p>
+<p>If you want to see how teams put this playbook into practice, explore our <a href="../case-studies.html">Case Studies</a>.</p>
+<p><em>200,000 tiny polls or 200 useful events? In 2026, your margin knows the difference.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/">Amazon Selling Partner API Developer Guide</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/notifications-api-v1-use-case-guide">Notifications API use case guide (EventBridge/SQS)</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/reports-api-v2021-06-30-use-case-guide">Reports API use case guide</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/feeds-api-v2021-06-30-use-case-guide">Feeds API use case guide</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/rate-limits">Rate limits and throttling guidance</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/error-messages">Error messages and handling</a></li>
+<li><a href="https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/">AWS Architecture Blog on backoff with jitter</a></li>
+<li><a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html">Amazon EventBridge overview</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/connecting-to-the-selling-partner-api">Connecting to the Selling Partner API (LWA and auth)</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html">Amazon SQS Developer Guide (queues, DLQs, visibility timeouts)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="optimize-sp-api-calls.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq854d.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Cut+SP-API+Costs%3A+Smarter+Calls%2C+Faster+Sales+Now&amp;pi=270015984320&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=270015984320&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Foptimize-sp-api-calls&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/optimize-sp-api-calls?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:47 GMT -->
+</html>

@@ -1,0 +1,370 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-bedrock-release-notes?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship Faster: AWS Bedrock Updates, Nova Optimizations, CloudFront</title>
+    <link rel="canonical" href="aws-bedrock-release-notes.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore AWS Bedrock new features in this release notes roundup and Amazon Nova updates. See the announcement plus CloudFront OAC boosts for Lambda URL origins.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship Faster: AWS Bedrock Updates, Nova Optimizations, CloudFront",
+        "datePublished": "2025-11-03T20:47:54Z",
+        "dateModified": "2025-11-03T20:47:55.168Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-bedrock-release-notes",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-03-2025-08-40-56-2141-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-bedrock-release-notes.html">Ship Faster: AWS Bedrock Updates, Nova Optimizations, CloudFront</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 3, 2025 8:47:54 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You want AI that actually ships, not another week of messy config. This week’s aws bedrock release notes help you do exactly that.</p>
+<p>AWS shipped updates that cut friction where it hurts badly. Smarter Knowledge Bases in Amazon Bedrock, performance and adoption boosts for Amazon Nova. And tighter security for serverless endpoints using CloudFront OAC on Lambda function URLs. Translation: less glue code, fewer brittle edges, cleaner path from prototype to production.</p>
+<p>If you’ve waited for an aws bedrock drop with speed and control, this is it. You get domain-aware AI without running your own RAG stack. Plus much lower latency inference at true cloud scale today. And a default-deny posture for your serverless APIs, without breaking your front end.</p>
+<p>Think practical upgrades you can ship this week, for real. A support copilot that finally cites your docs, and a product finder that answers fast under load. And Lambda URLs that don’t get hammered by random bots. Less duct tape, more shipping, and fewer scary midnight pages.</p>
+<p>Here’s the plain-English breakdown of this release, and how to roll it out. What changed, why it matters, and how to ship with minimal drama. Expect quick wins, gotchas to avoid, and a 30-day plan for small teams. <em>No buzzword bingo, just the path from demo to done.</em></p>
+<p>TL;DR</p>
+<ul>
+<li>Bedrock Knowledge Bases get smoother for domain-specific AI apps, with no DIY infrastructure.</li>
+<li>Amazon Nova pushes lower-latency, large-scale inference, plus easier adoption across AWS services.</li>
+<li>CloudFront OAC now plays nicer with Lambda function URLs for secure, fast serverless.</li>
+<li>This aws bedrock blog-style breakdown shows what changed, why it matters, and how to ship.</li>
+<li>Curious about DeepSeek in Amazon Bedrock or amazon nova multimodal embeddings? Not in this drop.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-03-2025-08-41-55-1831-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="bedrockknowledgebases">Bedrock Knowledge Bases</h2>
+<h3 id="whatchanged">What changed</h3>
+<p>Amazon Bedrock updated Knowledge Bases to make domain-specific AI apps much easier. You can use foundation models from top providers and enrich them with private data. No managing vector databases, chunking pipelines, or custom retrieval logic anymore. In plain English: fewer moving parts, faster RAG.</p>
+<p>In practice, you point Bedrock at trusted sources like PDFs, wikis, or a clean S3 bucket. It handles ingestion and embeddings under the hood, then your app calls one consistent API. No scrambling to maintain a retrieval service or fix a parser when formats change. This cuts the annoying “data plumbing tax” that kills so many AI prototypes.</p>
+<h3 id="whyyoucare">Why you care</h3>
+<p>RAG gives you reliable, context-aware answers from LLMs, without slow fine-tuning runs. With Knowledge Bases, you point Bedrock at sources, let it handle ingestion and retrieval, then wire your app. You keep data where it belongs, add reasoning where it counts, and avoid wild hallucinations.</p>
+<p>Also, Bedrock’s model flexibility means you aren’t locked into a single FM. Start with a budget model while you test prompts and data, then scale quality later. Same interface, far less refactor risk when needs change. And by default, your content isn’t used to train underlying FMs, which calms compliance folks.</p>
+<h3 id="firsthandexample">First hand example</h3>
+<p>Say you’re shipping a customer support copilot. You’ve got PDFs of policy docs, a Confluence graveyard, and a product FAQ that changes weekly. With Knowledge Bases, you:</p>
+<ul>
+<li>Connect your document store</li>
+<li>Let Bedrock index and embed</li>
+<li>Ask the model to cite sources in answers</li>
+<li>Expose it behind your existing help widget</li>
+</ul>
+<p>Result: relevant, grounded answers without building a bespoke RAG backend. And because it’s Bedrock, you can swap models as your needs evolve.</p>
+<p>To make this sing, spend two hours on hygiene and cleanup. Convert scanned PDFs to text, remove superseded docs, and add simple metadata tags. Use version, product, and region so retrieval stays sharp and stable. In prompts, ask for citations and confidence to reduce hallucination worry during demos.</p>
+<p>Helpful links: Browse the Bedrock docs for Knowledge Bases and the model catalog. See supported providers and capabilities before you lock choices.</p>
+<ul>
+<li>Knowledge Bases overview (docs)</li>
+<li>Model catalog and providers</li>
+</ul>
+<h3 id="protipsforknowledgebases">Pro tips for Knowledge Bases</h3>
+<ul>
+<li>Start small: index one product line or one policy set first.</li>
+<li>Chunk smart: keep short, self-contained sections with clear headings and labels.</li>
+<li>Keep a change log: re-ingest the delta when docs update, not the world.</li>
+<li>Prompt for evidence: “Cite top 2 sources with page or section” as default.</li>
+<li>Evaluate weekly: sample 20 answers, score grounding, prune bad docs, repeat.</li>
+</ul>
+<h2 id="novagetsfaster">Nova gets faster</h2>
+<h3 id="whatchanged-1">What changed</h3>
+<p>Amazon Nova updates focus on performance and adoption across AWS services. Optimized architecture for low-latency, large-scale generative and foundation model inference. The net effect is faster responses, better throughput, and fewer integration hurdles.</p>
+<p>In practical terms, expect lower tail latency during spikes and smoother autoscaling behavior. You also get tighter glue with building blocks you already use today. For multimodal or real-time assistants, those small wins stack into a smoother product.</p>
+<h3 id="whyyoucare-1">Why you care</h3>
+<p>Latency is product surface area, and users feel it right away. Every 100ms matters for search, chat, or real-time assistants in production. Nova aims for consistent low-latency inference across heavy loads and traffic spikes. And it plugs into AWS services, so you write less glue and ship more.</p>
+<p>There’s also cost control through smarter throughput and better features. Add streaming responses for snappier UX and limit max tokens per route. Cache stable outputs, like common tool calls, at the edge for savings. Your app feels fast and stays affordable under real traffic.</p>
+<h3 id="firsthandexample-1">First hand example</h3>
+<p>You’re launching a multimodal product finder for your main storefront. Users upload a photo, type a question, and get recommendations. Your stack needs to:</p>
+<ul>
+<li>Run fast image-to-text and text-to-text inference</li>
+<li>Orchestrate calls with your catalog search</li>
+<li>Scale cheaply without jitter</li>
+</ul>
+<p>With Nova’s integration-first approach, you wire inference and data access natively. Orchestration gets easier using AWS services you already trust and monitor. Note: if you’re scanning aws bedrock new features for “amazon nova multimodal embeddings,” not in this update. This drop emphasized performance and integration, not a new embeddings API.</p>
+<p>Practical tuning ideas:</p>
+<ul>
+<li>Stream responses for chat flows to reduce perceived latency for users.</li>
+<li>Batch background jobs, like content summaries, during low-traffic windows.</li>
+<li>Cap max tokens and temperature per route to control speed and style.</li>
+<li>Add a fallback: if the primary model is overloaded, route cheaper for basics.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-03-2025-08-42-56-6816-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="cloudfrontoacforlambdaurls">CloudFront OAC for Lambda URLs</h2>
+<h3 id="whatchanged-2">What changed</h3>
+<p>AWS improved support for CloudFront Origin Access Control with Lambda function URLs. You can run your HTTPS Lambda endpoints behind CloudFront and lock the origin. Only CloudFront can call the origin for a clean, default-deny setup.</p>
+<p>This pattern gives you signed requests from CloudFront to your origin by default. Origin visibility is off to the public internet for stronger security controls. You get one edge layer for caching, WAF, and DDoS protections too. Cleaner logs, fewer surprises, and happier on-call engineers.</p>
+<h3 id="whyyoucare-2">Why you care</h3>
+<p>Function URLs are great for prototypes and simple APIs, but open endpoints attract abuse. With OAC, you restrict origin access and enforce headers and signatures. Then you layer caching, WAF, and DDoS protections at the edge for safety. Keep the origin dark, latency low, and logs centralized in one place.</p>
+<p>You also get consistent routing and powerful edge features without API Gateway. Device or geo headers work fine at the edge for many early needs. If you need API Gateway later, you can switch without breaking your front end.</p>
+<h3 id="firsthandexample-2">First hand example</h3>
+<p>You’ve got a marketing mini-app on a Lambda function URL today. Dynamic personalization, basically zero infrastructure, and simple deploys for the team. It’s getting scraped, and your costs spike hard overnight. The fix:</p>
+<ul>
+<li>Put CloudFront in front</li>
+<li>Configure OAC so only CloudFront reaches the function URL</li>
+<li>Add AWS WAF rules and cache-friendly responses</li>
+</ul>
+<p>Now you serve the app from the edge while blocking direct origin hits. Spiky traffic gets tamed without re-platforming or changing your front end.</p>
+<p>Rollout checklist for OAC + Lambda URLs:</p>
+<ul>
+<li>Create and attach an OAC to the CloudFront origin for the function URL.</li>
+<li>Restrict the function URL to accept only signed CloudFront requests.</li>
+<li>Add AWS WAF managed rules for bots and rate limits, then tune.</li>
+<li>Set cache policies and vary only on needed headers or query params.</li>
+<li>Turn on CloudFront logs and sample early for misrouted or odd traffic.</li>
+</ul>
+<h2 id="fromdemotoproduction">From demo to production</h2>
+<h3 id="week1">Week 1</h3>
+<ul>
+<li>Identify your top two workflows, like helpdesk copilot or ops assistant.</li>
+<li>Map data sources for a Bedrock Knowledge Base setup right away.</li>
+<li>Pick a primary FM and a fallback, which switch easily in Bedrock.</li>
+</ul>
+<p>Add a simple success metric for each workflow before you start. Reduce time-to-first-answer by 50% or deflect 25% of repetitive tickets. Or cut manual data lookups by a clear, measurable amount this month. Document the current baseline, or you can’t prove the upgrade worked.</p>
+<h3 id="week2securetheedges">Week 2 secure the edges</h3>
+<ul>
+<li>Front all function URLs with CloudFront and OAC for safety.</li>
+<li>Add rate limits and bot protections in WAF for stability.</li>
+<li>Centralize logs and tracing so alerts make sense fast.</li>
+</ul>
+<p>This is your defense week, so lock origins by default right away. Test with signed edge requests, and add deny-list rules for scrapers. Set a sane rate limit per IP or session to prevent abuse. Pipe logs to a single place so anomalies are easy to spot.</p>
+<h3 id="week3hardenretrieval">Week 3 harden retrieval</h3>
+<ul>
+<li>Index clean, versioned docs in Knowledge Bases for stability.</li>
+<li>Add grounding and citations in prompts for trust and clarity.</li>
+<li>Build red-team tests for prompt injection and jailbreak attempts.</li>
+</ul>
+<p>Treat your RAG like a search system with real ownership and versioning. Freeze content windows, delete stale files, and label everything clearly. Add a test suite with tricky prompts that probe boundaries carefully. If it fails, improve instructions and guardrails before you ship.</p>
+<h3 id="week4measuretuneship">Week 4 measure tune ship</h3>
+<ul>
+<li>Track latency, token usage, helpfulness, and deflection rates weekly.</li>
+<li>Cache sensible responses at the edge to cut cost and tail times.</li>
+<li>Roll out to 10% of users, iterate hard, then scale confidence.</li>
+</ul>
+<p>Small rollouts expose weirdness safely and save your weekend on-call hours. Watch tail latency and error spikes, not just averages in dashboards. Trim tokens, add caching headers, or move non-urgent jobs to batch. After two iterations, go to 50% and watch the same metrics again.</p>
+<p>First-hand example: teams cut time-to-answer from minutes to seconds with grounding. They used Knowledge Bases and cached common results at CloudFront locations. Meanwhile OAC kept origins dark and abuse out to protect budgets.</p>
+<h2 id="fastrewind">Fast rewind</h2>
+<ul>
+<li>Bedrock Knowledge Bases reduce RAG plumbing so you can focus on UX.</li>
+<li>Nova’s performance and integration boosts mean lower inference latency at scale.</li>
+<li>CloudFront OAC on Lambda URLs gives you edge speed and origin-level security.</li>
+<li>This aws bedrock announcement prioritizes real-world ship-it upgrades, not buzzwords.</li>
+<li>Want a deeper dive? Check the aws bedrock blog and docs linked below.</li>
+</ul>
+<p><em>Bottom line: fewer moving parts, faster answers, and safer edges everywhere.</em> That combo gets stakeholder buy-in quickly, and helps you keep it.</p>
+<h2 id="faqs">FAQs</h2>
+<h3 id="whatchangedinknowledgebases">What changed in Knowledge Bases</h3>
+<p>AWS updated Knowledge Bases to simplify domain-specific apps on Bedrock for teams. You get streamlined retrieval on private data and simpler model integration. Practically speaking, fewer custom pipelines and quicker RAG deployments, with less moving pieces.</p>
+<h3 id="deepseekinamazonbedrock">DeepSeek in Amazon Bedrock</h3>
+<p>Not in this update, at least based on what AWS announced here. If you’re tracking “deepseek in amazon bedrock,” check the model catalog. Watch What’s New posts for additions and provider changes in the near future.</p>
+<h3 id="amazonnovamultimodalembeddings">Amazon Nova multimodal embeddings</h3>
+<p>The roundup highlights performance and adoption improvements for Nova overall. Low-latency, large-scale inference and tighter AWS integrations for teams. If you want “amazon nova multimodal embeddings,” not in this drop specifically.</p>
+<h3 id="cloudfrontoacwithlambdaurls">CloudFront OAC with Lambda URLs</h3>
+<p>OAC restricts origin access so only CloudFront can call your Lambda function URL. You get edge performance and signed or origin-verified requests for safety. It also makes WAF and caching easier to layer without extra services.</p>
+<h3 id="bedrockvsownrag">Bedrock vs own RAG</h3>
+<p>Bedrock Knowledge Bases remove a ton of infra work across indexing and retrieval. You also keep model flexibility and avoid lock-in through one interface. DIY may offer deep tuning, but adds big ops burden and slower value.</p>
+<h3 id="swapmodelsinbedrock">Swap models in Bedrock</h3>
+<p>Yes, that’s a core strength and why teams like it right now. Start with one FM for cost and latency goals, then switch later. You avoid rewriting core plumbing thanks to a consistent API surface.</p>
+<h3 id="metricsinproduction">Metrics in production</h3>
+<p>Track latency for p50 and p90, plus the error rate every week. Also track token usage per route and a helpfulness score from users. For RAG, add grounding rate so answers include valid citations.</p>
+<h3 id="controlcostswithoutkillingquality">Control costs without killing quality</h3>
+<p>Use streaming for chat, cap tokens per endpoint, and cache stable outputs. Batch non-urgent tasks during night windows to avoid peak costs. Start smaller for easy queries, escalate only when needed for quality.</p>
+<h3 id="dataprivacywithbedrock">Data privacy with Bedrock</h3>
+<p>Keep sensitive docs inside a Knowledge Base you control with tags. Mark PII-heavy content and use least-privilege access on sources. Bedrock is designed so inputs and outputs aren’t used to train FMs by default.</p>
+<h3 id="whatbreaksinragsetups">What breaks in RAG setups</h3>
+<p>Stale or conflicting docs break retrieval, and users get wrong answers quickly. People ingest everything “just in case,” then outdated content gets retrieved. Fix with version tags, a content freeze window, and aggressive deletions.</p>
+<h3 id="needapigatewaywithlambda">Need API Gateway with Lambda</h3>
+<p>Not necessarily, especially for simple apps with light needs and usage. CloudFront plus OAC and WAF is already strong and flexible. If you need request validation or quotas, add API Gateway later.</p>
+<h3 id="testcloudfrontoacsafely">Test CloudFront OAC safely</h3>
+<p>Spin up a staging distribution and a separate function URL for tests. Lock the origin and run load tests against CloudFront only here. Try direct origin hits, which should be denied with clear errors.</p>
+<h2 id="launchthisweekchecklist">Launch this week checklist</h2>
+<ul>
+<li>Inventory endpoints; front Lambda URLs with CloudFront and OAC immediately.</li>
+<li>Stand up a Bedrock Knowledge Base on a single, clean data source.</li>
+<li>Enable grounding and citations in prompts for trust and traceability.</li>
+<li>Add WAF bot rules and rate limits at the edge for safety.</li>
+<li>Cache stable responses, like marketing and FAQs, to save cost.</li>
+<li>Instrument latency, errors, token usage, and answer quality scores.</li>
+<li>Add fallbacks: model swap plus static copy for outages and spikes.</li>
+<li>Run a small canary rollout and gather feedback within 72 hours.</li>
+<li>Document the playbook, then scale to the next workflow right after.</li>
+</ul>
+<p>You don’t need a platform rewrite, just stack smart, ship, and iterate. In a noisy week for AI headlines, this update feels refreshingly practical. You get simpler RAG with Knowledge Bases, faster inference with Nova, and edge-first security. <em>If you do one thing today, put CloudFront and OAC before your Lambda URLs.</em> Then stand up a Bedrock Knowledge Base for your highest-ROI use case now.</p>
+<p>Want to apply this playbook to retail media? Explore <a href="../amc-cloud.html">AMC Cloud</a> and browse our <a href="../case-studies.html">Case Studies</a> for real-world wins.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/bedrock/">Amazon Bedrock — Service overview</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html">Knowledge bases for Amazon Bedrock — Documentation</a></li>
+<li><a href="https://aws.amazon.com/bedrock/#Model_Providers_and_Models">Amazon Bedrock model providers and models</a></li>
+<li><a href="https://aws.amazon.com/blogs/aws/knowledge-bases-for-amazon-bedrock/">AWS News Blog — Knowledge Bases for Amazon Bedrock</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/urls-intro.html">Using Lambda function URLs — Documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html#oac-overview">CloudFront Origin Access Control (OAC) overview</a></li>
+<li><a href="https://aws.amazon.com/cloudfront/">Amazon CloudFront — Product page</a></li>
+<li><a href="https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html">AWS WAF — What is AWS WAF?</a></li>
+<li><a href="https://aws.amazon.com/shield/">AWS Shield — DDoS protection overview</a></li>
+<li><a href="https://aws.amazon.com/bedrock/data-privacy/">Amazon Bedrock — Data privacy and security</a></li>
+<li><a href="https://www.thinkwithgoogle.com/intl/en-gb/marketing-strategies/app-and-mobile/mobile-page-speed-business-impact/">Think with Google — Milliseconds Make Millions (site speed impact)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-bedrock-release-notes.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqd491.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+Faster%3A+AWS+Bedrock+Updates%2C+Nova+Optimizations%2C+CloudFront&amp;pi=255436294860&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=255436294860&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-bedrock-release-notes&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-bedrock-release-notes?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:37:06 GMT -->
+</html>

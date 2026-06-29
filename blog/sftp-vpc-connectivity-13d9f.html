@@ -1,0 +1,215 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/sftp-vpc-connectivity-1?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:40:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Secure SFTP to Any VPC with AWS Transfer</title>
+    <link rel="canonical" href="sftp-vpc-connectivity-1.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover AWS file transfer updates: Transfer Family SFTP connectors now support VPC-based connectivity, enabling your AWS SFTP client to securely reach servers.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Secure SFTP to Any VPC with AWS Transfer",
+        "datePublished": "2025-10-20T20:30:54Z",
+        "dateModified": "2025-10-20T20:30:54.242Z",
+        "mainEntityOfPage": "https://remktr.com/blog/sftp-vpc-connectivity-1",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na1.net/hubfs/50136663/rss_to_hubspot_content/temp-Oct-20-2025-08-27-14-4912-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="sftp-vpc-connectivity-1.html">Secure SFTP to Any VPC with AWS Transfer</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Oct 20, 2025 8:30:54 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>AWS Transfer Family now lets SFTP and FTP connectors run inside your VPC.</p>
+<p>Traffic stays private over VPN, Direct Connect, Transit Gateway, or VPC peering.</p>
+<p><em>No public internet exposure at all, which keeps the path private.</em></p>
+<h2 id="keysteps">Key steps</h2>
+<ul>
+<li>Place connectors in private subnets and lock down egress in security groups. Use TCP 22 for SFTP; for FTP include only the partner’s passive port range.</li>
+<li>Make sure private DNS resolves using Route 53 private hosted zones or Resolver forwarding. Set correct routing over VPN, DX, TGW, or VPC peering as needed.</li>
+<li>Use VPC endpoints to avoid NAT or an internet gateway entirely. S3 uses a gateway endpoint; Secrets Manager, CloudWatch, KMS, and STS use interface endpoints.</li>
+<li>Write to S3 or EFS with least-privilege IAM and clear policies. Store partner credentials and keys in AWS Secrets Manager for safe handling. <em>Encrypt everything with SSE-KMS for keys and data at rest.</em></li>
+<li>Watch traffic with VPC Flow Logs and metrics with CloudWatch. Audit API operations end-to-end using CloudTrail for compliance and tracing.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-28-35-0050-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="commonfix">Common fix</h2>
+<ul>
+<li>setstat unsupported error occurs because S3 does not support POSIX attributes. <em>Disable preserve timestamp and permissions settings in the SFTP client.</em> Manage file permissions with IAM instead, not POSIX metadata at all.</li>
+</ul>
+<h2 id="customhostname">Custom hostname</h2>
+<ul>
+<li>Attach an ACM certificate and map a friendly DNS name. For example, sftp.example.com points to your Transfer Family server host. That makes partner onboarding cleaner and less confusing, which folks appreciate.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-20-2025-08-29-42-1006-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="quickstart">Quick start</h2>
+<p>1) Pick a VPC, private subnets, and a tight egress-only security group.
+2) Configure private routing and DNS resolution to the partner endpoint.
+3) Create a connector targeting the partner and an S3 destination.
+4) Add a workflow for validation and tagging, simple and clear.
+5) Test with a small file and review CloudWatch and VPC Flow Logs.</p>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="sftp-vpc-connectivity-1.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq7b08.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Secure+SFTP+to+Any+VPC+with+AWS+Transfer&amp;pi=197887344278&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=197887344278&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fsftp-vpc-connectivity-1&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/sftp-vpc-connectivity-1?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:40:08 GMT -->
+</html>

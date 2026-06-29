@@ -1,0 +1,472 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-advanced-jdbc-wrapper?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Retrofit your JDBC apps for Aurora speed and resilience</title>
+    <link rel="canonical" href="aws-advanced-jdbc-wrapper.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Retrofit apps with AWS Advanced JDBC Wrapper and AWS Aurora JDBC driver to tap serverless scaling, failover, and performance insights with minimal code changes">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Retrofit your JDBC apps for Aurora speed and resilience",
+        "datePublished": "2026-01-13T00:05:01Z",
+        "dateModified": "2026-01-13T00:05:02.063Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-advanced-jdbc-wrapper",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-12-2026-11-57-24-7172-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-advanced-jdbc-wrapper.html">Retrofit your JDBC apps for Aurora speed and resilience</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 13, 2026 12:05:01 AM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Nearly every outage postmortem has the same villain: the database.
+Not because databases are bad, really, but the hard parts pile up.
+Failover, pooling, and scaling get messy when apps hold fragile JDBC connections.
+Like crystal, honestly.</p>
+<p>Here’s the twist: you don’t need a rewrite for cloud-native resilience.
+You can retrofit instead and keep moving.
+With the AWS Advanced JDBC Wrapper, you keep your current JDBC driver.
+You add Aurora-grade smarts like failover, cluster awareness, and smoother scaling.
+Most of it lands through simple configuration, not code.</p>
+<p>If you run Amazon Aurora (PostgreSQL or MySQL) or plan to migrate, this fits.
+It’s a low-risk move with a lot of upside.
+Minimal code changes and full JDBC compatibility.
+It’s open source and battle-tested in production.</p>
+<p>You upgrade your driver setup and unlock health checks plus clean failover.
+Then you ride Aurora’s serverless scaling without babysitting connections all day.
+<em>That’s real leverage for almost no code churn.</em></p>
+<p>Best part, it fits how you already build apps today.
+Bring your SQL, your ORM, your framework, yep even Spring Boot.
+The wrapper quietly upgrades the plumbing behind the scenes.
+It’s like swapping in better shocks without changing the car.
+Same ride, far fewer bumps along the way.</p>
+<h2 id="keytakeaways">Key Takeaways</h2>
+<ul>
+<li>Use the AWS Advanced JDBC Wrapper to add failover, cluster awareness, and smarter connection handling to your existing apps—without changing SQL.</li>
+<li>Works with the underlying vendor JDBC drivers for Aurora PostgreSQL/MySQL; think “adapter,” not “replacement.”</li>
+<li>Easy to install via Maven Central; search for aws-advanced jdbc wrapper Maven to grab the latest build.</li>
+<li>GitHub has the source and docs; look for amazon aurora advanced jdbc wrapper GitHub under the awslabs org.</li>
+<li>Plays well with HikariCP and other pools, improving resilience during Aurora Serverless scaling, failovers, and planned maintenance.</li>
+<li>Ideal for Spring Boot: set the wrapper as your driver class and keep your usual DataSource config.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-12-2026-11-58-11-5590-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="awsadvancedjdbcwrapper">AWS Advanced JDBC Wrapper</h2>
+<h3 id="whatitis">What it is</h3>
+<p>The AWS Advanced JDBC Wrapper sits between your app and the vendor driver.
+It supports PostgreSQL or MySQL under the hood, no surprises there.
+It intercepts connection behavior to add Aurora intelligence and awareness.
+Think failover handling, host monitoring, and cluster-aware routing baked in.
+The JDBC API stays intact, so your SQL doesn’t change at all.
+Connection URLs and DataSource setup mostly stay very familiar.</p>
+<p>Under the hood, the wrapper tracks cluster topology and socket health.
+When a writer moves or an instance drops, it steers reconnections correctly.
+It’s like a smart GPS for JDBC that reroutes when roads suddenly close.</p>
+<h3 id="whyitbeatsarewrite">Why it beats a rewrite</h3>
+<p>Rewrites cost a lot and carry plenty of risk.
+With the wrapper, you retrofit the good parts you actually need.
+Keep your domain logic, ORM, and the driver you already know.
+Swap to the wrapper’s driver class and keep the vendor driver dependency.
+You gain smarter retries, graceful failover, and sane connection checks.
+That cuts down on those weird “dead” sockets that haunt logs.</p>
+<p>Risk stays low because the surface area is small and focused.
+You aren’t redesigning persistence; you’re adding guardrails it lacked.
+Teams adopt it in days, not quarters, which is kinda nice.
+Benefits show up the next time maintenance triggers a switchover.</p>
+<h3 id="whereitfits">Where it fits</h3>
+<p>If you use Aurora MySQL or Aurora PostgreSQL, it slots in cleanly.
+It supports cluster, reader, and primary endpoints out of the box.
+It handles the jump when writers fail over or readers get promoted.
+With Aurora Serverless v2, it tolerates rapid scaling by keeping connections healthy.
+It does clean reconnects when topology shifts under load.</p>
+<p>Tip: Grab it from Maven Central (software.amazon.jdbc:aws-advanced-jdbc-wrapper).
+Review source on the amazon aurora advanced jdbc wrapper GitHub within awslabs.
+Your aws aurora jdbc driver (PostgreSQL/MySQL) still stays in play.</p>
+<p>You’ll likely pair it with a pool like HikariCP and your framework.
+It doesn’t fight those patterns; it actually amplifies them.
+Especially during “oh no” moments when a writer flips or scaling kicks in.</p>
+<h2 id="failoversscalingmagic">Failovers scaling magic</h2>
+<h3 id="clusterawarenessthatactuallyhelps">Cluster awareness that actually helps</h3>
+<p>Aurora is a cluster, not a single box you hug forever.
+When a writer changes or reader pools shift, your app must adapt fast.
+The wrapper adds cluster awareness by monitoring topology and reconnecting smartly.
+That means fewer 2 a.m. wake-ups asking why the writer moved.</p>
+<p>During planned maintenance or surprise events, stale connections won’t sink you.
+The wrapper handles reconnect logic so your code can stay calm.</p>
+<p>In practice, when the cluster promotes a new writer, sessions recover quickly.
+Transactions avoid becoming a graveyard of broken pipes and sadness.
+Pools don’t churn themselves into a frenzy under timeouts and pressure.
+It helps stop the classic cascade: timeouts, thread pileups, and error spikes.</p>
+<h3 id="serverlessreadinesswithoutcodegymnastics">Serverless readiness without code gymnastics</h3>
+<p>Aurora Serverless v2 can scale capacity in a hurry when traffic hits.
+Great for cost and performance, trickier for connection stability though.
+The wrapper keeps connections healthy and validates sockets during shifts.
+It reconnects when capacity changes move you across nodes or hosts.
+So you get more “it just works” moments when the database scales.</p>
+<p>Pair it with a real pool like HikariCP to smooth spikes fast.
+Spring Boot plus the wrapper usually gives you resilience with little friction.</p>
+<p>One more practical note while autoscaling works its magic.
+Throughput can jump fast, so keep acquisition timeouts short and predictable.
+Add light validation so the pool won’t hand out zombie connections.
+The wrapper lowers zombie odds; good pool settings finish the job.</p>
+<h3 id="globaldatabasesandcrossregionthinking">Global databases and cross region thinking</h3>
+<p>Running Aurora Global Database adds latency, routing, and recovery complexity.
+The wrapper won’t replace design choices, but it covers key essentials.
+It handles endpoint changes during managed failover and clean reconnections.
+You still design for locality and consistency, that part remains.
+But the driver layer stops being the weak link during regional events.</p>
+<p>Plan your blast radius with clear and simple routing.
+Writes go to the primary region, reads go near your users.
+Test the managed failover path like you mean it, please.
+The wrapper helps connections follow the plan during controlled handovers.</p>
+<p><em>Bottom line: it keeps up with Aurora’s moving parts under pressure.</em>
+Failover, scaling, and topology changes become a lot less scary.
+Your app stays readable, writeable, and boring in the best way.</p>
+<h2 id="setuppaths">Setup paths</h2>
+<h3 id="mavengradleinstall">Maven Gradle install</h3>
+<p>No special repo needed or custom registry tricks.
+The aws advanced jdbc wrapper artifact lives on Maven Central.
+Use software.amazon.jdbc:aws-advanced-jdbc-wrapper as the coordinate.
+Keep your vendor driver dependency like org.postgresql:postgresql or mysql:mysql-connector-j.
+Check Maven Central for the latest version before you pin it.</p>
+<p>For direct downloads, use GitHub Releases on the awslabs repository.
+Search amazon aurora advanced jdbc wrapper GitHub for source and releases.
+You’ll find docs, examples, and detailed changelogs ready to read.</p>
+<p>If you use a BOM or version catalog, pin versions explicitly.
+That avoids surprise upgrades when transitive versions refresh behind you.</p>
+<h3 id="springbootbasics">Spring Boot basics</h3>
+<p>Spring Boot integration is straightforward and honestly pretty quick.
+Set the wrapper as your driver class in your configuration.
+Keep the vendor driver present on the classpath alongside it.
+Use your existing JDBC URL for Aurora cluster or reader endpoints.
+Configure your connection pool, with HikariCP common by default.</p>
+<p>Enable wrapper features via connection properties as you need.
+Toggle plugins for failover handling or host monitoring and such.
+Since it’s a wrapper, most Boot config stays the same.
+It just gets smarter at runtime when topology shifts.</p>
+<p>In testing, turn up logging to confirm wrapper activation.
+On startup, verify it detects the cluster endpoint you expect.
+Confirm your pool acquires connections quickly without odd delays.
+Then simulate a switchover and check logs for clean reconnects.</p>
+<h3 id="productionflagsthatmatter">Production flags that matter</h3>
+<ul>
+<li>Prefer cluster or reader endpoints. Aurora manages them during topology changes; the wrapper adapts when roles shift.</li>
+<li>Tune your pool’s timeouts conservatively. Short timeouts with intelligent retries beat a slow death by hung sockets.</li>
+<li>Test failover. Simulate a writer switchover in a staging environment; watch logs to confirm the wrapper reconnects cleanly.</li>
+<li>Observe behavior under load. Run a load test while scaling Aurora Serverless; verify latency and error rates when capacity moves.</li>
+<li>Keep DNS caching reasonable. Very long JVM DNS cache settings can delay endpoint changes being noticed by clients.</li>
+<li>Stick to predictable connection lifecycles. Shorter max lifetime and staggered eviction reduce “thundering herd” reconnects.</li>
+</ul>
+<p><em>Together, these steps get you 80% of the value with &lt;20% of the effort.</em></p>
+<h2 id="performanceplaybook">Performance playbook</h2>
+<h3 id="connectionpoolingunderstress">Connection pooling under stress</h3>
+<p>Pooling isn’t optional, it’s a must for stable systems.
+Use HikariCP or your preferred pool for speed and sanity.
+The wrapper complements pools with healthier and faster recovery.
+If the database moves you, the pool heals without broken socket storms.
+Less cascading failure in the app tier when things wobble.</p>
+<p>Set validation queries or keepalives tuned for your engine.
+Under spiky traffic, pair shorter maxLifetime with proactive health checks.
+That reduces mass expirations during a topology change event.</p>
+<p>Practical tuning tips many teams rely on daily:</p>
+<ul>
+<li>Make connectionTimeout tight enough to fail fast and retry elsewhere.</li>
+<li>Keep minimumIdle small for bursty workloads; let the pool scale up on demand.</li>
+<li>Use incremental warmup on deploys to avoid hammering the DB with a cold start flood.</li>
+</ul>
+<h3 id="readwritepatterns">Read write patterns</h3>
+<p>Aurora gives you reader endpoints for scalable reads at lower cost.
+The wrapper’s cluster smarts keep the app calm when writers flip roles.
+Many teams route writes to the writer and reads to the reader endpoint.
+Keep that pattern, and let the wrapper harden the connections underneath.
+If you use a query layer, respect transactions and your consistency needs.</p>
+<p>Batch heavy and read-mostly jobs can live on the reader endpoint.
+Latency-sensitive writes should point straight at the writer endpoint.
+The wrapper keeps both paths steady through patching and scale events.</p>
+<h3 id="watchtherightmetrics">Watch the right metrics</h3>
+<ul>
+<li>Aurora Performance Insights: track wait events, top SQL, and DB load to see if you’re bottlenecked at the database or the app.</li>
+<li>Connection pool telemetry: monitor active/idle counts, acquisition time, and timeout rates.</li>
+<li>Failover events: confirm the wrapper reconnects within your SLO during maintenance or simulated failover.</li>
+<li>Error budgets: measure how topology changes impact user-facing errors. Your goal isn’t zero errors; it’s small and fast recovery.</li>
+<li>JVM and GC: watch pause times under load; slow application threads make failovers feel worse than they are.</li>
+</ul>
+<p><em>Observability isn’t decoration; it proves resilience is real, not vibes.</em></p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-12-2026-11-59-04-9418-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="halfwaycheckpoint">Halfway checkpoint</h2>
+<ul>
+<li>Retrofit beats rewrite: keep your SQL, add cloud-native smarts via the wrapper.</li>
+<li>Works with Aurora PostgreSQL/MySQL and the aws aurora jdbc driver you already use.</li>
+<li>Failover, host monitoring, and cluster awareness help you glide through Aurora topology changes.</li>
+<li>Easy path via aws-advanced jdbc wrapper Maven and Spring Boot configs.</li>
+<li>Pair with pooling and Performance Insights to verify resilience under load.</li>
+</ul>
+<h2 id="testlikeyoumeanit">Test like you mean it</h2>
+<p><em>Don’t ship blind or hope it’s fine under pressure.</em>
+Run drills that mimic real life before production.</p>
+<ul>
+<li>Initiate a controlled failover in a staging Aurora cluster (console or CLI) and watch your app reconnect. Measure the exact time to recovery and error spike window.</li>
+<li>Scale Aurora Serverless v2 capacity during a load test. Confirm latency blips stay within your SLO and that your pool doesn’t hand out dead connections.</li>
+<li>Rotate endpoints (e.g., promote a reader) to ensure read paths recover with minimal impact.</li>
+<li>Restart application pods during database changes to catch startup edge cases.</li>
+</ul>
+<p>Keep a checklist of drills, findings, and tuning items.
+Track what broke, how fast it healed, and what to adjust.
+Turn that into a clear runbook for the on-call team.</p>
+<h2 id="commonpitfallsandeasyfixes">Common pitfalls and easy fixes</h2>
+<ul>
+<li>Stale DNS: If your environment caches DNS for too long, endpoint changes take longer to be noticed. Keep DNS TTLs reasonable.</li>
+<li>Over-long socket timeouts: A 30–60 second socket timeout can cause painful backlogs during failover. Favor shorter timeouts with retries.</li>
+<li>Pool mass expiry: If every connection shares the same maxLifetime, they can expire together under load. Stagger lifetimes.</li>
+<li>Weak validation: Without lightweight validation, pools can hand out half-dead connections. Enable a simple health check query.</li>
+<li>Concurrency spikes: Deploys that cold-start a big pool can stampede the DB. Warm up gradually and cap burst concurrency.</li>
+</ul>
+<p><em>Each fix is small, but the compounding effect is huge.</em>
+Together, they turn scary events into minor shoulder shrugs.</p>
+<h2 id="securityandcompliancenotes">Security and compliance notes</h2>
+<ul>
+<li>TLS/SSL stays the default posture. Keep certificate validation enabled end-to-end.</li>
+<li>Secrets management still matters: rotate credentials and avoid hardcoding.</li>
+<li>If you use IAM database authentication for Aurora, the wrapper doesn’t block that pattern; treat auth like a separate concern and test token refresh under load.</li>
+</ul>
+<p><em>Security isn’t glamorous, but it’s cheaper than incident cleanups.</em></p>
+<h2 id="alternativesandcomplements">Alternatives and complements</h2>
+<ul>
+<li>Database proxies (e.g., language-agnostic proxies) can help with pooling and routing at the network layer. They’re not mutually exclusive with the wrapper.</li>
+<li>Query-layer tools (caches, read routers) can help scale reads; the wrapper keeps the underlying connections steady.</li>
+<li>App-level retries and idempotent writes remain best practices. The wrapper reduces failures; it doesn’t make writes magically retry-safe.</li>
+</ul>
+<p><em>Use the wrapper as a force multiplier, not as a silver bullet.</em></p>
+<h2 id="faqquickanswers">FAQ quick answers</h2>
+<h3 id="howisthisdifferent">How is this different</h3>
+<p>You still use the vendor driver for PostgreSQL or MySQL connections.
+The AWS Advanced JDBC Wrapper sits on top as an adapter layer.
+It intercepts behavior and adds resilience like failover and awareness.
+It’s an adapter, not a replacement, by design and intention.</p>
+<h3 id="workwithauroraserverlessv2">Work with Aurora Serverless v2</h3>
+<p>Yes, it helps keep connections healthy while Aurora scales capacity.
+Topology shifts happen, and the wrapper reduces broken connections.
+You still need good pool settings and real load tests though.
+But the wrapper lowers the risk of scaling causing big failures.</p>
+<h3 id="changemysqlororm">Change my SQL or ORM</h3>
+<p>No changes needed to SQL, JPA/Hibernate, or MyBatis code.
+The JDBC API stays the same, that’s the whole point.
+Most changes live in driver class and connection property settings.</p>
+<h3 id="wheredownloadit">Where download it</h3>
+<p>Use Maven Central for builds at software.amazon.jdbc:aws-advanced-jdbc-wrapper.
+Grab source and releases from the awslabs GitHub repository as well.
+Always pin a version and read release notes before promotion.</p>
+<h3 id="compatiblewithspringboot">Compatible with Spring Boot</h3>
+<p>Yes, set the wrapper as the driver class in Boot.
+Keep the vendor driver on the classpath as usual.
+Configure your DataSource like normal and you’re good.
+The wrapper enhances behavior at connection time automatically.</p>
+<h3 id="licensingandsupport">Licensing and support</h3>
+<p>It’s open source under the Apache-2.0 license on GitHub.
+Open issues or PRs there when you need to.
+For production help around Aurora, use AWS docs and support plans.</p>
+<h3 id="whatoverheadexpect">What overhead expect</h3>
+<p>It adds a thin layer around connection handling only.
+In real apps, overhead is negligible versus network or query time.
+Measure in your environment, of course, before finalizing settings.
+Teams usually trade tiny overhead for big stability gains.</p>
+<h3 id="togglefeaturesonoff">Toggle features on off</h3>
+<p>Yes, you configure behavior through simple properties as needed.
+Start with failover handling and host monitoring first.
+Then layer more features after testing in staging.</p>
+<h2 id="shipitthisweek">Ship it this week</h2>
+<ul>
+<li>Day 1: Add the wrapper dependency; pin a version from Maven Central.</li>
+<li>Day 2: Point your DataSource to the wrapper driver; keep vendor driver present.</li>
+<li>Day 3: Enable failover/host monitoring properties; set conservative pool timeouts.</li>
+<li>Day 4: Run a load test; trigger Aurora writer switchover; watch reconnects.</li>
+<li>Day 5: Validate metrics in Performance Insights and pool telemetry; tune.</li>
+<li>Day 6–7: Promote to a canary service; monitor; then roll out broadly.</li>
+</ul>
+<p><em>A week later, your app handles maintenance and scaling like a pro.</em>
+You don’t need a platform rewrite to get cloud-native durability.
+You just need better connection behavior where it counts most.
+The AWS Advanced JDBC Wrapper gives you that leverage today.
+Cluster awareness, smoother failover, and healthier pools, without changing SQL.
+Pair it with good Spring Boot hygiene and realistic, sane timeouts.
+Use Aurora’s managed endpoints, then practice with real failover drills.
+Tune until the graphs get boring and your pager stays silent.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/awslabs/aws-advanced-jdbc-wrapper">AWS Advanced JDBC Wrapper (GitHub)</a></li>
+<li><a href="https://search.maven.org/artifact/software.amazon.jdbc/aws-advanced-jdbc-wrapper">AWS Advanced JDBC Wrapper on Maven Central</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html">Amazon Aurora (global database)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html">Amazon Aurora Serverless</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html">Amazon RDS Performance Insights</a></li>
+<li><a href="https://github.com/brettwooldridge/HikariCP">HikariCP connection pool</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Failover.html">Initiating a failover for an Aurora DB cluster (CLI/console)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html">Aurora connection management and endpoints</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#data">Spring Boot DataSource configuration</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/technotes/guides/net/properties.html">Java networking properties (DNS cache TTL)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-advanced-jdbc-wrapper.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqff85.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Retrofit+your+JDBC+apps+for+Aurora+speed+and+resilience&amp;pi=293761578700&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=293761578700&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-advanced-jdbc-wrapper&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-advanced-jdbc-wrapper?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:05 GMT -->
+</html>

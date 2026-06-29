@@ -1,0 +1,382 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-lambda-dotnet-10?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Build Faster on AWS Lambda with .NET 10</title>
+    <link rel="canonical" href="aws-lambda-dotnet-10.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn AWS Lambda .NET 10 serverless development with tutorial-style guidance. Build on managed runtime or container images, use Powertools, and upgrade easily.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build Faster on AWS Lambda with .NET 10",
+        "datePublished": "2026-01-12T20:33:59Z",
+        "dateModified": "2026-01-12T20:34:00.161Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-lambda-dotnet-10",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-12-2026-08-22-59-6001-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-lambda-dotnet-10.html">Build Faster on AWS Lambda with .NET 10</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 12, 2026 8:33:59 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>AWS Lambda now supports .NET 10 LTS. You get faster starts, smaller packages, and managed updates through November 2028.</p>
+<p><em>If you’ve been waiting to modernize your serverless stack without boring heavy lifting, this is your green light.</em> Lambda gives you two clear lanes: a managed runtime for max simplicity, or a container image for max control. Either way, builds get leaner, cold starts get snappier, and your deploys get cleaner.</p>
+<p>Think of this like an upgrade that removes friction. Less boilerplate. Better defaults. New C# features that cut clutter. And Powertools for AWS Lambda (.NET) backs you up from day one with logging, tracing, metrics, and idempotency. The result: fewer footguns, faster feedback loops, and fewer production surprises.</p>
+<h2 id="keytakeaways">Key Takeaways</h2>
+<h3 id="keyhighlights">Key highlights</h3>
+<ul>
+<li>Run .NET 10 as a managed runtime for simplicity or as a container base image for full control.</li>
+<li>Performance gains from JIT/AOT improvements and smaller artifacts; new C# features and file-based C# functions speed up development.</li>
+<li>Powertools for AWS Lambda (.NET) supports .NET 10 for logging, tracing, idempotency, and more.</li>
+</ul>
+<h3 id="whythismattersrightnow">Why this matters right now</h3>
+<ul>
+<li>You get long-term support on the runtime, which means predictable security patches and less time babysitting versions.</li>
+<li>You can keep your infrastructure-as-code (IaC) steady while upgrading apps incrementally using Lambda aliases. Safer rollouts, cleaner ops.</li>
+<li>The developer experience is just better: faster inner loops, simpler handlers, and consistent observability baked in.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-12-2026-08-23-58-2586-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="managedruntimevscontainers">Managed runtime vs containers</h2>
+<h3 id="managedruntimevscontainers-1">Managed runtime vs containers</h3>
+<ul>
+<li>Managed runtime: simplest ops, auto patching, great for event-driven services and APIs.</li>
+<li>Container image: custom dependencies and OS packages, image-level versioning, strong parity with container workflows.</li>
+</ul>
+<h3 id="usethemanagedruntimeif">Use the managed runtime if</h3>
+<ul>
+<li>You want the lowest operational overhead. AWS handles runtime updates through the LTS window.</li>
+<li>Your function relies on NuGet packages and simple native libs that don’t require custom OS packages.</li>
+<li>You prefer fast, small deployments and quick rollbacks using Lambda versions and aliases.</li>
+</ul>
+<h3 id="useacontainerimageif">Use a container image if</h3>
+<ul>
+<li>You need OS packages or specific native dependencies that aren’t available in the managed runtime.</li>
+<li>You want the same Docker-based build and test workflow across Lambda, ECS, and Kubernetes.</li>
+<li>You need strict image pinning, image scanning, and a private registry flow via ECR.</li>
+</ul>
+<h3 id="protips">Pro tips</h3>
+<ul>
+<li>Start with the managed runtime unless you have a clear container requirement. You can move to images later without rewriting your app logic.</li>
+<li><em>For both paths, treat observability as table stakes.</em> Add Powertools and structured logging on day one.</li>
+</ul>
+<h2 id="whatgetsfaster">What gets faster</h2>
+<ul>
+<li>Startup and cold start improvements: With better JIT and optional Native AOT, functions spin up faster and waste less memory. Your users feel the difference on spiky traffic.</li>
+<li>Smaller artifacts: Leaner builds and trimming reduce package size, which speeds deployments and container pulls.</li>
+<li>Cleaner C#: Modern C# means fewer lines of code. File-based C# functions help you skip ceremony and ship.</li>
+<li>Safer operations: Longer LTS support window means fewer urgent runtime upgrades. You can plan upgrades well before the end-of-support dates.</li>
+</ul>
+<p><em>None of this replaces good hygiene: right-size memory, keep dependencies tight, and monitor p95 latency. You’ll get the best gains when you combine .NET 10 improvements with Lambda best practices.</em></p>
+<h2 id="upgradeplaybookmanagedruntime">Upgrade playbook managed runtime</h2>
+<h3 id="upgradeplaybookmanagedruntime-1">Upgrade playbook managed runtime</h3>
+<p>1) Bump target framework to .NET 10 in your csproj.
+2) Update AWS Extensions for .NET CLI to v6.0.0+ if you use it.
+3) Rebuild, test locally and in CI.
+4) Deploy to pre-prod alias and load test.
+5) Shift traffic gradually with aliases and monitor.</p>
+<h3 id="whatthatlookslike">What that looks like</h3>
+<ul>
+<li>Step 1: Update your TargetFramework in your .csproj to net10.0. Keep other settings the same at first; change one variable at a time.</li>
+<li>Step 2: Upgrade AWS Extensions for .NET CLI (v6.0.0+) so packaging and deployment commands recognize .NET 10. This avoids weird build-time surprises.</li>
+<li>Step 3: Run unit tests locally, then your CI pipeline. If you use SAM local or the AWS Toolkit for Visual Studio, spin up a local test event to validate handlers and configuration.</li>
+<li>Step 4: Deploy to a pre-production alias or environment. Use the same infrastructure as production but with safe limits and test data. Load test with steady traffic plus spikes to mimic real usage.</li>
+<li>Step 5: Gradually shift traffic using Lambda aliases. Start at 1–5% canary, watch error rates, p95 latency, and memory usage. If clean, roll forward. If noisy, roll back instantly by pointing the alias back.</li>
+</ul>
+<h3 id="checklistforsuccess">Checklist for success</h3>
+<ul>
+<li>Monitor cold start and warm start latency separately. Provisioned Concurrency can smooth spikes for latency-sensitive APIs.</li>
+<li>Review IAM policies. Keep least privilege on function roles and any service integrations.</li>
+<li>Watch CloudWatch metrics for duration, errors, and throttles; set alarms before the rollout.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-12-2026-08-24-54-6798-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="upgradeplaybookcontainerimage">Upgrade playbook container image</h2>
+<h3 id="upgradeplaybookcontainerimage-1">Upgrade playbook container image</h3>
+<p>1) Rebase to the .NET 10 Lambda base image.
+2) Bake dependencies and pin versions.
+3) Scan and sign images.
+4) Push to ECR and deploy via SAM, CDK, or CloudFormation.</p>
+<h3 id="howtomakeitsmooth">How to make it smooth</h3>
+<ul>
+<li>Step 1: Start with the official .NET 10 Lambda base image. Keep your Dockerfile simple: restore, build, publish, then copy the output to the runtime workdir. Avoid multi-purpose images.</li>
+<li>Step 2: Pin every OS and package version to keep builds deterministic. If you add native deps, record them in code and docs.</li>
+<li>Step 3: Use image scanning before promotion. ECR scanning or your preferred tool should block promotion on high-severity issues. Consider image signing for your release stage.</li>
+<li>Step 4: Push to ECR, reference the digest (not just a tag), and deploy via SAM/CDK/CloudFormation. Roll back by flipping to a previous image digest.</li>
+</ul>
+<h3 id="shippingcontainersdontforget">Shipping containers Dont forget</h3>
+<ul>
+<li>Keep images small. Remove build tools from the final stage and clean caches.</li>
+<li>Log to stdout/stderr in JSON. CloudWatch will thank you.</li>
+<li>Tag images with git SHA and app version for easy tracing.</li>
+</ul>
+<h2 id="toolinganddevexperience">Tooling and dev experience</h2>
+<h3 id="toolinganddevexperience-1">Tooling and dev experience</h3>
+<ul>
+<li>SAM, CDK, AWS CLI, Lambda console, and AWS Toolkit for Visual Studio all support .NET 10.</li>
+<li>Use Powertools from day one for standardized observability and operational safety.</li>
+</ul>
+<h3 id="whatthismeans">What this means</h3>
+<ul>
+<li>SAM and CDK: You can define the .NET 10 runtime or point to your container image and use the same deploy commands you already know. Templates stay clean, environments stay consistent.</li>
+<li>AWS CLI and Lambda console: Great for quick experiments. Set environment variables, memory, and timeouts. Then script it later with IaC.</li>
+<li>AWS Toolkit for Visual Studio: Debug locally, run test events, and push to Lambda without leaving the IDE. Use it for quick feedback, then lock in your pipeline with CI/CD.</li>
+<li>Powertools for AWS Lambda (.NET): Add it when you create the project. You’ll get consistent correlation IDs, structured logs, traces, metrics, idempotency, and parameters/utilities that teams standardize on.</li>
+</ul>
+<h2 id="realworldpatternstocopy">Real world patterns to copy</h2>
+<ul>
+<li>Event-driven glue: Use managed runtime + Powertools + SAM. Keep the function small, stateless, and focused on one job.</li>
+<li>API endpoints: Use provisioned concurrency for the hot paths, structured logging, and strict timeouts. Monitor p95 latency closely.</li>
+<li>Heavy native deps: Use container images, pin OS packages, run image scans, and deploy via CDK. Version images by digest.</li>
+<li>Team-of-teams standard: Create a starter template with .NET 10, Powertools, logging format, alarms, and a CI pipeline. Make the right path the easy path.</li>
+</ul>
+<h2 id="lambdamanagedinstances">Lambda Managed Instances</h2>
+<h3 id="lambdamanagedinstances-1">Lambda Managed Instances</h3>
+<ul>
+<li>Use when you need specialized EC2-backed compute while keeping a serverless model.</li>
+<li>Keep IaC and CI/CD identical so switching is a config change, not a rewrite.</li>
+</ul>
+<p>Think of Managed Instances as a pressure-release valve. If a workload needs specialized compute that doesn’t fit the standard Lambda execution environment, you can still keep serverless semantics—events, auto-scaling, and aliases—without refactoring everything. The trick is to design your templates and pipelines so the switch from standard Lambda to Managed Instances is mostly configuration. That way, you keep one playbook for deployments, rollbacks, and monitoring.</p>
+<h2 id="deepdiveperformance">Deep dive performance</h2>
+<ul>
+<li>Right-size memory and CPU: Lambda ties CPU to memory. Don’t be afraid to give functions more memory if it cuts duration. Sometimes 512 MB is slower and more expensive than 1 GB.</li>
+<li>Provisioned Concurrency for APIs: If p95 matters, pre-warm the most frequently hit functions. Start small, measure, then tune.</li>
+<li>Minimize dependencies: Trimming and mindful package selection can drop artifact size and speed up cold starts.</li>
+<li>Async everything you can: For I/O-bound work, async C# with proper cancellation tokens helps reduce timeouts and costs.</li>
+<li>Log less, log better: Use structured logs with correlation IDs. Sample traces if traffic is high.</li>
+</ul>
+<h2 id="devximprovements">DevX improvements</h2>
+<p>File-based C# functions help you ship small units of logic without a lot of ceremony. Combined with modern C# features, you can model handlers as simple methods that are easy to test. This reduces boilerplate and improves readability. The benefit is most obvious when you have many small functions: less overhead per function, faster code reviews, and fewer places to hide bugs.</p>
+<h3 id="powertoolsmultipliesthateffect">Powertools multiplies that effect</h3>
+<ul>
+<li>Logger: Consistent, structured JSON logs topped with correlation IDs.</li>
+<li>Tracer: Instrument external calls and see the call path per request.</li>
+<li>Metrics: Emit standard business and technical metrics with a single line of code.</li>
+<li>Idempotency: Make retries safe by default—especially for event-driven flows like SQS and EventBridge.</li>
+</ul>
+<h2 id="faqquickhits">FAQ quick hits</h2>
+<h3 id="faqquickhits-1">FAQ quick hits</h3>
+<ul>
+<li>.NET 10 is available as both managed runtime and container base image.</li>
+<li>File-based C# functions are supported; use AWS Extensions for .NET CLI v6.0.0+.</li>
+<li>For Node or Python runtime upgrades, follow a similar staged rollout with aliases and tests.</li>
+</ul>
+<h3 id="extraanswersyoullprobablyneed">Extra answers youll probably need</h3>
+<p>1) Can I mix managed runtime and containers in one app?
+Yes. Choose per-function. Keep shared libs in NuGet packages and standardize logging.</p>
+<p>2) Do I need Provisioned Concurrency?
+Only for latency-sensitive paths. Start with managed runtime and measure.</p>
+<p>3) How do I roll back fast?
+Keep your previous Lambda version (managed runtime) or previous image digest (containers) and flip the alias.</p>
+<p>4) What about regions?
+Check regional availability before rollout if you’re multi-region; most services are broadly available but verify.</p>
+<h2 id="getstartedinunder">Get started in under</h2>
+<h3 id="getstartedinunder-1">Get started in under</h3>
+<ul>
+<li>Install or update .NET SDK 10, AWS CLI, SAM CLI, and AWS Extensions for .NET CLI v6.0.0+.</li>
+<li>Initialize with SAM or CDK, add a minimal handler, wire Powertools, test locally, and deploy.</li>
+</ul>
+<h3 id="aquickpathyoucan">A quick path you can</h3>
+<ul>
+<li>Install the .NET 10 SDK, the AWS CLI, and SAM CLI. Log in with an IAM user or role that can deploy to Lambda.</li>
+<li>Create a new serverless project with SAM or CDK. Add a simple handler and a unit test.</li>
+<li>Add Powertools for logging and tracing. Emit a test metric so you can see it in CloudWatch.</li>
+<li>Run locally with a sample event. Validate environment variables, timeouts, and memory.</li>
+<li>Deploy to a dev stage. Create a Lambda alias (e.g., dev) and point traffic to it.</li>
+<li>Add alarms for errors and duration. Trigger the function with a sample event or a test API call.</li>
+<li>When it looks good, promote the same artifact to staging and production by shifting alias traffic gradually.</li>
+</ul>
+<h2 id="securityandgovernance">Security and governance</h2>
+<ul>
+<li>Least privilege IAM: Start with the minimal permissions your function needs. Review policies as part of code review.</li>
+<li>Image scanning and signing (containers): Scan every image, fail the build on critical vulnerabilities, and sign images before promotion.</li>
+<li>Parameter and secret management: Use AWS Systems Manager Parameter Store or AWS Secrets Manager. Don’t bake secrets into images or code.</li>
+<li>Versioned deployments: Use Lambda versions and aliases to ensure every release is traceable and reversible.</li>
+<li>Consistent templates: Standardize SAM/CDK templates with the runtime, memory defaults, alarms, and Powertools so every team ships the same way.</li>
+</ul>
+<h2 id="putitalltogether">Put it all together</h2>
+<p>Here’s the play: pick the managed runtime if you want the fastest path to value. Choose containers if you need OS-level control and airtight image workflows. Either way, standardize on Powertools, keep your IaC clean, and roll out with aliases. <em>Watch error rates and latency like a hawk for the first few hours, then relax as the charts stay boring—in a good way.</em></p>
+<p>AWS Lambda now supports .NET 10 LTS, and that support stretches through November 2028. That’s a long runway to build, iterate, and ship without constant runtime churn. So upgrade the TFM, test the path, deploy behind an alias, and start shifting traffic. You can have your first .NET 10 Lambda in production before lunch.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html">AWS Lambda runtimes and support policy</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html">Deploying Lambda functions as container images</a></li>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/">AWS Lambda regional services and availability</a></li>
+<li><a href="https://github.com/aws-powertools/powertools-dotnet">Powertools for AWS Lambda (.NET)</a></li>
+<li><a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html">AWS SAM</a></li>
+<li><a href="https://docs.aws.amazon.com/cdk/latest/guide/home.html">AWS CDK</a></li>
+<li><a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html">AWS Toolkit for Visual Studio</a></li>
+<li><a href="https://github.com/aws/aws-extensions-for-dotnet-cli">AWS Extensions for .NET CLI</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/core/versions/support-policy">.NET support policy</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/core/deploying/native-aot/">Native AOT overview</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/csharp/whats-new/">What is new in C#</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html">AWS Lambda aliases and traffic shifting</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html">Amazon ECR image scanning</a></li>
+<li><a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html">AWS X-Ray for tracing</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html">Provisioned Concurrency</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-lambda-dotnet-10.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqa757.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Build+Faster+on+AWS+Lambda+with+.NET+10&amp;pi=293671159528&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=293671159528&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-lambda-dotnet-10&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-lambda-dotnet-10?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:07 GMT -->
+</html>

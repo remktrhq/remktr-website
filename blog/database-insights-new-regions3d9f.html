@@ -1,0 +1,364 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/database-insights-new-regions?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Accelerate RDS troubleshooting: CloudWatch Database Insights expands globally</title>
+    <link rel="canonical" href="database-insights-new-regions.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover aws cloudwatch performance insights as CloudWatch Database Insights expands to 4 regions, using ML to detect anomalies and guide fixes for RDS.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Accelerate RDS troubleshooting: CloudWatch Database Insights expands globally",
+        "datePublished": "2026-01-26T20:59:14Z",
+        "dateModified": "2026-01-26T20:59:15.348Z",
+        "mainEntityOfPage": "https://remktr.com/blog/database-insights-new-regions",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-26-2026-08-49-32-9533-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="database-insights-new-regions.html">Accelerate RDS troubleshooting: CloudWatch Database Insights expands globally</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 26, 2026 8:59:14 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Your database is fine… until it isn’t. One slow query. One connection leak. Suddenly your pager is doing CrossFit. The scramble begins. Where’s the bottleneck? Who owns the fix? How fast can you push it?</p>
+<p>Good news: CloudWatch Database Insights just landed in four new regions. Asia Pacific (New Zealand), Asia Pacific (Taipei), Asia Pacific (Thailand), and Mexico (Central). That brings total coverage to 25+ regions. It uses ML to flag anomalies and bottlenecks, then offers clear fixes. Think indexing a high‑cardinality column when scans go wild. The kicker: no agents to install.</p>
+<p>If you run Amazon RDS for PostgreSQL or MySQL, or Amazon Aurora, this is for you. In this guide, you’ll turn noisy performance mysteries into fast, repeatable fixes. And see how it plays nice with RDS Performance Insights, Calls/sec metrics, and the rest of your CloudWatch stack.</p>
+<p>That’s the headline. <em>The real win is speed.</em> Fewer guessing games, faster clues, and fixes you can trust. We’ll keep it practical. How to enable it, connect the dots, and roll it out without waking your whole on‑call rotation.</p>
+
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>ML‑powered anomaly detection surfaces slow queries, connection leaks, saturation, and more.</li>
+<li>Four new regions: New Zealand, Taipei, Thailand, and Mexico (Central).</li>
+<li>Works with RDS for PostgreSQL, MySQL, and Aurora; no agent overhead.</li>
+<li>Complements RDS Performance Insights; nothing here replaces it.</li>
+<li>Use Calls/sec from Performance Insights for workload context; use Database Insights for guided fixes.</li>
+<li>Roll out by environment, wire alerts, and ship runbooks you can reuse.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-26-2026-08-50-39-0050-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatchangedandwhy">What changed and why</h2>
+<h3 id="newcoveragezeroagent">New coverage zero agent</h3>
+<p>CloudWatch Database Insights now spans 25+ regions. Fresh support in Asia Pacific (New Zealand), Asia Pacific (Taipei), Asia Pacific (Thailand), and Mexico (Central). The model is simple. It leans on CloudWatch and service‑integrated telemetry. So you avoid classic agent tradeoffs like overhead, version drift, and host access.</p>
+<p>The promise is simple. Get on‑demand performance analysis and actionable guidance without redeploying your fleet. If teams are spread across time zones, first‑class support in these regions helps. You get fewer cross‑region hops and faster signal when things go sideways.</p>
+<p>Why this matters beyond a map. More regions usually mean lower monitoring delay. And better alignment with how your teams and data live today. If you run multi‑account, multi‑region, you can set up consistent monitoring where workloads run. Not backhaul everything to one hub and hope.</p>
+<p>No‑agent setups are great for managed databases. There’s nothing to install. Nothing to patch. Nothing that risks adding CPU or memory pressure to your database instances. You get insights and guidance while keeping instance resources focused on traffic.</p>
+<p><em>Pro tip: strict separation helps here too.</em> If you split prod vs. non‑prod, local‑region coverage makes blast‑radius control easier. Enable features region by region. Test in staging close to prod. Then roll out broadly with fewer surprises.</p>
+<h3 id="fromchaostocontext">From chaos to context</h3>
+<p>Here’s the usual midnight fire drill. Latency spikes. Dashboards look fine‑ish. Everyone guesses. With Database Insights, an ML baseline flags an anomaly on a write‑heavy table. It links it to query patterns that recently changed. You get a suggestion to add an index on a high‑cardinality column driving full scans. Instead of sifting through logs for an hour, you get a strong guess in under five minutes.</p>
+<p>The result is a new gold standard in incident response. Detection, context, recommendation. You still own the fix, but now you have a map.</p>
+<p>Picture the flow during a real incident:</p>
+<ul>
+<li>Detection: an anomaly fires for rising query latency and lock waits.</li>
+<li>Context: the insight notes a spike in similar queries hitting the same table.</li>
+<li>Recommendation: it suggests reviewing an index on a filter column and auditing connection pooling.</li>
+<li>Validation: you hop into your engine and run EXPLAIN/EXPLAIN ANALYZE or EXPLAIN FORMAT=JSON to confirm the plan.</li>
+<li>Action: you apply the index during a safe window or fix pooling, then verify the improvement.</li>
+</ul>
+<p>This cuts the loop from “weird graph, let’s guess” to “here’s the likely root cause, let’s validate.” It’s a big upgrade in calm and speed.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-26-2026-08-51-34-4675-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="howmlspotstrouble">How ML spots trouble</h2>
+<h3 id="behavioralbaselinesthatadapt">Behavioral baselines that adapt</h3>
+<p>Static thresholds age like milk. Database Insights builds behavioral baselines. It learns normal patterns for your workload and flags deviations. Bursts in query latency, lock waits, or connection growth that outruns app traffic. Because the baseline adapts, you avoid alert fatigue and still catch the weird stuff. Like a weekend cron job that suddenly explodes CPU.</p>
+<p>It’s great for seasonal or launch‑driven workloads where normal shifts often. Think end‑of‑month finance runs or product drops. Those can turn a tidy read‑write ratio into a write‑heavy stampede.</p>
+<p>Adaptive baselines shine when traffic is spiky or cyclical. They learn Monday mornings are busy. Saturday nights are quiet. So you don’t get paged for normal patterns. When an outlier pops, you see it. Retries blow up Calls/sec, locks rise faster than throughput, or connection count jumps suddenly. That’s where the anomaly shows up.</p>
+<p>You can make these baselines work harder by pairing them with tags and SLOs. Scope alerts to the apps that matter. Then compare anomalies against your SLO budgets, like error or latency budgets. That way you’re not chasing noise.</p>
+<h3 id="fromsymptomtolikelyfix">From symptom to likely fix</h3>
+<p>Anomaly detection is the first step. Remediation guidance is the real unlock. When a bottleneck links to missing indexes on high‑cardinality columns, you get a clear nudge. When connections spike, you get a heads‑up to audit pooling and timeouts. If slow queries cluster by pattern, you can pick the highest‑impact fix first.</p>
+<p>Use this along with engine‑native tools to validate next steps. For PostgreSQL, EXPLAIN and EXPLAIN ANALYZE confirm whether the new index changes plan shape and cost. For MySQL, EXPLAIN FORMAT=JSON is your friend. Database Insights speeds triage. Your database engine confirms the execution path.</p>
+<p><em>Pro move: wire anomaly notifications into your on‑call system using CloudWatch alarms and EventBridge. Do not learn about an issue from your users.</em></p>
+<p>A practical triage sequence you can reuse:
+1) Check service health: is there an app deploy, config change, or spike in traffic? Annotate dashboards with deploy events from Systems Manager or your CI so you connect dots fast.
+2) Check RDS Performance Insights: look at Calls/sec and top waits to understand the load story.
+3) Review the Database Insights anomaly: note what changed and the recommended next move.
+4) Validate in‑engine: run EXPLAIN/EXPLAIN ANALYZE (PostgreSQL) or EXPLAIN FORMAT=JSON (MySQL) to verify plan and cost.
+5) Fix and verify: apply the least risky change first, like index, query hint, or batch size. Then re‑check the plan and metrics.</p>
+<h2 id="performancevsdatabaseinsights">Performance vs Database Insights</h2>
+<h3 id="samemissiondifferentlenses">Same mission different lenses</h3>
+<p>You might be wondering about aws performance insights deprecated rumors. Short answer: Performance Insights is not deprecated. It remains a core feature of RDS and Aurora. It shows database load, top SQL, wait events, and more. Database Insights complements it. It detects anomalies with ML and layers on targeted remediation guidance.</p>
+<p>If you search aws cloudwatch performance insights, here’s the gist:</p>
+<ul>
+<li>Performance Insights: what is consuming load and when.</li>
+<li>Database Insights: what changed abnormally and what likely fixes it.</li>
+</ul>
+<p>You use both to move from what happened, to why it happened, to what to do next.</p>
+<p>A simple playbook:</p>
+<ul>
+<li>Start with Database Insights to spot the weird change and get a likely fix.</li>
+<li>Pivot to Performance Insights to see which waits, queries, and times drive load.</li>
+<li>Confirm your hypothesis in the engine with EXPLAIN.</li>
+<li>Apply the fix, then watch Performance Insights to see the load pattern settle.</li>
+</ul>
+<p><em>This is the “observe, orient, decide, act” loop for databases.</em> Fast and repeatable.</p>
+<h3 id="metricsthatmatter">Metrics that matter</h3>
+<p>Calls/sec in Performance Insights is a must‑watch metric. Spikes there without matching throughput or business traffic often point to retry storms. Or inefficient batching. Or hot partitions. Tie Calls/sec to lock waits and buffer cache misses. You’ll spot saturation early.</p>
+<p>For database insights execution plan work, keep your validations inside the database. Use EXPLAIN to compare before and after changes. Database Insights helps you pinpoint query candidates. The execution plan confirms impact.</p>
+<p>And do not sleep on cloudwatch container insights if your database sits behind microservices. App‑level metrics like p95 latency, container CPU throttling, and pod restarts help. They can explain database‑side symptoms that look mysterious in isolation.</p>
+<p>Other helpful signals to keep on a single pane:</p>
+<ul>
+<li>CPUUtilization and FreeableMemory on the database instance: shows compute or memory constraints.</li>
+<li>ReadIOPS/WriteIOPS and DiskQueueDepth: highlights I/O pressure and queueing.</li>
+<li>Lock waits and deadlocks (where available): reveals contention hotspots.</li>
+<li>NetworkTransmit/Receive (if applicable): helps when chatty services overwhelm connections.</li>
+</ul>
+<p>Cross‑plot these with Calls/sec. You’ll see if your issue is volume, contention, or inefficiency.</p>
+<h2 id="rollitout">Roll it out</h2>
+<h3 id="startsmalltageverything">Start small tag everything</h3>
+<p>Roll out Database Insights by environment. Dev, then staging, then a single prod slice. Tag databases by environment, owner, application, and cost center. That lets you scope alerts, dashboards, and budgets. So you don’t spam every team with every anomaly.</p>
+<p>Create a runbook for the top three issues you expect to see. Missing indexes, connection pool exhaustion, and lock contention. When an anomaly trips, your on‑call has a step‑by‑step path to resolution.</p>
+<p>A clean rollout checklist:</p>
+<ul>
+<li>Pick one non‑critical environment and one representative workload.</li>
+<li>Enable Database Insights and let it learn your baseline. Give it time to observe normal cycles.</li>
+<li>Set up alerts with clear routes, like PagerDuty, Opsgenie, or Slack via SNS. Add quiet hours where it makes sense.</li>
+<li>Share the runbook and do a tabletop walkthrough. Make sure every on‑call knows the dance.</li>
+</ul>
+<p>For tags, standardize keys like Environment, App, Owner, SLO, and CostCenter. Use them to filter dashboards and notifications. This keeps signal tight and costs visible.</p>
+<h3 id="automatetheedgesthatmatter">Automate the edges that matter</h3>
+<p>Even if there isn’t a dedicated cloudformation database insights resource type, you can still codify the plumbing. CloudWatch alarms, dashboards, metric math, EventBridge rules, and IAM roles. Keep it all in Git. Review it. Ship consistent monitoring with your apps.</p>
+<p>For incident routing, send anomaly alarms to PagerDuty, Opsgenie, or Slack via SNS. For change tracking, annotate dashboards with deployment events from Systems Manager or your CI. Then you can correlate fixes with trend shifts.</p>
+<p>Finally, train the team. A 45‑minute brown‑bag demo goes a long way. Walk through an example anomaly, the related Performance Insights Calls/sec trace, and an EXPLAIN plan. It will pay for itself on your next Friday night page.</p>
+<p>Guardrails to add early:</p>
+<ul>
+<li>Least‑privilege IAM for any automation that reads metrics or posts alerts.</li>
+<li>Budgets and alerts for CloudWatch usage so costs don’t creep.</li>
+<li>A naming convention for alarms and dashboards by env/app so discovery is easy.</li>
+</ul>
+<h2 id="quickpitstop">Quick pit stop</h2>
+<ul>
+<li>Four new regions mean lower latency on signals and broader coverage.</li>
+<li>ML baselines reduce noise and elevate genuinely weird performance shifts.</li>
+<li>Database Insights gives guidance; the database engine confirms with EXPLAIN.</li>
+<li>Performance Insights is alive and well; use it with Database Insights.</li>
+<li>Calls/sec is your early‑warning signal for workload shifts and retries.</li>
+<li>Automate alerts, dashboards, and routing; keep runbooks close to the team.</li>
+</ul>
+<p>Add these two memory hooks:</p>
+<ul>
+<li>When in doubt, correlate: Database Insights anomaly + Performance Insights Calls/sec + engine EXPLAIN.</li>
+<li>Fixes are ranked by impact and risk: index and query shape first, config and infra second.</li>
+</ul>
+<h2 id="faqsyouwillactuallyuse">FAQs you will actually use</h2>
+<h3 id="whatisdatabaseinsights">What is Database Insights</h3>
+<p>Database Insights is an ML‑powered, on‑demand database performance analysis feature in Amazon CloudWatch. It detects anomalies and suggests likely fixes, with no agents. RDS Performance Insights is a feature of RDS and Aurora that shows database load, top SQL, and waits. Use Performance Insights to understand workload shape. Use Database Insights to spot abnormal changes and get guided remediation.</p>
+<h3 id="supportedenginesandregions">Supported engines and regions</h3>
+<p>Per the latest expansion, supported engines include Amazon RDS for PostgreSQL, RDS for MySQL, and Amazon Aurora. Availability is now in 25+ regions including Asia Pacific (New Zealand), Asia Pacific (Taipei), Asia Pacific (Thailand), and Mexico (Central). Always verify engine and region coverage on the AWS Regional Services list before rollout to your environment.</p>
+<h3 id="isawsperformanceinsightsdeprecated">Is AWS Performance Insights deprecated</h3>
+<p>No. AWS Performance Insights is not deprecated. It continues to be supported for Amazon RDS and Amazon Aurora. It remains a primary way to visualize load, waits, and top SQL. Database Insights complements, not replaces, Performance Insights.</p>
+<h3 id="executionplanvisibility">Execution plan visibility</h3>
+<p>Use it to find and prioritize the slow or anomalous queries. For execution plans, stay in the engine. Run EXPLAIN or EXPLAIN ANALYZE in PostgreSQL. Run EXPLAIN or EXPLAIN FORMAT=JSON in MySQL. Treat Database Insights as your triage and prioritization layer for database insights execution plan work.</p>
+<h3 id="howdoespricingwork">How does pricing work</h3>
+<p>Pricing for CloudWatch features varies by metric volumes, analytics, and logs. Review the Amazon CloudWatch pricing page for the most current details. Set budgets plus anomaly filters so costs track with value. As always, test in a lower environment first.</p>
+<h3 id="automatewithcloudformation">Automate with CloudFormation</h3>
+<p>Even if there isn’t a first‑class CloudWatch Database Insights resource, you can manage the surrounding pieces with AWS CloudFormation. CloudWatch alarms, dashboards, metric filters, SNS topics for notifications, and IAM roles. Many teams wire EventBridge rules and runbooks into stacks to keep monitoring consistent.</p>
+<h3 id="baselineandtunealerts">Baseline and tune alerts</h3>
+<p>Start with a learning window of 14–30 days so the ML learns “normal.” Then map anomaly types to your SLOs. For example, alert on latency anomalies that persist beyond a few minutes. But only page for anomalies that coincide with error spikes or Calls/sec surges.</p>
+<h3 id="runbookstoprepare">Runbooks to prepare</h3>
+<p>Three essentials:</p>
+<ul>
+<li>Missing index: identify column and filter pattern, assess cardinality, validate with EXPLAIN, add index in a safe window, re‑EXPLAIN, monitor latency.</li>
+<li>Connection pool exhaustion: right‑size pool, set timeouts, confirm reuse, check retry logic, verify connection counts settle.</li>
+<li>Lock contention: find blocking sessions, reduce transaction scope, add appropriate indexes, retry with backoff, re‑check waits.</li>
+</ul>
+<h2 id="firstregionrolloutplan">First region rollout plan</h2>
+<ul>
+<li>Verify region support for your engines and choose a non‑critical environment first.</li>
+<li>Enable Database Insights and set a 14 to 30‑day baseline window before tightening alerts.</li>
+<li>Tag databases by environment, owner, and application; scope alerts accordingly.</li>
+<li>Create CloudWatch alarms for anomaly types that map to your SLOs; route via SNS.</li>
+<li>Build a runbook for index fixes, connection pooling, and lock triage with EXPLAIN steps.</li>
+<li>Correlate with RDS Performance Insights, especially Calls/sec, to validate workload shifts.</li>
+</ul>
+<p>Add a dry run:</p>
+<ul>
+<li>Trigger a harmless test change, like a controlled load test in staging, and watch both tools react. Practice the loop: anomaly, context, validation, fix, verify.</li>
+</ul>
+<p>Add “day two” tasks:</p>
+<ul>
+<li>Fold insights into post‑incident reviews. Capture which suggestions worked and which patterns matter most for your app.</li>
+<li>Update dashboards to highlight Calls/sec alongside your top SLO metrics.</li>
+<li>Keep your runbooks short, scannable, and linked from every alert.</li>
+</ul>
+<h2 id="wrapup">Wrap up</h2>
+<p>Your job is not to stare at dashboards. It’s to protect user experience and move fast on fixes. CloudWatch Database Insights gives you that first mile of clarity. ML to spot what changed, plus practical guidance to get you moving. Paired with RDS Performance Insights and a crisp EXPLAIN habit, you go from vague symptoms to targeted remediation in minutes, not hours.</p>
+<p>Roll it out like you would any powerful tool. Start small, tag consistently, automate the edges, and document what works. <em>The goal is a repeatable, boring process. Because boring is how you win Friday nights back from the pager.</em></p>
+<p><em>In ops, luck is a strategy. ML is a system. Choose the system.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/cloudwatch/">Amazon CloudWatch overview</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-AnomalyDetection.html">CloudWatch Anomaly Detection</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights.html">CloudWatch Container Insights</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html">Amazon RDS Performance Insights</a></li>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regions_az/">AWS Global Infrastructure and Regions</a></li>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/">AWS Regional Services list</a></li>
+<li><a href="https://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/what-is-amazon-eventbridge.html">Amazon EventBridge</a></li>
+<li><a href="https://docs.aws.amazon.com/sns/latest/dg/welcome.html">Amazon SNS</a></li>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html">AWS Systems Manager</a></li>
+<li><a href="https://www.postgresql.org/docs/current/using-explain.html">PostgreSQL EXPLAIN</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/explain-output.html">MySQL EXPLAIN output (including JSON)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="database-insights-new-regions.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq1578.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Accelerate+RDS+troubleshooting%3A+CloudWatch+Database+Insights+expands+globally&amp;pi=303876180669&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=303876180669&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fdatabase-insights-new-regions&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/database-insights-new-regions?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:43 GMT -->
+</html>

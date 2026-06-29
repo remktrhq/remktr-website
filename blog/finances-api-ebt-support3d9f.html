@@ -1,0 +1,442 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/finances-api-ebt-support?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:23:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Track EBT In Amazon Finances API Without Headaches</title>
+    <link rel="canonical" href="finances-api-ebt-support.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover finances API release notes: electronic benefits transfer (EBT) events add EBT IDs, fees, reserves, and marketplace mapping for easier reconciliation.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Track EBT In Amazon Finances API Without Headaches",
+        "datePublished": "2025-12-30T16:16:51Z",
+        "dateModified": "2025-12-30T16:16:51.683Z",
+        "mainEntityOfPage": "https://remktr.com/blog/finances-api-ebt-support",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-30-2025-04-09-05-0097-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="finances-api-ebt-support.html">Track EBT In Amazon Finances API Without Headaches</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 30, 2025 4:16:51 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>If you sell grocery or essentials on Amazon, there’s a quiet upgrade you’ll like. The Finances API now shows EBT-specific events. Translation: you can finally split electronic benefits transfer (EBT) flows from the blur. Think refunds, fees, and reserves in your ledger, not all mixed.</p>
+<p>That matters. SNAP usage is big and growing, and EBT reconciliations are high-stakes. Tax, compliance, and audits want clean lines. Before, you probably kludged SQL and exports to guess EBT. Now you get explicit EBT IDs, marketplace mapping, and itemized amounts via Finances v0.</p>
+<p>Your job: plug into GET /finances/v0/financialEvents, request finances:read, and handle pagination. Then map EBTRefundReimbursementOnlyEventList into your pipeline, so finance stops chasing screenshots and CSVs. <em>Do it once, sleep better for months.</em></p>
+<p>One more reason to care: EBT hits real cash timing. Refund reimbursements, fee treatment, and reserve releases move weekly cash. They also muddle gross-to-net if mixed with card refunds. Clean EBT signals mean a cleaner close and calmer audits. Plus faster “what happened?” answers when ops asks why a payout looks light.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>New: Finances API returns EBT refund reimbursement events with IDs, marketplace, amounts, fees, and reserves.</li>
+<li>Endpoints: listFinancialEvents, listFinancialEventsByGroupId, listFinancialEventsByOrderId now include EBTRefundReimbursementOnlyEventList.</li>
+<li>Scope: your app needs finances:read; test in sandbox first.</li>
+<li>Ops: respect throttling and pagination; store nextToken; monitor retries.</li>
+<li>Benefits: cleaner EBT tracking, easier audits, simpler reconciliation across marketplaces.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-30-2025-04-10-10-7406-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatchanged">What Changed</h2>
+<h3 id="theupgradeinonesentence">The upgrade in one sentence</h3>
+<p>Amazon’s SP-API Finances v0 now emits EBT refund reimbursement events. You can flag and book EBT directly in financial events instead of guessing from order metadata.</p>
+<h3 id="whatyouactuallyget">What you actually get</h3>
+<p>When you call GET /finances/v0/financialEvents (or by group/order), the payload can include EBTRefundReimbursementOnlyEventList. Those events carry:</p>
+<ul>
+<li>Distinct EBT identification</li>
+<li>Marketplace association per event</li>
+<li>Detailed breakdowns (amounts, fees, reserves)</li>
+<li>Refund reimbursement granularity</li>
+</ul>
+<p>That’s the trifecta you need to build a clean EBT sub-ledger.</p>
+<p>First‑hand example: imagine a customer’s SNAP-eligible basket triggers a partial refund. Instead of blending into generic refunds, you’ll see a discrete EBT refund reimbursement entry. It will map to the marketplace, with amounts and fee or reserve parts. Now your ETL can pivot on EBT vs. non-EBT without brittle rules.</p>
+<p>Expert tip from Amazon’s docs: <em>“Always test your application in the sandbox environment before going live.”</em> It’s the fastest way to smoke-test pagination, scopes, and parsing without touching real funds.</p>
+<h3 id="whythismattersforyou">Why this matters for you</h3>
+<ul>
+<li>Reconciliation stops being a weekly fire drill.</li>
+<li>Audits move faster with explicit EBT trails.</li>
+<li>Finance gets accurate gross-to-net by payment type.</li>
+<li>Product analytics can finally segment EBT-driven demand.</li>
+</ul>
+<h3 id="whatelsetoknow">What else to know</h3>
+<ul>
+<li>EBT data lives alongside other financial events, not a separate feed—so your parser should ignore unknown lists and process only what you need.</li>
+<li>Marketplace differences matter. Currency, fee structures, and reserve timing can vary by marketplace. Persist marketplace IDs and currency codes everywhere.</li>
+<li>Optional fields are a thing. Build your schema and checks to allow missing fields without blowing up the job.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-30-2025-04-11-09-3221-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="turneventsintoaccounting">Turn Events Into Accounting</h2>
+<h3 id="startwithidentifiersandscope">Start with identifiers and scope</h3>
+<p>You’ll pull financial events with finances:read. From there, filter EBTRefundReimbursementOnlyEventList. Persist the event ID, order or group IDs, marketplace, posted date, and currency. Those anchors let you dedupe, replay, and audit.</p>
+<h3 id="breakdownthemoney">Break down the money</h3>
+<p>Inside each EBT event, treat amounts, fees, and reserves as separate parts. Your GL wants:</p>
+<ul>
+<li>Gross EBT refund reimbursement</li>
+<li>Less: platform fees linked to EBT reimbursement</li>
+<li>Changes to reserves or withholds</li>
+<li>Net impact posted to the correct clearing account</li>
+</ul>
+<p>Use a stable event key to avoid double-posting when reprocessing with nextToken or backfills.</p>
+<h3 id="examplemapping">Example mapping</h3>
+<ul>
+<li>Debit: Marketplace clearing (EBT reimbursement) for the gross amount</li>
+<li>Credit: Returns or contra-revenue if it offsets prior EBT sales</li>
+<li>Credit/Debit: Fees expense (platform fees)</li>
+<li>Reserve movements: record to reserve liability and offset clearing</li>
+</ul>
+<h3 id="simplenumeric">Simple numeric</h3>
+<ul>
+<li>Scenario: A $30 EBT refund reimbursement hits with a $0.40 platform fee and a $5 reserve increase.</li>
+<li>Journal:</li>
+<li>Debit Marketplace clearing (EBT reimbursement): $30.00</li>
+<li>Credit Returns/contra-revenue: $30.00</li>
+<li>Debit Fees expense: $0.40</li>
+<li>Credit Marketplace clearing (fees): $0.40</li>
+<li>Credit Reserve liability: $5.00</li>
+<li>Debit Marketplace clearing (reserve): $5.00</li>
+<li>Net effect on clearing equals the cash delta you’ll see later in payouts. Your cash-flow report should mirror this.</li>
+</ul>
+<h3 id="keepyouranalyticstidy">Keep your analytics tidy</h3>
+<p>Create a payment<em>type dimension: EBT vs. non-EBT. Add marketplace</em>id and posted_date. With that, you can answer hard questions fast. “What percent of refunds are EBT?” And “How do EBT fees differ by marketplace?” Your finance and PM teams finally align.</p>
+<p><em>Pro move:</em> document an internal “EBT: introduction” primer. Yes, a ‘benny ebt: introduction’ one-pager works fine. Then analysts and auditors know how new fields roll into your statements.</p>
+<h3 id="datamodeldecisionsthatscale">Data model decisions that scale</h3>
+<ul>
+<li>Store raw events as JSON in object storage for immutability.</li>
+<li>Normalize to a thin, typed table with one row per event and additive measures (amounts, fees, reserve deltas).</li>
+<li>Maintain a dimension table for marketplaces and currencies; join during reporting, not ingestion.</li>
+<li>Implement a status flag: ingested, posted<em>to</em>gl, reconciled. This makes close-week checklists painless.</li>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<h3 id="scopesthrottlingpagination">Scopes throttling pagination</h3>
+<ul>
+<li>Scope: ensure finances:read is granted and refreshed.</li>
+<li>Throttling: respect SP-API limits and use exponential backoff. Don’t batch yourself into a lockout.</li>
+<li>Pagination: persist nextToken, iterate until empty, and checkpoint per marketplace and date.</li>
+</ul>
+<p>If you rely on listFinancialEventsByOrderId or listFinancialEventsByGroupId, keep a general pager. Use listFinancialEvents for big backfills, then refine by group or order for spot checks.</p>
+<h3 id="filteringstrategiesthatsavecompute">Filtering strategies that save compute</h3>
+<ul>
+<li>Date windows: pull posted-after windows to contain payloads.</li>
+<li>Event type filter: parse only EBTRefundReimbursementOnlyEventList when rebuilding EBT metrics.</li>
+<li>Idempotency: use event IDs to guard replays.</li>
+</ul>
+<h3 id="exampleingestionflow">Example ingestion flow</h3>
+<p>1) Request GET /finances/v0/financialEvents for a 24h window per marketplace.
+2) For each page, extract EBTRefundReimbursementOnlyEventList.
+3) Write raw events to object storage; write normalized rows to your finance schema.
+4) Post events to a queue for GL posting.</p>
+<h3 id="testinsandbox">Test in sandbox</h3>
+<p>Run schema validation against the sandbox to ensure your parser tolerates optional fields. Then run a staged production test on one marketplace. As volume climbs, watch rate-limit headers and retry logs.</p>
+<h3 id="errorhandlingplaybook">Error handling playbook</h3>
+<ul>
+<li>On 429s: back off exponentially and follow retry hints from headers.</li>
+<li>On partial failures: checkpoint your last good page per marketplace and date. Restarts won’t re-pull everything.</li>
+<li>On schema drift: alert when unknown fields appear; log them and continue. Don’t crash the pipeline for a new optional field.</li>
+</ul>
+<h3 id="securitybasics">Security basics</h3>
+<ul>
+<li>Store credentials in a secrets manager; rotate on a schedule.</li>
+<li>Limit access to raw event buckets; give finance read access to curated tables only.</li>
+<li>Log all admin actions on the ingestion service for auditability.</li>
+</ul>
+<h2 id="complianceandaudits">Compliance And Audits</h2>
+<h3 id="reconciliationthatsurvives">Reconciliation that survives</h3>
+<p>With explicit EBT events, you can reconcile by:</p>
+<ul>
+<li>Event count: EBT event IDs processed vs. GL postings</li>
+<li>Amount: summed by marketplace and date, net of fees</li>
+<li>Aging: reserves released vs. reserved at period close</li>
+</ul>
+<p>Tie that to order or group metadata for full traceability.</p>
+<h3 id="audittrailsandprivacy">Audit trails and privacy</h3>
+<p>Store original events in write-once logs, like immutable buckets or append-only tables. Label columns that tie back to customers and follow your PII or PCI rules. Keep retention aligned with your compliance needs and marketplace agreements.</p>
+<p>Quote to frame your policy: <em>“Data you don’t protect is data you don’t deserve.”</em> It’s not from Amazon; it’s a rule you should enforce. Keep raw access minimal, and generate curated views for finance.</p>
+<h3 id="analyticsyoucanactuallytrust">Analytics you can actually trust</h3>
+<p>Because EBT is now first-class in Finances v0, you can:</p>
+<ul>
+<li>Segment refunds by payment type (EBT vs. card)</li>
+<li>Compare fee impact by marketplace</li>
+<li>Forecast reserve impacts on cash flow</li>
+</ul>
+<p>If your broader stack references an “ebt transactions overview – commerce-sdk” or “ebt | sola payments documentation,” align those terms. Map them to Amazon’s event fields so your metrics match across systems.</p>
+<h3 id="closechecklist">Close checklist</h3>
+<ul>
+<li>Tick-and-tie EBT reimbursement totals to payout statements by marketplace.</li>
+<li>Review fee per EBT reimbursement vs. plan; flag drifts.</li>
+<li>Compare reserve deltas to expected release schedule; document exceptions.</li>
+</ul>
+<h2 id="halfwaycheck">Halfway Check</h2>
+<ul>
+<li>Finances v0 adds EBTRefundReimbursementOnlyEventList so you can track EBT explicitly.</li>
+<li>You’ll fetch via GET /finances/v0/financialEvents with finances:read.</li>
+<li>Break out amounts, fees, and reserves; post them to the right GL accounts.</li>
+<li>Build a resilient pager: handle nextToken, rate limits, retries.</li>
+<li>Sandbox first, then a narrow production rollout per marketplace.</li>
+<li>Store raw events immutably; feed curated tables to finance and analytics.</li>
+</ul>
+<p><em>If that list reads like a release plan, good—treat it like one.</em> Assign owners, add due dates, and wire it into your sprint board. Don’t let EBT slip behind “nice-to-have” work.</p>
+<h2 id="fieldguide">Field Guide</h2>
+<h3 id="namingthatsaveshourslater">Naming that saves hours later</h3>
+<p>Standardize a few fields in your warehouse:</p>
+<ul>
+<li>event<em>type: EBT</em>REFUND_REIMBURSEMENT</li>
+<li>event_id: stable unique key</li>
+<li>marketplace_id: string</li>
+<li>posted_date: timestamp (UTC)</li>
+<li>amount<em>gross, fee</em>total, reserve<em>delta, amount</em>net</li>
+<li>order<em>id and group</em>id when present</li>
+</ul>
+<p>This structure makes rollups easy and supports downstream GL posting.</p>
+<h3 id="handlingpartialsreversalsandtiming">Handling partials reversals and timing</h3>
+<ul>
+<li>Partials: multiple EBT refund reimbursements may map to one order. Sum by order_id for reporting; keep per-event detail for audit.</li>
+<li>Reversals or adjustments: treat delta events as separate rows; never overwrite history.</li>
+<li>Timing: reserves might release later; your cash-flow report should lag-adjust.</li>
+</ul>
+<p>First‑hand example: if two EBT reimbursements hit for the same order, keep both. Your ledger posts two events but nets them during period close. Don’t collapse them early; you’ll need the atomics for audit proof.</p>
+<h3 id="guardrailsforstability">Guardrails for stability</h3>
+<ul>
+<li>Deduplication by event_id</li>
+<li>Exactly-once posting with an outbox pattern from your ETL to GL</li>
+<li>Observability: dashboards on event throughput, error rates, and net differences vs. payouts</li>
+</ul>
+<p>If you want built-in checks for missing pages, duplicates, and schema drift, consider Requery to automate QA and reconciliation across SP-API pulls.</p>
+<p>Quote to remember: <em>“What gets measured gets managed.”</em> Instrument your pipeline.</p>
+<h3 id="realitiesyoushouldanticipate">Realities you should anticipate</h3>
+<ul>
+<li>Currency: convert for reporting, and store native for audit. Don’t hardcode assumptions.</li>
+<li>Time zones: normalize to UTC; show local time only in dashboards.</li>
+<li>Holiday spikes: widen your pull windows and scale workers; rate limits still apply.</li>
+</ul>
+<h3 id="dataqualitytestsworthautomating">Data quality tests worth automating</h3>
+<ul>
+<li>No gaps: ensure every day and marketplace has at least one pull record, even if zero events.</li>
+<li>No doubles: assert event_id uniqueness in the normalized table.</li>
+<li>Balanced postings: sum(amount<em>gross - fee</em>total - reserve<em>delta - amount</em>net) ≈ 0 within rounding.</li>
+</ul>
+<h2 id="quickfaq">Quick FAQ</h2>
+<ol>
+<li>Q: Which endpoints return EBT events?</li>
+</ol>
+<p>A: listFinancialEvents, listFinancialEventsByGroupId, and listFinancialEventsByOrderId can include EBTRefundReimbursementOnlyEventList. For scale, start with listFinancialEvents and use others for lookups.</p>
+<ol start="2">
+<li>Q: What scope do I need?</li>
+</ol>
+<p>A: Your application must have finances:read. Verify authorization and token refresh before production pulls.</p>
+<ol start="3">
+<li>Q: How should I handle throttling and pagination?</li>
+</ol>
+<p>A: Respect the documented rate limits. Implement backoff on 429s. Persist and replay nextToken until the stream completes.</p>
+<ol start="4">
+<li>Q: Can I test EBT in sandbox?</li>
+</ol>
+<p>A: Yes—use the SP-API sandbox to validate schemas, pagination logic, and error handling without touching real money.</p>
+<ol start="5">
+<li>Q: What’s the accounting treatment?</li>
+</ol>
+<p>A: Split gross EBT refund reimbursements, platform fees, and reserve movements. Post to clearing, contra-revenue or returns, expense, and reserve accounts accordingly. Keep event-level detail for audits.</p>
+<ol start="6">
+<li>Q: Any gotchas with order-specific requests?</li>
+</ol>
+<p>A: If you use listFinancialEventsByOrderId, verify completeness across pagination. Consider a daily full pull as a safety net. Watch release notes for changes.</p>
+<ol start="7">
+<li>Q: How should I migrate from legacy heuristics?</li>
+</ol>
+<p>A: Run both systems in parallel for a full cycle. Compare totals by marketplace and day. Switch your source of truth once deltas are within tolerance and documented.</p>
+<ol start="8">
+<li>Q: What about SNAP scale—is this really worth the effort?</li>
+</ol>
+<p>A: Yes. SNAP EBT is a real slice of U.S. grocery demand. Getting accounting right reduces risk and speeds audits. See the USDA SNAP data for context.</p>
+<ol start="9">
+<li>Q: Do I need to change my payout reconciliation?</li>
+</ol>
+<p>A: The process stays, but add a separate EBT lane. Reimbursement totals, related fees, and reserve deltas—then tie to payout line items by marketplace.</p>
+<ol start="10">
+<li>Q: Any special monitoring alerts to set?</li>
+</ol>
+<p>A: Alert on zero events for a day by marketplace. Also rising retry rates, and mismatches between event sums and GL postings over a rolling window.</p>
+<h2 id="shipit">Ship It</h2>
+<ul>
+<li>Confirm finances:read scope and token refresh.</li>
+<li>Implement GET /finances/v0/financialEvents with pagination and retries.</li>
+<li>Parse EBTRefundReimbursementOnlyEventList; persist raw and normalized rows.</li>
+<li>Map amounts, fees, reserves; define GL posting rules.</li>
+<li>Build dedupe by event_id; add observability and alerts.</li>
+<li>Sandbox test, then pilot on one marketplace and date window.</li>
+<li>Reconcile pilot vs. payouts; roll out broadly once clean.</li>
+</ul>
+<p><em>You’re not just adding a field—you’re ending a reconciliation headache.</em> The Finances API now gives you explicit EBT signals. IDs, marketplace, amounts, fees, and reserves, all lined up for your ledger. Build the pager, map the schema, and standardize your posting rules. Then get fancy: segment by payment type, forecast reserve releases, and speed up your audit cycle. The payoff is real. Fewer manual checks, faster closes, and clearer insight into how EBT moves your business.</p>
+<p>Want to see how teams operationalize Amazon data pipelines at scale? Browse our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/finances-api-v0-reference">Amazon Selling Partner API Finances v0 Reference</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/finances-api-v0-reference#get-financesv0financialevents">GET /finances/v0/financialEvents operation</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/release-notes">SP-API Release Notes</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/authorization-and-authentication">Authorization &amp; Authentication (SP-API)</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/sandbox">SP-API Sandbox Guide</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/rate-limits">SP-API Rate Limits</a></li>
+<li><a href="https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap">USDA SNAP participation data (context for EBT scale)</a></li>
+<li><a href="https://www.amazon.com/SNAP">SNAP EBT on Amazon (program info)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="finances-api-ebt-support.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqbfeb.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Track+EBT+In+Amazon+Finances+API+Without+Headaches&amp;pi=286145405652&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=286145405652&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Ffinances-api-ebt-support&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/finances-api-ebt-support?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:23:54 GMT -->
+</html>

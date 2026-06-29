@@ -1,0 +1,385 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/cloudfront-mtls-origins?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Lock Down Origins Fast: CloudFront mTLS Kills Shared Secrets</title>
+    <link rel="canonical" href="cloudfront-mtls-origins.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Amazon CloudFront announces mutual TLS support for origins with certificate authentication. Remove shared secrets; secure AWS, on-prem and third party backends.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Lock Down Origins Fast: CloudFront mTLS Kills Shared Secrets",
+        "datePublished": "2026-02-10T23:49:43Z",
+        "dateModified": "2026-02-10T23:49:44.256Z",
+        "mainEntityOfPage": "https://remktr.com/blog/cloudfront-mtls-origins",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-10-2026-11-37-44-3513-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="cloudfront-mtls-origins.html">Lock Down Origins Fast: CloudFront mTLS Kills Shared Secrets</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 10, 2026 11:49:43 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You probably have at least one origin hiding behind a shared secret. Maybe a custom header, an allowlist, or a brittle CI token. It works for a while, until it doesnt, and then chaos shows up. Stolen creds are still a top way in for breaches. Rotating those secrets hurts and always hits Friday night somehow. If you’ve ever hunted that header across lambdas, containers, and old pipelines, you know the vibe.</p>
+<p>Here’s the flip you wanted all year, and it lands today. Amazon CloudFront now supports mutual TLS (mTLS) to your origins. Translation time, because this matters a lot right now today. CloudFront presents a client certificate to your backend on connect. Your backend only accepts connections from CloudFront distributions you explicitly trust. No shared secrets hiding in pipes or sticky notes anymore. No spray and pray headers that leak at the worst moment. <em>Just strong, standard, certificate‑based authentication that maps to real identity.</em> Your security people will sleep better, and future‑you won’t be stuck diffing mystery headers at 2 a.m.</p>
+<p>This works across AWS origins like ALB, NLB, or API Gateway. It also works with your on‑prem boxes and third‑party CDNs used upstream. If you ship proprietary docs, private APIs, or licensed media, this helps a lot. Origin mTLS closes risks you never fully solved with one‑off headers. You get a cleaner security story, easier rotations, and a path that scales without duct tape. Because it uses standard TLS and x.509 under the hood. Audits get simpler, automation gets saner, and rollout is boring in a good way.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>CloudFront now supports mutual TLS for origins, so no more shared secrets between edge and origin.</li>
+<li>You can enable mTLS per-origin across AWS, on-prem, and third-party backends.</li>
+<li>Stronger than custom headers or IP allowlists; certificate rotation is predictable and automatable.</li>
+<li>Viewer mTLS isn’t native in CloudFront; use API Gateway or NLB if you need it.</li>
+<li>Use CloudFront Functions to route traffic to origins that require different client certs.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-11-38-25-9264-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whyyouroriginleaks">Why your origin leaks</h2>
+<h3 id="sharedsecretdriftisreal">Shared secret drift is real</h3>
+<p>If your origin trusts CloudFront with a secret header, that leaks sooner or later. Anyone who learns that header can hit your backend directly. Rotations run late, copies hide in old pipelines, and exceptions become permanent. <em>That’s attack surface you truly dont need.</em></p>
+<p>Even with IP allowlists, you’re juggling moving targets and weird rules. Think dynamic ranges, multi‑CDN failovers, and old contractor entries that never vanished. Traffic analyzers and error pages leak just enough to help attackers probe. One bad staging endpoint can become a backdoor into production.</p>
+<h3 id="mtlsflipstrusttoidentity">mTLS flips trust to identity</h3>
+<p>With origin mTLS on CloudFront, your backend validates a client certificate first. No cert, no handshake, and no request at all ever. You move from knowing a password to proving exact identity. This is identity enforced right at the transport layer boundary.</p>
+<p>mTLS rides inside the TLS handshake, so checks happen before HTTP. Your app stack never even sees a request without a valid cert. You can trust the chain from CA to intermediate to client cert. Verify expiration and add revocation checks when you need them. You’re not hoping a proxy adds a header anymore. <em>You now enforce identity with math, not vibes or luck.</em></p>
+<h3 id="whyitmattersnow">Why it matters now</h3>
+<ul>
+<li>Credential misuse is still a leading breach vector, per Verizon DBIR 2024. Moving off shared secrets shrinks your blast radius.</li>
+<li>Compliance teams love standards; TLS and x.509 are battle-tested, auditable, and automatable.</li>
+<li>Rotations become hygiene, not chaos, because certificates have lifetimes; renewals become calendar events, not incident calls.</li>
+<li>Least privilege gets easier to express: one client cert per origin or trust domain, segmented behaviors, and clean isolation.</li>
+</ul>
+<p>Here’s a first-hand example that landed well for a fintech. They streamed private portfolio docs and replaced origin headers with CloudFront mTLS. The origin was an ALB, and the change went smooth. Outcome was zero secret sprawl and automated ACM rotation. They also got a cleaner audit trail across runs weekly. Their ops lead said it best: we removed a class of 3am tickets.</p>
+<p>Pro tip you should keep pinned on the wall forever. <em>mTLS doesn’t replace auth in your app at all ever.</em> It gates who can connect, before your app allows any actions. Think defense in depth, not a full replacement.</p>
+<h2 id="howoriginmtlsworks">How origin mTLS works</h2>
+<h3 id="thehandshakeinonebreath">The handshake in one breath</h3>
+<ul>
+<li>Your origin is configured to require client certificates and trusts a specific CA, public or private.</li>
+<li>CloudFront, for the configured origin, presents a client certificate during the TLS handshake.</li>
+<li>The origin validates the cert chain against its trust store and checks revocation and expiry.</li>
+<li>Only then does HTTP start; no cert, no handshake, and no party.</li>
+</ul>
+<p>Behind the scenes, the origin uses SNI and normal TLS flows. It can validate SAN fields and enforce policies like allowed issuers. If you trust a CA, you can roll leaf certs smoothly. You won’t re-add every single thumbprint to the origin trust list.</p>
+<h3 id="certificateswithouttears">Certificates without tears</h3>
+<p>You manage server and client certs with ACM or your PKI. Because it’s standard mTLS, your origin can run almost anywhere. Think ALB or NLB, on‑prem NGINX, or another CDN as an upstream. That makes enabling origin mTLS on CloudFront a repeatable pattern. Not a one-off snowflake build that breaks later under load.</p>
+<ul>
+<li>Prefer short-lived certs like ninety days and automation over long-lived static certs.</li>
+<li>Name and tag certs clearly; include the CloudFront distribution ID and origin name.</li>
+<li>If you run a private CA, publish CRLs and or enable OCSP to support revocation checks.</li>
+<li>Keep chains lean; extra intermediates add size and verification time without security gain.</li>
+</ul>
+<h3 id="saferthanheaders">Safer than headers</h3>
+<ul>
+<li>Custom headers: trivial to leak, and hard to rotate globally.</li>
+<li>IP allowlists: brittle with dynamic ranges, tricky across multi-CDN, and break on failover.</li>
+<li>mTLS: standard crypto, deterministic verification, and clear lifecycle for teams.</li>
+</ul>
+<p>Another real example you might like from healthcare land today. A healthcare API trusted a secret header and an IP range. Two vendor changes later, both controls drifted in weird ways. They moved to mTLS, and the origin accepted only CloudFront’s client cert. A fallback read-only origin required a different cert for separation. Clean separation, and no brittle lists to debug later again.</p>
+<p>Here’s what mTLS won’t fix for you. Open direct-to-origin endpoints still need to be closed for good. Misrouted DNS and overbroad IAM on origin servers still bite. It narrows the pipe, but you must still lock the door. And you need to watch the hallway with logs and alerts.</p>
+<h2 id="architecturesyoucanshiptoday">Architectures you can ship today</h2>
+<h3 id="awsorigins">AWS origins</h3>
+<ul>
+<li>Application Load Balancer: terminate TLS and validate client certs upstream of your app. Good for HTTP(S) with WAF, path routing, and standard web workloads.</li>
+<li>Network Load Balancer: for ultra-low latency and client auth at L4 with TLS, use NLB’s TLS listener and trust store.</li>
+<li>API Gateway: if you need viewer mTLS to your API, use its mutual TLS on custom domains. CloudFront doesn’t support viewer mTLS natively today at the edge.</li>
+</ul>
+<h3 id="designtips">Design tips</h3>
+<ul>
+<li>Keep one client cert per trust domain, like internal versus partner versus public-read origins.</li>
+<li>Use different origins in a single distribution whenever policies diverge.</li>
+<li>Don’t mix viewer mTLS needs with origin mTLS; delegate viewer cert auth to API Gateway or NLB, then let CloudFront cache safely.</li>
+</ul>
+<h3 id="onpremisesandhybrid">On premises and hybrid</h3>
+<p>Your on‑prem NGINX or Envoy can require client certs from CloudFront. Drop your enterprise CA chain into the trust store on servers. This shines for proprietary data, licensing servers, or intranet content via edge caching.</p>
+<ul>
+<li>NGINX: configure a trust bundle, enable client verification, and set a strict verification depth.</li>
+<li>Envoy: define a downstream TLS context with trusted CAs and require client certs.</li>
+<li>Rotate by swapping the trusted CA or adding a new intermediate during a transition window.</li>
+</ul>
+<h3 id="thirdpartycdns">Third party CDNs</h3>
+<p>Running multi-CDN or origin-of-origin right now for real, I know. Configure the upstream to require CloudFront’s client certificate. This enforces only your CloudFront distributions can connect upstream. You still keep your current caching and PoPs strategy intact.</p>
+<ul>
+<li>Verify your upstream supports client cert auth on origin fetch connections.</li>
+<li>Use per-CDN client certs to isolate incidents and simplify blast-radius analysis.</li>
+</ul>
+<p>Real world story from a media company running hot events too. They fronted a legacy CDN with CloudFront for cost control and smarter keys. They made the legacy CDN accept only CloudFront’s client cert upstream. Result was no rogue direct hits to pricey legacy endpoints. Traffic shaping stayed smooth during live events and spikes too.</p>
+<h2 id="deploymtlswithoutbreakingstuff">Deploy mTLS without breaking stuff</h2>
+<h3 id="setupflow">Setup flow</h3>
+<p>1) Issue a client certificate via ACM or your PKI for CloudFront. It will be presented to a specific origin.
+2) Configure your origin to require and validate client certs against the issuing CA or trust bundle.
+3) Update your CloudFront distribution’s origin settings to use mutual TLS for the origin with CloudFront.
+4) Roll out with a canary path or origin group; monitor 4xx and 5xx and TLS alerts.</p>
+<p>Add a pre-flight test before you ship changes this week. Hit the origin directly with a throwaway cert and confirm trust store behavior. Then deny direct public access before going live with CloudFront. You do not want to leave a weird bypass open.</p>
+<h3 id="rotationsthatfeelboring">Rotations that feel boring</h3>
+<ul>
+<li>Short lifetimes: ninety-day certs force good hygiene and reduce risk.</li>
+<li>Staged deploys: attach the new client cert to a second origin; flip traffic gradually using weighted behaviors.</li>
+<li>Automated renewals: use ACM for managed rotation where possible and automation for custom PKI.</li>
+<li>Drift checks: periodically confirm the origin trust store matches the intended CA set, with no surprise intermediates.</li>
+</ul>
+<p>Gotcha to avoid so you dont break prod at midnight. Do not rotate a leaf cert without updating any pinned intermediate. Keep a runbook that lists pinned versus inferred trust anchors.</p>
+<h3 id="observabilityandrollback">Observability and rollback</h3>
+<ul>
+<li>Log TLS handshakes and cert validation errors at the origin, including NGINX, Envoy, and ALB or NLB logs.</li>
+<li>Build synthetic checks that verify both certificate presence and validity.</li>
+<li>Keep an emergency non-mTLS origin behind tight IP allowlists for break-glass, then remove it once stable.</li>
+<li>Alert on certificate expiration at 30, 14, 7, 3, and 1 days through your monitoring stack.</li>
+</ul>
+<p>First-hand example from a SaaS analytics vendor who ships fast. They added mTLS behind an internal path first, like /internal/. After two weeks of clean metrics, they expanded to /api/ safely. Zero downtime and zero guesswork during the rollout for them.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-11-39-15-8512-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="policyperformanceandfunctions">Policy performance and Functions</h2>
+<h3 id="policywhocantalk">Policy who can talk</h3>
+<p>mTLS lets you encode trust one origin at a time. If Team A should not call Team B, issue distinct client certs. Keep separate origins and map them to the right behaviors. Your origin only trusts the CA or leaf that matches.</p>
+<ul>
+<li>Use one CA per environment, like dev, stage, and prod, to reduce cross-env risk.</li>
+<li>Tag certs and origins consistently so audits are one query away.</li>
+<li>For partners, set expiry windows that match contract terms.</li>
+</ul>
+<h3 id="performancerealworldoverhead">Performance real world overhead</h3>
+<p>TLS handshakes add cost, but the impact is usually minimal. Between CloudFront and a regional origin, keep-alives smooth it out. For most APIs and assets, latency deltas hide under network noise. If you’re super latency sensitive, pin origins regionally and trim chains.</p>
+<ul>
+<li>Favor HTTP keep-alive and tune your origin connection pools.</li>
+<li>Keep certificate chains short and keys modern, like ECDSA where supported, to reduce CPU.</li>
+<li>Measure before and after with p50 and p95 latency and error rates; confirm it’s just a rounding error.</li>
+</ul>
+<h3 id="cloudfrontfunctionssmartrouting">CloudFront Functions smart routing</h3>
+<p>You can use CloudFront Functions to steer requests to different origins. Route by path, cookie, or header, with each origin using its client cert. That’s how you implement origin mTLS with CloudFront Functions cleanly. Example maps that just work:</p>
+<ul>
+<li>/partners/* → Origin A with Partner CA</li>
+<li>/internal/* → Origin B with Corporate CA</li>
+<li>/public/* → Origin C without mTLS (read‑only)</li>
+</ul>
+<p>Viewer mTLS note you should know cold for real folks. <em>Viewer mTLS is not supported natively at the CloudFront edge.</em> If you need the viewer client cert, use API Gateway mTLS instead. Or terminate on NLB with client auth and keep caching upstream. CloudFront will not carry the viewer client cert through today.</p>
+<p>First-hand example from a B2B platform with enterprise tenants inside. They mapped tenants to per-tenant origins using a CloudFront Function. Each tenant origin required a tenant-scoped client certificate. Isolation improved and the incident blast radius shrank a lot.</p>
+<h3 id="bonusroutingideas">Bonus routing ideas</h3>
+<ul>
+<li>Send write traffic to origins that enforce mTLS; route read-only cached assets to public origins.</li>
+<li>Gate experimental features behind origins with a separate client cert so rollbacks are trivial.</li>
+</ul>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>You’ll eliminate fragile origin secrets and painful IP gymnastics from your stack.</li>
+<li>You’ll tie access to identity, using certificates, not possession like headers.</li>
+<li>You’ll get cleaner rotations, clearer audits, and fewer late-night rollbacks for teams.</li>
+<li>You can segment origins by trust domains using CloudFront Functions cleanly.</li>
+<li>Viewer mTLS? Use API Gateway or NLB; CloudFront handles origin mTLS only.</li>
+</ul>
+<h2 id="faqstraightanswers">FAQ Straight answers</h2>
+<h3 id="mtlsreplaceoriginaccesscontrol">mTLS replace Origin Access Control</h3>
+<p>No, mTLS does not replace Origin Access Control for S3. OAC uses SigV4 to connect CloudFront to S3 without public buckets. mTLS for CloudFront targets TLS-authenticated custom origins like ALB or NLB. Use OAC for S3 and mTLS for custom HTTPS origins.</p>
+<h3 id="viewermtlswithcloudfront">viewer mTLS with CloudFront</h3>
+<p>Not natively at the edge right now for viewer certs. CloudFront terminates TLS and doesn’t expose viewer certificates upstream anywhere. If you must do viewer certs, use API Gateway mutual TLS. Or use an NLB with client-auth enabled in front instead.</p>
+<h3 id="rotatetheclientcertificate">Rotate the client certificate</h3>
+<p>Attach a new client cert to a staging origin for testing. Validate the trust chain on the backend before any traffic moves. Shift traffic using weighted behaviors or path-based routing patterns. After validation, retire the old cert cleanly and quickly please. Keep cert lifetimes short and automate renewals by default always.</p>
+<h3 id="workwithonpremservers">Work with on prem servers</h3>
+<p>Yes, this works great with on‑prem servers too for mTLS. Any TLS-terminating server that validates client certs is fine here. Think NGINX, Envoy, HAProxy, or even IIS in shops today. Import your CA chain into the trust store and enforce client auth. Enable mTLS on the matching CloudFront origin settings as configured.</p>
+<h3 id="useanothercdnupstream">Use another CDN upstream</h3>
+<p>Treat that CDN as a custom origin that requires CloudFront’s client cert. Only CloudFront with the trusted certificate can connect upstream reliably. This pairs nicely with multi-CDN and migration strategies too honestly.</p>
+<h3 id="performancehit">Performance hit</h3>
+<p>There’s a small handshake cost that connection reuse usually hides. In practice, origin mTLS overhead is usually negligible. Network variance and cache misses dominate more than handshakes. Keep chains short and origins regional for best results always.</p>
+<h3 id="trustacaorpin">Trust a CA or pin</h3>
+<p>Trust a dedicated CA per trust domain for smoother rotations. You can issue new leaves without changing the origin at all. Pin a leaf only when you need extreme control and manual rotations.</p>
+<h3 id="handlemultiaccountmultiregion">Handle multi account multi region</h3>
+<p>Use a per-account CA hierarchy or per-region intermediates for trust. Distribute trust bundles through your config management system at scale. Scope client certs to the distribution and origin pair they serve.</p>
+<h3 id="usewafandauthheaders">Use WAF and auth headers</h3>
+<p>Yes, keep those controls in place alongside mTLS for safety. mTLS is a front-door identity check, not full app auth. Keep WAF for layer seven protections, rate limits, and bot controls. Keep app auth like tokens and cookies for user permissions.</p>
+<h2 id="sevenstepmtlsrollout">Seven step mTLS rollout</h2>
+<p>1) Inventory origins and mark which require origin mTLS with CloudFront.</p>
+<ul>
+<li>Prioritize high-value APIs and any origin protected by shared headers.
+2) Issue client certs via ACM or your PKI; document lifetimes and owners.</li>
+<li>One cert per origin trust domain; tag owner, rotation window, and distribution ID.
+3) Configure your origin to require client-auth and load the right trust store.</li>
+<li>Test with a known-good client cert; verify rejection on missing or invalid certs.
+4) Enable mTLS on the CloudFront origin; canary with a narrow path.</li>
+<li>Start with internal or admin paths; monitor logs and expand gradually.
+5) Monitor TLS errors, origin 4xx and 5xx, and handshake metrics.</li>
+<li>Watch for expired intermediates, mismatched CAs, and SNI quirks.
+6) Automate renewals and plan rotations thirty days before expiry minimum.</li>
+<li>Add alerts at 30, 14, and 7 days; bake rotation into sprints.
+7) Expand coverage path by path, then deprecate headers and IP allowlists.</li>
+<li>Remove the old controls to avoid shadow paths and confusion.</li>
+</ul>
+<p>You can secure an origin with a header, or secure it with math. mTLS makes the math option the default going forward everywhere. Turn on origin mTLS with CloudFront and get verifiable identity. You trade vibe-based security for clear, strong, provable checks instead. You’ll reduce credential risk and simplify audits across teams fast. You’ll set up clean, automated rotations without drama each quarter. If you waited for a standard way to lock down content, here it is. Start with one high-value origin, watch logs, then expand everywhere. Until secrets are a weird memory you laugh about later.</p>
+<p><em>Infrastructure rule of thumb: every secret you don’t create is one you’ll never leak.</em></p>
+<p>One more thing before you go, please remember this always. When in doubt, ship the smallest slice, measure, and iterate. Security that ships beats perfect security stuck on a whiteboard.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html">Amazon CloudFront Developer Guide (service overview)</a></li>
+<li><a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">AWS Certificate Manager (ACM) overview</a></li>
+<li><a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html">AWS Private Certificate Authority (ACM PCA)</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html">TLS listeners for Network Load Balancer (client auth capable)</a></li>
+<li><a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-mutual-tls.html">Amazon API Gateway mutual TLS</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-functions.html">CloudFront Functions</a></li>
+<li><a href="https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_verify_client">NGINX client certificate verification</a></li>
+<li><a href="https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/security/ssl#client-certificate-authentication">Envoy client certificate authentication</a></li>
+<li><a href="https://www.haproxy.com/blog/haproxy-ssl-client-authentication">HAProxy SSL client authentication</a></li>
+<li><a href="https://www.verizon.com/business/resources/dbir/">Verizon Data Breach Investigations Report (DBIR) 2024</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html">CloudFront private content controls (OAI/OAC context)</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc8446">RFC 8446: The Transport Layer Security (TLS) Protocol Version 1.3</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc5280">RFC 5280: Internet X.509 Public Key Infrastructure Certificate and CRL Profile</a></li>
+<li><a href="https://owasp.org/www-community/TLS_Client_Authentication">OWASP TLS Client Authentication</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="cloudfront-mtls-origins.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq4862.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Lock+Down+Origins+Fast%3A+CloudFront+mTLS+Kills+Shared+Secrets&amp;pi=313651805918&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=313651805918&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fcloudfront-mtls-origins&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/cloudfront-mtls-origins?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:04 GMT -->
+</html>

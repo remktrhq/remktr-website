@@ -1,0 +1,247 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/s3-iceberg-compaction-strategies?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Boost Apache Iceberg Queries with New S3 Strategies</title>
+    <link rel="canonical" href="s3-iceberg-compaction-strategies.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Enhance Apache Iceberg query performance on Amazon S3 using sort and z-order compaction strategies. Achieve faster queries and cost-efficiency.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Boost Apache Iceberg Queries with New S3 Strategies",
+        "datePublished": "2025-06-24T21:31:45Z",
+        "dateModified": "2025-06-24T21:31:45.438Z",
+        "mainEntityOfPage": "https://remktr.com/blog/s3-iceberg-compaction-strategies",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na1.net/hubfs/50136663/rss_to_hubspot_content/temp-Jun-24-2025-09-28-58-3393-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="s3-iceberg-compaction-strategies.html">Boost Apache Iceberg Queries with New S3 Strategies</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jun 24, 2025 9:31:45 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Amazon's recent update to S3 is shaking things up for anyone knee-deep in big data analysis using Apache Iceberg. They've unleashed two robust compaction strategies: 'sort' and 'z-order.' These shiny new tools promise to turbocharge your query performance by a staggering threefold compared to the classic 'binpack' method.</p>
+<p>It's like upgrading from a bicycle to a motorbike when you're zipping through those colossal datasets that used to slow you down.</p>
+<p>Now, let's dive into these strategies. Imagine you’re on a treasure hunt, but instead of sifting through endless sand to find your prize, the data is pre-organized so your search is swift and efficient. That’s exactly what these compaction strategies do—they cluster similar data together. So, when it's time to query, your system knows exactly where to look, avoiding a wild goose chase through irrelevant data files.</p>
+<p>If you're thinking about integrating these strategies into your S3 Tables or general-purpose buckets, you’re in luck. Amazon's latest system comes to the rescue, incorporating these improvements as part of your regular service. There's no extra fee to worry about, though you should anticipate some compute costs when carrying out compactions.</p>
+<h3 id="keytakeaways">Key Takeaways</h3>
+<ul>
+<li><strong>Sort and Z-order Compaction:</strong> Utilize these strategies to boost performance by minimizing file scans during queries.</li>
+<li><strong>Apache Iceberg Use-case:</strong> These strategies are perfect for managing large datasets that require frequent updates.</li>
+<li><strong>No Extra Cost:</strong> Implementing these improvements won't add to your AWS bill—be prepared for compute costs during compaction, though.</li>
+<li><strong>Real-world Impact:</strong> You can expect up to threefold performance improvements on queries, turning sluggish tasks into quick operations.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jun-24-2025-09-29-54-3584-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="breakingdownnewstrategies">Breaking Down New Strategies</h2>
+<h3 id="sortvsbinpackbasics">Sort vs. Binpack Basics</h3>
+<p>The go-to 'binpack' compaction strategy is decent when it comes to saving query performance in managed S3 Tables. But, the 'sort' strategy elevates that experience. It allows you to organize files based on a customized column order, making the query engine's task as straightforward as flipping through a neatly organized photo album rather than a jumbled scrap heap.</p>
+<h4 id="usecasesnapshots">Use Case Snapshots:</h4>
+<ul>
+<li><strong>Example 1:</strong> Suppose you've organized a table by <code>state</code> and <code>zip_code</code>. Queries targeting these categories become a walk in the park, as they're quick and efficient rather than a hunt for an obscure artefact.</li>
+<li><strong>Example 2:</strong> When you're filtering across multiple dimensions, like identifying customers by <code>pickup_location</code> and <code>dropoff_location</code>, this pre-arrangement significantly narrows down what your systems have to sift through, akin to cutting the fat off a steak.</li>
+</ul>
+<h3 id="zorderwhyitmatters">Z-Order: Why It Matters</h3>
+<p>Delving into Z-order might initially feel like solving a cryptic crossword puzzle, but the benefits are monumental. This strategy interleaves values from multiple columns, yielding compounded gains particularly in scenarios involving multiple dimensions.</p>
+<h4 id="practicalapplications">Practical Applications:</h4>
+<ul>
+<li><strong>Spatial or Multi-Dimensional Queries:</strong> When queries simultaneously utilize multiple dimensions, such as <code>pickup_location</code>, <code>dropoff_location</code>, or <code>fare_amount</code>, the Z-order strategy ensures a speedy data retrieval process instead of a long, grueling race.</li>
+</ul>
+<p>For more advanced tactics and successful client stories, check out our <a href="../case-studies.html">Case Studies</a>.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jun-24-2025-09-31-09-6643-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="whyconsiderthisupgrade">Why Consider This Upgrade</h3>
+<p>If implemented correctly, these strategies considerably reduce the number of files the query engine needs to evaluate. This reduction not only saves time but also slashes potential costs in cloud storage. These new methods are crafted to outpace the older sort and binpack strategies and have become a hot ticket item for data scientists eager for performance bursts.</p>
+<h2 id="snapshotofprogress">Snapshot of Progress</h2>
+<ul>
+<li><strong>Streamlined Process:</strong> Data management has never felt this light, with constant updates burdening the system less.</li>
+<li><strong>Performance Gains:</strong> Users have reported noticeably quicker query responses during hands-on trials, notably when working with Apache Spark tables.</li>
+</ul>
+<h2 id="faqhuddle">FAQ Huddle</h2>
+<ol>
+<li><p><strong>What’s the cost involved with using these strategies?</strong>
+There are no additional charges beyond regular S3 usage and upkeep fees, although compute costs do apply during the Data Catalog's compaction process.</p></li>
+<li><p><strong>Do these strategies apply to pre-existing tables?</strong>
+Any new data written after you activate these strategies will adapt instantly, whereas older compacted files stay unchanged unless rewritten.</p></li>
+<li><p><strong>How do I implement Z-order compaction?</strong>
+For Z-order deployment with S3 Tables, update your table maintenance settings through the S3 Tables API.</p></li>
+<li><p><strong>Are these strategies universally available?</strong>
+Yes, these strategies are available in every AWS region that supports Glue Data Catalog optimizations.</p></li>
+<li><p><strong>What real-world impact can I expect?</strong>
+Look forward to significant improvements in query processing times and monetary savings, potentially tripling those seen with binpack strategy, delivering efficiency assertions both in time and resources.</p></li>
+</ol>
+<h2 id="leveragethecompactionboost">Leverage the Compaction Boost</h2>
+<p>Start by ensuring your table has a defined sort order; if not, create one. Then, with the proper permissions and configurations, tweak your compaction settings using the AWS Glue Data Catalog for general-purpose buckets or through the S3 Tables API.</p>
+<p>Innovation in data management is a constantly moving target. With the introduction of sort and z-order strategies, Amazon Web Services is laying down a foundation for quicker, smarter data queries, transforming the way you manage and engage with large datasets in the cloud. Are you ready to step into this new paradigm and discover what these enhancements can do for your data lake processes?</p>
+<p>For more insights and detailed guides, explore our <a href="https://aws.amazon.com/big-data/datalakes">AWS guide on Cloud Data Management</a> and stay ahead of trends in data strategy.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/blogs/aws/">AWS Blog on S3 Enhancements</a></li>
+<li><a href="https://iceberg.apache.org/">Apache Iceberg Documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api.html">AWS Glue Data Catalog Controls</a></li>
+<li><a href="https://aws.amazon.com/products/">Amazon Web Services Product Page</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="s3-iceberg-compaction-strategies.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq2c10.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Boost+Apache+Iceberg+Queries+with+New+S3+Strategies&amp;pi=191778116724&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=191778116724&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fs3-iceberg-compaction-strategies&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/s3-iceberg-compaction-strategies?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:44 GMT -->
+</html>

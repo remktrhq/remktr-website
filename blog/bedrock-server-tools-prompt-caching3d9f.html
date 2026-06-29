@@ -1,0 +1,406 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/bedrock-server-tools-prompt-caching?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Build Faster AI Agents with Bedrock Tools and Caching</title>
+    <link rel="canonical" href="bedrock-server-tools-prompt-caching.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Build secure agent workflows with server-side tools and extended prompt caching in AWS Bedrock. Cut costs up to 90%, reduce latency, and speed iteration.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build Faster AI Agents with Bedrock Tools and Caching",
+        "datePublished": "2026-02-02T20:22:21Z",
+        "dateModified": "2026-02-02T20:22:21.793Z",
+        "mainEntityOfPage": "https://remktr.com/blog/bedrock-server-tools-prompt-caching",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-02-2026-08-13-56-1435-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="bedrock-server-tools-prompt-caching.html">Build Faster AI Agents with Bedrock Tools and Caching</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 2, 2026 8:22:21 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You don’t ship AI agents to look cute. <em>You ship to win.</em> Faster answers, lower costs, tighter security. Amazon Bedrock just dropped two upgrades that push hard on all three.</p>
+<p>Here’s the punchline. Server-side tool use via the Responses API, plus extended prompt caching. Your agents can search, code, and hit private databases securely. And you cut repeat-token costs by up to 90%. <em>Translation: keep sensitive work inside AWS, reduce latency, and stop paying for déjà vu prompts.</em></p>
+<p>If you’ve been duct-taping orchestration, juggling client-side API keys, or paying big to hold long context, now’s the time to fix it. Bedrock’s server-side tools and caching snap into Agents, Knowledge Bases, and Guardrails. Early adopters are seeing 3x faster iteration and lower token spend. You get production-ready stacks without a production-ready headache.</p>
+<p>Let’s break how to use it, and where it pays off first.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Server-side tools let agents safely call web, code, DB, and third-party APIs inside AWS.</li>
+<li>Prompt caching supports longer contexts, up to 1M tokens in some models, with hour-level TTLs.</li>
+<li>Cache hits can cut repeated-query cost by up to 90%.</li>
+<li>Works with Bedrock Agents, Knowledge Bases, and Guardrails. No custom infra needed.</li>
+<li>Build from Console, CLI, or SDKs. See GitHub examples and model docs for details.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-15-20-9737-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whyserversidetools">Why server side tools</h2>
+<h3 id="whatitunlocks">What it unlocks</h3>
+<p>Server-side tool use with the Bedrock Responses API means your agent can run web searches, execute Python, query or update databases, or call SaaS APIs. And it won’t leak creds or logic to the client. Think of it like moving the action backstage.</p>
+<p>Your agent can:</p>
+<ul>
+<li>Query a private Postgres in your VPC.</li>
+<li>Execute Python to crunch data or transform outputs.</li>
+<li>Call a CRM or payment API with IAM-managed credentials.</li>
+<li>Blend real-time search with Retrieval-Augmented Generation results.</li>
+</ul>
+<p>This kills the classic client-side risk: exposed secrets, weird runtimes, and random latency. Everything stays in AWS walls, governed by IAM and optional VPC endpoints. You control who runs what, where.</p>
+<h3 id="securityandlatencyonpurpose">Security and latency on purpose</h3>
+<p>When tools run server-side, you cut round-trips and skip cross-origin mystery boxes. Less hop, less drop. For regulated work like finance, healthcare, or internal support, this shrinks the attack surface a lot. Pair server-side tools with Guardrails for policy grounding and Knowledge Bases for vetted retrieval.</p>
+<p>First-hand example. A support agent pulls the last 10 tickets from a private DB, runs a Python summarizer to spot sentiment shifts, then drafts a reply. No client handles tokens. No secret keys in browsers. Just AWS-to-AWS with auditable calls.</p>
+<p><em>Result: faster, safer, simpler orchestration.</em></p>
+<h3 id="designpatterns">Design patterns</h3>
+<ul>
+<li>Tool registry and versioning: keep a clear catalog of tools with semantic names and versions. Roll out updates without breaking prompts.</li>
+<li>JSON I/O contracts: define strict input and output schemas for each tool so the model knows what to send and expect. Fewer errors, easier retries.</li>
+<li>Idempotency keys: for writes like refunds or profile updates, pass idempotency keys. Retries won’t double-charge or duplicate updates.</li>
+<li>Least privilege by design: each tool gets its own IAM role with only what it needs. Separate read and write paths.</li>
+<li>Parallelization: where it’s safe, let the agent call multiple read-only tools in parallel. Fetch profile and recent orders at the same time.</li>
+<li>Circuit breakers: cap max tool calls per turn and per session. Avoid loops when a model keeps retrying.</li>
+</ul>
+<h3 id="securitybydefaultblueprint">Security by default blueprint</h3>
+<ul>
+<li>IAM guardrails: one role per tool, scoped to exact services and resources. No wildcard writes. Rotate creds using IAM best practices.</li>
+<li>Network isolation: put DBs in private subnets. Use VPC interface endpoints with AWS PrivateLink for supported services. Block egress from sensitive subnets except approved endpoints.</li>
+<li>Secrets management: keep API keys in AWS Secrets Manager or Systems Manager Parameter Store. Never hardcode.</li>
+<li>Auditability: log tool calls and model prompts to CloudWatch, with redaction where needed. Turn on CloudTrail for API auditing.</li>
+<li>Data protection: use KMS at rest and TLS in transit. Tag data by sensitivity and enforce handling rules with Guardrails and app logic.</li>
+</ul>
+<h3 id="latencytuningplaybook">Latency tuning playbook</h3>
+<ul>
+<li>Reduce chattiness: combine related queries into one tool call, not five bounces.</li>
+<li>Cache upstream: if you fetch slow data like a catalog, add a short-lived cache at the tool layer.</li>
+<li>Right-size retrieval: don’t pull 100KB of text for two sentences. Limit RAG chunk sizes and count.</li>
+<li>Precompute hot paths: precompute common calculations or store summaries. Let the agent retrieve them fast.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-16-11-4626-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="promptcachingkeepcontext">Prompt caching keep context</h2>
+<h3 id="howitworks">How it works</h3>
+<p>Prompt caching stores repeated prompts or context pieces so later calls hit the cache. Not full-priced inference. Bedrock now supports longer contexts, up to 1 million tokens in some models. It also supports longer cache durations, on the order of hours. You can tune eviction with TTL or usage rules.</p>
+<p>For multi-turn chat, RAG, or long-form gen, you stop re-paying to re-send the same system instructions, retrieved passages, or chat history. Cache hits are automatic once enabled. Misses fall back to normal inference. Early adopters report big savings and lower latency on repeated prompts.</p>
+<h3 id="whereitshines">Where it shines</h3>
+<ul>
+<li>Chatbots that keep long histories across dozens of turns</li>
+<li>Multi-step reasoning where your base instructions rarely change</li>
+<li>RAG flows that reuse the same retrieved chunks across entities</li>
+<li>Content workflows like editorial long-form where headers or research blocks repeat</li>
+</ul>
+<p>A practical pattern. Cache your system prompt, safety rules, and knowledge “prologue”. Then only vary the user query. For an ecommerce assistant, cache product taxonomy and FAQ blocks once per session. User questions flow free. It’s realistic to see 50–90% cost cuts on repeats, based on hit rate and model choice.</p>
+<h3 id="cachingdesigntips">Caching design tips</h3>
+<ul>
+<li>Segment your prompt: split into static, semi-static, and dynamic. Only cache the first two.</li>
+<li>Use content versioning: add a content version, like policy_v3, to static parts. Cache invalidates cleanly when you update.</li>
+<li>TTL that matches reality: match chat TTL to session length, like 1–4 hours. Match RAG TTL to your KB update schedule.</li>
+<li>Don’t cache user-specific PII: keep per-user data dynamic unless you isolate caches per user and have a strict retention policy.</li>
+<li>Beware hidden drift: if your RAG index updates hourly, include a version stamp in semi-static chunks. Don’t serve stale facts.</li>
+<li>Measure hit rate by segment: track stats for system prompts vs. knowledge chunks. Tune what actually pays off.</li>
+</ul>
+<h3 id="costmathmadetangible">Cost math made tangible</h3>
+<ul>
+<li>Imagine a 6K-token system prompt and safety policy reused across 100 turns.</li>
+<li>Without caching: you pay for those 6K tokens 100 times.</li>
+<li>With caching: you pay full price once. Then hit the cache on the next 99 turns, plus the small dynamic delta per turn.</li>
+<li>If prompts are stable and hits are high, spend drops sharply. Savings vary by model and usage. Always check current pricing and your own metrics.</li>
+</ul>
+<h2 id="demotoproductionworkflow">Demo to production workflow</h2>
+<h3 id="architecturesketch">Architecture sketch</h3>
+<p>Picture this:</p>
+<ul>
+<li>Bedrock Agent coordinates the conversation.</li>
+<li>Server-side tool calls run in your AWS account: Python for transforms, a VPC DB for user data, and a third-party API with IAM-scoped creds.</li>
+<li>Knowledge Base retrieves approved content from a vector store.</li>
+<li>Guardrails enforce safety, redaction, and topic limits.</li>
+<li>Prompt caching stores the system prompt, safety policy, and recent RAG chunks.</li>
+</ul>
+<p>All roads stay in AWS. Logs go to CloudWatch. Access control lands in IAM. You can gate everything behind VPC endpoints to keep traffic private.</p>
+<h3 id="walkthroughexample">Walkthrough example</h3>
+<p>Let’s say you’re building a fintech KYC assistant:
+1) User asks, “Why was my account flagged?”
+2) The agent uses a server-side DB tool to fetch the last three risk events.
+3) It runs a Python tool to compute a fresh risk score and explainers.
+4) It calls a regulatory update API to verify recent rule changes.
+5) It composes an answer grounded by a Knowledge Base of internal policy text.
+6) Prompt caching ensures your system prompt, safety policy, and base policy chunks aren’t re-billed every turn.</p>
+<p><em>Outcome: accurate, auditable, and fast.</em> The agent avoids client-side secrets, reduces repeat-token spend, and keeps context without ballooning cost.</p>
+<h3 id="failuremodes">Failure modes</h3>
+<ul>
+<li>Tool timeout: return a friendly fallback, log the failure, suggest a next step. Don’t strand the user.</li>
+<li>Schema mismatch: validate tool outputs. If they don’t match the schema, ask the model to repair once, then fail gracefully.</li>
+<li>Partial data: respond with what you know and invite a follow-up. “I can see two events; the third timed out—retry?”</li>
+<li>Rate limits: if an external API throttles, back off and queue the action. Notify the user with an ETA for long tasks.</li>
+</ul>
+<h2 id="buildpath">Build path</h2>
+<h3 id="startfast">Start fast</h3>
+<ul>
+<li>Console: spin up an Agent, attach Knowledge Bases, and toggle Guardrails. Add tools for server-side calls.</li>
+<li>SDKs: use Python, Java, or Node.js to wire the Responses API, define tools, and set cache policies.</li>
+<li>Examples: check aws-samples/amazon-bedrock-samples on GitHub for reference builds and quickstarts. If you search “amazon bedrock agent workflows server side tools prompt caching example”, sample repos and AWS docs will save you hours.</li>
+</ul>
+<h3 id="scalesafely">Scale safely</h3>
+<ul>
+<li>IAM: least-privilege roles per tool. Separate roles for DB, web, and third-party API access.</li>
+<li>Networking: VPC endpoints for Bedrock. DB access via security groups. Private subnets for sensitive calls.</li>
+<li>Guardrails: enforce moderation, PII redaction, and topic filters.</li>
+<li>Observability: log tool calls, cache hits and misses, and model latencies in CloudWatch. Add alarms for error spikes or weird call patterns.</li>
+</ul>
+<h3 id="costcontrols">Cost controls</h3>
+<ul>
+<li>Prompt caching TTL: match TTL to session length or project lifecycle. Max out hits.</li>
+<li>Chunking strategy: cache stable instructions and policy text. Keep dynamic user input uncached.</li>
+<li>Pricing visibility: review Bedrock pricing for model-specific caching math and context lengths. If you search “aws bedrock prompt caching pricing” or “langchain bedrock prompt caching”, remember caching sits in Bedrock, not the client lib.</li>
+</ul>
+<h3 id="devtoprod">Dev to prod</h3>
+<ul>
+<li>Environments: isolate dev, staging, and prod with separate Bedrock configs and IAM roles.</li>
+<li>IaC everywhere: use CloudFormation or Terraform for Agents, roles, VPC endpoints, and logging targets. Recreate stacks in minutes.</li>
+<li>Secrets flow: store non-prod and prod secrets separately in Secrets Manager. Rotate often.</li>
+<li>Release gates: deploy behind feature flags. Run canary sessions with internal users before opening the floodgates.</li>
+<li>Cost guardrails: set AWS Budgets and alerts for token spend and tool calls. Catch surprises early.</li>
+</ul>
+<h2 id="realworldusecases">Real world use cases</h2>
+<ul>
+<li>Customer support triage: fetch profile, past tickets, and order history. Summarize sentiment, propose actions, draft replies. Guardrails block unsafe content; tools log actions for audit.</li>
+<li>E-commerce shopping copilot: read catalog metadata, hit inventory APIs, and blend reviews with RAG. Keep style and policy prompts cached. Personalize without exposing secrets in the browser.</li>
+<li>Finance back-office assistant: reconcile transactions with a read-only DB tool. Flag anomalies and open tasks in a ticketing system with scoped creds.</li>
+<li>IT help desk: pull device posture and last login from internal APIs. Restart services through an automation tool. Document the fix in a knowledge base.</li>
+<li>Healthcare intake, internal: summarize clinician notes, retrieve policy snippets via RAG, and suggest next steps. Keep PHI in private subnets. Use strict Guardrails and logging. Always validate with a human in the loop.</li>
+</ul>
+<h2 id="promptcachingrecipes">Prompt caching recipes</h2>
+<ul>
+<li>Session starter cache: on session start, warm the cache with system rules, safety, and top-10 FAQs. Every turn benefits.</li>
+<li>Role-based prologues: sales, support, and finance each get a cached prologue tuned to their work. One agent, multiple personas.</li>
+<li>RAG segment cache: cache top-k static policy sections and product taxonomy. Keep per-query snippets dynamic.</li>
+<li>Long-form drafts: cache style guides, outlines, and reference blocks for content teams. The model only regenerates the changing bits.</li>
+</ul>
+<h2 id="migrationmap">Migration map</h2>
+<ul>
+<li>Today: browser calls a proxy, proxy calls LLM, secrets live in env vars, tools run on mixed infra. Messy.</li>
+<li>Tomorrow: client talks to your backend, backend calls Bedrock, tools run inside AWS with IAM roles. Knowledge Bases fetch vetted content, Guardrails enforce policy, cache trims cost.</li>
+<li>Steps: move secrets to Secrets Manager, define tools in Bedrock, wire the Responses API, restrict network paths, flip traffic gradually, kill client-side keys.</li>
+</ul>
+<h2 id="testingevaluationandsafetychecks">Testing Evaluation and Safety Checks</h2>
+<ul>
+<li>Golden conversations: record 20–50 real chats. Replay after every change and compare outcomes.</li>
+<li>Tool sandboxing: in staging, point write tools at a test DB or no-op endpoints until confident.</li>
+<li>A/B prompts: try two system prompts. Compare accuracy, latency, and tool call counts.</li>
+<li>Safety evals: run inputs with PII, policy edge cases, and adversarial prompts. Verify Guardrails block or route correctly.</li>
+<li>Post-deploy monitors: alert on tool error spikes, tool call loops, and cache miss rates drifting down.</li>
+</ul>
+<h2 id="speedrunrecap">Speed run recap</h2>
+<ul>
+<li>Server-side tools move sensitive ops into AWS, governed by IAM and VPC.</li>
+<li>Prompt caching slashes repeat-token costs and latency for long contexts.</li>
+<li>Agents plus Knowledge Bases plus Guardrails equals production-grade workflows, minus custom glue.</li>
+<li>Early adopters report 3x faster iteration cycles and lower token spend.</li>
+<li>Build via Console or SDKs. Use GitHub samples and model docs to confirm support per model.</li>
+</ul>
+<h2 id="faqs">FAQs</h2>
+<h3 id="serversidetooluse">Server side tool use</h3>
+<p>It’s the ability for an agent, via the Bedrock Responses API, to call tools like web search, code execution, database queries, or third-party APIs inside your AWS environment. Credentials stay server-side, governed by IAM. You get lower latency, stronger security, and simpler orchestration.</p>
+<h3 id="promptcachingreducecost">Prompt caching reduce cost</h3>
+<p>When you enable caching for stable prompt parts, cache hits avoid full-priced inference for those parts. In high-repeat cases like long system prompts or RAG with recurring chunks, hit rates can be high enough to cut costs a lot. Savings depend on your model, prompt design, and hit rate. Check Amazon Bedrock pricing for details.</p>
+<h3 id="specificsdkorframework">Specific SDK or framework</h3>
+<p>No. Prompt caching is a Bedrock-side feature. Whether you call Bedrock direct or through a framework like LangChain, caching happens in the service once enabled.</p>
+<h3 id="automaticandexplicitpromptcaching">Automatic and explicit prompt caching</h3>
+<p>You opt in to caching for certain segments and set policies like TTL. After that, cache hits are automatic when requests match cached content. “Explicit” means you control what gets cached and how long it persists, while hit or miss logic runs behind the scenes.</p>
+<h3 id="modelssupportlongcontexts">Models support long contexts</h3>
+<p>Support varies by model and changes over time. Some models on Bedrock support very large windows, from hundreds of thousands up to 1M tokens. Check the model’s docs or Bedrock service docs to confirm current limits and caching support.</p>
+<h3 id="serversidetoolsprotectsecrets">Server side tools protect secrets</h3>
+<p>With server-side tools, your creds never leave AWS. Calls run with IAM-scoped roles, can be isolated with VPC endpoints, and are logged centrally. Client-side Setups risk secret leaks, proxy sprawl, and inconsistent runtimes.</p>
+<h3 id="dataresidencyandcompliance">Data residency and compliance</h3>
+<p>Keep data in-region. Use VPC endpoints to control egress. Store logs with the right retention. Combine IAM, KMS, Guardrails, and audit logs to meet rules. Check your regulator’s guidance and map controls before launch.</p>
+<h3 id="alwaysneedrag">Always need RAG</h3>
+<p>Not always. If your use case needs fresh internal facts or domain policy, RAG helps a lot. If it’s generic reasoning, you can skip RAG and keep the stack lean. Start simple, add RAG when you see drift or outdated answers.</p>
+<h2 id="7stepbuilderplaybook">7 step builder playbook</h2>
+<ul>
+<li>Scope the workflow: list tools your agent needs, like DB, web, Python, or APIs.</li>
+<li>Lock security: IAM least privilege, VPC endpoints, and Guardrails.</li>
+<li>Enable prompt caching: cache system prompts, policies, and stable RAG chunks.</li>
+<li>Implement server-side tools via the Responses API.</li>
+<li>Add Knowledge Bases for vetted retrieval. Test with real data.</li>
+<li>Instrument everything: cache hit rate, latency, tool errors, and cost.</li>
+<li>Automate deploys with CI/CD. Run load tests and failure drills before launch.</li>
+</ul>
+<p>You don’t need a lab full of PhDs to ship production agents. You need guardrails, the right tools, and a clean path from prototype to prod. Bedrock’s server-side tools and prompt caching give you that runway: secure calls, lower cost, and fewer moving parts to babysit. <em>Start with one agent, one high-impact workflow, and real data.</em> Measure cache hits, compare spend, iterate weekly.</p>
+<p><em>Small teams win by shipping faster.</em> This is how you ship faster without taking on risk debt.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/bedrock/">Amazon Bedrock product page</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html">Agents for Amazon Bedrock (docs)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Guardrails for Amazon Bedrock (docs)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-bases.html">Knowledge bases for Amazon Bedrock (docs)</a></li>
+<li><a href="https://aws.amazon.com/bedrock/pricing/">Amazon Bedrock pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/welcome.html">Amazon Bedrock API Reference</a></li>
+<li><a href="https://github.com/aws-samples/amazon-bedrock-samples">AWS Samples for Amazon Bedrock (GitHub)</a></li>
+<li><a href="https://python.langchain.com/docs/integrations/providers/bedrock">LangChain + Bedrock integration</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html">AWS IAM best practices</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html">AWS PrivateLink overview</a></li>
+<li><a href="https://docs.aws.amazon.com/cloudwatch/">AWS CloudWatch (service docs)</a></li>
+<li><a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html">AWS Budgets</a></li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html">AWS Well-Architected Framework</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="bedrock-server-tools-prompt-caching.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq51b3.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Build+Faster+AI+Agents+with+Bedrock+Tools+and+Caching&amp;pi=309257935554&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=309257935554&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fbedrock-server-tools-prompt-caching&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/bedrock-server-tools-prompt-caching?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:40 GMT -->
+</html>

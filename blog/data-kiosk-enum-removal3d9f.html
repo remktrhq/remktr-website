@@ -1,0 +1,280 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/data-kiosk-enum-removal?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:40:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Avoid Breakage: Prep for Amazon Data Kiosk Enum Change</title>
+    <link rel="canonical" href="data-kiosk-enum-removal.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Prepare for enum value removal in Amazon Data Kiosk Analytics Economics via SP-API by Oct 30, 2025. Update integrations to avoid errors and keep data accurate.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Avoid Breakage: Prep for Amazon Data Kiosk Enum Change",
+        "datePublished": "2025-10-10T15:35:09Z",
+        "dateModified": "2025-10-10T15:35:10.185Z",
+        "mainEntityOfPage": "https://remktr.com/blog/data-kiosk-enum-removal",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na1.net/hubfs/50136663/rss_to_hubspot_content/temp-Oct-10-2025-03-30-19-1600-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="data-kiosk-enum-removal.html">Avoid Breakage: Prep for Amazon Data Kiosk Enum Change</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Oct 10, 2025 3:35:09 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Heads up: Amazon Data Kiosk Analytics Economics will remove FNSKU from ProductIdentifierGranularity on <em>2025-10-30</em> across all marketplaces.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Stop using FNSKU granularity. Switch to ASIN or Seller SKU.</li>
+<li>Update request payloads, filters, joins, and warehouse models.</li>
+<li>Build a mapping table linking fnsku, asin, sku, marketplace_id with validity windows.</li>
+<li>Ship behind a feature flag. Canary 10–25 percent. Compare KPIs, and keep a rollback ready.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-10-2025-03-31-18-8038-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatchanges">What changes</h2>
+<ul>
+<li>Any request that sets productIdentifierGranularity = FNSKU <em>will fail</em>, or return empty data, after the cutoff.</li>
+<li>Replace with ASIN or SKU, and update downstream logic accordingly.</li>
+</ul>
+<h2 id="whythismatters">Why this matters</h2>
+<ul>
+<li>Dashboards that slice by FNSKU may go blank or undercount.</li>
+<li>ETL joins on FNSKU can break or cause silent data drift.</li>
+<li>Historical analyses keyed by FNSKU need enrichment to preserve continuity.</li>
+</ul>
+<h2 id="quickidentifierrefresher">Quick identifier refresher</h2>
+<ul>
+<li>FNSKU is fulfillment focused, and it can change over time.</li>
+<li>ASIN is catalog focused and stable per marketplace entry.</li>
+<li>Seller SKU is merchant defined and often stable inside your systems.</li>
+</ul>
+<h2 id="migrationchecklist">Migration checklist</h2>
+<p>1) Audit: search code, configs, and BI for FNSKU and productIdentifierGranularity.
+2) Requests: switch payload builder to ASIN or SKU based on use case.
+3) Models: add asin and sku to facts and dims; update joins and filters.
+4) Mapping: create a dim<em>identifier</em>map with columns fnsku, asin, sku, marketplace<em>id, valid</em>from, valid<em>to, is</em>current; backfill history.
+5) Canary: enable via feature flag for a cohort; compare units, revenue, and key rates daily.
+6) Cutover: move to 100 percent if parity holds; block FNSKU usage post date.
+7) Rollback: keep old path available behind a flag for at least two weeks.</p>
+<h2 id="commonpitfalls">Common pitfalls</h2>
+<ul>
+<li>Validation errors or empty responses due to leftover FNSKU payloads.</li>
+<li>Broken joins if marketplace_id is not included in key matching.</li>
+<li>Silent undercounting if errors are swallowed or unmatched rows drop during joins.</li>
+</ul>
+<h2 id="choosingasinvssku">Choosing ASIN vs SKU</h2>
+<ul>
+<li>Catalog level analysis and cross seller comparisons: choose ASIN.</li>
+<li>Internal catalog, ERP reconciliation, and merchant centric reporting: choose SKU.</li>
+<li>If unsure, store both asin and sku in the warehouse, and let BI select per use case.</li>
+</ul>
+<h2 id="dataqualityguardrails">Data quality guardrails</h2>
+<ul>
+<li>Block jobs that attempt FNSKU after <em>2025-10-30</em>.</li>
+<li>Monitor row count and metric parity between old and new keys during canary.</li>
+<li>Track join coverage and null rates for asin and sku.</li>
+<li>Alert on marketplace-scoped collisions or mapping gaps.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-10-2025-03-32-26-1657-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="backfillingwithoutrewritinghistory">Backfilling without rewriting history</h2>
+<ul>
+<li>Keep original fnsku columns for lineage.</li>
+<li>Enrich historical facts with asin and sku using mapping valid at fact_date and marketplace.</li>
+<li>Use deterministic tie breaking rules when multiple mappings exist.</li>
+</ul>
+<h2 id="observability">Observability</h2>
+<ul>
+<li>Daily deltas for units, ordered revenue, and key rates by marketplace and top products.</li>
+<li>Coverage and latency checks for new joins.</li>
+</ul>
+<h2 id="rollbackplan">Rollback plan</h2>
+<ul>
+<li>Feature flag to revert to old path.</li>
+<li>Preserve FNSKU based marts for short term comparison; mark deprecated.</li>
+<li>Keep mapping maintained for audits and future backfills.</li>
+</ul>
+<h2 id="suggestedtimeline">Suggested timeline</h2>
+<ul>
+<li>Week 1: Audit usage, build mapping, add columns, prep flags.</li>
+<li>Week 2: Stage dual path, validate extracts and joins, start backfills.</li>
+<li>Week 3: Canary 10–25 percent; monitor KPI parity; fix gaps.</li>
+<li>Week 4: Scale to 50–100 percent; finalize docs and monitoring.</li>
+<li>Before <em>2025-10-30</em>: Complete cutover; enforce no FNSKU in payloads.</li>
+</ul>
+<h2 id="finalchecklist">Final checklist</h2>
+<ul>
+<li>Zero FNSKU requests after cutover date.</li>
+<li>KPI parity within agreed thresholds.</li>
+<li>Mapping coverage greater than 99 percent for active catalog; exceptions documented.</li>
+<li>Dashboards and runbooks updated; on call aware; rollback documented.</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs">SP API docs</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/changelog">Changelog</a></li>
+<li><a href="https://github.com/amzn/selling-partner-api-docs">Selling Partner API GitHub</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="data-kiosk-enum-removal.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqbd08.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Avoid+Breakage%3A+Prep+for+Amazon+Data+Kiosk+Enum+Change&amp;pi=197391895212&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=197391895212&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fdata-kiosk-enum-removal&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/data-kiosk-enum-removal?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:40:37 GMT -->
+</html>

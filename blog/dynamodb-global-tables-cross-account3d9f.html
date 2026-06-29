@@ -1,0 +1,558 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/dynamodb-global-tables-cross-account?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Slash Risk and Latency With DynamoDB Cross-Account Global Tables</title>
+    <link rel="canonical" href="dynamodb-global-tables-cross-account.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Enable DynamoDB global tables across accounts to boost resiliency and low-latency writes. Apply per-account cost allocation and PITR with simple API setup.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Slash Risk and Latency With DynamoDB Cross-Account Global Tables",
+        "datePublished": "2026-02-10T22:09:46Z",
+        "dateModified": "2026-02-10T22:09:47.029Z",
+        "mainEntityOfPage": "https://remktr.com/blog/dynamodb-global-tables-cross-account",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-10-2026-09-58-41-9762-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="dynamodb-global-tables-cross-account.html">Slash Risk and Latency With DynamoDB Cross-Account Global Tables</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 10, 2026 10:09:46 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p><em>One account is convenience. Multiple accounts with global tables is resilience.</em></p>
+<p>Wait — your global app still tied to one AWS account?
+That’s like a factory with one power line, hoping storms behave.</p>
+<p>Amazon DynamoDB global tables now replicate across multiple AWS accounts.
+You get multi-Region, multi-active, low-latency reads and writes.
+And you don’t cram it all into one big blast-radius account.
+Governance gets cleaner. Cost allocation gets cleaner. DR gets measurable.</p>
+<p>This is a big unlock for multi-tenant SaaS and regulated stuff.
+Also for teams that want dev, test, and prod split clean, without sad data silos.
+You keep point-in-time recovery, on-demand capacity, and that single-digit millisecond punch.
+Now you get it with cross-account isolation too.</p>
+<p><em>‘Everything fails, all the time,’ like AWS CTO Werner Vogels says.</em>
+Cross-account global tables turn that truth into a real edge.</p>
+<ul>
+<li><p>TL;DR</p></li>
+<li><p>Cross-account DynamoDB global tables give multi-Region, multi-active replication.
+You also get per-account isolation for governance, cost, and blast radius.</p></li>
+<li><p>Strong consistency stays Region-bound; across Regions you get eventual consistency.
+<em>Design for it.</em></p></li>
+<li><p>Pricing: writes fan out to every replica; budget for replicated write capacity,
+storage, Streams, and inter-Region data transfer.</p></li>
+<li><p>Set up by console or API: create replicas in other Regions or accounts,
+wire IAM and KMS, and let last-writer-wins resolve conflicts.
+Or use Streams plus Lambda for custom logic.</p></li>
+<li><p>Best for multi-tenant SaaS isolation, disaster recovery,
+and global apps needing low-latency local reads and writes.</p></li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-59-29-9368-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<p>If you used global tables inside one account, the power is the same.
+It’s finally mapped to how real orgs actually run.
+Different accounts for prod, staging, and tenants.
+Different KMS keys. Different budgets. Same dataset, replicated fast and safe.</p>
+<p>Want the mental picture?
+Think of each account like a walled garden.
+You can prune or water one without touching the others.
+When one garden gets weeds, your other gardens still bloom.</p>
+<h2 id="whatcrossaccountglobaltableschange">What Cross Account Global Tables Change</h2>
+<h3 id="fromsingleaccountblastradius">From single account blast radius</h3>
+<p>Historically, global tables gave you multi-Region and multi-active in one account.
+That works… until risky deploys, noisy neighbors, or policy changes hit everything.
+Cross-account replication breaks that tie. It’s a nice break, honestly.
+You can keep prod, staging, and tenant stacks in separate accounts now.
+And you don’t lose a single, unified, globally replicated dataset.</p>
+<p>This isolation isn’t hand-wavy. Account borders give you real guardrails.
+Use different service control policies, budget alarms, and incident playbooks.
+When staging goes sideways, you still keep rights to fix prod.
+When one tenant surges traffic, it won’t spike your whole bill.</p>
+<h3 id="governanceandcostclarity">Governance and cost clarity</h3>
+<p>Separate accounts mean separate budgets and clean cost categories.
+Chargeback gets saner. Your blood pressure does too.
+Apply per-account IAM boundaries, service control policies, and KMS keys.
+You still get point-in-time recovery and on-demand capacity.
+Now they map cleanly to who owns what.</p>
+<p>In practice, quarterly reviews stop hurting so much.
+Finance sees costs by account and Region. Easy.
+Security audits access centrally, while keeping least-privilege local.
+Engineering moves faster, without one shared-account ticket pileup.</p>
+<h3 id="realworldexample">Real world example</h3>
+<p>A fintech with tight controls splits prod US and EU into one account,
+staging and canary into a second, and analytics into a third.
+Global tables replicate data across them all.
+If staging breaks IAM or spikes capacity, prod stays calm.
+Compliance loves the account-level blast radius.
+Engineering loves the global, low-latency writes.</p>
+<p><em>‘Everything fails, all the time,’ and cross-account makes failure boring.</em></p>
+<p>Zoom out and the pattern fits other industries too.
+Healthcare isolates PHI-holding tenants in dedicated accounts per Region.
+Gaming separates live ops from wild experiments.
+Retailers carve out regional pushes without risking the core store.</p>
+<p>Since each account runs its own encryption keys and IAM boundaries,
+separation-of-duties becomes real, not just a slide.
+Key custodians rotate in one account without pausing the rest.
+Auditors get precise scope. You get sleep.</p>
+<h2 id="designingmultiaccountmultiregion">Designing Multi Account Multi Region</h2>
+<h3 id="tenancydevprodorgstructure">Tenancy dev prod org structure</h3>
+<p>Start with AWS Organizations. No, really, start there.
+Put prod in a hardened account, staging in another,
+and tenant or Region-specific stacks in their own when needed.
+Tag everything, same schema, every time.
+Use SCPs to block scary actions in prod, like table deletion.
+Let builders move fast elsewhere.</p>
+<p><em>A simple blueprint:</em></p>
+<ul>
+<li>Root: AWS Organizations with consolidated billing and central security tooling.</li>
+<li>OUs: Prod, Non-Prod, and Tenants.</li>
+<li>Accounts: prod-core, prod-analytics, staging, dev, and one-per-enterprise-tenant if needed.</li>
+<li>Tag schema: Application, Environment, Owner, CostCenter, DataClass.</li>
+</ul>
+<p>This pays off when you must prove who touched what, where money went,
+and why a change was safe to deploy.</p>
+<h3 id="iamkmstrusthandshake">IAM KMS trust handshake</h3>
+<p>You need permissions in both source and target accounts to add replicas.
+Encrypt tables with KMS keys scoped per account and Region.
+Grant cross-account KMS access to the replication roles.
+Keep key policies explicit. Key misconfig is the top reason replication stalls.</p>
+<p>Pro tips:</p>
+<ul>
+<li>Prefer customer managed KMS keys per account and Region for clear control.
+Also for clean audit trails.</li>
+<li>Add cross-account grants that let DynamoDB use the key
+on behalf of the replica account’s role.</li>
+<li>Keep key policies narrow; test a dry run with a tiny table.
+Add and remove a replica to be sure.</li>
+<li>Rotate keys on a schedule and document the steps.
+Replication should flow through rotation when grants are correct.</li>
+</ul>
+<h3 id="networkandopshygiene">Network and ops hygiene</h3>
+<p>DynamoDB is serverless with public endpoints, so no VPC peering needed.
+You still want logging and alarms, day one.
+Use CloudTrail across accounts, CloudWatch alarms per replica,
+and AWS Config rules that flag drift.
+For rollback posture, use AWS Backup or DynamoDB PITR.</p>
+<p>Watch these metrics per Region:</p>
+<ul>
+<li>ReplicationLatency to track lag.</li>
+<li>ConsumedWriteCapacityUnits and ConsumedReadCapacityUnits for demand spikes.</li>
+<li>ThrottledRequests and UserErrors to catch bad callers and hot partitions.</li>
+<li>SuccessfulRequestLatency to spot app slowness versus network pain.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-10-00-15-7395-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="firsthandstyleexample">First hand style example</h3>
+<p>Consider a multi-tenant SaaS.
+You put each enterprise tenant with strict SLAs in its own account.
+That isolates noisy spikes and custom compliance.
+A shared control-plane account provisions tables and adds replicas by code.
+Each tenant account enforces its own IAM and cost guardrails.
+Write paths stay local and fast via the nearest Region.</p>
+<p><em>Build a golden-path automation.</em>
+One pipeline creates a tenant account, bootstraps KMS, deploys IAM roles,
+creates the local replica, and tags everything.
+The control plane tracks status and can re-run without side effects.
+When sales lands a new APAC customer, you press one button.
+The data shows up where it should, safely.</p>
+<h3 id="operationalpatternsyoullreuse">Operational patterns youll reuse</h3>
+<ul>
+<li>Runbooks: document break-glass roles, replica remove or add steps,
+and KMS key rotation behavior.</li>
+<li>DR tests: quarterly drills that simulate a Region isolation.
+Validate RTO and RPO on real workloads.</li>
+<li>Drift detection: Config rules to enforce encryption, PITR, and tags
+across all accounts.</li>
+<li>Cost controls: budgets and alerts by account and Region.
+Enforce reserved capacity or autoscaling where it fits.</li>
+</ul>
+<h2 id="consistencyconflictsandrealitychecks">Consistency Conflicts And Reality Checks</h2>
+<h3 id="dynamodbglobaltablesstrongconsistency">DynamoDB global tables strong consistency</h3>
+<p>Inside one Region, you can do strongly consistent reads for that replica.
+Across Regions, global tables are eventually consistent by design.
+Cross-account doesn’t change that, not even a bit.
+If you need cross-Region read-after-write, your app must coordinate.
+Use version checks, idempotency, or wait for a small lag window.</p>
+<p><em>A simple guardrail helps.</em>
+When a user reads right after a write, route that read to the same Region.
+For cross-Region flows, add a short poll or use change events
+before you proceed.</p>
+<h3 id="conflictresolutionbuiltinvscustom">Conflict resolution built in vs custom</h3>
+<p>Global tables use last-writer-wins based on write timestamps.
+For many use cases, that’s fine. It’s boring and it works.
+If you need app-specific merges, like counters or cart edits,
+pipe DynamoDB Streams into Lambda to detect and fix conflicts.
+Keep a version attribute to reject stale writes.</p>
+<p>Add these patterns:</p>
+<ul>
+<li>Optimistic concurrency: store a version attribute.
+Use ConditionExpression so updates pass only if version matches.
+Then increment it.</li>
+<li>Idempotency keys: include a requestId attribute and ignore duplicate retries.</li>
+<li>Reconciliation jobs: scan for conflicted items you marked and heal them.
+Do it in a deterministic way.</li>
+</ul>
+<h3 id="crossregionreplicationvsglobaltables">Cross Region replication vs global tables</h3>
+<p>You can roll your own with Streams, Lambda, and BatchWriteItem.
+But global tables give managed, multi-active replication with conflict handling.
+Fewer moving parts. Fewer 2 a.m. surprises.
+If you need near real-time fan-out to analytics, Streams still help.
+Just don’t rebuild the core replication wheel.</p>
+<p>If your domain needs pre-processing before writes land,
+keep that logic in your app tier.
+Let global tables handle the transport and conflict choice.
+Not your business rules.</p>
+<h3 id="practicalexample">Practical example</h3>
+<p>A gaming company stores player profiles worldwide.
+Writes go to the closest Region for sub-10ms latency.
+Profile lastUpdatedAt timestamps drive idempotency.
+Last-writer-wins is fine for user preference updates.
+For sensitive credits counters, they use conditional updates with version checks.
+No drift allowed there.</p>
+<h3 id="transactionsuniquenessandrealitychecks">Transactions uniqueness and reality checks</h3>
+<ul>
+<li>DynamoDB transactions are scoped to a single Region.
+They replicate out, but atomicity is local.</li>
+<li>Global secondary indexes replicate like base tables.
+Keep access patterns consistent everywhere.</li>
+<li>Uniqueness constraints still need a pattern.
+Write a lock item with a ConditionExpression per Region where writes happen.</li>
+</ul>
+<h2 id="halfwaymarkthetldrupgrade">Halfway Mark The TLDR Upgrade</h2>
+<ul>
+<li>Strong consistency is local only; global reads are eventually consistent.</li>
+<li>Cross-account replicas cut blast radius and make budgets clearer.</li>
+<li>Use KMS with explicit cross-account grants; watch those key policies.</li>
+<li>Conflicts default to last-writer-wins; Streams plus Lambda give custom merges.</li>
+<li>Pricing scales with replicas: writes, storage, Streams, and data transfer matter.</li>
+<li>Perfect for multi-tenant SaaS, DR drills, and global low-latency apps.</li>
+</ul>
+<p>If you remember one thing, remember this.
+You can finally match DynamoDB’s global muscle to your org chart.
+No more shoving it all into one risky account.
+Same speed. Saner boundaries.</p>
+<h2 id="pricingcapacityandthroughputmath">Pricing Capacity And Throughput Math</h2>
+<h3 id="dynamodbglobaltablespricingbasics">DynamoDB global tables pricing basics</h3>
+<p>You pay for write and read capacity in every Region.
+Use provisioned or on-demand, your call.
+You also pay for replicated write I/O to each replica.
+Storage is billed per Region. Streams add cost.
+Inter-Region data transfer applies for replication traffic.
+Cross-account itself adds no extra premium.
+Replication is per Region either way.</p>
+<h3 id="thementalmodel">The mental model</h3>
+<p>If you write 1M items per month in Region A, and replicate to B and C,
+you pay the original write in A and two sets of replicated writes.
+Then add any reads in each Region. It stacks up fast.
+PITR also bills per Region based on retained history.</p>
+<p>Keep in mind:</p>
+<ul>
+<li>Backfill on replica creation moves existing data across Regions.
+Expect a short spike in transfer and write activity.</li>
+<li>Storage multiplies across Regions.
+Store 200 GB in each Region across three Regions?
+You pay roughly 600 GB total, plus PITR overhead.</li>
+<li>Streams consumers you run, like conflict resolvers and CDC fans,
+exist per account and Region. Tune batch sizes and errors.</li>
+</ul>
+<h3 id="rightsizingtips">Right sizing tips</h3>
+<ul>
+<li>If traffic is bursty, start on-demand.
+Switch hot partitions to provisioned once you learn the shape.</li>
+<li>Use composite keys to avoid hot partitions.
+Replication won’t fix bad partition math.</li>
+<li>TTL old data to trim storage across all replicas.</li>
+<li>Keep Streams consumers efficient; they run in every account and Region you need.</li>
+</ul>
+<p>Add-ons to consider:</p>
+<ul>
+<li>Autoscaling for provisioned capacity on known patterns.</li>
+<li>Table class choices, Standard vs. Standard-IA, for colder datasets.
+Dial down storage spend.</li>
+<li>Export to S3 for analytics to avoid heavy scans on live replicas.</li>
+</ul>
+<h3 id="exampleoutcome">Example outcome</h3>
+<p>A SaaS vendor added a replica in EU for latency and another in APAC.
+They projected a 2.1x write-cost increase, not 3x.
+They offloaded a chunk of reads to EU and APAC and used TTL to keep hot data slim.
+Net-net: happier users and predictable bills.</p>
+<h2 id="crossaccountreplicasfast">Cross Account Replicas Fast</h2>
+<h3 id="prepaccountsrolesandkeys">Prep accounts roles and keys</h3>
+<ul>
+<li>Pick your Regions. Create destination AWS accounts: prod, staging, tenant, etc.</li>
+<li>In each account and Region, set up KMS keys for DynamoDB encryption.
+Grant cross-account usage to the source replication role.</li>
+<li>Ensure IAM permissions in both accounts to create or update tables
+and manage replicas.</li>
+<li>Turn on CloudTrail org trails and baseline CloudWatch alarms.
+You want visibility from day one.</li>
+</ul>
+<h3 id="createorupgradethetable">Create or upgrade the table</h3>
+<ul>
+<li>If starting fresh, create the table in your primary Region.
+Use on-demand or provisioned. Turn on PITR.</li>
+<li>If you have an existing global table, you can add replicas.
+If not, convert your table to global table v2.</li>
+<li>Validate GSIs, TTL, and Streams settings.
+Replicas inherit the model, so get it right early.</li>
+</ul>
+<h3 id="addreplicasacrossaccounts">Add replicas across accounts</h3>
+<ul>
+<li>In the console wizard, choose Add Region.
+Then pick the destination account and Region.
+Or use UpdateTable with ReplicaUpdates in code.</li>
+<li>DynamoDB handles backfill and starts ongoing replication.
+Watch CloudWatch metrics like ReplicationLatency and UserErrors.</li>
+<li>Confirm KMS key usage via CloudTrail.
+Make sure the right keys and grants are used.</li>
+</ul>
+<h3 id="handleconflictsandops">Handle conflicts and ops</h3>
+<ul>
+<li>Accept last-writer-wins or add Streams plus Lambda for domain logic.</li>
+<li>Test failover: write in one Region or account, read in another.
+Simulate a Region isolation.</li>
+<li>Document runbooks: break-glass IAM roles, key-rotation plans, and PITR restores.</li>
+<li>Practice restoring from PITR to a new table.
+Then re-attach it as a replica if needed.</li>
+</ul>
+<h3 id="exampledevtestprod">Example dev test prod</h3>
+<p>Dev writes to a staging account in us-east-1.
+Prod writes in eu-west-1. Both replicate to each other.
+They also replicate to a shared analytics account in us-west-2.
+Each account owns its cost center and IAM.
+Deploy risk in dev never blocks prod, while data stays globally reachable.</p>
+<h2 id="10minutecrossaccountquickstart">10 Minute Cross Account Quickstart</h2>
+<ul>
+<li>Choose Regions and target accounts: prod, staging, tenant-specific.</li>
+<li>Create or confirm KMS keys in each account; add cross-account grants.</li>
+<li>Ensure IAM roles can call CreateTable and UpdateTable
+and manage replicas in both accounts.</li>
+<li>Create or identify the source table; enable PITR and Streams.</li>
+<li>Add replicas in target accounts and Regions via console or API.</li>
+<li>Verify encryption, Streams status, and replication metrics.</li>
+<li>Implement conflict strategy: accept last-writer-wins or add a Lambda merge.</li>
+<li>Run a failover drill: write in one account or Region, read in another.</li>
+<li>Tag resources for cost allocation; set CloudWatch alarms per replica.</li>
+<li>Document runbooks and set a quarterly DR test.</li>
+</ul>
+<h2 id="faqyourspiciestquestionsanswered">FAQ Your Spiciest Questions Answered</h2>
+<h3 id="doescrossaccountchangeconsistency">Does cross account change consistency</h3>
+<p>No. Strong consistency is only for reads within the same Region replica.
+Across Regions, reads are eventually consistent. Cross-account doesn’t change that.</p>
+<h3 id="conflictresolutionacrossaccounts">Conflict resolution across accounts</h3>
+<p>Same as standard global tables: last-writer-wins using write timestamps.
+If you need smarter merges, like counters, use DynamoDB Streams plus Lambda.
+Do idempotent updates with a version attribute.</p>
+<h3 id="globaltablesvslocaltables">Global tables vs local tables</h3>
+<p>A local table lives in a single Region and account.
+It has no cross-Region replication.
+A global table spans Regions, and now accounts, for multi-active writes
+with managed replication and conflict handling.</p>
+<h3 id="globaltablespricingbasics">Global tables pricing basics</h3>
+<p>Writes fan out to every replica, so plan for replicated write capacity.
+Also plan for storage in each Region, Streams, and inter-Region data transfer.
+On-demand simplifies capacity, but not replication economics.
+Use TTL and smart access patterns to cut waste.</p>
+<h3 id="crossregionvsglobaltables">Cross Region vs global tables</h3>
+<p>Build your own only if you need custom event flows before writes land,
+and you can carry the extra complexity.
+For most OLTP use cases, global tables are simpler, faster, and safer at scale.</p>
+<h3 id="pointintimerecoverysupport">Point in time recovery support</h3>
+<p>Yes. Enable PITR per replica to restore to any second in the window.
+Restores occur in the Region and account where you run them.</p>
+<h3 id="globaltablesitemsizelimits">Global tables item size limits</h3>
+<p>No changes there. Item size caps and request limits are the same.
+Design for the 400 KB item size limit and keep items narrow.</p>
+<h3 id="pausereplicationtemporarily">Pause replication temporarily</h3>
+<p>There isn’t a pause switch. To stop replication to a Region, remove that replica.
+You can add it back later. DynamoDB will backfill from current state.</p>
+<h3 id="restoresandglobaltables">Restores and global tables</h3>
+<p>Restoring from PITR or a backup creates a new table in that Region.
+It is not a replica by default.
+Add it as a new replica or promote it through your plan if needed.</p>
+<h3 id="transactionsacrossregions">Transactions across Regions</h3>
+<p>Transactions commit atomically within a single Region.
+They replicate out as normal writes.
+If you need cross-Region coordination, layer it in your app
+using conditional writes, sagas, or queues.</p>
+<p><em>In short: cross-account global tables give you governance and blast-radius wins.</em>
+You keep the speed and simplicity that make DynamoDB shine.</p>
+<p><em>Your next move: map Regions to accounts, wire KMS and IAM, add replicas,
+and schedule a failover drill. You’ll sleep better. Your pager buzzes less.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html">Amazon DynamoDB Global Tables — Developer Guide</a></li>
+<li><a href="https://aws.amazon.com/dynamodb/pricing/">DynamoDB Pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PointInTimeRecovery.html">DynamoDB Point-in-Time Recovery — PITR</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html">Read and Write Capacity Modes — On-Demand and Provisioned</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html">DynamoDB Streams</a></li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/?whats-new-content-all.sort-by=item.additionalFields.postDateTime&amp;whats-new-content-all.sort-order=desc&amp;awsf.whats-new-content-all=product%23amazon-dynamodb">AWS What’s New — Amazon DynamoDB updates</a></li>
+<li><a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">AWS Organizations</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/metrics-dimensions.html">Amazon CloudWatch metrics for DynamoDB</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html">DynamoDB Transactions</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataExport.HowItWorks.html">Exporting DynamoDB table data to Amazon S3</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="dynamodb-global-tables-cross-account.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqa41d.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Slash+Risk+and+Latency+With+DynamoDB+Cross-Account+Global+Tables&amp;pi=313639789293&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=313639789293&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fdynamodb-global-tables-cross-account&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/dynamodb-global-tables-cross-account?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:55 GMT -->
+</html>

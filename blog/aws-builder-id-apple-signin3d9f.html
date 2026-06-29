@@ -1,0 +1,476 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-builder-id-apple-signin?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Sign in faster with AWS Builder ID using Apple</title>
+    <link rel="canonical" href="aws-builder-id-apple-signin.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Sign in with Apple streamlines aws builder id login and aws builder id sign up, hiding emails via relay for privacy. Enjoy faster AWS console and CLI access.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Sign in faster with AWS Builder ID using Apple",
+        "datePublished": "2026-02-10T22:47:51Z",
+        "dateModified": "2026-02-10T22:47:51.831Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-builder-id-apple-signin",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-10-2026-10-37-19-9851-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-builder-id-apple-signin.html">Sign in faster with AWS Builder ID using Apple</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 10, 2026 10:47:51 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>If you’ve ever wasted minutes on a password reset loop, this one stings.
+Verizon’s 2024 DBIR says 74% of breaches involve people today.
+Think stolen creds, sneaky phishing, and classic fat-finger errors during logins.
+<em>Passwords aren’t just annoying; they’re risky and expensive when things go wrong.</em></p>
+<p>Good news: AWS Builder ID now works with Sign in with Apple.
+Translation: fewer passwords, less PII exposure, and a smoother on-ramp for Apple-first users.
+Apple’s relay keeps your real email private, so apps see a proxy.
+Federation cuts friction, and still gives secure paths to console and CLI.
+No more duct-taping another login to your brain every week.</p>
+<p>If you’re optimizing your aws builder id login flow, this matters a lot.
+Maybe you’re deciding how to create aws builder id for your team.
+Or settling the “aws builder id vs aws account” debate for good.
+You get faster sign-in, better privacy defaults, and a dev experience your team won’t hate.</p>
+<p>And no, this won’t bulldoze your current setup, promise today.
+It plays nice with Google and Microsoft, and respects your identity policies.
+It slots into existing SSO flows without breaking your rules.
+It’s one more familiar door into the same secure house.
+Users move faster, and your security team keeps the keys.
+<em>Result: fewer support tickets, fewer resets, fewer uh-ohs overall.</em></p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Sign in with Apple now works with AWS Builder ID for easier, privacy-first auth.</li>
+<li>Apple’s relay hides your email; fewer passwords and less PII to manage.</li>
+<li>Plays nicely with Google/Microsoft options—pick what your team already uses.</li>
+<li>Faster path to AWS console and CLI via federated sign-ins (where enabled).</li>
+<li>Clear split: Builder ID is your personal profile; AWS account runs workloads.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-10-38-04-2474-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="awsbuilderid">AWS Builder ID</h2>
+<h3 id="builderidvsawsaccount">Builder ID vs AWS account</h3>
+<p>Let’s settle the “aws builder id vs aws account” mix-up in one line.
+An AWS Builder ID is your personal identity, full stop.
+An AWS account is where services run and bills get charged.
+Your Builder ID is tied to you, not one company or project.
+You can use it across learning tools, community sites, and allowed federated flows.
+Your AWS account remains the container for resources, IAM, and spend.</p>
+<ul>
+<li>Use Builder ID to manage your aws builder profile, join events, and tap learning resources.</li>
+<li>Use an AWS account to create resources (EC2, S3, Lambda), enforce policies, and track costs.</li>
+</ul>
+<h3 id="whereyouuseit">Where you use it</h3>
+<p>You’ll see Builder ID across AWS places like AWS re:Post and Skill Builder.
+With this update, you can also choose Sign in with Apple.
+It sits beside Google and Microsoft during aws builder id sign up or login.
+If your org uses federated sign-ins for console or CLI, Builder ID fits in.
+You get quicker access without juggling brand new credentials again.</p>
+<p><em>Bottom line: Builder ID travels with you across roles and seasons.</em>
+AWS accounts can change with teams and projects over time.
+That matters for contractors, learners, and multi-org developers bouncing between environments.</p>
+<h3 id="edgecasestoknow">Edge cases to know</h3>
+<ul>
+<li>Email relay and notifications: If you choose Apple’s “Hide My Email,” notifications still reach you.
+They’ll route through a private address that forwards to your inbox.
+If your company allowlists by domain, confirm those relayed emails won’t get filtered.</li>
+<li>Provider control: Your identity admin decides which providers can be used for console or CLI.
+Even if you add Apple to your Builder ID, access still depends on assigned roles.</li>
+<li>Recovery matters: Locking your Apple ID with MFA is great, but set recovery methods.
+Use trusted devices and recovery contacts, so you don’t lock yourself out.</li>
+<li>Multiple providers: Many users attach two or more providers, like Apple and Google.
+If one provider has issues, you’ve got a simple backup ready.</li>
+</ul>
+<h2 id="whysigninwithapple">Why Sign in with Apple</h2>
+<h3 id="privacybydesign">Privacy by design</h3>
+<p>Sign in with Apple uses a private relay to mask your actual email.
+Apple creates a unique, random address that forwards to your inbox.
+So your real email stays hidden from apps and services you use.
+Less exposed PII means fewer headaches if a vendor list leaks.
+Also, you’ll see less spam piling up over time too.
+It balances convenience with privacy in a way devs actually respect.
+<em>“Privacy is a fundamental human right.”</em> That’s Tim Cook, and it shows in defaults.</p>
+<h3 id="fasterforapplefirstteams">Faster for Apple first teams</h3>
+<p>If you live in Apple land, you already know the drill here.
+One tap with Face ID or Touch ID beats typing passwords, every time.
+Especially on a tiny laptop keyboard while screensharing with your boss.
+There are more than two billion active Apple devices out there.
+Optimizing for Apple isn’t niche anymore; it’s table stakes today.
+Adding Apple beside Google and Microsoft keeps control while staying familiar.</p>
+<p><em>Performance win: You shorten time-to-first-action for new and returning users.</em>
+<em>Conversion win: Fewer bounces at the login wall, plain and simple.</em>
+<em>Security win: Fewer credentials exist to phish, steal, or spray.</em></p>
+<h3 id="securitymechanicsinplainenglish">Security mechanics in plain English</h3>
+<ul>
+<li>OpenID Connect under the hood: Apple issues a signed ID token proving who you are, without passwords.</li>
+<li>Device-native auth: Face ID or Touch ID plus Apple ID MFA gives strong assurance it’s you.</li>
+<li>Data minimization: You share your name and real email or a private relay, nothing else.</li>
+<li>Fewer standing secrets: Short-lived AWS credentials shrink blast radius when something leaks, especially with federation.</li>
+</ul>
+<h3 id="accessibilityanduxperks">Accessibility and UX perks</h3>
+<ul>
+<li>Less context switching: Tap, approve, and you’re in within seconds, no fiddly steps.</li>
+<li>Lower cognitive load: No more “which password did I use here?” debates with yourself.</li>
+<li>Cross-device friendly: Works on Macs, iPhones, iPads, and the web without weird workarounds.</li>
+</ul>
+<h2 id="setitup">Set it up</h2>
+<h3 id="createyourawsbuilderid">Create your AWS Builder ID</h3>
+<p>If you’re new, choose aws builder id sign up and pick “Sign in with Apple.”
+You’ll approve the request with Face ID/Touch ID and choose whether to hide your email via Apple’s relay.
+That’s it—you’ve effectively created your aws builder profile without another password.
+If you already have a Builder ID, you can often add providers.
+Or switch providers from account settings and consolidate your login flow.</p>
+<p><em>Tip: Keep your Apple ID protected with strong MFA, always.</em>
+You just reduced your password surface area, now maximize the win.
+Use hardware-backed or device MFA for extra safety right.</p>
+<h3 id="useitinconsolecli">Use it in Console CLI</h3>
+<p>Console: If your org enables federated access, Builder ID joins the chain to console.
+You still need the right role assignments and permissions to do anything.
+Builder ID handles who you are; the AWS account decides what you can do.</p>
+<p>CLI: Modern flows use short-lived credentials instead of static keys for terminals.
+Configure the AWS CLI once, authenticate, and let it fetch temporary tokens.
+With federation enabled, you go from auth to action fast, no long-lived secrets.</p>
+<p><em>Pro move: Replace static access keys with SSO wherever possible.</em>
+It shrinks blast radius and boosts your security posture a lot.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-10-38-47-4024-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="mentalmodeloftheflow">Mental model of the flow</h3>
+<p>1) You click “Sign in with Apple” for your AWS Builder ID.
+2) Apple uses Face ID, Touch ID, and MFA to verify you, then returns a signed ID token.
+3) Your org’s identity system maps you to assigned roles there.
+4) For console: you assume a role and land in the AWS Management Console.
+5) For CLI: the AWS CLI exchanges authorization for short-lived credentials stored locally until they expire.</p>
+<h3 id="commoncligotchas">Common CLI gotchas</h3>
+<ul>
+<li>Multiple profiles: Use named profiles like dev, staging, and prod to avoid mix-ups.
+Run commands with --profile to be explicit and safe each.</li>
+<li>Default browser troubles: If the SSO window won’t open, set your preferred browser.
+Or use the device code flow when prompted by the CLI.</li>
+<li>Time drift: If your machine’s clock is off, token validation can fail.
+Sync your system time and try again right away.</li>
+<li>Expired sessions: If you see “the SSO session has expired,” re-authenticate with aws sso login --profile your-profile.</li>
+<li>Least privilege tests: If a command gets AccessDenied, check the role and policy first.
+It’s usually that, not the sign-in method at all.</li>
+</ul>
+<h2 id="securitycompliancecontrol">Security compliance control</h2>
+<h3 id="lessdatalowerrisk">Less data lower risk</h3>
+<p>Storing fewer credentials and less PII makes your security team smile.
+Apple’s relay hides the real email tied to your identity online.
+Centralized auth reduces the number of passwords you must maintain.
+Short-lived session tokens limit reuse if anything leaks or gets stolen.
+That hits a big chunk of risk from human error and credential theft.</p>
+<p>From a compliance lens, you’re leaning into data minimization principles.
+Collect only what you need to authenticate and authorize users.
+You get tighter scoping in reviews and fewer noisy tracking sheets.
+No more guessing where personal emails might live across systems.</p>
+<p>If you’re also building privacy-safe measurement on Amazon, explore our <a href="../amc-cloud.html">AMC Cloud</a>.
+It’s a managed path into Amazon Marketing Cloud that avoids raw PII handling.</p>
+<h3 id="auditandrevokefast">Audit and revoke fast</h3>
+<p>Identity events tied to console access are logged across your AWS stack.
+Federated sign-ins can be monitored with your existing logging tools too.
+If a contractor leaves, disable their identity once, and access evaporates.
+If a device is lost, lean on Apple and org policies to block access.</p>
+<p>You still need strong role design, least-privilege policies, and solid alerting.
+This update won’t fix bad IAM, but it reduces credential sprawl a lot.
+It also makes “who did what, when” much easier to answer.</p>
+<h3 id="frameworksandpolicies">Frameworks and policies</h3>
+<ul>
+<li>Least privilege: Assign only the roles and permissions a user needs for the task at hand.</li>
+<li>Data minimization: Share the smallest personal data needed, like relay emails, to meet GDPR’s “adequate, relevant, and limited” standard.</li>
+<li>Short-lived credentials: Prefer temporary tokens over long-term access keys; rotate and scope access tightly.</li>
+<li>Monitoring and response: Use CloudTrail to answer “who did what, when,” and alert on unusual sign-in or role-assumption patterns.</li>
+</ul>
+<h3 id="whattomeasure">What to measure</h3>
+<ul>
+<li>Track login success rate and time-to-first-action after sign-up closely too.</li>
+<li>Measure password reset volume; it should drop as federation adoption rises.</li>
+<li>Count standing access keys; trend should drop toward zero for humans.</li>
+<li>Watch support tickets tied to auth and access for faster resolutions.</li>
+<li>Track mean time to revoke access for departures and contractors.</li>
+</ul>
+<h2 id="realworldplays">Real world plays</h2>
+<h3 id="externalcollaboratorsmadeeasy">External collaborators made easy</h3>
+<p>You invite a contractor for a six-week migration project.
+They don’t need another username or password to get started.
+They enroll with Sign in with Apple under their AWS Builder ID.
+Your Identity Center assigns a scoped role, and they’re productive in minutes.
+When the engagement ends, you remove the assignment, and access is gone.
+You didn’t add another long-lived identity to your password vault.</p>
+<h3 id="developerexperiencethatsticks">Developer experience that sticks</h3>
+<p>For leaders, this is measurable in numbers you can defend.
+Faster onboarding, fewer tickets about lost passwords, and fewer policy exceptions.
+For developers, it’s a vibe that really sticks day to day.
+One-tap login, a CLI that just works, and one personal identity.
+It follows you across Skill Builder, re:Post, and allowed access flows.</p>
+<p>If you’ve standardized on Google or Microsoft, adding Apple won’t fragment things.
+Honestly, it completes your options and rounds out the lineup.
+Your Apple-first teammates can use the device-native flow they already trust.
+Meanwhile your governance model stays intact and consistent throughout.</p>
+<h3 id="handsonlabsandhackathons">Hands on labs and hackathons</h3>
+<p>Spin up a temporary sandbox account for your event or workshop.
+Map a “LabUser” role with read-only and a few scoped write perms.
+Let participants sign in with Apple using their Builder ID accounts.
+You get:</p>
+<ul>
+<li>Fast onboarding at the door (no forms, no manual passwords).</li>
+<li>Contained permissions that expire when the event ends automatically too.</li>
+<li>Clean audit trails per participant, even across shared projects today.</li>
+</ul>
+<h3 id="sideprojectsandlearningsandboxes">Side projects and learning sandboxes</h3>
+<p>Tinkering with a new AWS service after dinner this week?
+Keep your personal Builder ID and use federated access to a “Playground” account.
+Avoid sprinkling static keys across your laptop or random scripts.
+If the project grows up, promote it to a new account.
+Then reassign roles, no identity redo required at all later.</p>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>Builder ID is personal; AWS accounts run workloads and hold permissions.</li>
+<li>Sign in with Apple adds privacy via email relay and device-native MFA.</li>
+<li>Federated sign-in enables console and CLI access with short-lived tokens.</li>
+<li>Less PII plus fewer passwords equals smaller attack surface and fewer resets.</li>
+<li>Add Apple alongside Google and Microsoft to meet users where they are.</li>
+</ul>
+<p><em>If you hit those five notes, you’ll feel it fast.</em>
+Smoother onboarding, happier devs, and fewer late-night password resets tonight.</p>
+<h2 id="youaskedweshippedfaqs">You asked we shipped FAQs</h2>
+<h3 id="whatisawsbuilderid">What is AWS Builder ID</h3>
+<p>It’s your personal identity for AWS builder services like learning and community.
+Where organizations enable it, it’s also a path into federated console and CLI access.
+Think of it as a persistent profile not tied to one company account.</p>
+<h3 id="builderidvsawsaccount-1">builder id vs aws account</h3>
+<p>Your AWS account is the container for resources, permissions, and billing.
+Your AWS Builder ID is about who you are across AWS properties.
+You still need proper roles in an AWS account to manage resources.</p>
+<h3 id="signinwithapple">Sign in with Apple</h3>
+<p>Yes, you can use it during aws builder id sign up.
+Choose Apple as your provider when the option appears there.
+You can hide your email using Apple’s relay for extra privacy.
+Your real address stays private while messages still reach you.</p>
+<h3 id="workwithawscli">Work with AWS CLI</h3>
+<p>Yes, when your organization enables federated sign-in and assigns you roles.
+Configure the CLI once, then authenticate with your chosen provider.
+It will fetch short-lived credentials automatically after you sign in.</p>
+<h3 id="changeidentityproviders">Change identity providers</h3>
+<p>You can often add or switch providers in your Builder ID settings.
+If your org manages access, they control which providers are accepted for console or CLI.
+Your access depends on the roles they assign, not which button you click.</p>
+<h3 id="alongsidegoogleandmicrosoft">Alongside Google and Microsoft</h3>
+<p>Yes, Sign in with Apple is available alongside Google and Microsoft.
+Teams can pick the provider that fits their ecosystem without losing control.</p>
+<h3 id="signinwithappledata">Sign in with Apple data</h3>
+<p>By default, it shares your name and your real email or a relay.
+No password is shared with apps, and you control email exposure.</p>
+<h3 id="workonnonappledevices">Work on non Apple devices</h3>
+<p>Yes, it works on the web across non-Apple devices.
+Use supported browsers on Windows or Linux without any hacks.
+You’ll still approve with Apple ID credentials and MFA as usual.</p>
+<h3 id="caniunlinkapplelater">Can I unlink Apple later</h3>
+<p>Generally, yes, you can manage sign-in methods in Builder ID settings.
+For console and CLI, your identity admin decides which providers are allowed.</p>
+<h3 id="costforfederatedsignin">Cost for federated sign in</h3>
+<p>There’s no extra charge for AWS IAM Identity Center in this use.
+You pay for the AWS resources you use, not for sign-in.
+Role assignments and access management are available at no extra cost.</p>
+<h3 id="applerelayemailallowlists">Apple relay email allowlists</h3>
+<p>It can, if your process relies on exact personal email matching.
+Two fixes help right away.
+Allowlist the relay domain pattern your org receives from Apple.
+Or key internal records off a unique ID instead of an email.
+For example, try a user ID linked to that identity.</p>
+<h2 id="rolloutgameplan">Rollout game plan</h2>
+<ul>
+<li>Create aws builder id or log in; add Apple as your provider during sign up.</li>
+<li>Choose “Hide My Email” for extra privacy via Apple’s relay.</li>
+<li>Enable MFA on your Apple ID and your Builder ID for layered security.</li>
+<li>Ask your org admin to confirm federated console/CLI access is enabled and roles assigned.</li>
+<li>Configure AWS CLI for SSO-based login; test a role with least privilege.</li>
+<li>Document the flow for your team (screenshots + steps) to cut support tickets.</li>
+</ul>
+<p>If login is where your dev experience starts, make it invisible here.
+Less friction, more shipping, and fewer blocked mornings for teams.
+You get privacy by default and keep governance fully intact.
+That’s the rare win-win in identity: better UX with stronger security.
+Your next move: consolidate providers and enable short-lived credentials now.
+Then standardize on one press-the-button flow your team can’t mess up.
+Want to see real teams doing privacy-safe identity and measurement?
+Browse our <a href="../case-studies.html">Case Studies</a> to see how they ship this in production.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.verizon.com/business/resources/reports/dbir/">Verizon 2024 Data Breach Investigations Report</a></li>
+<li><a href="https://developer.apple.com/sign-in-with-apple/">Apple Developer: Sign in with Apple overview</a></li>
+<li><a href="https://support.apple.com/en-us/HT210318">Apple Support: Use Sign in with Apple (email relay explained)</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html">AWS CLI: Configure SSO for the AWS CLI</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">AWS IAM Identity Center (Overview)</a></li>
+<li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-activity.html">AWS CloudTrail: Logging and monitoring user activity</a></li>
+<li><a href="https://skillbuilder.aws/">AWS Skill Builder (sign-in surface for Builder ID)</a></li>
+<li><a href="https://repost.aws/">AWS re:Post (community surface for Builder ID)</a></li>
+<li><a href="https://www.reuters.com/technology/apple-says-installed-base-surpasses-22-billion-active-devices-2024-02-01/">Reuters: Apple says installed base surpasses 2.2 billion active devices (Feb 2024)</a></li>
+<li><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">GDPR Article 5(1)(c) – Data minimization principle (EUR-Lex)</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html">AWS IAM best practices (use temporary credentials)</a></li>
+<li><a href="https://aws.amazon.com/iam/identity-center/pricing/">AWS IAM Identity Center pricing (no additional charge)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-builder-id-apple-signin.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqa748.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Sign+in+faster+with+AWS+Builder+ID+using+Apple&amp;pi=313635104456&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=313635104456&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-builder-id-apple-signin&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-builder-id-apple-signin?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:55 GMT -->
+</html>

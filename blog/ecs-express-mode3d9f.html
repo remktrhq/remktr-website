@@ -1,0 +1,360 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/ecs-express-mode?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Launch Production Containers Fast with Amazon ECS Express Mode</title>
+    <link rel="canonical" href="ecs-express-mode.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Amazon ECS Express Mode lets you launch containerized apps—go from image to HTTPS URL fast. Build production-ready apps without infrastructure complexity.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Launch Production Containers Fast with Amazon ECS Express Mode",
+        "datePublished": "2025-11-22T20:40:38Z",
+        "dateModified": "2025-11-22T20:40:38.822Z",
+        "mainEntityOfPage": "https://remktr.com/blog/ecs-express-mode",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-22-2025-08-33-49-7815-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="ecs-express-mode.html">Launch Production Containers Fast with Amazon ECS Express Mode</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 22, 2025 8:40:38 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You keep wiring load balancers, IAM roles, and scaling rules instead of features. Sound familiar? What if you could go from a container image to a live HTTPS endpoint in minutes, not days, with AWS best practices built in?</p>
+<p>Enter Amazon ECS Express Mode. One command, one flow, and AWS builds the boring but critical stuff for you. Networking, security groups, auto scaling, load balancing, and a shareable URL. You hand it a container image, a couple roles, and boom — your app runs on Fargate.</p>
+<p><em>This isn’t a toy.</em> It uses production-grade defaults, created inside your account, with knobs you can tweak later. So you move fast now without painting yourself into a corner later.</p>
+<p><em>Ready to ship more, ticket less, and sleep better?</em> Let’s break down how to go from image to HTTPS with basically no ops hassle.</p>
+<p>If you’re a small team, a platform engineer building paved roads, or a solo dev who just wants “URL now, tune later,” this mode is your fast lane. Keep reading for what gets created, what you still own, and how to optimize day one.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Go from container image to HTTPS endpoint in minutes with ECS Express Mode.</li>
+<li>AWS automates networking, ALB with health checks, auto scaling, and roles.</li>
+<li>Works for public or private HTTPS apps; scales on utilization.</li>
+<li>No extra fee for Express Mode. Pay only for underlying AWS resources.</li>
+<li>You keep full access to all resources in your AWS account.</li>
+<li>Ideal for small teams, APIs, prototypes, and self-serve platform workflows.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-22-2025-08-35-01-5331-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="fromimagetohttps">From image to HTTPS</h2>
+<h3 id="whatexpressmodepicks">What Express Mode picks</h3>
+<p>Express Mode automates the heavy lifting so you can focus on your app. Behind the scenes, it provisions an Amazon ECS service on AWS Fargate. It attaches an Application Load Balancer with health checks, configures security groups and networking, and sets up auto scaling on utilization. It also generates a domain with an AWS-provided URL so you can hit your app right away.</p>
+<p>The best part: these are sensible, production-friendly defaults. ECS on Fargate means no servers to patch. ALB gives you layer 7 routing, built-in health checks, and TLS termination. Auto scaling policies react to CPU utilization out of the box, so you don’t babysit traffic spikes.</p>
+<p>Under the hood, the pieces line up like a normal web stack. A VPC with subnets, an ECS service with a task definition, target groups, and an HTTPS listener on the ALB. The health check endpoint you choose becomes the source of truth for readiness. If a task fails, ALB stops sending requests there, and the service replaces it. That’s resilience by default.</p>
+<p>For networking, ALBs require subnets in at least two Availability Zones. So the created wiring follows AWS guidance for high availability. Security groups are scoped to allow 443 from the right sources and to let the service reach its dependencies. You still control outbound access and can add more restrictions as you go.</p>
+<h3 id="whatyouprovide">What you provide</h3>
+<p>You bring a container image, and Amazon ECR works great. You also bring a task execution role and an infrastructure role. If those IAM roles don’t exist yet, Express Mode can create them using AWS-managed policies. Minimal inputs with maximum leverage.</p>
+<p>If your app needs to call other AWS services like S3, DynamoDB, or SQS, add a task role later. Grant only the least-privileged permissions your code needs. Keep the task execution role focused on pulling images from ECR and writing logs to CloudWatch. That separation keeps you safe and audit-friendly.</p>
+<p>Also provide a health check path that reflects real readiness. For a REST API, maybe /healthz hits the database and cache. For a frontend, it might verify the app server can read from storage. Health checks that mirror reality make traffic routing smarter.</p>
+<h3 id="theconsoletimelineexperience">The console timeline experience</h3>
+<p>In the AWS console, you’ll see a timeline view as resources spin up. VPC wiring, security groups, ECS service creation, ALB config, target groups, listener rules, and DNS mapping. When it’s done, you get a URL. Click it. Your app is live.</p>
+<p>While the timeline runs, watch CloudWatch logs for your task to confirm the container started cleanly. If health checks fail, the console points to the failing stage. You can fix the path, the container port, or your startup logic without guesswork.</p>
+<p>If you prefer infrastructure as code later, model the same resources in CDK, CloudFormation, or Terraform. Reference the Express-created resources to stay consistent. Keep velocity now and move to repeatable IaC as your team grows.</p>
+<h2 id="whythismatters">Why this matters</h2>
+<h3 id="fewerticketsmorecommits">Fewer tickets more commits</h3>
+<p>Express Mode compresses a multi-service setup into a single flow. That means fewer Slack pings to platform teams and fewer infrastructure rabbit holes for developers. You become shippable in hours, not sprints. For teams doing trunk-based development or feature flags, this is huge. Your feedback loops get tighter.</p>
+<p>Less yak-shaving also helps QA and product. A staging URL in minutes means real user tests and real payloads. You catch bugs earlier. The faster you iterate, the less you over-engineer. Shipping small, safe changes becomes the default.</p>
+<h3 id="bestpracticesbydefault">Best practices by default</h3>
+<p>You get AWS’s battle-tested blueprint without reinventing the wheel. ALB with health checks, security groups with least-privilege openings, and utilization-based scaling. The defaults are designed to be production-ready for web apps and APIs. As AWS states about Fargate, you pay only for the resources you use. Nice match on cost and performance.</p>
+<p>And because the building blocks are standard AWS services, you get proven features when you need them. TLS termination with ACM certificates, stickiness if a session needs it, and graceful deployments with health-checked rollouts. No snowflake stack. No mystery control plane.</p>
+<h3 id="scaleswhenyoudo">Scales when you do</h3>
+<p>Traffic spikes? Auto scaling handles it. With task-level isolation on Fargate and ALB distributing requests, you avoid noisy neighbors and keep resilience. The setup supports public and private HTTPS endpoints. So whether you expose a public API or an internal admin panel, you’re covered.</p>
+<p><em>Pro tip:</em> use health check paths that exercise critical dependencies. A shallow 200 OK on root is easy. A deeper check that pings your DB or cache makes the autoscaler smarter.</p>
+<p>Another smart move: add target tracking on requests per target using ALB metrics if CPU isn’t the bottleneck. Many APIs are I/O bound, not CPU bound. Scale on the signal that matches your bottleneck to avoid over or under scaling.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-22-2025-08-36-18-2802-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="notlockedin">Not locked in</h2>
+<h3 id="fullvisibilityinyouraccount">Full visibility in your account</h3>
+<p>Everything Express Mode creates lives in your AWS account. You can see it in the console and manage it via APIs and IaC. Inspect ECS tasks, tweak ALB listeners, view CloudWatch logs and metrics, and adjust scaling thresholds. No black boxes.</p>
+<p>You can also enable access logs on the ALB and set log retention in CloudWatch. Add alarms for error rates or latency. If something breaks, you’re not guessing. You have the same dials and dashboards you’d expect from a hand-built stack.</p>
+<h3 id="overridethedefaults">Override the defaults</h3>
+<p>Need path-based routing or multiple listeners? Add ALB rules. Want a more aggressive scale-out policy tied to requests per target? Tune Service Auto Scaling. Want to swap the AWS-provided URL for your own domain and TLS cert? Add an ACM certificate and update the listener.</p>
+<p>If you run multiple apps behind one load balancer, create more target groups and listener rules. Split traffic by path or host header. For internal-only services, use an internal ALB, lock inbound rules to your corporate CIDR, and layer IAM where appropriate.</p>
+<h3 id="whentodroptoadvanced">When to drop to advanced</h3>
+<p>If you need service mesh, cross-account networking, private link exposure, or deep IAM boundary controls, start with Express Mode to ship fast. Then graduate to custom ECS configurations as your needs evolve. The path is smooth because you’re building on standard ECS, ALB, IAM, and CloudWatch primitives. Not a bespoke control plane.</p>
+<p><em>Reality check: simplicity up front, flexibility later.</em> That’s the right kind of lock-in — to your own account and AWS’s well-trodden services.</p>
+<h3 id="securityandsecretswithoutdrama">Security and secrets without drama</h3>
+<p>Security doesn’t have to mean slow. Use AWS Secrets Manager or Systems Manager Parameter Store for database passwords, API keys, and tokens. Mount them as environment variables in the task definition, and grant the task role read-only access. Rotate secrets on a schedule, and your tasks pull the latest on restart.</p>
+<p>If your app is public-facing, consider putting AWS WAF in front of the ALB. It helps filter common attacks. For DDoS protection, AWS Shield Standard is always on for ALB. Shield Advanced is an option for larger footprints.</p>
+<h2 id="pricingrealitycheck">Pricing reality check</h2>
+<h3 id="noexpresssurcharge">No Express surcharge</h3>
+<p><em>Express Mode itself is free.</em> You pay for the underlying components. AWS Fargate compute, Application Load Balancer hours and LCU usage, CloudWatch logs and metrics, and data transfer. The bill maps directly to your architecture.</p>
+<h3 id="thecostdrivers">The cost drivers</h3>
+<ul>
+<li>Compute: Fargate vCPU and memory per task, per second, with a 1-minute minimum.</li>
+<li>Load balancing: ALB hours and LCUs. They include new connections, active connections, processed bytes, and rule evaluations.</li>
+<li>Observability: CloudWatch logs ingestion and storage, metrics, and optional alarms.</li>
+<li>Networking: data transfer and NAT gateway if applicable.</li>
+</ul>
+<h3 id="keepthebilltidy">Keep the bill tidy</h3>
+<p>Right-size CPU and memory. Many web APIs do great on modest footprints. Tune auto scaling to scale to zero in dev environments, and keep minimum tasks low in staging. Aggregate logs wisely and set retention policies. If you don’t need public exposure, use private HTTPS to avoid egress where possible.</p>
+<p>Use AWS pricing calculators to forecast costs and run a smoke test under expected load. Small tweaks on task size and scaling thresholds can cut spend by double digits without performance trade-offs.</p>
+<p>For non-critical environments, consider Fargate Spot to save on compute when capacity is available. Keep desired count at 0 when idle, and use CI/CD to scale up for tests. Then scale back down when done. Observability can add up too. Send only the logs you need and drop verbose debug logs after a short retention window.</p>
+<h2 id="10minutewalkthrough">10 minute walkthrough</h2>
+<h3 id="prereqs">Prereqs</h3>
+<ul>
+<li>A container image in Amazon ECR with a healthy port exposed.</li>
+<li>Permissions to create IAM roles and ECS resources in your AWS account.</li>
+<li>An understanding of your app’s health check path, resource needs, and desired exposure, public or private.</li>
+</ul>
+<h3 id="deployintheconsole">Deploy in the console</h3>
+<ul>
+<li>Open the Amazon ECS console and choose Express Mode.</li>
+<li>Select your ECR image and tag.</li>
+<li>Pick existing IAM roles for task execution and infrastructure, or let Express Mode create them using AWS-managed policies.</li>
+<li>Choose public or private HTTPS exposure.</li>
+<li>Confirm CPU and memory for the task and the target group health check path.</li>
+<li><em>Click Create.</em> Watch as ECS, Fargate, ALB, security groups, and DNS come online.</li>
+</ul>
+<h3 id="validateanditerate">Validate and iterate</h3>
+<ul>
+<li>Hit the provided URL. Validate cold starts, throughput, and error paths.</li>
+<li>Check CloudWatch logs for startup messages and health check results.</li>
+<li>Tune auto scaling thresholds if CPU isn’t the best proxy for your workload. Consider target tracking on requests per target via ALB metrics.</li>
+<li>Wire CI/CD to push new image tags to ECR and trigger rolling updates in ECS. You now have a clean deploy loop.</li>
+</ul>
+<h3 id="qualitygatesdayone">Quality gates day one</h3>
+<ul>
+<li>Add CloudWatch alarms for p95 latency, 5xx rate, and unhealthy host count.</li>
+<li>Enable ALB access logs to S3 if you need request-level analytics or audits.</li>
+<li>Set log retention policies so verbose logs don’t become a surprise bill.</li>
+<li>Create a runbook for rollbacks: previous task definition revision, then deploy.</li>
+<li>Add a simple load test to ensure your health checks and scaling work as expected.</li>
+</ul>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>You bring a container image; Express Mode builds the rest.</li>
+<li>ECS on Fargate, ALB, auto scaling, and an AWS-provided HTTPS URL are included.</li>
+<li>Public or private exposure supported; defaults are production-friendly.</li>
+<li>Full control remains with you — all resources live in your account.</li>
+<li>No extra fee for Express Mode; you pay for compute, ALB, logs, and transfer.</li>
+<li>Start simple, then customize routing, scaling, and domains as needs grow.</li>
+</ul>
+<h2 id="ecsexpressmodefaq">ECS Express Mode FAQ</h2>
+<h3 id="owndomainandtls">Own domain and TLS</h3>
+<p>Yes. Express Mode gives you an AWS-provided URL to start, and you can later attach your own domain by adding an ACM certificate and updating the ALB listener to use it. Point your DNS, like Route 53, at the ALB with an alias record.</p>
+<h3 id="privateappsinternalapis">Private apps internal APIs</h3>
+<p>Yes. You can configure private HTTPS endpoints, keeping traffic inside your VPC. This is useful for internal tools, back-office services, or partner-only integrations. Combine with security group rules and IAM for strong access control.</p>
+<h3 id="lockedoutofresources">Locked out of resources</h3>
+<p>No. Every component is created in your AWS account. You can inspect, modify, and extend ECS services, task definitions, ALB listeners and rules, security groups, and scaling policies via the console, CLI, or Infrastructure as Code.</p>
+<h3 id="updatesandrollouts">Updates and rollouts</h3>
+<p>Push a new image tag to ECR and update the ECS service. ECS performs a rolling deployment with health checks through ALB. You can tune minimum healthy and maximum percent to control blast radius. For canaries or blue/green, add another target group and listener rules.</p>
+<h3 id="dayonemetrics">Day one metrics</h3>
+<p>Watch task CPU and memory utilization, ALB target response time, 5xx rate, and healthy host counts. In CloudWatch, set alarms on error ratios and p95 latency. For steady workloads, consider scaling on requests per target rather than CPU alone.</p>
+<h3 id="vpcpeeringservicemesh">VPC peering service mesh</h3>
+<p><em>Start on Express Mode to move fast.</em> Then evolve to custom ECS setups with VPC peering, private link, or a mesh. Since Express Mode builds on standard ECS and ALB, you’re not boxed in. You’re standing on a stable foundation.</p>
+<h3 id="handlesecretsandconfig">Handle secrets and config</h3>
+<p>Store secrets in AWS Secrets Manager or Parameter Store. Grant your task role read access to the specific parameters or secrets and load them as environment variables. Keep non-secret config in plain environment variables or a config file baked into the image.</p>
+<h3 id="exportormirrorsetupiac">Export or mirror setup IaC</h3>
+<p>Yes. Recreate the service with AWS CDK, CloudFormation, or Terraform by referencing the same container image, networking, and load balancer settings. Transition incrementally. Manage scaling policies or listeners as code while leaving the rest as-is.</p>
+<h3 id="runmultipleenvironments">Run multiple environments</h3>
+<p>Use separate services, and optionally separate clusters or VPCs, for dev, staging, and prod. Each service gets its own target group and URL. Keep IAM roles scoped per environment and vary desired count, scaling, and log retention by stage.</p>
+<h3 id="commongotchastoavoid">Common gotchas to avoid</h3>
+<ul>
+<li>Health check path returns 301 or 302 without following redirects. ALB treats that as unhealthy. Return a 200.</li>
+<li>Container listens on a different port than the target group expects. Align them.</li>
+<li>Security group egress blocked, so the task can’t reach dependencies or pull containers through NAT. Open what you need.</li>
+<li>CPU-based scaling on an I/O-bound API. Use requests per target instead.</li>
+</ul>
+<h3 id="rollbackfast">Roll back fast</h3>
+<p>Keep the previous task definition revision handy. In ECS, update the service to that revision and let ALB health checks handle traffic shifting. You can also pin to a stable image tag, then redeploy.</p>
+<h3 id="comparelambdaorapprunner">Compare Lambda or App Runner</h3>
+<ul>
+<li>Lambda: great for event-driven or spiky workloads with short tasks. If you already have containers and need fine-grained networking or long-lived processes, ECS on Fargate fits better.</li>
+<li>App Runner: also gets you from container to URL fast. ECS offers more control over networking, scaling policies, and integration with VPC primitives. Express Mode narrows the setup gap while keeping ECS flexibility.</li>
+</ul>
+<h2 id="shipyourfirstservicetoday">Ship your first service today</h2>
+<ul>
+<li>Put your container in Amazon ECR with a clear health check path.</li>
+<li>Open ECS Express Mode, select the image, and choose or auto-create the IAM roles.</li>
+<li>Pick public or private HTTPS, confirm task size, and click Create.</li>
+<li>Validate via the provided URL, check CloudWatch logs, and tweak health checks.</li>
+<li>Tune auto scaling and add your own domain with ACM when ready.</li>
+<li>Wire your CI/CD to update the ECS service on new image tags.</li>
+</ul>
+<p>In a world where platform complexity keeps creeping up, Express Mode gives you a shortcut without the hangover. You get production-grade defaults today and the freedom to customize tomorrow. Start with the basics — an image and a couple roles — and let AWS assemble the scaffolding. Fargate, ALB, scaling, and secure endpoints included. Once you’re live, iterate on what matters. Latency, reliability, and the product itself. The fastest teams don’t avoid infrastructure; they automate it and move on. That’s the point here.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/ecs/">Amazon ECS product page</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html">AWS Fargate overview</a></li>
+<li><a href="https://aws.amazon.com/fargate/pricing/">AWS Fargate pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html">Elastic Load Balancing – Application Load Balancer</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html">ALB HTTPS listener setup</a></li>
+<li><a href="https://aws.amazon.com/elasticloadbalancing/pricing/">Elastic Load Balancing pricing</a></li>
+<li><a href="https://aws.amazon.com/cloudwatch/pricing/">CloudWatch pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-autoscaling.html">Amazon ECS Service Auto Scaling</a></li>
+<li><a href="https://aws.amazon.com/ecr/">Amazon ECR product page</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">IAM managed policies explained</a></li>
+<li><a href="https://aws.amazon.com/waf/">AWS WAF overview</a></li>
+<li><a href="https://aws.amazon.com/secrets-manager/">AWS Secrets Manager</a></li>
+<li><a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS Systems Manager Parameter Store</a></li>
+<li><a href="https://aws.amazon.com/shield/">AWS Shield</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html">Elastic Load Balancing access logs</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html">Amazon CloudWatch metrics and alarms</a></li>
+<li><a href="https://calculator.aws/">AWS Pricing Calculator</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html">Amazon ECS deployment configuration (minimum healthy percent)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="ecs-express-mode.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqc4a8.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Launch+Production+Containers+Fast+with+Amazon+ECS+Express+Mode&amp;pi=263710328511&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=263710328511&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fecs-express-mode&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/ecs-express-mode?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:31:33 GMT -->
+</html>

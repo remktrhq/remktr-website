@@ -1,0 +1,384 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/ecs-managed-instances-spot?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Cut Container Spend With ECS Managed Instances On Spot</title>
+    <link rel="canonical" href="ecs-managed-instances-spot.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Amazon ECS Managed Instances with EC2 Spot Instances help cut costs up to 90% vs On-Demand pricing. Run fault-tolerant containers as AWS manages scaling.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cut Container Spend With ECS Managed Instances On Spot",
+        "datePublished": "2026-01-05T21:53:17Z",
+        "dateModified": "2026-01-05T21:53:18.132Z",
+        "mainEntityOfPage": "https://remktr.com/blog/ecs-managed-instances-spot",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-05-2026-09-46-24-8558-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="ecs-managed-instances-spot.html">Cut Container Spend With ECS Managed Instances On Spot</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 5, 2026 9:53:17 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’re probably paying too much for containers. Like, way too much. Here’s the kicker: you can cut <em>up to 90% off compute</em> by running Amazon ECS Managed Instances on EC2 Spot. Same workloads. Same AWS backbone. Just smarter capacity.</p>
+<p>And now it’s turnkey. AWS handles the undifferentiated heavy lifting—scaling, patching, maintenance—so you can run fault-tolerant tasks (batch, CI/CD, analytics, ML training) on discounted, spare EC2 capacity without babysitting servers.</p>
+<p>If you’ve tested Fargate Spot but need more control, or you rolled your own EC2 + ECS capacity provider setup and hated the toil, this is your middle path: managed EC2 control with Spot economics and ECS simplicity.</p>
+<p>The net: your jobs don’t care where they run as long as they finish on time. With ECS Managed Instances on Spot, they run cheaper—much cheaper.</p>
+<p>Think of it like flying standby for compute—you still land at the same airport, you just paid a fraction of the ticket price. If your jobs can handle a brief restart and you design for it, you’re golden. This guide breaks down how to use Amazon ECS Managed Instances on EC2 Spot, where it shines, and how to avoid gotchas.</p>
+<ul>
+<li><p>TL;DR</p></li>
+<li><p>Run Amazon ECS Managed Instances on EC2 Spot for up to 90% savings vs On-Demand.</p></li>
+<li><p>Best for fault-tolerant tasks: batch, CI/CD, data pipelines, ML/AI training.</p></li>
+<li><p>Mix Spot + On-Demand via ECS capacity providers to balance reliability and cost.</p></li>
+<li><p>ECS handles scaling, patching, and maintenance so you focus on apps.</p></li>
+<li><p>Consider Fargate Spot for zero-infra; use Managed Instances for control/perf.</p></li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-47-13-6866-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="meetthemove">Meet the move</h2>
+<h3 id="whatthisactuallyis">What this actually is</h3>
+<p>Amazon ECS Managed Instances brings AWS-managed infrastructure to ECS on EC2. AWS handles provisioning, scaling, and routine maintenance of the instance fleet behind your ECS cluster. Pair that with EC2 Spot Instances—spare capacity at steep discounts—and you get elastic, low-cost compute for containers without wrangling autoscaling.</p>
+<p>AWS’s own docs emphasize the model: Spot provides “up to 90% discounts” with a “<em>two-minute interruption notice</em>” before an instance is reclaimed. Translation: you get extreme savings for workloads that can retry, checkpoint, or tolerate brief restarts.</p>
+<p>Under the hood, you’re still using familiar building blocks—Auto Scaling groups, capacity providers, task definitions—but with a lot less toil. Managed scaling nudges your Auto Scaling group to match task demand, and ECS keeps placing tasks while draining instances marked for termination. You get the control of EC2 with the ergonomics of ECS.</p>
+<p>Here’s the mental model:</p>
+<ul>
+<li>You define two pools of capacity: On-Demand and Spot.</li>
+<li>ECS capacity providers connect your cluster to those pools and understand how to scale them up or down.</li>
+<li>You set a default strategy (base + weights) so the scheduler spreads tasks the way you want.</li>
+<li>When Spot capacity gets reclaimed, ECS drains gracefully and retries tasks per your rules.</li>
+</ul>
+<p><em>This isn’t a science project.</em> It’s a pattern AWS has documented for years: use multiple capacity pools, plan for interruptions, and let the scheduler do the heavy lifting.</p>
+<h3 id="whyitmattersrightnow">Why it matters right now</h3>
+<ul>
+<li>AI and agentic workflows are bursty. You train, you fine-tune, you batch-infer, you iterate. Spot is perfect for the spiky parts.</li>
+<li>Data engineering windows are bounded. ETL, feature stores, nightly compactions—these don’t need 24/7 guarantees; they need to finish by morning. Spot thrives here.</li>
+<li>CI/CD is inherently fault-tolerant. If a test runner restarts, your pipeline grumbles but moves on. Why pay On-Demand rates for that?</li>
+</ul>
+<p>If you’ve avoided Spot because the infra glue felt fragile, ECS Managed Instances eliminates most of that friction. You focus on tasks and capacity strategy, not patch baselines and instance drains.</p>
+<p>References to dig deeper: EC2 Spot overview (up to 90% off) and ECS capacity providers for mixing capacity sources.</p>
+<p>Bonus: you can bring broad instance menus into your Spot pool (multiple families, sizes, generations). The more pools you allow, the higher your odds of getting capacity at the best price when you need it.</p>
+<h2 id="ecsmanagedinstancesvsfargate">ECS Managed Instances vs Fargate</h2>
+<h3 id="thebigquestion">The big question</h3>
+<p>When should you choose Amazon ECS Managed Instances vs Fargate (including Fargate Spot)? Here’s the quick lens:</p>
+<ul>
+<li>Control and performance: Managed Instances give you instance-level control (families, sizes, EBS, networking, GPUs). That matters for ML training, I/O-heavy jobs, and custom AMIs. Fargate is serverless—no instances to manage—but less low-level tuning.</li>
+<li>Cost profile: EC2 Spot can reach up to 90% off On-Demand. Fargate Spot typically offers large discounts (AWS commonly cites up to ~70% vs Fargate On-Demand). If you can utilize dense, right-sized EC2 capacity, Managed Instances often win the cost game—especially at scale.</li>
+<li>Operations: Fargate is zero-infrastructure. ECS Managed Instances removes most of the grunt work, but you’ll still think in capacity pools, instance types, and placement.</li>
+</ul>
+<p>In practice, many teams run both. Use Fargate for always-on services where simplicity rules. Use ECS Managed Instances on Spot for batch, analytics, and ML where you want bigger boxes, GPUs, or custom drivers. You can standardize on ECS for orchestration and switch runtimes per workload.</p>
+<h3 id="thenuance">The nuance</h3>
+<ul>
+<li>ECS Fargate Spot is amazing when you want pure simplicity and are OK with availability variability. AWS states there’s “no guarantee of capacity availability” on Spot—true for both EC2 and Fargate flavors.</li>
+<li>Amazon ECS Managed Instances on Spot lets you mix capacity providers: On-Demand for baseline reliability, Spot for surge savings. You tune weights and base capacity so critical tasks land.</li>
+</ul>
+<p>If you’re searching “amazon ecs managed instances vs fargate,” here’s the punchline: choose Managed Instances when you need GPUs, huge RAM, custom storage, or predictable per-instance performance; choose Fargate when your time-to-value and ops simplicity trump fine-grained control.</p>
+<p>One more angle: startup times. With EC2, you can pre-warm capacity or keep a small buffer of instances around for immediate task placement. With Fargate, you don’t manage hosts, but you also don’t pre-warm. If your workloads are ultra-latency-sensitive on scale-up, Managed Instances give you more dials.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-05-2026-09-48-08-6184-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="architectingforinterruption">Architecting for interruption</h2>
+<h3 id="blendcapacitylikeaportfolio">Blend capacity like a portfolio</h3>
+<p>Use ECS capacity providers to mix On-Demand and Spot. Set a small On-Demand base (e.g., 20–30%) for steady reliability, then let Spot handle bursts. Managed scaling adjusts the Auto Scaling group to track your task demand. This blend evens out Spot hiccups while preserving big savings.</p>
+<p>“<em>Design for interruptions</em>” is the golden rule in AWS’s Spot playbooks. Expect occasional reclamations. Plan to roll with them.</p>
+<p>Treat it like asset allocation: On-Demand is your bonds; Spot is your high-yield equities. The bond portion keeps you moving during rough patches; the equities portion delivers the returns.</p>
+<h3 id="maketasks">Make tasks</h3>
+<ul>
+<li>Idempotent and checkpointed: Write progress to durable storage (S3, DynamoDB, RDS) so task restarts don’t redo hours of work.</li>
+<li>Shorter shards: Break big jobs into smaller chunks (e.g., 5–15 minutes). Faster retries, less wasted work.</li>
+<li>Graceful draining: ECS will stop placing new tasks on instances marked for termination; use container preStop hooks and SIGTERM handlers to flush buffers.</li>
+<li>Retry with exponential backoff: Standard practice recommended in the AWS Well-Architected Framework to avoid thundering herds.</li>
+</ul>
+<p>Also wire up interruption signals. EC2 posts a two-minute warning to instance metadata for Spot interruptions; when your container host sees that, ECS begins draining, and your tasks should exit gracefully. Your apps don’t need to know everything about Spot—but they should know how to save state and stop clean.</p>
+<h3 id="placementmatters">Placement matters</h3>
+<ul>
+<li>Use multiple instance families and sizes (m, c, r, a, t, g/gpu) to widen your Spot pools. More pools = higher availability.</li>
+<li>Spread across AZs for diversity.</li>
+<li>Avoid sticky resource constraints (e.g., huge single-task memory) unless you need them; flexible task sizes get scheduled more easily during Spot scarcity.</li>
+</ul>
+<p>Expert note, straight from AWS guidance: Spot delivers the best results when you “tap into multiple capacity pools” and handle that “<em>two-minute interruption notice</em>” cleanly.</p>
+<p>Add two more tweaks that help:</p>
+<ul>
+<li>Enable capacity rebalancing on your Auto Scaling groups so new Spot instances launch early when AWS signals risk; ECS will drain the old ones as they wind down.</li>
+<li>Check Spot placement scores or advisor pages before you commit a region/instance mix; this helps you pick pools with better odds of getting capacity.</li>
+</ul>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>Run ECS Managed Instances on EC2 Spot to slash compute costs—aim for up to 90% off On-Demand when tolerant.</li>
+<li>Mix Spot + On-Demand with capacity providers; keep a small reliability base.</li>
+<li>Fargate = simplicity; Managed Instances = control and often lower $ at scale.</li>
+<li>Design tasks with retries, checkpoints, and short shards to shrug off preemptions.</li>
+<li>Use diverse instance families/sizes/AZs for better Spot availability.</li>
+</ul>
+<p>If you follow those five points, you’ll remove 80% of the risk while keeping 80% of the savings. The rest is tuning and observability.</p>
+<h2 id="themoneymath">The money math</h2>
+<h3 id="asimpleway">A simple way</h3>
+<p>Start with your On-Demand baseline cost. If you can move a chunk of it to Spot, your blended rate drops.</p>
+<p>Example thought experiment:</p>
+<ul>
+<li>Assume 1,000 vCPU-hours/day of containerized batch.</li>
+<li>If On-Demand EC2 is your baseline cost unit (call it 1.0x), and you move 70% of hours to Spot at a 70–90% discount, your weighted average cost can drop to roughly 0.37x–0.16x. That’s a 63–84% cut.</li>
+</ul>
+<p>Actual dollars vary by region, instance type, and current Spot markets. But the direction is stable. The more tolerant your workload and the broader your instance pools, the better your realized savings.</p>
+<p>Here’s a simple formula to sanity-check your plan:</p>
+<ul>
+<li>Blended cost multiplier = (OD<em>share × 1.0) + (Spot</em>share × (1.0 − Spot_discount))</li>
+<li>Example: (0.3 × 1.0) + (0.7 × 0.3) = 0.51 → ~49% savings</li>
+<li>If Spot discount rises to 80%: (0.3 × 1.0) + (0.7 × 0.2) = 0.44 → ~56% savings</li>
+</ul>
+<p>Even with conservative discounts, you get meaningful cuts. The goal is to keep retry costs small by sharding work and checkpointing.</p>
+<h3 id="blendedcapacityscenario">Blended capacity scenario</h3>
+<ul>
+<li>Base capacity (On-Demand): 30% of workload for steady reliability.</li>
+<li>Variable capacity (Spot): 70% for bursts and nightly crunch.</li>
+<li>If Spot dries up momentarily, the On-Demand base continues, and retries fill gaps when Spot returns. ECS Managed Instances automates scaling and drains.</li>
+</ul>
+<p>You can adjust this mix by workload:</p>
+<ul>
+<li>CI/CD: Base 10–20% On-Demand; tolerate retries.</li>
+<li>ETL windows: Base 20–40% depending on deadlines.</li>
+<li>ML training: Base 20–30% for schedulers, orchestration, and critical controllers; put workers on Spot.</li>
+</ul>
+<h3 id="hiddencoststowatch">Hidden costs to watch</h3>
+<ul>
+<li>Bigger EBS for I/O-heavy tasks can be a good trade, but price it in.</li>
+<li>Data transfer and cross-AZ traffic can dwarf compute if you’re sloppy with placement.</li>
+<li>Interruption cost: long-running tasks with no checkpoints lose progress—keep shards small to cap waste.</li>
+</ul>
+<p>For live prices, see EC2 On-Demand and Spot pricing. For clarity on Fargate Spot discounts, check AWS Fargate capacity provider docs.</p>
+<p><em>Pro tip: Turn on budgets and anomaly detection.</em> If someone ships a chatty service that blasts cross-AZ traffic, you’ll want to know fast.</p>
+<h2 id="fromzerotoshipping">From zero to shipping</h2>
+<h3 id="configurecapacityproviders">Configure capacity providers</h3>
+<ul>
+<li>Create two capacity providers in ECS: one for your On-Demand Auto Scaling group, one for your Spot group. Enable managed scaling.</li>
+<li>Attach them to your ECS cluster with default strategy (e.g., base 30 on On-Demand, weight 1 on both). Tune later.</li>
+</ul>
+<p>Make your Spot Auto Scaling group a mixed-instances policy. Add multiple families and sizes so the scheduler has options, and turn on capacity rebalancing. For the On-Demand group, keep it small but steady.</p>
+<h3 id="maketasks-1">Make tasks</h3>
+<ul>
+<li>Add lifecycle hooks: handle SIGTERM, flush buffers, save checkpoints.</li>
+<li>Use smaller task units and job queues (SQS/SNS/EventBridge) to retry safely.</li>
+<li>Leverage container health checks and short timeouts.</li>
+</ul>
+<p>If your app writes to local disk, sync progress to S3 or a database every few minutes. If you’re processing from a queue, include a visibility timeout longer than your shard length and let failed messages reappear for retry.</p>
+<h3 id="testlikeproduction">Test like production</h3>
+<ul>
+<li>Trigger Spot interruption simulations with AWS fault injection tooling or by terminating an instance to verify graceful draining.</li>
+<li>Monitor with CloudWatch metrics, ECS service events, and Spot termination notices. Alert on elevated evictions.</li>
+</ul>
+<p>As AWS’s Spot guidance puts it: “<em>Architect for interruption</em>” and you’ll unlock the economics that make cloud fun again.</p>
+<p>Run a game day: kill a Spot instance during a run and watch the system recover. If it’s boring, you did it right.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="whatareecsmanagedinstances">What are ECS Managed Instances</h3>
+<p>They’re AWS-managed EC2 capacity backing your ECS cluster. AWS handles provisioning, scaling, and routine maintenance of the instance fleet. You keep the control you need (instance types, sizes, GPUs, storage), minus most of the ops overhead.</p>
+<h3 id="howspotinterruptionswork">How Spot interruptions work</h3>
+<p>EC2 Spot provides a two-minute interruption notice before reclaiming capacity. ECS marks the instance for drain, stops new task placement, and your tasks should exit gracefully. Design for retries and checkpoints so progress isn’t lost.</p>
+<h3 id="betterthanfargatespot">Better than Fargate Spot</h3>
+<p>It depends. If you value zero-infrastructure and can live with availability variability, Fargate Spot is excellent. If you need custom AMIs, GPUs, bigger disks, or tighter performance control (common in ML and big data), ECS Managed Instances on Spot often wins.</p>
+<h3 id="mixondemandandspot">Mix On Demand and Spot</h3>
+<p>Yes. Use ECS capacity providers to define a base On-Demand capacity and a Spot pool for bursts. The scheduler spreads tasks according to your weights and base settings.</p>
+<h3 id="doesthishelpworkloads">Does this help workloads</h3>
+<p>Definitely. Training jobs, hyperparameter sweeps, embedding generation, batch inference, and feature store builds are classic fault-tolerant patterns. Use checkpoints and chunked work units so retries are cheap.</p>
+<h3 id="howoftendointerruptionshappen">How often do interruptions happen</h3>
+<p>It varies by instance family, size, Region, and time of day. Some pools are extremely stable; others churn more. Check advisor tools and spread across multiple pools to reduce risk.</p>
+<h3 id="whataboutstatefulservices">What about stateful services</h3>
+<p>Run state on durable services (RDS, DynamoDB, EFS, S3) and keep stateless compute on Spot. If you must run stateful containers, pin them to On-Demand via placement or use a higher On-Demand base.</p>
+<h3 id="whatobservabilitytoadd">What observability to add</h3>
+<p>CloudWatch alarms for task failures, queue latency, and backlog; ECS service event alerts; and a dashboard for Spot interruption notices, drain times, and retry counts. The faster you see retries, the faster you can tune shard size or capacity mix.</p>
+<h3 id="wherearethebestdocs">Where are the best docs</h3>
+<p>Start with the ECS documentation (Welcome guide), ECS capacity providers, and the EC2 Spot overview plus interruption behavior. Those cover the core mechanics end-to-end.</p>
+<h2 id="shipit">Ship it</h2>
+<ul>
+<li>Create an ECS cluster and enable capacity providers for On-Demand and Spot.</li>
+<li>Attach Auto Scaling groups with broad instance families and sizes.</li>
+<li>Set a default strategy (e.g., base On-Demand 20–30%, balanced weights).</li>
+<li>Update task definitions with graceful shutdown handlers and checkpoints.</li>
+<li>Shard jobs; drive via SQS/EventBridge for retries.</li>
+<li>Run a canary service and simulate interruptions; validate drains.</li>
+<li>Add CloudWatch alarms for task failures and Spot interruptions.</li>
+<li>Roll out gradually; tune weights by error rate and queue latency.</li>
+</ul>
+<p>You don’t need a big-bang migration—start with a single batch pipeline or CI workload and expand.</p>
+<p><em>The big idea: your compute bill is a lever, not a law.</em> With Amazon ECS Managed Instances on EC2 Spot, you get AWS-managed infrastructure and capacity diversity, with economics that actually scale. If your jobs can tolerate a restart (and many can), you’re leaving real money on the table by sticking to all On-Demand or overpaying for simplicity.</p>
+<p>Start with one fault-tolerant workload—say, nightly ETL or embedding generation—and measure. Tune your capacity provider mix, diversify instance families, and add checkpoints. In a week, you’ll have data proving whether the savings curve is worth chasing (spoiler: <em>it usually is</em>).</p>
+<p>Two final tips before you press go:</p>
+<ul>
+<li>Keep the feedback loop tight: track dollars saved per day and tasks retried per day. Optimize for that ratio.</li>
+<li>Write down your “abort criteria” (e.g., retry rate &gt; X% for Y hours) so you can fail safe, bump base capacity, and try again.</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/ec2/spot/">Amazon EC2 Spot Instances overview</a></li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html">EC2 Spot interruption behavior (two-minute notice)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html">Amazon ECS documentation (Welcome)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/capacity-providers.html">ECS Capacity Providers</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html">AWS Fargate capacity providers (Fargate Spot)</a></li>
+<li><a href="https://aws.amazon.com/ec2/pricing/on-demand/">EC2 On-Demand pricing</a></li>
+<li><a href="https://aws.amazon.com/ec2/spot/pricing/">EC2 Spot pricing guidance</a></li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html">AWS Well-Architected Framework – Reliability Pillar (retries/backoff guidance)</a></li>
+<li><a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalancing.html">EC2 Auto Scaling capacity rebalancing</a></li>
+<li><a href="https://aws.amazon.com/ec2/spot/instance-advisor/">Spot Instance Advisor (interruption rate and savings guidance)</a></li>
+<li><a href="https://aws.amazon.com/fis/">AWS Fault Injection Simulator (for interruption testing)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="ecs-managed-instances-spot.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqfb87.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Cut+Container+Spend+With+ECS+Managed+Instances+On+Spot&amp;pi=289021625056&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=289021625056&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fecs-managed-instances-spot&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/ecs-managed-instances-spot?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:07 GMT -->
+</html>

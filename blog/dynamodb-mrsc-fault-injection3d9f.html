@@ -1,0 +1,409 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/dynamodb-mrsc-fault-injection?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Battle-Test Failover with DynamoDB MRSC and FIS Global Tables</title>
+    <link rel="canonical" href="dynamodb-mrsc-fault-injection.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore a DynamoDB MRSC global tables fault injection example with AWS FIS. Validate failover, replication, and write conflict resolution; pay-per-use price.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Battle-Test Failover with DynamoDB MRSC and FIS Global Tables",
+        "datePublished": "2026-02-02T20:49:27Z",
+        "dateModified": "2026-02-02T20:49:27.707Z",
+        "mainEntityOfPage": "https://remktr.com/blog/dynamodb-mrsc-fault-injection",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-02-2026-08-36-34-6702-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="dynamodb-mrsc-fault-injection.html">Battle-Test Failover with DynamoDB MRSC and FIS Global Tables</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 2, 2026 8:49:27 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Bad day scenario: a Region blips, your cart service faceplants, customers rage-tap refresh. Most teams pray. You’ll do better—you’ll break stuff on purpose first.</p>
+<p>Amazon DynamoDB global tables with multi-Region strong consistency (MRSC) plus AWS Fault Injection Service (FIS) lets you simulate ugly failures—Regional outages, network partitions, latency spikes—and watch your app hold the line. The result: <em>sub-second RPO/RTO and zero data loss by design, proven by chaos.</em></p>
+<p>This is the upgrade from “we think it works” to “we proved it under fire.” You’ll script failures, track replication and write conflicts, and practice failover until it’s boring. Then ship.</p>
+<p><em>“Everything fails, all the time.”</em> That’s Werner Vogels. Your move is making failure uneventful.</p>
+<p>So treat resiliency like security and performance: <em>not a checkbox, a drill.</em> Write down what “healthy” means, inject pain on purpose, and force your system to show how it behaves when the universe is rude. That’s how you turn scary unknowns into boring playbooks.</p>
+<p>We’ll keep it practical. You’ll pair DynamoDB global tables with FIS, wire up CloudWatch, and run short game-day experiments that target the gnarly stuff—replication lag, conflicts, failover, hot keys. You’ll learn what breaks and how to fix it, fast. When a Region sneezes, your customers shouldn’t even sniff it.</p>
+<ul>
+<li>Key Takeaways</li>
+<li>Use FIS to inject Regional outages, AZ failures, and network latency against DynamoDB global tables (MRSC) without touching prod traffic.</li>
+<li>Validate replication lag, conflict resolution, and failover paths; aim for sub-second RPO/RTO.</li>
+<li>Choose single-writer or multi-writer; understand last-writer-wins and conditional writes.</li>
+<li>Monitor CloudWatch metrics and DynamoDB Streams; document a repeatable game day runbook.</li>
+<li>Costs are pay-per-use: DynamoDB per read/write/storage/replication; FIS billed per experiment duration.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-37-23-4180-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatmrscandfisprovide">What MRSC and FIS Provide</h2>
+<h3 id="mrscinplainenglish">MRSC in Plain English</h3>
+<p>Multi-Region strong consistency (MRSC) means your writes commit across Regions with a clarity contract designed to deliver zero data loss and sub-second recovery goals. With DynamoDB global tables (v2), you replicate data across Regions at petabyte scale with single-digit millisecond performance. The MRSC twist: you’re proving a Region going dark won’t drop writes or return stale reads where it matters. You’re designing for reality, not hope.</p>
+<p>“In distributed systems, everything fails, all the time.” — Werner Vogels. MRSC turns that from a scary quote into an engineering constraint you can test.</p>
+<p>Think of MRSC as a discipline layered on top of global tables: you pick the items and flows that need correctness above all (carts, balances, inventory), then enforce invariants with conditional writes, idempotency, and conflict-aware logic. You pair that with near-real-time replication across Regions and drill until failover is muscle memory. The destination is boring reliability: your app behaves the same no matter which Region takes the write.</p>
+<p>A practical mental model:</p>
+<ul>
+<li>Critical paths get guardrails (ConditionalExpression, version attributes, dedupe tokens) so timestamp-based conflict resolution never silently violates business rules.</li>
+<li>Observability tells you how quickly replicas converge and where conflicts cluster.</li>
+<li>Game days harden your code paths and the people paths—alerts, runbooks, and on-call.</li>
+</ul>
+<h3 id="whyfismatters">Why FIS Matters</h3>
+<p>AWS Fault Injection Service lets you run safe, controlled chaos: pause a Regional dependency, add latency between Regions, or disrupt availability zones. Target DynamoDB global tables and related infrastructure, then measure outcomes with CloudWatch. You can simulate:</p>
+<ul>
+<li>Region-level outages and controlled failover switchovers</li>
+<li>Network partitions that trigger replication backlogs</li>
+<li>Latency spikes that punch your P99s</li>
+</ul>
+<p>A real-world example: you run a 30-minute FIS experiment injecting 300 ms cross-Region latency while hammering a hot partition (e.g., inventory item). You observe replication health, application retries, and conditional write behavior. If carts still commit and reads stay fresh across Regions—you’re ready.</p>
+<p>Pro tip: combine FIS events with load gen (e.g., distributed load test) to stress read/write paths while faults unfold.</p>
+<p>Safety rails to use every time:</p>
+<ul>
+<li>Run in a staging environment that mirrors prod traffic patterns before you touch prod.</li>
+<li>Scope FIS actions tightly with IAM and resource tags; use experiment templates so nobody fat-fingers a Region-wide blast.</li>
+<li>Time-box experiments (15–30 minutes), add CloudWatch alarms as stop conditions, and require approvals.</li>
+<li>Annotate timelines so you can correlate metrics to fault windows.</li>
+</ul>
+<h2 id="replicationdesignchoices">Replication Design Choices</h2>
+<h3 id="choosingyourwritetopology">Choosing Your Write Topology</h3>
+<p>You’ve got two main patterns:</p>
+<ul>
+<li>Single-Region writer, multi-Region readers: simpler mental model, fewer conflicts, straightforward failover.</li>
+<li>Multi-Region writers (bidirectional): ultra-low write latency everywhere, but you must tame conflicts.</li>
+</ul>
+<p>Both ride DynamoDB global tables. For e-commerce, single-writer is often enough; for gaming leaderboards or social features with global users, multi-writer can win on latency.</p>
+<p>Add a quick decision hack:</p>
+<ul>
+<li>Pick single-writer if most writes start in one geography, correctness is king, and you can tolerate a controlled writer failover.</li>
+<li>Pick multi-writer if users write globally and P99 write latency is a business KPI. Budget extra effort for conflict detection, idempotency, and reconciliation.</li>
+</ul>
+<h3 id="conflictresolutionwithoutdrama">Conflict Resolution Without Drama</h3>
+<p>DynamoDB global tables resolve concurrent updates with last-writer-wins based on timestamps. That’s predictable and fast, but you need idempotency and app-level checks where correctness beats speed. Use ConditionalExpression to guard invariants—e.g., version numbers or balance deltas—so you fail fast rather than silently clobber.</p>
+<ul>
+<li>Example: a fintech ledger uses conditional writes to enforce monotonic sequence numbers. If conflict hits, you catch ConditionalCheckFailed and retry with a deterministic rule.</li>
+<li>DynamoDB Streams give you a replayable change log. Tap them for reconciliation jobs or alerts when write skew appears.</li>
+</ul>
+<p>Add GSIs carefully: global secondary indexes replicate across Regions too, so write amplification grows. Hot keys? Use sharding patterns and adaptive capacity.</p>
+<p>Expert note from the AWS Builders Library: retries can amplify traffic during incidents; add jittered backoff and sensible timeouts so your recovery doesn’t DDoS yourself.</p>
+<p>A few more hard-won tactics:</p>
+<ul>
+<li>Store a client-side idempotency key (like orderId) and write it with a conditional expression (attribute<em>not</em>exists) to prevent duplicates during retries.</li>
+<li>Track a “version” attribute and require version = expected for updates. On mismatch, re-read and reconcile.</li>
+<li>For counters or balances, prefer transactional patterns or write-invertible deltas you can replay or compensate.</li>
+<li>Keep item size lean (&lt;400 KB) and avoid high-churn attributes; smaller items replicate faster and cheaper.</li>
+</ul>
+<h2 id="runchaosexperiments">Run Chaos Experiments</h2>
+<h3 id="faultstoinject">Faults to Inject</h3>
+<p>Start with the high-signal, low-risk tests:</p>
+<p>1) Regional outage simulation: disable a Region’s dependencies so your app must fail over reads/writes to a healthy Region.
+2) Cross-Region network latency: inject 200–500 ms and observe replication queues, write latencies, and client timeouts.
+3) AZ failure: take down an Availability Zone and ensure your provisioned capacity or On-Demand scaling stays steady.
+4) Partial partition: block specific service endpoints to mimic asymmetric failures.</p>
+<p>Netflix’s chaos mantra applies: <em>“The best way to avoid failure is to fail constantly.”</em> Do it safely.</p>
+<p>Turn that into a repeatable template:</p>
+<ul>
+<li>Baseline: capture 10 minutes of steady-state metrics (success rates, P95/P99, backlog = 0, minimal conflicts).</li>
+<li>Kickoff: start the FIS experiment and immediately tag the timeline.</li>
+<li>Escalate: if results are stable, bump latency or duration on the next run—not in the same run.</li>
+<li>Rollback: define automatic stop conditions tied to error rates or SLO breaches.</li>
+</ul>
+<h3 id="metricstowatchandwhy">Metrics to Watch and Why</h3>
+<p>Wire CloudWatch alarms and dashboards before you push the red button:</p>
+<ul>
+<li>Write success rate, system/user errors, throttled requests</li>
+<li>ConditionalCheckFailed counts (conflict pressure)</li>
+<li>Tail latencies (P95/P99) for reads/writes by Region</li>
+<li>Replication health and backlog trends (watch table/replica status and Streams consumer lag)</li>
+<li>Application SLOs: checkout success rate, time-to-consistency for hot items, leaderboards freshness</li>
+</ul>
+<p>Example experiment: 20-minute latency injection between us-east-1 and eu-west-1 during peak-like load. Expected result: multi-writer keeps local writes snappy; conflicts spike slightly but remain bounded; replication backlog clears &lt;60s post-test; customers see consistent balances and carts.</p>
+<p>Automate teardown and add annotations so you can correlate faults to metrics later. <em>If you can’t measure it, you didn’t test it.</em></p>
+<p>Observability pointers:</p>
+<ul>
+<li>Break down metrics by partition key class (hot vs normal) to spot skew.</li>
+<li>Track DynamoDB Streams consumer lag; if lag climbs during a fault and doesn’t recover, your downstream jobs may be the bottleneck.</li>
+<li>Add synthetic checks that perform a real read-after-write in both Regions for a known test item.</li>
+</ul>
+<h2 id="pocketnotes">Pocket Notes</h2>
+<ul>
+<li>Strong consistency across Regions is a design choice, not a wish. Test it.</li>
+<li>Prefer single-writer for simple correctness; use multi-writer when latency is king.</li>
+<li>Last-writer-wins is fine—until it isn’t. Add conditional writes for invariants.</li>
+<li>FIS makes failure repeatable. Start with latency and Regional outage drills.</li>
+<li>Watch conflicts, P99s, and backlog. Your SLOs don’t care about averages.</li>
+</ul>
+<h2 id="limitsandcosts">Limits and Costs</h2>
+<h3 id="realworldlimitations">Real World Limitations</h3>
+<ul>
+<li>Partition keys and hot items: MRSC doesn’t save you from poor key design. Distribute writes.</li>
+<li>TTL behavior: expirations are local events; design cleanup jobs that don’t assume cross-Region TTL symmetry.</li>
+<li>Item size and GSI write amplification still apply globally. Every replica pays.</li>
+<li>Schema drift across Regions? Don’t. Keep table definitions, capacity modes, and GSIs aligned.</li>
+<li>Operational blast radius: guardrails in IAM and change control—misconfig in one Region propagates fast.</li>
+</ul>
+<p>For "dynamodb global tables limitations," check official docs to validate specifics in your stack.</p>
+<p>Add a few more sharp edges to respect:</p>
+<ul>
+<li>Per-partition throughput still matters; hot partitions throttle regardless of global footprint. Use good keys and, if needed, write sharding.</li>
+<li>Streams ordering is guaranteed per partition key. Don’t assume global order across keys; design consumers accordingly.</li>
+<li>Quotas apply per account/Region (throughput, tables, Streams consumers). Know them before game day.</li>
+<li>Backfilling a new replica Region can take time depending on data size. Plan migrations outside peak and monitor status.</li>
+</ul>
+<h3 id="priceandsavings">Price and Savings</h3>
+<p>“dynamodb global table price” boils down to:</p>
+<ul>
+<li>You pay for replicated writes in each Region, reads, storage, Streams, and cross-Region data transfer.</li>
+<li>FIS is billed by experiment duration; keep tests sharp and time-boxed.</li>
+<li>On-Demand vs provisioned: On-Demand is great for unpredictability; provisioned + auto scaling can trim steady-state spend.</li>
+<li>Reduce write amp: minimize attribute churn, compress heavy payloads client-side, and avoid redundant GSIs.</li>
+</ul>
+<p>Example cost control: if your multi-Region game leaderboard writes 10x/sec per shard, consider local aggregation with periodic cross-Region consolidation. Fewer, larger writes can be cheaper than a firehose of small ones.</p>
+<p>More levers worth pulling:</p>
+<ul>
+<li>Cache read-heavy views at the edge (CloudFront, regional caches) to shave cross-Region reads.</li>
+<li>Batch low-priority writes or reconcile in bulk via Streams consumers during off-peak.</li>
+<li>Drop unused attributes and indexes; every byte and index update multiplies across Regions.</li>
+</ul>
+<h2 id="gamedayplaybook">Game Day Playbook</h2>
+<h3 id="beforetheblast">Before the Blast</h3>
+<ul>
+<li>Define steady state: what does “healthy” mean for carts, ledgers, or leaderboards? Set SLOs.</li>
+<li>Pick scenarios: outage, latency, partition. Write hypotheses and expected outcomes.</li>
+<li>Create FIS templates targeting DynamoDB global tables and relevant infra. Lock IAM down.</li>
+<li>Pre-wire dashboards, alarms, and on-call responders. Announce your game day.</li>
+</ul>
+<p>Add acceptance criteria you can check in minutes:</p>
+<ul>
+<li>RPO ~ 0 for critical writes (no lost confirmed orders).</li>
+<li>RTO under your business target (e.g., write failover &lt; 60 seconds, read failover &lt; 500 ms).</li>
+<li>Replication backlog drains to baseline within N minutes after the fault.</li>
+<li>Conflict rate stays below a defined threshold and all conflicts are auto-resolved or reconciled.</li>
+</ul>
+<h3 id="duringandafter">During and After</h3>
+<ul>
+<li>Start small: short-duration latency injection at off-peak.</li>
+<li>Observe in real time: replication health, conflicts, client error rates, and P99 latency.</li>
+<li>Enforce timeouts, retries with jitter, and circuit breakers. Verify graceful degradation paths.</li>
+<li>End experiment, snapshot metrics, and run a blameless postmortem.</li>
+</ul>
+<p>First-hand style example: an e-commerce team runs a 15-minute Regional outage sim. Expected: carts write to the secondary Region within 1s; no lost orders; read paths switch under 500 ms. Actual: a background job flooded retries, spiking P99s. Fix: add jitter and bounded retries. Retest. Green.</p>
+<p>Put this on a quarterly cadence. If you don’t practice failover, you don’t have failover.</p>
+<p>Common postmortem actions that move the needle:</p>
+<ul>
+<li>Tighten timeouts to match real P99s, not wishful thinking.</li>
+<li>Add circuit breakers around least-reliable dependencies.</li>
+<li>Reduce batch sizes in hot paths to cut item churn and write amp.</li>
+<li>Improve alarms to fire on user-impacting symptoms (checkout success) not just low-level noise.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-02-2026-08-38-46-2628-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="faq">FAQ</h2>
+<h3 id="practicalmrscfisexample">Practical MRSC FIS example</h3>
+<p>Run a 20-minute cross-Region latency injection (e.g., 300 ms) during controlled load. Verify write success, conflict counts, replication backlog clearance under 60 seconds, and user SLOs (checkout success, balance accuracy). Then simulate a Regional outage to validate automated failover.</p>
+<h3 id="conflictresolutioninmultiwriter">Conflict resolution in multi-writer</h3>
+<p>DynamoDB global tables use a last-writer-wins approach based on timestamps. To protect invariants (balances, idempotent operations), use conditional writes and application-side reconciliation. Track ConditionalCheckFailed exceptions and handle retries with jittered backoff.</p>
+<h3 id="keyglobaltableslimitations">Key global tables limitations</h3>
+<p>Plan for write amplification across Regions, TTL expirations being local, and the need for consistent table/index definitions in every Region. Hot partitions remain a risk; design keys to distribute load. Review service quotas before game day.</p>
+<h3 id="streamsformrsctesting">Streams for MRSC testing</h3>
+<p>Streams aren’t mandatory to replicate, but they’re extremely useful for observability, reconciliation, and building integrity checks. Use Streams to validate ordering assumptions and to trigger compensating logic after conflict spikes.</p>
+<h3 id="practicalcosts">Practical costs</h3>
+<p>DynamoDB charges for reads/writes/storage in every Region, plus replicated writes and data transfer. FIS charges by experiment duration. Start with short, targeted drills; prefer off-peak windows and keep experiments measurable to control spend.</p>
+<h3 id="singlewriterwithglobalreads">Single writer with global reads</h3>
+<p>Yes. Single-Region writer with multi-Region readers is common. You’ll failover the writer on Regional issues and keep read replicas hot globally. It’s simpler, cheaper, and avoids most conflicts.</p>
+<h3 id="chaoswithoutproduction">Chaos without production</h3>
+<p>Yes—start in a pre-prod environment that mirrors production traffic patterns and scale. Once you can predict outcomes, promote to carefully scoped, off-peak prod experiments with strict stop conditions and approvals.</p>
+<h3 id="schemamigrationsandglobals">Schema migrations and globals</h3>
+<p>Keep schema, capacity mode, and GSI definitions identical in every Region. Roll out changes gradually and monitor replication and write errors; mismatched definitions cause surprises. Plan index backfills off-peak.</p>
+<h2 id="runanmrscdrill">Run an MRSC Drill</h2>
+<ul>
+<li>Define SLOs and steady state for one mission-critical flow.</li>
+<li>Choose a scenario: Regional outage or 300 ms cross-Region latency.</li>
+<li>Create an FIS template targeting your DynamoDB global table and dependencies.</li>
+<li>Set CloudWatch dashboards and alarms for latency, conflicts, and replication health.</li>
+<li>Run a 15–30 minute drill with realistic load. Annotate the timeline.</li>
+<li>Capture metrics, fix bottlenecks (timeouts/backoff, hot keys), and schedule the next run.</li>
+</ul>
+<p>Wrap-up thought: <em>you don’t rise to the occasion—you fall to your runbook.</em> Make it good, then make it muscle memory.</p>
+<p>In the end, resiliency isn’t a feature; it’s a habit. MRSC with DynamoDB global tables gives you the architecture. FIS gives you the reps. Your job is to run the play until failover feels boring. When a Region sneezes, your customers shouldn’t notice. That’s the bar.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>DynamoDB Global Tables (v2) overview: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html</li>
+<li>DynamoDB Streams: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html</li>
+<li>Monitoring DynamoDB with CloudWatch: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/monitoring-cloudwatch.html</li>
+<li>DynamoDB pricing (including global tables): https://aws.amazon.com/dynamodb/pricing/</li>
+<li>AWS Fault Injection Service (FIS): https://aws.amazon.com/fis/</li>
+<li>FIS pricing: https://aws.amazon.com/fis/pricing/</li>
+<li>Supported services in FIS: https://docs.aws.amazon.com/fis/latest/userguide/fis-supported-services.html</li>
+<li>AWS Builders Library — Timeouts, retries, and backoff with jitter: https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/</li>
+<li>Netflix Tech Blog — The Simian Army: https://netflixtechblog.com/the-netflix-simian-army-16e57fbab116</li>
+<li>Werner Vogels on failure in distributed systems: https://www.allthingsdistributed.com/2016/11/10-lessons-from-10-years-of-aws.html</li>
+<li>DynamoDB Time to Live (TTL): https://docs.aws.amazon.com/dynamodb/latest/developerguide/howitworks-ttl.html</li>
+<li>DynamoDB adaptive capacity: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AdaptiveCapacity.html</li>
+<li>DynamoDB service quotas and item size limits: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ServiceQuotas.html</li>
+<li>Global secondary indexes: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalSecondaryIndexes.html</li>
+<li>FIS experiment templates: https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html</li>
+<li>AWS Well-Architected Framework — Reliability Pillar: https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html</li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="dynamodb-mrsc-fault-injection.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqaecd.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Battle-Test+Failover+with+DynamoDB+MRSC+and+FIS+Global+Tables&amp;pi=309268179677&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=309268179677&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fdynamodb-mrsc-fault-injection&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/dynamodb-mrsc-fault-injection?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:18:40 GMT -->
+</html>

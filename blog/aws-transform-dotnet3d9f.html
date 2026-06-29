@@ -1,0 +1,388 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-transform-dotnet?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship .NET Upgrades Faster with AWS Transform</title>
+    <link rel="canonical" href="aws-transform-dotnet.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore AWS Transform for .NET (aws transform dotnet) to modernize apps faster with expanded transformation capabilities and an improved developer experience.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship .NET Upgrades Faster with AWS Transform",
+        "datePublished": "2026-02-16T22:01:33Z",
+        "dateModified": "2026-02-16T22:01:34.132Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-transform-dotnet",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-16-2026-09-50-18-1455-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-transform-dotnet.html">Ship .NET Upgrades Faster with AWS Transform</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 16, 2026 10:01:33 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’ve got .NET Framework apps still running critical revenue. Meanwhile, your backlog screams “modernize to .NET 8.” The blocker? Time, risk, and a migration map that’s 20 Jira boards long.</p>
+<p>Here’s the “wait, what?” moment: teams now use AWS Transform for .NET to automate big chunks of that grind. It updates project files, swaps legacy APIs, and lights up modern .NET patterns. You move faster without those white‑knuckle refactors that blow up nights.</p>
+<p><em>This isn’t magic.</em> It’s structured automation with guardrails and a better developer experience. You keep control the whole time: review diffs, run tests, accept changes. The payoff is real: cleaner code, faster releases, and a runway to containers, serverless, or on‑prem VMware—wherever you need to land it.</p>
+<p>If you’re juggling feature work and tech debt, this buys back weeks. You do it without breaking prod or torching your roadmap.</p>
+<p>The stakes are simple: keep funding maintenance on code that’s harder to hire for. And it’s harder to secure every month you wait. Or shift to modern .NET and unlock cheaper infra, cleaner tooling, and a happier team. The longer you wait, the more “surprise” work stacks up and bites.</p>
+<p><em>Automation changes the math.</em> Let machines handle mechanical edits like project files and API shims. Keep engineers focused on analysis, tests, and careful reviews. That’s how you speed up safely—less drift, more momentum, and fewer late‑night rollback drills.</p>
+<h2 id="keytakeaways">Key Takeaways</h2>
+<ul>
+<li>Automate repetitive .NET upgrades with AWS Transform for .NET. Keep humans on reviews, not boilerplate churn.</li>
+<li>Target .NET 6/7/8, modernize APIs, and prep for containers, serverless, or VMware environments you already trust.</li>
+<li>Start small: one service, tight tests, and CI guardrails. Scale when everything’s green.</li>
+<li>Costs? See aws transform pricing on the official AWS pricing pages.</li>
+<li>Need examples? Search for an aws transform dotnet example and check aws transform dotnet github for community samples.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-16-2026-09-51-04-3063-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatawstransformdoes">What AWS Transform Does</h2>
+<h3 id="fromframeworktomodernnet">From Framework to Modern NET</h3>
+<p>Legacy .NET Framework apps drag hard: Windows‑only hosting, older APIs, and security debt. AWS Transform for .NET helps automate code and project updates so you move toward modern .NET faster. Think updating .csproj formats, replacing retired libraries with supported ones, and annotating spots where human review matters. You still make the calls—Transform just speeds the boring parts.</p>
+<p>Microsoft’s .NET 8 is LTS and brings performance, native AOT, and modern cloud tooling. If you’re stuck on Framework 4.x, the gap only grows over time. Modernizing unlocks portability, smaller containers, and better runtime support that won’t age out soon.</p>
+<p><em>“Make it work, make it right, make it fast.”</em> That Kent Beck mantra is the playbook here. Transform handles the “make it work” scaffolding, while your team focuses on “right and fast.”</p>
+<p>Here’s the practical flow most teams see:</p>
+<ul>
+<li>It scans your solutions and projects to flag framework targets, package references, and API usage that break on modern .NET.</li>
+<li>It proposes or applies structured edits: convert old‑style project files to SDK‑style, replace deprecated APIs, and add annotations where choices exist, like CoreWCF versus gRPC.</li>
+<li>It leaves a clean diff trail, so you can review every change like a teammate’s PR.</li>
+<li>It nudges you toward current tooling conventions—so build, test, and run match locally and in CI.</li>
+</ul>
+<p>A simple, real‑world example you’ll likely hit is converting a classic .csproj to SDK‑style. That shrinks hundreds of lines of MSBuild noise into a dozen lines. It turns on sensible defaults and makes cross‑platform builds work without custom scripts. Less surface area means fewer surprises later.</p>
+<h3 id="targetedpatterns">Targeted Patterns</h3>
+<ul>
+<li>Project system updates that move you to .NET SDK‑style projects with fewer pitfalls</li>
+<li>API shims and replacements, like steering WCF server scenarios toward CoreWCF or gRPC</li>
+<li>Build pipeline tweaks for cross‑platform so Linux and Windows agents behave the same</li>
+<li>Test scaffolding alignment so your CI actually runs and passes real tests</li>
+</ul>
+<p>What does that look like on the ground?</p>
+<ul>
+<li>Project updates: Swap old imports, move to implicit compile, and align target frameworks. You end up with projects that just build on laptops and Linux build agents.</li>
+<li>API shims: For WCF, it surfaces migration paths and wires up scaffolding for CoreWCF or gRPC. You get a place to start, not a blank page. For configuration, it nudges toward appsettings.json and IOptions.</li>
+<li>Build tweaks: Fewer hand‑rolled MSBuild targets. Standard outputs make Docker builds faster and predictable across environments.</li>
+<li>Test alignment: Consistent test SDKs and runners so dotnet test works the same locally and in CI.</li>
+</ul>
+<p>Pair Transform with helpers like Porting Assistant for .NET and .NET Upgrade Assistant. You’ll get actionable findings, dependency analysis, and a cleaner upgrade path. No vague reports that stall your sprint for days.</p>
+<h2 id="whythismatters">Why This Matters</h2>
+<h3 id="businesscase">Business Case</h3>
+<p>Staying on older frameworks costs you in security exposure, hiring pain, and infra lock‑in. Modern .NET opens Linux containers, cheaper autoscaling, and a talent pool that isn’t allergic to decade‑old APIs.</p>
+<p>Performance jumps in recent .NET releases don’t just flex on benchmarks. They trim cloud bills and cut P99 latency meaningfully. Native AOT helps you ship leaner services. Kestrel keeps getting faster each release.</p>
+<p>As AWS CTO Werner Vogels loves to remind us, <em>“Everything fails, all the time.”</em> Modern runtimes, observability, and autoscaling aren’t nice‑to‑haves. They are your safety net when stuff tilts.</p>
+<p>Upgrading also buys you time in the long run. LTS support windows are clearer, patching is simpler, and you can standardize on steady quarterly upgrades. Not a once‑a‑decade fire drill that ruins quarters.</p>
+<h3 id="devexangle">DevEx Angle</h3>
+<p>Modern SDK‑style projects, consistent tooling, and fewer brittle scripts mean faster onboarding. You get fewer yak‑shaves and less archaeology in old build files.</p>
+<ul>
+<li>CI/CD gets simpler with fewer Windows‑only runners and bespoke steps</li>
+<li>Containers get smaller and much faster to build and pull</li>
+<li>You can finally standardize on a sane and reliable test strategy</li>
+</ul>
+<p><em>Bottom line: Transform reduces toil.</em> Your roadmap gets lighter, sprints get tighter, and your risk window narrows.</p>
+<p>Little things add up. Centralized package management, Directory.Build.props, and true environment parity make builds reproducible. Add OpenTelemetry, and traces make sense across services—not spelunking logs at 2 a.m.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-16-2026-09-51-50-5710-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="handsonexample">Hands On Example</h2>
+<h3 id="minimalplaybook">Minimal Playbook</h3>
+<p>You don’t need a moonshot. Do a controlled pilot on one service you trust.</p>
+<p>1) Pick a bounded service with strong tests. If you’ve got none, write smoke tests first.
+2) Run discovery with your preferred analyzers, like Porting Assistant and Upgrade Assistant, to scope risk.
+3) Apply AWS Transform for .NET to generate code updates and project changes. Treat it like a smart PR author.
+4) Review diffs, run tests locally, then in CI. Fix red builds before merging anything.
+5) Benchmark cold start, P95 latency, and memory. Compare before and after numbers.
+6) Containerize the upgraded service and run it through staging traffic.</p>
+<p><em>“Hope is not a strategy.”</em> Use metrics. If the first service shows gains and clean diffs, scale next.</p>
+<p>Add a few guardrails to make this repeatable:</p>
+<ul>
+<li>Define success upfront: maybe a 20–40% smaller image or improved P95 latency. Even if you miss some, you’ll know where to focus next.</li>
+<li>Keep a risk log: list manual hotspots like reflection, dynamic proxies, or custom WCF behaviors. Review them with senior eyes.</li>
+<li>Plan your rollback: blue/green or canary, with a fast flag to revert if errors spike. Confidence comes from having an exit.</li>
+<li>Treat every transform as code: PR titles, changelogs, and a short rationale. Future you will thank present you.</li>
+</ul>
+<h3 id="docsandexamples">Docs and Examples</h3>
+<ul>
+<li>aws transform for .net documentation: use it to learn supported patterns, config flags, and IDE integrations.</li>
+<li>aws transform dotnet github: find community samples, migration checklists, and scripts that match your stack.</li>
+</ul>
+<p>The workflow is opinionated but flexible. Automate the repetitive, and keep human eyes on architecture changes.</p>
+<p>Before you start, skim release notes and support policies for your target runtime. Make sure your dependencies have modern equivalents or a solid mitigation plan. It’s easier to route around a dead‑end early than rip it out late.</p>
+<h2 id="realworldtargets">Real World Targets</h2>
+<h3 id="containersandserverless">Containers and Serverless</h3>
+<p>Once you’re on modern .NET, you can run in a few ways:</p>
+<ul>
+<li>Amazon ECS or EKS with Linux containers that are cheaper, faster, and simpler</li>
+<li>AWS Lambda for event‑driven endpoints using .NET runtime or AOT for tiny cold starts</li>
+<li>Elastic Beanstalk or straight EC2 if you want minimal change in hosting</li>
+</ul>
+<p>You’ll get cleaner Dockerfiles, smaller images, and easier autoscaling defaults. Observability levels up with OpenTelemetry, metrics, and logs without legacy hacks.</p>
+<p>A few practical container tips:</p>
+<ul>
+<li>Use official .NET runtime images for production, and SDK images only for build stages.</li>
+<li>Multi‑stage Dockerfiles keep images lean and reduce your CVE surface area.</li>
+<li>Publish trimming and Native AOT can shave cold start and memory for some workloads. Test to confirm the trade‑offs.</li>
+</ul>
+<p>On serverless, aim for small, focused handlers with minimal baggage. If you can AOT‑compile and keep package size low, cold starts shrink. Add structured logging and traces so on‑call doesn’t become guesswork.</p>
+<h3 id="onpremandvmware">On Prem and VMware</h3>
+<p>If you’re hybrid, the upgraded .NET services run on‑prem on Windows or Linux VMs. They also run inside containers on vSphere or Tanzu. That’s how aws transform for vmware comes into play: modernize the codebase, then deploy on the platform you already operate. On‑prem today, cloud tomorrow, or both.</p>
+<p>Martin Fowler’s “Strangler Fig” pattern still rules modernization. Place a facade in front, carve functionality piece‑by‑piece, and cut over when ready. Transform accelerates the carve‑out and keeps design drift low.</p>
+<p>No matter your landing zone, the output is standard .NET. It’s portable, testable, and production‑ready with modern tooling across teams.</p>
+<p><em>Hybrid hint:</em> standardize on containers even if you’re staying on‑prem now. Then your move to cloud later is a deployment shift, not a rebuild.</p>
+<h2 id="governanceandpricing">Governance and Pricing</h2>
+<h3 id="costcomplianceandcontrol">Cost Compliance and Control</h3>
+<p>Budget and guardrails matter. For aws transform pricing, check official AWS pricing pages for the latest details. That includes whether it’s bundled with developer offerings or billed separately. Tie spend to outcomes like fewer person‑weeks, better performance, and lower infra costs.</p>
+<p>Security? Keep your standard controls in place and enforced:</p>
+<ul>
+<li>Static analysis like CodeQL or AWS CodeGuru Security on all PRs</li>
+<li>SBOM generation for dependencies you ship and store</li>
+<li>Container image scanning like Amazon Inspector before deploy gates</li>
+</ul>
+<p><em>“Speed and stability are not trade‑offs.”</em> Accelerate’s research shows teams can have both. They just automate tests, deployments, and careful reviews.</p>
+<p>Also, wire finance into your loop. Track hours saved per repo, reduced build minutes, and runtime efficiency. When the CFO asks, “Was this worth it?”, you’ll have the receipts ready.</p>
+<h3 id="tuningtheengine">Tuning the Engine</h3>
+<p>Every codebase is weird in its own lovely way. Use configuration to:</p>
+<ul>
+<li>Exclude files or modules not ready for prime time this quarter</li>
+<li>Prefer certain library replacements, like CoreWCF versus gRPC for specific services</li>
+<li>Flag high‑risk diffs for mandatory human review before any merge</li>
+</ul>
+<p>If aws transform custom rule sets are supported for your version, standardize them in‑repo. Keep them versioned and reviewed through pull requests. Make transformation predictable and auditable across teams.</p>
+<p>Go one step further: add pre‑commit or pre‑push checks that run lightweight validation. Build plus tests right after transform changes land. The faster the feedback, the less rework you’ll chew through later.</p>
+<h2 id="commonpitfalls">Common Pitfalls</h2>
+<ul>
+<li>Skipping tests: no tests means guessing. Add smoke tests before you touch code.</li>
+<li>Mixing architecture changes with upgrades: separate mechanical changes from hard design calls like gRPC design. Merge small, reviewable PRs.</li>
+<li>Ignoring performance baselines: measure before and after, or you won’t catch regressions.</li>
+<li>Over‑customizing early: start with defaults. Add custom rules only when patterns repeat.</li>
+<li>Leaving build scripts behind: remove dead MSBuild targets and batch files the new build won’t need.</li>
+<li>Forgetting docs: capture decisions in ADRs or PR descriptions. Tribes change; context shouldn’t vanish.</li>
+</ul>
+<h2 id="quickreload">Quick Reload</h2>
+<ul>
+<li>You can automate the grindy 60–80% of .NET upgrades and keep humans on architecture calls.</li>
+<li>Modern .NET unlocks Linux containers, cheaper hosting, and better performance across services.</li>
+<li>Start with a single service, strong tests, and clear, measurable benchmarks.</li>
+<li>You’re not locked to cloud‑only after upgrade. VMware and on‑prem both work fine.</li>
+<li>Governance doesn’t suffer. Security scans, SBOMs, and CI gates harden the process.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="opensourceandgithub">Open Source and GitHub</h3>
+<p>The core service and IDE integrations are AWS‑managed today. For examples and utilities, search aws transform dotnet github and the AWS Samples org. AWS often publishes sample projects and starter kits under aws‑samples. Always verify repo ownership and license before adopting.</p>
+<h3 id="frameworktomodernmigrations">Framework to Modern Migrations</h3>
+<p>That’s the primary value: accelerate upgrades to modern .NET right away. It automates mechanical changes and surfaces hotspots for careful review. Combine it with Microsoft’s .NET Upgrade Assistant and AWS Porting Assistant for dependency analysis and guidance.</p>
+<h3 id="wcfandwebforms">WCF and Web Forms</h3>
+<p>WCF server‑side isn’t in modern .NET out of the box currently. Common paths include CoreWCF with community support or moving RPC endpoints to gRPC. Web Forms typically needs re‑platforming to Razor Pages, MVC, or Blazor. Use Transform to de‑risk project changes and plan architecture shifts deliberately.</p>
+<h3 id="pricing">Pricing</h3>
+<p>aws transform pricing can vary and may be packaged with broader AWS developer offerings. Check AWS pricing pages for current terms and any bundles. Right‑size your pilot to estimate cost versus engineer‑weeks saved.</p>
+<h3 id="onpremandvmware-1">On Prem and VMware</h3>
+<p>Yes. Modern .NET apps run on Linux or Windows in containers or VMs. That includes vSphere and VMware Cloud on AWS as options. Transform modernizes the code; deployment target stays your choice—on‑prem, cloud, or hybrid.</p>
+<h3 id="maintainingquality">Maintaining Quality</h3>
+<p>Treat Transform like a disciplined teammate with clear rules. PR per change‑set, required code reviews, unit and integration tests, SBOM plus container scans, and staged rollouts with canaries. Measure P95 and P99, error rates, and cost before and after.</p>
+<h3 id="largemonoliths">Large Monoliths</h3>
+<p>Start by upgrading shared libraries and low‑risk edges first in sequence. Keep APIs stable with a facade while you carve out pieces. Use the Strangler Fig approach so you don’t bet the farm on one big‑bang cutover.</p>
+<h3 id="ideandci">IDE and CI</h3>
+<p>Lean on SDK‑style projects and dotnet CLI commands for consistency. Then dev boxes, GitHub Actions, Azure DevOps, Bitbucket, or AWS CodeBuild all run the same steps.</p>
+<h2 id="10daypilotplan">10 Day Pilot Plan</h2>
+<ul>
+<li>Day 1: Pick one bounded service; define success metrics like build time, P95, image size.</li>
+<li>Day 2: Baseline tests and benchmarks; add smoke tests if anything’s missing.</li>
+<li>Day 3–4: Run analyzers; prep a migration branch and a clean CI pipeline.</li>
+<li>Day 5: Apply AWS Transform for .NET; generate diffs you can actually review.</li>
+<li>Day 6: Review PRs; fix build and test breaks; document key decisions.</li>
+<li>Day 7: Containerize; push to staging; run load tests to stress it.</li>
+<li>Day 8: Security scans with SAST, SBOM, and image scans; fix criticals now.</li>
+<li>Day 9: Canary release; watch dashboards; compare all the metrics carefully.</li>
+<li>Day 10: Retrospective; write a playbook; queue the next service in line.</li>
+</ul>
+<p>You modernized one service without stalling the roadmap. Rinse, standardize, and scale up.</p>
+<p>Modernization’s dirty secret: it’s not the refactor that hurts—it’s the uncertainty. AWS Transform for .NET shrinks the unknowns. You get fast, reviewable changes, fewer manual edits, and a safe path to modern hosting.</p>
+<p>You don’t need a year‑long rewrite. You need a repeatable pipeline that upgrades services one by one. Use metrics and guardrails so wins compound without chaos.</p>
+<p><em>Next step:</em> pick the service you’re least afraid of. Ten days from now, you’ll have your blueprint.</p>
+<p>One more nudge: schedule the kickoff. <em>Calendars don’t migrate themselves.</em></p>
+<p><em>2005: Netflix offered to sell for $50M. Blockbuster laughed. Today, automation does the laughing—your legacy code won’t.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://dotnet.microsoft.com/platform/support/policy/dotnet-core">Microsoft .NET Support Policy</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/core/whats-new/dotnet-8">What’s new in .NET 8</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/core/porting/upgrade-assistant-overview">.NET Upgrade Assistant overview</a></li>
+<li><a href="https://aws.amazon.com/porting-assistant-dotnet/">Porting Assistant for .NET (AWS)</a></li>
+<li><a href="https://aws.amazon.com/microservice-extractor-dotnet/">Microservice Extractor for .NET (AWS)</a></li>
+<li><a href="https://aws.amazon.com/q/developer/">Amazon Q Developer (includes Code Transformation info)</a></li>
+<li><a href="https://aws.amazon.com/q/developer/pricing/">Amazon Q Developer pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/dotnet.html">AWS Lambda for .NET</a></li>
+<li><a href="https://aws.amazon.com/containers/">Containers on AWS (ECS/EKS)</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/core/docker/">Containerize a .NET app</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/core/deploying/native-aot/">.NET Native AOT docs</a></li>
+<li><a href="https://opentelemetry.io/docs/languages/net/">OpenTelemetry for .NET</a></li>
+<li><a href="https://aws.amazon.com/otel/">AWS Distro for OpenTelemetry</a></li>
+<li><a href="https://aws.amazon.com/vmware/">VMware Cloud on AWS</a></li>
+<li><a href="https://github.com/CoreWCF/CoreWCF">CoreWCF (WCF on modern .NET)</a></li>
+<li><a href="https://learn.microsoft.com/dotnet/architecture/grpc-for-wcf-developers/">gRPC for WCF developers (Microsoft guide)</a></li>
+<li><a href="https://aws.amazon.com/codeguru/security/">AWS CodeGuru Security</a></li>
+<li><a href="https://aws.amazon.com/inspector/">Amazon Inspector (container scanning)</a></li>
+<li><a href="https://codeql.github.com/">CodeQL (static analysis)</a></li>
+<li><a href="https://martinfowler.com/bliki/StranglerFigApplication.html">Strangler Fig Application (Martin Fowler)</a></li>
+<li><a href="https://dora.dev/research/">DORA DevOps Research</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-transform-dotnet.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq41c5.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+.NET+Upgrades+Faster+with+AWS+Transform&amp;pi=315761037034&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=315761037034&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-transform-dotnet&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-transform-dotnet?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:02 GMT -->
+</html>

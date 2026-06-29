@@ -1,0 +1,383 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/bedrock-agent-plugins?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:12:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Build Production AI Agents Faster With Amazon Bedrock Plugins</title>
+    <link rel="canonical" href="bedrock-agent-plugins.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore new Amazon Bedrock agent plugins to integrate tools, custom APIs, and workflows. See AWS Bedrock Agents examples and APIs to build faster within AWS.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build Production AI Agents Faster With Amazon Bedrock Plugins",
+        "datePublished": "2026-02-23T21:32:45Z",
+        "dateModified": "2026-02-23T21:32:45.512Z",
+        "mainEntityOfPage": "https://remktr.com/blog/bedrock-agent-plugins",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-23-2026-09-23-43-0375-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="bedrock-agent-plugins.html">Build Production AI Agents Faster With Amazon Bedrock Plugins</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 23, 2026 9:32:45 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’re done duct-taping APIs to your LLM. Good. Because Amazon Bedrock just shipped agent plugins that meet you where you build. Inside AWS, server-side, and wired into tools your org already uses.</p>
+<p>The headline: pre-built connectors for Salesforce, ServiceNow, and Microsoft Teams. A simplified SDK for custom plugins, with zero-code options via AWS Lambda. Plus server-side execution that keeps data movement minimal and predictable. <em>Translation: fewer flaky hops, more reliable workflows, and agents you can ship without a 50-tab debug session.</em></p>
+<p>Even better, this builds on Bedrock’s server-side tool use in the Responses API. So your agents can web search, execute code, and talk to databases without leaving AWS boundaries. <em>That’s the gap between a cool demo and a durable system.</em></p>
+<p>You want examples, not hype. Below, you’ll get a concrete path. Where to start (amazon bedrock agents documentation + workshop). How to plug in real systems (aws bedrock agent api + GitHub examples). And what to watch on security, latency, and cost.</p>
+<p><em>Here’s the vibe: practical steps, minimal jargon, and patterns you can copy this week.</em> Think of this like a build guide from a teammate. One who already blew up staging so you don’t have to.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>New Bedrock agent plugins integrate Salesforce, ServiceNow, and Teams out of the box.</li>
+<li>Build custom plugins fast via a simplified SDK or zero-code Lambda wiring.</li>
+<li>Everything runs server-side in AWS for lower latency and tighter control.</li>
+<li>Use the Responses API for tool use (search, code, DB) without leaving AWS.</li>
+<li>Get started fast with the amazon bedrock agents documentation, workshop, and GitHub examples.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-23-2026-09-24-42-5893-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="meettheplugins">Meet the plugins</h2>
+<h3 id="prebuiltconnectors">Pre built connectors</h3>
+<p>You can now drop in pre-built plugins for Salesforce, ServiceNow, and Microsoft Teams. No fragile one-off scripts. Think common ops: fetch a Salesforce Account, open a ServiceNow incident, or post a Teams message with context. Because execution stays inside AWS, tokens and payloads don’t bounce through random layers.</p>
+<p><em>First-hand example:</em> imagine a support triage agent that gets escalated. It pulls customer entitlements from Salesforce, opens a ServiceNow P1 with logs, then posts a Teams alert to on-call. All in one flow. No browser automations. No local executors.</p>
+<p>If you’ve been burned by brittle UI automations or OAuth token spaghetti, <em>breathe out.</em> You map an action, hand it a clean request, and let AWS run the path. Less glue code. Fewer “why did prod 500 at 2 a.m.” messages. A faster path from prototype to something ops actually trusts.</p>
+<p>What this looks like in practice:</p>
+<ul>
+<li>Input: the LLM decides to call fetch_account with a customer email.</li>
+<li>Plugin: the Salesforce connector translates that into the right SOQL or API call.</li>
+<li>Output: structured JSON—name, tier, open opportunities, last renewal date.</li>
+<li>Follow-on: the agent chains that into create_incident on ServiceNow, then notifies Teams.</li>
+</ul>
+<p><em>You still define what “good” means.</em> Fields, validation, and fallbacks. But the plumbing isn’t your full-time job anymore.</p>
+<h3 id="customplugins">Custom plugins</h3>
+<p>When the pre-built set doesn’t cover your stack, use the simplified SDK. Define inputs and outputs and wire business logic fast. If you don’t want much code, zero-code via AWS Lambda works great. Map a plugin action to a Lambda function with configuration. Bring any REST or GraphQL API. Version your plugin like a microservice.</p>
+<p><em>A sane way to design custom actions:</em></p>
+<ul>
+<li>Start with the business verb: create<em>refund, compute</em>risk<em>score, sync</em>contract.</li>
+<li>Define a tight request schema and a predictable response. Include success flag, payload, and error.</li>
+<li>Add validation rules: required fields, enums for types, and numeric ranges.</li>
+<li>Plan for partial failure. Can you return a warning while still finishing the task?</li>
+</ul>
+<p><em>Operational tips for Lambda-backed actions:</em></p>
+<ul>
+<li>Keep timeouts realistic. Five to fifteen seconds for CRUD, longer for batch. Use retries with backoff.</li>
+<li>Set memory high enough to dodge cold-start drag during spikes. Measure and right-size later.</li>
+<li>Store secrets in AWS Secrets Manager and fetch at init, not on every call.</li>
+<li>Normalize logs. One JSON per line, with action, correlation<em>id, and duration</em>ms.</li>
+</ul>
+<h3 id="serversidetooluse">Server side tool use</h3>
+<p><em>Here’s the kicker: plugins execute within AWS boundaries.</em> Pair that with server-side tool use in the Bedrock Responses API. Now your agent can do retrieval, web calls, or light code runs without spraying secrets across clients. Fewer network hops equals tighter latency and fewer mystery failures. It’s the gap between “works on my laptop” and “passes on-call.”</p>
+<p>This also plays nicely with governance. Control egress with allowlisted domains. Route private traffic over VPC endpoints or PrivateLink. Leave a complete audit trail in CloudTrail and CloudWatch. When compliance asks where a token went, you have a map. When security asks who touched a record, you have logs.</p>
+<p><em>One underrated benefit: consistent schemas across tools.</em> If everything returns clean JSON, the LLM hallucinates less. Define a shared pattern—status, data, error—and stick to it across plugins. The agent learns faster, and your dashboards get cleaner signals.</p>
+<h2 id="designworkflows">Design workflows</h2>
+<h3 id="planthetoolgraph">Plan the tool graph</h3>
+<p>Sketch your agent as a tool graph. Context assembly → decision → action(s) → verification → user response. Each action is a plugin call with explicit contracts. Keep actions small and composable. Think single-responsibility functions. Then you can retry safely and observe performance per step.</p>
+<p><em>First-hand example:</em> a collections agent runs four steps. One, fetch<em>account from Salesforce. Two, compute</em>risk with a code tool. Three, create_case in ServiceNow. Four, notify in Teams. Each returns structured JSON the LLM can reason over.</p>
+<p><em>Turn that sketch into something you can ship:</em></p>
+<ul>
+<li>Write the happy path, then immediately list three failure modes per action.</li>
+<li>Assign SLAs per step, like fetch_account p95 under one second. Track them in metrics.</li>
+<li>Decide which fields must be verified before moving on. Entitlement_tier present and not null.</li>
+<li>Add a final verification tool that sanity-checks answers before the agent responds.</li>
+</ul>
+<h3 id="handlefailuresandretriesupfront">Handle failures and retries upfront</h3>
+<p><em>Production reality: APIs throttle, tokens expire, and schemas drift.</em> Treat plugin errors as first-class citizens. Add retry policies with jitter and idempotency keys for writes. Use circuit breakers to avoid cascading meltdowns. Keep human-in-the-loop paths for sensitive actions.</p>
+<p><em>How to make retries boring, in a good way:</em></p>
+<ul>
+<li>Use exponential backoff with jitter. Base 200–500 ms, and cap after a few attempts.</li>
+<li>Add idempotency keys. A stable hash of inputs so create_case doesn’t double-create.</li>
+<li>Build a dead-letter path. When retries fail, persist the payload for manual review.</li>
+<li>Emit typed errors. Throttle, timeout, auth<em>failure, bad</em>request. Don’t just 500 everything.</li>
+</ul>
+<p><em>For human approvals, keep the loop fast.</em> Show a compact summary, the action, and the diff. One click to approve or reject, with a reason. Log it all.</p>
+<h3 id="bakeinobservabilityandevals">Bake in observability and evals</h3>
+<p>Log plugin inputs and outputs, minus secrets, and latencies too. Track per-action success rates. That’s how you find the flaky edge. Run regression evals when you change prompts or roll new plugin versions. Your north star is measurable task success, not token-by-token eloquence.</p>
+<p><em>What “good” looks like:</em></p>
+<ul>
+<li>Metrics: p50 and p95 latency, error rates, retries, and time-to-first-byte.</li>
+<li>Traces: a correlation_id across the user request, model calls, and plugin actions.</li>
+<li>Logs: single-line JSON with action, status, duration<em>ms, and request</em>size fields.</li>
+<li>Evals: a small gold set, twenty to one hundred tasks. Re-run on every change.</li>
+</ul>
+<p><em>Bonus: add synthetic tests that ping critical actions hourly with safe data.</em> If Salesforce auth dies at 3 a.m., you’ll know before users do.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-23-2026-09-25-30-9567-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="fromhelloworldtoprod">From hello world to prod</h2>
+<h3 id="startwithdocsandworkshop">Start with docs and workshop</h3>
+<p>Don’t freestyle. The amazon bedrock agents documentation walks through key concepts. Agents, permissions, and runtime behaviors. Pair that with the hands-on amazon bedrock agents workshop. You’ll learn action design, prompting patterns, and safe rollouts. Together, it’s your aws bedrock agents tutorial without guesswork.</p>
+<ul>
+<li>Docs: amazon bedrock agents documentation → see agents, routing, and deployment fundamentals.</li>
+<li>Workshop: amazon bedrock agents workshop → build an end-to-end agent with evaluation checkpoints.</li>
+</ul>
+<p><em>Treat the workshop like flight school.</em> Do the drills, then adapt the patterns. You’ll leave with a clear model. How the Responses API calls tools. How to scope IAM permissions. Where to add guardrails so the agent doesn’t color outside the lines.</p>
+<h3 id="grabgithubexamples">Grab GitHub examples</h3>
+<p>Search amazon bedrock agent plugins github. Or clone the official aws-samples repo with agents examples. You’ll find reference architectures, Lambda bridges, and prompt patterns you can adapt. Fork it, tweak config, wire your own APIs, and ship a proof-of-concept this week.</p>
+<ul>
+<li>Look for aws bedrock agents example projects with Salesforce and ServiceNow scaffolding.</li>
+<li>Keep examples close to prod: environment variables, least-privilege IAM, and CI hooks.</li>
+</ul>
+<p><em>If you’re on a deadline, start with multi-step tool use examples.</em> Swap the mocked API with your dev endpoint. Add minimal validation. Then drive it through the Bedrock Agent API. Set a success metric, like create a valid P1 in under sixty seconds. Iterate from there.</p>
+<h3 id="usethebedrockagentapi">Use the Bedrock Agent API</h3>
+<p>Spend time with the aws bedrock agent api and the Responses API. Treat plugin operations as typed functions with clear schemas. Return machine-readable outputs the model can ground on. <em>Pro tip: standardize one JSON schema style across plugins.</em> Don’t make the LLM switch payload formats.</p>
+<p>Schema hygiene checklist:</p>
+<ul>
+<li>Use consistent keys and casing. Snake_case or camelCase—pick one and stick with it.</li>
+<li>Return a status field, ok or error, plus an error object with code and message.</li>
+<li>Prefer enums for categorical values, like severity P1, P2, or P3.</li>
+<li>Keep payloads small. Include only what the next action needs.</li>
+</ul>
+<p><em>And yes, version your actions.</em> A tiny v2 suffix beats silent field changes every time.</p>
+<h2 id="securitygovernanceandcost">Security governance and cost</h2>
+<h3 id="stayinsideawsboundaries">Stay inside AWS boundaries</h3>
+<p>Because plugins execute server-side in AWS, you cut risky round-trips. Keep data paths predictable and restrict egress where you can. Document which actions may call external services. Use AWS-native identity for invoked services and rotate credentials on a tight schedule.</p>
+<p><em>First-hand example:</em> for a plugin that writes to ServiceNow, scope it tightly. Limit to one incident table endpoint. Require explicit parameters, like severity, with validation before dispatch. No free-form execute-anything blind spots.</p>
+<p><em>Practical guardrails to add day one:</em></p>
+<ul>
+<li>IAM least privilege for Lambda and API calls. Deny wildcard write scopes.</li>
+<li>Secrets in AWS Secrets Manager with automatic rotation where possible.</li>
+<li>VPC endpoints or PrivateLink for internal calls. Restrict outbound to known domains.</li>
+<li>KMS for encrypting sensitive data at rest and in transit where supported.</li>
+</ul>
+<h3 id="guardrailspoliciesandapprovals">Guardrails policies and approvals</h3>
+<p>Pair plugins with model guardrails. Enforce content filters and safety checks, always. Your agent should never suggest actions outside policy. For sensitive actions—refunds, entitlements, account closures—use an approver workflow. Log who approved, what changed, and the execution trace. Governance is easier when actions are small and named.</p>
+<p><em>Make your policies explicit in prompts and code:</em></p>
+<ul>
+<li>Only create P1 tickets if entitlement<em>tier is Enterprise and error</em>count is above N.</li>
+<li>Never expose access tokens in responses. Mask credentials by default.</li>
+<li>For refunds above $X, request human approval and halt until approved.</li>
+</ul>
+<p>Then back those rules with runtime checks in the plugin. <em>The model isn’t your last defense.</em></p>
+<h3 id="latencyandcosttactics">Latency and cost tactics</h3>
+<ul>
+<li>Consolidate actions to reduce unnecessary sequential calls.</li>
+<li>Cache read-only calls, like account lookups, when policy allows.</li>
+<li>Stream responses while actions run in parallel where it’s feasible.</li>
+<li>Measure model token usage and pick smaller context windows when possible.</li>
+<li>Keep third-party API calls minimal and batched. Those costs add up quietly.</li>
+</ul>
+<p><em>Also, track fan-out.</em> One question that fans into five tools across two regions is pricey. It can also wreck your p95. Audit your most common paths monthly. Axe the waste.</p>
+<h2 id="pitstop">Pit stop</h2>
+<ul>
+<li>Pre-built plugins speed up Salesforce, ServiceNow, and Teams integration with server-side execution.</li>
+<li>Custom plugins come together fast via SDKs or Lambda-based zero-code wiring.</li>
+<li>Treat your agent as a tool graph: small actions, retries, and evals.</li>
+<li>Start with docs, the workshop, and GitHub to hit production faster.</li>
+<li>Keep governance tight: least-privilege, approvals for sensitive actions, and clear logs.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="pluginstoolsactionlogic">Plugins tools action logic</h3>
+<p>Think of plugins as the integration layer. They’re well-defined actions that call third-party or custom APIs. Tool use in the Responses API is how the model decides to call an action. Your action logic, often in Lambda, encodes the business rules behind the API call.</p>
+<h3 id="authenticatetosalesforceservicenowteams">Authenticate to Salesforce ServiceNow Teams</h3>
+<p>Use the standard auth flows those platforms support, usually OAuth 2.0. Configure credentials server-side and scope them to least privilege. Plugins execute inside AWS, so tokens don’t traverse client devices. Rotate keys regularly and monitor failed auth attempts.</p>
+<h3 id="keepdataprivateusingtools">Keep data private using tools</h3>
+<p>Yes. With server-side tool use, your agent can search, run code, and hit databases inside AWS. For private data, expose APIs through controlled endpoints. Restrict egress to approved domains. Avoid secrets in prompts. Use server-managed credentials.</p>
+<h3 id="whichmodelscalltools">Which models call tools</h3>
+<p>Model support varies by provider. Many popular Bedrock models support tool use via the Responses API. Check the model’s capabilities page in the amazon bedrock agents documentation. Verify input and output limits before building complex multi-step actions.</p>
+<h3 id="monitoranddebuginproduction">Monitor and debug in production</h3>
+<p>Track per-action latency, error types, and success rates. Log structured inputs and outputs for your plugins, without secrets. For Lambda-backed actions, use standard AWS logging and metrics. Add synthetic runs for critical paths. Run evals before releasing prompt or plugin changes.</p>
+<h3 id="whatdoipayfor">What do I pay for?</h3>
+<p>You pay for model inference, plugin execution, and any third-party API usage. Watch token counts, redundant calls, and fan-out patterns. Small inefficiencies compound fast at scale.</p>
+<h3 id="needanorchestratorstepfunctions">Need an orchestrator Step Functions</h3>
+<p>Not required, but helpful for complex and long-running tasks. Also for strict approval gates. Keep the agent focused on reasoning and short actions. Use an orchestrator when you need state, timers, or retries over minutes to hours.</p>
+<h3 id="preventovercallingtools">Prevent over calling tools</h3>
+<p>Give the model crisp tool descriptions. Include cost and latency hints in system prompts. Return informative fields from tools, like cache<em>valid</em>until. Add rate limits per user or task at the API layer. Track a short-term memory of calls to avoid loops.</p>
+<h3 id="whatifmyschemachanges">What if my schema changes?</h3>
+<p>Version your actions. Keep backward-compat prompts during a deprecation window. Add contract tests to ensure the agent still handles valid fields. Don’t ship breaking changes without a migration plan. Thats how on-call pages happen.</p>
+<h2 id="launchyourfirstbedrockplugin">Launch your first Bedrock plugin</h2>
+<ul>
+<li>Pick a narrow, high-impact task. Create a ServiceNow ticket from a Salesforce alert.</li>
+<li>Read the amazon bedrock agents documentation and note the IAM requirements.</li>
+<li>Complete the amazon bedrock agents workshop to learn core patterns.</li>
+<li>Clone aws-samples GitHub. Look for aws bedrock agents example projects.</li>
+<li>Define two to three plugin actions with clear request and response schemas.</li>
+<li>Wire actions to Lambda or SDK and test via the aws bedrock agent api.</li>
+<li>Add retries, guardrails, and an approval step. Ship a pilot to one team.</li>
+</ul>
+<p><em>Next-level in week two:</em></p>
+<ul>
+<li>Add observability with metrics, traces, and structured logs plus a 20-case eval set.</li>
+<li>Optimize prompts for fewer tool calls. Cache obvious reads.</li>
+<li>Run a load test to check p95 latency and throttle behavior.</li>
+<li>Tighten IAM and egress rules before expanding access.</li>
+</ul>
+<p><em>Wrap-up thought: Integration beats invention.</em> If your agent already talks to Salesforce, ServiceNow, and Teams, securely, server-side, you’re not building an LLM app. You’re upgrading workflows you’ve refined for years. That’s why these plugins matter. They compound what you already do well.</p>
+<p>Want to see how teams turn these patterns into real impact? Explore our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html">Agents for Amazon Bedrock (User Guide)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/what-is-bedrock.html">Amazon Bedrock API Reference</a></li>
+<li><a href="https://catalog.workshops.aws/bedrock-agents/en-US">Amazon Bedrock Agents Workshop</a></li>
+<li><a href="https://github.com/aws-samples/amazon-bedrock-samples">AWS Samples – Amazon Bedrock examples (GitHub)</a></li>
+<li><a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">AWS Lambda (Developer Guide)</a></li>
+<li><a href="https://aws.amazon.com/blogs/aws/agents-for-amazon-bedrock/">AWS News Blog – Agents for Amazon Bedrock</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Guardrails for Amazon Bedrock</a></li>
+<li><a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html">AWS Secrets Manager</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html">AWS Identity and Access Management (IAM) Best Practices</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html">Amazon CloudWatch Logs</a></li>
+<li><a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html">AWS X-Ray</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html">AWS PrivateLink</a></li>
+<li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html">AWS CloudTrail</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="bedrock-agent-plugins.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq6c4f.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Build+Production+AI+Agents+Faster+With+Amazon+Bedrock+Plugins&amp;pi=318160729807&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=318160729807&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fbedrock-agent-plugins&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/bedrock-agent-plugins?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:12:49 GMT -->
+</html>

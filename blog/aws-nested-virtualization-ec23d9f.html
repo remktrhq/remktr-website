@@ -1,0 +1,427 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-nested-virtualization-ec2?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Nested Virtualization on EC2: Ship Faster, Simulate More</title>
+    <link rel="canonical" href="aws-nested-virtualization-ec2.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Enable AWS nested virtualization on Amazon EC2 to run KVM or Hyper-V inside VMs. Accelerate CI/CD, mobile testing, and simulations—no bare-metal required.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Nested Virtualization on EC2: Ship Faster, Simulate More",
+        "datePublished": "2026-02-23T22:37:52Z",
+        "dateModified": "2026-02-23T22:37:53.041Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-nested-virtualization-ec2",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-23-2026-10-28-30-6750-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-nested-virtualization-ec2.html">Nested Virtualization on EC2: Ship Faster, Simulate More</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 23, 2026 10:37:52 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p><em>“Dev teams don’t want more servers; they want more experiments per hour.”</em></p>
+<p>You’ve been told to move faster without blowing up costs. Cute. Meanwhile, your CI is backlogged. Your Android emulators crawl. Your hardware‑in‑the‑loop tests are chained to a lab bench. The old answer was “get a bare‑metal host.” Translation: wait weeks, pay more, and babysit it.</p>
+<p>Now you’ve got a better path: nested virtualization on virtual Amazon EC2 instances. Run KVM or Hyper‑V inside an EC2 VM. Spin up nested VMs for mobile emulators, automotive simulations, or WSL2 dev environments. <em>No bare metal, no drama.</em></p>
+<p>This changes how you build and test. You can carve isolated, throwaway sandboxes inside a single EC2 instance. You can parallelize heavy pipelines. You can run complex system tests that actually look like production. You keep the elasticity and pricing of standard EC2. You also unlock the power of “VMs inside VMs.”</p>
+<p>If you’ve ever envied GCP’s nested virtualization or wrangled Azure’s Hyper‑V‑in‑VM, your moment on AWS just arrived. Let’s break down what it is, why it matters, and how to use it without stepping on rakes.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Run KVM or Hyper‑V inside virtual Amazon EC2 instances—no bare metal required.</li>
+<li>Best for CI speedups, mobile emulators, hardware sims, and WSL2 on Windows workstations.</li>
+<li>Expect a performance tax; benchmark KVM/Hyper‑V guests for your workload.</li>
+<li>Compare clouds: GCP and Azure already support nested virt; AWS now joins in select families.</li>
+<li>Mind licensing (Windows/SQL), security boundaries, and network/NAT complexity.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-23-2026-10-29-13-8096-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whatnestedreallymeans">What Nested Really Means</h2>
+<h3 id="quickdefinition">Quick definition</h3>
+<p>Nested virtualization lets you run a hypervisor inside a virtual machine. So your EC2 instance hosts its own VMs. Practically, that means spinning KVM guests on a Linux EC2 instance. Or enabling Hyper‑V and WSL2 on a Windows EC2 box. Microsoft says it well: “Nested virtualization is a feature that allows you to run Hyper‑V inside of a Hyper‑V virtual machine.” That’s the mental model. Only now applied on AWS.</p>
+<h3 id="whynowonec2">Why now on EC2</h3>
+<p>Historically, AWS only exposed virtualization extensions on bare‑metal instances. Think Intel VT‑x or AMD‑V. That limited your options when you wanted cloud elasticity plus VM‑in‑VM tests. With nested virtualization on virtual EC2, you split the difference. You keep on‑demand scaling and managed fleet behaviors. You also upgrade your toolbox with real hypervisors inside your instance.</p>
+<h3 id="thepayoffinplainenglish">The payoff in plain English</h3>
+<ul>
+<li>Fewer environment mismatches: Package OS, kernel, and drivers in a nested VM. Not just containers.</li>
+<li>Faster parallelization: Fire up dozens of short‑lived test VMs per host.</li>
+<li>Stronger isolation for “spicy” builds: Test kernel modules, drivers, and low‑level SDKs safely.</li>
+<li>Cleaner teardown: Kill the nested VMs. Keep the parent EC2 around for the next run.</li>
+</ul>
+<p><em>“VMs inside VMs” isn’t cute. It’s how you keep quality high while shipping faster.</em></p>
+<p>Think of it like power tools for your pipelines. Containers are great for apps and services. Nested VMs add the heavy‑duty layer when you test kernels or boot steps. Or device drivers and things that live below the app line. You get reproducibility without lugging around a hardware lab.</p>
+<h3 id="nestedperfectvsoverkill">Nested Perfect vs Overkill</h3>
+<ul>
+<li>Perfect for: CI pipelines that need clean OS images, Android emulators, WSL2 dev boxes, firmware tests, multi‑OS matrices, and teaching labs where students need full VMs.</li>
+<li>Overkill for: Simple web app builds, container‑only test suites, or cases where Docker and namespaces already give enough isolation.</li>
+</ul>
+<h2 id="realworkloadseasierovernight">Real Workloads Easier Overnight</h2>
+<h3 id="mobiletestingatscale">Mobile testing at scale</h3>
+<p>If you build mobile apps, you know emulators can be sluggish or finicky. With nested KVM, you can run fully accelerated Android emulators in parallel. Each nested VM matches a device profile like CPU, ABI, screen, and OS version. Then you churn through UI tests at speed. You aren’t stuck on one monolith emulator host. You spread suites across nested VMs and autoscale EC2 parents by load.</p>
+<p><em>Pro tip: Combine emulator snapshots with parallel runners. You’ll cut cold‑starts and shrink wall‑clock test time.</em></p>
+<p>Practical playbook:</p>
+<ul>
+<li>Shape the parent: Pick a compute‑optimized EC2 with enough vCPU and memory headroom. Leave 10–20% for the host OS and hypervisor.</li>
+<li>Size the guests: Give each emulator VM 2–4 vCPUs, 4–8 GB RAM, and a fast virtio SSD. Use cloud‑init to pre‑seed SDK tools and images.</li>
+<li>Keep artifacts close: Store emulator images and test bundles on NVMe instance store. Or warmed gp3 volumes to cut startup latency.</li>
+<li>Run the matrix: Split by API level, ABI, and screen density. Use ADB over TCP inside each guest for clean orchestration.</li>
+<li>Monitor the basics: CPU steal time, I/O wait, and emulator frame pacing. If you see contention, consolidate to fewer, larger guests.</li>
+</ul>
+<p>One gotcha: iOS builds and simulators still require macOS. Nested virtualization on EC2 helps Android and cross‑platform backends. But keep your macOS fleet, or a macOS cloud, for iOS‑specific steps.</p>
+<h3 id="automotiveandhardwaresimulations">Automotive and hardware simulations</h3>
+<p>R&amp;D teams need to simulate ECUs, sensors, and in‑vehicle networks without waiting for rigs. Nested virtualization lets you isolate each subsystem in its own VM. For example a CAN bus node or infotainment OS image. You wire them together virtually. Then run integration tests that mirror real hardware timing. When a test corrupts state, your lab doesn’t cry. You nuke the nested VM and rehydrate.</p>
+<p>How teams wire this up:</p>
+<ul>
+<li>Use KVM guests to model ECUs with qemu‑system‑x86_64 or qemu‑system‑arm. Then boot your embedded OS images.</li>
+<li>Emulate CAN with SocketCAN using vcan interfaces and can‑utils. Stitch networks with libvirt‑defined bridges.</li>
+<li>Reproduce timing: Pin vCPUs for time‑sensitive nodes. Throttle with tc or netem for realistic latency and jitter.</li>
+<li>Capture traces: Mirror traffic to a diagnostics VM running Wireshark or candump. Or your in‑house telemetry collector.</li>
+</ul>
+<p><em>The win isn’t just speed. It’s repeatability.</em> Tests that used to need a booked stand in the lab now run in parallel. They also leave clean logs every time.</p>
+<h3 id="wsl2andwindowsdevworkstations">WSL2 and Windows dev workstations</h3>
+<p>WSL2 relies on Hyper‑V virtualization. With nested virtualization on Windows EC2, you can finally run WSL2 reliably inside your cloud workstation. That unlocks Linux toolchains like Docker, clang, and apt next to your Windows IDE. You also get snapshots and rollback. It’s great for orgs trialing Windows‑first desktops that still need Linux‑native tools.</p>
+<p>Tips for smooth WSL2‑in‑EC2:</p>
+<ul>
+<li>Enable Hyper‑V and Virtual Machine Platform. Then set WSL2 as default with wsl --set-default-version 2.</li>
+<li>Put your repo inside the Linux filesystem, like \wsl$ or /home, for faster file I/O.</li>
+<li>For Docker Desktop, select the WSL backend. Limit resource caps to leave headroom for the parent VM.</li>
+<li>Snapshot the Windows AMI after base toolchains are installed. It speeds up future workstations.</li>
+</ul>
+<h2 id="awsvsgcpvsazure">AWS vs GCP vs Azure</h2>
+<h3 id="featureavailability">Feature availability</h3>
+<ul>
+<li>GCP: Publicly supports nested virtualization for KVM on select Intel and AMD types. It’s a staple for specialized CI/CD and teaching labs.</li>
+<li>Azure: Supports Hyper‑V nested virtualization on many VM families like Dv3 or Ev3+. It’s well documented and widely used for WSL2 and labs.</li>
+<li>AWS: Nested virtualization on virtual EC2 brings parity for common use cases. Think KVM on Linux and Hyper‑V on Windows. Support is family and region dependent. Confirm for your instance type and AMI.</li>
+</ul>
+<p><em>Bottom line: If you’ve been weighing “aws nested virtualization kvm” vs “gcp nested virtualization,” the field just leveled. Cloud choice now leans on price, instance supply, and ecosystem fit. Not “can I even run a nested VM?”</em></p>
+<h3 id="featureparitycaveatstocheck">Feature parity caveats to check</h3>
+<ul>
+<li>Live migration and maintenance events: Learn how each cloud handles host maintenance while guests run.</li>
+<li>CPU models and flags: Confirm the vCPU shows the flags your hypervisor needs. vmx or svm and ept or npt.</li>
+<li>Storage options: Validate performance for local NVMe and instance store vs networked volumes. EBS, Persistent Disk, or Managed Disks.</li>
+</ul>
+<h3 id="performancetaxcostmath">Performance tax cost math</h3>
+<p>Any extra hypervisor layer adds overhead. Rule of thumb: nested virt is great for CI, emulators, and sims. Think twice for latency‑critical production paths. You’ll want to:</p>
+<ul>
+<li>Benchmark with your exact kernel and QEMU or libvirt or Hyper‑V version. Also storage driver and network model.</li>
+<li>Prefer NVMe‑backed storage for nested VM disks. Cache aggressively when safe.</li>
+<li>Right‑size hosts: Fewer, bigger nested VMs often beat a swarm of tiny ones for I/O‑heavy tests.</li>
+</ul>
+<p>Cost angle: Consolidating 10 emulators into one c7i.2xlarge may beat 10 small instances. Especially if you keep images warm. Do the spreadsheet.</p>
+<p>A simple test plan:</p>
+<ul>
+<li>CPU: Run parallel compile jobs or sysbench in guests. Compare to a host‑only baseline.</li>
+<li>Disk: Use fio inside guests with direct I/O. Test random read and write plus mixed loads.</li>
+<li>Network: Run iperf3 guest↔guest and guest↔host. Note any throughput drops or latency spikes.</li>
+<li>Oversubscription: Increase guest count until CPU ready time or steal time rises. That’s your ceiling.</li>
+</ul>
+<h2 id="kvmandhypervsetup">KVM and Hyper V Setup</h2>
+<h3 id="prereqsandinstancechoices">Prereqs and instance choices</h3>
+<ul>
+<li>Pick a supported EC2 family and region. Confirm Intel VMX or AMD SVM is exposed to the guest.</li>
+<li>Use an HVM AMI like Amazon Linux 2023, Ubuntu 22.04+, or Windows Server 2019 or 2022. Paravirtual AMIs won’t work.</li>
+<li>Ensure your security baseline: patched kernel, up‑to‑date hypervisor, and least‑privilege IAM for automation.</li>
+</ul>
+<p>Storage layout pointers:</p>
+<ul>
+<li>Fast and ephemeral: Instance store NVMe is great for scratch disks and emulator images. Back up or rehydrate on reboot.</li>
+<li>Durable: Use gp3 volumes for VM images you want to persist. Tune IOPS and throughput to your workload.</li>
+<li>Caching: Use writeback caches in guests only when you can tolerate data loss on crash.</li>
+</ul>
+<h3 id="kvmonlinux">KVM on Linux</h3>
+<ul>
+<li>Verify CPU flags: On the EC2 instance, check for vmx or svm in /proc/cpuinfo.</li>
+<li>Install KVM stack: On Ubuntu, apt install qemu‑kvm libvirt‑daemon‑system virt‑manager. On Amazon Linux, use dnf or yum.</li>
+<li>Enable nested: Modern kernels often ship nested=1 by default when hardware allows. If needed, set intel<em>kvm.nested=1 or amd</em>kvm.nested=1 and reload.</li>
+<li>Create guests: Use cloud‑init images for quick boot. Attach virtio disks and paravirt network for speed. Script with virsh or Terraform for repeatability.</li>
+</ul>
+<p>Extra niceties:</p>
+<ul>
+<li>Use virtio‑net and virtio‑scsi. Avoid emulated devices when possible.</li>
+<li>Define a libvirt network for NAT. Add macvtap or a bridge for guests that need VPC reachability.</li>
+<li>Pre‑bake a golden image with qemu‑guest‑agent for clean shutdowns and metadata.</li>
+</ul>
+<h3 id="hypervandwsl2onwindows">Hyper V and WSL2 on Windows</h3>
+<ul>
+<li>Add Hyper‑V and Virtual Machine Platform features via PowerShell using Enable‑WindowsOptionalFeature.</li>
+<li>Confirm that virtualization extensions are available to the Windows guest.</li>
+<li>For WSL2, install per Microsoft docs. Set wsl --set-default-version 2 and install your distro. Then validate Docker Desktop with the WSL2 backend.</li>
+</ul>
+<p>If you’ve scoured “nested virtualization amazon ec2 github” for examples, you’ll find helpful snippets. Terraform and cloud‑init to bootstrap libvirt networks, seed images, and pre‑warm emulator snapshots. Great starting points for a golden AMI.</p>
+<h2 id="securitylicensinggotchas">Security Licensing Gotchas</h2>
+<h3 id="securityandisolation">Security and isolation</h3>
+<ul>
+<li>Trust boundaries: Your nested VMs are isolated from each other by KVM or Hyper‑V. They’re also isolated from the parent by the guest OS. Still, your blast radius is the parent EC2. Harden it.</li>
+<li>Secrets: Keep tokens and signing keys out of nested VM disks. Fetch at runtime with short‑lived credentials.</li>
+<li>Snapshots: Encrypt AMI or EBS and nested disk images. Rotate images often.</li>
+</ul>
+<p>Hardening checklist:</p>
+<ul>
+<li>Minimal base images with auto‑updates. Disable unnecessary services in both host and guests.</li>
+<li>Mandatory access controls like SELinux or AppArmor on the parent. Use qemu confinement profiles.</li>
+<li>Dedicated security groups and subnet ACLs for guest networks. Treat them like mini‑servers, not toys.</li>
+<li>IAM: Give the parent instance role the exact S3, ECR, and Parameter Store access needed. No more.</li>
+</ul>
+<h3 id="licensingwindowssqlserver">Licensing Windows SQL Server</h3>
+<p>Nested VMs with Windows or SQL can trigger extra licensing duties. Read the fine print. Per‑core licensing, virtualization rights, and edition constraints differ. If you run Hyper‑V guests, make sure your Windows Server edition grants enough virtual instances. Or license the guests individually.</p>
+<p>Also check:</p>
+<ul>
+<li>BYOL rules vs marketplace images.</li>
+<li>SQL Server edition features used by your tests, like Always On. And their licensing impact in virtualized setups.</li>
+</ul>
+<h3 id="networkingandnat">Networking and NAT</h3>
+<ul>
+<li>A nested layer means double NAT by default. Use macvtap or bridging on KVM. Or an internal plus NAT switch on Hyper‑V for sane routing.</li>
+<li>For CI agents that must hit services in your VPC, pre‑provision routes and security groups. Don’t let ephemeral VM IPs surprise your firewalls.</li>
+</ul>
+<p>Two blueprints:</p>
+<ul>
+<li>Simple NAT: Use the libvirt default network for outbound‑only traffic. Great for internet‑bound CI jobs.</li>
+<li>Bridged or mapped: Use macvtap or a Linux bridge connected to the parent’s interface. Assign IPs from your VPC CIDR or a routed subnet so guests can reach databases, caches, and internal APIs.</li>
+</ul>
+<h3 id="observabilityanddrift">Observability and drift</h3>
+<ul>
+<li>Logs: Forward nested VM syslogs to the parent. Then ship to your central stack.</li>
+<li>Metrics: Lightweight exporters inside each nested guest help spot hotspots.</li>
+<li>Drift: Bake images with Packer. Pin versions of kernel, QEMU, and virtio to reduce “works on my GPU” energy.</li>
+</ul>
+<p><em>You’re trading some complexity for control. That’s fine. Write it down, automate it, and your future self won’t hate you.</em></p>
+<h2 id="pulsecheckrecap">Pulse Check Recap</h2>
+<ul>
+<li>Nested virtualization on virtual Amazon EC2 lets you run KVM or Hyper‑V inside a VM—great for CI, emulators, and simulations.</li>
+<li>It closes a historical AWS gap vs GCP and Azure, bringing parity for common dev and test scenarios.</li>
+<li>Expect some overhead; benchmark with your exact hypervisor plus storage and network stack.</li>
+<li>Mind licensing for Windows or SQL, double‑check security boundaries, and plan your network.</li>
+<li>Golden images, warm caches, and scripted provisioning turn this into a push‑button platform.</li>
+</ul>
+<h2 id="architecturepatternsyoucansteal">Architecture patterns you can steal</h2>
+<ul>
+<li>Single‑tenant build host: One beefy EC2 runs 4–8 nested VMs. Each is a clean CI agent image. Use an Auto Scaling group to add or remove parents by queue depth.</li>
+<li>Emulator farm: One parent VM with fast NVMe hosts a pool of Android emulator guests. A scheduler assigns test shards per guest by API level and device profile.</li>
+<li>Hardware‑in‑the‑loop sim: Multiple guests emulate ECUs and a diagnostics node on a bridged network. Time‑critical guests get pinned vCPUs. Logs stream to a central collector.</li>
+</ul>
+<p>For each pattern, document capacity limits like max guests and RAM per guest. Note warm‑up time and a rollback plan if a guest image goes sideways.</p>
+<h2 id="troubleshootingandtuningchecklist">Troubleshooting and Tuning Checklist</h2>
+<ul>
+<li>Guests won’t start with acceleration: Re‑check vmx or svm flags in /proc/cpuinfo. Ensure the nested=1 module parameter is active.</li>
+<li>Terrible I/O: Switch to virtio. Place guest disks on NVMe or provisioned IOPS volumes. Disable disk write cache only if data integrity is critical.</li>
+<li>Network flakiness: Avoid double NAT for internal services. Prefer bridged networking and explicit security group rules.</li>
+<li>High CPU steal time: You’ve oversubscribed. Reduce guest count or move to a larger instance type.</li>
+<li>Clock drift in guests: Enable kvm‑clock or paravirt clock sources. Use chrony or ntp inside each guest.</li>
+<li>Can’t reach VPC services from guests: Ensure route tables know the guest subnet. If bridging is not possible, set up a NAT or forwarding rule on the parent. Then tighten iptables.</li>
+</ul>
+<h2 id="costcontrolplays">Cost Control Plays</h2>
+<ul>
+<li>Keep parents warm, not guests: Boot the parent with caches warmed. Spin guests on demand from snapshots to save idle costs.</li>
+<li>Right‑size storage: gp3 with tuned IOPS beats overpaying for capacity you never use.</li>
+<li>Pre‑pull dependencies: Cache SDKs, Gradle, Maven, and npm layers on host‑local disks. It shrinks guest runtime.</li>
+<li>Schedule down‑time: If CI is quiet overnight, stop or hibernate parents. Relaunch from AMI in the morning.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-23-2026-10-30-00-5830-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="faqstraightanswers">FAQ Straight Answers</h2>
+<h3 id="ec2instancessupportnestedvirtualization">EC2 instances support nested virtualization</h3>
+<p>Support is family‑ and region‑dependent. Choose HVM AMIs on instance types that expose Intel VT‑x or AMD‑V to the guest. Check the instance family docs. Confirm flags inside the instance. Look for vmx or svm in /proc/cpuinfo on Linux. Or verify in Windows with systeminfo and Hyper‑V checks.</p>
+<h3 id="performanceforciandemulators">Performance for CI and emulators</h3>
+<p>Yes for most build and test work. Expect overhead from the extra hypervisor layer, especially on I/O and network. Use virtio drivers and NVMe‑backed volumes for nested disks. Parallelize smartly. Always benchmark with your actual toolchain. Kernels, QEMU or Hyper‑V versions, and image sizes matter.</p>
+<h3 id="awsbaremetalnestedvirtualization">AWS bare metal nested virtualization</h3>
+<p>Bare metal exposes hardware directly to your instance OS. That used to be the only way to get nested virt on AWS. Virtual EC2 with nested support gives similar flexibility without managing bare‑metal hosts. Often at lower cost and with better elasticity.</p>
+<h3 id="dockerindockerwithoutnested">Docker in Docker without nested</h3>
+<p>Yes. Containers inside containers don’t need nested virt. But for low‑level tests like kernels, drivers, and emulators that need VT‑x or AMD‑V, you want real nested virtualization with KVM or Hyper‑V.</p>
+<h3 id="pricingfornestedvms">Pricing for nested VMs</h3>
+<p>You pay for the parent EC2 instance and any storage or transfer it uses. The nested VMs run inside that footprint. There’s no separate EC2 billing for them. That’s why consolidation and right‑sizing matter.</p>
+<h3 id="enableinawsworkspaces">Enable in AWS WorkSpaces</h3>
+<p>WorkSpaces instances vary by bundle and host capabilities. If you need WSL2 or Hyper‑V, confirm whether your WorkSpaces bundle supports nested virt. Or use an EC2‑based Windows workstation with known support.</p>
+<h3 id="workonarmgraviton">Work on ARM Graviton</h3>
+<p>Nested virtualization depends on hardware extensions being exposed to the guest. Verify support for your specific ARM instance family and AMI. Capabilities can differ from x86.</p>
+<h3 id="nestedvmsperhost">Nested VMs per host</h3>
+<p>It depends on your workload mix. Start with target CPU usage around 60–70% under load. Watch steal time and I/O wait. Back off if latency‑sensitive tests degrade. Fewer, larger guests often perform better for I/O‑heavy cases.</p>
+<h2 id="launchfirstnestedvmlab">Launch First Nested VM Lab</h2>
+<ul>
+<li>Pick a supported EC2 instance, like a recent Intel or AMD family. Launch with an HVM AMI.</li>
+<li>Validate hardware flags: On Linux, verify vmx or svm in /proc/cpuinfo. On Windows, check Hyper‑V requirements.</li>
+<li>Install hypervisor: apt, dnf, or yum install the KVM stack on Linux. Or enable Hyper‑V and WSL2 on Windows.</li>
+<li>Create a small base image: Use cloud‑init Ubuntu or Windows Eval media. Attach virtio disks and NAT or bridged networking.</li>
+<li>Script it: Automate VM creation with virsh and Cloud‑Init for KVM. Or PowerShell for Hyper‑V. Bake a golden AMI with everything pre‑wired.</li>
+<li>Benchmark: Run your CI or emulator workload. Measure CPU, disk, and wall‑clock time. Iterate instance size and storage until it’s green.</li>
+</ul>
+<p><em>You came for speed.</em> Nested virt pays you back the first time you parallelize tests. And kill a flaky lab box with a single command.</p>
+<p><em>Here’s the punchline: nested virtualization on virtual EC2 gives you a new lever.</em> Speed through isolation. Use it to cut flake in half. Make your pipelines deterministic. Simulate the messy real world without dragging metal into the mix. Your next step is simple. Pick one bottleneck like Android UI tests, driver builds, or WSL2 dev boxes. Then prototype a nested VM approach. If it beats your status quo on time and money, scale it. If not, you’ll still know exactly where the ceiling is.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://cloud.google.com/compute/docs/instances/nested-virtualization/overview">Google Cloud: Nested virtualization overview</a></li>
+<li><a href="https://learn.microsoft.com/virtualization/hyper-v-on-windows/user-guide/nested-virtualization">Microsoft Docs: Nested virtualization (Hyper‑V)</a></li>
+<li><a href="https://www.kernel.org/doc/html/latest/virt/kvm/nested-virt.html">Kernel docs: KVM nested virtualization</a></li>
+<li><a href="https://www.redhat.com/en/blog/nested-virtualization-kvm-what-hows-and-whys">Red Hat Blog: Nested virtualization in KVM — what, hows, and whys</a></li>
+<li><a href="https://aws.amazon.com/nitro/">AWS Nitro System overview</a></li>
+<li><a href="https://learn.microsoft.com/windows/wsl/install">Windows Subsystem for Linux install guide</a></li>
+<li><a href="https://developer.android.com/studio/run/emulator-acceleration">Android Emulator acceleration (Intel HAXM/QEMU)</a></li>
+<li><a href="https://aws.amazon.com/ec2/instance-types/">Amazon EC2 instance types</a></li>
+<li><a href="https://aws.amazon.com/about-aws/whats-new/">What’s New with AWS (service announcements)</a></li>
+<li><a href="https://libvirt.org/formatnetwork.html">libvirt networking</a></li>
+<li><a href="https://www.kernel.org/doc/html/latest/networking/can.html">Linux SocketCAN documentation</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-nested-virtualization-ec2.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq69d9.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Nested+Virtualization+on+EC2%3A+Ship+Faster%2C+Simulate+More&amp;pi=318106175163&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=318106175163&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-nested-virtualization-ec2&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-nested-virtualization-ec2?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:10:34 GMT -->
+</html>

@@ -1,0 +1,364 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/route-53-accelerated-recovery?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:29:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Achieve 60-Minute DNS RTO with Route 53 Recovery</title>
+    <link rel="canonical" href="route-53-accelerated-recovery.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore Route 53 AWS accelerated recovery to maintain public DNS changes during outages. Achieve a 60-minute RTO and strengthen continuity for critical apps.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Achieve 60-Minute DNS RTO with Route 53 Recovery",
+        "datePublished": "2025-11-26T20:25:24Z",
+        "dateModified": "2025-11-26T20:25:24.835Z",
+        "mainEntityOfPage": "https://remktr.com/blog/route-53-accelerated-recovery",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-26-2025-08-16-33-1892-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="route-53-accelerated-recovery.html">Achieve 60-Minute DNS RTO with Route 53 Recovery</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 26, 2025 8:25:24 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You don’t think about DNS… until you can’t change it. That’s when simple fixes—pointing traffic to a healthy endpoint, spinning up a new region, flipping a blue/green deploy—turn into “we’re stuck” chaos.</p>
+<p>Amazon just quietly shipped a get-out-of-jail card: Accelerated recovery for Amazon Route 53 public DNS records. Translation: even if the US East (N. Virginia) Region is disrupted, you can regain the ability to make DNS changes within roughly 60 minutes. That’s the control plane coming back online fast, so you keep shipping, routing, and recovering.</p>
+<p>If you run a bank, fintech, or SaaS with mission-critical SLAs, this is a big deal. DNS management has been a sneaky single point of failure. Now you get a <em>predictable recovery time objective (RTO)</em> for public hosted zones—without changing your APIs or rewriting your IaC.</p>
+<p>It’s simple, it’s global, and it costs exactly <em>$0 extra</em>. Let’s break down what this unlocks and how to switch it on without stress.</p>
+<p>Think of it like a <em>spare steering wheel</em> for DNS changes: if the primary region locks up, you can still steer your traffic. Less finger-crossing, more control when the pressure is highest.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Route 53 accelerated recovery restores DNS change capability for public hosted zones within ~60 minutes during a US East (N. Virginia) service disruption.</li>
+<li>It works by maintaining a replica in US West (Oregon) and failing over control-plane operations automatically.</li>
+<li>No new APIs, no code changes, no extra cost; globally available (except AWS GovCloud and China).</li>
+<li>Perfect for blue/green deploys, regional failover, emergency record edits, and onboarding during incidents.</li>
+<li>Use with health checks, failover/latency routing, and geoproximity for end-to-end resilience.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-26-2025-08-17-28-6284-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="dnscontrolplanelockout">DNS Control Plane Lockout</h2>
+<h3 id="resolutionvsmanagement">Resolution vs Management</h3>
+<p>Most teams confuse DNS resolution (answering queries) with DNS management (changing records). Route 53’s data plane is globally distributed; your users usually keep resolving records just fine. The pain hits when the control plane is impaired and you can’t change records—exactly when you need to.</p>
+<p>When the data plane hums along but the control plane is stuck, your dashboards look “green enough” while your ops team can’t flip the one switch that matters. That lockout turns a routine reroute into an outage multiplier. You can have backup endpoints, readiness probes, and multi-region apps—and still be blocked by the inability to update a single DNS record.</p>
+<p>If you’ve ever been mid-incident and heard “we can’t update DNS right now,” you know the feeling. It’s not that users can’t look you up—it’s that you can’t change where they land. That difference is everything during a failover, cutover, or emergency rollback.</p>
+<h3 id="whatacceleratedrecoveryactuallysolves">What Accelerated Recovery Actually Solves</h3>
+<p>Accelerated recovery targets a 60-minute RTO to restore your ability to make updates to public hosted zones even if US East (N. Virginia) has issues. The service keeps a replica of your zone’s control-plane state in US West (Oregon), and if the primary is impaired, it automatically fails over your management operations.</p>
+<p>You keep using the same Route 53 APIs and endpoints. Your CI/CD, IaC, and runbooks don’t change.</p>
+<p>In practice, this means your “ability to change” becomes resilient. You don’t need to invent complex workarounds or babysit alternate tooling. The same Create/ChangeResourceRecordSets calls, the same CloudFormation stacks—just more reliable during a bad day.</p>
+<h3 id="bluegreenstuck">Blue Green Stuck</h3>
+<p>You’re mid-deploy, blue is unhealthy, green is ready. Normally, you’d flip an Alias to the new ALB. But the region hosting the control plane is impaired. Without accelerated recovery, you’re stuck. With it enabled, your change window resumes within about an hour, and your traffic swings to green.</p>
+<p>For more on public hosted zones and record changes, see the Route 53 Developer Guide: <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html">Working with hosted zones</a>.</p>
+<p>Another everyday case: you need to bump a weighted record from 10% to 50% during a canary. Or you must add a TXT record to verify a third-party integration under time pressure. Control-plane lockout turns those “one-minute” tasks into a hair-on-fire delay. Accelerated recovery shrinks the window and gives you a plan you can count on.</p>
+<h2 id="underthehood">Under the Hood</h2>
+<h3 id="replicainuswestoregon">Replica in US West Oregon</h3>
+<p>When you enable accelerated recovery on a public hosted zone, Route 53 maintains a replica copy of the zone’s control-plane state in US West (Oregon). If operations in US East (N. Virginia) are impaired, Route 53 redirects control-plane operations to the replica—no manual switch, no new tooling.</p>
+<p>You don’t have to pre-provision anything in Oregon or wire up a custom failover. It’s an implementation detail handled by Route 53. From your vantage point, the API looks identical; the resiliency is built into the service.</p>
+<h3 id="60minuterto">60 Minute RTO</h3>
+<p>AWS targets approximately 60 minutes to restore DNS management functions. <em>This isn’t speeding up DNS propagation; it’s restoring your ability to make the change in the first place.</em> You still follow normal TTL and routing-policy behavior after updates.</p>
+<p>In other words: accelerated recovery shortens the time until you can press the button. It doesn’t magically warp time-to-live values or update recursive resolvers faster. Plan your TTLs the same way you do today.</p>
+<h3 id="availabilityandcost">Availability and Cost</h3>
+<ul>
+<li>Available globally (with the exception of AWS GovCloud and China).</li>
+<li><em>No additional charge.</em></li>
+<li>Backward-compatible with existing APIs and automation.</li>
+</ul>
+<p>That <em>“no extra charge”</em> part matters. You aren’t negotiating a new SKU or re-architecting just to unlock resilience. It’s a practical upgrade that levels up your incident muscle without touching app code.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-26-2025-08-18-19-9736-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="emergencyrerouteexample">Emergency Reroute Example</h3>
+<p>Production API is degraded in one region. Your team needs to redirect traffic to a warm standby. With accelerated recovery enabled, you edit the Alias/weight/failover record and proceed. Without it, that edit could be delayed until the impaired control plane recovers—turning minutes into hours.</p>
+<p>Helpful background on routing policies: <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html">Amazon Route 53 routing policies</a>.</p>
+<p>Now imagine a compliance-sensitive cutover—say, a payments endpoint where you must reroute by a specific window. A control-plane delay turns a planned change into a potential breach of SLA. Accelerated recovery buys back predictability so you can hit the window or at least shorten the miss.</p>
+<h2 id="quickpulsecheck">Quick Pulse Check</h2>
+<ul>
+<li>Route 53 accelerated recovery restores DNS change capability for public zones in about 60 minutes during regional control-plane issues.</li>
+<li>It’s automatic, costs nothing extra, and requires no new APIs.</li>
+<li>Keep using your tooling (CLI, SDKs, CloudFormation/CDK) unchanged.</li>
+<li>Pair it with health checks, failover/latency/geoproximity policies for full-stack resilience.</li>
+<li>Not for private hosted zones; scope is public DNS records.</li>
+</ul>
+<p>If any of your incident runbooks say “update DNS,” this feature belongs in your standard stack. It’s low effort, high impact, and removes a sneaky single point of failure you probably accepted as “just how it is.”</p>
+<h2 id="resilientdnspattern">Resilient DNS Pattern</h2>
+<h3 id="combinewithrouting">Combine with Routing</h3>
+<ul>
+<li>Failover routing: Primary to secondary based on health checks.</li>
+<li>Latency-based routing: Send users to the lowest-latency endpoint.</li>
+<li>AWS Route 53 geoproximity: Shift traffic based on geography and bias—useful for gradual migrations or disaster avoidance.</li>
+</ul>
+<p>Docs: <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">Failover routing and health checks</a>, <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html">Geoproximity routing</a>.</p>
+<p>Best practice: set health checks on real user paths (e.g., /healthz that checks dependencies) and use alarms to trigger ops playbooks. Weighted records help you canary 1%, 5%, 25% while watching dashboards. If a region degrades, failover takes care of the bulk move while accelerated recovery ensures you can still tweak routing weights or aliases during control-plane trouble.</p>
+<p>TTL tips:</p>
+<ul>
+<li>Shorter TTLs (30–60s) give faster pivots but increase resolver load. Use them for critical records only.</li>
+<li>Longer TTLs (300–600s) reduce chatter and are fine for static endpoints.</li>
+<li>During planned cutovers, temporarily lower TTLs 24–48 hours ahead, then raise them post-migration.</li>
+</ul>
+<h3 id="localdnsinvpcs">Local DNS in VPCs</h3>
+<p>For on-prem and VPC name resolution (your “Route 53 local DNS” needs), use Route 53 Resolver with inbound/outbound endpoints. That’s where you integrate with corporate DNS and control “aws route 53 ip address” considerations for resolver endpoints.</p>
+<p>Docs: <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html">Route 53 Resolver</a>.</p>
+<p>A common hybrid pattern: corporate DNS forwards app.company.com to Route 53, while on-prem domains stay local. Ensure you have clear forwarding rules, health monitoring for Resolver endpoints, and runbooks for endpoint failover. Accelerated recovery doesn’t change private resolution, but it ensures your public entries remain manageable when you need them most.</p>
+<h3 id="fintechrolloversexample">Fintech Rollovers Example</h3>
+<p>A fintech runs active-active across two regions. It uses latency-based routing for normal ops, health checks for failover, and geoproximity with a slight bias to shift load during regional stress events. Accelerated recovery ensures they can still adjust records (weights, aliases) under control-plane impairment—no blocked deploys, no frozen changes.</p>
+<p>They also keep a “traffic lever” dashboard: a simple runbook that lists which records to adjust and by how much in common scenarios. Pair that with change approvals pre-cleared for incidents, and DNS becomes a lever, not a liability.</p>
+<h3 id="migrationbonus">Migration Bonus</h3>
+<p>If you’re about to transfer your DNS service to Amazon Route 53, read the official migration guide first. You’ll create a public hosted zone, import or recreate records, and update registrar nameservers.</p>
+<p>Docs: <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/migrate-dns-domain-in-use.html">Make Route 53 your DNS for a live domain</a>.</p>
+<p>Pro move: validate every record ahead of the registrar update using the zone’s assigned Route 53 nameservers, and run a dual-response test window. Once happy, switch the registrar to Route 53 nameservers during a low-traffic period and monitor closely for NXDOMAIN or misconfigurations.</p>
+<h2 id="runbooksandguardrails">Runbooks and Guardrails</h2>
+<h3 id="enableobservepractice">Enable Observe Practice</h3>
+<ul>
+<li>Enabling can take up to several hours depending on zone size. Plan the change window and track status in the console (Accelerated recovery tab) or via APIs.</li>
+<li>Observe with CloudWatch and AWS Health. Use Amazon EventBridge rules to alert on health events impacting Route 53 operations.</li>
+</ul>
+<p>Operationally, treat accelerated recovery like any other resiliency control: document it, tag hosted zones where it’s enabled, and put verification steps into your quarterly testing. If you use ChatOps, add a quick “DNS change health” slash command to surface status fast.</p>
+<h3 id="scopeandlimitstoknow">Scope and Limits to Know</h3>
+<ul>
+<li>Scope: Public hosted zones only (this does not change private hosted zone behavior).</li>
+<li>Global availability with two exceptions: AWS GovCloud and AWS China.</li>
+<li>You still respect TTLs and routing policy semantics after you make changes.</li>
+</ul>
+<p>What it doesn’t do:</p>
+<ul>
+<li><em>It doesn’t speed up DNS propagation or override resolver caches.</em></li>
+<li>It doesn’t affect domain registration or registrar-side changes.</li>
+<li>It doesn’t replace app-level health checks or regional readiness.</li>
+</ul>
+<h3 id="gamedaydrill">Game Day Drill</h3>
+<p>Run a quarterly game day:
+1) Simulate a regional impairment scenario.
+2) Attempt a record change (e.g., increase weight to a healthy region).
+3) Verify the change can be made during an impaired-control-plane scenario once accelerated recovery fails over.
+4) Confirm downstream: health checks fire correctly, client resolution patterns match expectations.</p>
+<p>To keep it low-risk, practice on a non-critical subdomain (e.g., canary.example.com) and mirror the steps you’d take in a real incident. Capture timings: “time until change allowed,” “time until resolvers reflect change,” and “time until user metrics stabilize.”</p>
+<h3 id="leastprivilegeandautomation">Least Privilege and Automation</h3>
+<ul>
+<li>Ensure IAM roles for CI/CD have the minimum needed (for example, permissions to change records in specific hosted zones).</li>
+<li>Keep IaC idempotent. With accelerated recovery, your pipelines don’t change—just make sure they handle retries gracefully during failover windows.</li>
+</ul>
+<p>More on general concepts: <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html">Route 53 Developer Guide</a>.</p>
+<p>Guardrails to add:</p>
+<ul>
+<li>Tag hosted zones by tier (prod/stage/dev) and restrict write access accordingly.</li>
+<li>Put a circuit breaker in your pipelines for DNS changes—require a manual approval step if a change would affect more than X records or high-risk names (like apex or api.example.com).</li>
+<li>Log every ChangeResourceRecordSets call and pipe to a security lake for auditing.</li>
+</ul>
+<h3 id="howtovalidatechangesquickly">How to Validate Changes Quickly</h3>
+<ul>
+<li>Use dig or nslookup against multiple public resolvers (1.1.1.1, 8.8.8.8) and your ISP’s resolver.</li>
+<li>Check authoritative answers from Route 53 by querying the zone’s nameservers directly.</li>
+<li>Watch repeat queries over the TTL to confirm caches expire and new answers appear.</li>
+</ul>
+<p>If you’re shifting traffic, couple DNS checks with app telemetry: 2xx rates, p50/p95 latency, error budgets, and customer-facing uptime. DNS moving doesn’t matter if the new endpoint isn’t actually healthy.</p>
+<h2 id="faq">FAQ</h2>
+<h3 id="1acceleratedrecoveryresolutionbehavior">1 Accelerated recovery resolution behavior</h3>
+<p>No. It restores your ability to manage public DNS records during a control-plane impairment. The data plane (answering queries) remains globally distributed as usual.</p>
+<h3 id="260minutertomeasuring">2 60 minute RTO measuring</h3>
+<p>It’s the target time to regain the ability to make DNS changes to public hosted zones after a regional control-plane disruption. It’s not about propagation; it’s about restoring management.</p>
+<h3 id="3newapisendpointscodechanges">3 New APIs endpoints code changes</h3>
+<p>No. You use the same Route 53 APIs, endpoints, and automation. That’s the point—backward-compatible recovery for your existing workflows.</p>
+<h3 id="4extracost">4 Extra cost</h3>
+<p>No additional charge for enabling accelerated recovery on public hosted zones.</p>
+<h3 id="5availableeverywhere">5 Available everywhere</h3>
+<p>It’s globally available except in AWS GovCloud and AWS China Regions.</p>
+<h3 id="6privatehostedzonesresolver">6 Private hosted zones Resolver</h3>
+<p>No. The feature applies to public hosted zones. Private DNS and Route 53 Resolver continue to work as designed, but this recovery feature doesn’t apply to them.</p>
+<h3 id="7disablelater">7 Disable later</h3>
+<p>Yes. You can disable accelerated recovery at any time from the same console tab or via APIs.</p>
+<h3 id="8knowfailoverchangerecords">8 Know failover change records</h3>
+<p>Watch AWS Health and your Route 53 console for status, and attempt a safe, low-impact record edit. Your runbook should include a simple “can I change DNS now?” check on a non-critical record to verify capability before you touch production traffic.</p>
+<h3 id="9registrarnameserverupdates">9 Registrar nameserver updates</h3>
+<p>No. Registrar-side updates (like changing nameservers) are outside Route 53’s control plane. Accelerated recovery applies to changes inside your Route 53 public hosted zones.</p>
+<h3 id="10enableperhostedzone">10 Enable per hosted zone</h3>
+<p>Yes—review your mission-critical zones first. Standardize the enablement across environments so your behavior is consistent when incidents hit.</p>
+<h3 id="11longttlshelp">11 Long TTLs help</h3>
+<p>Yes. Accelerated recovery gets you to “change allowed” faster. Propagation still depends on TTLs and caching, so plan TTLs appropriately for records you might need to flip quickly.</p>
+<h2 id="9stepenablementplan">9 Step Enablement Plan</h2>
+<ul>
+<li>Identify your mission-critical public hosted zones.</li>
+<li>In Route 53 console, open a zone and select the Accelerated recovery tab.</li>
+<li>Click Enable and confirm.</li>
+<li>Note that enablement can take hours; schedule during a calm window.</li>
+<li>Monitor the status until it shows Enabled.</li>
+<li>Optionally, enable via CLI/SDK, CloudFormation, or CDK for consistency.</li>
+<li>Update runbooks to reflect the 60-minute RTO and test procedures.</li>
+<li>Run a game day to verify you can make record changes during simulated impairments.</li>
+<li>Track health and alerts via AWS Health and EventBridge.</li>
+</ul>
+<p>You’ve just reduced a sneaky single point of failure without touching your code.</p>
+<p>Here’s the big takeaway: <em>resilience isn’t only about serving users—it’s about keeping your ability to change.</em> Accelerated recovery for Route 53 locks in a predictable 60-minute RTO for public DNS management when the control plane is impaired. Pair it with health checks, failover/latency/geoproximity policies, and Resolver for local DNS, and you’ve got an end-to-end posture that handles bad days like a pro. <em>If you haven’t enabled it yet, schedule the change.</em> Future-you (and your pager) will be grateful.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html">Amazon Route 53 Developer Guide (Overview)</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html">Working with hosted zones</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html">Routing policies (failover, latency, weighted, geoproximity)</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html">Geoproximity routing</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html">DNS failover and health checks</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html">Route 53 Resolver (for local DNS and hybrid)</a></li>
+<li><a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/migrate-dns-domain-in-use.html">Migrate your live domain to Route 53 (transfer your DNS service to Amazon Route 53)</a></li>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regions_az/">AWS Global Infrastructure (Regions and AZs)</a></li>
+<li><a href="https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html">AWS Health</a></li>
+<li><a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/what-is-amazon-eventbridge.html">Amazon EventBridge (monitor health events)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="route-53-accelerated-recovery.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq5769.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Achieve+60-Minute+DNS+RTO+with+Route+53+Recovery&amp;pi=266189917905&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=266189917905&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Froute-53-accelerated-recovery&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/route-53-accelerated-recovery?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:29:45 GMT -->
+</html>

@@ -1,0 +1,517 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/bedrock-reinforcement-fine-tuning?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Boost AI Accuracy 66% With Bedrock Reinforcement Fine-Tuning</title>
+    <link rel="canonical" href="bedrock-reinforcement-fine-tuning.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover how Amazon Bedrock now supports reinforcement fine-tuning (RFT) for Amazon Nova models, boosting accuracy by 66% on average to build AI agents.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Boost AI Accuracy 66% With Bedrock Reinforcement Fine-Tuning",
+        "datePublished": "2025-12-03T20:26:26Z",
+        "dateModified": "2025-12-03T20:26:26.498Z",
+        "mainEntityOfPage": "https://remktr.com/blog/bedrock-reinforcement-fine-tuning",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-03-2025-08-15-42-3121-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="bedrock-reinforcement-fine-tuning.html">Boost AI Accuracy 66% With Bedrock Reinforcement Fine-Tuning</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 3, 2025 8:26:26 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You don’t need a bigger model; you need a smarter one instead.</p>
+<p>AWS just rolled out reinforcement fine-tuning (RFT) in Amazon Bedrock.
+Early customers report 66% average accuracy gains, without switching to giant, pricey LLMs.</p>
+<p><em>That’s not a rounding error; that’s a real strategy shift.</em></p>
+<p>If you’re duct-taping prompts, templates, and guardrails for better answers, wrong game.
+RFT teaches models the behavior you actually want, using feedback, not only data.
+So they reason better, handle complex workflows, and stay on-brand.</p>
+<p>And no, you don’t need an RL PhD to pull this off.
+Bedrock automates the heavy lifting, from data prep to training to evaluation.
+You define what 'good' means; Bedrock turns it into rewards the model chases.</p>
+<p>Salesforce reported gains up to 73% with this approach.
+Other early adopters build faster, more accurate agents, without torching their cloud budgets.</p>
+<p>Ready to stop scaling tokens and start scaling outcomes? Here’s how to put RFT to work.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>RFT in Amazon Bedrock boosts accuracy by about 66% on average.</li>
+<li>You fine-tune behavior with rewards, human or automated, not just data.</li>
+<li>Start with Amazon Nova 2 Lite; text-only works now, multimodal support is coming.</li>
+<li>Start small with 100–200 examples, then iterate on your reward design.</li>
+<li>Watch for overfitting; monitor reward plateaus closely, and adjust as needed.</li>
+<li>Pair this with SageMaker serverless customization for end-to-end agility.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-03-2025-08-16-48-2819-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="flipstheagentplaybook">Flips the agent playbook</h2>
+<h3 id="costaccuracytrap">Cost accuracy trap</h3>
+<p>Today you have two dials: bigger model, bigger bill.
+Or smaller model, weaker results, especially on hard tasks.</p>
+<p>Neither gives controlled behavior for complex workflows like reasoning steps, policy rules, or domain tone.</p>
+<p>RFT changes the objective completely, away from blind next-token prediction.
+Instead of only predicting the next token, you optimize for rewarded behaviors.
+Think chain-of-thought quality, grounded citations, and clean, structured outputs.</p>
+<p>AWS sums it up neatly:</p>
+<blockquote>
+  <p>\"RFT is a technique where models are trained with feedback signals, such as human or automated evaluations, that reward desirable behaviors and penalize undesirable ones.\"</p>
+</blockquote>
+<p>In practice, RFT lets you say, 'Don’t just answer; use this style, structure, and rules.'
+It turns a clever intern into a seasoned analyst who cites sources and follows policy.</p>
+<p>RFT breaks the spiral where performance issues push you toward bigger base models.
+Instead of buying more parameters, you pay for better behavior shaping.
+That shift moves teams from okay demos to reliable production agents, without blowing budgets.</p>
+<h3 id="betterprocessbetteranswers">Better process better answers</h3>
+<ul>
+<li>Average accuracy gains of 66% over base models, according to AWS.</li>
+<li>Salesforce reports improvements up to 73% when tuned to its requirements.</li>
+<li>You can use invocation logs to teach how your best agents perform.</li>
+</ul>
+<p><em>Put simply, you’re not paying for more parameters; you’re paying for better process.</em>
+That pays off for support bots, policy-heavy workflows, and analyst copilots needing transparency.</p>
+<p>And the kicker is that these improvements compound over time, dramatically.
+Once your agent follows rubrics and formats, you can layer more complex tasks.
+Think compliance checks, cited summaries, or multi-tool reasoning, without rewriting your stack.</p>
+<h2 id="howrftworks">How RFT works</h2>
+<h3 id="startwithnova2lite">Start with Nova 2 Lite</h3>
+<p>Pick a Bedrock foundation model, initially Amazon Nova 2 Lite, text-only for now.
+Then feed it the right signals and curated examples for training.</p>
+<ul>
+<li>Invocation logs, like chat histories and API traces, that show good behavior.</li>
+<li>A curated dataset of prompts paired with desired outcomes for each prompt.</li>
+</ul>
+<p>Bedrock automates the RL pipeline, with no custom infra and no bespoke trainers.
+You focus entirely on the outcome you care about.</p>
+<p>Behind the scenes, Bedrock handles the heavy lifting automatically for you.
+It batches data, applies rewards, runs training loops, and tracks metrics.
+You don’t write PPO from scratch or spin up big GPU fleets.
+You define 'good,' then measure progress against that target.</p>
+<h3 id="teachwithrewards">Teach with rewards</h3>
+<p>Define success with a reward function, rule-based, AI-based, or using templates.
+AWS puts it plainly:</p>
+<blockquote>
+  <p>\"Developers only need to define what 'good results' look like through a reward function, which can be rule-based, AI-based, or use pre-defined templates.\"</p>
+</blockquote>
+<p>Practical reward ideas:</p>
+<ul>
+<li>Award points for grounded answers that cite retrieved sources.</li>
+<li>Penalize hallucinations or clear policy violations, every single time.</li>
+<li>Reward step-by-step reasoning for complex, multi-part questions.</li>
+<li>Score schema compliance, including JSON shape and required field constraints.</li>
+</ul>
+<p>Then iterate with discipline using short, measured feedback loops.
+Monitor reward curves, validation accuracy, and common failure modes.
+If rewards plateau or overfit, tweak the function or widen the dataset.
+The loop is simple: define, train, evaluate, then refine.</p>
+<p>Want a lightweight way to instrument evaluation and mine invocation logs for rewards?
+Explore <a href="../requery.html">Requery</a> to speed evaluation and reward design in practice.</p>
+<h3 id="dataprepthatsaves">Data prep that saves</h3>
+<ul>
+<li>Curate examples with clear prompts, expected outputs, and short rationales.
+One great example beats ten noisy ones every single time.</li>
+<li>Redact PII and secrets before they reach training data.
+Keep a clean, auditable pipeline from end to end.</li>
+<li>Include hard negatives, tricky prompts with wrong outputs, plus a corrected gold answer.</li>
+<li>Cover edge cases: long documents, policy traps, multilingual inputs, or JSON-heavy tasks.</li>
+<li>Deduplicate near-identical examples carefully to avoid harmful memorization.</li>
+</ul>
+<p>Pro tip: tag each example with metadata like domain, intent, and difficulty.
+During evaluation you’ll see exactly where the model improved or regressed, then target rewards.</p>
+<h3 id="rewarddesignpatterns">Reward design patterns</h3>
+<ul>
+<li>Rule-based: deterministic checks like JSON schema, length, keywords, and citation URLs.</li>
+<li>Model-graded: a grader LLM scores helpfulness, grounding, or tone using a simple rubric.</li>
+<li>Hybrid: rules for structure, model grading for nuance, plus small human spot checks.</li>
+<li>Pairwise preference: pick the better of two outputs to nudge preferred behavior.</li>
+</ul>
+<p>Keep rewards sparse and meaningful, not bloated and confusing.
+A simple +1 for verified sources often beats a 17-point rubric.</p>
+<h3 id="evaluatewithoutfoolingyourself">Evaluate without fooling yourself</h3>
+<ul>
+<li>Create a held-out test set that the model never sees during training.</li>
+<li>Mix exact-match checks, like key fields, with semantic scoring using an evaluator model.</li>
+<li>Track accuracy and compliance together: are answers correct, safe, and properly formatted?</li>
+<li>Watch for regressions; gains on Policy Q&amp;A shouldn’t break Billing or Troubleshooting.</li>
+</ul>
+<p>If you can, run a small canary in production behind a flag.
+Real users are ruthless and expose issues your test set misses.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-03-2025-08-17-37-0072-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="realworldwins">Real world wins</h2>
+<h3 id="salesforcebiglift">Salesforce big lift</h3>
+<p>Salesforce saw gains up to 73% by tailoring RFT to specific requirements.
+Think domain lingo, high accuracy, and strong safety controls.
+That’s the blueprint: tune for your own KPIs, not generic benchmarks.</p>
+<blockquote>
+  <p>\"These enhancements allow customers to achieve better model performance without requiring larger, more expensive models.\" —AWS</p>
+</blockquote>
+<p>It’s the classic enterprise story with policies, legacy workflows, and a high trust bar.
+RFT encodes those realities into incentives, so the model stops guessing and behaves.</p>
+<h3 id="wenivtexspecializedagents">Weni VTEX specialized agents</h3>
+<p>Weni by VTEX used RFT to build specialized agents for unique business needs.
+Translation: fewer escalations, faster resolutions, and tighter, cleaner workflows.
+You don’t need a moonshot, just a narrow, valuable task where behavior compounds.</p>
+<p>Copyable patterns:</p>
+<ul>
+<li>Customer support: reward grounded answers that include correct policy citations.</li>
+<li>Sales enablement: reward tone control paired with strict product accuracy.</li>
+<li>Research copilots: reward structured reasoning with clear, verified source links.</li>
+</ul>
+<p>If you have high-volume agent interactions, your invocation logs are an RFT dataset waiting.</p>
+<p>And don’t sleep on ops metrics that actually pay the bills.
+When answers are consistent and structured, downstream systems become far more reliable.
+That means less human cleanup and faster time to resolution.</p>
+<h2 id="zerotopilotplaybook">Zero to pilot playbook</h2>
+<h3 id="scopetowinearly">Scope to win early</h3>
+<p>AWS recommends starting small:</p>
+<blockquote>
+  <p>\"Start small with 100–200 examples to validate reward functions.\"</p>
+</blockquote>
+<p>Pick one workflow with clear success criteria, like grounded answers in 3–5 sentences.
+Include a reference link and JSON metadata in the target format.
+Build a minimal reward: +1 grounded reference, +1 schema, −1 policy violations.</p>
+<p>Pre-training sanity check:</p>
+<ul>
+<li>If the base model already aces your reward, skip RFT for now.</li>
+<li>If it struggles consistently, proceed to RFT and proper evaluation.</li>
+</ul>
+<p>Also define a north-star KPI before training starts, so success is clear.
+Examples include CSAT up 5 points, deflection up 10%, or handle time down 15%.
+You can also use accuracy on a curated test set, up 20%.
+Tie RFT outcomes to business outcomes so the win is obvious.</p>
+<h3 id="trainmonitoriterate">Train monitor iterate</h3>
+<p>Run RFT in Bedrock with your reward function configured.
+Then watch for the following common issues during training.</p>
+<ul>
+<li>Overfitting: the model memorizes examples, and generalization drops sharply.</li>
+<li>Reward hacking: outputs meet rules technically but miss the actual intent.</li>
+<li>Plateauing rewards: little measurable improvement after a certain number of steps.</li>
+</ul>
+<p>AWS guidance says, 'Monitor training progress to detect overfitting or plateauing rewards' early.
+Also, 'Optimize reward functions for efficiency to minimize overhead' during experiments.
+Small, well-shaped rewards beat sprawling rulebooks every day.
+Tighten the loop; don’t bloat it with unnecessary checks.</p>
+<p>When you hit a plateau, change one thing at a time.
+Add 20–50 harder examples, simplify rewards, or rebalance weights toward truthfulness.
+Then retrain and re-evaluate with the same held-out test set.</p>
+<h3 id="lightweightevaluationrubric">Lightweight evaluation rubric</h3>
+<ul>
+<li>Grounding: does the answer cite a source from the retrieval set? (+1)</li>
+<li>Format: valid JSON with required fields, and no extra keys. (+1)</li>
+<li>Safety: no restricted topics, and no PII echo or leakage. (+1)</li>
+<li>Helpfulness: concise, on-topic, and within 3–5 sentences total. (+1)</li>
+<li>Penalty: hallucinated fact, broken link, or policy violation. (−1)</li>
+</ul>
+<p>Keep it simple with a rubric anyone understands in sixty seconds.
+You should be able to audit it fast when things go sideways.</p>
+<h2 id="quickpulsecheck">Quick pulse check</h2>
+<ul>
+<li>RFT in Amazon Bedrock lets you optimize behavior, not just tokens.</li>
+<li>Average 66% accuracy lift across tasks; Salesforce saw gains up to 73%.</li>
+<li>Start with Nova 2 Lite for text-only; more models and modalities are coming.</li>
+<li>Use invocation logs for training; keep rewards simple, consistent, and auditable.</li>
+<li>Monitor for overfitting and reward hacking closely; iterate fast.</li>
+<li>Pair with SageMaker serverless customization for end-to-end agility.</li>
+</ul>
+<h2 id="nextmultimodalmodelsstacks">Next multimodal models stacks</h2>
+<h3 id="neartermsupport">Near term support</h3>
+<p>Initial RFT support is Amazon Nova 2 Lite with text-only input.
+AWS says multimodal support and more model types are coming soon.
+Expect vision plus text agents tuned for parsing documents, retail catalog QA, or forms.
+Rewards can measure OCR fidelity, entity extraction quality, or caption grounding accuracy.</p>
+<p>That matters because many real-world tasks are not purely text.
+With multimodal RFT, you shape reasoning across formats, not just final words.</p>
+<h3 id="stackplaybedrocksagemaker">Stack play Bedrock SageMaker</h3>
+<p>AWS upgraded SageMaker with serverless model customization that complements Bedrock RFT nicely.
+Prototype RFT quickly in Bedrock, then use SageMaker to scale and version.
+You can also combine techniques like LoRA fine-tuning plus RFT for domain agents.</p>
+<p>This shows AWS doubling down on custom LLMs that fit guardrails and budgets.
+If your roadmap says efficient and reliable agents, RFT becomes your center of gravity.</p>
+<p>Also remember the rest of the Bedrock toolbox, like Knowledge Bases and Guardrails.
+Use built-in model evaluation, too, for clean comparisons and tracking.
+RFT aligns the model to your end-to-end workflow, not a toy benchmark.</p>
+<h2 id="rftquestionsanswered">RFT questions answered</h2>
+<h3 id="rftvsfinetuning">RFT vs fine tuning</h3>
+<p>Standard fine-tuning predicts the right output for each input using supervision.
+RFT optimizes behavior using rewards, human or automated, across steps and outcomes.
+It shines on reasoning and policy-heavy workflows where process actually matters.</p>
+<h3 id="howmanyexamples">How many examples</h3>
+<p>No. AWS recommends starting with 100–200 examples to validate your reward design.
+You can scale later, but small, high-quality sets can drive big gains.
+The reward function does most of the steering during learning.</p>
+<h3 id="supportedmodelsnow">Supported models now</h3>
+<p>Right now, Bedrock RFT supports Amazon Nova 2 Lite with text-only inputs.
+AWS plans to expand support to additional models and multimodal data types.</p>
+<h3 id="preventrewardhacking">Prevent reward hacking</h3>
+<p>Keep rewards simple, auditable, and aligned with human judgment at evaluation time.
+Mix rule-based checks like schema and citations with small human spot reviews.
+Watch validation tasks and adjust when outputs meet the letter, not the spirit.</p>
+<h3 id="useinvocationlogs">Use invocation logs</h3>
+<p>Yes, Bedrock supports using invocation logs from real agents as training data.
+Clean for privacy, define rewards around your best exemplars, and iterate.</p>
+<h3 id="sagemakerfit">SageMaker fit</h3>
+<p>SageMaker serverless customization complements Bedrock RFT in real deployments.
+Prototype behavior tuning in Bedrock, then operationalize and scale in SageMaker.
+Use it to manage experiments and larger training flows within MLOps.</p>
+<h3 id="measuresuccessbeyondaccuracy">Measure success beyond accuracy</h3>
+<p>Track operations and business metrics like CSAT, handle time, and deflection rate.
+Also track first-contact resolution, compliance violations per thousand, and JSON parse errors.
+If accuracy rises but handle time spikes, weight rewards toward concision and structure.</p>
+<h3 id="rlhfdpopreferencetuning">RLHF DPO preference tuning</h3>
+<p>They’re cousins sharing similar ideas, but with different training methods.
+RLHF uses human feedback; DPO optimizes from pairwise preference comparisons.
+Bedrock RFT focuses on reward-driven behavior shaping for specific workflow needs.</p>
+<h3 id="safetyandcompliance">Safety and compliance</h3>
+<p>Bake safety into rewards by penalizing violations and requiring approved citations.
+Add small human review slices for high-risk intents and sensitive scenarios.
+Pair RFT with Bedrock Guardrails to enforce boundaries at runtime.</p>
+<h3 id="timetoresults">Time to results</h3>
+<p>For a narrow task with 100–200 examples, gains can show within few iterations.
+The slow part is designing a reward that captures what 'good' means.
+Invest there first, then training feels surprisingly quick.</p>
+<h2 id="rftragguardrailscombo">RFT RAG Guardrails combo</h2>
+<ul>
+<li>Retrieval: treat correct citation of retrieved passages as a reward signal.
+Penalize answers that ignore top documents or invent facts outright.</li>
+<li>Reasoning: reward step-by-step plans on complex tasks, but cap length to avoid rambling.</li>
+<li>Guardrails: enforce policy and tone at runtime, and train with same rules.</li>
+<li>Schema-first outputs: reward correct JSON keys and types to keep systems stable.</li>
+</ul>
+<p>Add a periodic retrieval audit to your process every sprint.
+If the retriever surfaces bad docs, the model cannot ground answers.
+Fix upstream data first before blaming the agent downstream.</p>
+<h2 id="costopsgovernance">Cost ops governance</h2>
+<ul>
+<li>Cost control: RFT lets you keep smaller base models and still improve outcomes.
+You trade raw scale for smart alignment and targeted rewards.</li>
+<li>Serverless FT: Bedrock and SageMaker serverless features simplify infrastructure and management.
+You pay for what you use and skip cluster babysitting.</li>
+<li>Versioning: treat rewards, datasets, and models as first-class, versioned artifacts.
+Track changes like code with reward v1.2, dataset v3.1, model v0.9.</li>
+<li>Reproducibility: log seeds, configs, and evaluation scores for explainable changes.
+Auditors and product teams will ask for clear histories later.</li>
+<li>Rollout: ship behind a feature flag, run A/B tests, collect feedback as signals.</li>
+</ul>
+<p>A tiny governance win: publish a one-page Reward Design Doc for each run.
+Define behavior, risks, and success measures clearly, in plain language.
+Your future self will seriously thank you later.</p>
+<h2 id="commonpitfallstododge">Common pitfalls to dodge</h2>
+<ul>
+<li>Over-penalizing length: you get terse, unhelpful answers; balance brevity with completeness.</li>
+<li>Rewarding the wrong proxy: the model optimizes metrics, not intent.
+Keep rewards tightly tied to user value and desired outcomes.</li>
+<li>Ignoring edge cases: the model aces happy paths and fails on real tickets.
+Seed examples directly from production pain points and recent incidents.</li>
+<li>Skipping human review: automated graders drift over time without warning.
+Add regular spot checks to keep the reward signal honest.</li>
+<li>Training on messy logs: garbage in means garbage out, every time.
+Clean, redact, and label before you feed the beast anything.</li>
+</ul>
+<p>When in doubt, simplify. Shorter rewards, tighter datasets, faster loops.</p>
+<h2 id="firstweekplan">First week plan</h2>
+<ul>
+<li>Day 1: pick one narrow workflow and write a crisp success definition.
+Then draft a simple five-point reward rubric to start.</li>
+<li>Day 2: pull 150–200 examples from logs; clean, redact, and label carefully.
+Add twenty hard negatives with clear corrections for contrast.</li>
+<li>Day 3: run a base model baseline and score it with your rubric.
+If performance is already good, pause and reconsider the plan.</li>
+<li>Day 4: kick off RFT in Bedrock; track reward curves and validation carefully.</li>
+<li>Day 5: review failure modes, tweak reward weights, and add twenty tricky examples.</li>
+<li>Day 6–7: rerun training, ship a canary behind a flag, collect feedback.
+Use it for the next iteration loop immediately.</li>
+</ul>
+<p><em>Move fast, but measure.</em> A small, repeatable loop beats a perfect plan.
+Ship something useful instead of chasing imaginary perfection forever.</p>
+<h2 id="shiprftchecklist">Ship RFT checklist</h2>
+<ul>
+<li>Pick one narrow task with clear, testable success criteria.</li>
+<li>Gather 100–200 high-quality examples or cleaned invocation logs.</li>
+<li>Define a simple reward covering grounding, schema, and policy adherence.</li>
+<li>Run RFT on Amazon Nova 2 Lite inside Bedrock.</li>
+<li>Evaluate on held-out tasks; watch for overfitting and plateaus carefully.</li>
+<li>Refine rewards; add light human review exactly where it counts.</li>
+<li>Deploy behind a feature flag and measure downstream KPIs like CSAT, AHT, accuracy.</li>
+<li>Document reward logic for governance, auditability, and repeatability later.</li>
+</ul>
+<p>RFT isn’t about chasing bigger models; it’s about shaping smarter ones.
+With Bedrock, you can tune behaviors that move accuracy, trust, and resolution time.
+And you can do it without setting your cloud bill on fire.</p>
+<p>Start small, reward what matters most, and iterate fast.
+<em>Winners will not have the most parameters; they’ll have the best rewards.</em></p>
+<p>Want to see how teams ship measurable gains with behavior tuning? Browse our <a href="../case-studies.html">Case Studies</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/bedrock/">Amazon Bedrock overview</a></li>
+<li><a href="https://aws.amazon.com/what-is/reinforcement-learning/">What is Reinforcement Learning? (AWS)</a></li>
+<li><a href="https://aws.amazon.com/sagemaker/">Amazon SageMaker overview</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html">Amazon Bedrock model evaluation (Docs)</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html">Amazon Bedrock model customization (Docs)</a></li>
+<li><a href="https://aws.amazon.com/blogs/machine-learning/introducing-guardrails-for-amazon-bedrock-to-build-safer-generative-ai-applications/">Guardrails for Amazon Bedrock (Blog)</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html">Amazon SageMaker serverless inference (Docs)</a></li>
+</ul>
+<p><em>\"You don’t reduce hallucinations by yelling at the prompt. You reduce hallucinations by paying the model to tell the truth.\"</em></p>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="bedrock-reinforcement-fine-tuning.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqf088.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Boost+AI+Accuracy+66%25+With+Bedrock+Reinforcement+Fine-Tuning&amp;pi=269520934609&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=269520934609&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fbedrock-reinforcement-fine-tuning&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/bedrock-reinforcement-fine-tuning?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:49 GMT -->
+</html>

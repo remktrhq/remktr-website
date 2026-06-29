@@ -1,0 +1,563 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/sagemaker-serverless-fine-tuning?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Serverless fine-tuning on SageMaker: ship custom LLMs faster</title>
+    <link rel="canonical" href="sagemaker-serverless-fine-tuning.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Accelerate Amazon SageMaker serverless model fine-tuning with AI agent guidance, MLflow tracking, and autoscaling. Customize LLMs and deploy to endpoints fast.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Serverless fine-tuning on SageMaker: ship custom LLMs faster",
+        "datePublished": "2025-12-03T21:02:28Z",
+        "dateModified": "2025-12-03T21:02:29.289Z",
+        "mainEntityOfPage": "https://remktr.com/blog/sagemaker-serverless-fine-tuning",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-03-2025-08-51-46-7689-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="sagemaker-serverless-fine-tuning.html">Serverless fine-tuning on SageMaker: ship custom LLMs faster</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 3, 2025 9:02:28 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You want custom LLMs that actually fit your use case. Not a prompt band-aid.
+But the old way—instances, GPUs, logs—turns into weeks of DevOps karaoke.
+And money burns while you wait.</p>
+<p>You shouldn’t need a PhD in clusters to ship clear emails or invoice parsers.
+Or to follow your compliance rules without a fight.
+You want short loops, clean evals, and a simple path to prod.
+Basically: <em>less yak-shaving, more shipping.</em></p>
+<p>Here’s the flip: Amazon SageMaker AI just added serverless model customization.
+It gets you from idea to deployed endpoint in hours or days, not months.
+No instance guesswork. No MLOps yak-shaving. No late-night fire drills.
+Pick a model (Nova, Llama, Qwen, DeepSeek, GPT-OSS), add data, and go.
+The platform auto-scales, recovers fast from failures, and tracks everything.</p>
+<p>That means your team can try three ideas before lunch.
+Kill the losers with real metrics, then double down on the winner.
+No infra blockers. No quota begging. <em>It feels like dial-up to fiber.</em></p>
+<p>If you googled ‘amazon sagemaker serverless model fine tuning tutorial’, good.
+You’re done with theory. You want steps. You’ll get the playbook here.
+We’ll cover pitfalls and deployment too. And endpoint timing.
+Yes, creating a SageMaker endpoint usually takes minutes, size dependent.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Fully serverless fine-tuning for popular LLMs—no instance selection required.</li>
+<li>AI agent guides spec, synthetic data, training, and eval.</li>
+<li>Techniques supported: SFT, DPO, RLAIF, RLVR (for verifiable goals).</li>
+<li>LLM-as-judge eval compares your custom model vs. base—fast.</li>
+<li>Deploy to SageMaker endpoints or Amazon Bedrock with a few clicks.</li>
+<li>MLflow logs metrics serverlessly; rapid recovery and autoscaling built-in.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-03-2025-08-52-37-4172-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="serverlesscustomizationexplained">Serverless customization explained</h2>
+<h3 id="zerodevopsoverhead">Zero DevOps overhead</h3>
+<p>SageMaker AI’s new serverless model customization does provisioning and scaling for you.
+You don’t pick instances. You don’t set up clusters. No yak-traps.
+It sizes compute to your model and dataset, then scales during training.
+When training ends, it winds down. If a job fails, it recovers quick.
+You keep momentum instead of combing logs at 2 a.m. like a zombie.</p>
+<ul>
+<li>What changes for you: faster loops. Less waiting for capacity or config rewrites.</li>
+<li>Where it shines: legal, finance, healthcare. Tailored style, safety, compliance.</li>
+</ul>
+<p>Under the hood, you get ephemeral compute that spins up only when needed.
+Caching cuts download time on common containers. No idle boxes burning cash.
+You pay for what you use, not for forgotten servers. More tries per week.
+Fewer “we’ll get to it next sprint” delays that stall teams.</p>
+<h3 id="agentguidedworkflow">Agent guided workflow</h3>
+<p>An AI scientist (agent) helps scope the job with plain language.
+It generates a spec: tasks, techniques, data needs, and metrics.
+It can create synthetic data, check quality, and run training and eval.
+Think of it as your co-pilot. It shrinks the “what now?” time a lot.</p>
+<p>It won’t magically fix a messy dataset. But it will:</p>
+<ul>
+<li>Suggest schema and labeling rules. Stop twelve spellings of ‘refund’ madness.</li>
+<li>Propose sample sizes for a first pass. Start with 3–10k clean SFT pairs.</li>
+<li>Draft an evaluation template with safety prompts and tricky edge cases.</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>Your legal team needs contract-risk summaries in plain English.
+Start with Amazon Nova or Llama. Upload 20k annotated clauses and notes.
+Ask the agent for a concise, accurate, neutral-tone summary bot.
+It proposes SFT plus DPO for tone. Then spins up a run.
+It compares outputs vs. the base. You get clear win rates.
+Robin AI-style legal workflows go from idea to useful in days.
+Not quarters spent waiting and explaining.</p>
+<p>Layer in a small golden set—maybe 300 clauses with lawyer-written summaries.
+Add pass/fail rules for definitions, dates, and obligations.
+The agent bakes those into eval. See where your model wins or hallucinates.
+Catch issues before anyone in Legal hears the word ‘deploy’.</p>
+<h2 id="choosetherighttechnique">Choose the right technique</h2>
+<h3 id="supervisedfinetuningsft">Supervised fine tuning SFT</h3>
+<p>Use SFT when you’ve got labeled input-output pairs that show good work.
+You want the model to imitate high-quality examples for your tasks.
+It’s the fastest on-ramp for grounding tasks like invoice parsing or Q&amp;A.
+Start with SFT to cut hallucinations and match your brand’s tone.</p>
+<ul>
+<li>Best for: domain specialization, structured tasks, deterministic mappings.</li>
+<li>Tradeoff: SFT sets the baseline, but may miss nuanced preferences.</li>
+</ul>
+<p>Practical tips:</p>
+<ul>
+<li>Keep demonstrations consistent. If you want bullets, always show bullets.</li>
+<li>Balance the dataset. Don’t let ‘password reset’ drown every other ticket.</li>
+<li>Start small and clean, then scale. A tight 5k beats a noisy 50k set.</li>
+</ul>
+<h3 id="directpreferenceoptimizationdpo">Direct preference optimization DPO</h3>
+<p>DPO learns from preference pairs where one response is preferred.
+It avoids heavy RL infra by optimizing a direct objective from preferences.</p>
+<ul>
+<li>Best for: style, harmlessness, helpfulness, formatting consistency.</li>
+<li>Play: collect A/B choices. The agent can bootstrap with synthetic pairs.</li>
+</ul>
+<p>Practical tips:</p>
+<ul>
+<li>Use diverse prompts. Don’t overfit to one tone or vibe.</li>
+<li>Track preference win rate on a held-out set. Watch for stalls.
+If it stalls, fix pair quality or add harder negatives.</li>
+</ul>
+<h3 id="rlaif">RLAIF</h3>
+<p>Instead of human ratings for every output, use a strong model-as-critic.
+It scales alignment signals, popularized by Constitutional AI methods.
+Great when human raters are scarce or too expensive for volume.</p>
+<ul>
+<li>Best for: safety policies, refusal behaviors, helpful-but-safe replies.</li>
+<li>Note: use carefully. Keep a human slice to sanity-check drift.</li>
+</ul>
+<p>Practical tips:</p>
+<ul>
+<li>Write a short “constitution” the critic will apply to outputs.
+Add rules like no PII exposure and medical disclaimers.</li>
+<li>Compare critic judgments to human reviews often. Catch bias or over-refusal.</li>
+</ul>
+<h3 id="rlvr">RLVR</h3>
+<p>When you can write a checker, you can use RLVR for objective goals.
+Think math correctness, schema validation, or unit tests as rewards.
+If the checker passes, the model gets rewarded. If not, it learns.</p>
+<ul>
+<li>Best for: code gen, step-by-step reasoning, templates that must validate.</li>
+<li>Upshot: fewer reward hacks, more measurable wins you can trust.</li>
+</ul>
+<p>Practical tips:</p>
+<ul>
+<li>Start with simple checks like JSON schema and field presence.</li>
+<li>Keep verifiers fast. Slow checkers bottleneck training loops hard.</li>
+</ul>
+<h3 id="example-1">Example</h3>
+<p>Customer support bot plan: start with SFT on resolved tickets.
+Add DPO using responses tied to five-star ratings. Teach stronger style.
+Layer RLAIF to sharpen refusals and safety policies.
+Use RLVR when you can verify claims against a rules engine.
+Like refund eligibility rules that always must pass validation.</p>
+<p>Pro move: tag each training example with metadata.
+Include product line, region, language, and sentiment.
+Slice evals by those tags. See issues fast.
+You might find Spanish refunds lag English by eight points.
+Then you know exactly where to invest next.</p>
+<h2 id="fromprompttoendpoint">From prompt to endpoint</h2>
+<h3 id="instantexperimentsllmjudge">Instant experiments LLM judge</h3>
+<p>SageMaker AI spins up a customization environment in minutes.
+After training, it evaluates your model vs. the base across scenarios.
+It uses an LLM as a judge, which correlates well with humans when designed.
+You get side-by-side outputs and metrics like win rate and latency.
+Ship or iterate based on a real scorecard, not vibes.</p>
+<ul>
+<li>Why it matters: you avoid death-by-demo. Every run has a scorecard.</li>
+<li>Add-on: define success criteria like exact match, BLEU/ROUGE, or citations.
+For RLVR, use checker pass rates too. The agent bakes it in.</li>
+</ul>
+<p>Make the judge honest:</p>
+<ul>
+<li>Randomize output order to reduce position bias.</li>
+<li>Add canary tests with known answers like math and schema checks.</li>
+<li>Keep a small human-reviewed set to calibrate judgments.</li>
+</ul>
+<h3 id="deploymentoptionswithoutfriction">Deployment options without friction</h3>
+<p>Once the model clears your thresholds, deploy to one of two places:</p>
+<ul>
+<li>SageMaker inference endpoints with flexible autoscaling and VPC isolation.</li>
+<li>Amazon Bedrock for fully managed, serverless inference at scale.</li>
+</ul>
+<p>Provisioning a SageMaker endpoint typically completes in minutes.
+Timing varies by model size and region, of course.
+For a giant 70B model, expect more time than an 8B model.
+Containers download and memory warm-up takes longer, naturally.</p>
+<p>Day-one checklist:</p>
+<ul>
+<li>Set autoscaling policies so you don’t pay for idle peak capacity.</li>
+<li>Enable logging for latency, tokens, and errors right away.</li>
+<li>Put the endpoint in a VPC if compliance is required for your team.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-03-2025-08-53-29-9246-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="pipelinefriendlybydesign">Pipeline friendly by design</h3>
+<p>Want a <code>sagemaker pipeline create endpoint</code> step baked in?
+Add a post-train stage that registers the model and runs eval.
+Only on pass, promote to a prod endpoint automatically.
+This gates deployment on measured quality, not hopes and prayers.</p>
+<p>Add approvals too. Require sign-off if safety violations exceed a threshold.
+Or if latency regresses by more than ten percent vs. baseline.</p>
+<h3 id="example-2">Example</h3>
+<p>You customize Qwen for call summarization tasks.
+The platform evaluates on 500 test calls vs. the base model.
+It shows a 28% win rate on accuracy. Hallucinations drop 35% by checker.
+You ship to a production endpoint by end of day. Clean.</p>
+<p>Then you schedule nightly eval runs on a rolling sample of calls.
+If accuracy dips below 90% or hallucinations tick up, the pipeline halts.
+It pings Slack with a short report and the worst offenders.
+Tight loops mean fewer 3 a.m. surprises for the team.</p>
+<h2 id="llmopsmlflowinside">LLMOps MLflow inside</h2>
+<h3 id="serverlessexperimenttracking">Serverless experiment tracking</h3>
+<p>SageMaker AI integrates with MLflow. Your runs log automatically.
+Parameters, metrics, and artifacts are captured without extra servers.
+You get tracking and charts on demand with zero ops overhead.
+See side-by-side runs like SFT vs. DPO with win and loss metrics.
+Artifacts include checkpoints, eval sets, and confusion matrices too.</p>
+<ul>
+<li>Nice touch: autoscaling training and rapid recovery from failures.
+If a node hiccups mid-epoch, the system recovers fast.
+Your logs remain intact for analysis. No mystery gaps.</li>
+</ul>
+<p>Name your runs with the “why,” like <code>sft_v3_lora_rank16_dedup_on</code>.
+Tag them with dataset hashes. Answer audit questions in seconds.
+When Legal asks which data trained the March 2 model, you’ll know.
+No multi-day scramble or spreadsheet archeology.</p>
+<h3 id="metricsthatmatter">Metrics that matter</h3>
+<p>Don’t just stare at loss curves till your eyes glaze over.
+Track the real stuff:</p>
+<ul>
+<li>Preference win rate (DPO), refusal accuracy (RLAIF), verifier pass rate (RLVR)</li>
+<li>Latency and cost per 1k tokens</li>
+<li>Safety violations per 100 prompts</li>
+<li>Hallucination rate using LLM-as-judge with retrieval checks</li>
+</ul>
+<p>Line these up against your acceptance criteria.
+If cost per task trends the wrong way, pull some levers.
+Try LoRA adapters, batch inference, or smaller model variants.
+If safety violations spike, increase RLAIF weight or tighten the constitution.</p>
+<h3 id="example-3">Example</h3>
+<p>You run five SFT jobs on Amazon Nova with variant prompts.
+Then three DPO passes using different preference datasets for coverage.
+In MLflow, the best run shows a 22% higher win rate at 18% lower latency.
+You pin that run, promote it, and archive the rest.
+Clean lifecycle, no spreadsheets or copy-paste chaos.</p>
+<p>Bonus: set budget alarms per run and per day.
+If an experiment burns tokens without accuracy lift, auto-stop and notify.
+Money saved is runway gained. Your CFO will smile.</p>
+<h2 id="dataprepandeval">Data prep and eval</h2>
+<p><em>Clean beats big.</em> Do this before your first run every time:</p>
+<ul>
+<li>Deduplicate near-identical examples to avoid overweighting one pattern.</li>
+<li>Mask or remove PII unless your task truly needs it.
+If it does, limit access and log usage.</li>
+<li>Standardize formats like dates, currency, and units. Stop guesswork.</li>
+</ul>
+<p>Build a tight evaluation set with clear stakes:</p>
+<ul>
+<li>100–300 golden prompts with high-stakes answers.
+Think contract clauses, refund rules, and medical summaries.</li>
+<li>50–100 trick prompts that trigger hallucinations or safety issues.</li>
+<li>A few long-form tasks to test latency and chunking behavior.</li>
+</ul>
+<p>If you can automate a check, absolutely do it.
+Schema, math, and factual grounding to a reference are perfect.
+Verifiers are your superpower. Lean on them early and often.</p>
+<h2 id="quickhitspricingmodelsconstraints">Quick hits pricing models constraints</h2>
+<h3 id="costsandcapacity">Costs and capacity</h3>
+<p>Serverless isn’t free. You still pay for training and inference compute.
+You just skip paying for idle infrastructure you forgot to turn off.
+Use smaller base models when possible. Prefer adapters for cheaper updates.
+If you came via ‘amazon sagemaker canvas pricing’, note this is different.
+Canvas is a separate low-code product with its own pricing.
+This guide covers serverless customization for LLMs only.</p>
+<p>Cost levers you control:</p>
+<ul>
+<li>Token budget per prompt and response</li>
+<li>Batch size and gradient accumulation settings</li>
+<li>Adapter ranks, like LoRA rank 8 vs. 32 tradeoffs</li>
+<li>Caching frequency and warm pools for endpoints</li>
+</ul>
+<h3 id="supportedmodelsanddata">Supported models and data</h3>
+<p>Popular bases like Amazon Nova, Llama, Qwen, DeepSeek, and GPT-OSS are supported.
+Keep your datasets clean: dedupe, guard PII, and set clear success criteria.
+The AI agent can synthesize data, but always validate samples first.
+Don’t unleash huge runs on junk. That’s pain.</p>
+<p>If you’re unsure on size, start smaller.
+A tuned 8B model often beats a lazy 70B with prompts.
+You can scale up once you prove real lift and value.</p>
+<h3 id="complianceandsafeguards">Compliance and safeguards</h3>
+<p>For regulated teams, use private networking and encryption at rest and transit.
+Add human-in-the-loop review on a subset of outputs.
+Log everything in MLflow so audits aren’t a fire drill.
+If you searched ‘amazon sagemaker tutorial pdf,’ export your runbook.
+Share metrics dashboards with reviewers for peace of mind.</p>
+<p>Add a red team eval with prompts that probe for policy breaks.
+Look for PII leaks, unsafe advice, or compliance violations.
+Track violation rates like you track latency. Treat it as a top metric.</p>
+<h3 id="example-4">Example</h3>
+<p>Healthcare summarization plan: start with SFT on de-identified notes.
+Add RLVR with a HIPAA-safe checker for redaction and term accuracy.
+Deploy behind a VPC endpoint. Monitor hallucination rate every week.</p>
+<p>Pro tip: rotate a small human QA panel monthly.
+Catch drift early and update checkers as guidelines evolve in the field.</p>
+<h2 id="halfwaycheckpointaccelerationsummary">Halfway checkpoint acceleration summary</h2>
+<ul>
+<li>You fine-tune LLMs serverlessly—no instance wrangling or cluster guilt.</li>
+<li>An AI agent drafts specs, synthesizes data, and evaluates results.</li>
+<li>SFT, DPO, RLAIF, and RLVR cover tasks, preferences, safety, and goals.</li>
+<li>LLM-as-judge plus custom checkers give fast, useful evals you trust.</li>
+<li>Deploy to SageMaker endpoints or Bedrock; endpoint creation typically minutes.</li>
+<li>MLflow tracks experiments automatically; autoscaling and recovery keep runs steady.</li>
+</ul>
+<p>Add a steady rhythm of small experiments and tight loops.
+Bias toward measurable wins. You’ve turned model building into weekly sprints.
+Not a quarterly gamble that eats budget and patience.</p>
+<h2 id="faq">FAQ</h2>
+<p>1.</p>
+<h3 id="createasagemakerendpoint">Create a SageMaker endpoint</h3>
+<p>Typically minutes, depending on model size, image pull time, and region.
+Bigger models like 34B–70B take longer to download and warm up.
+Enable autoscaling warm pools for faster cold starts after that.</p>
+<p>2.</p>
+<h3 id="amazonsagemakercanvaspricing">Amazon SageMaker Canvas pricing</h3>
+<p>Yes. Canvas is a low-code UI product with separate pricing.
+Serverless customization focuses on fine-tuning LLMs with autoscaling and an agent.
+Check official AWS pricing pages for current numbers and regions.</p>
+<p>3.</p>
+<h3 id="whichtechniqueshouldistart">Which technique should I start</h3>
+<p>Start with SFT to ground task behavior and cut nonsense.
+Add DPO to encode style or preference orderings.
+Use RLAIF to scale alignment with a model-as-critic.
+If you can write a checker, layer RLVR for verifiable outcomes.</p>
+<p>4.</p>
+<h3 id="trackwithoutmlflowservers">Track without MLflow servers</h3>
+<p>Yes. MLflow integration is serverless in this flow.
+Runs, params, metrics, and artifacts log automatically.
+You get comparisons and charts without a tracking backend to run.</p>
+<p>5.</p>
+<h3 id="buildasagemakerpipeline">Build a sagemaker pipeline</h3>
+<p>Absolutely. Put eval and governance in the pipeline.
+After training, evaluate. Only on pass, register and create or update the endpoint.
+This helps you avoid shipping regressions that bite later.</p>
+<p>6.</p>
+<h3 id="supportmyfavoritebasemodels">Support my favorite base models</h3>
+<p>Yes. The flow covers Amazon Nova, Llama, Qwen, DeepSeek, and GPT-OSS.
+Pick the smallest that hits your accuracy and latency targets.
+Adapters can deliver big wins at much lower cost.</p>
+<p>7.</p>
+<h3 id="evalsdisagreewithllmjudge">Evals disagree with LLM judge</h3>
+<p>Keep a human-reviewed slice and some verifiable checks.
+If the judge fails canary tests or disagrees with ground truth, change it.
+Tune the prompt, switch the judge model, or boost objective metrics.</p>
+<p>8.</p>
+<h3 id="controlcostsastrafficgrows">Control costs as traffic grows</h3>
+<p>Use autoscaling with a sane min capacity and batch where possible.
+Cache frequent prompts. Measure cost per successful task, not just tokens.
+Review cost dashboards weekly and adjust.</p>
+<h2 id="runyourfirstserverlessfinetune">Run your first serverless fine tune</h2>
+<ul>
+<li>Define success: task, metrics, constraints like tone, safety, and latency.</li>
+<li>Pick a base model sized to your use case and traffic.</li>
+<li>Ask the AI agent to draft a spec. Review and tweak as needed.</li>
+<li>Upload data. Use the agent to synthesize extras and check quality.</li>
+<li>Start with SFT. Add DPO, RLAIF, or RLVR if your goals need them.</li>
+<li>Evaluate with LLM-as-judge plus verifiers. Compare against the base.</li>
+<li>If it passes, deploy to a SageMaker endpoint or Bedrock.</li>
+<li>Log everything in MLflow and schedule a weekly eval job.</li>
+</ul>
+<p>Pro checklist after deploy:</p>
+<ul>
+<li>Add alerts on latency p95 and safety violation rate.</li>
+<li>Track cost per successful task every single week.</li>
+<li>Refresh your evaluation set monthly with real edge cases.</li>
+<li>Plan a retrain path: small refresh every 2–4 weeks, major quarterly.</li>
+</ul>
+<p><em>Good news: you don’t need a ‘sagemaker model model’ mental model.</em>
+You just need a repeatable loop you can run again and again.</p>
+<p><em>You don’t win by renting bigger GPUs. Not usually anyway.</em>
+You win by tightening the loop: define, fine-tune, evaluate, deploy, repeat.
+Serverless model customization in SageMaker AI gives you that loop.
+Start with SFT to anchor behavior, then stack DPO for preferences.
+Use RLAIF or RLVR when you can scale feedback or write verifiers.
+Ship the smallest model that clears the bar and measure ruthlessly in MLflow.
+Let autoscaling handle bursts. The result isn’t just a faster model.
+<em>It’s a faster team with fewer headaches.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/sagemaker/">Amazon SageMaker (product overview)</a></li>
+<li><a href="https://aws.amazon.com/bedrock/">Amazon Bedrock (product overview)</a></li>
+<li><a href="https://aws.amazon.com/sagemaker/canvas/pricing/">Amazon SageMaker Canvas pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html">Amazon SageMaker endpoints (deploying models)</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html">Amazon SageMaker serverless inference</a></li>
+<li><a href="https://mlflow.org/docs/latest/index.html">MLflow documentation</a></li>
+<li><a href="https://arxiv.org/abs/2305.18290">Direct Preference Optimization (Rafailov et al., 2023)</a></li>
+<li><a href="https://arxiv.org/abs/2212.08073">Constitutional AI / RLAIF (Anthropic, 2022)</a></li>
+<li><a href="https://openai.com/research/learning-to-reason-with-verifiable-rewards">Learning to Reason with Verifiable Rewards (OpenAI, 2024)</a></li>
+<li><a href="https://arxiv.org/abs/2306.05685">LLM-as-a-Judge (Kojima et al., 2023)</a></li>
+<li><a href="https://www.robinai.com/">Robin AI</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="sagemaker-serverless-fine-tuning.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqa384.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Serverless+fine-tuning+on+SageMaker%3A+ship+custom+LLMs+faster&amp;pi=269524511433&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=269524511433&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fsagemaker-serverless-fine-tuning&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/sagemaker-serverless-fine-tuning?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:49 GMT -->
+</html>

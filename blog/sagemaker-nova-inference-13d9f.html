@@ -1,0 +1,366 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/sagemaker-nova-inference-1?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:12:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Cut AI costs deploying custom Nova models on SageMaker</title>
+    <link rel="canonical" href="sagemaker-nova-inference-1.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Deploy custom Amazon Nova models with SageMaker Inference. Optimize scaling, hardware &amp; cost (up to 50%) via Trainium/Inferentia and CloudWatch. AWS AI.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cut AI costs deploying custom Nova models on SageMaker",
+        "datePublished": "2026-02-23T22:08:41Z",
+        "dateModified": "2026-02-23T22:08:41.481Z",
+        "mainEntityOfPage": "https://remktr.com/blog/sagemaker-nova-inference-1",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-23-2026-09-57-01-8575-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="sagemaker-nova-inference-1.html">Cut AI costs deploying custom Nova models on SageMaker</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 23, 2026 10:08:41 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’ve got a model that absolutely crushes multimodal tasks in production. But when traffic spikes, your bill sweats, latency creeps, dashboards blink red—super fun.</p>
+<p>Here’s the twist: Amazon SageMaker Inference now supports custom Amazon Nova models. You get real dials to actually tune your stack. Pick instance types, set auto-scaling, tweak concurrency, and hold steady performance without melting budgets.</p>
+<p>This is built for operators who really hate guesswork. Flexible scaling adjusts in real time as traffic changes. AWS Trainium and Inferentia chips can deliver <em>up to 50% cost savings</em>. CloudWatch sends signal, not noise, so you move faster and sleep better.</p>
+<p>If you run e-commerce recs, healthcare imaging, or real-time analytics, this finally unlocks missing knobs. It matters most when “good enough” simply isn’t good enough anymore.</p>
+<p>Let’s be honest: generic managed endpoints feel great until limits and surprise costs hit. With Nova on SageMaker, pricing, scaling, and performance levers sit in your hands. Now you tune for your traffic, not refactor traffic to fit a black box.</p>
+<p>Think of it like moving from a rental to your own place. More responsibility? Sure, you own more of it now. But you get keys, set rules, and choose what stays warm versus spins up. That’s how a flashy demo becomes a reliable, margin-friendly product.</p>
+<ul>
+<li>TL;DR</li>
+<li>Custom Amazon Nova on SageMaker gives real control over scaling, hardware, and concurrency.</li>
+<li>Trainium or Inferentia can cut inference costs by up to 50% with the right workload.</li>
+<li>CloudWatch plus data capture makes monitoring, alerting, and optimization feel straightforward.</li>
+<li>Real-time, asynchronous, or serverless modes fit different latency and throughput needs.</li>
+<li>Perfect for e-commerce recs, imaging pipelines, and streaming analytics at serious scale.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-23-2026-09-58-04-8663-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="novasagemakerinferencecontrol">Nova SageMaker Inference Control</h2>
+<h3 id="theheadline">The headline</h3>
+<p>You can now run custom Amazon Nova models on SageMaker Inference with full control. Pick instance types, set auto-scaling targets, and manage concurrency exactly as needed. That’s the short version of “AWS launches SageMaker Inference for custom Nova.” It’s the combo you’ve wanted if you want Nova without lock-in or mystery pricing.</p>
+<p>Put differently: you bring your Nova weights and logic, SageMaker brings the hardened plumbing. You get fleet management, health checks, rolling updates, and scaling policies with your hands on the wheel. No more praying someone’s “default latency” meets your SLOs under peak.</p>
+<h3 id="whyyoushouldcare">Why you should care</h3>
+<ul>
+<li>Performance and cost are trade-offs until you actually add better knobs. With instance tuning and scaling policies, you choose your target and drive toward it.</li>
+<li>Trainium and Inferentia target deep learning price‑performance hard. The headline promises up to 50% cost savings, which is real money.</li>
+<li>CloudWatch integration bakes observability in from day one. You’ll catch p95 latency drifts before customers ever feel them.</li>
+</ul>
+<p><em>The practical upshot: fewer fire drills, calmer promo launches, and bills that map to value.</em> You’ll still make trade-offs, because you always do, but they’re yours now. You’ll have numbers behind them, which is what you trust at 3 a.m.</p>
+<h3 id="howitfitsyourstack">How it fits your stack</h3>
+<ul>
+<li>Real-time inference for recommendation clicks or chat-like interactive features.</li>
+<li>Asynchronous jobs for heavier multimodal tasks where users can wait a bit.</li>
+<li>Serverless inference for traffic that’s spiky or totally unpredictable.</li>
+</ul>
+<p>“As AWS puts it, SageMaker lets you deploy models to fully managed endpoints for real-time inference”—you bring the model; the platform handles fleets, scaling, and health checks.</p>
+<p>Think of these modes like lanes on a highway during rush hour. Interactive paths ride the fast lane, heavy jobs cruise the right lane, and spiky features ramp on only when needed. Same road, different lanes, no needless gridlock.</p>
+<h2 id="performanceinstanceschipsconcurrency">Performance Instances Chips Concurrency</h2>
+<h3 id="picktherightsilicon">Pick the right silicon</h3>
+<ul>
+<li>Inferentia (Inf2) is designed for high throughput inference at low cost per unit. It’s great when you care about cost per token or image.</li>
+<li>Trainium (Trn1 or Trn1n) shines for training and selective inference patterns at scale. In many shops, Trainium with Inferentia gives end-to-end efficiency.</li>
+<li>The promise is up to 50% cost savings using AWS ML silicon for Nova inference, depending on size and traffic.</li>
+</ul>
+<p>A simple rule of thumb helps a ton in practice. If your bottleneck is inference spend or massive serving volume, begin on Inferentia. If you train Nova variants often, keep Trainium in play to shrink training time and cost, then deploy on Inferentia.</p>
+<p>Precision matters a lot, maybe more than you think. If your use case allows, test reduced precision modes to boost throughput. Always validate with your real inputs, not lab toys, before you commit.</p>
+<h3 id="rightsizeyourendpoints">Right size your endpoints</h3>
+<ul>
+<li>Start with an instance family that fits Nova’s memory footprint with headroom. Then load test with real image sizes, sequence lengths, and multimodal mixes.</li>
+<li>Measure p50 and p95 latency plus throughput, either RPS or TPS. For multimodal cases, test mixed batches to mirror actual user behavior.</li>
+<li>Use Provisioned Concurrency when you’ve got tight SLAs to honor. Combine with target tracking so you don’t massively over-provision during lulls.</li>
+</ul>
+<p><em>Treat right-sizing like getting a suit tailored, not bought off-rack.</em> Begin with one or two instance types that fit with room for batching. Replay a day’s traffic, then push until p95 starts threatening your target.</p>
+<p>Don’t forget payload ergonomics, because they quietly matter. Compress images where acceptable without hurting quality and outcomes. Trim prompt context that adds fluff, not signal, to responses.</p>
+<h3 id="concurrencyandautoscaling">Concurrency and autoscaling</h3>
+<ul>
+<li>Set a per-instance concurrency that keeps p95 under your SLA target. Then let Application Auto Scaling handle capacity moves automatically.</li>
+<li>For heavy bursts, tune scale-out faster with shorter cooldowns and steps. For cost control, let scale-in work harder during off-hours and weekends.</li>
+</ul>
+<p>First-hand scenario: your product image-to-caption microservice spikes hard at lunch. You set concurrency at eight per instance, target tracking near seventy percent, and step scaling for p95 above 300ms. Result: steady latency, fewer abandoned carts, and no triple over‑provisioning.</p>
+<p>Avoid a few classic anti-patterns that hurt more than help. Don’t push concurrency so high that swapping kills latency and patience. Don’t set it so low you pay for idle capacity and wasted headroom either.</p>
+<p>Pro tip: align autoscaling rules with your actual calendar. Pre-scale before launches, drops, or press moments you’ve already planned. Stagger minimum capacity by region if demand rolls across time zones daily.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-23-2026-09-58-52-6591-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="realtimeasyncserverless">Realtime Async Serverless</h2>
+<h3 id="realtimeendpoints">Realtime endpoints</h3>
+<p>Use real-time endpoints when requests must return within seconds. Think e‑commerce recommendations or on-page multimodal summarization under load. Configure health checks, min and max capacity, and a warm‑pool strategy.</p>
+<p>Keep timeouts honest and fair to actual users. If your UI can stream or progressively render, let it do exactly that. For everything else, define a crisp fallback the team trusts under pressure.</p>
+<h3 id="asynchronousinference">Asynchronous inference</h3>
+<p>For high‑res imaging, document processing, or batch conversions, async is your friend. You post jobs to a queue in S3, the endpoint works it, then writes results to S3 and notifies you.</p>
+<p>Build idempotency in from the very start here. Tag jobs with unique IDs and deterministic output paths. Make retries safe, so blips don’t cause double bills or duplicate writes.</p>
+<h3 id="serverlessinference">Serverless inference</h3>
+<p>When traffic is spiky or wildly unpredictable, go serverless. It removes idle costs by spinning up only when jobs arrive. Expect cold starts, and offset them with provisioned concurrency on hot paths.</p>
+<p>Real example framing: your analytics dashboard runs a Nova explain function on demand. Move it to serverless with provisioned concurrency set to one during business hours. You erase most idle spend while keeping excellent response times for analysts.</p>
+<p>Keep payloads compact so cold starts hurt less on the edge. Pre-tokenize or pre-resize inputs anywhere that actually makes sense. If bursts build queues, add a small reserved capacity window during peaks.</p>
+<h2 id="observabilityandcostcontrol">Observability and Cost Control</h2>
+<h3 id="cloudwatchintheloop">CloudWatch in the loop</h3>
+<p>Turn on CloudWatch metrics, logs, and alarms right out of the gate. Track request counts, 4xx and 5xx rates, latency percentiles, and CPU or memory utilization. Create alarms for p95 latency targets and error spikes your users would notice.</p>
+<p>Keep dashboards simple so teams don’t drown in graphs. Start with a top-row SLO view, then drill down by endpoint, region, and model version. If you must wake someone up, alert on user impact, not random blips.</p>
+<h3 id="traceandoptimize">Trace and optimize</h3>
+<p>Enable inference data capture for payloads and predictions with proper scrubbing. Sample one to five percent of requests to isolate slow paths and painful outliers. Spot oversized payloads and set limits or add lightweight pre-processors.</p>
+<p>Close the loop by reviewing captured samples on a cadence. If p95 jumps after a model update, you’ll know which inputs got slower. Pair this with A/B rollouts so comparisons are clean and objective.</p>
+<h3 id="guardrailsandgovernance">Guardrails and governance</h3>
+<p>Lock endpoints into a VPC and use KMS for encryption at rest. Keep TLS in transit, tag resources for chargeback, and set budgets with alerts. For healthcare or fintech, document choices and keep audit trails tidy.</p>
+<p>Also, write runbooks people actually read at 2 a.m. When an alarm fires, there’s a five‑step checklist ready to go. Check metrics, peek at queues, verify autoscaling, test a known‑good payload, then rollback if needed.</p>
+<p>Quoting the docs: “Amazon CloudWatch monitors your AWS resources and the applications you run on AWS in real time.” Translation: use it to catch regressions before customers even smell them.</p>
+<h2 id="ecommercehealthcareanalytics">Ecommerce Healthcare Analytics</h2>
+<h3 id="ecommercerecommendations">Ecommerce recommendations</h3>
+<ul>
+<li>Pattern: real-time endpoint with Provisioned Concurrency and target tracking autoscaling.</li>
+<li>Nova multimodal inputs score related items while caching a top-N per SKU.</li>
+<li>Pre-warm for peak promos, then scale in overnight to save money sensibly.</li>
+<li>Failure plan: when latency breaks SLA, fall back to cached embeddings immediately.</li>
+</ul>
+<p>Bonus moves: segment SKUs by traffic so spend matches value clearly. Top tier rides higher-concurrency pools, long tail moves to lean pools or serverless. Keep a safe model version warmed during major launches for stability.</p>
+<h3 id="healthcareimaging">Healthcare imaging</h3>
+<ul>
+<li>Pattern: asynchronous inference with job queues and clean S3 IO.</li>
+<li>Run high‑res scans with Nova analysis, push results to PACS or EHR systems. Add human review in the loop where required.</li>
+<li>Governance: VPC endpoints, KMS encryption, audit logs, and tight access policies. Batch overnight when costs are lower and windows are open.</li>
+</ul>
+<p>Operational tips: use deterministic output paths per study for traceability. Attach metadata for provenance, store intermediates for QA, and separate urgent cases. Keep concurrency caps so urgent work doesn’t get starved by bulk runs.</p>
+<h3 id="realtimeanalytics">Realtime analytics</h3>
+<ul>
+<li>Pattern: serverless inference in front of an event stream like Kinesis or MSK. Use provisioned concurrency during trading hours or large events.</li>
+<li>Enrich feeds with Nova captions or summaries, then store features for BI.</li>
+<li>Watch p95 latency and throttle strategies under real load, not assumptions. Control payload sizes so cold starts stay a rounding error.</li>
+</ul>
+<p>If you support multiple regions, deploy near data to reduce jitter. Use lightweight schemas, and add backpressure when downstream sinks lag. <em>Shedding noncritical work beats exploding queues every single time.</em></p>
+<p>First-hand framing: a retailer’s “shop the look” used serverless for long-tail items. Provisioned endpoints handled the top five percent where latency truly matters.</p>
+<h2 id="halftimecheck">Half Time Check</h2>
+<ul>
+<li>You can run custom Nova models with full control on SageMaker Inference.</li>
+<li>Choose Inferentia or Trainium to chase up to 50% lower costs here.</li>
+<li>Match mode to job type: real-time for interactive, async for heavy workloads.</li>
+<li>Turn on CloudWatch, sensible alarms, and data capture from day zero.</li>
+<li>For sensitive domains, lock down VPC, KMS, and clean audit trails.</li>
+</ul>
+<p>If any bullets above feel squishy, pause and fix them today. <em>Hours spent on SLOs, right-sizing, and alarms pay back tenfold when traffic slams.</em></p>
+<h2 id="prototypetoproductionnova">Prototype to Production Nova</h2>
+<h3 id="prepandpackaging">Prep and packaging</h3>
+<ul>
+<li>Freeze your Nova artifact and tokenizer, and version them cleanly in S3.</li>
+<li>Containerize your inference server with a stable /invocations contract inside.</li>
+<li>Add health and readiness probes, plus strict payload size limits early.</li>
+</ul>
+<p>Make the container boring in the best way possible. Minimal dependencies, pinned versions, predictable logs, and graceful shutdowns help a ton. Document schemas so nobody reverse‑engineers payloads during a crisis.</p>
+<h3 id="loadtestingandslos">Load testing and SLOs</h3>
+<ul>
+<li>Recreate real payload mixes, not friendly lab inputs that lie. Measure p50 or p95 latency, CPU or memory, and cost per thousand.</li>
+<li>Trial multiple instance types and chip families under honest load tests. Validate the cost curve with your very own traffic patterns.</li>
+</ul>
+<p>Run tests at steady-state, expected peak, and the dreaded “oh no.” Capture the p95 breakpoints, rising errors, and bend points where costs spike. Write these thresholds down, since they become scaling and alert rules.</p>
+<h3 id="rolloutsandsafety">Rollouts and safety</h3>
+<ul>
+<li>Use canaries that go one, then ten, then fifty, then one hundred percent. Monitor latency and errors at each step without cutting corners.</li>
+<li>Keep a rollback alias pinned to your last stable version always. Automate cutover so nerves don’t break when minutes do matter.</li>
+</ul>
+<p>Bake observability straight into rollout steps as a hard requirement. At each jump, compare p95, errors, and cost per thousand against prior. If any metric regresses, pause, investigate, or cleanly roll back.</p>
+<p>A senior SRE mantra fits right here: “<em>If it isn’t measured, it isn’t managed.</em>” Your Nova setup should absolutely be both.</p>
+<h2 id="novasagemakerfaq">Nova SageMaker FAQ</h2>
+<h3 id="pickamode">Pick a mode</h3>
+<p>Match mode to latency tolerance and payload size very directly. Real-time for under two seconds, async for seconds to minutes, serverless for spiky needs.</p>
+<h3 id="costsavings">Cost savings</h3>
+<p>It’s workload-dependent, so test it with your traffic. Model size, precision, batching, and traffic shape all matter for savings.</p>
+<h3 id="scalingandconcurrency">Scaling and concurrency</h3>
+<p>You can set min or max capacity, target tracking, and step scaling rules. Also per-instance concurrency plus provisioned concurrency for cold-start control.</p>
+<h3 id="monitorlatency">Monitor latency</h3>
+<p>Turn on CloudWatch metrics and alarms for p95, errors, and utilization. Enable data capture, inspect slow payloads, and right-size instances thoughtfully.</p>
+<h3 id="securityandcompliance">Security and compliance</h3>
+<p>Yes, with the right controls in place and enforced. Use VPC endpoints, KMS, TLS, IAM, audits, and change approvals.</p>
+<h3 id="comparedtogenericapis">Compared to generic APIs</h3>
+<p>SageMaker Inference gives low-level control on key levers. You tune instances, autoscaling, concurrency, and networking for your workload.</p>
+<h3 id="batchingvslatency">Batching vs latency</h3>
+<p>Batching boosts throughput and cost, but can add delay, of course. Use small batches for interactive paths and larger for async jobs.</p>
+<h3 id="zerodowntimeupdates">Zero downtime updates</h3>
+<p>Use aliases or blue/green endpoints and canary traffic ramps. Switch when metrics hold steady, and keep the previous version warmed.</p>
+<h2 id="shipit">Ship It</h2>
+<p>1) Package your custom Nova model and dependencies; store in S3 with versioning.
+2) Build an inference container with health checks and a stable /invocations API.
+3) Choose the right instance family, considering Inferentia or Trainium for cost.
+4) Create a SageMaker model and endpoint config; set both min and max capacity.
+5) Define autoscaling targets and step rules plus per‑instance concurrency settings.
+6) Enable CloudWatch metrics, logs, and alarms; turn on inference data capture.
+7) Load test with real payload mixes; tune batch size and precision choices.
+8) Roll out with canaries plus automatic rollback guards, tested and trusted.
+9) Review cost per thousand weekly; adjust scaling windows and instance types.</p>
+<p>You’re now effectively “announcing Amazon SageMaker Inference for custom Amazon Nova models” inside your org. Because you’ve got it running, tuned, and already paying back dividends.</p>
+<p>When you control the dials—instances, autoscaling, concurrency, and observability—you stop praying to latency gods. <em>You start shipping reliably, and that’s the real difference.</em> Pick one high‑impact path and run the full loop end‑to‑end.</p>
+<p>If you’ve read this far, you don’t want another shiny tool, just control. Nova plus SageMaker gives you that, in a very direct way. Start small, instrument everything, and iterate like you actually mean it.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html">Amazon SageMaker Inference endpoints</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/async-inference.html">Amazon SageMaker Asynchronous Inference</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html">Amazon SageMaker Serverless Inference</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/endpoint-auto-scaling.html">Application Auto Scaling for SageMaker</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html">Amazon CloudWatch overview</a></li>
+<li><a href="https://aws.amazon.com/machine-learning/inferentia/">AWS Inferentia (Inf2) overview</a></li>
+<li><a href="https://aws.amazon.com/machine-learning/trainium/">AWS Trainium (Trn1) overview</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html">Inference data capture for endpoints</a></li>
+</ul>
+<p><em>Tweet-sized take: “Hardware gets cheaper. Bad architectures don’t. Nova + SageMaker lets you fix the latter.”</em></p>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="sagemaker-nova-inference-1.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptqb0a4.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Cut+AI+costs+deploying+custom+Nova+models+on+SageMaker&amp;pi=318160729819&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=318160729819&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fsagemaker-nova-inference-1&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/sagemaker-nova-inference-1?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:12:48 GMT -->
+</html>

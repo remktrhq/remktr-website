@@ -1,0 +1,400 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/iam-identity-center-cross-region?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Enable Multi-Region IAM Identity Center Without Downtime</title>
+    <link rel="canonical" href="iam-identity-center-cross-region.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Enable multi-region replication in IAM Identity Center to boost resiliency and AWS account access. Learn aws identity center cross region setup and add accounts.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Enable Multi-Region IAM Identity Center Without Downtime",
+        "datePublished": "2026-02-03T20:27:12Z",
+        "dateModified": "2026-02-03T20:27:13.820Z",
+        "mainEntityOfPage": "https://remktr.com/blog/iam-identity-center-cross-region",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-03-2026-08-17-05-5189-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="iam-identity-center-cross-region.html">Enable Multi-Region IAM Identity Center Without Downtime</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 3, 2026 8:27:12 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>In ops, every second kills momentum. <em>Multi‑Region identity turns seconds into zero.</em></p>
+<p>You know the pain. Identity stuck in one AWS Region, apps stranded elsewhere. A "switch Regions" plan that feels like a rebuild. Before now, AWS IAM Identity Center (formerly AWS SSO) forced one Region. Want to move? <em>Nuke and pave.</em> Users, groups, permission sets, app configs—the whole identity world—rebuilt from scratch.</p>
+<p><em>That’s over.</em> IAM Identity Center now supports multi‑Region replication. Your directory data, users, groups, permission sets, and assignments mirror to other Regions automatically. Resiliency goes up. Latency goes down. App teams stop waiting on identity.</p>
+<p>If you run global workloads, this is your <em>oh finally</em> moment. You get local auth for apps like Amazon SageMaker, regional redundancy for AWS account access, and a sane path for data residency. No swapping URLs. No retraining people.</p>
+<p>One more perk: your current access portal stays the same front door. <em>Behind the scenes,</em> replicas keep identity close to users. Sign‑ins feel faster without changing how people log in.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Turn on multi‑Region replication to mirror users, groups, permission sets, and assignments.</li>
+<li>Run apps closer to users while keeping IAM Identity Center consistent everywhere.</li>
+<li>Improve DR: if a Region fails, access continues from replicas.</li>
+<li>Cut auth latency for cross‑Region apps; users sign in once and go.</li>
+<li>Start in default‑enabled Regions; reduce opt‑in busywork across accounts.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-03-2026-08-18-00-8085-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="escapethesingleregiontrap">Escape the Single Region Trap</h2>
+<h3 id="theoldbottleneck">The old bottleneck</h3>
+<p>Before replication, IAM Identity Center lived in one Region. Apps tied to it, like SageMaker, had to run there for clean SSO. Switching Regions meant deleting your instance and rebuilding users and permission sets. Then reassigning apps and updating the access portal URL. Translation: downtime, risk, and a pile of toil.</p>
+<p>If you’ve moved identity before, you know it’s not a few clicks. It’s weeks of spreadsheets and runbooks. Reprovisioning permission sets across dozens or hundreds of accounts. Fixing broken app configs and handling "I can’t log in" tickets at 2 a.m. One Region looked tidy on paper, but brutal in practice.</p>
+<h3 id="thenewdefault">The new default</h3>
+<p>Multi‑Region replication mirrors your workforce identities and permission sets to extra Regions automatically. You enable IAM Identity Center in a primary Region, pick target Regions, and AWS handles it. Replication makes AWS account access resilient and supports auth for apps closer to users. It borrows from patterns like AWS Managed Microsoft AD replication and S3 Cross‑Region Replication.</p>
+<p>You still operate a single logical instance. You manage users, groups, and permission sets centrally. Replicas sync changes so the identity plane looks identical everywhere. No new sign‑in URL to memorize. No "which Region is identity today?" confusion.</p>
+<h3 id="whyitmattersnow">Why it matters now</h3>
+<ul>
+<li>Global teams hate 150ms+ cross‑ocean auth calls. Local replicas remove login friction.</li>
+<li>DR becomes real. If your primary Region blips, replicas keep the lights on.</li>
+<li>Data residency gets simpler when identity can live where your data does.</li>
+</ul>
+<p>Example: A SaaS with users in North America, Europe, and APAC runs IAM Identity Center in us‑east‑1 and replicates to eu‑west‑1 and ap‑southeast‑2. Users log in once. App sessions and AWS account access work locally.</p>
+<p>Think about the ripple effects. Faster day‑one access for new hires. Fewer timeouts during heavy windows. A realistic path to serve new geographies without re‑architecting login.</p>
+<h2 id="howreplicationworks">How Replication Works</h2>
+<h3 id="whatgetsmirrored">What gets mirrored</h3>
+<p>IAM Identity Center now replicates:</p>
+<ul>
+<li>Directory data: users and groups</li>
+<li>Permission sets and assignments for AWS account access</li>
+<li>App integrations and configurations used for SSO</li>
+</ul>
+<p>That keeps your identity plane consistent, whether in two Regions or ten. You still manage centrally; replicas sync automatically, so changes propagate quickly.</p>
+<p>Bonus: centralization reduces drift. One source of truth plus replicas means fewer weird surprises. No more "why does Europe show different apps than the U.S.?" mysteries from manual copies and quick scripts.</p>
+<h3 id="whatstaysregional">What stays regional</h3>
+<p>Some managed apps still have regional nuances. Your IAM Identity Center instance stays anchored in a primary Region. Replicas enable resilient auth and access. Organization‑wide instances and account‑level instances remain distinct. There’s no auto‑merge across separate instances. If you run multiple by design, plan migrations, not magic sync.</p>
+<p>Keep in mind: application data and control planes stay regional per service. Replication helps identity reach those Regions. It doesn’t make every service global by default. If you intentionally run multiple IAM Identity Center instances, treat them as separate environments with their own lifecycle and governance.</p>
+<h3 id="resiliencyandlatencyinpractice">Resiliency and latency in practice</h3>
+<ul>
+<li>Resiliency: If the primary Region has an outage, replicated data keeps AWS account access and app logins alive in secondary Regions.</li>
+<li>Latency: Intercontinental round trips often exceed 100ms. Placing replicas near users cuts auth overhead and boosts perceived speed.</li>
+</ul>
+<p>Example: A trading platform authenticates from Frankfurt for EU workloads and Sydney for APAC. Permission set updates are made once and propagate quickly, avoiding stale access during incidents.</p>
+<p><em>User experience shines here.</em> Fewer redirects, fewer timeouts, fewer "try again" moments. The sign‑in portal feels familiar, but the backend skips ocean hops.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-03-2026-08-18-55-9152-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="nailthesetup">Nail the Setup</h2>
+<h3 id="picktherightregionsfirst">Pick the right Regions first</h3>
+<ul>
+<li>Start with default‑enabled Regions (e.g., us‑east‑1, eu‑west‑1) to avoid opt‑in toggles.</li>
+<li>Choose Regional hubs that match user clusters and data residency rules.</li>
+<li>Target two to three Regions first; expand as traffic patterns justify it.</li>
+</ul>
+<p>A simple rubric:</p>
+<ul>
+<li>Where are your users? Place replicas on the same continent, same country when needed.</li>
+<li>Where are your apps? Prioritize Regions hosting latency‑sensitive services like SageMaker, CI/CD runners, or portals.</li>
+<li>What are your compliance anchors? Map replicas to regulated data locations so auth lives nearby.</li>
+</ul>
+<h3 id="wireupthenetwork">Wire up the network</h3>
+<p>AWS handles the heavy bits, but your environment still matters:</p>
+<ul>
+<li>Ensure VPC connectivity where directory components will land in target Regions.</li>
+<li>If you use private access, confirm routing via Transit Gateway or VPC peering.</li>
+<li>Keep security groups and NACLs friendly to directory replication and SSO flows.</li>
+</ul>
+<p>Also worth doing:</p>
+<ul>
+<li>Confirm endpoints and egress so identity traffic reaches AWS APIs without hairpinning.</li>
+<li>Standardize DNS and time sync across Regions to avoid clock skew or split‑brain.</li>
+<li>Practice in a sandbox account first. Validate auth from a jump host in each target Region.</li>
+</ul>
+<h3 id="securitythatscaleswithyou">Security that scales with you</h3>
+<ul>
+<li>Pair IAM Identity Center with IAM least privilege and permission boundaries. Review sets often.</li>
+<li>Use AWS KMS multi‑Region keys to encrypt across boundaries and simplify key management.</li>
+<li>Centralize logs in your primary Region via CloudTrail and aggregate findings in Security Hub.</li>
+</ul>
+<p>Layer a few more guardrails:</p>
+<ul>
+<li>Turn on MFA for workforce users via Identity Center policies. Cheap, high value.</li>
+<li>Prefer attribute‑based access control where it fits. Tag resources and let attributes decide.</li>
+<li>Set session durations thoughtfully: long enough for work, short enough to limit risk.</li>
+</ul>
+<p>Example: A healthcare org picks us‑east‑1 as primary, replicates to eu‑west‑1 for EU patients, and ap‑southeast‑2 for AU compliance. Logs land in a dedicated us‑east‑1 audit account S3 bucket, with Security Hub feeding a global SOC.</p>
+<h2 id="appsandsso">Apps and SSO</h2>
+<h3 id="appslocaltousers">Apps local to users</h3>
+<p>With replication, apps like Amazon SageMaker authenticate against local replicas. Result: lower sign‑in latency, fewer timeouts, and cleaner multi‑Region AI/ML workflows. Homegrown apps using Identity Center also benefit. Auth stays consistent wherever the app runs.</p>
+<p>This helps bursty workflows a lot. Training jobs that spin up fleets. Analysts jumping into notebooks. Engineers hopping between accounts. Every login saved keeps focus.</p>
+<h3 id="commongotchastoavoid">Common gotchas to avoid</h3>
+<ul>
+<li>Don’t assume every feature is magically global. Some apps remain region‑scoped.</li>
+<li>If you see "you have already registered another region" while enabling, the instance exists elsewhere. Use replication instead of a second primary.</li>
+<li>Organization‑wide and account‑level instances don’t sync across each other. Plan migrations if consolidating.</li>
+</ul>
+<p>Two more reality checks:</p>
+<ul>
+<li>Expect eventual consistency during propagation windows. Change centrally, wait for replicas, then announce.</li>
+<li>Keep a change calendar. Noon in the U.S. may be mid‑day for EU too. Communicate.</li>
+</ul>
+<h3 id="pricingclarityyouactuallywant">Pricing clarity you actually want</h3>
+<p>IAM Identity Center doesn’t add a separate line item. You pay for underlying services you use. That includes AWS Directory Service for Microsoft AD if applicable, networking, logging, and KMS keys. Translation: replication boosts resiliency without blowing up your identity bill.</p>
+<p>Watch the usual suspects. Log storage with CloudTrail. KMS key policies. Cross‑Region data transfer for centralized logs. Any directory service you run. Most teams see small, predictable bumps, not outage‑level costs.</p>
+<p>Example: A media company runs editorial tools in eu‑west‑1, training in us‑east‑1, and rendering in ap‑southeast‑2. Replication removes the auth hairball. Teams sign in once and move across tools without a Region wall.</p>
+<h2 id="operatelikeapro">Operate like a pro</h2>
+<h3 id="validateandmonitorcontinuously">Validate and monitor continuously</h3>
+<ul>
+<li>Console checks: use the Identity Center dashboard to verify replication health and statuses.</li>
+<li>Logs: send CloudTrail to a central S3 bucket; alert via GuardDuty and Security Hub.</li>
+<li>APIs: list users, groups, and assignments to confirm changes match across Regions.</li>
+</ul>
+<p>Add a little automation:</p>
+<ul>
+<li>Nightly job: call Identity Center APIs to count objects per Region and flag drift.</li>
+<li>Weekly test: run a headless browser sign‑in for a test user in each Region. Alert on latency spikes.</li>
+<li>Query CloudTrail Lake for unusual sign‑in patterns, like bursts from unserved Regions.</li>
+</ul>
+<h3 id="testfailuretherightway">Test failure the right way</h3>
+<p>Run game days. Disable access to the primary Region and verify:</p>
+<ul>
+<li>Users can access AWS accounts from secondary Regions</li>
+<li>App logins complete locally</li>
+<li>Permission set updates still propagate during partial outages</li>
+</ul>
+<p><em>You don’t want to find a route table issue mid‑incident.</em></p>
+<p>When you run the drill:</p>
+<ul>
+<li>Pick a low‑risk window and freeze nonessential changes.</li>
+<li>Pre‑stage a playbook: owners, checks, and rollback steps.</li>
+<li>Record results: login times, error rates, and any manual steps needed.</li>
+</ul>
+<h3 id="governancethatdoesntslowbuilders">Governance that doesnt slow builders</h3>
+<ul>
+<li>Document a Region strategy: primary, replicas, roles, and ownership.</li>
+<li>Define change windows for permission set updates and communicate propagation expectations.</li>
+<li>Tag identities and permission sets for auditability; report quarterly to compliance.</li>
+</ul>
+<p>Make it easy to do the right thing:</p>
+<ul>
+<li>Standardize permission set names and descriptions so teams pick correctly.</li>
+<li>Use tickets or lightweight approvals for high‑risk changes, like expanding admin access.</li>
+<li>Keep a break‑glass role with tight controls and out‑of‑band approval. Test it, then lock it.</li>
+</ul>
+<p>Example: A fintech automates a daily replication drift check across Regions. If drift appears, a runbook triggers investigation before it becomes an incident.</p>
+<h2 id="quickpulse">Quick pulse</h2>
+<ul>
+<li>You remove single‑Region lock‑in for workforce identities.</li>
+<li>Replication keeps users, groups, permission sets, and assignments consistent globally.</li>
+<li>Apps authenticate locally, shaving cross‑ocean latency from login flows.</li>
+<li>DR is real: outages in a primary Region no longer stall access.</li>
+<li>Governance improves with centralized changes and regional verification.</li>
+<li>Costs stay predictable; you’re not paying an identity tax for resiliency.</li>
+</ul>
+<h2 id="faqs">FAQs</h2>
+<ol>
+<li><p>Q: Do I still have to recreate users and permission sets when moving Regions?
+A: No. With multi‑Region replication, users, groups, permission sets, and assignments mirror automatically. Manage once, consume everywhere.</p></li>
+<li><p>Q: What about the error "you have already registered another region" when enabling?
+A: That message means your Identity Center instance already exists in a different Region. Don’t enable another primary. Configure replication from the existing primary to target Regions.</p></li>
+<li><p>Q: Can I run multiple IAM Identity Center instances across Regions and have them sync?
+A: Organization‑wide instances and account‑level instances are distinct and don’t sync. If you have multiple by design, plan manual migrations or consolidation.</p></li>
+<li><p>Q: Does replication help with data residency?
+A: Yes. Replicating identities to specific Regions aligns auth flows and data access with residency needs, especially for sensitive workloads.</p></li>
+<li><p>Q: How does pricing work for replication?
+A: IAM Identity Center has no standalone fee. You pay for underlying services like Directory Service, network transfer, KMS, and logging. Most teams gain resiliency without a big cost jump.</p></li>
+<li><p>Q: What apps benefit most from this?
+A: Latency‑sensitive and region‑scoped apps—SageMaker notebooks, training jobs, internal tools—see big gains. Auth can happen against a local replica.</p></li>
+<li><p>Q: Does the sign‑in URL change when I enable replication?
+A: No. Your existing access portal stays your front door. Replication runs behind the scenes, so bookmarks stay valid.</p></li>
+<li><p>Q: How fast do changes propagate to replicas?
+A: Propagation is quick, but treat it as eventual consistency. Roll changes, allow time, then confirm.</p></li>
+<li><p>Q: Any limits I should know before scaling?
+A: Yes. Review Identity Center quotas for users, groups, assignments, and apps. Plan naming, tagging, and lifecycle so you don’t hit ceilings.</p></li>
+</ol>
+<h2 id="rolloutcheatsheet">Rollout cheat sheet</h2>
+<p>1) Enable IAM Identity Center in a primary, default‑enabled Region.
+2) In Settings, choose Multi‑Region Replication and select target Regions.
+3) Verify networking and security groups where replicas will live.
+4) Confirm users, groups, and permission sets sync to replicas.
+5) Test app logins locally in each Region, like SageMaker and internal apps.
+6) Centralize logs in one Region and set alerts in Security Hub.
+7) Run a game day to validate failover and propagation.</p>
+<p>You don’t win points for perfect theory. <em>You win with a clean rollout.</em></p>
+<p><em>This change removes the worst part of global identity: inertia.</em> With Identity Center replication, you keep one source of truth. AWS does the heavy lifting across Regions. Users sign in once. Apps authenticate locally. Auditors get cleaner controls and logs.</p>
+<p>Next step: pick your two most critical Regions and replicate. Run a game day. If your team barely notices a failover test, that’s the point. <em>Identity should be boring, fast, and invisible</em>, so builders can ship without Region politics.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">AWS IAM Identity Center (successor to AWS SSO)</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/getting-started.html">Getting started with IAM Identity Center</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/permissionsetconcept.html">Permission sets in IAM Identity Center</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityCenterAPIReference/welcome.html">IAM Identity Center API Reference</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/limits.html">IAM Identity Center limits and quotas</a></li>
+<li><a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html">Enable and manage AWS Regions (opt‑in)</a></li>
+<li><a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">AWS Organizations overview</a></li>
+<li><a href="https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_multi_region.html">AWS Managed Microsoft AD multi‑Region</a></li>
+<li><a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">AWS KMS multi‑Region keys</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html">Amazon S3 Replication</a></li>
+<li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html">AWS CloudTrail user guide</a></li>
+<li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake.html">CloudTrail Lake</a></li>
+<li><a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">AWS Security Hub</a></li>
+<li><a href="https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html">Amazon GuardDuty</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html">AWS Transit Gateway</a></li>
+<li><a href="https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html">VPC Peering Guide</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/enable-mfa.html">Enable MFA in IAM Identity Center</a></li>
+<li><a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/permissionsets-concepts.html#ps-session-duration">Session duration for permission sets</a></li>
+<li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html">Attribute‑Based Access Control (ABAC) in AWS</a></li>
+<li><a href="https://docs.aws.amazon.com/whitepapers/latest/aws-multi-region-architecture/building-multi-region-applications.html">Building multi‑Region applications on AWS (whitepaper)</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="iam-identity-center-cross-region.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq7e99.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Enable+Multi-Region+IAM+Identity+Center+Without+Downtime&amp;pi=310117774010&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=310117774010&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fiam-identity-center-cross-region&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/iam-identity-center-cross-region?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:57 GMT -->
+</html>

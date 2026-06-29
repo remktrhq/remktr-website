@@ -1,0 +1,393 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-bedrock-new-features?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Build faster on Bedrock with Opus 4.6, structured outputs</title>
+    <link rel="canonical" href="aws-bedrock-new-features.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore AWS Bedrock news and release notes: Claude Opus 4.6 boosts agentic tasks and coding, while Structured Outputs enforce JSON schemas for reliable APIs.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build faster on Bedrock with Opus 4.6, structured outputs",
+        "datePublished": "2026-02-11T00:16:12Z",
+        "dateModified": "2026-02-11T00:16:12.786Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-bedrock-new-features",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-11-2026-12-07-22-7522-AM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-bedrock-new-features.html">Build faster on Bedrock with Opus 4.6, structured outputs</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 11, 2026 12:16:12 AM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>If you’re still wrestling flaky AI outputs or hoping your code-gen agent won’t drift, here’s the wake-up. Amazon Bedrock just leveled up.</p>
+<p>Anthropic’s Claude Opus 4.6 is now on Bedrock with stronger reasoning, sturdier long context, and sharper code generation. Translation: you can finally trust an AI pair‑programmer to handle multi-step, agentic tasks without babysitting.</p>
+<p>Paired with Structured Outputs (JSON schemas the model actually follows), this update ends your post‑processing purgatory. No more brittle regex. No more half‑baked formats. Just clean, schema‑validated responses flowing straight into your APIs, ETL pipelines, and enterprise agents.</p>
+<p>This is the part where your AI roadmap flips from “cool demo” to “production‑grade”.</p>
+<p><em>Hot take: The fastest way to ship AI isn’t new models. It’s cutting the glue code between them.</em></p>
+<p>If you build on AWS, this combo is a big unlock. Bedrock gives you managed models, enterprise guardrails, and tight hooks into the rest of your stack. Opus 4.6 sharpens the brain. Structured Outputs clean up the mouth. Together, they make your agents coherent and your pipelines boring—in a good way.</p>
+<p>Who wins? Teams drowning in flaky integrations, long code diffs, and risky copy‑paste steps. If your backlog is stuffed with “add safety,” “trim latency,” and “please stop breaking the JSON,” this update lets you ship faster with fewer oops moments. Keep reading for the playbook.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Claude Opus 4.6 on Amazon Bedrock upgrades reasoning, long-context, and coding—perfect for agentic tasks.</li>
+<li>Structured Outputs enforce JSON schemas, slashing post-processing and integration bugs.</li>
+<li>Use Bedrock agents, knowledge bases, and the Converse API for composable, multi-step workflows.</li>
+<li>Focus on latency budgets, safety guardrails, and clear observability from day one.</li>
+<li>Track aws bedrock news via official release notes; DeepSeek isn’t on Bedrock (yet).</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-11-2026-12-08-07-1660-AM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="meetopus46">Meet Opus 4.6</h2>
+<h3 id="whyitmattersforbuilders">Why it matters for builders</h3>
+<p>You’re shipping software, not science experiments. Opus 4.6 on Amazon Bedrock gives you a sturdier backbone for complex coding and multi‑step reasoning. The big win: accuracy. Vendor benchmarks point to leadership in long context and coding reliability vs. prior models, which means your AI pair‑programmer is more likely to stay on task across bigger codebases and longer traces.</p>
+<p>In practice, that looks like fewer hallucinated imports, more consistent function signatures, and cleaner diffs on refactors. If you’re building a dev assistant, security bot, or data migration helper, Opus 4.6 widens the set of tasks you can offload without round‑tripping prompts 10 times.</p>
+<p>You’ll notice practical upgrades day one:</p>
+<ul>
+<li>It keeps track of entities and variables across longer conversations, so your thread doesn’t collapse after step 4.</li>
+<li>It follows API contracts more faithfully, so tool calls are less hand‑wavy and more executable.</li>
+<li>It’s better at incremental edits (add a flag, don’t rewrite the world), which means fewer scary diffs and easier code reviews.</li>
+<li>It writes tests and assertions that actually map to your functions, not imaginary methods.</li>
+</ul>
+<p>This matters when you go from “ask a question” to “plan, act, and verify.” The more steps you chain, the more reasoning drift hurts. Opus 4.6 tightens that loop.</p>
+<h3 id="agenticworkflowsunlocked">Agentic workflows unlocked</h3>
+<p>The model’s improved agentic performance matters when you chain tools. Think: a release engineer agent that reads a change request, proposes a plan, writes infra code, runs checks, and opens a PR—while explaining each step. With Opus 4.6 in Bedrock, you can:</p>
+<ul>
+<li>Orchestrate tool use via agents and the Converse API.</li>
+<li>Feed longer traces and design docs without truncating critical context.</li>
+<li>Keep reasoning coherent across steps (proposal → code → tests → rollout).</li>
+</ul>
+<p>First‑hand example: a CI assistant that reads a 1k‑line Terraform module, flags drift, proposes a patch, validates with a dry run, and writes a PR with justification. Before, you’d fight context limits and brittle reasoning. With Opus 4.6, the flow holds together—and your human reviewers get clearer diffs, faster.</p>
+<p>To make this sing in production:</p>
+<ul>
+<li>Use a plan‑act‑verify loop. Ask for a plan (structured), run tools, then request a short verification before committing actions.</li>
+<li>Pass state as typed objects between steps. Don’t rely on free‑form summaries; your future self will curse you.</li>
+<li>Include idempotency keys and safe retries for tool steps (e.g., running tests, creating PRs) so the agent can recover without double‑posting.</li>
+<li>Use short, stable headers (APIs, constraints, SLAs) as pinned context; retrieve the rest on demand.</li>
+<li>Keep a lightweight memory store for the agent (e.g., DynamoDB items keyed by task_id) so steps can resume after timeouts or cold starts.</li>
+</ul>
+<h2 id="structuredoutputs">Structured Outputs</h2>
+<h3 id="whatitis">What it is</h3>
+<p>Structured Outputs in Amazon Bedrock let you define a JSON schema, and the model adheres to it. No more “close enough” objects. You specify the fields, types, enums, and nesting; the model returns compliant JSON. That means your downstream code can parse deterministically, run validations, and ship without duct‑taping regex onto prompts.</p>
+<p>This is huge for APIs, RAG pipelines, and agents. Your agent can reason freely, but its final response shows up as clean, typed data. Fewer 2 a.m. on‑calls because the “status” field sometimes says ok‑ish.</p>
+<p>A few schema tips that pay off immediately:</p>
+<ul>
+<li>Mark critical fields as required. Keep optional fields actually optional—don’t sneak in must‑haves as nullable strings.</li>
+<li>Use enums for decision points (approve|reject|needs_review) so dashboards and policies are easy to build.</li>
+<li>Add format hints (date-time, uri, email) and constraints (minItems, maxLength) to tighten outputs.</li>
+<li>Include a version and a trace_id on every response to track drift and enable safe migrations.</li>
+</ul>
+<h3 id="whereitpaysoff">Where it pays off</h3>
+<p>Three high‑leverage spots:</p>
+<ul>
+<li>APIs: enforce request/response contracts and backward compatibility. Easy versioning via schema updates.</li>
+<li>ETL: parse unstructured docs into structured tables (think invoices → line items) with consistent typing.</li>
+<li>Agents: standardize tool inputs/outputs so steps chain without glue‑gun fixes.</li>
+</ul>
+<p>A line from Anthropic’s docs sums it up: with structured outputs, Claude returns valid JSON matching your schema. In Bedrock, that eliminates a whole class of production bugs.</p>
+<p>Example: a compliance agent extracts PII fields from PDFs. You define a schema with name, date<em>of</em>birth (YYYY‑MM‑DD), id<em>type (enum), and redaction</em>coordinates (array of bounding boxes). The agent’s extraction either validates or fails fast. You log the failure, retry gracefully, and keep your pipelines sane.</p>
+<p>For governance, pair Structured Outputs with Bedrock guardrails. You can enforce safety filters and domain policies while still getting machine‑parseable results.</p>
+<p>Want a quick rollout plan for structured outputs?</p>
+<ul>
+<li>Start with the output you want to plug into your system, then write the schema to match it—not the other way around.</li>
+<li>Build a tiny validator (jsonschema works great) in your service. Reject or retry anything that doesn’t validate.</li>
+<li>Add a “reason” field when you need explainability. This keeps reasoning separate from the typed decision.</li>
+<li>Log both the raw model text and the parsed object (with redactions). You’ll thank yourself during audits.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-11-2026-12-08-53-5021-AM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="quickpulse">Quick pulse</h2>
+<ul>
+<li>Opus 4.6 boosts reasoning and code reliability for agentic tasks on Bedrock.</li>
+<li>Structured Outputs kill brittle parsing by enforcing JSON schemas.</li>
+<li>Composability is the move: agents, tools, and knowledge bases click together.</li>
+<li>Production isn’t just prompts: latency, guardrails, and observability matter.</li>
+<li>Watch aws bedrock release notes for regional rollouts and pricing tweaks.</li>
+</ul>
+<p>The theme: less babysitting, more building. Strong planning plus strict schemas equals fewer edge‑case fires.</p>
+<h2 id="composableagents">Composable agents</h2>
+<h3 id="referencearchitecture">Reference architecture</h3>
+<p>Here’s a resilient pattern you can ship on Bedrock:</p>
+<ul>
+<li>Front door: An API (API Gateway or AppSync) feeding user intents into a coordinator service.</li>
+<li>Reasoning core: Opus 4.6 via the Bedrock Converse API for planning and structured decisions.</li>
+<li>Tooling: Bedrock Agents to orchestrate multi‑step tasks; integrate with Lambda for custom tools.</li>
+<li>Knowledge: Bedrock Knowledge Bases for retrieval over docs, code, and SOPs.</li>
+<li>Workflow: Step Functions to coordinate long‑running tasks and retries.</li>
+<li>Events: Amazon EventBridge for async triggers and cross‑service fan‑out.</li>
+<li>Storage: DynamoDB/S3 for state and artifacts; CodeCommit/GitHub for PRs.</li>
+<li>Observability: CloudWatch logs/metrics + X‑Ray traces; CloudTrail for audit.</li>
+</ul>
+<p>Each hop passes typed payloads (Structured Outputs) so you avoid format drift. When you add a new tool—say, a static analyzer—you just define its input/output schema and plug it in.</p>
+<p>How this holds up under load:</p>
+<ul>
+<li>API Gateway or AppSync throttles and authenticates requests before they ever hit your reasoning loop.</li>
+<li>Step Functions adds retries with jitter and compensating steps for rollbacks.</li>
+<li>EventBridge decouples slow tools from fast decisions, so one flaky integration doesn’t block the queue.</li>
+<li>CloudWatch and X‑Ray make it obvious which step is the bottleneck, not just “the AI is slow.”</li>
+</ul>
+<h3 id="realworldexample">Real world example</h3>
+<p>Picture a release ops agent for a fintech team:</p>
+<ul>
+<li>Intake: Reads a Jira ticket and links to a design doc.</li>
+<li>Plan: Generates a rollout plan with risk scoring.</li>
+<li>Code: Proposes infrastructure changes (IaC), with diffs.</li>
+<li>Validate: Runs static checks and dry‑runs.</li>
+<li>Governance: Routes to an approval step if risk &gt; threshold.</li>
+<li>Execute: Applies changes and posts logs.</li>
+<li>Report: Summarizes outcomes; opens incident tasks if something trips.</li>
+</ul>
+<p>This isn’t sci‑fi. Bedrock gives you the model, orchestration, and retrieval. Opus 4.6 keeps reasoning coherent across steps; Structured Outputs guarantee every step speaks the same typed language. You get fewer brittle adapters and more leverage from day one.</p>
+<p>To make it production‑grade:</p>
+<ul>
+<li>Define clear risk thresholds (enum + numeric rationale) and send high‑risk plans to human review.</li>
+<li>Store every plan, diff, and validation result with a trace_id. Later, you can replay or explain any decision.</li>
+<li>Run validators (lint, policy as code, unit tests) as separate tools with crisp schemas. The agent consumes pass/fail + findings.</li>
+<li>Keep write actions behind a feature flag or change window. A safe agent is a scheduled agent.</li>
+</ul>
+<h2 id="costlatencysafety">Cost latency safety</h2>
+<h3 id="latencyandthroughputtips">Latency and throughput tips</h3>
+<p>Agentic workflows can sprawl. Keep a latency budget:</p>
+<ul>
+<li>Token discipline: Summarize long threads; pin stable context (requirements, APIs) as short hints. Use retrieval for the rest.</li>
+<li>Step splitting: Break big tasks into smaller calls; parallelize tool steps where safe.</li>
+<li>Response size: Constrain outputs with schemas to avoid verbose rambles.</li>
+<li>Caching: Memoize deterministic sub‑results (schema validations, compiled prompts, embeddings).</li>
+<li>Observability: Trace each step’s timing in CloudWatch; alert on p95 spikes.</li>
+</ul>
+<p>Also, watch concurrency and quotas. If you plan bursts (e.g., nightly code scans), spread them with EventBridge schedules or batch windows. Push heavy compute (large diffs, test runs) to tools, not the model loop.</p>
+<p>To trim costs without hurting quality:</p>
+<ul>
+<li>Right‑size the context. Don’t feed entire repos; retrieve the 3 files that matter.</li>
+<li>Reuse compiled prompts/templates. Avoid regenerating boilerplate.</li>
+<li>Prefer short “check” calls (validate‑only) over full rewrites.</li>
+</ul>
+<h3 id="governanceandsafety">Governance and safety</h3>
+<p>Production AI isn’t just code; it’s compliance. Use Guardrails for Amazon Bedrock to enforce safety filters and content controls. Add domain policies (e.g., prevent secrets in outputs), and validate every final response against your JSON schema before action.</p>
+<p>Audit everything. Log prompt/response metadata (hashed or redacted as needed) to CloudTrail. For PII, route through a de‑identification tool and confirm with structured validations. Tighten access with IAM boundaries for tools that can write to prod.</p>
+<p>Finally, embrace progressive disclosure: migrate low‑risk use cases first (read‑only analyzers), then gated writers (PR‑only), then automated executors with kill‑switches. Your on‑call team will thank you.</p>
+<p>Observability checklist that saves weekends:</p>
+<ul>
+<li>Emit a trace_id into every model response and thread it through tools.</li>
+<li>Log schema validation outcomes (pass/fail + reason) for quick triage.</li>
+<li>Track retry counts and reasons; too many “schema_mismatch” events = tighten prompts or adjust schema.</li>
+<li>Build a dashboard for p50/p95 latency per step. Shave the slowest, not the average.</li>
+</ul>
+<h2 id="faqs">FAQs</h2>
+<h3 id="whatisamazonbedrock">What is Amazon Bedrock</h3>
+<p>Amazon Bedrock is AWS’s fully managed service to access foundation models (from providers like Anthropic) through a single, secure API. You get orchestration features (agents, knowledge bases), safety guardrails, and enterprise‑grade governance. It’s the quickest on‑ramp to production‑grade AWS AI without hosting models yourself.</p>
+<h3 id="isopus46available">Is Opus 4.6 available</h3>
+<p>Availability varies by region and can change. Check the official aws bedrock release notes and the Bedrock console for the latest on supported regions and pricing before you commit a rollout.</p>
+<h3 id="howstructuredoutputswork">How Structured Outputs work</h3>
+<p>You define a JSON schema for the model’s response. The model returns data that validates against that schema—fields, types, enums included. This keeps your pipelines deterministic and cuts post‑processing. If validation fails, you can retry or route to a human‑in‑the‑loop.</p>
+<h3 id="isdeepseekinamazonbedrock">Is DeepSeek in Amazon Bedrock</h3>
+<p>Not at this time. Bedrock supports multiple providers (including Anthropic, Meta, Mistral, and others), but DeepSeek isn’t listed. If this changes, it’ll show up in aws bedrock news and the release notes.</p>
+<h3 id="compareopensourcestack">Compare open-source stack</h3>
+<p>Open‑source models give you control but add ops and integration tax: hosting, scaling, safety controls, and constant patching. Bedrock centralizes those concerns, adds governance and structured outputs, and speeds up time‑to‑value. If you have heavy customization or strict data residency needs, you can hybridize: Bedrock for orchestration + in‑house models for specific steps.</p>
+<h3 id="findbedrockfeatures">Find Bedrock features</h3>
+<p>Bookmark the Bedrock release notes and the main product page. AWS’s “What’s New” feed and the console change logs are your fastest sources for weekly updates.</p>
+<h3 id="handlefailuresandretries">Handle failures and retries</h3>
+<p>Fail fast and loud. Validate every response against your schema, log the reason on failure, and retry with a tighter instruction or a smaller context. If it still fails, hand off to a human with the raw text and the intended schema attached. Keep retry counts low and idempotent.</p>
+<h3 id="dataprivacywithbedrock">Data privacy with Bedrock</h3>
+<p>AWS provides security features like encryption in transit and at rest, IAM controls, and auditing. According to AWS docs, Bedrock is designed with enterprise data privacy in mind. Review the Bedrock security documentation and your organization’s policies before moving sensitive workflows to production.</p>
+<h2 id="bedrockplaybook">Bedrock playbook</h2>
+<ul>
+<li>Pick a narrow, high‑value task (e.g., PR summarization + risk tagging).</li>
+<li>Define a strict JSON schema for the output; include enums for decision fields.</li>
+<li>Wire Opus 4.6 via the Converse API; request Structured Outputs.</li>
+<li>Add a simple tool (repo read, test runner) behind a safe IAM role.</li>
+<li>Log and validate every model output; retry on schema fail.</li>
+<li>Measure p50/p95 latency; trim prompts and parallelize where possible.</li>
+<li>Gate writes behind human approval; expand autonomy as metrics stabilize.</li>
+</ul>
+<p>Wrap it with CloudWatch dashboards and a kill‑switch. Ship, learn, iterate.</p>
+<p>Want to see how teams turn prototypes into production? Browse our <a href="../case-studies.html">Case Studies</a>.</p>
+<p>You don’t need a 40‑page AI strategy to win here. You need one reliable, narrow workflow that compounds. Opus 4.6 gives you the reasoning. Structured Outputs give you the contracts. Bedrock gives you the rails. Put them together and your “AI project” becomes a product with SLAs, not just a demo with vibes.</p>
+<p>Next step: pick a boring, costly workflow. Schema it. Agent it. Measure it. Repeat. That’s how you stack wins without stacking incidents.</p>
+<p>Ready to operationalize structured outputs, observability, and agentic orchestration? Explore our <a href="../features.html">Features</a>.</p>
+<p><em>If glue code were a startup, it’d be a unicorn. Structured outputs are how you short that market.</em></p>
+<h2 id="references">References</h2>
+<ul>
+<li>Amazon Bedrock product overview: <a href="https://aws.amazon.com/bedrock/">https://aws.amazon.com/bedrock/</a></li>
+<li>Amazon Bedrock release notes: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/release-notes.html">https://docs.aws.amazon.com/bedrock/latest/userguide/release-notes.html</a></li>
+<li>Converse API for Amazon Bedrock: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/converse-api.html">https://docs.aws.amazon.com/bedrock/latest/userguide/converse-api.html</a></li>
+<li>Agents for Amazon Bedrock: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html">https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html</a></li>
+<li>Amazon Bedrock Knowledge Bases: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-bases.html">https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-bases.html</a></li>
+<li>Guardrails for Amazon Bedrock: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html</a></li>
+<li>Security in Amazon Bedrock: <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/security.html">https://docs.aws.amazon.com/bedrock/latest/userguide/security.html</a></li>
+<li>JSON Schema official: <a href="https://json-schema.org/">https://json-schema.org/</a></li>
+<li>Anthropic Structured Outputs (JSON Schema): <a href="https://docs.anthropic.com/claude/docs/structured-outputs">https://docs.anthropic.com/claude/docs/structured-outputs</a></li>
+<li>Amazon API Gateway: <a href="https://aws.amazon.com/api-gateway/">https://aws.amazon.com/api-gateway/</a></li>
+<li>AWS AppSync: <a href="https://aws.amazon.com/appsync/">https://aws.amazon.com/appsync/</a></li>
+<li>AWS Step Functions: <a href="https://aws.amazon.com/step-functions/">https://aws.amazon.com/step-functions/</a></li>
+<li>Amazon EventBridge: <a href="https://aws.amazon.com/eventbridge/">https://aws.amazon.com/eventbridge/</a></li>
+<li>Amazon CloudWatch: <a href="https://aws.amazon.com/cloudwatch/">https://aws.amazon.com/cloudwatch/</a></li>
+<li>AWS X-Ray: <a href="https://aws.amazon.com/xray/">https://aws.amazon.com/xray/</a></li>
+<li>AWS CloudTrail: <a href="https://aws.amazon.com/cloudtrail/">https://aws.amazon.com/cloudtrail/</a></li>
+<li>AWS Identity and Access Management (IAM): <a href="https://aws.amazon.com/iam/">https://aws.amazon.com/iam/</a></li>
+<li>Amazon Bedrock pricing: <a href="https://aws.amazon.com/bedrock/pricing/">https://aws.amazon.com/bedrock/pricing/</a></li>
+<li>AWS What’s New: <a href="https://aws.amazon.com/new/">https://aws.amazon.com/new/</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-bedrock-new-features.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq3b22.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Build+faster+on+Bedrock+with+Opus+4.6%2C+structured+outputs&amp;pi=313652805368&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=313652805368&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-bedrock-new-features&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-bedrock-new-features?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:04 GMT -->
+</html>

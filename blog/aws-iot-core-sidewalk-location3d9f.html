@@ -1,0 +1,436 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-iot-core-sidewalk-location?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Build GPS-Free Asset Tracking with Amazon Sidewalk and AWS</title>
+    <link rel="canonical" href="aws-iot-core-sidewalk-location.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover AWS IoT Core Location with Amazon Sidewalk: build GPS-free asset tracking, enable positioning, route data via AWS IoT Core API and GitHub examples.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build GPS-Free Asset Tracking with Amazon Sidewalk and AWS",
+        "datePublished": "2025-11-13T20:41:08Z",
+        "dateModified": "2025-11-13T20:41:09.421Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-iot-core-sidewalk-location",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-13-2025-08-27-36-3568-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-iot-core-sidewalk-location.html">Build GPS-Free Asset Tracking with Amazon Sidewalk and AWS</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 13, 2025 8:41:08 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Amazon says Sidewalk now reaches most U.S. homes, no gateway install needed. That’s not just a nice stat — it’s your new network.</p>
+<p>Here’s the play: pair Amazon Sidewalk’s long-range, low-power network with AWS IoT Core Device Location. You can resolve device coordinates without stuffing a GPS module into every tracker. Translation: lower BOM, longer battery life, faster launches.</p>
+<p>You bring BLE, Wi‑Fi, and GNSS signals. AWS resolves the location in the cloud. Route it anywhere — maps, data lakes, dashboards, alerts — using IoT Rules. The kicker? It’s generally available in us-east-1 (N. Virginia) today, with Sidewalk live across the U.S.</p>
+<p>If you’ve been waiting for a cheap, battery-friendly way to track assets, this is it. Geo‑fence equipment, or map outdoor sensors at scale, without the usual pain.</p>
+<p>And here’s the budget kicker: no towers to rent, no private gateways to mount, no SIMs to juggle. You design the device once, provision it, and lean on the community network. It’s that rare mix of lower cost and lower complexity that actually scales.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Ship trackers without GPS; use BLE, Wi‑Fi, and GNSS scans for cloud positioning.</li>
+<li>Runs on Amazon Sidewalk’s U.S. community network; GA today in us-east-1.</li>
+<li>Create “destinations” and route resolved coordinates via IoT Rules to any AWS service.</li>
+<li>Start fast: Sidewalk SDK v1.19+, enable positioning at provisioning, pick your destination.</li>
+<li>See live pins in the AWS IoT Console; integrate with Amazon Location, Timestream, and QuickSight.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-13-2025-08-29-11-5965-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="cloudpositioningwithoutgps">Cloud positioning without GPS</h2>
+<h3 id="signaltrifectayoucanuse">Signal trifecta you can use</h3>
+<p>You don’t need a dedicated GPS chip to get a location. Your Sidewalk‑enabled device can do this:</p>
+<ul>
+<li>Scan BLE beacons and nearby Bluetooth signals.</li>
+<li>Collect Wi‑Fi access point identifiers, plus RSSI levels.</li>
+<li>Include GNSS reads when available. You don’t need full GPS in every device.</li>
+</ul>
+<p>Those payloads ride the Amazon Sidewalk network to AWS IoT Core for Amazon Sidewalk. It’s the community mesh in millions of Echo and Ring devices. AWS IoT Core Device Location then turns that raw signal soup into coordinates.</p>
+<p>Think of it like this: your device does light “sniffing” of the radio around it. The cloud handles the heavy math. That’s the secret sauce. Your battery doesn’t burn on navigation, and you skip pricey GPS hardware. You can still add occasional GNSS reads in tougher spots. Most of the time, BLE and Wi‑Fi fingerprints give you a solid fix.</p>
+<h3 id="whatthedevicesends">What the device sends</h3>
+<ul>
+<li>BLE: nearby device identifiers and signal strengths. No pairing; you’re just listening for presence and power.</li>
+<li>Wi‑Fi: BSSIDs, the MACs, and RSSI from access points in range. No connection required.</li>
+<li>GNSS: optional sky snapshots when there’s a clear view. Use sparingly to save battery.</li>
+</ul>
+<p>Keep payloads compact. You’re sending observations, not full logs. Sidewalk is built for small, bursty messages, which is ideal for trackers and sensors.</p>
+<h3 id="wherecoordinatesgo">Where coordinates go</h3>
+<p>Resolved locations land on MQTT topics or flow through IoT Rules. It’s your programmable switchboard to almost anywhere:</p>
+<ul>
+<li>Visualize on Amazon Location Service maps.</li>
+<li>Store time series in Amazon Timestream and query patterns later.</li>
+<li>Push events to AWS Lambda for business logic, like alerts and geofences.</li>
+<li>Stream to Amazon Kinesis for near real‑time analytics.</li>
+</ul>
+<p>That’s the headline. You offload the heavy location math to the cloud and keep devices simple, cheap, and power‑sipping. For docs and details, see AWS IoT Core Device Location and AWS IoT Core for Amazon Sidewalk.</p>
+<h3 id="updatefrequencysweetspot">Update frequency sweet spot</h3>
+<ul>
+<li>Moving assets: send small updates by time or distance. For example, every 5–15 minutes in motion, slower when idle.</li>
+<li>Stationary sensors: report daily, or on change events. For example, if it moves X meters, or crosses a fence.</li>
+<li>Burst mode: allow a short high‑frequency window during theft or loss, then fall back.</li>
+</ul>
+<p>This keeps batteries happy and bills predictable. Ops teams still get enough detail to make decisions.</p>
+<h3 id="edgevscloudtradeoffs">Edge vs cloud tradeoffs</h3>
+<ul>
+<li>Cloud positioning: cheaper devices, longer battery, easier updates. You’re betting on coverage and a rich radio environment.</li>
+<li>On‑device GPS: more precise in clear sky, but more cost and power, and slower time‑to‑fix.</li>
+</ul>
+<p>Most fleets don’t need centimeter precision. They need “where is it now?” and “did it leave the site?” Cloud positioning nails that.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-13-2025-08-30-17-8613-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="coverageandconstraintsforyou">Coverage and constraints for you</h2>
+<h3 id="wheresidewalkworksrightnow">Where Sidewalk works right now</h3>
+<p>Amazon reports Sidewalk coverage across a huge portion of the U.S. population. It rides the community network. In practice, many outdoor and indoor spots can connect without your own gateways. Key points:</p>
+<ul>
+<li>Availability: Sidewalk operates in the United States.</li>
+<li>AWS integration region: us‑east‑1 (N. Virginia) for this feature.</li>
+<li>Best fit: battery‑powered trackers, sensors, and low‑data IoT payloads.</li>
+</ul>
+<p>Check Amazon’s Sidewalk coverage info before big rollouts. You’ll understand density in your target areas.</p>
+<h3 id="reliabilityaccuracyandexpectations">Reliability accuracy and expectations</h3>
+<p>Accuracy depends on the signals you provide:</p>
+<ul>
+<li>Wi‑Fi scanning delivers strong urban and suburban accuracy where access points are plentiful.</li>
+<li>BLE observability helps in places with beacons or other Bluetooth devices.</li>
+<li>GNSS, when available, improves precision in clear‑sky conditions.</li>
+</ul>
+<p>You’re trading per‑device GPS parts for a multi‑source, cloud‑resolved approach. It’s cheaper and more power‑efficient at scale. For routine tracking, geo‑fences, and outdoor sensor placement, it’s more than enough. For centimeter‑level needs, like precision robotics, you’ll still want specialized positioning.</p>
+<p>Pro tip: test in your real environments, like warehouses, yards, and routes. Log both resolved coordinates and signal metadata. You’ll learn which signals dominate and how to tune update intervals.</p>
+<h3 id="indoorvsoutdoorreality">Indoor vs outdoor reality</h3>
+<ul>
+<li>Indoors: expect Wi‑Fi to do the heavy lifting. BLE helps if your sites run beacons.</li>
+<li>Outdoors: urban areas are strong thanks to Wi‑Fi density. In open areas, mix in occasional GNSS.</li>
+<li>Transitional spaces: dock doors, loading bays, and lots can be tricky. Add a slightly longer dwell window before alerts to cut noise.</li>
+</ul>
+<h3 id="latencyexpectations">Latency expectations</h3>
+<p>Design for minutes, not milliseconds. Sidewalk backhaul, RF, and cloud processing add variability. For most tracking and geofence alerts, that’s fine. If you need sub‑second control loops, this isn’t the right tool.</p>
+<h3 id="atedgeofcoverage">At edge of coverage</h3>
+<ul>
+<li>Use store‑and‑forward on the device. Queue updates offline; publish when back in range.</li>
+<li>Increase location report intervals in low‑coverage zones to save battery.</li>
+<li>Consider dual connectivity, like Sidewalk plus a local BLE gateway at a warehouse. You get more density in specific buildings.</li>
+</ul>
+<h2 id="buildyourfirsttracker">Build your first tracker</h2>
+<h3 id="prereqsyouactuallyneed">Prereqs you actually need</h3>
+<ul>
+<li>Devices with Sidewalk SDK v1.19 or newer.</li>
+<li>AWS account access to us‑east‑1 (N. Virginia).</li>
+<li>A plan for routes and destinations, where location data goes after resolution.</li>
+</ul>
+<p>In the AWS IoT Core console, provision Sidewalk devices under LPWAN devices. During provisioning, flip on Geolocation by choosing “Activate positioning.” Once your device connects to Sidewalk, the SDK forwards BLE, Wi‑Fi, and GNSS inputs to AWS IoT Core for Amazon Sidewalk. Device Location resolves the coordinates and sends them to your selected topics and rules.</p>
+<h3 id="routedatatorealapps">Route data to real apps</h3>
+<p>Create a “destination” to tie devices to an IoT Rule. This is how you fan out:</p>
+<ul>
+<li>Map pins: send coordinates to Amazon Location Service for real‑time tracking.</li>
+<li>History: insert events into Amazon Timestream or DynamoDB.</li>
+<li>Alerts: invoke AWS Lambda to check geo‑fences and send notifications.</li>
+<li>Monitoring: put metrics and anomalies into CloudWatch.</li>
+</ul>
+<p>A field ops example: tag power tools with a compact Sidewalk device. Each morning, Wi‑Fi scans resolve locations. If a tool leaves a jobsite geo‑fence, your Lambda triggers a Slack alert in under a minute. No GPS on the device. No private gateways. Just cloud‑resolved coordinates riding a public network.</p>
+<p>If you want a hands‑on AWS IoT Core Location Amazon Sidewalk example, browse AWS’s IoT blog series and the AWS Samples catalog. You’ll also find AWS IoT Core Location Amazon Sidewalk GitHub repositories via a GitHub search.</p>
+<h3 id="stepbystepfast">Step by step fast</h3>
+<ul>
+<li>Provision: add your device in AWS IoT Core under LPWAN. Select Amazon Sidewalk, and register the device credentials.</li>
+<li>Enable: check “Activate positioning” so Device Location kicks in.</li>
+<li>Destinations: create one destination per outcome — maps, storage, and alerts.</li>
+<li>Rules: build IoT Rules that transform and route the location messages. For example, add deviceId, geohash, and firmwareVersion.</li>
+<li>Visualize: wire Amazon Location Service to see live pins. Verify movement and timestamps.</li>
+</ul>
+<h3 id="commongotchastoavoid">Common gotchas to avoid</h3>
+<ul>
+<li>Forgetting to enable positioning during provisioning. Result: no resolved coordinates.</li>
+<li>Over‑reporting. Result: battery drain and higher costs without more value.</li>
+<li>Missing accuracy hints. Result: downstream analytics can’t filter or score quality.</li>
+<li>Single‑topic spaghetti. Result: debugging pain. Use one‑purpose topics and rules.</li>
+</ul>
+<h2 id="datasecurityandcost">Data security and cost</h2>
+<h3 id="dataflowsandstoragepatterns">Data flows and storage patterns</h3>
+<p>Treat resolved positions as time-series telemetry:</p>
+<ul>
+<li>Write each event with deviceId, lat and lon, accuracy hints, and timestamp.</li>
+<li>Persist to Amazon Timestream for time‑window queries, like last known location and dwell time.</li>
+<li>Mirror to Amazon S3 for long‑term analytics or training ML models in Amazon SageMaker.</li>
+<li>Use QuickSight to visualize fleet movement over time.</li>
+</ul>
+<p>Design your IoT Rules atomically. One rule per outcome — map, history, or alerting — keeps pipelines clear and debuggable.</p>
+<p>Consider adding a geohash to each event. It’s a light way to bucket locations for fast map clustering and spatial queries. Pair it with partition keys like date or deviceId in storage to keep reads fast and cheap.</p>
+<h3 id="securityandfleetoperations">Security and fleet operations</h3>
+<p>Sidewalk traffic is encrypted end‑to‑end. AWS IoT adds device identity and policy‑based access. Follow the usual IoT hygiene:</p>
+<ul>
+<li>Use per‑device certificates and identities, plus least‑privilege IoT policies.</li>
+<li>Separate dev, test, and prod accounts and topics.</li>
+<li>Track device health and metadata with AWS IoT Device Management.</li>
+</ul>
+<p>Also, practice safe operations:</p>
+<ul>
+<li>Keep a consistent device schema, like hardware, firmware, and capabilities, in your registry.</li>
+<li>Roll out changes with staged deployments and canaries.</li>
+<li>Add alarms for “no data in X minutes” and unusual movement patterns.</li>
+</ul>
+<h3 id="costthinkingmeasureit">Cost thinking measure it</h3>
+<p>You don’t pay carriers for Sidewalk coverage. You do pay for AWS usage, like IoT messaging, Device Location resolution, storage, and downstream services. Keep reports lightweight, like deltas or periodic updates, and right‑size retention. For details, review AWS IoT pricing and model your event volume before launch.</p>
+<p>A fast back‑of‑napkin:</p>
+<ul>
+<li>5,000 devices x 24 reports/day = 120,000 messages/day.</li>
+<li>If you add one alert and one write per message, that’s 360,000 downstream actions per day.</li>
+<li>Now model those actions against pricing pages for IoT Core, Device Location resolutions, storage writes, queries, and analytics.</li>
+</ul>
+<p>Small change that saves big: reduce reporting at night or when assets are stationary.</p>
+<h3 id="observabilityandsrebasics">Observability and SRE basics</h3>
+<ul>
+<li>Metrics: message count per device, success vs. error rates, average resolution time.</li>
+<li>Logs: keep transforms and rule execution logs for debugging.</li>
+<li>Traces: tag messages with correlation IDs. Follow them from MQTT to storage to alerts.</li>
+</ul>
+<h2 id="fieldplaybook">Field playbook</h2>
+<h3 id="quickrepeatabletestplan">Quick repeatable test plan</h3>
+<ul>
+<li>Pick three sites: urban, suburban, and your toughest coverage spot.</li>
+<li>Walk or drive a loop with a test device. Record raw scans and resolved coordinates.</li>
+<li>Check latency, accuracy, and fence triggers along the route.</li>
+<li>Review the event trail in Timestream or S3 to see gaps or spikes.</li>
+<li>Tweak intervals and repeat. Two loops is better than one; five is best.</li>
+</ul>
+<h3 id="successmetricstotrack">Success metrics to track</h3>
+<ul>
+<li>Fix rate: percentage of reports that produce a usable coordinate.</li>
+<li>Fence reliability: enter/exit events that match reality.</li>
+<li>Battery trend: expected life at your chosen intervals.</li>
+<li>Cost per asset per month: keep a running tally.</li>
+</ul>
+<h3 id="ifaccuracydisappoints">If accuracy disappoints</h3>
+<ul>
+<li>Add occasional GNSS scans outdoors for a boost.</li>
+<li>Increase scan time slightly to capture more Wi‑Fi APs.</li>
+<li>Use a short cool‑down before declaring a fence event to cut false alarms near boundaries.</li>
+</ul>
+<h2 id="miniusecasestosteal">Mini Use Cases To Steal</h2>
+<ul>
+<li>Construction tools: tag drills, generators, and ladders. Every morning, push a “roll call” and auto‑flag missing gear.</li>
+<li>Rental bikes and scooters: hourly pings during business hours. Quick surge to 2‑minute pings if a unit leaves a service zone.</li>
+<li>Outdoor sensors: trail counters, weather nodes, and irrigation controls. Daily check‑ins plus an alert on movement or tamper.</li>
+<li>Logistics cages and bins: fence alerts at docks. If a bin strays, ops sees it before it’s gone for good.</li>
+</ul>
+<p>Each of these wins without a GPS module on every device. And without building your own network.</p>
+<h2 id="troubleshootingwhenthingsgetweird">Troubleshooting when things get weird</h2>
+<ul>
+<li>No points on the map: confirm “Activate positioning” is enabled and rules use the right topics.</li>
+<li>Stale last‑known location: check device connectivity and Sidewalk signal quality. Make sure reports aren’t stuck in a local buffer.</li>
+<li>Duplicate events: add a message ID and dedupe at the consumer. Idempotency is your friend.</li>
+<li>Wild jumps on the map: filter by accuracy hint and require two consecutive reports before acting.</li>
+</ul>
+<h2 id="governancecomplianceandprivacy">Governance compliance and privacy</h2>
+<ul>
+<li>Data minimization: only collect what you need. Device ID, time, coordinates, and accuracy are usually enough.</li>
+<li>Retention: set lifecycle policies on S3 and Timestream so old data ages out automatically.</li>
+<li>Access control: use IAM roles tied to IoT Rules and destination services. Avoid wildcard permissions.</li>
+<li>Auditing: keep configuration history for rules, destinations, and policies. Tag everything.</li>
+</ul>
+<h2 id="faqyourtopquestionsanswered">FAQ your top questions answered</h2>
+<h3 id="isamazonsidewalkreallynationwide">Is Amazon Sidewalk really nationwide</h3>
+<p>Amazon reports broad U.S. coverage via its community network of Echo and Ring devices. Coverage can vary by neighborhood density and environment. Always check the latest amazon sidewalk coverage map. Test in the areas that matter for your deployment.</p>
+<h3 id="needgpshardwareondevice">Need GPS hardware on device</h3>
+<p>No. AWS IoT Core Device Location resolves coordinates from BLE, Wi‑Fi, and optional GNSS sent over Sidewalk. You can still include GNSS when it’s practical. It’s not required to get a usable fix for many asset tracking cases.</p>
+<h3 id="howaccurateisthelocation">How accurate is the location</h3>
+<p>It depends on the signals around you. Wi‑Fi can be very effective in dense areas. BLE helps where beacons or Bluetooth devices are present. GNSS improves precision outdoors. The best approach is to test with your intervals and environments, then tune.</p>
+<h3 id="whichregionsandaccounts">Which regions and accounts</h3>
+<p>For this integration, AWS IoT Core Device Location with Amazon Sidewalk is GA in US East, N. Virginia. Amazon Sidewalk network availability is U.S.‑only, so plan alternatives for international operations.</p>
+<h3 id="routedataprogrammatically">Route data programmatically</h3>
+<p>Use IoT Rules to transform and forward MQTT messages to downstream services. To manage destinations and Sidewalk resources in code, use the AWS IoT Wireless APIs. The AWS IoT Core API reference and guides provide request and response details, plus SDKs.</p>
+<h3 id="whatdoesitcost">What does it cost</h3>
+<p>You pay for AWS usage, like messaging, resolutions, storage, queries, and analytics. Sidewalk coverage itself doesn’t carry a separate carrier fee. Estimate event rates and review AWS IoT pricing to model your total cost.</p>
+<h3 id="whataboutindooronlydeployments">What about indoor only deployments</h3>
+<p>If you’re mostly indoors, rely on Wi‑Fi scanning. Consider adding BLE beacons in key zones like exits or tool cribs. You still skip GPS and keep battery life strong.</p>
+<h3 id="usemyowngeolocationalgorithm">Use my own geolocation algorithm</h3>
+<p>Yes. You can route raw scans and resolved coordinates in parallel. Store scans in S3, run your own models in Lambda or SageMaker, and compare results. Keep the cloud‑resolved fix for production while you experiment.</p>
+<h3 id="testwithoutcustomhardware">Test without custom hardware</h3>
+<p>Start with a dev kit that supports the Sidewalk SDK v1.19+ and the needed radios. Provision it, simulate movement, and validate your cloud pipeline end to end before designing a custom board.</p>
+<h2 id="shipitfastpath">Ship it fast path</h2>
+<ul>
+<li>Validate coverage in your target ZIP codes, day and night, indoor and outdoor.</li>
+<li>Flash Sidewalk SDK v1.19+ and provision devices in us‑east‑1.</li>
+<li>Enable “Activate positioning” during provisioning to turn on resolution.</li>
+<li>Create an IoT Rule and destination for maps, storage, and alerts.</li>
+<li>Log both positions and signal metadata. Then tune intervals for battery and cost.</li>
+<li>Add a geo‑fence in Lambda. Alert your ops channel on enter and exit.</li>
+</ul>
+<p>You don’t win IoT by packing more silicon into devices. You win by pushing complexity into the cloud and shipping faster than rivals. With Amazon Sidewalk plus AWS IoT Core Device Location, you get a practical, GPS‑free track‑and‑trace stack. It’s inexpensive, resilient, and enterprise‑ready. Start with a single asset type. Prove the coverage and accuracy you need, then scale with confidence.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/iot-core/device-location/">AWS IoT Core Device Location</a></li>
+<li><a href="https://aws.amazon.com/iot-core/amazon-sidewalk/">AWS IoT Core for Amazon Sidewalk</a></li>
+<li><a href="https://www.amazon.com/sidewalk">Amazon Sidewalk (coverage and overview)</a></li>
+<li><a href="https://aws.amazon.com/location/">Amazon Location Service</a></li>
+<li><a href="https://aws.amazon.com/timestream/">Amazon Timestream</a></li>
+<li><a href="https://aws.amazon.com/quicksight/">Amazon QuickSight</a></li>
+<li><a href="https://aws.amazon.com/lambda/">AWS Lambda</a></li>
+<li><a href="https://aws.amazon.com/kinesis/data-streams/">Amazon Kinesis Data Streams</a></li>
+<li><a href="https://aws.amazon.com/cloudwatch/">Amazon CloudWatch</a></li>
+<li><a href="https://aws.amazon.com/iot-device-management/">AWS IoT Device Management</a></li>
+<li><a href="https://aws.amazon.com/iot-core/pricing/">AWS IoT Core pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/iot/latest/apireference/">AWS IoT Core API Reference</a></li>
+<li><a href="https://aws.amazon.com/iot-wireless/">AWS IoT Wireless (destinations and LPWAN)</a></li>
+<li><a href="https://github.com/search?q=Amazon+Sidewalk+AWS+IoT+Core&amp;type=repositories">GitHub search for Amazon Sidewalk examples</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-iot-core-sidewalk-location.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq145b.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Build+GPS-Free+Asset+Tracking+with+Amazon+Sidewalk+and+AWS&amp;pi=258556784327&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=258556784327&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-iot-core-sidewalk-location&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-iot-core-sidewalk-location?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:31 GMT -->
+</html>

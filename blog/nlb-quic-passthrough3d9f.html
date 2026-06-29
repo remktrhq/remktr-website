@@ -1,0 +1,437 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/nlb-quic-passthrough?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship 25% Faster: QUIC on AWS Network Load Balancer</title>
+    <link rel="canonical" href="nlb-quic-passthrough.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Accelerate apps with AWS Network Load Balancer (NLB) QUIC passthrough: 25–30% lower latency, sticky sessions via QUIC IDs for mobile and streaming workloads.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship 25% Faster: QUIC on AWS Network Load Balancer",
+        "datePublished": "2025-11-17T21:01:40Z",
+        "dateModified": "2025-11-17T21:01:40.794Z",
+        "mainEntityOfPage": "https://remktr.com/blog/nlb-quic-passthrough",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Nov-17-2025-08-51-52-8867-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="nlb-quic-passthrough.html">Ship 25% Faster: QUIC on AWS Network Load Balancer</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Nov 17, 2025 9:01:40 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Your users don’t care how elegant your backend is. They care how fast the app feels. And right now, speed is a moat. Here’s the move: QUIC on AWS Network Load Balancer (NLB) just landed in passthrough mode—and teams are seeing 25–30% lower latency for mobile, real-time, and streaming.</p>
+<p>That’s not a rounding error. That’s the difference between a video starting instantly vs. buffering. A trade order feeling snappy vs. laggy. And a chat staying connected on subway Wi‑Fi. QUIC slashes handshakes, survives IP changes, and keeps sessions sticky via Connection IDs. All while you hold your TLS keys end to end.</p>
+<p>If you’ve been waiting for a clean way to run modern UDP transport at scale, this is it. Do it without ripping out your stack. You keep your architecture, your certificates, your encryption. NLB forwards QUIC directly to your targets and handles stickiness the QUIC-native way.</p>
+<p>Here’s how to wire it up, what to watch, and why it’s your fastest path to “feels instant” in production.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>QUIC on NLB (passthrough) cuts latency ~25–30% by minimizing handshakes and speeding up recovery.</li>
+<li>You keep TLS end to end; NLB forwards QUIC/UDP directly to targets.</li>
+<li>Sticky sessions use QUIC Connection IDs, resilient to IP/NAT changes.</li>
+<li>Works great for mobile, real-time, and streaming workloads.</li>
+<li>Enable NLB access logs and CloudWatch metrics to trace flows and tune capacity.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-52-49-9831-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="quicmeetsnlb">QUIC meets NLB</h2>
+<h3 id="quic101">QUIC 101</h3>
+<p>QUIC runs over UDP and bakes TLS 1.3 into the transport. That gives you fewer round trips, especially on first connect. You get connection migration across IPs and built‑in stream multiplexing without head‑of‑line blocking. On flaky mobile networks, that’s money. Less handshake overhead plus resilience means lower tail latency.</p>
+<p>In practical terms, you’ll see faster first frame for video. You’ll see fewer retries on chat. You’ll get smoother real-time updates when a device hops from cellular to Wi‑Fi. That’s the class of gain behind the 25–30% latency drop AWS highlights for QUIC passthrough on NLB.</p>
+<p>Here’s what that looks like under the hood, without the academic jargon:</p>
+<ul>
+<li>First connect: QUIC does TLS 1.3 during the transport handshake. You get to “secure and ready” in roughly 1 round trip (vs. multiple with TCP+TLS).</li>
+<li>Repeat visitors: With session resumption and 0‑RTT in TLS 1.3, clients can send data right away on reconnects. Use care for replay‑safe operations.</li>
+<li>No head‑of‑line blocking: Multiple independent streams share one connection. A single lost packet doesn’t stall the whole party like TCP would.</li>
+<li>Loss recovery built for modern networks: QUIC measures and adapts quickly. That improves tail latency where mobile jitter hurts the most.</li>
+</ul>
+<p><em>Translation: no magic, just fewer round trips and smarter recovery.</em></p>
+<h3 id="passthroughmode">Passthrough mode</h3>
+<p>With NLB in QUIC passthrough, the load balancer doesn’t terminate TLS or parse QUIC packets. It forwards UDP 443 straight to your targets. You manage certs at the service—NGINX QUIC, Envoy/QUIC, or quic-go. So your cryptographic posture is unchanged. End-to-end encryption stays intact. You avoid dual certificate management.</p>
+<p>This setup also means:</p>
+<ul>
+<li>You control ALPN (e.g., h3) and cipher suites on the server, not the LB.</li>
+<li>You can do mTLS at the application layer if you need it for service‑to‑service trust.</li>
+<li>WAF-style L7 filtering won’t happen at NLB for UDP/QUIC. Plan security at the edge (e.g., Shield) and at the service.</li>
+<li>Certificates renew the same way you do today—no extra certificate sync to the LB.</li>
+</ul>
+<h3 id="arealworldpattern">A real world pattern</h3>
+<ul>
+<li>Mobile API and chat on UDP/443 using QUIC</li>
+<li>NLB listener: UDP:443 → target group (instance or IP targets)</li>
+<li>Targets terminate TLS/QUIC and speak HTTP/3 internally</li>
+<li>Health checks via TCP/HTTP on a designated port</li>
+</ul>
+<p>This lets you ship QUIC fast without re-architecting everything behind the load balancer.</p>
+<p>If you’re on containers (EKS/ECS), use IP target groups to register pods or tasks directly. That keeps traffic L4-clean and avoids extra hops through node proxies. For hybrid or on‑prem extension, IP targets also let you point NLB at non‑EC2 endpoints. As long as they’re reachable in your VPC.</p>
+<h3 id="rollingoutsafely">Rolling out safely</h3>
+<ul>
+<li>Keep HTTP/2 as a fallback. Many enterprise networks still throttle UDP. Your server should advertise HTTP/3 but gracefully serve HTTP/2.</li>
+<li>Announce HTTP/3 with Alt-Svc, then ramp to more users over days, not hours.</li>
+<li>Start with one latency‑critical API or media path. Prove the win, then expand.</li>
+</ul>
+<h2 id="connectionids">Connection IDs</h2>
+<h3 id="quicstickinessonnlb">QUIC stickiness on NLB</h3>
+<p>Sticky sessions are a headache with mobile devices. You get NAT rebinding, IP flips, and intermittent coverage. QUIC solves this with Connection IDs (CIDs). It’s an identifier that stays stable even if the client’s IP or port changes. In NLB’s QUIC passthrough mode, traffic is forwarded to backend targets with session stickiness via these CIDs.</p>
+<p>Translation: you get consistent target routing for a client session. You don’t rely on cookies or brittle 5‑tuple hashing. Your session data and in-memory state on the target remain useful. Users don’t “pinball” between hosts after a network blip.</p>
+<h3 id="beatstraditionalstickiness">Beats traditional stickiness</h3>
+<ul>
+<li>Survives IP changes: Device switches networks? CID keeps the session anchored.</li>
+<li>Fewer reconnect storms: No need to renegotiate or replay state on every rebinding.</li>
+<li>Cleaner horizontal scaling: You can scale targets without trashing session affinity.</li>
+</ul>
+<p>Compared to classic cookie stickiness on HTTP/1.1 or TCP flow hashing, QUIC’s CID-based routing is purpose‑built for modern, mobile‑heavy traffic.</p>
+<h3 id="thesubwayswap">The subway swap</h3>
+<p>Imagine your streaming app while a user goes from 5G → station Wi‑Fi → back to cellular in 90 seconds. With QUIC/CIDs, the existing session can migrate without breaking. The NLB keeps traffic flowing to the same target. Your video buffer doesn’t reset. And your metrics don’t spike with reconnect errors. That’s exactly the failure mode QUIC was built to tame.</p>
+<p>Practical tip: if you keep in‑memory state on a single target (e.g., chat presence), match session lifetime to your QUIC idle timeouts. For higher resilience, push session state (tokens, presence, carts) into a shared store. That way a target loss doesn’t drop users on reconnect.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-53-46-5511-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="fromzerotoquic">From zero to QUIC</h2>
+<h3 id="build">Build</h3>
+<p>You’ll set up an NLB listener on UDP:443. You’ll forward to an EC2-based QUIC server. You’ll terminate TLS at the service. You’ll verify sticky sessions using CIDs. Treat this as your aws network load balancer nlb tutorial you can run in a dev account.</p>
+<h3 id="prereqsanddiagramming">Prereqs and diagramming</h3>
+<ul>
+<li>Targets: EC2 instances or IP targets that support QUIC/HTTP/3 (e.g., NGINX with QUIC, Envoy with HTTP/3, or a quic-go demo server)</li>
+<li>Security groups and NACLs allowing UDP:443 to targets</li>
+<li>Health check port open (TCP/HTTP)</li>
+<li>For diagrams, grab the official AWS Network Load Balancer icon from AWS Architecture Icons</li>
+</ul>
+<p>Before you start, define what “good” looks like. Example SLOs:</p>
+<ul>
+<li>p50/ p95 handshake time</li>
+<li>p95 time-to-first-byte (TTFB)</li>
+<li>Session migration success rate when IP changes</li>
+<li>Error rate on fallback to HTTP/2</li>
+</ul>
+<h3 id="step">Step</h3>
+<p>1) Create target group (UDP):</p>
+<ul>
+<li>Protocol: UDP, Port: 443</li>
+<li>Target type: instance or IP</li>
+<li>Health check: TCP or HTTP on a dedicated port (e.g., 8080)</li>
+</ul>
+<p>2) Register targets:</p>
+<ul>
+<li>Point to instances running your QUIC-capable server. For a quick test, use NGINX with HTTP/3 enabled or a quic-go sample. Terminate TLS with your certs on the service.</li>
+</ul>
+<p>3) Create NLB:</p>
+<ul>
+<li>Scheme: Internet‑facing (for public traffic) or internal (for private clients)</li>
+<li>Listener: UDP:443 → forward to your UDP target group</li>
+<li>Consider cross-zone load balancing if you want even traffic spread across AZs</li>
+</ul>
+<p>4) Test connectivity:</p>
+<ul>
+<li>Use a QUIC/HTTP/3 client (e.g., curl with HTTP/3 support) hitting https://your-nlb-dns</li>
+<li>Validate that the server negotiates HTTP/3 and serves content</li>
+</ul>
+<p>5) Validate stickiness:</p>
+<ul>
+<li>Simulate IP change (switch Wi‑Fi/cellular or use a network tool)</li>
+<li>Observe the same session continues without reconnecting to a new target</li>
+</ul>
+<h3 id="quickdemoserver">Quick demo server</h3>
+<p>Spin up a small EC2 (t4g.small). Install NGINX with QUIC or run a quic-go example server on UDP:443. Attach to the UDP target group. Then hit it with a QUIC‑capable curl (curl --http3). You’ll see fast handshake behavior and stable sessions, even when network conditions change.</p>
+<h3 id="sanitychecks">Sanity checks</h3>
+<ul>
+<li>Confirm ALPN offers h3 and your cert chain is valid from common mobile roots.</li>
+<li>Ensure security groups and NACLs allow return UDP traffic (stateful SGs, stateless NACLs).</li>
+<li>Decide on idle timeouts and how long you’ll keep stickiness/mapping for inactive sessions.</li>
+<li>Document fallback: if UDP fails, you must serve the same endpoint on HTTP/2.</li>
+</ul>
+<h2 id="observabilityandalgorithmplaybook">Observability and algorithm playbook</h2>
+<h3 id="hownlbpickstargets">How NLB picks targets</h3>
+<p>By default, NLB is a Layer 4 load balancer using a flow-hash approach. Think 5‑tuple: source IP/port, destination IP/port, protocol. It maps connections to targets. With QUIC passthrough, NLB still processes UDP flows. It can maintain session stickiness via QUIC Connection IDs. That keeps a given QUIC session anchored to a single target. Cross‑zone load balancing can smooth distribution across AZs if enabled.</p>
+<p>Key implications for you:</p>
+<ul>
+<li>Fewer mid-session target switches (less state churn)</li>
+<li>More predictable cache/session hits on the target</li>
+<li>Better tail latency under mobile IP flaps</li>
+</ul>
+<p>Also note: if you autoscale quickly, newly added targets join the hashing pool. Watch distribution and consider pre‑warming if you expect traffic spikes. Think a live event or a product drop.</p>
+<h3 id="whattolog">What to log</h3>
+<p>Turn on NLB access logs to Amazon S3 for per‑flow visibility. You also get CloudWatch metrics to watch capacity and health. Start with:</p>
+<ul>
+<li>ActiveFlowCount, NewFlowCount: How many concurrent and new flows you’re handling</li>
+<li>ProcessedBytes: Throughput at the LB</li>
+<li>HealthyHostCount / UnHealthyHostCount: Target health snapshot</li>
+</ul>
+<p>Pair this with VPC Flow Logs for subnet-level insights and service-level QUIC logging (qlog) on your targets. qlog gives you per-connection events like handshakes, losses, and CID changes. It makes QUIC troubleshooting humane.</p>
+<p>Bonus: Wireshark understands QUIC and can decrypt with keys if you export them in a test environment. For production, rely on qlog-structured events to avoid touching secrets.</p>
+<h3 id="troubleshootingtips">Troubleshooting tips</h3>
+<ul>
+<li>Handshake fails? Check that UDP:443 is open from client → NLB → targets. Many firewalls silently drop UDP.</li>
+<li>Health checks flap? Use TCP/HTTP checks on a stable port. Verify your target isn’t rate limiting checks.</li>
+<li>Clients fall back to HTTP/2? Confirm your server advertises HTTP/3 and your certs/ALPN are set right.</li>
+<li>Spiky tail latency? Enable cross‑zone LB and scale targets. Inspect qlog for loss/retx patterns.</li>
+<li>Packet loss on one cell network? Lower server pacing/aggressiveness. Validate congestion control choice.</li>
+<li>Random stalls? Watch for MTU/fragmentation issues. Tune max datagram size and enable Path MTU Discovery.</li>
+</ul>
+<h3 id="tracingastickysession">Tracing a sticky session</h3>
+<p>Enable qlog on the server. Make a request, then switch networks mid‑stream. You’ll observe a stable Connection ID across migration. Correlate with NLB access logs to see consistent target mapping. That’s QUIC stickiness doing exactly what you wanted.</p>
+<p><em>Pro tip: visualize the trace with qvis to see handshake, RTT, losses, and migration as a timeline. It’s night-and-day easier than parsing raw logs.</em></p>
+<h2 id="performancetuning">Performance tuning</h2>
+<p><em>You don’t need to be a kernel wizard.</em> A few practical knobs make QUIC feel even snappier:</p>
+<ul>
+<li>UDP buffers: Increase OS receive/send buffers on your targets to handle bursts. Do it carefully, with testing.</li>
+<li>Congestion control: Many stacks default to CUBIC. Try BBR in a controlled canary if your stack supports it.</li>
+<li>Stream design: Use separate QUIC streams for independent data. Keep metadata and video segments uncoupled.</li>
+<li>Retry-sensitive endpoints: Avoid 0‑RTT for requests that mutate state unless you’ve built replay protections.</li>
+<li>CPU pinning: QUIC is user‑space. Give busy listeners dedicated cores under consistent load.</li>
+</ul>
+<p>Measure changes with real user metrics (RUM), not just lab tests. Your users’ networks are the truth.</p>
+<h2 id="securitycomplianceguardrails">Security compliance guardrails</h2>
+<p>You’re not giving up security by choosing QUIC passthrough on NLB. You’re moving it to where it belongs—your service.</p>
+<ul>
+<li>End-to-end TLS 1.3: You manage certs, rotate keys, and enforce modern cipher suites.</li>
+<li>mTLS (optional): For high-trust APIs, issue client certs and authenticate at the app.</li>
+<li>DDoS posture: Protect at the edge with AWS Shield. Rate limit or challenge at the service.</li>
+<li>Least privilege networking: Tight security groups and NACLs for UDP:443. Keep health check ports scoped.</li>
+<li>Logging retention: Access logs (S3), qlog on servers, and flow logs form your audit trail.</li>
+</ul>
+<p><em>Remember 0‑RTT: it’s awesome for latency but replayable.</em> Only allow it for idempotent reads or when you’ve built replay fences.</p>
+<h2 id="rolloutplaybook">Rollout playbook</h2>
+<ul>
+<li>Dual‑stack the endpoint (HTTP/3 + HTTP/2). Let clients choose.</li>
+<li>Announce h3 via Alt-Svc gradually. Ramp from 5% → 25% → 50% → 100%. </li>
+<li>Use feature flags in mobile apps to toggle QUIC if you need a fast off‑switch.</li>
+<li>Watch p95/p99 TTFB and error rates per ASN/ISP. Some networks are just weird with UDP.</li>
+<li>Keep a rollback: remove Alt-Svc, keep NLB listener, and fall back to HTTP/2 while you debug.</li>
+</ul>
+<h2 id="costandcapacity">Cost and capacity</h2>
+<ul>
+<li>NLB pricing is based on hours, LCUs, and data processed. QUIC/UDP doesn’t change that model.</li>
+<li>Access logs land in S3—set lifecycle rules so you don’t hoard logs forever.</li>
+<li>Right-size targets: QUIC termination is CPU-heavy. Match instance types to traffic patterns.</li>
+<li>Pre-warm before big launches if you know a spike is coming.</li>
+</ul>
+<h2 id="compatibilitychecklist">Compatibility checklist</h2>
+<ul>
+<li>Major browsers (Chrome, Safari, Firefox, Edge) support HTTP/3.</li>
+<li>curl supports HTTP/3 for testing (build with a QUIC-capable TLS library).</li>
+<li>Many mobile SDKs and modern OS stacks include QUIC support out of the box.</li>
+</ul>
+<p>If you’re running a custom client (e.g., a game or streaming app), embed a proven QUIC library. Turn on qlog from day one. Future you will be grateful.</p>
+<h2 id="halfwaycheckpoint">Halfway checkpoint</h2>
+<ul>
+<li>QUIC on NLB in passthrough trims 25–30% latency for mobile and streaming.</li>
+<li>You keep TLS at the service; NLB forwards UDP/443 without termination.</li>
+<li>QUIC Connection IDs give you real sticky sessions across IP changes.</li>
+<li>NLB uses flow hashing under the hood; stickiness rides on CIDs.</li>
+<li>Turn on access logs, CloudWatch metrics, and qlog to see what’s happening.</li>
+<li>Keep HTTP/2 as a safety net; ramp QUIC with Alt-Svc and feature flags.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="terminatequicortls">Terminate QUIC or TLS</h3>
+<p>No. In QUIC passthrough, NLB forwards UDP traffic to your targets. You terminate TLS/QUIC at the service, preserving end‑to‑end encryption and full control of certificates.</p>
+<h3 id="stickysessionsonnlb">Sticky sessions on NLB</h3>
+<p>QUIC uses Connection IDs that persist across IP/port changes. NLB leverages these IDs to keep a session routed to the same target, avoiding mid‑session hops common with pure 5‑tuple hashing.</p>
+<h3 id="healthchecksforquic">Health checks for QUIC</h3>
+<p>Use TCP or HTTP health checks on a dedicated port. This keeps health signaling reliable while your app speaks QUIC on UDP:443.</p>
+<h3 id="crossaztraffic">Cross AZ traffic</h3>
+<p>Yes. Enable cross‑zone load balancing if you want even distribution across Availability Zones. QUIC stickiness continues to work. Just ensure targets in all AZs handle the same session state model, or externalize state.</p>
+<h3 id="awsnetworkloadbalancericon">AWS Network Load Balancer icon</h3>
+<p>Grab it from the official AWS Architecture Icons set. Using the correct icon helps teammates and auditors parse your design quickly.</p>
+<h3 id="debugclientfallbacks">Debug client fallbacks</h3>
+<p>Check ALPN settings and certificates on your QUIC server. Confirm UDP:443 path is open. Review qlog traces. Many corporate networks still hamstring UDP—plan an HTTP/2 fallback path for those environments.</p>
+<h3 id="useawswafwithnlb">Use AWS WAF with NLB</h3>
+<p>AWS WAF integrates with ALB and certain services at L7, not with NLB UDP listeners. For NLB, combine security groups, NACLs, Shield, and application-layer defenses at your targets.</p>
+<h3 id="changemidtierordatabases">Change mid tier or databases</h3>
+<p>No. QUIC changes the client ↔ edge transport. Your mid‑tier can keep using HTTP/2 or gRPC over TCP internally. Start at the edge where users feel it most.</p>
+<h2 id="checklisttoshipquic">Checklist to ship QUIC</h2>
+<ul>
+<li>Create a UDP target group on port 443; set TCP/HTTP health checks.</li>
+<li>Deploy/enable QUIC (HTTP/3) on targets; install TLS certs there.</li>
+<li>Create an NLB with a UDP:443 listener forwarding to the target group.</li>
+<li>Open security group/NACL rules for UDP:443 end to end.</li>
+<li>Enable NLB access logs to S3 and CloudWatch metrics.</li>
+<li>Test with curl --http3 and simulate IP changes to confirm stickiness.</li>
+<li>Advertise h3 with Alt-Svc, start with a small ramp, and watch p95.</li>
+<li>Keep HTTP/2 fallback ready; document your rollback.</li>
+</ul>
+<p><em>In 30 minutes, you’ll have real users riding a faster transport.</em></p>
+<p><em>Your north star is simple: make your app feel instant.</em> QUIC on NLB is a rare upgrade that gives you speed without complexity. No TLS termination changes, no rewrite of your mid-tier, and a clear story for mobile reality. Think IP churn, NAT, and sketchy Wi‑Fi. Start with one latency‑sensitive path—video first frame, chat presence, or real-time metrics. Move it to QUIC on UDP:443 behind NLB. Measure. If you see the 25–30% latency drop, scale it. If not, check logs, validate UDP reachability, and profile server loss/retransmits with qlog. Either way, you’ll learn fast—and likely ship faster.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>RFC 9000: QUIC: A UDP‑Based Multiplexed and Secure Transport, IETF — https://www.rfc-editor.org/rfc/rfc9000</li>
+<li>RFC 9001: Using TLS to Secure QUIC, IETF — https://www.rfc-editor.org/rfc/rfc9001</li>
+<li>Network Load Balancers — User Guide (AWS) — https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html</li>
+<li>Access logs for Network Load Balancers (AWS) — https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-access-logs.html</li>
+<li>Network Load Balancer CloudWatch metrics (AWS) — https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-cloudwatch-metrics.html</li>
+<li>Target groups for Network Load Balancers (AWS) — https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html</li>
+<li>AWS Architecture Icons — https://aws.amazon.com/architecture/icons/</li>
+<li>RFC 9114: HTTP/3, IETF — https://www.rfc-editor.org/rfc/rfc9114</li>
+<li>RFC 9002: QUIC Loss Detection and Congestion Control, IETF — https://www.rfc-editor.org/rfc/rfc9002</li>
+<li>Alt-Svc (Alternative Services), IETF RFC 7838 — https://www.rfc-editor.org/rfc/rfc7838</li>
+<li>MDN Web Docs: HTTP/3 — https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#http3</li>
+<li>Can I use: HTTP/3 — https://caniuse.com/http3</li>
+<li>curl HTTP/3 docs — https://curl.se/docs/http3.html</li>
+<li>Envoy HTTP/3 (QUIC) configuration — https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http3</li>
+<li>Wireshark QUIC protocol support — https://www.wireshark.org/docs/dfref/q/quic.html</li>
+<li>AWS Shield Advanced — https://docs.aws.amazon.com/waf/latest/developerguide/ddos-aws-shield.html</li>
+<li>Elastic Load Balancing Pricing — https://aws.amazon.com/elasticloadbalancing/pricing/</li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="nlb-quic-passthrough.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq9945.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+25%25+Faster%3A+QUIC+on+AWS+Network+Load+Balancer&amp;pi=260641875701&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=260641875701&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fnlb-quic-passthrough&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/nlb-quic-passthrough?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:33:29 GMT -->
+</html>

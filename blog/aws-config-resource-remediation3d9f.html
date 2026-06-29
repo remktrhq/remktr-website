@@ -1,0 +1,292 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/aws-config-resource-remediation?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship Compliance Faster with AWS Config Discovery and Remediation</title>
+    <link rel="canonical" href="aws-config-resource-remediation.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover AWS Config resources across EC2 and SageMaker. Automate compliance with rules, see remediation examples, and describe remediation execution status.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship Compliance Faster with AWS Config Discovery and Remediation",
+        "datePublished": "2026-01-12T21:42:06Z",
+        "dateModified": "2026-01-12T21:42:06.523Z",
+        "mainEntityOfPage": "https://remktr.com/blog/aws-config-resource-remediation",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Jan-12-2026-09-35-48-5990-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="aws-config-resource-remediation.html">Ship Compliance Faster with AWS Config Discovery and Remediation</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Jan 12, 2026 9:42:06 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p><em>Your biggest cloud risk isn’t attackers; it’s quiet drift you didn’t notice.</em>
+One unchecked security group rule, one unencrypted dataset, one SageMaker notebook with public internet access, and you have a problem.</p>
+<p>Good news, AWS Config expanded coverage across EC2, SageMaker, and S3 Tables this round.
+That means fewer blind spots, more automatic fixes, and stronger auditability across your stack.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Enable AWS Config for wider inventory on EC2, SageMaker, and S3 Tables to catch misconfigurations fast.</li>
+<li>Use managed rules or custom rules, then pair with Systems Manager Automation for auto-remediation.</li>
+<li>Example pattern, auto-enable S3 bucket encryption and verify using DescribeRemediationExecutionStatus.</li>
+<li>Control cost by scoping rules, preferring change-triggered evaluations, and using conformance packs and aggregators.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-12-2026-09-37-13-8990-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="expandeddiscovery">Expanded discovery</h2>
+<ul>
+<li>EC2: Instances, security groups, volumes, and AMIs; catch unrestricted SSH or stray public IPs.</li>
+<li>SageMaker: Notebooks, endpoints, model packages; ensure restricted internet access and encryption.</li>
+<li>S3 Tables: Enforce encryption and access policies for tight analytics governance.</li>
+</ul>
+<h2 id="setuptips">Setup tips</h2>
+<ul>
+<li>Enable Config in active regions and pick an encrypted S3 bucket with lifecycle for snapshots and history.</li>
+<li>Use the service-linked role, or a tight least-privilege role for setup.</li>
+<li>Start with key resource types, like EC2, SageMaker, and S3-related, then add an aggregator for org-wide visibility.</li>
+<li>Designate a delegated admin account to handle central governance across the org.</li>
+</ul>
+<h2 id="fromdetectiontofix">From detection to fix</h2>
+<ul>
+<li>Managed rules give quick coverage, while custom rules in Lambda handle unique policies.</li>
+<li>Attach SSM Automation runbooks to remediate issues, like removing 0.0.0.0/0 SSH, enabling S3 encryption, and disabling notebook internet.</li>
+<li>Key APIs here are StartRemediationExecution to initiate fixes, and DescribeRemediationExecutionStatus to track outcomes.</li>
+<li>Safe patterns include detect-only starts, set concurrency and error thresholds, require approvals for risky changes, and log everything.</li>
+<li><em>Make sure IAM is correct for Config, SSM Automation, and any KMS usage.</em></li>
+</ul>
+<h2 id="s3encryptionexample">S3 encryption example</h2>
+<ul>
+<li>Goal is to auto-enable default encryption on any noncompliant S3 bucket.</li>
+<li>Steps: enable Config, add managed rule for bucket encryption, attach remediation (AWS-EnableS3BucketEncryption), test with noncompliant bucket, verify with DescribeRemediationExecutionStatus.</li>
+<li><em>Note, default encryption affects new objects only; plan backfill for legacy data using S3 Batch Operations or rewrite.</em></li>
+</ul>
+<h2 id="scaletoec2andsagemaker">Scale to EC2 and SageMaker</h2>
+<ul>
+<li>EC2: pair restricted-ssh with remediation to remove 0.0.0.0/0 access on port 22.</li>
+<li>SageMaker: flag notebooks with direct internet access, then remediate by updating configuration.</li>
+<li>S3 Tables: enforce encryption and access policies consistently across environments.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Jan-12-2026-09-37-59-9554-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="alertingandreporting">Alerting and reporting</h2>
+<ul>
+<li>Use EventBridge to route noncompliance alerts to SNS or chat tools.</li>
+<li>Include links to the Config rule and Automation execution for fast triage.</li>
+<li>Use aggregators and conformance packs for central reporting across accounts and regions.</li>
+</ul>
+<h2 id="costandsustainability">Cost and sustainability</h2>
+<ul>
+<li>Cost drivers include configuration items recorded and rule evaluations; remediation costs come from SSM Automation and related services.</li>
+<li>Keep costs predictable by scoping rules by resource type or tags, and prefer change-triggered over periodic.</li>
+<li>Standardize with conformance packs, aggregate centrally without duplicate evaluations, and pilot in non-prod first.</li>
+<li>Operational hygiene matters; tag out-of-scope resources, retire stale rules, consolidate overlaps, and maintain dashboards.</li>
+</ul>
+<h2 id="whatyougain">What you gain</h2>
+<ul>
+<li>Broader discovery reduces blind spots across EC2, SageMaker, and S3 Tables.</li>
+<li>Automated remediation closes the loop from detection to fix, with fully auditable results.</li>
+<li>Cost controls and org-wide patterns make this approach sustainable at scale.</li>
+</ul>
+<h2 id="faqs">FAQs</h2>
+<ol>
+<li><p>New resources discovered include expanded coverage across EC2, SageMaker, and S3 Tables; check Supported Resource Types by region.</p></li>
+<li><p>Tracking remediation, use DescribeRemediationExecutionStatus for step-by-step results and failure reasons.</p></li>
+<li><p>How remediation differs, it ties compliance findings to SSM Automation documents for standardized, verifiable fixes.</p></li>
+<li><p>Regional scope wise, Config is regional; use aggregators for org-wide visibility.</p></li>
+<li><p>Approvals are supported; many runbooks support approvals and rate controls.</p></li>
+<li><p>S3 encryption and existing objects, default encryption does not retroactively encrypt; plan a backfill.</p></li>
+<li><p>Exclusions, scope rules by resource IDs or tags, like ComplianceExempt=true, and use expirations for temporary exceptions.</p></li>
+<li><p>SageMaker gotcha, disabling internet may require stop and start, plus VPC endpoints for S3, ECR, and SageMaker APIs.</p></li>
+<li><p>Troubleshooting failures, check SSM Automation execution logs; common blockers are IAM, bucket policies, and KMS key policies.</p></li>
+</ol>
+<h2 id="quickstart">Quickstart</h2>
+<ul>
+<li>Enable AWS Config, then set the S3 bucket and IAM role.</li>
+<li>Configure an aggregator for multi-account and multi-region visibility across the org.</li>
+<li>Add managed rules, like S3 bucket encryption and restricted SSH, to start.</li>
+<li>Attach SSM Automation remediation to the rules you just added.</li>
+<li>Test drift, verify remediation and compliance, then roll out using conformance packs.</li>
+<li>Add alerts and set up regular compliance reports for teams.</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li>What is AWS Config: <a href="https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html">What is AWS Config</a></li>
+<li>Supported Resource Types: <a href="https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html">Supported Resource Types</a></li>
+<li>Managed Rules: <a href="https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html">Managed Rules</a></li>
+<li>Conformance Packs: <a href="https://docs.aws.amazon.com/config/latest/developerguide/conformance-packs.html">Conformance Packs</a></li>
+<li>StartRemediationExecution API: <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_StartRemediationExecution.html">StartRemediationExecution API</a></li>
+<li>DescribeRemediationExecutionStatus API: <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DescribeRemediationExecutionStatus.html">DescribeRemediationExecutionStatus API</a></li>
+<li>AWS-EnableS3BucketEncryption: <a href="https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-aws-enable-s3-bucket-encryption.html">AWS-EnableS3BucketEncryption</a></li>
+<li>AWS Config pricing: <a href="https://aws.amazon.com/config/pricing/">AWS Config pricing</a></li>
+<li>Shared Responsibility Model: <a href="https://aws.amazon.com/compliance/shared-responsibility-model/">Shared Responsibility Model</a></li>
+<li>Aggregators: <a href="https://docs.aws.amazon.com/config/latest/developerguide/aggregate-data.html">Aggregators</a></li>
+<li>EventBridge for Config events: <a href="https://docs.aws.amazon.com/config/latest/developerguide/monitor-config-with-cloudwatchevents.html">EventBridge for Config events</a></li>
+<li>S3 bucket default encryption: <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html">S3 bucket default encryption</a></li>
+<li>KMS key policies: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">KMS key policies</a></li>
+<li>Systems Manager Automation docs: <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-documents.html">Systems Manager Automation docs</a></li>
+<li>Organizations delegated admin: <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_delegate_policies.html">Organizations delegated admin</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="aws-config-resource-remediation.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq48e2.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+Compliance+Faster+with+AWS+Config+Discovery+and+Remediation&amp;pi=293502119613&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=293502119613&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Faws-config-resource-remediation&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/aws-config-resource-remediation?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:22:07 GMT -->
+</html>

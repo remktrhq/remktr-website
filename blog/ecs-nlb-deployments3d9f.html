@@ -1,0 +1,372 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/ecs-nlb-deployments?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:56 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Ship Safer ECS Deployments with Network Load Balancers</title>
+    <link rel="canonical" href="ecs-nlb-deployments.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn how Amazon ECS Network Load Balancer enables linear and canary deployments for TCP/UDP apps. Monitor with CloudWatch to cut risk and MTTR. See examples.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ship Safer ECS Deployments with Network Load Balancers",
+        "datePublished": "2026-02-10T21:18:17Z",
+        "dateModified": "2026-02-10T21:18:18.257Z",
+        "mainEntityOfPage": "https://remktr.com/blog/ecs-nlb-deployments",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-10-2026-09-08-50-0945-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="ecs-nlb-deployments.html">Ship Safer ECS Deployments with Network Load Balancers</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 10, 2026 9:18:17 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You ship code. Your users hate downtime. And if your app speaks TCP or UDP, you probably hacked rollouts with scripts, maintenance windows, and crossed fingers.</p>
+<p><em>That changes now.</em> Amazon ECS just added native support for NLB canary and linear deployments. Translation: you can slowly shift real traffic, connections and all, without duct tape. That means smaller blast radius, faster rollbacks, and fewer 3 a.m. texts asking if prod is down.</p>
+<p><em>Here’s the kicker:</em> NLB is built to scale. AWS says it can handle millions of requests each second with ultra-low latency. Pair that with ECS traffic shifting, and gaming servers, IoT backends, and trading gateways finally get sane, safe deploys.</p>
+<p>If you’ve been googling amazon ecs network load balancer tutorial, this is your field guide. What changed, why it matters, and how to run your first canary without bricking long-lived sessions.</p>
+<p>If you’ve dealt with sticky sessions, static IP needs, or strict allowlists, you get it. NLB gives you raw TCP or UDP power, keeps source IPs, and plays nice with TLS. Now ECS can shift traffic natively, so you get L4 speed with canary and linear guardrails.</p>
+<p>Think of this as the missing playbook for real-time stuff. We’ll compare NLB and ALB, explain ECS traffic shifting under the hood, share rollout patterns for stateful apps, and hand you a 10-step runbook to use today. <em>Less guessing. More green graphs.</em></p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>ECS now supports NLB for native linear and canary deployments, no custom scripts needed.</li>
+<li>Great for TCP or UDP apps needing low latency, static IPs, or long-lived connections.</li>
+<li>Linear ramps traffic in steps; canary tests a small slice, then promotes.</li>
+<li>Monitor with Amazon CloudWatch for errors, latency, and connection resets to cut risk and MTTR.</li>
+<li>Use cases: gaming, IoT, finance, anything where connection persistence is king.</li>
+<li>Compare NLB vs ALB: choose NLB for L4 speed; ALB for HTTP routing features.</li>
+<li>Use CodeDeploy configs, like time-based canary or linear, with ECS blue or green services.</li>
+<li>Tune deregistration delay and health checks so in-flight sessions drain clean.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-09-39-5085-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whynlbcanarieschangemath">Why NLB canaries change math</h2>
+<h3 id="quickcontrastnlbvsalb">Quick contrast NLB vs ALB</h3>
+<p>Here’s the 60-second version. ALB is Layer 7: HTTP headers, cookies, path or host rules, and routing. NLB is Layer 4: raw TCP or UDP, static IPs, TLS passthrough or termination, and very low latency. For long-lived connections or game-level performance, pick NLB. For path rules or WAF, pick ALB.</p>
+<p>AWS says NLB handles millions of requests per second with ultra-low latency. That’s your north star if you care about real-time loads.</p>
+<p>A simple rule to choose: if your packet needs header logic or rules like /api versus /admin, go ALB. If your packet is a long stream, like game, chat, FIX, MQTT, or custom binary, go NLB. Some teams run both: ALB for web or app, NLB for real-time ports, behind the same ECS cluster.</p>
+<h3 id="whygradualtrafficbeatsdeploys">Why gradual traffic beats deploys</h3>
+<p>Canary and linear cuts the failure blast zone. You don’t flip 100% of traffic at once. You start at 5–10%, watch errors and latency, then go forward or bail. This matters most for stateful or connection-heavy apps where fails cascade hard.</p>
+<ul>
+<li>Gaming servers: keep sessions sticky while you test a new build with a small group.</li>
+<li>IoT backends: validate protocol tweaks without bricking a fleet.</li>
+<li>Trading gateways: soak test latency spikes before they hit the book.</li>
+</ul>
+<p><em>As Werner Vogels likes to remind us, everything fails all the time.</em> Canarying lets you fail in private before you fail in public.</p>
+<p><em>Bonus: gradual shifts make rollbacks boring, in the best way.</em> If you only moved 10%, rollback is a flick, not a fire drill. MTTR drops, the pager stays quiet.</p>
+<h3 id="whatchangedforecsteams">What changed for ECS teams</h3>
+<p>Before: blue or green and canary for NLB meant scripts, fragile listener swaps, or outside tools. Now: ECS manages the rollout, shifts traffic natively behind your NLB, and hooks into CloudWatch for health and rollback. <em>Less YAML yoga, more safety.</em></p>
+<p>Under the hood, ECS blue or green services tie into CodeDeploy traffic routing configs, canary or linear. You set the plan, attach CloudWatch alarms, and ECS plus CodeDeploy shift traffic between two target groups behind your NLB. If alarms fire, rollback is automatic. If metrics stay green, promotion is hands-off.</p>
+<h2 id="howtrafficshiftingworks">How traffic shifting works</h2>
+<h3 id="linearpredictableramps">Linear predictable ramps</h3>
+<p>Linear deployments move traffic in fixed steps on a timer. Example: shift 10% every 3 minutes until 100%. If metrics go red, like error spikes, resets, or bad p99, ECS halts or rolls back. It’s a steady curve that’s easy to explain and reason about.</p>
+<p>Practical tip: set steps based on peak traffic, not instance count. Ten percent at off-peak might be noise. Ten percent at peak is a real test.</p>
+<p>Common defaults in CodeDeploy style setups: 10% every 1 minute, or 10% every 3 minutes. Pick intervals long enough to see effects on caches, pools, and GC pauses. Fast ramps tempt you, but slow ramps catch edge cases.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-10-2026-09-10-28-8967-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h3 id="canarytrustbutverify">Canary trust but verify</h3>
+<p>Canary tests a small slice first, like 5% for 10 minutes, then 100% if healthy. It’s perfect for schema changes, protocol tweaks, or new TLS configs. With NLB, connection stickiness matters a lot. Tune deregistration delay so in-flight sessions on the old task set don’t get dropped mid-chat.</p>
+<p><em>Health is your contract.</em> Use CloudWatch to watch:</p>
+<ul>
+<li>Target health and reset counts</li>
+<li>New versus active flow counts, is connection churn spiking</li>
+<li>App error rates and latency, export custom metrics if needed</li>
+</ul>
+<p><em>Pro move: pair the canary window with a feature flag or config toggle.</em> If you hit a subtle bug, like a weak handshake or keepalive mismatch, you can disable the feature while keeping the binary.</p>
+<h3 id="rollbacksandguardrails">Rollbacks and guardrails</h3>
+<p>When the canary trips a wire, you need fast, clear rollback. ECS tracks deployment state and can return traffic to the prior task set. Configure:</p>
+<ul>
+<li>Sensible error and latency thresholds</li>
+<li>Minimum bake time per step, don’t promote on a lucky minute</li>
+<li>Alarms that fail safe, one clear alarm beats five noisy ones</li>
+</ul>
+<p><em>Pro move: test rollback paths in staging with production-like patterns.</em> If rollback isn’t tested, <em>it’s hope, not a plan.</em></p>
+<p>Also consider partial rollbacks. If one Availability Zone shows high resets or latency, pause promotion. Check AZ-level metrics before calling a global revert.</p>
+<h2 id="designpatternsforstatefulworkloads">Design patterns for stateful workloads</h2>
+<h3 id="keepconnectionsstableduringshifts">Keep connections stable during shifts</h3>
+<p>Long-lived TCP sessions hate surprises. Three levers matter most:</p>
+<ul>
+<li>Deregistration delay: give enough time for active flows to drain before removal.</li>
+<li>Connection tracking: let NLB keep routing packets of an existing flow to the same target.</li>
+<li>Health checks: gentle and accurate checks, TCP or TLS, to prevent flapping.</li>
+</ul>
+<p>For chatty or custom binary protocols, test idle timeouts and keepalives. Canary with real session mixes, not just simple pings.</p>
+<p>Two more practical notes:</p>
+<ul>
+<li>If you use Proxy Protocol v2 for client IPs, confirm your target parses it right during canaries. A parsing bug can look like an LB issue.</li>
+<li>If you terminate TLS on targets, with passthrough at NLB, rehearse cert rotation in a small canary. Watch TLSNegotiationErrorCount during shifts.</li>
+</ul>
+<h3 id="staticipsandcomplianceneeds">Static IPs and compliance needs</h3>
+<p>NLB can use static IPs per Availability Zone or assigned Elastic IPs. That’s gold for partner allowlists, payment rails, or strict data paths. ECS handles task churn behind the scenes, so your egress IP stays stable while you ship updates.</p>
+<p>TLS note: if you terminate TLS on NLB, manage certs with ACM and watch for TLS negotiation errors during rollouts. If you pass TLS through to targets, validate app-level cert rotation during canary.</p>
+<p>Bonus: if partners require whitelisting, document exact NLB EIPs per AZ. Set change windows for rare IP moves, like AZ scaling or migration. With pinned EIPs, moves are rare.</p>
+<h3 id="examplearchitecturethatjustworks">Example architecture that just works</h3>
+<ul>
+<li>One NLB, a listener per protocol or port</li>
+<li>Two target groups, current and new task set</li>
+<li>ECS service manages both task sets and traffic weights during deploy</li>
+<li>CloudWatch alarms on error rate, resets, and custom p99 latency</li>
+</ul>
+<p>If you need HTTP routing plus raw TCP or UDP, run a hybrid. ALB for web front-end, NLB for game, chat, or gateway ports. <em>NLB and ALB isn’t either or, it’s a topology.</em></p>
+<p>Add resilience:</p>
+<ul>
+<li>At least two AZs for the NLB and tasks, so one AZ issue won’t wreck canary.</li>
+<li>Separate target groups per protocol if you host many ports. Roll each one alone to isolate risk.</li>
+</ul>
+<h2 id="costssignalsandsafeguards">Costs signals and safeguards</h2>
+<h3 id="networkloadbalancerpricing">Network Load Balancer pricing</h3>
+<p>You pay per load balancer hour and usage. Pricing counts new connections, active flows, and processed bytes into capacity units, plus data transfer. Turn on cross-zone load balancing only if you need it. It helps spread traffic but changes transfer costs. Read the pricing page, then estimate with real traffic histograms.</p>
+<p><em>Rule of thumb: small, frequent canaries are cheap compared to one outage.</em> MTTR drops when promotion is automated and rollback is instant.</p>
+<p>Cost guardrails you’ll be glad for:</p>
+<ul>
+<li>Alert on NLB capacity unit spikes, are canaries causing connection churn</li>
+<li>Track cross-zone transfer before and after enabling cross-zone</li>
+<li>Cache warm-ups churn connections and bytes, run them during the canary window</li>
+</ul>
+<h3 id="whattomonitorexactly">What to monitor exactly</h3>
+<ul>
+<li>NLB: healthy or unhealthy targets, flow counts, processed bytes, connection resets</li>
+<li>ECS service: task health and deployment state transitions</li>
+<li>App SLOs: p95 or p99 latency, error budgets, and tail timeouts</li>
+</ul>
+<p>Build promotion gates on CloudWatch alarms tied to your SLOs. For TCP or UDP, you don’t get HTTP request metrics like ALB. Push custom app metrics, like auth errors or match fails, to CloudWatch.</p>
+<p>Concrete signals to wire up:</p>
+<ul>
+<li>ActiveFlowCount versus NewFlowCount, rising new flows with flat active flows can mean churn</li>
+<li>TCP<em>Client</em>Reset<em>Count and TCP</em>Target<em>Reset</em>Count, spikes during canary means pause</li>
+<li>TLSNegotiationErrorCount, watch during cert rotations or TLS version changes</li>
+<li>Custom: handshake fails, login timeouts, dropped matches, or queue leaves</li>
+</ul>
+<h3 id="riskreducersmostteamsskip">Risk reducers most teams skip</h3>
+<ul>
+<li>Stagger AZ drains to avoid synchronized brownouts during shifts</li>
+<li>Bake times longer than event loops, let GC, JIT, caches, and pools settle</li>
+<li>Schema drift checks, canary DB and protocol changes before promotion</li>
+<li>Synthetic checks that mimic real clients, not just a port open test</li>
+</ul>
+<p>If you’re writing an amazon ecs network load balancer example, show success and rollback paths. Real guides include what to do when things go sideways.</p>
+<h2 id="primeronecsdeploymentmodels">Primer on ECS deployment models</h2>
+<ul>
+<li>Rolling update: replace tasks in place. Simple, but not great for long sessions.</li>
+<li>Blue or green with traffic shifting: run old and new task sets, shift gradually. Best for stateful or high-risk changes.</li>
+<li>External controller: bring your own logic if you must. But now ECS supports NLB canary and linear natively, so default to managed unless you need exotic.</li>
+</ul>
+<p><em>If you have hand-rolled listener swaps, this is your cue to retire the bash.</em></p>
+<h2 id="playbookconnectingthedots">Playbook connecting the dots</h2>
+<p>Imagine a chat backend on TCP 443 with TLS passthrough:</p>
+<ul>
+<li>Current version runs in target group A; new version spins up in group B.</li>
+<li>You define a canary, 10% for 10 minutes, then 100% if healthy.</li>
+<li>During the 10-minute bake, you watch ActiveFlowCount flat, NewFlowCount slight bump, and TCP<em>Client</em>Reset_Count flat. App shows steady login success and stable p99 connect latency.</li>
+<li>A narrow reset spike hits one AZ. You pause promotion, check logs, find a mis-tuned keepalive. You patch, restart that subset, and resume promotion. No headlines, no pager drama.</li>
+</ul>
+<p><em>This is the point: canaries turn surprises into tweaks, not incidents.</em></p>
+<h2 id="quickpitstoplockedin">Quick pit stop locked in</h2>
+<ul>
+<li>NLB is your go-to for TCP or UDP, static IPs, and long sessions.</li>
+<li>ECS now ships linear and canary rollouts with NLB, no custom tooling.</li>
+<li>Linear means steady ramps; canary means small slice, then promote.</li>
+<li>CloudWatch is your truth for errors, latency, resets, and custom app metrics.</li>
+<li>Design for stability with deregistration delays, TLS checks, and static IPs.</li>
+<li>Pricing is hourly plus usage; cross-zone changes cost patterns, so measure first.</li>
+</ul>
+<h2 id="faqecsnlbquestionsanswered">FAQ ECS NLB questions answered</h2>
+<h3 id="usebothnetworkandapplication">Use both Network and Application</h3>
+<p>Yes. Use ALB for HTTP features like host or path rules and WAF. Use NLB for TCP or UDP, static IPs, and very low latency. Many teams run ALB for web and NLB for real-time behind the same ECS cluster.</p>
+<h3 id="canaryandlineardiffer">Canary and linear differ</h3>
+<p>Linear shifts traffic in fixed steps on a schedule, like plus 10% every few minutes. Canary starts with a small percent, like 5–10%, for a bake period. If healthy, it jumps to 100%. Both can roll back fast if alarms fire.</p>
+<h3 id="willconnectionsdropduringdeployment">Will connections drop during deployment</h3>
+<p>They shouldn’t, if you set deregistration delay and health checks right. NLB keeps existing flows to targets until they close. Test real client behavior, keepalives and timeouts, in staging to confirm.</p>
+<h3 id="monitorincloudwatchduringcanary">Monitor in CloudWatch during canary</h3>
+<p>Target health, connection resets, active and new flows, processed bytes, and your app SLOs. Add custom metrics for domain errors like logins, matches, or protocol rejects.</p>
+<h3 id="networkloadbalancerpricingalb">Network Load Balancer pricing ALB</h3>
+<p>NLB pricing uses load balancer hours and usage via capacity units, plus transfer. ALB uses LCUs tied to L7 features. For TCP or UDP without L7 needs, NLB is usually cheaper.</p>
+<h3 id="replaceblueorgreen">Replace blue or green</h3>
+<p>No. It makes it smoother. Canary and linear are flavors of traffic shifting inside blue or green. You still run old and new task sets, shift traffic, then retire the old when ready.</p>
+<h2 id="runthisecsnlbcanary">Run this ECS NLB canary</h2>
+<p>1) Pick your service and port, TCP or UDP. Ensure the ECS service uses blue or green so traffic shifting is available.</p>
+<p>2) Attach an NLB with listeners per port. Confirm listener protocol, TCP, TLS, or UDP, matches your app. Enable Proxy Protocol v2 if targets expect it.</p>
+<p>3) Create two target groups, current and new. Register existing tasks in group A, and configure the deploy to register new tasks in group B.</p>
+<p>4) Enable health checks and set deregistration delay. Use TCP or TLS checks for L4. Set deregistration<em>delay.timeout</em>seconds high enough to drain long sessions.</p>
+<p>5) Define canary or linear, percent plus interval plus bake time. Start small, 5–10% for 5–10 minutes, and use longer bakes for protocol or cipher changes.</p>
+<p>6) Add CloudWatch alarms for error rate, resets, and latency. Wire alarms to fail the deploy if thresholds break. Fast rollback beats slow debugging at 100%.</p>
+<p>7) Deploy new task set and start at 5–10%. Warm caches and pools during canary so promotion won’t cause a cold-start wave.</p>
+<p>8) Watch metrics; fix or roll back on alarms. Check per-AZ metrics and global ones, problems can be local.</p>
+<p>9) Promote to 100% when stable. Keep the old task set briefly as a safety net until it survives peak load.</p>
+<p>10) Decommission the old task set and confirm zero unhealthy targets. Clean up any temp alarms or feature flags you used for rollout.</p>
+<p>End with a quick post-mortem: what surprised you, and what to automate next.</p>
+<p>Here’s the truth: you don’t need heroics, you need guardrails. NLB brings the speed; ECS now gives you the wheel. Add observability and pricing sense, and you’ll ship stateful real-time systems without dread.</p>
+<p>References</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/elasticloadbalancing/network-load-balancer/">AWS Network Load Balancer product page, performance and features</a></li>
+<li><a href="https://aws.amazon.com/elasticloadbalancing/pricing/">NLB pricing, capacity units and data transfer</a></li>
+<li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-cloudwatch-metrics.html">NLB CloudWatch metrics, flows, resets, and health</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html">ECS services and load balancing, service to NLB</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html">Blue or green deployments with ECS and CodeDeploy, traffic shifting configs</a></li>
+<li><a href="https://aws.amazon.com/elasticloadbalancing/features/">Elastic Load Balancing features and comparisons</a></li>
+<li><a href="https://www.allthingsdistributed.com/">Werner Vogels on resilience, everything fails all the time</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="ecs-nlb-deployments.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq34ba.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Ship+Safer+ECS+Deployments+with+Network+Load+Balancers&amp;pi=313631427304&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=313631427304&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fecs-nlb-deployments&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/ecs-nlb-deployments?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:56 GMT -->
+</html>

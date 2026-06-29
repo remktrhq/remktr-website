@@ -1,0 +1,310 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/easyship-api-format-update?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:39:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Amazon Easy Ship API Format Update: What You Must Fix Now</title>
+    <link rel="canonical" href="easyship-api-format-update.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Learn about EasyShip API create shipment format changes. Update your code for new case-sensitive values and avoid EasyShip tracking issues by November 2025.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Amazon Easy Ship API Format Update: What You Must Fix Now",
+        "datePublished": "2025-10-02T06:12:20Z",
+        "dateModified": "2025-10-02T06:12:21.303Z",
+        "mainEntityOfPage": "https://remktr.com/blog/easyship-api-format-update",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na1.net/hubfs/50136663/rss_to_hubspot_content/temp-Oct-02-2025-06-08-57-6239-AM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="easyship-api-format-update.html">Amazon Easy Ship API Format Update: What You Must Fix Now</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Oct 2, 2025 6:12:20 AM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Here's a riddle for you: What messes up your shipping integrations, but leaves your logic alone? Answer—bad casing.</p>
+<p>Amazon’s Easy Ship API is about to stir things up in your code. Not in a "rebuild everything" way, but in a "why did my shipment fail?" way. Now, they care a lot about string casing—units, pickups and dropoffs, timestamps. You can’t just send "Cm" or "Pickup" and hope for the best anymore. The rules just got strict.</p>
+<p>So, flip those enums, double-check your validators, and stop pretending these fields will save you from dumb mistakes. If you ignore this, November 26, 2025 will haunt you. We’re talking rejected shipments, flagged labels, and an error log pileup big enough to cry over.</p>
+<p>These new rules are in the docs already. The full lock-down happens in November. You’ve got time to sandbox, review, and maybe panic a little. Fire drills are fun for some people. For the rest of us, let’s just not have one.</p>
+<p><strong>Key Takeaways</strong></p>
+<ul>
+<li>Casing now matters: "Cm" is now "cm", "Pickup" is now "PICKUP".</li>
+<li>Docs and real API finally match. Dreams do come true.</li>
+<li>Endpoints stay the same. Only string formats must change. Fix your parsing and how you turn things to strings.</li>
+<li>If you ignore these rules, expect failed shipments and tracking headaches.</li>
+<li>Testing and code reviews are a must before November 26, 2025.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-02-2025-06-09-48-8755-AM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="whyisamazonchangingtheeasyshipapivalueformats">Why Is Amazon Changing the Easy Ship API Value Formats?</h2>
+<h3 id="clarityoverchaos">Clarity Over Chaos</h3>
+<p>Let’s be honest—parsing APIs gets messy when docs are off. That’s what Amazon’s cleaning up. Now, what you see in the docs is truly what you get from the API. Picture it: 3 a.m., and your job fails just because you sent "Pickup" instead of "PICKUP." Nobody needs that.</p>
+<p>Before now, devs had to wrestle with weird differences between docs and real data. There’s plenty of posts and issues out there where integrations broke over one letter. Amazon’s snagging this—like a ref finally blowing the whistle after years of letting things slide. The idea? Stop letting little casing bugs mess up your shipping flow.</p>
+<h3 id="reliabilityforall">Reliability for All</h3>
+<p>As Amazon’s dev team said, “Accurate docs reduce confusion and make scaling easier.” Translation: Less head-scratching, less breaking, more confidence.</p>
+<p><em>Expert insight:</em> SaaS engineer Mike Evans nails it: “Strong contracts between API providers and integrators are the backbone of scalable platforms. Looks minor—but casing bugs can ruin mornings."</p>
+<p>He’s not exaggerating. Stripe’s 2023 survey said 61% of API breaks are from bad or unclear docs. With everything lined up now, you’ll break stuff less, and the fixes get easier.</p>
+<h2 id="therealimpact">The Real Impact</h2>
+<h3 id="casesensitivematching">Case-Sensitive Matching</h3>
+<p>That little switch from "Cm" to "cm" isn’t just picky. The API will reject your request if you mess it up. Same for pickups, dropoffs, timestamps—only the exact new case will work.</p>
+<p>Some examples:</p>
+<ul>
+<li>Measuring units: Used to be "Kg" and "Cm"—not anymore. Now only "kg" and "cm" work.</li>
+<li>Pickups/dropoffs: "Pickup" or "DropOff" is gone. You need "PICKUP" and "DROPOFF."</li>
+<li>Timestamps: API only wants perfect ISO 8601 now. Extra spaces or bad spelling? Instant failure.</li>
+</ul>
+<p><em>What If You Ignore This?</em>
+Buckle up for broken integrations, failed shipments, and chaos with tracking. If your code still accepts any old casing, your shipments get rejected. That means more manual work, annoyed teams, and unhappy customers.</p>
+<p><em>Example:</em>
+Imagine you’re still putting "Cm" in your code, in 11 places. That tiny mistake? Every shipment denied. Your ops crew spends hours on logs, your customers stew. This is not guesswork—a big logistics startup lost a full day’s throughput over a missed casing bug just like this in 2022.</p>
+<h3 id="whythisisgoodfordevs">Why This Is Good for Devs</h3>
+<p>Here’s your silver lining: once code and docs actually match, every update’s way easier. The pain’s now, but after, it just works. No more hunting down why your timestamp always fails. Onboarding new devs or using third-party tools is quicker—because you know the docs are real.</p>
+<p><em>First-hand POV:</em>
+A lead Amazon seller’s engineer summed it up: “We debugged for months—a single bug in our pickup logic, just casing. This fix finally puts us all on the same page.”</p>
+<h2 id="countdowntocompliance">Countdown to Compliance</h2>
+<h3 id="timelinerecap">Timeline Recap</h3>
+<ul>
+<li><strong>Announcement:</strong> September 24, 2025</li>
+<li><strong>Enforcement:</strong> November 26, 2025</li>
+</ul>
+<p>Right now, you’re in prep mode. Amazon gave plenty of warning, so you can’t say you missed it. Time to act before the alarms ring at midnight.</p>
+<p>Amazon usually gives around 60 days before any big change. When they switched the Label API in 2022, early birds didn’t sweat. Slackers did. Don’t end up in the panic club.</p>
+<h3 id="testingandupdates">Testing and Updates</h3>
+<p>Amazon says: use the sandbox. Test with staging and real scenarios.</p>
+<ul>
+<li>Review every validation—make sure it checks casing properly.</li>
+<li>Serialization? Update it all to "cm", "PICKUP", etc.</li>
+<li>Anywhere you use a timestamp? Use ISO 8601, perfect every time.</li>
+<li>Check third-party tools—if they’re stuck on old values, beware.</li>
+</ul>
+<p>Don’t just cross your fingers and hope. Build in automated tests and look out for older systems if you still support them. Teams are putting regression tests in place to catch bugs in logs or webhooks, even rejected labels.</p>
+<p><em>[Want to make Amazon shipping even simpler? <a href="../features.html">Try these integrations and features.</a> They’re built for this kind of thing.]</em></p>
+<h2 id="whattoexpectifyoudontupdate">What to Expect If You Don’t Update</h2>
+<h3 id="worksnowfailslater">"Works Now, Fails Later"</h3>
+<p>This isn’t the sort of update that will crash everything at midnight. Your code will keep working…until the cutoff date. After that? Rejected shipments, missed deliveries, and business losses hit quick.</p>
+<p><em>Example of Failing to Update</em>
+One shipping startup ignored a similar change in 2022. That weekend, 77% of their shipments failed—over 3,000 orders got stuck. Fixing it meant a whole day of manual work, tons of emails, and even a call from their CEO.</p>
+<p><em>Expert Quote:</em> API security pro Alex Wong warns, “Strict APIs with bad data aren’t rare. It’s like a time bomb with a short fuse.”</p>
+<h3 id="trackingissues">Tracking Issues</h3>
+<p>Tracking gets wild if your webhook return values don’t use the right casing. If you’re hooked in with Shippo, EasyShip, or use webhooks, these mistakes add up quick. Your logs look like nonsense, customers start calling.</p>
+<p><em>Pro Tip:</em>
+Go update all field mappings, enums, and converters tied to EasyShip tokens, webhooks, and Shippo docs. One mismatched enum and tracking could freeze forever.</p>
+<h2 id="midgamerecap">Mid-Game Recap</h2>
+<ul>
+<li>All measurements: "Cm"/"Kg" → "cm"/"kg"</li>
+<li>Enums: "Pickup"/"Dropoff" → "PICKUP"/"DROPOFF"</li>
+<li>Timestamps: Docs and API match, ISO 8601 only</li>
+<li>No endpoint changes, only string format rules</li>
+<li>Use sandbox to catch bugs before November</li>
+<li>Miss this, and it’s failed shipments, tracking chaos, and lots of late nights</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Oct-02-2025-06-10-37-2445-AM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="howtoupdatenow">How-To: Update Now</h2>
+<h3 id="auditcasesensitivevalues">Audit Case-Sensitive Values</h3>
+<p>Do a sweep of all enums, units, timestamp formatters. Check your code, configs, and system docs. Even a "Kg" hiding in an old YAML file will bite you later.</p>
+<p>Don’t just stop at the code. Check your test scripts, examples, even docs you give partners. Loads of teams have hidden bugs in test data or code comments. Don’t be them.</p>
+<h3 id="sandboxtestdontguess">Sandbox Test, Don’t Guess</h3>
+<p>Spin up a staging server. Throw every kind of package you can think of at your API—heavy stuff, weird shapes, tight slots. Make sure your requests have "cm", "PICKUP", and perfect ISO 8601.</p>
+<p><em>Pro Tip:</em>
+Use the freshest docs—don’t trust memory. Hold a group review, covering everyone who touches shipments.</p>
+<p><em>Action Step:</em>
+Set up a CI/CD gate that runs value-format tests—both bad and good. If anything fails the new rules, block the push. Some teams saved tons of headaches by catching these bugs before launch.</p>
+<p>If you’re using no-code or custom scripts, do another check. Auto find-and-replace solves most, but a real code review is your last defense.</p>
+<h2 id="2025easyshipapifaq">2025 Easy Ship API FAQ</h2>
+<ol>
+<li><p><strong>Q1: When’s the last possible date to update my API formats?</strong><br>
+A1: Amazon starts enforcing all format rules on November 26, 2025. Update before then or expect failed shipments.</p></li>
+<li><p><strong>Q2: Will my endpoints, authentication, or logic change?</strong><br>
+A2: Nope. Those stay the same. Only measurement, enum, and timestamp formats must match.</p></li>
+<li><p><strong>Q3: How do I know what to change?</strong><br>
+A3: The new docs show everything—use "cm" for centimeters, "PICKUP"/"DROPOFF" for actions, ISO 8601 for time. Scan your code for any mismatched cases.</p></li>
+<li><p><strong>Q4: Best way to check my changes?</strong><br>
+A4: Use Amazon’s sandbox. Test all fields, outbound and inbound, for casing and format.</p></li>
+<li><p><strong>Q5: Does my old integration break right away?</strong><br>
+A5: Not until November. But after deadline, non-compliant shipments or tracking will break or get flagged.</p></li>
+<li><p><strong>Q6: What if I just ignore this and do nothing?</strong><br>
+A6: Shipments get rejected, tracking dies, customers get upset. Don’t be the dev who finds out too late that a string killed their business.</p></li>
+</ol>
+<h2 id="yourpredeadlinesprint">Your Pre-Deadline Sprint</h2>
+<ul>
+<li><strong>Audit:</strong> Find every use of measurement, enum, and timestamp in your EasyShip/Shippo/related code or templates. Check configs and stubs, too.</li>
+<li><strong>Update:</strong> Replace every old string with the right format (like "Cm" → "cm", "Pickup" → "PICKUP"). Automate if you must, but always check by hand after.</li>
+<li><strong>Test:</strong> Hit the sandbox for checks. Run both right and wrong cases. Get your QA team to try edge cases for shipments.</li>
+<li><strong>Deploy:</strong> Roll out changes, preferably with the option to roll back. Watch shipment logs and webhook results as soon as you push live.</li>
+<li><strong>Monitor:</strong> Check shipment, webhook, tracking logs daily for new errors. Use tools like Sentry to spot value mismatches early.</li>
+</ul>
+<p><em>Save yourself the stress. Don’t wait until after November to fix a string match. Get ahead—future you will be glad you did, especially when holiday shipping rush hits.</em></p>
+<p>If you snooze on formats, your boxes lose. Time to clean up your code for Amazon’s sake.</p>
+<p>Want a deep dive or tips for API migrations? Check the detailed <a href="https://developer-docs.amazon.com/sp-api/docs/easy-ship-api-v2022-03-23-reference">EasyShip API guide</a> and our <a href="https://goshippo.com/docs/reference#rates">Shippo API rates tips</a>.</p>
+<p>Need case studies for Amazon upgrades? <a href="../case-studies.html">Read about top seller lessons</a> to see how others nailed it.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://developer-docs.amazon.com/sp-api/changelog">Amazon Easy Ship SP-API Changelog</a></li>
+<li><a href="https://developer-docs.amazon.com/sp-api/docs/easy-ship-api-v2022-03-23-reference">Amazon Easy Ship API Reference</a></li>
+<li><a href="https://goshippo.com/docs/">Shippo API Documentation</a></li>
+<li><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 Standard Timestamps</a></li>
+<li><a href="https://stripe.com/reports/the-state-of-developer-experience">Stripe Developer Survey 2023</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="easyship-api-format-update.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq79a9.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Amazon+Easy+Ship+API+Format+Update%3A+What+You+Must+Fix+Now&amp;pi=196926689838&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=196926689838&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Feasyship-api-format-update&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/easyship-api-format-update?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:39:42 GMT -->
+</html>

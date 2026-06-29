@@ -1,0 +1,288 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/export-metrics-s3-tables?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Export S3 Storage Lens Metrics to S3 Tables Fast</title>
+    <link rel="canonical" href="export-metrics-s3-tables.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Export metrics to S3 Tables with AWS Storage Lens to analyze and join data. Get an export metrics S3 Tables AWS example and turn raw metrics into insights.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Export S3 Storage Lens Metrics to S3 Tables Fast",
+        "datePublished": "2025-12-02T21:21:58Z",
+        "dateModified": "2025-12-02T21:21:58.552Z",
+        "mainEntityOfPage": "https://remktr.com/blog/export-metrics-s3-tables",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-02-2025-09-16-50-7137-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="export-metrics-s3-tables.html">Export S3 Storage Lens Metrics to S3 Tables Fast</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 2, 2025 9:21:58 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>If you’re still pulling CSV dumps, praying columns don’t move, and stitching storage data to app logs — <em>stop.</em> There’s a faster lane, and you can hop in today.</p>
+<p>AWS just made it easier to analyze Amazon S3 Storage Lens data by exporting metrics straight into managed S3 Tables. Your storage insights land query-ready, so you can join with app logs, cost data, and business metrics in minutes.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>Export S3 Storage Lens metrics right into managed S3 Tables.</li>
+<li>Query with Amazon Athena and visualize in Amazon QuickSight directly.</li>
+<li>Join with app logs and business data for end-to-end insight.</li>
+<li>Use Parquet plus partitions to cut Athena scan costs, <em>way down</em>.</li>
+<li>Lock down access with Lake Formation and IAM today.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-02-2025-09-17-44-2256-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="fromcsvchaostotables">From CSV chaos to tables</h2>
+<ul>
+<li>Historically, exporting to files meant crawlers, schema drift, and brittle joins.</li>
+<li>S3 Tables give you a steady schema, sane partitions, and instant queries.</li>
+<li>Standardize consumption with a clear schema and a simple data contract.</li>
+</ul>
+<h2 id="setuphighlevel">Setup high level</h2>
+<ul>
+<li>Make sure IAM permissions and Lake Formation or S3 Tables access is set.</li>
+<li>Name your database and table, then choose partitions like event<em>date, region, bucket</em>name.</li>
+<li>In S3 Storage Lens, enable export to S3 Tables using Parquet, date partitions, encryption, and the right role.</li>
+<li>Prefer automation with IaC, like CloudFormation, CDK, or Terraform, for repeatability.</li>
+</ul>
+<h2 id="partitioningandformats">Partitioning and formats</h2>
+<ul>
+<li>Use Parquet with Snappy compression for smaller, faster scans overall.</li>
+<li>Partition by event<em>date, and consider region and bucket</em>name when it helps.</li>
+<li>Manage retention with S3 lifecycle policies, and target 128–512 MB file sizes.</li>
+</ul>
+<h2 id="querywithathenaglue">Query with Athena Glue</h2>
+<ul>
+<li>Confirm the schema in the Glue Data Catalog, and document metric meanings, units, and refresh times.</li>
+<li>Join Storage Lens metrics to app telemetry using event_date and region, plus bucket when needed.</li>
+<li>Common queries include top growth buckets, latency trends with 7-day rolling averages, and metric pivots.</li>
+</ul>
+<h2 id="visualizewithquicksight">Visualize with QuickSight</h2>
+<ul>
+<li>Connect to Athena, build visuals like latency lines, 4xx bars, and a KPI for checkouts, then schedule refresh.</li>
+<li>Use parameters for date ranges, row-level security, and SPICE to speed things up.</li>
+</ul>
+<h2 id="operatesafely">Operate safely</h2>
+<ul>
+<li>Security: use <em>least privilege</em> with IAM and Lake Formation, encrypt at rest and in transit, and audit with CloudTrail.</li>
+<li>Performance: <em>always</em> filter by partitions, compact small files, and select only needed columns or metrics.</li>
+<li>Cost: lean on Parquet and pruning, use CTAS for pre-aggregations, and SPICE to reduce live scans.</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Missing data: check the export status, destination, permissions, partition arrival time, and S3 paths.</li>
+<li>Large scans: add WHERE filters on event_date and region, use Parquet, verify pruning with EXPLAIN, and compact files.</li>
+<li>Dashboard lag: push data to SPICE, pre-aggregate results, and schedule off-peak refreshes.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-02-2025-09-18-33-7317-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="30minutechecklist">30 minute checklist</h2>
+<ul>
+<li>Enable Storage Lens export to S3 Tables using Parquet, partitioned by event_date.</li>
+<li>Configure encryption and the IAM role, verify the table in Glue, and add column docs.</li>
+<li>Run a scoped Athena query for one day to validate the pipeline.</li>
+<li>Connect QuickSight, build a basic dashboard, and set lifecycle policies.</li>
+</ul>
+<h2 id="faqs">FAQs</h2>
+<ol>
+<li><p>Freshness:
+daily; new partitions appear once per day after export completes.</p></li>
+<li><p>PDF exports:
+use the QuickSight dashboard export to PDF.</p></li>
+<li><p>Costs:
+S3 storage plus Athena at $5 per TB scanned; Parquet and partitions keeps scans tiny; SPICE reduces repeats.</p></li>
+<li><p>Access:
+use Lake Formation grants, IAM roles, and CloudTrail auditing; share cross-account with resource links.</p></li>
+<li><p>Schema changes:
+evolve additively with nullable fields, version datasets for breaking changes, and keep partition keys stable.</p></li>
+<li><p>Org vs. account scope:
+align dashboard scope and export role permissions.</p></li>
+<li><p>Crawlers:
+usually not needed for managed S3 Tables with a known schema.</p></li>
+<li><p>Retention:
+keep 12–18 months daily, and store monthly aggregates longer.</p></li>
+<li><p>Privacy:
+metrics are aggregate; if joining user-level logs, apply column controls and masking.</p></li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html">Amazon S3 Storage Lens</a></li>
+<li><a href="https://aws.amazon.com/athena/">Amazon Athena</a></li>
+<li><a href="https://aws.amazon.com/athena/pricing/">Athena pricing</a></li>
+<li><a href="https://docs.aws.amazon.com/athena/latest/ug/best-practices.html">Athena best practices</a></li>
+<li><a href="https://docs.aws.amazon.com/athena/latest/ug/ctas.html">Athena CTAS</a></li>
+<li><a href="https://docs.aws.amazon.com/athena/latest/ug/partition-projection.html">Partition projection</a></li>
+<li><a href="https://parquet.apache.org/docs/overview/">Apache Parquet</a></li>
+<li><a href="https://aws.amazon.com/quicksight/">Amazon QuickSight</a></li>
+<li><a href="https://docs.aws.amazon.com/quicksight/latest/user/spice.html">SPICE</a></li>
+<li><a href="https://docs.aws.amazon.com/quicksight/latest/user/exporting-analyses-dashboard.html">QuickSight PDF export</a></li>
+<li><a href="https://aws.amazon.com/glue/">AWS Glue Data Catalog</a></li>
+<li><a href="https://aws.amazon.com/lake-formation/">AWS Lake Formation</a></li>
+<li><a href="https://docs.aws.amazon.com/lake-formation/latest/dg/sharing-resource-links.html">Lake Formation resource links</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html">S3 Lifecycle</a></li>
+<li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html">AWS CloudTrail</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="export-metrics-s3-tables.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq8946.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Export+S3+Storage+Lens+Metrics+to+S3+Tables+Fast&amp;pi=268811494121&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=268811494121&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fexport-metrics-s3-tables&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/export-metrics-s3-tables?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:27:50 GMT -->
+</html>

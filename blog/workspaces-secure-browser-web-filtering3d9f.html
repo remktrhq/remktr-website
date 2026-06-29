@@ -1,0 +1,413 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/workspaces-secure-browser-web-filtering?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Block Risky Sites Fast with WorkSpaces Secure Browser</title>
+    <link rel="canonical" href="workspaces-secure-browser-web-filtering.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Discover web content filtering in Amazon WorkSpaces Secure Browser: block 25+ categories, allowlist URLs, log to S3, enforce Chrome policies for secure VDI.">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Block Risky Sites Fast with WorkSpaces Secure Browser",
+        "datePublished": "2025-12-15T21:53:08Z",
+        "dateModified": "2025-12-15T21:53:08.446Z",
+        "mainEntityOfPage": "https://remktr.com/blog/workspaces-secure-browser-web-filtering",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Dec-15-2025-09-46-33-6570-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="workspaces-secure-browser-web-filtering.html">Block Risky Sites Fast with WorkSpaces Secure Browser</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Dec 15, 2025 9:53:08 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>Your browser is your biggest security blind spot. One bad click on a sketchy site, and now helpdesk fights fires while Legal drafts incident emails.</p>
+<p>Here’s the flip. Amazon WorkSpaces Secure Browser just added web content filtering. Block 25+ categories by default, like gambling, malware, and adult content. Allowlist the URLs you trust, including deep links your apps require. Log every decision to Amazon S3 for compliance and audits. <em>No added cost.</em> Ten Regions. Pay-as-you-go streaming. Push policy, get control, keep users moving.</p>
+<p>If you run a modern workplace, this is a rare win-win. Security gets stronger, auditors get their logs, and users keep deep-linking into SaaS without roadblocks. You cut risk without breaking workflows or habits.</p>
+<p>And you don't need a six month project plan. Configure categories, tune URL rules, wire logs to S3, and use Chrome Enterprise policies to harden the browser shell. <em>That's it.</em> Lightweight, fast, and built for VDI and zero-trust edge cases.</p>
+<p>Here’s why this matters right now. Most attacks still start with the human element. Think social engineering, dodgy links, and risky clicks that catch folks. The 2024 Verizon Data Breach Investigations Report shows 68% involve a human component. <em>Your browser is exactly where those moments happen.</em></p>
+<p>Now add SaaS sprawl and contractors on unmanaged devices. Plus users who live inside deep links all day. You need control without slowdown or drama. A streamed, managed browser with policy filtering and S3-backed evidence gives you that.</p>
+<p>TL;DR</p>
+<ul>
+<li>Block 25+ risky web categories in Amazon WorkSpaces Secure Browser, with no added cost.</li>
+<li>Allowlist granular URLs and deep links so work keeps flowing smoothly.</li>
+<li>Stream decisions to Amazon S3 for compliance, investigations, and clean reporting.</li>
+<li>Enforce Chrome Enterprise policies for consistent, reliable browser security.</li>
+<li>Launch in minutes and scale across 10 AWS Regions with pay-as-you-go.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-15-2025-09-47-20-1167-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="meetsecurebrowserfiltering">Meet Secure Browser Filtering</h2>
+<h3 id="whatitis">What it is</h3>
+<p>Amazon WorkSpaces Secure Browser is a managed, streamed browser for your users. The new move is built-in web content filtering, ready to use. Block categories like malware, phishing, adult, gambling, and more than two dozen others. You set the policy, and the browser enforces it per session and per user.</p>
+<p>If you’ve duct-taped proxies, PAC files, and onboarding docs for years, this removes a lot of accidental complexity. It’s built for VDI and hybrid setups that need control without tossing heavy agents on every device.</p>
+<p>Plain-English version of how it works. Users connect to a browser that runs in AWS, not local machines. Rendering happens in the cloud, and only pixels stream down. Network egress stays inside your AWS boundary, and policies get evaluated centrally. Every decision can be logged with details. That isolation layer slices off a huge chunk of endpoint risk, while keeping UX familiar.</p>
+<p>Where this shines:</p>
+<ul>
+<li>Contractors and third-party vendors hitting sensitive apps from unmanaged laptops.</li>
+<li>BYOD programs where agents are a non-starter and just don’t stick.</li>
+<li>High-risk roles like finance, admins, and support that click under pressure.</li>
+<li>Regulated teams that need evidence of control without rebuilding the network.</li>
+<li>VDI environments that want clean, consistent browsing with fewer moving parts.</li>
+</ul>
+<h3 id="whatsnew">What’s new</h3>
+<ul>
+<li>25+ category blocks available right out of the box.</li>
+<li>URL allowlists for the exact destinations your apps need to reach.</li>
+<li>Compliance-friendly logging of requests and decisions to Amazon S3.</li>
+<li>Chrome Enterprise policy support for consistent, hardened controls.</li>
+<li>Integrates with Session Logger workflows in VDI environments today.</li>
+<li>No added cost; available in 10 AWS Regions with pay-as-you-go streaming.</li>
+</ul>
+<p>First-hand example. A global marketing team let creatives deep-link into ad platforms. Shady sites flagged under malware and illegal streaming got blocked automatically. Result? Fewer escalations, no nasty surprises, and clean S3 logs when audit needed a paper trail. That’s the point: strong defaults, minimal friction for everyone.</p>
+<p>To translate those bullets to outcomes. Categories give broad guardrails that catch obvious bad and gray-area risky. Allowlists unlock exact app paths for daily work, so users don’t feel walls. S3 logging turns ‘we think we blocked it’ into hard evidence with timestamp, URL, category, and decision. Chrome policies lock down the browser shell, so extensions, downloads, and updates behave the same.</p>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Dec-15-2025-09-48-06-8078-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="policydesign">Policy design</h2>
+<h3 id="choosecategories">Choose categories</h3>
+<p><em>Start simple, then grow when needed.</em> If you’re healthcare, block categories with obvious compliance risk. Examples include adult, anonymizers, gambling, malware, and phishing. If you’re fintech or a public company, add crypto mining, file sharing, and known botnets. Don’t boil the ocean on day one, ship a tight baseline.</p>
+<p>Pro tip: don’t guess what users need, just don’t. Pull the last 30–60 days of browser telemetry if you have it. Or run a discovery period with monitor-only in a pilot for safe data. You’ll get real clickstream patterns that inform your policy. When you enable blocking, nobody screams because deep links still work.</p>
+<p>Baselines that usually work on day one:</p>
+<ul>
+<li>Block: malware, phishing, newly-registered domains, anonymizers/proxies, cryptomining, adult, illegal streaming, known botnets.</li>
+<li>Monitor: file sharing, social media, and webmail, then decide by role. Marketing may need social; finance probably doesn’t during core hours.</li>
+<li>Permit with allowlists: vendor portals, SSO callbacks, and deep links needed by finance, procurement, and HR.</li>
+</ul>
+<p>When to tighten:</p>
+<ul>
+<li>Privileged roles like admins, finance, and payroll handling sensitive data.</li>
+<li>Teams soaked in high-volume social content where phishing risk spikes.</li>
+</ul>
+<p>When to loosen (safely):</p>
+<ul>
+<li>Engineering teams that need docs, repos, and forums to move fast. Allowlists for vendor domains and doc CDNs help.</li>
+<li>Research roles; keep categories blocked but widen allowlists to vetted sources.</li>
+</ul>
+<h3 id="turnlogs">Turn logs</h3>
+<p>All web decisions can be logged to Amazon S3 with rich context. That includes blocks or allows, categories, URL, timestamp, and user or session metadata. It’s not just forensics, it’s a compliance superpower too. You can prove enforcement at a specific time and correlate with identity systems. Use lifecycle policies to retain what you need and keep storage lean.</p>
+<p>First-hand example. A regional bank piped S3 logs into a detection rule. It flagged attempts to reach anonymizers from privileged accounts quickly. That turned into a weekly security review with clean evidence, not vibes.</p>
+<p>Make logs useful on day two:</p>
+<ul>
+<li>Create an S3 bucket with server-side encryption enabled by default.</li>
+<li>Use lifecycle policies to move older logs to infrequent access and Glacier.</li>
+<li>Partition logs by date like year=YYYY/month=MM/day=DD to keep queries cheap.</li>
+<li>Define a basic schema in Athena: timestamp, action, category, url, user, group, session_id, and region.</li>
+<li>Wire CloudWatch metrics and alarms for spikes in blocks by category or group.</li>
+</ul>
+<p>Compliance mapping ideas:</p>
+<ul>
+<li>SOC 2: show logical access controls and monitoring with S3 logs, plus policy change history.</li>
+<li>HIPAA or regulated: document blocked risky categories and logging; retain records per policy.</li>
+<li>Zero Trust per NIST SP 800-207: central policy, continuous evaluation, and least-privilege access.</li>
+</ul>
+<p>Privacy guardrails:</p>
+<ul>
+<li>Avoid logging full POST bodies or session tokens, keep that out. URL, category, and decision are usually enough.</li>
+<li>Mask usernames in broad dashboards; keep unmasked data for need-to-know work.</li>
+</ul>
+<h3 id="layerchromepolicies">Layer Chrome policies</h3>
+<p>Use Chrome Enterprise policies to lock down extensions, downloads, and risky behaviors. Combine that with content filtering for true defense-in-depth. You get category blocks plus hardened browser controls.</p>
+<p>Helpful anchor links for your runbook: Amazon S3 for storage and lifecycle policies. Also Chrome Enterprise policy references to control downloads, extensions, and safe browsing.</p>
+<p>Practical policy starters:</p>
+<ul>
+<li>SafeBrowsingProtectionLevel: enforce enhanced protection in the browser.</li>
+<li>ExtensionInstallBlocklist: block everything by default, then add exceptions.</li>
+<li>ExtensionInstallAllowlist or ExtensionInstallForcelist: approve what you need.</li>
+<li>DownloadRestrictions: limit or block executable and archive downloads.</li>
+<li>URLBlocklist and URLAllowlist: backstop against shadow IT domains that slip through.</li>
+<li>Browser updates: enforce auto-update and pin minimum versions to close CVEs.</li>
+</ul>
+<h2 id="deeplinksandallowlists">Deep links and allowlists</h2>
+<h3 id="howallowlistshelp">How allowlists help</h3>
+<p>Categories are your coarse filter; URL allowlists are your scalpel tool. When an app relies on deep links, you can be precise. Think SaaS routes like /app/invoices/123?view=pdf that users hit often. Allow the exact destination while keeping the broader category locked down. That stops malware sites without breaking your accounting team’s vendor portal.</p>
+<p>When you set allowlists, think in terms of:</p>
+<ul>
+<li>The exact domain required, like app.vendor.com versus vendor.com.</li>
+<li>Specific paths that host your business-critical routes and content.</li>
+<li>Login flows that bounce across subdomains like SSO, MFA, and callbacks.</li>
+</ul>
+<h3 id="patterntips">Pattern tips</h3>
+<ul>
+<li>Start with login flows first, since SSO often chains multiple hosts.</li>
+<li>SSO may hit auth.youridp.com, accounts.vendor.com, and the app itself.</li>
+<li>Capture deep-link patterns from confirmed workflows, and actually test them.</li>
+<li>Keep allowlists tight; avoid broad domains with user-generated content.</li>
+<li>Revisit regularly; SaaS vendors evolve their URL structures often.</li>
+</ul>
+<p>First-hand example. A procurement team needed deep links into a supplier’s invoice portal. It lived under supplier.com/portal/payments/ with specific flows. The security team allowlisted only /portal/payments/ and SSO callbacks. The rest of the supplier’s domain stayed under category enforcement. Users didn’t notice, but attackers hit a wall.</p>
+<p>Common SaaS patterns to pre-plan:</p>
+<ul>
+<li>Salesforce: my.salesforce.com and your custom domain; include lightning.force.com assets.</li>
+<li>ServiceNow: yourinstance.service-now.com and any /nav_to.do links used.</li>
+<li>Workday: wdX.myworkday.com plus your tenant path; watch MFA redirects.</li>
+<li>Microsoft 365: login.microsoftonline.com, aadcdn.msauth.net, and your app endpoints.</li>
+<li>Okta: yourtenant.okta.com, yourtenant.okta-emea.com, and device-trust pages if used.</li>
+<li>CDNs: static asset hosts like cloudfront.net and akamaized.net used by apps.</li>
+</ul>
+<p>Avoid wildcard traps. The pattern *.vendor.com might include forums and sandboxes. Prefer explicit subdomains and paths that you can defend.</p>
+<h2 id="rolloutwithoutdrama">Rollout without drama</h2>
+<h3 id="portalsettings">Portal settings</h3>
+<p>If you’re configuring portal settings for Amazon WorkSpaces Secure Browser, treat it carefully. It’s like a change to your identity perimeter, so act accordingly.</p>
+<ul>
+<li>Enforce category blocks for a default 'all users' policy baseline.</li>
+<li>Create groups for high-risk personas like admins and finance with stricter rules.</li>
+<li>Wire logs to Amazon S3 with lifecycle policies that fit retention.</li>
+<li>Apply Chrome Enterprise policies for extensions, downloads, and safe browsing.</li>
+<li>Pair with your Session Logger in VDI for session context alongside URL decisions.</li>
+</ul>
+<p>Add a few governance basics:</p>
+<ul>
+<li>Change control: track policy edits with tickets and owner sign-off.</li>
+<li>Communications: a short ‘what’s changing and why’ note to pilot users.</li>
+<li>Exception workflow: a form for temporary allowlist requests with auto-expiry.</li>
+</ul>
+<h3 id="pilottoproduction">Pilot to production</h3>
+<ul>
+<li>Day 1–2: pilot with 10–20 users across roles in your company. Use monitor-only if available, or a light baseline with strong categories.</li>
+<li>Day 3–4: tune allowlists for deep links, tighten Chrome policies, confirm SSO flows work.</li>
+<li>Day 5: turn on block for non-negotiable categories like malware, phishing, adult.</li>
+<li>Day 6–7: expand by org unit or group with a simple rollback plan ready.</li>
+</ul>
+<p>Operational realities: you’re not racking appliances or shipping boxes. This is pay-as-you-go browser streaming live in 10 AWS Regions. Roll out quickly, measure impact via S3 logs, and standardize where it works. <em>Security wins, IT breathes, and Legal seriously stops pacing.</em></p>
+<p>Instrument the rollout:</p>
+<ul>
+<li>Metrics to watch: block rate by category and top allowlisted domains.</li>
+<li>Track incidents per week and helpdesk tickets tied to browsing patterns.</li>
+<li>UX checks: page load time, login success rate, and extension behavior.</li>
+<li>Region placement: choose the closest Region to users for snappy performance.</li>
+</ul>
+<h3 id="costperformanceandscale">Cost performance and scale</h3>
+<ul>
+<li>Pricing: filtering has no added cost; you pay for streamed sessions. S3 storage costs apply based on your retention and compression.</li>
+<li>Performance: pick a nearby Region and keep extensions minimal to stay quick. Review network egress rules if you proxy elsewhere for control.</li>
+<li>Scale: start with critical groups, then roll to departments you trust. Policies are central, so consistency stays high as you expand.</li>
+</ul>
+<h2 id="quickgutcheck">Quick gut check</h2>
+<ul>
+<li>Start with a tight baseline and block obvious risky categories first.</li>
+<li>Make allowlists precise, target domains, paths, and SSO endpoints.</li>
+<li>Turn on S3 logging early, because <em>evidence beats anecdotes every time</em>.</li>
+<li>Layer Chrome Enterprise policies for defense-in-depth at the browser.</li>
+<li>Pilot with mixed personas like finance, engineering, CX, and admin roles.</li>
+<li>Iterate weekly and tune categories and allowlists as traffic rolls in.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="whatissecurebrowser">What is Secure Browser</h3>
+<p>It’s a managed, streamed browser from AWS that isolates web access. You get a consistent, controllable browser with policy enforcement, logging, and pay-as-you-go pricing. It’s designed for modern workplace, VDI, and zero-trust use cases.</p>
+<h3 id="whatsincluded">What’s included</h3>
+<p>You can block 25+ content categories like gambling, adult, malware, and phishing. Use granular URL allowlists for approved destinations and deep links. Log decisions to Amazon S3 for compliance, investigations, and reporting.</p>
+<h3 id="doesthisaddcost">Does this add cost</h3>
+<p>No added cost for the web content filtering feature at all. You still pay for streaming sessions on a pay-as-you-go basis. S3 storage costs apply for logs based on retention policies.</p>
+<h3 id="howallowlistshandledeeplinks">How allowlists handle deep links</h3>
+<p>You add specific URLs users need, down to domain and path level. Deep links like vendor.com/app/invoices/123 keep working while the broader category stays blocked. Start with SSO endpoints and exact app paths from daily workflows.</p>
+<h3 id="whichregionssupport">Which Regions support</h3>
+<p>It’s available in 10 AWS Regions today and ready to go. Check your Region on the AWS Global Infrastructure pages and WorkSpaces product pages. If it’s listed, then you’re good to go.</p>
+<h3 id="enforcechromeenterprisepolicies">Enforce Chrome Enterprise policies</h3>
+<p>Yes, absolutely. Apply Chrome Enterprise policies to control extensions, downloads, and safe browsing. Pairing category filtering with Chrome policies gives layered protection with consistent UX.</p>
+<h3 id="howisthisdifferent">How is this different</h3>
+<p>A streamed, managed browser keeps risky content off endpoints by design. You still get policy-based filtering and logging, without agents or PAC file gymnastics. Great for BYOD and contractor scenarios where agents aren’t feasible.</p>
+<h3 id="performanceimpactforusers">Performance impact for users</h3>
+<p>With a nearby AWS Region and a lean policy set, UX is smooth. The browser renders in the cloud and only pixels stream back. Keep extensions low and allowlist needed CDNs to keep page load times normal.</p>
+<h3 id="useonunmanageddevices">Use on unmanaged devices</h3>
+<p>Yes, that’s a core use case and works well. Users access a managed browser session without heavy installs on personal machines. Policies and logging still apply because control lives in the service.</p>
+<h3 id="handletemporaryexceptions">Handle temporary exceptions</h3>
+<p>Use a time-bound allowlist process, with request form and owner approval. Add auto-expiry for 7–14 days and log everything for review. Revisit expired entries weekly to curb policy drift.</p>
+<h3 id="monitorandalert">Monitor and alert</h3>
+<p>Stream logs to S3, then query with Athena for fast answers. Wire CloudWatch metrics for spikes by category or user group. Send alerts to your SIEM for correlation with identity and endpoint signals.</p>
+<h3 id="helpwithzerotrust">Help with zero trust</h3>
+<p>Yes. A centrally-managed, isolated browser with policy controls and logging aligns well. Verify explicitly, apply least privilege, and assume breach by default.</p>
+<h2 id="launchdayplaybook">Launch day playbook</h2>
+<ul>
+<li>Define your baseline blocklist: malware, phishing, adult, and anonymizers.</li>
+<li>Create user groups like admins, finance, and engineering with tailored rules.</li>
+<li>Add allowlists for critical SaaS deep links and SSO endpoints today.</li>
+<li>Enable S3 logging with lifecycle policies aligned to retention needs.</li>
+<li>Apply Chrome Enterprise policies for extensions, downloads, and updates.</li>
+<li>Pilot with 10–20 users, review logs, and tune categories and URLs.</li>
+<li>Roll out by org unit, then monitor weekly and adjust as apps evolve.</li>
+</ul>
+<p>Add a few more day-one moves:</p>
+<ul>
+<li>Stand up an Athena table and three starter queries immediately.</li>
+<li>Track top blocked categories, top allowlisted domains, and spike detector by group.</li>
+<li>Publish a short ‘How to request an exception’ doc in your IT portal.</li>
+<li>Nominate two pilot champions in each department to funnel feedback.</li>
+<li>Schedule a 30-minute review after week one to promote monitored categories.</li>
+</ul>
+<p>You don’t need a forklift project to get real control, not today. Categories, precise allowlists, and S3 logging deliver 80% of the value on day one. And they do it without slowing anyone down or causing noise. If you run modern workplace or VDI, this platform move shrinks risk and simplifies runbooks. Start with a crisp baseline, instrument everything, and iterate. That’s the play.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://aws.amazon.com/workspaces/secure-browser/">Amazon WorkSpaces Secure Browser (product)</a></li>
+<li><a href="https://aws.amazon.com/workspaces/">Amazon WorkSpaces (overview)</a></li>
+<li><a href="https://aws.amazon.com/s3/">Amazon S3 (service)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html">Amazon S3 Lifecycle policies (docs)</a></li>
+<li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regions_az/">AWS Global Infrastructure (Regions &amp; AZs)</a></li>
+<li><a href="https://chromeenterprise.google/policies/">Chrome Enterprise policy list</a></li>
+<li><a href="https://support.google.com/chrome/a/answer/7532419">Chrome Safe Browsing for enterprise admins</a></li>
+<li><a href="https://www.verizon.com/business/resources/reports/dbir/">Verizon 2024 Data Breach Investigations Report</a></li>
+<li><a href="https://csrc.nist.gov/publications/detail/sp/800-207/final">NIST SP 800-207 Zero Trust Architecture</a></li>
+<li><a href="https://aws.amazon.com/blogs/desktop-and-application-streaming/">AWS Desktop and Application Streaming Blog</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="workspaces-secure-browser-web-filtering.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq01f9.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Block+Risky+Sites+Fast+with+WorkSpaces+Secure+Browser&amp;pi=276756854476&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=276756854476&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fworkspaces-secure-browser-web-filtering&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/workspaces-secure-browser-web-filtering?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:25:57 GMT -->
+</html>

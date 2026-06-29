@@ -1,0 +1,402 @@
+<!doctype html>
+<html amp lang="en" >
+  
+<!-- Mirrored from remktr.com/blog/bedrock-openai-open-weights?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Migrate Faster with Bedrock’s OpenAI-Compatible Open Weights Today</title>
+    <link rel="canonical" href="bedrock-openai-open-weights.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <meta name="author" content="Jacob Heinz">
+
+    <meta name="description" content="Explore open-weight models in AWS Bedrock OpenAI: DeepSeek v3.2, MiniMax 2.1, and Qwen3 Coder Next. Migrate via OpenAI API, deploy with Kiro, and scale securely">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="generator" content="HubSpot">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Migrate Faster with Bedrock\u2019s OpenAI-Compatible Open Weights Today",
+        "datePublished": "2026-02-16T20:51:47Z",
+        "dateModified": "2026-02-16T20:51:47.707Z",
+        "mainEntityOfPage": "https://remktr.com/blog/bedrock-openai-open-weights",
+        "author": {
+          "@type": "Person",
+          "name": "Jacob Heinz"
+        },
+        "image": {
+         "@type": "ImageObject",
+        
+          
+          "width": 1200,
+          
+          
+          "height": 675,
+          
+          "url": "https://50136663.fs1.hubspotusercontent-na2.net/hubfs/50136663/rss_to_hubspot_content/temp-Feb-16-2026-08-47-02-3394-PM.png"
+        
+        },
+        "publisher" : {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            
+            "url": "/hs/hsstatic/content_shared_assets/static-1.4092/img/default-amp-logo.png",
+            "width": 60,
+            "height": 60
+            
+          },
+          "name": "Pulse x reMKTR"
+        }
+      }
+    </script>
+    <script async custom-element="amp-analytics" src="../../cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript>
+      <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+  <style amp-custom>
+      body {
+        color: #404040;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .hs-page-width-normal {
+        box-sizing: content-box;
+        margin: 0 auto;
+        padding: 0 5vw 5vw;
+      }
+
+      .info {
+        font-size: 14px
+      }
+
+      h1 {
+        color: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 26px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
+
+      h1 a {
+        color: #404040;
+      }
+
+      h2 {
+        color: #404040;
+        font-size: 22px;
+        line-height: 38px;
+      }
+
+      a {
+        color: #416bb3;
+        text-decoration: none;
+      }
+
+      .logo-header-text {
+        color: #1e1e1e;
+        font-size: 36px;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        line-height: 2.0;
+        font-weight: bold;
+        vertical-align: text-bottom;
+      }
+
+      .hs-page-width-normal {
+        padding: 5vw;
+      }
+
+      .iframe-placeholder {
+        background-color: #bbb;
+      }
+
+      .header-banner {
+        padding: 3vw 1vw;
+        border-color: #dcdcdc;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .full-link {
+        text-align: center;
+      }
+
+      .full-link a {
+        border: 1px solid #dcdcdc;
+        background-color: transparent;
+        color: #416bb3;
+        cursor: pointer;
+        display: block;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 auto;
+        max-width: 200px;
+        padding: 11px 16px;
+        text-decoration: none;
+        width: 50%;
+      }
+
+    </style>
+    <script async src="../../cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="header-banner">
+        <a class="blog-link" href="../blog.html">
+        
+          <span class="logo-header-text">Pulse x reMKTR</span>
+         </a>
+      </div>  
+      <div class="hs-page-width-normal">
+        <div class="post-header">
+          <h1><a href="bedrock-openai-open-weights.html">Migrate Faster with Bedrock’s OpenAI-Compatible Open Weights Today</a></h1>
+        </div>
+        <div class="info">
+          <span> Written by <a class="author-link" href="author/jh.html">Jacob Heinz</a> | Feb 16, 2026 8:51:47 PM </span>
+        </div>
+        <div class="blog-section">
+          <span>
+
+
+
+
+
+<p>You’ve probably built half your stack around the OpenAI API. Smart move. But now your CFO wants lower costs, your CISO wants tighter control, and your team wants real fine‑tuning. Enter Amazon Bedrock’s new open‑weight models, wired for OpenAI API compatibility. So you can switch providers without paying the rewrite tax.</p>
+<p>Here’s the punchline: you keep your agent workflows, chat flows, and codegen routines. You swap endpoints, map model names, and ship. Bedrock’s serverless layer handles scaling, security, and model customization for you. You get enterprise guardrails and freedom to fine‑tune on your own data.</p>
+<p>The newest wave—DeepSeek v3.2, MiniMax 2.1, and Qwen3 Coder Next—lands with OpenAI spec alignment. Add Kiro, a spec‑driven AI dev tool, and you’re shipping in days. Not months. It’s the move if you want multi‑model choice without chaos.</p>
+<p>If you’ve been Googling “aws bedrock openai” or “bedrock openai models,” this is your green light. Let’s make the migration boring, in the best way, and the results loud.</p>
+<h2 id="tldr">TLDR</h2>
+<ul>
+<li>New open‑weight models on Amazon Bedrock (via Project Mantle) match the OpenAI API spec.</li>
+<li>Lineup: DeepSeek v3.2, MiniMax 2.1, and Qwen3 Coder Next for agents, chat, and codegen.</li>
+<li>Use Kiro to spec your flows and auto‑generate integration glue.</li>
+<li>Bedrock is serverless, secure, and fine‑tune‑ready on your proprietary data.</li>
+<li>Reinforcement‑style tuning works via external pipelines plus Bedrock Custom Models.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-16-2026-08-48-02-5802-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="openweightsthatspeakopenai">Open weights that speak OpenAI</h2>
+<h3 id="whyopenweightmattersnow">Why open weight matters now</h3>
+<p>Open‑weight models give you transparency and control without starting from scratch. You can inspect behavior, attach adapters, and fine‑tune on your data. On Bedrock, you also get managed infra: autoscaling, IAM‑backed access, private VPC links, and enterprise guardrails. Translation: fewer fire drills, more speed.</p>
+<ul>
+<li>Control: Bring your own adapters and domain data with <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html">Bedrock Custom Models</a>.</li>
+<li>Safety: Centralize content filters and red‑teaming with <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Bedrock Guardrails</a>.</li>
+<li>Governance: Use account‑level policies and logging (CloudWatch, CloudTrail) like your AWS stack.</li>
+</ul>
+<p>Open weights also help with repeatability. You can log which base model, adapter, dataset slice, and hyperparameters made a release. That means tight versioning across dev, staging, and prod. You can roll forward or back without guesswork.</p>
+<p>Open weights also lower vendor risk in practice. If you need to switch providers or run hybrid, you’re not stuck. It’s like open file formats—you keep your work and your options.</p>
+<h3 id="openaiapicompatibility">OpenAI API compatibility</h3>
+<p>OpenAI’s request and response shape became the default standard. Bedrock’s new open‑weight models match that spec, so migration gets simple. Change your base URL, map model IDs, confirm function‑calling JSON schema, then test tool outputs. Most teams keep prompts and business logic as‑is.</p>
+<p>Example: you’ve got a code‑assist agent using gpt‑4 function calling today. With OpenAI‑compatible models in Bedrock, you map to the provider’s tool schema. You keep your function signatures, and the agent keeps humming. Now you also get Bedrock’s serverless autoscaling.</p>
+<p><em>As one engineering lead said during a dry run, “We didn’t change our product. We changed our dependency.” Exactly the point.</em></p>
+<h3 id="compatibilitychecklist">Compatibility checklist</h3>
+<ul>
+<li>Roles and messages: system, user, assistant map cleanly.</li>
+<li>Tools and function calling: JSON schema aligns; add strict validation for shape drift.</li>
+<li>Streaming: token events stream in order; confirm event names and delimiters.</li>
+<li>Parameters: temperature, top‑p, and max tokens behave similar; confirm defaults.</li>
+<li>Errors: map error codes and retry policies; don’t assume 1:1 parity.</li>
+</ul>
+<h2 id="meetthelineup">Meet the lineup</h2>
+<h3 id="quickmodelsnapshots">Quick model snapshots</h3>
+<ul>
+<li>DeepSeek v3.2: Generalist with strong reasoning and long‑context skills. Great for agent orchestration, multi‑step planning, and retrieval‑aided decisions. From the <a href="https://github.com/deepseek-ai">DeepSeek</a> family known for efficient training.</li>
+<li>MiniMax 2.1: Chat‑first behavior, crisp instruction following, and quick turns. Ideal for customer bots and ticket triage. MiniMax focuses on dialog alignment; see the <a href="https://api.minimax.chat/document/guides">MiniMax API</a> for more.</li>
+<li>Qwen3 Coder Next: Code‑gen specialist from the <a href="https://github.com/QwenLM/Qwen">Qwen</a> lineage. Strong on multi‑file edits, refactors, and test creation. Nice for IDE plugins, CI autofixes, and review assistants.</li>
+</ul>
+<p>These arrive under Project Mantle with OpenAI spec alignment. That means less glue code, fewer surprises, and faster QA cycles.</p>
+<h3 id="pickingtherightfit">Picking the right fit</h3>
+<ul>
+<li>Agents and tools: Start with DeepSeek v3.2 for planning. If latency rules, try MiniMax 2.1.</li>
+<li>Pure chat and support: MiniMax 2.1 likely wins on tone and safety defaults.</li>
+<li>Codegen and repair: Qwen3 Coder Next is your pick. Measure diff quality and compile rates.</li>
+</ul>
+<p><em>Pro tip:</em> run a week‑long A/B with real traffic. Evaluate win rates on user‑labeled outcomes, not only BLEU or code metrics. Keep a rollback switch to your prior model behind a feature flag. That’s how you move fast, not reckless.</p>
+<h3 id="evaluationplan">Evaluation plan</h3>
+<ul>
+<li>Offline: Use a frozen test set of real chats, tasks, or code diffs. Score exact‑match where possible and use human review where needed.</li>
+<li>Shadow: Send mirrored traffic to candidates without action. Just log and compare.</li>
+<li>Online: Route a small slice, like 5–10%, with a kill switch. Track time‑to‑first‑token, total latency, and outcomes like FCR, CSAT, and compile success.</li>
+<li>Budget: Cap token spend per route. Stop early if errors spike or costs jump.</li>
+</ul>
+<p><amp-img src="../hubfs/rss_to_hubspot_content/temp-Feb-16-2026-08-48-54-7346-PM.png" alt="" width="1200.0" height="675.0" layout="responsive"></amp-img></p>
+<h2 id="migrationplaybook">Migration playbook</h2>
+<h3 id="step1maptheapi">Step 1 Map the API</h3>
+<ul>
+<li>Chat completions: Align to the <a href="https://platform.openai.com/docs/api-reference">OpenAI API</a> request and response shape. That’s messages, roles, and system prompts.</li>
+<li>Function calling and tools: Ensure your tool schema is pure JSON and matches tool‑use format. Validate with a strict JSON schema checker to block silent coercions.</li>
+<li>Streaming: Verify token streaming formats. Update your SSE or WebSocket client if event names differ.</li>
+</ul>
+<p>Kiro makes this easier. You define a spec—models, tools, safety rails—and Kiro generates glue. That includes env configs, model mapping, and schema validators. Your app logic stays untouched.</p>
+<h3 id="bonushygiene">Bonus hygiene</h3>
+<ul>
+<li>Normalize tokenization edge cases with your own truncation rules.</li>
+<li>Standardize error translation so downstream services keep familiar codes.</li>
+<li>Document model and route ownership. Someone owns each critical path, period.</li>
+</ul>
+<h3 id="step2stabilizeprompts">Step 2 Stabilize prompts</h3>
+<p>System prompts are your policy engine. Freeze them first. Run a prompt regression suite across your top workflows. Pick 30–50 prompts that cover 80% of traffic. Lock baselines before switching endpoints.</p>
+<p>Guardrails live at two levels: prompt rules and platform filters. Use Bedrock Guardrails for safety, PII handling, and jailbreak resistance. Keep brand tone and legal disclaimers inside your system prompts.</p>
+<p>Small wins add up:</p>
+<ul>
+<li>Split long system prompts into short, reusable blocks. Version everything.</li>
+<li>Add unit tests for critical phrases, like disclaimers or source cites.</li>
+<li>Track prompt token counts. Keep headroom for long user messages.</li>
+</ul>
+<h3 id="step3validatetools">Step 3 Validate tools</h3>
+<p>Your agent is only as good as its tool success rate. Spin up a canary that runs full end‑to‑end flows. Cover tool calls, error handling, and retries. Log tool payloads and model outputs side‑by‑side for triage. Expect small shifts in function selection choices.</p>
+<p>Example scenario: a support bot picks between “RefundPolicyLookup” and “EscalateToHuman.” After migration, the escalation threshold shifts a bit. Add a temporary confidence band and a human‑in‑the‑loop rule on day one. Remove it once your metrics settle.</p>
+<h3 id="step4observabilityquotasslos">Step 4 Observability quotas SLOs</h3>
+<ul>
+<li>Quotas: Check throughput and token quotas before go‑live. Coordinate bumps early, please.</li>
+<li>Telemetry: Emit structured logs for prompts, tool calls, model IDs, latency, and cost per request.</li>
+<li>SLOs: Define p95 latency and success targets. Alert on real issues, not noise.</li>
+</ul>
+<h3 id="step5rolloutsafely">Step 5 Rollout safely</h3>
+<ul>
+<li>Start with internal traffic or low‑risk routes first.</li>
+<li>Use weighted routing with a hard off‑switch.</li>
+<li>Keep the prior provider hot for one full release cycle. Don’t pop champagne early.</li>
+</ul>
+<h3 id="step6postmigrationtuning">Step 6 Post migration tuning</h3>
+<ul>
+<li>Tighten prompts after seeing real data in production.</li>
+<li>Adjust temperature, top‑p, and tool‑selection hints.</li>
+<li>Trim prompt bloat and add RAG for repeating facts. Saves tokens and hallucinations.</li>
+</ul>
+<h2 id="enterprisemode">Enterprise mode</h2>
+<h3 id="securityandscaling">Security and scaling</h3>
+<p>Bedrock is fully managed and serverless. You get autoscaling, private networking with VPC endpoints, IAM policies, and audit trails via CloudWatch and CloudTrail. That’s the boring infra you want. More in the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html">Bedrock Developer Guide</a> and the <a href="https://aws.amazon.com/bedrock/model-catalog/">model catalog</a>.</p>
+<p>Content filters, sensitive data handling, and safety categories can be centralized with <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Guardrails for Bedrock</a>. Tie that into DLP so you’re not rebuilding compliance every quarter.</p>
+<h3 id="securitychecklist">Security checklist</h3>
+<ul>
+<li>Enforce IAM least privilege for any app calling Bedrock.</li>
+<li>Route traffic via VPC endpoints and restrict egress where needed.</li>
+<li>Centralize logs and access reviews with your SIEM and audit cycles.</li>
+</ul>
+<h3 id="finetuningsftlater">Fine tuning SFT later</h3>
+<p>“Reinforcement fine‑tuning in Amazon Bedrock” lands in two parts:</p>
+<ul>
+<li>Supervised fine‑tuning (SFT): Bedrock supports customization for select models via <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html">Custom Models</a>. You upload curated input and output pairs, then train adapters without touching base weights.</li>
+<li>Reinforcement signals (RLHF or RLAIF): Run reward modeling and policy optimization outside, like on SageMaker or your infra. Then import adapters or checkpoints through Custom Models. See the paper “Training language models to follow instructions with human feedback” (<a href="https://arxiv.org/abs/2203.02155">arXiv:2203.02155</a>).</li>
+</ul>
+<p>Workflow: start with SFT on your gold chats or code diffs. Layer a reward model tuned to business outcomes, like first‑contact resolution or compile success. Use offline evaluation to catch regressions. When stable, deploy on Bedrock and gate with Guardrails.</p>
+<h3 id="datatipsforfinetune">Data tips for fine tune</h3>
+<ul>
+<li>Curate for clarity: one task per example and consistent style.</li>
+<li>Label edge cases and failures, like ambiguous inputs or policy checks.</li>
+<li>Keep a holdout set for unbiased evaluation later.</li>
+<li>Version datasets, adapters, and prompts together.</li>
+</ul>
+<h3 id="costandperformancelevers">Cost and performance levers</h3>
+<ul>
+<li>Token budgets: Keep system prompts short, consistent, and modular. Cache snippets.</li>
+<li>Retrieval: Offload facts to RAG to shrink prompts and cut hallucinations.</li>
+<li>Observability: Log per‑route model choice, latency, and success labels. That’s your loop.</li>
+<li>Streaming: Show first tokens fast for speed feel. Users forgive longer tails.</li>
+<li>Batching: Where latency allows, batch low‑priority work to smooth spikes.</li>
+<li>Timeouts and retries: Fail fast on tool errors. Don’t snowball costs with retries.</li>
+<li>Determinism: Lower temperature for workflows needing consistent outputs.</li>
+</ul>
+<h2 id="realitycheck">Reality check</h2>
+<h3 id="modelcatalogchanges">Model catalog changes</h3>
+<p>If you’re searching for “aws bedrock models list” or “ministral 3b 8b and 14b models available on amazon bedrock,” remember the catalog evolves. Always verify models and regions in the <a href="https://aws.amazon.com/bedrock/model-catalog/">Bedrock Model Catalog</a>. Don’t hardcode assumptions—feature‑flag your model IDs by default.</p>
+<p><em>Note:</em> Bedrock already includes many families, like Amazon, Anthropic, Cohere, Meta, Mistral, and more. The new open‑weight adds—DeepSeek v3.2, MiniMax 2.1, Qwen3 Coder Next—arrive via Project Mantle with OpenAI compatibility. Region availability can vary, so double‑check.</p>
+<h3 id="latencycontextandtools">Latency context and tools</h3>
+<p>Expect small differences in a few areas.</p>
+<ul>
+<li>Latency: cold starts versus hot paths. Warmups really help.</li>
+<li>Context: max tokens and truncation rules. Log and enforce your own caps.</li>
+<li>Tool selection: heuristics differ slightly. Add guardrails and retries as needed.</li>
+</ul>
+<p>Run synthetic suites that mimic real users. Include ambiguous prompts, malformed inputs, and adversarial queries. It’s cheaper to catch weirdness pre‑prod than explain it on Monday.</p>
+<h3 id="complianceanddataboundaries">Compliance and data boundaries</h3>
+<p>If you have strict data boundaries, keep traffic inside your VPC. Control egress and route logs to your SIEM. For broader controls, start with <a href="https://aws.amazon.com/compliance/">AWS Compliance</a> and map to your internal risk register. Bring security into prompt‑policy talks early. Prompts are policy, not just words.</p>
+<h3 id="quotaserrorsthroughput">Quotas errors throughput</h3>
+<ul>
+<li>Quotas: each model has default service quotas. Confirm token and TPS limits before load tests.</li>
+<li>Error taxonomy: error codes won’t always match your prior provider. Translate at the edge.</li>
+<li>Backpressure: add circuit breakers and graceful degradation. Fallback to faster or cheaper models.</li>
+</ul>
+<h2 id="speedrunrecap">Speed run recap</h2>
+<ul>
+<li>Open‑weight models on Bedrock now match the OpenAI API spec. So you can migrate with minimal code changes.</li>
+<li>DeepSeek v3.2 for reasoning, MiniMax 2.1 for chat, and Qwen3 Coder Next for codegen cover key workloads.</li>
+<li>Kiro turns your spec into working integrations, mapping models, tools, and guardrails.</li>
+<li>Bedrock gives you serverless scale, IAM, VPC, and guardrails. You bring your data and adapters.</li>
+<li>SFT is native. Reinforcement‑style tuning runs externally, then deploy via Custom Models.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="openaiapicompatiblemeaning">OpenAI API compatible meaning</h3>
+<p>It means request and response structures match the OpenAI spec, including chat roles, tools, and streaming. In practice, you swap the base URL and model ID, validate tool schemas, and your app logic still works.</p>
+<h3 id="finetuneinbedrock">Fine tune in Bedrock</h3>
+<p>Bedrock supports supervised fine‑tuning for select models through Custom Models. For reinforcement‑style tuning, like RLHF or RLAIF, you train externally, then import adapters or checkpoints via Custom Models.</p>
+<h3 id="safetyandcompliance">Safety and compliance</h3>
+<p>Centralize safety at two layers. Use platform‑level Guardrails for PII, toxicity, and jailbreak resistance. Keep brand tone and disclaimers in prompts. Lock down IAM and use VPC endpoints. Log everything for audit and fast rollback.</p>
+<h3 id="testfunctioncalling">Test function calling</h3>
+<p>Build a canary that runs full end‑to‑end flows with real tools. Validate JSON with a strict schema and compare tool choices before and after. Widen confidence bands temporarily. Track success by outcomes, like ticket resolved or code compiles.</p>
+<h3 id="checkmodelavailability">Check model availability</h3>
+<p>Always check the <a href="https://aws.amazon.com/bedrock/model-catalog/">Amazon Bedrock Model Catalog</a>. Availability changes over time and by region. Avoid hardcoding any assumptions.</p>
+<h3 id="modelavailabilityaccuracy">Model availability accuracy</h3>
+<p>Model names and sizes vary by provider and evolve. Confirm current Mistral or Mixtral offerings in the Bedrock Model Catalog. Then pick by region and your use case.</p>
+<h3 id="ragandembeddings">RAG and embeddings</h3>
+<p>Usually no. Your retrieval pipeline—index, embeddings, reranker—can stay. Start by swapping the generator only. If you change embeddings later, do it as a separate project.</p>
+<h3 id="automodelrouting">Auto model routing</h3>
+<p>Yes. Build a simple router that picks a model by task, like chat or code. Keep it transparent, logged, and overridable with a feature flag.</p>
+<h3 id="estimatecost">Estimate cost</h3>
+<p>Sample real traffic, like 1–5%, for a few days. Log input and output tokens, latency, and outcomes. Extrapolate by route. Set budgets and guardrails before full rollout.</p>
+<h2 id="zerodowntimechecklist">Zero downtime checklist</h2>
+<ul>
+<li>Inventory: list endpoints, model IDs, and functions you use today.</li>
+<li>Spec: define tool schemas and system prompts. Freeze a prompt regression suite.</li>
+<li>Map: swap base URL and model ID. Align streaming and tool formats.</li>
+<li>Guard: configure Bedrock Guardrails. Set IAM policies and VPC endpoints.</li>
+<li>Canary: run end‑to‑end flows. Watch latency, costs, and outcome metrics.</li>
+<li>Scale: roll out with feature flags. Keep rollback hot for one release cycle.</li>
+<li>Tune: start SFT with gold data. Plan RLHF or RLAIF externally. Deploy via Custom Models.</li>
+<li>Quotas: confirm service quotas and request increases if needed.</li>
+<li>Docs: record model versions, prompt hashes, and config diffs for audit.</li>
+</ul>
+<p>You’re not switching paradigms—you’re switching platforms. Keep your business logic. Level up the control plane.</p>
+<p><em>In short:</em> you get the compatibility you need today and the flexibility you’ll need tomorrow. Open weights give you control, Bedrock gives you the rails, and Kiro gives you speed. Migrate once, then iterate without fear. The teams that win in 2026 won’t be the ones with the flashiest demos. They’ll be the ones shipping stable, compliant, multi‑model systems on schedule.</p>
+<p><em>History rhymes in AI: standards win. OpenAI’s spec became the lingua franca; Bedrock speaking it means you can change engines without rebuilding the plane.</em></p>
+<p>Want to see how teams execute migrations and scale multi‑model systems in production? Browse our <a href="../case-studies.html">Case Studies</a>.</p>
+<p>Ready to operationalize multi‑model workflows with guardrails, testing, and reporting? Explore our platform <a href="../features.html">Features</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html">Amazon Bedrock — What is Amazon Bedrock?:</a></li>
+<li><a href="https://aws.amazon.com/bedrock/model-catalog/">Amazon Bedrock — Model Catalog:</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html">Amazon Bedrock — Custom Models (model customization &amp; fine‑tuning):</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">Amazon Bedrock — Guardrails:</a></li>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Amazon Bedrock — Service Quotas:</a></li>
+<li><a href="https://aws.amazon.com/compliance/">AWS Compliance Programs:</a></li>
+<li><a href="https://platform.openai.com/docs/api-reference">OpenAI API Reference:</a></li>
+<li><a href="https://github.com/deepseek-ai">DeepSeek (GitHub organization):</a></li>
+<li><a href="https://github.com/QwenLM/Qwen">Qwen (Alibaba Cloud’s Qwen models, GitHub):</a></li>
+<li><a href="https://api.minimax.chat/document/guides">MiniMax API Guides:</a></li>
+<li><a href="https://arxiv.org/abs/2203.02155">Ouyang et al., “Training language models to follow instructions with human feedback” (RLHF):</a></li>
+</ul>
+
+</span>
+        </div>
+        <div class="full-link">
+          <a href="bedrock-openai-open-weights.html">View full post</a>
+        </div>
+      </div>
+    </div>
+    
+    <amp-pixel src="../../track-na2.hubspot.com/__ptq6119.gif?cd=SCREEN_COLOR_DEPTH-bit&amp;cs=DOCUMENT_CHARSET&amp;ln=BROWSER_LANGUAGE&amp;sd=AVAILABLE_SCREEN_WIDTHxAVAILABLE_SCREEN_HEIGHT&amp;v=1.1&amp;iaa=1&amp;k=1&amp;ccu=CANONICAL_URL&amp;r=DOCUMENT_REFERRER&amp;ct=blog-post&amp;t=Migrate+Faster+with+Bedrock%E2%80%99s+OpenAI-Compatible+Open+Weights+Today&amp;pi=315748864749&amp;a=50136663&amp;nc=true&amp;cgi=191171895601&amp;lvi=315748864749&amp;pu=https%3A%2F%2Fremktr.com%2Fblog%2Fbedrock-openai-open-weights&amp;lvc=en&amp;vi=CLIENT_ID(hubspotutk)&amp;ai=CLIENT_ID(amputk)">
+    </amp-pixel>
+    
+  </body>
+
+<!-- Mirrored from remktr.com/blog/bedrock-openai-open-weights?hs_amp=true by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 26 Jun 2026 20:15:03 GMT -->
+</html>
