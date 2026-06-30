@@ -1,13 +1,13 @@
 # reMKTR Website — Project Status
-**Last updated:** June 27, 2026
+**Last updated:** June 30, 2026
 
 ---
 
 ## Key URLs & Credentials
 
-- **Live Site:** https://remktr-website.netlify.app
+- **Live Site:** https://remktr.com
 - **GitHub Repo:** https://github.com/remktrhq/remktr-website
-- **Netlify Site ID:** ubiquitous-dragon-a0c74c
+- **Netlify Site ID:** ubiquitous-dragon-a0c74c / custom name: remktr-website
 - **GitHub Token:** expires ~90 days from June 27, 2026
 
 ## Tracking IDs
@@ -15,7 +15,7 @@
 - X Pixel: `rd4k5`
 - X Lead Event: `tw-rd4k5-rd6v2`
 - X Booked Call Event: `tw-rd4k5-rd6v3`
-- Microsoft Clarity: `xc0040t55v`
+- Microsoft Clarity: `xc8o40t95v`
 
 ---
 
@@ -25,33 +25,24 @@
 - Full reMKTR website rebuilt from HubSpot HTTrack mirror
 - Fully self-contained — zero external CSS/JS/font/image calls
 - GitHub + Netlify auto-deploy pipeline connected
+- Domain migrated — remktr.com pointing to Netlify, SSL active
+- /home → / redirect added
+- 9 main site pages live: Home, DSP Services, Prime Video Ads, Features, AMC Cloud, Pricing, reQuery, DSP Discovery Call, Privacy Policy
+- Blog migrated — 33 pagination pages live at remktr.com/blog (pulse.remktr.com has no DNS, blog self-hosted on Netlify)
+- Case Studies — all 6 subpages live, images and links working, redirects corrected
+- Performance optimization — 358MB blog images converted to WebP, SVGs 9MB→54KB, lazy loading, JS deferred, HubSpot tracking scripts removed
 - 3 landing pages built and deployed (OLV, Link Out, UNDERCUT)
-- All pixels verified — Meta, X, Clarity installed on all 3 pages
+- All pixels verified — Meta ✅, X ✅, Clarity ✅ (live session recordings confirmed)
+- Clarity ID corrected: xc0040t55v → xc8o40t95v
 - CTA confirmed — Calendly booking with Jayce Broda (30 min)
+- X Ads event source confirmed — Site visits, Lead, Booked Call all active
 
 ### ⏳ In Progress
-- Microsoft Clarity — installed, waiting for first session to appear
-- Landing page assets — pages render but missing visuals (logos, videos, images)
+- Clarity dashboard tabs — need 24hrs of traffic to populate (not a blocker)
 
-### 🔴 Blocked
-- Assets folder needed from Ken (celest-haven-6trt.here.now/assets/)
-  - client logos, brand logo, videos, deck images
-- Case Studies pages returning 404 — not captured in HTTrack mirror
-- Main site logo QA not completed
-
----
-
-## Monday To Do
-1. Fix Case Studies 404 — redirect or re-run HTTrack on remktr.com/case-studies/
-2. Get assets folder from Ken and push to GitHub
-3. Final logo QA on all 9 main site pages
-4. Confirm Clarity sessions recording
-5. Domain migration — remktr-website.netlify.app → remktr.com
-   - Add domain in Netlify → Domain Management
-   - Update DNS at registrar to point to Netlify
-   - SSL auto-provisions
-   - Update all ad URLs to new domain
-   - DO NOT migrate until all fixes are complete
+### 🔴 Parked
+- requery page: 3 images missing (requery.png, answers-4.jpg, AI-bot.png) — SVG placeholders in place
+- Main site CSS still uses hub_generated files — low risk, all files self-hosted locally
 
 ---
 
@@ -59,23 +50,27 @@
 
 | Page | URL |
 |------|-----|
-| OLV | https://remktr-website.netlify.app/agencies/klientboost-olv.html |
-| Link Out | https://remktr-website.netlify.app/agencies/klientboost-linkout.html |
-| UNDERCUT | https://remktr-website.netlify.app/agencies/klientboost-undercut.html |
+| OLV | https://remktr.com/agencies/klientboost-olv.html |
+| Link Out | https://remktr.com/agencies/klientboost-linkout.html |
+| UNDERCUT | https://remktr.com/agencies/klientboost-undercut.html |
 
 ### Launch Gate
-- Meta & X pixels verified ✅
+- Meta Pixel verified ✅
+- X Pixel verified ✅
+- Clarity verified ✅
 - CTA destination confirmed ✅ (Calendly — Jayce Broda)
 - UTM template ready ✅
-- Clarity confirmed ⏳
-- Landing page assets 🔴 Need from Ken
 
-**Do not run paid traffic until all green.**
+**All clear for paid traffic.**
 
 ### UTM Template
 ```
 [page-url]?utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}
 ```
+
+### QA Reference
+- Pixel QA page: https://snowy-plume-7bdp.here.now/
+- Clarity dashboard: https://clarity.microsoft.com/projects/view/xc8o40t95v
 
 ---
 
@@ -83,11 +78,11 @@
 - Do not paste Meta/X/Apify tokens into landing pages
 - Do not create or publish campaigns without explicit approval
 - Do not change budgets or billing settings
-- Update all ad URLs if domain changes from remktr-website.netlify.app to remktr.com
+- X pixel approval must go through CallFlow OS queue — do not set up manually
 
 ---
 
 ## Contacts
-- **Ken (kfree108)** — landing page assets, local dev server (celest-haven-6trt.here.now)
+- **Ken (kfree108)** — landing page assets, local dev server
 - **Jayce Broda** — CTA booking destination (Calendly, 30 min calls)
-- **JP (jserrano@fullcircleagency.com)** — project lead
+- **JP (jserrano@fullcircleamazon.slack.com)** — project lead
