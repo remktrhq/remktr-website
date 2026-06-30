@@ -47,7 +47,7 @@
 <main>
   <div class="blog-post-wrapper">
     <a href="/blog/" class="blog-back-link">&#8592; Back to Blog</a>
-    <div class="blog-post-hero"><img src="/hs-fs/hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-51-52-8867-PM5114.png" alt="Ship 25% Faster: QUIC on AWS Network Load Balancer" onerror="this.style.display=\'none\'"></div>
+    <div class="blog-post-hero"><img src="/hs-fs/hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-51-52-8867-PM5114.webp" alt="Ship 25% Faster: QUIC on AWS Network Load Balancer" onerror="this.style.display=\'none\'"></div>
     <span class="blog-post-tag">Blog</span>
     <h1 class="blog-post-title">Ship 25% Faster: QUIC on AWS Network Load Balancer</h1>
     <div class="blog-post-meta">
@@ -73,7 +73,7 @@
 <li>Works great for mobile, real-time, and streaming workloads.</li>
 <li>Enable NLB access logs and CloudWatch metrics to trace flows and tune capacity.</li>
 </ul>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-52-49-9831-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
+<p><img loading="lazy" src="/hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-52-49-9831-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="quicmeetsnlb">QUIC meets NLB</h2>
 <h3 id="quic101">QUIC 101</h3>
 <p>QUIC runs over UDP and bakes TLS 1.3 into the transport. That gives you fewer round trips, especially on first connect. You get connection migration across IPs and built‑in stream multiplexing without head‑of‑line blocking. On flaky mobile networks, that’s money. Less handshake overhead plus resilience means lower tail latency.</p>
@@ -124,7 +124,7 @@
 <h3 id="thesubwayswap">The subway swap</h3>
 <p>Imagine your streaming app while a user goes from 5G → station Wi‑Fi → back to cellular in 90 seconds. With QUIC/CIDs, the existing session can migrate without breaking. The NLB keeps traffic flowing to the same target. Your video buffer doesn’t reset. And your metrics don’t spike with reconnect errors. That’s exactly the failure mode QUIC was built to tame.</p>
 <p>Practical tip: if you keep in‑memory state on a single target (e.g., chat presence), match session lifetime to your QUIC idle timeouts. For higher resilience, push session state (tokens, presence, carts) into a shared store. That way a target loss doesn’t drop users on reconnect.</p>
-<p><img src="/hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-53-46-5511-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
+<p><img loading="lazy" src="/hubfs/rss_to_hubspot_content/temp-Nov-17-2025-08-53-46-5511-PM.png" alt="" onerror="this.style.display=\'none\'"></p>
 <h2 id="fromzerotoquic">From zero to QUIC</h2>
 <h3 id="build">Build</h3>
 <p>You’ll set up an NLB listener on UDP:443. You’ll forward to an EC2-based QUIC server. You’ll terminate TLS at the service. You’ll verify sticky sessions using CIDs. Treat this as your aws network load balancer nlb tutorial you can run in a dev account.</p>
@@ -333,10 +333,10 @@
   <div class="remktr-footer-inner">
     <div class="remktr-footer-top">
       <div>
-        <a href="/"><img src="/hubfs/footer-logo.png" alt="reMKTR" class="remktr-footer-logo"></a>
+        <a href="/"><img loading="lazy" src="/hubfs/footer-logo.png" alt="reMKTR" class="remktr-footer-logo"></a>
       </div>
       <div class="remktr-footer-badges">
-        <img src="/hubfs/footer-badges_1.png" alt="Amazon Ads Verified Partner">
+        <img loading="lazy" src="/hubfs/footer-badges_1.png" alt="Amazon Ads Verified Partner">
       </div>
     </div>
     <div class="remktr-footer-bottom">
