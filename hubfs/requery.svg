@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340" style="width:100%;height:auto;border-radius:1rem;display:block;">
+  <defs>
+    <linearGradient id="rqbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5e8ff"/>
+      <stop offset="100%" style="stop-color:#fffbea"/>
+    </linearGradient>
+  </defs>
+  <rect width="520" height="340" rx="16" fill="url(#rqbg)"/>
+  <!-- Search bar -->
+  <rect x="40" y="40" width="440" height="48" rx="24" fill="#fff" stroke="#e0d0f5" stroke-width="1.5"/>
+  <circle cx="72" cy="64" r="10" fill="none" stroke="#6e19ad" stroke-width="2"/>
+  <line x1="79" y1="71" x2="86" y2="78" stroke="#6e19ad" stroke-width="2" stroke-linecap="round"/>
+  <rect x="96" y="56" width="200" height="16" rx="8" fill="#f0e6ff"/>
+  <rect x="440" y="52" width="28" height="24" rx="12" fill="#FCCC00"/>
+  <!-- Result cards -->
+  <rect x="40" y="108" width="200" height="80" rx="12" fill="#fff" stroke="#ede8f5" stroke-width="1"/>
+  <rect x="56" y="124" width="80" height="10" rx="5" fill="#6e19ad" opacity="0.7"/>
+  <rect x="56" y="142" width="168" height="8" rx="4" fill="#ddd"/>
+  <rect x="56" y="156" width="120" height="8" rx="4" fill="#ddd"/>
+  <rect x="260" y="108" width="220" height="80" rx="12" fill="#fff" stroke="#ede8f5" stroke-width="1"/>
+  <rect x="276" y="124" width="100" height="10" rx="5" fill="#FCCC00" opacity="0.9"/>
+  <rect x="276" y="142" width="188" height="8" rx="4" fill="#ddd"/>
+  <rect x="276" y="156" width="140" height="8" rx="4" fill="#ddd"/>
+  <!-- Second row -->
+  <rect x="40" y="208" width="200" height="80" rx="12" fill="#fff" stroke="#ede8f5" stroke-width="1"/>
+  <rect x="56" y="224" width="60" height="10" rx="5" fill="#131015" opacity="0.5"/>
+  <rect x="56" y="242" width="168" height="8" rx="4" fill="#ddd"/>
+  <rect x="56" y="256" width="100" height="8" rx="4" fill="#ddd"/>
+  <rect x="260" y="208" width="220" height="80" rx="12" fill="#6e19ad" opacity="0.08" stroke="#ede8f5" stroke-width="1"/>
+  <rect x="276" y="224" width="90" height="10" rx="5" fill="#6e19ad" opacity="0.4"/>
+  <rect x="276" y="242" width="188" height="8" rx="4" fill="#c9b8e8"/>
+  <rect x="276" y="256" width="130" height="8" rx="4" fill="#c9b8e8"/>
+  <!-- Label -->
+  <text x="260" y="318" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" fill="#9370c0" font-weight="500">Ask anything about your Amazon data</text>
+</svg>

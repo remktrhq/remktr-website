@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" style="width:100%;height:auto;border-radius:1rem;display:block;">
+  <defs>
+    <linearGradient id="abg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#131015"/>
+      <stop offset="100%" style="stop-color:#2a1040"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="300" rx="16" fill="url(#abg)"/>
+  <!-- Chat bubbles - user -->
+  <rect x="160" y="30" width="290" height="40" rx="20" fill="#FCCC00"/>
+  <text x="305" y="55" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" fill="#342A00" font-weight="600">What drove ROAS increase in Q2?</text>
+  <!-- Chat bubbles - AI -->
+  <rect x="30" y="90" width="310" height="56" rx="16" fill="#6e19ad" opacity="0.85"/>
+  <text x="185" y="112" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" fill="#fff">DSP campaigns contributed 68% lift,</text>
+  <text x="185" y="130" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" fill="#fff">driven by retargeting on Prime Video.</text>
+  <!-- User -->
+  <rect x="200" y="166" width="250" height="36" rx="18" fill="#FCCC00" opacity="0.9"/>
+  <text x="325" y="189" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" fill="#342A00" font-weight="600">Which ASINs underperformed?</text>
+  <!-- AI -->
+  <rect x="30" y="220" width="280" height="50" rx="16" fill="#6e19ad" opacity="0.6"/>
+  <text x="170" y="242" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" fill="#fff">3 ASINs had CPC above category avg.</text>
+  <text x="170" y="258" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" fill="#e0c8ff">Tap to see recommendations →</text>
+  <!-- Cursor blink -->
+  <rect x="318" y="270" width="2" height="16" rx="1" fill="#FCCC00" opacity="0.8"/>
+</svg>
