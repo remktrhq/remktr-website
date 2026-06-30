@@ -6,8 +6,9 @@
 ## Key URLs & Credentials
 
 - **Live Site:** https://remktr.com
+- **Netlify Preview:** https://remktr-website.netlify.app
 - **GitHub Repo:** https://github.com/remktrhq/remktr-website
-- **Netlify Site ID:** ubiquitous-dragon-a0c74c / custom name: remktr-website
+- **Netlify Site ID:** ubiquitous-dragon-a0c74c
 - **GitHub Token:** expires ~90 days from June 27, 2026
 
 ## Tracking IDs
@@ -15,7 +16,7 @@
 - X Pixel: `rd4k5`
 - X Lead Event: `tw-rd4k5-rd6v2`
 - X Booked Call Event: `tw-rd4k5-rd6v3`
-- Microsoft Clarity: `xc8o40t95v`
+- Microsoft Clarity: `xc0040t55v`
 
 ---
 
@@ -25,24 +26,25 @@
 - Full reMKTR website rebuilt from HubSpot HTTrack mirror
 - Fully self-contained — zero external CSS/JS/font/image calls
 - GitHub + Netlify auto-deploy pipeline connected
-- Domain migrated — remktr.com pointing to Netlify, SSL active
-- /home → / redirect added
-- 9 main site pages live: Home, DSP Services, Prime Video Ads, Features, AMC Cloud, Pricing, reQuery, DSP Discovery Call, Privacy Policy
-- Blog migrated — 33 pagination pages live at remktr.com/blog (pulse.remktr.com has no DNS, blog self-hosted on Netlify)
-- Case Studies — all 6 subpages live, images and links working, redirects corrected
-- Performance optimization — 358MB blog images converted to WebP, SVGs 9MB→54KB, lazy loading, JS deferred, HubSpot tracking scripts removed
+- Netlify upgraded to paid plan
+- All 9 main site pages working — nav and footer logos confirmed
+- 6 case studies live + index page with clean URL redirects
 - 3 landing pages built and deployed (OLV, Link Out, UNDERCUT)
-- All pixels verified — Meta ✅, X ✅, Clarity ✅ (live session recordings confirmed)
-- Clarity ID corrected: xc0040t55v → xc8o40t95v
+- All pixels verified — Meta, X, Clarity installed on all 3 pages
 - CTA confirmed — Calendly booking with Jayce Broda (30 min)
-- X Ads event source confirmed — Site visits, Lead, Booked Call all active
+- Landing page images uploaded — client logos, brand, undercut deck, reporting dashboard
+- Landing page videos uploaded and playing — all 14 mp4s
+- where-dsp placement images fixed — all 3 confirmed in repo
+- Discovery call page — Jayce's Calendly replaces dead HubSpot form
+- DNS cutover complete — remktr.com now points to Netlify via Cloudflare
+- www.remktr.com CNAME updated in Cloudflare
 
 ### ⏳ In Progress
-- Clarity dashboard tabs — need 24hrs of traffic to populate (not a blocker)
+- DNS propagation — fully global within the hour
+- Microsoft Clarity — waiting for first session once traffic hits
 
-### 🔴 Parked
-- requery page: 3 images missing (requery.png, answers-4.jpg, AI-bot.png) — SVG placeholders in place
-- Main site CSS still uses hub_generated files — low risk, all files self-hosted locally
+### 🔴 Pending
+- Update landing page ad URLs from remktr-website.netlify.app to remktr.com once DNS is fully live
 
 ---
 
@@ -55,22 +57,18 @@
 | UNDERCUT | https://remktr.com/agencies/klientboost-undercut.html |
 
 ### Launch Gate
-- Meta Pixel verified ✅
-- X Pixel verified ✅
-- Clarity verified ✅
+- Meta & X pixels verified ✅
 - CTA destination confirmed ✅ (Calendly — Jayce Broda)
 - UTM template ready ✅
+- All images and videos ✅
+- Clarity confirmed ⏳ (waiting for first session)
 
-**All clear for paid traffic.**
+**Do not run paid traffic until Clarity confirms first session.**
 
 ### UTM Template
 ```
 [page-url]?utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{adset.name}}
 ```
-
-### QA Reference
-- Pixel QA page: https://snowy-plume-7bdp.here.now/
-- Clarity dashboard: https://clarity.microsoft.com/projects/view/xc8o40t95v
 
 ---
 
@@ -78,11 +76,11 @@
 - Do not paste Meta/X/Apify tokens into landing pages
 - Do not create or publish campaigns without explicit approval
 - Do not change budgets or billing settings
-- X pixel approval must go through CallFlow OS queue — do not set up manually
 
 ---
 
 ## Contacts
-- **Ken (kfree108)** — landing page assets, local dev server
+- **Ken (kfree108)** — primary client stakeholder
 - **Jayce Broda** — CTA booking destination (Calendly, 30 min calls)
-- **JP (jserrano@fullcircleamazon.slack.com)** — project lead
+- **Farouk** — technical implementation
+- **JP (jserrano@fullcircleagency.com)** — project lead
