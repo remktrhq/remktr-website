@@ -305,7 +305,7 @@ const creativeVideos = [
     product: "B0FT3WVCZZ",
     title: "Impossible Swagger Transformation",
     format: ":30 transformation spot",
-    src: "../assets/videos/b0ft3wvczz-impossible-swagger.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/e55c7c382f9e8f4d68c28fc5aed096bb/downloads/default.mp4",
     audience: "Category browsers with low brand awareness",
     measuredBy: "Detail-page lift and branded search",
     placement: "Prime Video awareness flight"
@@ -314,7 +314,7 @@ const creativeVideos = [
     product: "B09JWW7KL4",
     title: "Blunt DTC Category Roast",
     format: ":15 category disruption cut",
-    src: "../assets/videos/b09jww7kl4-category-roast.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/344ebb4bbc090199211c47d5e3d6df29/downloads/default.mp4",
     audience: "Competitor buyers and switcher segments",
     measuredBy: "New-to-brand purchase rate",
     placement: "Hulu and Prime Video retargeting"
@@ -323,7 +323,7 @@ const creativeVideos = [
     product: "B00R3ZLXZ6",
     title: "Founder Myth",
     format: ":30 brand origin story",
-    src: "../assets/videos/b00r3zlxz6-founder-myth.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/3aac9d5c1828a193eb0c4c2e640bd78a/downloads/default.mp4",
     audience: "Lifestyle segments adjacent to the category",
     measuredBy: "Reach frequency and branded-search lift",
     placement: "Prime Video living-room flight"
@@ -332,7 +332,7 @@ const creativeVideos = [
     product: "B00Y2MAE9O",
     title: "Street Interview Social Proof",
     format: ":15 social proof cut",
-    src: "../assets/videos/b00y2mae9o-street-interview.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/692eafdaf295ca034afeeb84c06e7eca/downloads/default.mp4",
     audience: "In-market shoppers comparing alternatives",
     measuredBy: "Add-to-cart and PDP visit lift",
     placement: "Disney/Hulu mid-funnel flight"
@@ -341,7 +341,7 @@ const creativeVideos = [
     product: "B0GSCJ9J4G",
     title: "Mock News Breakthrough Segment",
     format: ":15 news-style hook",
-    src: "../assets/videos/b0gscj9j4g-mock-news.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/e3030ce6c6b144a3da54892ef40bf834/downloads/default.mp4",
     audience: "Competitor conquesting audiences",
     measuredBy: "New-to-brand lift and ROAS",
     placement: "Prime Video and Hulu test"
@@ -350,7 +350,7 @@ const creativeVideos = [
     product: "B0GSCJ9J4G",
     title: "Morning Show Product Demo",
     format: ":06 and :15 cutdowns",
-    src: "../assets/videos/b0gscj9j4g-morning-show.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/dff02cb5049d4e3a8b50775323800fa1/downloads/default.mp4",
     audience: "Recent category viewers and cart abandoners",
     measuredBy: "Conversion lift after exposure",
     placement: "Prime Video retargeting"
@@ -359,7 +359,7 @@ const creativeVideos = [
     product: "B0GSCJ9J4G",
     title: "Street Interview Social Proof",
     format: ":15 social proof cut",
-    src: "../assets/videos/b0gscj9j4g-street-interview.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/9ee3cda67bf709f8645d9832e9cf1532/downloads/default.mp4",
     audience: "Ingredient-aware shoppers comparing alternatives",
     measuredBy: "Detail-page visits and purchase lift",
     placement: "Disney/Hulu mid-funnel flight"
@@ -368,7 +368,7 @@ const creativeVideos = [
     product: "B0CTJ5K5GQ",
     title: "Legendary Customer Myth",
     format: ":30 premium story spot",
-    src: "../assets/videos/b0ctj5k5gq-legendary-customer.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/b542730eb9287d746117062c1618880d/downloads/default.mp4",
     audience: "New-to-category households",
     measuredBy: "New-to-brand sales and NTB share",
     placement: "Premium OLV prospecting"
@@ -377,7 +377,7 @@ const creativeVideos = [
     product: "B01BK871DE",
     title: "Mock News Breakthrough Segment",
     format: ":15 news-style hook",
-    src: "../assets/videos/b01bk871de-mock-news.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/4787d8e0dcff41bce7c33f8050bc71dd/downloads/default.mp4",
     audience: "Competitor conquesting audiences",
     measuredBy: "Brand search lift and PDP assists",
     placement: "ESPN and Hulu test cell"
@@ -386,7 +386,7 @@ const creativeVideos = [
     product: "B0CB1KF6VT",
     title: "Street Interview Proof",
     format: ":15 buyer reaction spot",
-    src: "../assets/videos/b0cb1kf6vt-street-interview.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/4683b94b8ff2ae902c0a3fc645842bb8/downloads/default.mp4",
     audience: "Price-sensitive comparison shoppers",
     measuredBy: "Cost per new customer",
     placement: "Prime Video plus offsite retargeting"
@@ -395,7 +395,7 @@ const creativeVideos = [
     product: "B0GWKRSBV6",
     title: "Apple Minimalist Glitch Pulse",
     format: ":06 premium bumper",
-    src: "../assets/videos/b0gwkrsbv6-apple-glitch.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/e6963d16f0a921983799b611fb7a9ec3/downloads/default.mp4",
     audience: "High-intent repeat category shoppers",
     measuredBy: "Frequency-to-purchase curve",
     placement: "Streaming bumper sequence"
@@ -404,7 +404,7 @@ const creativeVideos = [
     product: "B0B5723XX5",
     title: "Street Interview Social Proof",
     format: ":15 proof-of-need cut",
-    src: "../assets/videos/b0b5723xx5-street-interview.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/a88637364cb50c12121d08d94f5da12b/downloads/default.mp4",
     audience: "Lifestyle lookalikes built from shoppers",
     measuredBy: "Detail-page visit quality",
     placement: "Upper-funnel Prime Video"
@@ -413,7 +413,7 @@ const creativeVideos = [
     product: "Sciatiease",
     title: "Problem/Solution Test",
     format: ":15 direct response concept",
-    src: "../assets/videos/sciatiease-test.mp4",
+    src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/8b99d273088648e3e6b702f8461f5d68/downloads/default.mp4",
     audience: "Problem-aware households",
     measuredBy: "Search lift and downstream purchase",
     placement: "Streaming retargeting cutdown"
@@ -424,7 +424,7 @@ const heroExpertVideo = {
   product: "B01BK871DE",
   title: "Absurd Expert Explainer",
   format: ":15 expert hook",
-  src: "../assets/videos/b01bk871de-absurd-expert-explainer.mp4",
+  src: "https://customer-v9pcxggnfntjh3cn.cloudflarestream.com/f5e78d63034a69cbae005e39f5aac482/downloads/default.mp4",
   audience: "Category shoppers primed for education",
   measuredBy: "PDP lift and purchase assists",
   placement: "Premium OLV prospecting"
