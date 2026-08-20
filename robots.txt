@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# AI assistants — explicitly allowed. Blocking these removes us from ChatGPT,
+# Claude and Perplexity answers, which is where we are trying to appear.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://remktr.com/sitemap.xml
