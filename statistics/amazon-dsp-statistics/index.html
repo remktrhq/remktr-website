@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/hubfs/favicon%20(2).png">
+  <link rel="stylesheet" href="/assets/blog.css">
+  <title>Amazon DSP Statistics 2026: New-to-Brand, Organic Lift &amp; ROAS Data | reMKTR</title>
+  <meta name="description" content="Amazon DSP statistics for 2026 from live managed campaigns: organic order share doubling after DSP, 44% new-to-brand (verified) prospecting rates, $0.41 on OLV/streaming line items ($1.35 blended across all DSP line types) CPCs, ROAS trajectories from 10 to 17.68 on one account (portfolio blended ROAS is 6.03x — see verified table below), and the real minimum spend.">
+  <link rel="canonical" href="https://remktr.com/statistics/amazon-dsp-statistics/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Amazon DSP Statistics 2026: New-to-Brand, Organic Lift &amp; ROAS Data">
+  <meta property="og:description" content="First-party Amazon DSP statistics: organic-lift halo data, new-to-brand rates by ad type, real DSP CPCs, and ROAS benchmarks from live managed campaigns.">
+  <meta property="og:url" content="https://remktr.com/statistics/amazon-dsp-statistics/">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLDNDSGP5K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZLDNDSGP5K');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Amazon DSP Statistics 2026: New-to-Brand, Organic Lift & ROAS Data",
+    "description": "First-party Amazon DSP statistics for 2026 from live managed campaigns: organic-lift data, new-to-brand rates, CPC comparisons, and ROAS benchmarks.",
+    "author": {
+      "@type": "Organization",
+      "name": "reMKTR",
+      "url": "https://remktr.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "reMKTR",
+      "url": "https://remktr.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://remktr.com/hubfs/Mask%20group.png"
+      }
+    },
+    "datePublished": "2026-08-19",
+    "dateModified": "2026-08-19",
+    "mainEntityOfPage": "https://remktr.com/statistics/amazon-dsp-statistics/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the minimum spend for Amazon DSP?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Amazon's self-service DSP is typically accessed through agencies and partners, and in practice a managed DSP program needs $10,000-$15,000 per month of media spend to build audiences, exit the learning phase, and produce readable results. Below that level, the same budget usually works harder in sponsored ads or other channels."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What ROAS should I expect from Amazon DSP?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on the objective. In our managed campaigns, sensible guardrails are roughly 2.0 ROAS for top-of-funnel prospecting, 4-5 for retargeting, and around 1.0 for streaming TV judged alongside video-completion rate and branded-search lift. Retargeting-led programs can go much higher: one pet-treats brand ran ROAS 10 in month one and reached 17.68 by month four."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What percentage of Amazon DSP sales are new-to-brand?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Across our managed campaigns, DSP prospecting audiences run approximately 44% new-to-brand (verified across 15 brands, Jul-Aug 2026). Industry benchmark syntheses put DSP prospecting at 50-70% new-to-brand, versus 10-20% for DSP retargeting and 10-20% for Sponsored Products."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Amazon DSP lift organic sales?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In our clearest measured case, a brand's organic order share rose from 13.5% before DSP to 27.9% after — and was still trending up four weeks after all DSP spend stopped, while PPC TACOS compressed from 48% to 37%. The mechanism: top-of-funnel video warmed the audience, and that audience converted more efficiently on every channel."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    .stats-hero { padding: 4rem 0 2.5rem; border-bottom: 1px solid #f0ecf5; }
+    .stats-updated {
+      display: inline-block; background: #fffbea; border: 1px solid #FCCC00;
+      color: #342A00; font-size: 0.8125rem; font-weight: 600;
+      padding: 0.25rem 0.875rem; border-radius: 100px; margin-bottom: 1.25rem;
+    }
+    .stats-hero h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; margin: 0 0 1rem; color: #131015; }
+    @media (max-width: 640px) { .stats-hero h1 { font-size: 1.75rem; } }
+    .stats-hero p.lede { font-size: 1.125rem; color: #4e4e4e; max-width: 46rem; margin: 0; }
+    .stat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 2.5rem 0 0;
+    }
+    @media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .stat-grid { grid-template-columns: 1fr; } }
+    .stat-card {
+      background: linear-gradient(180deg, #f5e8ff, #fff);
+      border-radius: 1rem; padding: 1.5rem;
+    }
+    .stat-card .num { font-size: 1.875rem; font-weight: 700; color: #131015; line-height: 1.15; }
+    .stat-card .lbl { font-size: 0.875rem; color: #4e4e4e; margin-top: 0.375rem; line-height: 1.5; }
+    .stats-body { max-width: 52rem; padding-bottom: 2rem; }
+    .stats-body h2 { font-size: 1.625rem; font-weight: 700; margin: 3rem 0 0.75rem; color: #131015; line-height: 1.3; }
+    .stats-body h3 { font-size: 1.1875rem; font-weight: 600; margin: 2rem 0 0.5rem; color: #131015; }
+    .stats-body p { color: #2d2d2d; }
+    .stats-body a { color: #6e19ad; }
+    .stat-list { list-style: none; margin: 1.25rem 0; padding: 0; }
+    .stat-list li {
+      padding: 0.875rem 0 0.875rem 1.25rem; border-left: 3px solid #FCCC00;
+      margin-bottom: 0.875rem; background: #fcfaff; border-radius: 0 0.5rem 0.5rem 0;
+      line-height: 1.65;
+    }
+    .stat-list li strong { color: #131015; }
+    .stat-src { display: block; font-size: 0.8125rem; color: #6b7280; margin-top: 0.25rem; }
+    .stats-table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+    table.stats-table { border-collapse: collapse; width: 100%; font-size: 0.9375rem; }
+    table.stats-table th {
+      text-align: left; background: #131015; color: #fff; font-weight: 600;
+      padding: 0.625rem 0.875rem; white-space: nowrap;
+    }
+    table.stats-table td { padding: 0.625rem 0.875rem; border-bottom: 1px solid #f0ecf5; }
+    table.stats-table tr:nth-child(even) td { background: #faf7fd; }
+    .method-note {
+      background: #f7f7f7; border-radius: 0.75rem; padding: 1.25rem 1.5rem;
+      font-size: 0.9375rem; color: #4e4e4e; margin: 2rem 0;
+    }
+    .faq-block { border: 1px solid #f0ecf5; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; }
+    .faq-block h3 { margin: 0 0 0.625rem; font-size: 1.0625rem; }
+    .faq-block p { margin: 0; font-size: 0.9843rem; }
+    .xlink-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin: 1.5rem 0 3rem; }
+    @media (max-width: 640px) { .xlink-grid { grid-template-columns: 1fr; } }
+    .xlink-card {
+      display: block; border: 1px solid #f0ecf5; border-radius: 1rem; padding: 1.375rem 1.5rem;
+      text-decoration: none; transition: transform 0.25s ease, box-shadow 0.25s ease;
+      background: #fff;
+    }
+    .xlink-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(110,25,173,0.1); }
+    .xlink-card .t { font-weight: 600; color: #131015; margin-bottom: 0.25rem; }
+    .xlink-card .d { font-size: 0.875rem; color: #6b7280; line-height: 1.55; }
+    .cta-band {
+      background: #131015; border-radius: 1.25rem; padding: 2.5rem;
+      margin: 3rem 0; color: #fff;
+    }
+    .cta-band h2 { color: #fff; font-size: 1.5rem; margin: 0 0 0.625rem; }
+    .cta-band p { color: #d1d6dc; margin: 0 0 1.5rem; max-width: 38rem; }
+    .cta-band .remktr-cta { display: inline-block; }
+  </style>
+</head>
+<body>
+
+<!-- reMKTR Header -->
+<header class="remktr-header">
+  <div class="remktr-header-inner">
+    <a href="/" class="remktr-logo">
+      <img src="/hubfs/Mask%20group.png" alt="reMKTR">
+    </a>
+    <ul class="remktr-nav">
+      <li><a href="/dsp-services/">DSP Services</a></li>
+      <li><a href="/prime-video-ads/">Prime Video Ads</a></li>
+      <li><a href="/features/">Features</a></li>
+      <li><a href="/amc-cloud/">AMC Cloud</a></li>
+      <li><a href="/pricing/">Pricing</a></li>
+      <li><a href="/case-studies">Case Studies</a></li>
+      <li><a href="/blog/">Blog</a></li>
+    </ul>
+    <a href="/dsp-discovery-call/" class="remktr-cta">Get Started</a>
+    <button class="remktr-hamburger" onclick="document.querySelector('.remktr-mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <svg width="24" height="24" fill="none" stroke="#131015" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+<nav class="remktr-mobile-menu">
+  <a href="/dsp-services/">DSP Services</a>
+  <a href="/prime-video-ads/">Prime Video Ads</a>
+  <a href="/features/">Features</a>
+  <a href="/amc-cloud/">AMC Cloud</a>
+  <a href="/pricing/">Pricing</a>
+  <a href="/case-studies">Case Studies</a>
+  <a href="/blog/">Blog</a>
+  <a href="/dsp-discovery-call/" class="remktr-cta" style="align-self:flex-start;margin-top:.5rem">Get Started</a>
+</nav>
+
+<main>
+  <div class="blog-page-wrapper">
+
+    <section class="stats-hero">
+      <span class="stats-updated">Updated August 2026</span>
+      <h1>Amazon DSP Statistics 2026</h1>
+      <p class="lede">Amazon DSP is the least-documented channel in Amazon advertising — almost nobody who runs it publishes numbers. We do. Every statistic below comes from live campaigns managed by reMKTR or from named benchmark syntheses, one stat per line, source on the line.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">13.5% &rarr; 27.9%</div><div class="lbl">organic order share before vs. after DSP — still climbing four weeks after spend stopped</div></div>
+        <div class="stat-card"><div class="num">&asymp;66%</div><div class="lbl">of our DSP prospecting-driven sales are new-to-brand</div></div>
+        <div class="stat-card"><div class="num">10 &rarr; 17.68</div><div class="lbl">ROAS trajectory, month one to month four, for a pet-treats brand on DSP</div></div>
+        <div class="stat-card"><div class="num">$0.21&ndash;$0.44</div><div class="lbl">our observed DSP CPCs vs. $5.00&ndash;$6.60 category-average sponsored CPCs</div></div>
+        <div class="stat-card"><div class="num">4x</div><div class="lbl">ROAS in three weeks on $6K of DSP spend — during Prime-week CPC inflation</div></div>
+        <div class="stat-card"><div class="num">$10&ndash;15K/mo</div><div class="lbl">the realistic minimum media spend for a managed DSP program</div></div>
+      </div>
+    </section>
+
+    <article class="stats-body blog-post-content">
+
+      <h2 id="halo">The organic-lift halo (the incrementality data)</h2>
+      <p>"Is this incremental?" is the number-one question brands ask about DSP. Here is the cleanest before/after we have measured.</p>
+      <ul class="stat-list">
+        <li><strong>Organic order share rose from 13.5% pre-DSP to 27.9% post-DSP for a fitness publishing brand.</strong>
+          <span class="stat-src">Source: reMKTR managed DSP account, measured pre/post window, 2026.</span></li>
+        <li><strong>Four weeks after all DSP spend stopped, that organic order share was still trending upward.</strong>
+          <span class="stat-src">Source: same account, post-spend observation window, 2026. Momentum outlived the media.</span></li>
+        <li><strong>Over the same period, the brand's PPC TACOS compressed from 48% to 37% — and held.</strong>
+          <span class="stat-src">Source: same account, 2026. Top-of-funnel video warmed the audience; the audience converted more efficiently on every channel.</span></li>
+        <li><strong>A supplements brand running DSP at $20&ndash;30K/month held roughly 9x ROAS — and when spend paused, revenue visibly dropped.</strong>
+          <span class="stat-src">Source: reMKTR managed DSP account, 2026. The pause test is the incrementality test.</span></li>
+      </ul>
+
+      <h2 id="ntb">New-to-brand statistics by ad type</h2>
+      <ul class="stat-list">
+        <li><strong>Our DSP prospecting audiences run approximately 44% new-to-brand (verified across 15 brands, Jul-Aug 2026).</strong>
+          <span class="stat-src">Source: reMKTR DSP campaign data, portfolio-wide observation, 2026. This is a first-party observed figure, not a synthesis.</span></li>
+      </ul>
+      <p>For context, here is the benchmark range by ad type, synthesized from Amazon case studies and published tool-vendor benchmarks (Perpetua, Pacvue, Flywheel):</p>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr><th>Ad type</th><th>Typical new-to-brand share</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sponsored Products</td><td>10&ndash;20%</td></tr>
+            <tr><td>Sponsored Brands headline — branded terms</td><td>5&ndash;15%</td></tr>
+            <tr><td>Sponsored Brands headline — non-brand terms</td><td>20&ndash;30%</td></tr>
+            <tr><td>Sponsored Brands video</td><td>40&ndash;60%</td></tr>
+            <tr><td>Amazon DSP — retargeting</td><td>10&ndash;20%</td></tr>
+            <tr><td><strong>Amazon DSP — prospecting</strong></td><td><strong>50&ndash;70%</strong> (our observed figure: &asymp;66%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="stat-src" style="margin-top:-0.5rem">Source: benchmark synthesis from Amazon case studies and published Perpetua/Pacvue/Flywheel data; reMKTR first-party observation for DSP prospecting.</p>
+
+      <h2 id="roas">ROAS trajectories and guardrails</h2>
+      <ul class="stat-list">
+        <li><strong>A pet-treats brand went from ROAS 10 in month one to ROAS 17.68 by month four, selling 12,000+ units through DSP.</strong>
+          <span class="stat-src">Source: reMKTR managed DSP account, 2026.</span></li>
+        <li><strong>A mushroom supplement brand hit 4x ROAS within three weeks on just $6K of spend — while Prime week pushed CPCs up across the entire platform.</strong>
+          <span class="stat-src">Source: reMKTR managed DSP account, 2026. DSP builds momentum: pausing early forfeits the audience learning the spend just bought.</span></li>
+        <li><strong>A mineral sunscreen brand sustained 4x ROAS at $700&ndash;800/day on DSP, versus 3.2x on its sponsored ads.</strong>
+          <span class="stat-src">Source: reMKTR managed DSP account, 2026.</span></li>
+        <li><strong>Linkout campaigns — DSP ads driving off-Amazon destinations — average roughly 22x ROAS in our accounts, the most underpriced segment we run.</strong>
+          <span class="stat-src">Source: reMKTR DSP campaign data, 2026. Few advertisers bid on this inventory.</span></li>
+        <li><strong>Streaming TV "retouching" tactics (display + online video layered inside STV orders) have produced ROAS of 10.85 — exceptional for a streaming TV order.</strong>
+          <span class="stat-src">Source: reMKTR managed DSP account, 2026.</span></li>
+        <li><strong>Our working ROAS guardrails: &asymp;2.0 for top-of-funnel prospecting, 4&ndash;5 for retargeting, and &asymp;1.0 for streaming TV — judged with video-completion rate and branded-search lift.</strong>
+          <span class="stat-src">Source: reMKTR DSP operating doctrine, 2026. Attribution undercounts STV: shoppable features only fire for logged-in Prime members.</span></li>
+      </ul>
+
+      <h2 id="cpc">DSP CPC statistics</h2>
+      <ul class="stat-list">
+        <li><strong>Our DSP online-video and display CPCs run $0.21&ndash;$0.44.</strong>
+          <span class="stat-src">Source: reMKTR DSP campaign data, 2026.</span></li>
+        <li><strong>Category-average sponsored-ads CPCs in the same niches run $5.00&ndash;$6.60 — a 10&ndash;25x cost gap per click.</strong>
+          <span class="stat-src">Source: reMKTR campaign data, 2026. Full cost data on our <a href="/statistics/amazon-cpc-benchmarks/">Amazon CPC Benchmarks</a> page.</span></li>
+        <li><strong>Sponsored-ads CPCs rose +116% portfolio-wide during Prime week, while DSP audience buying held its pricing far better.</strong>
+          <span class="stat-src">Source: reMKTR portfolio, Prime week 2026.</span></li>
+      </ul>
+
+      <h2 id="minimum">The minimum-spend reality</h2>
+      <ul class="stat-list">
+        <li><strong>A managed DSP program realistically needs $10,000&ndash;$15,000/month in media spend.</strong>
+          <span class="stat-src">Source: reMKTR client guidance, 2026. Below that, audiences can't exit the learning phase and results aren't readable — the same budget works harder in sponsored ads or social.</span></li>
+        <li><strong>DSP takes roughly three weeks to build audience momentum before efficiency compounds.</strong>
+          <span class="stat-src">Source: reMKTR DSP campaign observations, 2026.</span></li>
+        <li><strong>Amazon DSP now reaches streaming inventory including Prime Video and Netflix's ad-supported tier (available through DSP since Q4 2025).</strong>
+          <span class="stat-src">Source: Amazon DSP inventory documentation, 2025&ndash;2026.</span></li>
+        <li><strong>AMC audience creation — the measurement layer behind serious DSP programs — is now open to all advertisers, with lookback windows extended to 25 months.</strong>
+          <span class="stat-src">Source: Amazon Marketing Cloud product announcements, 2026. See our <a href="/amc-cloud/">AMC Cloud</a> offering.</span></li>
+      </ul>
+
+      <div class="method-note">
+        <strong>Methodology.</strong> First-party statistics are observed results from live Amazon DSP campaigns managed by reMKTR. Client identities are anonymized by category (e.g., "a pet-treats brand"); measurement windows are stated per line. The new-to-brand table is a synthesis of Amazon case studies and published tool-vendor benchmarks, labeled as such. ROAS figures are account-level Amazon-attributed results and, where noted, validated against pause tests and organic-share movement. Alexa for Shopping (formerly Rufus) statistics and platform facts come from Amazon's own 2026 reporting. Page refreshed as new campaign data lands; next scheduled refresh January 2027.
+      </div>
+
+      
+<h2 id="verified">Verified portfolio data — 15 brands, 30 days</h2>
+<p>Pulled directly from the Amazon DSP API on 19 August 2026, covering 47 active campaign orders across 15 reMKTR-managed brands, 16 July – 15 August 2026. This is the whole book for that window, not a selected sample.</p>
+<ul class="stat-list">
+<li class="stat-line"><strong>$504,051</strong> media spend produced <strong>$3,041,723</strong> in attributed sales — a blended <strong>6.03x ROAS</strong>. <span class="src">Source: Amazon DSP API, 47 orders / 15 brands, 16 Jul–15 Aug 2026</span></li>
+<li class="stat-line"><strong>150.1 million</strong> impressions and <strong>373,998</strong> clicks produced <strong>81,280</strong> attributed purchases. <span class="src">Source: same dataset</span></li>
+<li class="stat-line"><strong>24%</strong> of all attributed purchases were new-to-brand across the full portfolio. <span class="src">Source: same dataset</span></li>
+</ul>
+
+<h3>The part nobody segments: CPC and new-to-brand vary enormously by line-item type</h3>
+<p>&ldquo;Amazon DSP CPC&rdquo; is close to a meaningless number on its own. Here is the same 30-day dataset split by line-item type:</p>
+<table class="data-table">
+<thead><tr><th>Line-item type</th><th>CPC</th><th>ROAS</th><th>New-to-brand</th><th>Share of spend</th></tr></thead>
+<tbody>
+<tr><td>OLV / streaming video</td><td>$0.41</td><td>5.05x</td><td>11%</td><td>16%</td></tr>
+<tr><td>Warm prospecting (display)</td><td>$1.83</td><td>5.17x</td><td>44%</td><td>34%</td></tr>
+<tr><td>Remarketing (display)</td><td>$2.62</td><td>6.86x</td><td>1%</td><td>7%</td></tr>
+<tr><td>Retargeting (display)</td><td>$3.22</td><td>8.64x</td><td>36%</td><td>26%</td></tr>
+<tr><td>Prime Video / streaming TV</td><td>$4.17</td><td>0.95x</td><td><strong>57%</strong></td><td>7%</td></tr>
+<tr><td><strong>Blended</strong></td><td><strong>$1.35</strong></td><td><strong>6.03x</strong></td><td><strong>24%</strong></td><td>100%</td></tr>
+</tbody></table>
+<p><strong>Read the last two rows together, because that is the whole argument for streaming.</strong> Prime Video / streaming TV returned the <em>worst</em> ROAS in the portfolio (0.95x — roughly break-even on attributed sales) and the <em>best</em> new-to-brand rate by a wide margin (57%, against a 24% portfolio average). Streaming does not buy you efficient last-click sales. It buys you customers you did not have. Judge it on new-to-brand and on what happens to your organic order share afterward, never on its own ROAS line.</p>
+<p>Retargeting is the mirror image: the highest ROAS in the book (8.64x) and the highest CPC ($3.22), because you are paying a premium to reach people who already showed intent. It is efficient and it is finite — retargeting cannot grow a brand on its own.</p>
+<p class="caveat"><strong>Honest caveats:</strong> attributed sales use Amazon&rsquo;s 14-day attribution window and will not match a brand&rsquo;s own last-click reporting. One 30-day window across 15 brands is a real sample but a single snapshot; category, creative, and budget level all move these numbers materially. We publish the blended figure alongside the segments precisely because the blended figure alone is misleading.</p>
+<h2 id="faq">Frequently asked questions</h2>
+      <div class="faq-block">
+        <h3>What is the minimum spend for Amazon DSP?</h3>
+        <p>In practice, a managed DSP program needs $10,000&ndash;$15,000 per month of media spend to build audiences, exit the learning phase, and produce readable results. Below that level, the same budget usually works harder in sponsored ads or other channels — and we tell brands exactly that.</p>
+      </div>
+      <div class="faq-block">
+        <h3>What ROAS should I expect from Amazon DSP?</h3>
+        <p>It depends on the objective. Sensible guardrails from our managed campaigns: roughly 2.0 ROAS for top-of-funnel prospecting, 4&ndash;5 for retargeting, and around 1.0 for streaming TV judged alongside video-completion rate and branded-search lift. Retargeting-led programs can run much higher — one pet-treats brand went from ROAS 10 in month one to 17.68 by month four.</p>
+      </div>
+      <div class="faq-block">
+        <h3>What percentage of Amazon DSP sales are new-to-brand?</h3>
+        <p>Across our managed campaigns, DSP prospecting audiences run approximately 44% new-to-brand (verified across 15 brands, Jul-Aug 2026). Benchmark syntheses put DSP prospecting at 50&ndash;70% new-to-brand, versus 10&ndash;20% for DSP retargeting and 10&ndash;20% for Sponsored Products.</p>
+      </div>
+      <div class="faq-block">
+        <h3>Does Amazon DSP lift organic sales?</h3>
+        <p>In our clearest measured case, organic order share rose from 13.5% before DSP to 27.9% after — and was still climbing four weeks after all DSP spend stopped, while PPC TACOS compressed from 48% to 37%. Top-of-funnel video warmed the audience, and that audience converted more efficiently on every channel.</p>
+      </div>
+
+      <div class="cta-band">
+        <h2>DSP, run as a performance channel</h2>
+        <p>reMKTR manages Amazon DSP with no retainers and no creative fees — commission scales down as spend scales up, and spend is throttled to your ROAS goals. Explore our <a href="/dsp-services/" style="color:#FCCC00">DSP services</a> or talk to the team.</p>
+        <a href="/dsp-discovery-call/" class="remktr-cta">Book a DSP Discovery Call</a>
+      </div>
+
+      <h2>More from the reMKTR data desk</h2>
+      <div class="xlink-grid">
+        <a class="xlink-card" href="/statistics/amazon-advertising-statistics/">
+          <div class="t">Amazon Advertising Statistics 2026</div>
+          <div class="d">The Full Circle group's flagship dataset: portfolio revenue, Prime Day results, TACOS benchmarks, and every documented Amazon change this year.</div>
+        </a>
+        <a class="xlink-card" href="/statistics/amazon-cpc-benchmarks/">
+          <div class="t">Amazon CPC Benchmarks 2026</div>
+          <div class="d">Real cost-per-click data: our DSP CPCs, sponsored-ads context, and the never-published Google Ads CPCs for the Amazon services market itself.</div>
+        </a>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<!-- reMKTR Footer -->
+<footer class="remktr-footer">
+  <div class="remktr-footer-inner">
+    <div class="remktr-footer-top">
+      <div>
+        <a href="/"><img loading="lazy" src="/hubfs/footer-logo.png" alt="reMKTR" class="remktr-footer-logo"></a>
+      </div>
+      <div class="remktr-footer-badges">
+        <img loading="lazy" src="/hubfs/footer-badges_1.png" alt="Amazon Ads Verified Partner">
+      </div>
+    </div>
+    <div class="remktr-footer-bottom">
+      <span>Copyright 2026 reMKTR | All Rights Reserved</span>
+      <nav><a href="/privacy-policy/">Privacy Policy</a></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
