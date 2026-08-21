@@ -85,16 +85,47 @@
       function (p) { return p.textContent.trim().length > 80 && !p.closest('.fc-cta'); }
     );
 
+    // Some of our best pages carry their argument in tables and lists rather
+    // than prose — amazon-ppc-software-comparison is 2,464 words across six
+    // paragraphs. Counting only <p> put a single CTA on those pages and no
+    // depth CTAs at all. Fall back to section-level blocks so placement tracks
+    // the shape of the page instead of assuming every page is an essay.
+    // Choosing EITHER prose or blocks still missed a shape: the /learn/ hubs
+    // run ~1,700 words as seven paragraphs interleaved with section headings
+    // and link lists. Prose alone gave seven anchors (one short of the depth
+    // threshold), and blocks alone lost because a section <h2> is only ~25px
+    // tall and the old 40px filter threw every heading away. Merging both in
+    // document order is what actually tracks the page.
+    if (paras.length < 8) {
+      var merged = Array.prototype.filter.call(
+        article.querySelectorAll('p, h2, table, ul, ol, dl'),
+        function (n) {
+          if (n.closest('.fc-cta')) return false;
+          if (n.tagName === 'P') return n.textContent.trim().length > 80;
+          return n.offsetHeight > 20;   // still skips collapsed/hidden blocks
+        }
+      );
+      if (merged.length > paras.length) paras = merged;
+    }
+
+    // A CTA placed directly after a heading separates it from the section it
+    // introduces, which looks like a mistake. Step past headings instead.
+    var heading = function (n) { return /^H[1-6]$/.test(n.tagName); };
+    var settle = function (i) {
+      while (i < paras.length - 1 && heading(paras[i])) i++;
+      return i;
+    };
+
     var insertAfter = function (node, el) {
       if (node && node.parentNode) { node.parentNode.insertBefore(el, node.nextSibling); placed.push(el); }
     };
     if (paras.length) {
-      insertAfter(paras[0], cta('after-first-paragraph'));
+      insertAfter(paras[settle(0)], cta('after-first-paragraph'));
       // Only add depth CTAs when the article is long enough that they land in
       // distinct places — on a short page they would stack on top of each other.
       if (paras.length >= 8) {
         [[0.25, 'depth-25'], [0.50, 'depth-50'], [0.75, 'depth-75']].forEach(function (m) {
-          var i = Math.floor(paras.length * m[0]);
+          var i = settle(Math.floor(paras.length * m[0]));
           if (i > 0 && i < paras.length) insertAfter(paras[i], cta(m[1]));
         });
       }
@@ -202,8 +233,14 @@
     });
   }
 
+  // Once per ARTICLE, not once per session. The session-wide flag meant a reader
+  // who saw the popup on one comparison page never saw it again anywhere on the
+  // site — which is exactly how it looked "missing" on pages that were working
+  // correctly. Each article gets one offer; dismissing it silences that article,
+  // not the whole visit.
+  var POP_KEY = 'fc_popped:' + location.pathname;
   var popped = false;
-  try { popped = sessionStorage.getItem('fc_popped') === '1'; } catch (e) {}
+  try { popped = sessionStorage.getItem(POP_KEY) === '1'; } catch (e) {}
 
   var ticking = false;
   function onScroll() {
@@ -217,10 +254,12 @@
           track('scroll_depth', { percent_scrolled: parseInt(m[1], 10) });
         });
       });
-      var longEnough = document.documentElement.scrollHeight > window.innerHeight * 2.2;
+      // 1.6, not 2.2: the old gate silently skipped table-heavy pages on a tall
+      // desktop window, which is the other half of "the popup is missing".
+      var longEnough = document.documentElement.scrollHeight > window.innerHeight * 1.6;
       if (!popped && longEnough && d >= 0.40) {
         popped = true;
-        try { sessionStorage.setItem('fc_popped', '1'); } catch (e) {}
+        try { sessionStorage.setItem(POP_KEY, '1'); } catch (e) {}
         popup();
       }
     });
