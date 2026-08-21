@@ -194,7 +194,7 @@ a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-b
      </div>
     </div> 
    </div> 
-   <main id="main-content" class="body-container-wrapper"> 
+   <main data-article id="main-content" class="body-container-wrapper"> 
     <div class="container-fluid body-container body-container--homepage"> 
      <div class="row-fluid-wrapper"> 
       <div class="row-fluid"> 
@@ -231,7 +231,20 @@ a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-b
      </div> 
     </div> 
     <div id="hs_cos_wrapper_footer" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
-     <footer id="custom-footer"> 
+     
+<style>
+.fc-family{margin:44px 0 0;padding:22px 0 0;border-top:1px solid var(--line,#e6e4ee);
+font-size:13.5px;line-height:1.7}
+.fc-family h3{margin:0 0 10px;font-size:11px;text-transform:uppercase;
+letter-spacing:.13em;color:var(--dim,#5c5c6b);font-weight:600}
+.fc-family ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;
+grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.fc-family li{color:var(--dim,#5c5c6b)}
+.fc-family a{font-weight:650;text-decoration:none;color:var(--accent,#2dd4a7)}
+.fc-family a:hover{text-decoration:underline}
+</style>
+<aside class="fc-family"><h3>The rest of the family</h3><ul><li><a href="https://drppc.ai">Dr. PPC</a> — when the ad account is the thing losing money</li><li><a href="https://drdsp.ai">Dr. DSP</a> — when sponsored ads have plateaued and you need reach</li><li><a href="https://drstock.ai">Dr. Stock</a> — when stockouts and fees are eating the margin</li><li><a href="https://fullcircleorbit.com">Orbit</a> — the software behind all three, included free</li><li><a href="https://fullcircleagency.com">Full Circle</a> — when you want the whole account run, not one function</li></ul></aside>
+<footer id="custom-footer"> 
       <div class="footer-container"> 
        <div class="footer-top"> 
         <div class="footer-left"> 
@@ -291,5 +304,12 @@ a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-b
   <script>
   AOS.init();
 </script> 
- </body>
+ 
+<link rel="stylesheet" href="/assets/engagement.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLDNDSGP5K"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-ZLDNDSGP5K');
+window.FC_CTA={ga4:'G-ZLDNDSGP5K',brand:'remktr',href:'https://remktr.com/growth-leak-audit/',label:'Claim your free reMKTR audit',sub:'We show the method before the number.',popup:{eyebrow:'reMKTR · part of Full Circle',title:'Where is your Amazon growth leaking?',body:'reMKTR runs Amazon DSP as a managed service, and is part of Full Circle, a full-service Amazon management company. A free audit, reconciled properly — we show you the method before we show you a number.',points:['Method | Reconciled in Amazon Marketing Cloud, not last-click.','You get | The working, not just the headline number.','Terms | Free. No contract, no obligation.'],proof:'109 live Amazon DSP seats · $500M+ managed across 100+ brands.',dismiss:'No thanks — I’m just comparing',label:'Claim your free audit'}};</script>
+<script src="/assets/engagement.js" defer></script>
+</body>
 </html>
