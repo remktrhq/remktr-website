@@ -10,6 +10,40 @@
  * Poppins. Same structure, same class names, reMKTR's own palette — taken from
  * assets/blog.css, which is what the rest of this site already uses.
  */
+/* Poppins, self-declared. These pages inherit a font <link> for Archivo,
+ * Inter and JetBrains Mono from the shared renderer — drppc.ai's faces —
+ * so Poppins was named in the tokens but never actually downloaded, and
+ * every page fell back to system-ui. Same @font-face rules the rest of
+ * remktr.com already uses, so there is one source of truth for the face. */
+@font-face {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/poppins/v21/pxiEyp8kv8JHgFVrJJfecg.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2") format("woff2");
+}
+
 :root{
   --base:#ffffff; --raised:#faf7fd; --fg:#131015; --dim:#5d5766; --line:#e8d5f5;
   --accent:#6e19ad; --amber:#FCCC00;
