@@ -46,7 +46,7 @@
 
 :root{
   --base:#ffffff; --raised:#faf7fd; --fg:#131015; --dim:#5d5766; --line:#e8d5f5;
-  --accent:#6e19ad; --amber:#FCCC00;
+  --accent:#7c3aed; --amber:#FCCC00;
   --display:'Poppins',system-ui,sans-serif; --body:'Poppins',system-ui,sans-serif;
   --mono:ui-monospace,'SFMono-Regular',Menlo,monospace;
 }
@@ -216,6 +216,6 @@ letter-spacing:.13em;color:var(--dim,#5c5c6b);font-weight:600}
 .fc-family ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;
 grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
 .fc-family li{color:var(--dim,#5c5c6b)}
-.fc-family a{font-weight:650;text-decoration:none;color:var(--accent,#2dd4a7)}
+.fc-family a{font-weight:650;text-decoration:none;color:var(--accent,#7c3aed)}
 .fc-family a:hover{text-decoration:underline}
 
