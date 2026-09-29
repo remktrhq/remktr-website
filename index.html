@@ -17,7 +17,7 @@
 </script>
 <!--
   PROOF NOTE (internal): reMKTR audience-network proof (6.03x ROAS, 44% NTB warm prospects, 57% streaming NTB, $1.35 CPC;
-  Jul 16 to Aug 15 2026, $504k spend) is marked "to re-verify before publishing" in BRIEF.md.
+  Jul 16 to Aug 15 2026) is marked "to re-verify before publishing" in BRIEF.md.
 -->
 <style>
 :root{
@@ -458,25 +458,12 @@ h1,h2,h3,blockquote,.card h3{word-spacing:.08em}
 .cmo p{font-weight:600;font-size:clamp(15px,1.25vw,18px)}
 .cmo-line{text-align:center;margin-top:clamp(20px,2.4vw,30px);font-weight:900;font-size:clamp(26px,3.8vw,64px);letter-spacing:-.045em;text-transform:uppercase;line-height:.95}
 .cmo-line em{font-style:normal;color:var(--lav4)}
-.plat{margin-top:clamp(50px,7vw,100px)}
-.plat h3{font-weight:900;font-size:clamp(30px,4vw,68px);line-height:.9;letter-spacing:-.05em;text-transform:uppercase;max-width:980px}
-.plat h3 em{font-style:normal;color:var(--lav4)}
-.plat-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:28px}
-.pl{background:#1b1620;border:1.5px solid #3a3140;border-radius:18px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;transition:border-color .3s,transform .3s,background .3s}
-.pl:hover{border-color:var(--p2);transform:translateY(-4px);background:#221b29}
-.pl img{width:56px;height:56px;border-radius:14px;background:#fff;object-fit:contain}
-.pl .tx{width:56px;height:56px;border-radius:14px;background:linear-gradient(140deg,var(--p2),var(--pd));display:grid;place-items:center;font-weight:900;font-size:13px;letter-spacing:-.02em;line-height:1;color:#fff}
-.pl span{font-size:12.5px;font-weight:700;line-height:1.15}
-.pl small{display:block;font-family:var(--m);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8c8197;font-weight:400;margin-top:3px}
-@media (max-width:1100px){ .plat-grid{grid-template-columns:repeat(5,minmax(0,1fr))} }
 @media (max-width:900px){
   .stv-hero{grid-template-columns:1fr}
   .vs{grid-template-columns:1fr}
   .cmo{grid-template-columns:auto 1fr}
-  .plat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
-.plat .qual{margin-top:30px;max-width:760px}
 /* ============ PRODUCTS (horizontal) ============ */
 .hs{position:relative;background:var(--lav2);color:var(--k);height:calc(var(--screen) * 3.6)}
 .hs-sticky{position:sticky;top:0;height:var(--screen);overflow:hidden;display:flex;align-items:center}
@@ -545,28 +532,128 @@ h1,h2,h3,blockquote,.card h3{word-spacing:.08em}
 .p2v .big{display:flex;align-items:baseline;gap:14px;margin-top:16px}
 .p2v .big b{font-weight:900;font-size:clamp(54px,6vw,100px);letter-spacing:-.06em;line-height:.8;color:#fff}
 .p2v .big span{font-family:var(--m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lav3)}
-/* P3: Amazon -> Shopify */
-.p3v{position:relative;width:100%;max-width:500px;display:flex;flex-direction:column;gap:0}
-.p3v .az{align-self:flex-start;width:62%;background:#fff;color:var(--k);border-radius:18px;padding:14px 16px;border:2.5px solid var(--lav4);box-shadow:0 20px 40px -20px rgba(142,32,226,.8)}
-.p3v .az img{width:62%;height:auto}
-.p3v .az .who{display:flex;gap:5px;margin-top:10px}
-.p3v .az .who i{width:18px;height:18px;border-radius:50%;background:var(--p);display:block;animation:bob 2.4s ease-in-out infinite}
-.p3v .az .who i:nth-child(2n){background:var(--p2);animation-delay:.3s}.p3v .az .who i:nth-child(3n){background:var(--lav4);animation-delay:.6s}
-.p3v .az span{display:block;font-family:var(--m);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--body);margin-top:8px}
-@keyframes bob{50%{transform:translateY(-4px)}}
-.p3v svg.path{width:100%;height:110px;overflow:visible}
-.p3v .shop{align-self:flex-end;width:74%;background:#fff;color:var(--k);border-radius:16px;overflow:hidden;border:2.5px solid #95bf47;box-shadow:0 20px 40px -18px rgba(149,191,71,.7)}
-.p3v .shop .bar{display:flex;align-items:center;gap:6px;padding:7px 10px;background:#f4f1f7;border-bottom:1.5px solid #e1d8ea}
-.p3v .shop .bar i{width:8px;height:8px;border-radius:50%;background:#cbbad8}
-.p3v .shop .bar span{margin-left:6px;font-family:var(--m);font-size:10px;color:var(--body);background:#fff;border-radius:999px;padding:2px 10px}
-.p3v .shop .in{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;align-items:center}
-.p3v .shop .in img.p{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px}
-.p3v .shop .t{display:flex;flex-direction:column;gap:6px}
-.p3v .shop .t img{height:24px;width:auto;align-self:flex-start}
-.p3v .shop .t i{display:block;height:7px;border-radius:4px;background:#ece4f2}
-.p3v .shop .t b{align-self:flex-start;background:var(--k);color:#fff;font-size:10.5px;font-weight:800;padding:6px 10px;border-radius:999px;margin-top:4px;position:relative}
-.p3v .shop .t b::after{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid var(--p2);animation:ping 2.2s ease-out infinite}
-@keyframes ping{0%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(1.4)}}
+/* P3: Link Out. Amazon signals -> Target Lock -> your store -> an owned customer */
+.panel.p3{width:max(min(124vw,1680px),1380px);grid-template-columns:minmax(0,.92fr) minmax(0,1.28fr) minmax(0,.96fr);gap:clamp(24px,2.6vw,44px);background:radial-gradient(90% 70% at 62% 40%,rgba(110,25,173,.38) 0%,rgba(19,16,21,0) 70%),var(--k)}
+.panel.p3 h3{margin-bottom:16px}
+.p3 .lo-lead{font-weight:800!important;font-size:clamp(19px,1.65vw,26px)!important;line-height:1.12;letter-spacing:-.02em;color:#fff!important;margin-bottom:14px}
+.p3 .lo-lead em{font-style:normal;color:var(--lav4)}
+.lo-own{list-style:none;margin-top:18px;border-top:2px solid rgba(255,255,255,.9);padding-top:14px;display:grid;gap:8px}
+.lo-own li{position:relative;padding-left:26px;font-size:clamp(13px,1.02vw,15px);line-height:1.3;color:#cfc4d8}
+.lo-own li b{color:#fff;font-weight:700}
+.lo-own li::before{content:"";position:absolute;left:0;top:2px;width:16px;height:16px;border-radius:50%;background:var(--p2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.2 8.3l2.4 2.4 5-5.2' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+/* stage: a 1000x1100 unit canvas; --u scales every size with the stage */
+.lo-stage{position:relative;width:min(100%,560px);aspect-ratio:10/11;container-type:inline-size;margin:0 auto}
+.lo-stage > *{--u:1cqw}
+.lo-flow{position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:1;pointer-events:none}
+.lo-ln{fill:none;stroke:url(#loG);stroke-width:2.5;stroke-dasharray:3 8;vector-effect:non-scaling-stroke;animation:lodash 1s linear infinite}
+.lo-ln.g{stroke:#95bf47}
+@keyframes lodash{to{stroke-dashoffset:-22}}
+.lo-az{position:absolute;left:0;top:0;width:47%;background:#fff;color:var(--k);border-radius:calc(var(--u)*2.4);padding:calc(var(--u)*2.6) calc(var(--u)*2.8);border:2.5px solid var(--lav4);box-shadow:0 20px 40px -20px rgba(142,32,226,.9);z-index:2}
+.lo-az > img{width:58%;height:auto;display:block}
+.lo-az .k,.lo-cust small,.lo-ret span,.lo-shop .bar span{font-family:var(--m);text-transform:uppercase;letter-spacing:.08em}
+.lo-az .k{display:block;font-size:max(9px,calc(var(--u)*1.55));color:var(--p);margin-top:calc(var(--u)*1.4)}
+.lo-az .sig{list-style:none;margin-top:calc(var(--u)*.8);display:grid;gap:calc(var(--u)*.5)}
+.lo-az .sig li{font-size:max(10px,calc(var(--u)*1.85));font-weight:600;color:var(--body);display:flex;align-items:center;gap:calc(var(--u)*.9);white-space:nowrap}
+.lo-az .sig li i{flex:0 0 auto;width:calc(var(--u)*1.1);height:calc(var(--u)*1.1);border-radius:50%;background:var(--p2);animation:losig 2.7s ease-in-out infinite}
+.lo-az .sig li:nth-child(2) i{animation-delay:.9s}.lo-az .sig li:nth-child(3) i{animation-delay:1.8s}
+@keyframes losig{0%,100%{box-shadow:0 0 0 0 rgba(142,32,226,.5)}30%{box-shadow:0 0 0 calc(var(--u)*.8) rgba(142,32,226,0)}}
+.lo-az .who{display:flex;gap:calc(var(--u)*.6);margin-top:calc(var(--u)*1.3)}
+.lo-az .who i{width:calc(var(--u)*2);height:calc(var(--u)*2);border-radius:50%;background:var(--p);display:block;animation:bob 2.4s ease-in-out infinite}
+.lo-az .who i:nth-child(2n){background:var(--p2);animation-delay:.3s}.lo-az .who i:nth-child(3n){background:var(--lav4);animation-delay:.6s}
+.lo-ret{position:absolute;left:70%;top:4.545%;width:20%;z-index:2;text-align:center}
+.lo-ret svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 calc(var(--u)*2) rgba(142,32,226,.9))}
+.lo-ret .rg{transform-box:fill-box;transform-origin:center;animation:spin 9s linear infinite}
+.lo-ret span{display:inline-block;margin-top:calc(var(--u)*.6);font-size:max(9px,calc(var(--u)*1.5));color:var(--y);white-space:nowrap}
+.lo-shop{position:absolute;left:4%;top:30.5%;width:92%;background:#fff;color:var(--k);border-radius:calc(var(--u)*2);overflow:hidden;border:2.5px solid #95bf47;box-shadow:0 30px 60px -24px rgba(149,191,71,.55),0 0 0 calc(var(--u)*1.2) rgba(149,191,71,.08);z-index:2}
+.lo-shop .bar{display:flex;align-items:center;gap:calc(var(--u)*.7);padding:calc(var(--u)*1) calc(var(--u)*1.4);background:#f4f1f7;border-bottom:1.5px solid #e1d8ea}
+.lo-shop .bar > i{width:calc(var(--u)*1.1);height:calc(var(--u)*1.1);border-radius:50%;background:#cbbad8}
+.lo-shop .bar span{margin-left:calc(var(--u)*.8);display:inline-flex;align-items:center;gap:calc(var(--u)*.6);font-size:max(9px,calc(var(--u)*1.45));letter-spacing:.02em;text-transform:none;color:var(--body);background:#fff;border-radius:999px;padding:calc(var(--u)*.3) calc(var(--u)*1.4)}
+.lo-shop .bar svg{width:calc(var(--u)*1.1);height:auto;color:#5e8e3e}
+.lo-shop .bar img{margin-left:auto;height:calc(var(--u)*2.7);width:auto}
+.lo-shop .in{display:grid;grid-template-columns:36% 1fr;gap:calc(var(--u)*2);padding:calc(var(--u)*1.8) calc(var(--u)*2);align-items:start}
+.lo-shop .ph{border-radius:calc(var(--u)*1.4);overflow:hidden;background:#f1ebe3;aspect-ratio:1}
+.lo-shop .ph img{width:100%;height:100%;object-fit:cover;object-position:52% 40%;display:block;transform:scale(1.12)}
+.lo-shop .t{display:flex;flex-direction:column;gap:calc(var(--u)*.6);min-width:0}
+.lo-shop .nm{font-size:max(11px,calc(var(--u)*2.2));line-height:1.15;letter-spacing:-.01em}
+.lo-shop .st{color:#f3a847;font-size:max(9px,calc(var(--u)*1.5));letter-spacing:1px}
+.lo-shop .pr{font-weight:900;font-size:max(14px,calc(var(--u)*3.2));letter-spacing:-.03em;line-height:1}
+.lo-shop .op{display:flex;align-items:center;gap:calc(var(--u)*.8);font-size:max(9px,calc(var(--u)*1.55));font-weight:600;color:var(--body);border:1.5px solid #e6ddee;border-radius:calc(var(--u)*.9);padding:calc(var(--u)*.55) calc(var(--u)*1)}
+.lo-shop .op i{width:calc(var(--u)*1.3);height:calc(var(--u)*1.3);border-radius:50%;border:1.5px solid #bfb2cb;flex:0 0 auto}
+.lo-shop .op.on{border-color:var(--p2);background:#f7f0fd;color:var(--k)}
+.lo-shop .op.on i{border-color:var(--p2);background:radial-gradient(circle,var(--p2) 45%,transparent 50%)}
+.lo-shop .up{font-size:max(9px,calc(var(--u)*1.5));font-weight:700;color:var(--p)}
+.lo-shop .cta{align-self:stretch;text-align:center;background:var(--k);color:#fff;font-size:max(10px,calc(var(--u)*1.7));font-weight:800;padding:calc(var(--u)*1) calc(var(--u)*1.4);border-radius:999px;position:relative;margin-top:calc(var(--u)*.3)}
+.lo-shop .cta::after{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid var(--p2);animation:ping 2.4s ease-out infinite}
+.lo-list{position:absolute;left:0;top:77%;width:34%;display:flex;flex-direction:column;gap:calc(var(--u)*1);z-index:2}
+.lo-list span{display:flex;align-items:center;gap:calc(var(--u)*1);font-family:var(--m);font-size:max(9px,calc(var(--u)*1.5));letter-spacing:.06em;text-transform:uppercase;color:#d9d1df;background:rgba(255,255,255,.06);border:1.5px solid #3a3140;border-radius:999px;padding:calc(var(--u)*.6) calc(var(--u)*1.3) calc(var(--u)*.6) calc(var(--u)*.6)}
+.lo-list i{font-style:normal;font-family:var(--f);font-weight:900;font-size:max(9px,calc(var(--u)*1.45));background:#95bf47;color:var(--k);border-radius:999px;padding:calc(var(--u)*.2) calc(var(--u)*.8);animation:lopop 2.4s ease-in-out infinite}
+.lo-list span:nth-child(2) i{animation-delay:.15s}.lo-list span:nth-child(3) i{animation-delay:.3s}
+@keyframes lopop{0%,70%,100%{transform:scale(1)}80%{transform:scale(1.28)}}
+.lo-cust{position:absolute;left:37%;top:67.5%;width:63%;background:linear-gradient(160deg,#fff 0%,#f5ecfe 100%);color:var(--k);border-radius:calc(var(--u)*2.4);border:2.5px solid var(--p2);padding:calc(var(--u)*2) calc(var(--u)*2.2);box-shadow:0 30px 60px -20px rgba(142,32,226,.85);z-index:3}
+.lo-cust .top{display:flex;align-items:center;gap:calc(var(--u)*1.2)}
+.lo-cust .av{width:calc(var(--u)*4.6);height:calc(var(--u)*4.6);border-radius:50%;display:grid;place-items:center;background:linear-gradient(140deg,var(--p2),var(--pd));color:#fff;font-weight:900;font-size:max(10px,calc(var(--u)*1.7));flex:0 0 auto}
+.lo-cust .top b{display:block;font-size:max(11px,calc(var(--u)*2.1));line-height:1.1}
+.lo-cust small{display:block;font-size:max(8.5px,calc(var(--u)*1.3));color:var(--p);margin-top:2px}
+.lo-cust .ck{list-style:none;display:flex;flex-wrap:wrap;gap:calc(var(--u)*.6) calc(var(--u)*1.6);margin-top:calc(var(--u)*1.3)}
+.lo-cust .ck li{display:flex;align-items:center;gap:calc(var(--u)*.6);font-size:max(9.5px,calc(var(--u)*1.6));font-weight:700}
+.lo-cust .ck i{font-style:normal;width:calc(var(--u)*1.9);height:calc(var(--u)*1.9);border-radius:50%;background:#95bf47;color:#fff;display:grid;place-items:center;font-size:max(8px,calc(var(--u)*1.2))}
+.lo-cust .ck em{font-style:normal;font-weight:500;color:var(--mute)}
+.lo-cust .ord{list-style:none;margin-top:calc(var(--u)*1.2);border-top:1.5px dashed #d9c9e8;padding-top:calc(var(--u)*.9);display:grid;gap:calc(var(--u)*.45)}
+.lo-cust .ord li{display:flex;justify-content:space-between;gap:10px;font-size:max(9.5px,calc(var(--u)*1.55));color:var(--body);transition:opacity .45s,transform .45s}
+.lo-cust .ord li b{color:var(--k)}
+.lo-cust .ord li.off{opacity:.15;transform:translateX(-6px)}
+.lo-cust .ltv{display:flex;align-items:flex-end;gap:calc(var(--u)*1.2);margin-top:calc(var(--u)*1.1)}
+.lo-cust .ltv > span:first-child{font-family:var(--m);font-size:max(8.5px,calc(var(--u)*1.3));letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding-bottom:4px}
+.lo-cust .ltv b{font-weight:900;font-size:max(18px,calc(var(--u)*3.8));letter-spacing:-.04em;line-height:.9;color:var(--p)}
+.lo-cust .sp{margin-left:auto;display:flex;align-items:flex-end;gap:3px;height:calc(var(--u)*3.6)}
+.lo-cust .sp i{width:calc(var(--u)*1.3);height:var(--h);background:linear-gradient(0deg,var(--p),var(--p2));border-radius:3px 3px 0 0;transition:height .6s cubic-bezier(.2,.8,.2,1)}
+.lo-cust .sp i.off{height:6%}
+.lo-cust .lo-stamp{position:absolute;right:calc(var(--u)*-1.6);top:calc(var(--u)*-2.6);font-weight:900;font-size:max(9px,calc(var(--u)*1.45));letter-spacing:.04em;text-transform:uppercase;background:var(--y);color:var(--k);border:2px solid var(--k);border-radius:8px;padding:calc(var(--u)*.6) calc(var(--u)*1.1);transform:rotate(5deg);box-shadow:3px 3px 0 var(--k)}
+.lo-cust.hit{animation:lohit .7s ease-out}
+@keyframes lohit{0%{box-shadow:0 0 0 0 rgba(149,191,71,.9),0 30px 60px -20px rgba(142,32,226,.85)}100%{box-shadow:0 0 0 calc(var(--u)*2.4) rgba(149,191,71,0),0 30px 60px -20px rgba(142,32,226,.85)}}
+/* comparison */
+.lo-vs{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.lo-vs h4{font-weight:900;font-size:clamp(26px,2.4vw,40px);line-height:.92;letter-spacing:-.045em;text-transform:uppercase;color:#fff}
+.lo-vs h4 em{font-style:normal;color:var(--lav4)}
+.lo-vs table{width:100%;border-collapse:separate;border-spacing:0;margin-top:clamp(14px,1.6vw,22px);font-size:clamp(12.5px,.98vw,14.5px)}
+.lo-vs th,.lo-vs td{text-align:left;padding:clamp(7px,.75vw,11px) 10px;border-bottom:1px solid #2e2733;vertical-align:middle}
+.lo-vs thead th{font-family:var(--m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8c8197;font-weight:400;border-bottom:2px solid #3a3140;vertical-align:bottom}
+.lo-vs thead img{display:block;height:24px;width:auto;max-width:78px;object-fit:contain;background:#fff;border-radius:6px;padding:5px 7px;margin-bottom:7px}
+.lo-vs tbody th{font-family:var(--m);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#b9aec3;font-weight:400;padding-left:0;width:31%}
+.lo-vs td{color:#8c8197;font-weight:500}
+.lo-vs .own{background:rgba(142,32,226,.2);color:#fff;font-weight:800;border-left:2px solid var(--p2);border-right:2px solid var(--p2)}
+.lo-vs thead .own{color:var(--lav3);border-top:2px solid var(--p2);border-radius:14px 14px 0 0;border-bottom-color:var(--p2)}
+.lo-vs tbody tr:last-child .own{border-bottom:2px solid var(--p2);border-radius:0 0 14px 14px}
+.lo-vs td.own::before{content:"✓";display:inline-block;margin-right:7px;color:#95bf47;font-weight:900}
+.lo-fn{margin-top:14px;font-size:12.5px!important;line-height:1.45;color:#a99db3!important;max-width:none!important;font-weight:500!important}
+.lo-vs dl{margin-top:16px;padding-top:14px;font-size:14px;border-top-color:rgba(255,255,255,.9)}
+@media (min-width:901px){
+  html.js:not(.rm) .p3 .art{container-type:size;align-items:center}
+  html.js:not(.rm) .p3 .lo-stage{width:min(100cqw,calc(100cqh * 10 / 11))}
+}
+@media (min-width:901px) and (max-height:820px){
+  html.js:not(.rm) .lo-own li{font-size:12.5px}
+  html.js:not(.rm) .lo-own{gap:6px}
+  html.js:not(.rm) .panel.p3 .pcopy > div > p:not(.lo-lead){display:none}
+  html.js:not(.rm) .lo-vs dl{display:none}
+}
+@media (max-width:900px){
+  .panel.p3{width:100%;grid-template-columns:1fr}
+  .lo-stage{width:100%;aspect-ratio:auto;container-type:normal;display:flex;flex-direction:column;align-items:stretch;gap:0}
+  .lo-stage > *{--u:4.4px}
+  .lo-flow{display:none}
+  .lo-az > img{width:132px}
+  .lo-list{justify-content:center}
+  .lo-az,.lo-ret,.lo-shop,.lo-list,.lo-cust{position:relative;left:auto;top:auto;width:auto}
+  .lo-az{order:1} .lo-ret{order:2} .lo-shop{order:3} .lo-cust{order:4;margin-top:40px} .lo-list{order:5}
+  .lo-ret{align-self:center;width:84px;padding:22px 0}
+  .lo-ret::before,.lo-ret::after{content:"";position:absolute;left:50%;width:0;height:22px;border-left:2.5px dashed var(--lav4)}
+  .lo-ret::before{top:0}.lo-ret::after{bottom:0;border-left-color:#95bf47}
+  .lo-cust::before{content:"";position:absolute;left:50%;top:-42px;height:40px;border-left:2.5px dashed #95bf47}
+  .lo-list{flex-direction:row;flex-wrap:wrap;margin-top:14px;gap:8px}
+  .lo-cust .lo-stamp{right:10px;top:-14px}
+}
+.rm .lo-ln,.rm .lo-az .sig li i,.rm .lo-az .who i,.rm .lo-ret .rg,.rm .lo-shop .cta::after,.rm .lo-list i{animation:none!important}
 .hs-count{position:absolute;left:var(--gut);bottom:26px;font-family:var(--m);font-size:12px;letter-spacing:.12em;text-transform:uppercase;display:flex;gap:16px;align-items:center}
 .hs-count .bar{width:160px;height:3px;background:var(--lav3)}
 .hs-count .bar i{display:block;height:100%;width:0;background:var(--p)}
@@ -582,6 +669,7 @@ h1,h2,h3,blockquote,.card h3{word-spacing:.08em}
 .no-js .hs-sticky,.rm .hs-sticky{position:relative;height:auto;display:block;padding:90px 0 60px}
 .no-js .hs-track,.rm .hs-track{flex-wrap:wrap;height:auto;margin-top:0;transform:none!important}
 .no-js .panel,.rm .panel{min-height:560px}
+.no-js .panel.p3,.rm .panel.p3{width:100%}
 .no-js .hs-count,.rm .hs-count{display:none}
 
 /* ============ CREATIVE WALL ============ */
@@ -771,7 +859,7 @@ footer{background:var(--k);color:#fff;border-top:2px solid #241e28;padding-top:5
 }
 
 /* reduced motion */
-.rm .grain,.rm .tape .tr,.rm .stamp .spin,.rm .eyebrow .dot,.rm .logo-mq .lt,.rm .wrow .lt,.rm .ring .orb,.rm .ring .ch>*,.rm .ret,.rm .p3v .az .who i,.rm .p3v .shop .t b::after,.rm .hub .pulse,.rm .lo2 .flow,.rm .sbar .dot,.rm .p2v .scr .prg i{animation:none!important}
+.rm .grain,.rm .tape .tr,.rm .stamp .spin,.rm .eyebrow .dot,.rm .logo-mq .lt,.rm .wrow .lt,.rm .ring .orb,.rm .ring .ch>*,.rm .ret,.rm .hub .pulse,.rm .lo2 .flow,.rm .sbar .dot,.rm .p2v .scr .prg i{animation:none!important}
 .rm .lo-dot{display:none}
 .rm .card{position:relative;top:auto}
 .rm .wrow{overflow-x:auto}
@@ -873,14 +961,14 @@ footer{background:var(--k);color:#fff;border-top:2px solid #241e28;padding-top:5
 <!-- ============ TAPES ============ -->
 <section class="tapes" aria-label="Results, Jul 16 to Aug 15 2026, and the offer">
   <div class="tape" aria-hidden="true">
-    <div class="tr"><span>First 30 days free <i></i></span><span>6.03x portfolio ROAS <i></i></span><span>44% new-to-brand <em>(warm prospects)</em> <i></i></span><span>57% streaming new-to-brand <i></i></span><span>$1.35 blended CPC <i></i></span><span>$504k spend <em>Jul 16–Aug 15 2026</em> <i></i></span></div>
-    <div class="tr"><span>First 30 days free <i></i></span><span>6.03x portfolio ROAS <i></i></span><span>44% new-to-brand <em>(warm prospects)</em> <i></i></span><span>57% streaming new-to-brand <i></i></span><span>$1.35 blended CPC <i></i></span><span>$504k spend <em>Jul 16–Aug 15 2026</em> <i></i></span></div>
+    <div class="tr"><span>First 30 days free <i></i></span><span>6.03x portfolio ROAS <i></i></span><span>44% new-to-brand <em>(warm prospects)</em> <i></i></span><span>57% streaming new-to-brand <i></i></span><span>$1.35 blended CPC <i></i></span></div>
+    <div class="tr"><span>First 30 days free <i></i></span><span>6.03x portfolio ROAS <i></i></span><span>44% new-to-brand <em>(warm prospects)</em> <i></i></span><span>57% streaming new-to-brand <i></i></span><span>$1.35 blended CPC <i></i></span></div>
   </div>
   <div class="tape b" aria-hidden="true">
     <div class="tr"><span>No Retainers. No Creative Fees. <i></i></span><span>Free commercial-grade creative <i></i></span><span>Target Lock AI <i></i></span><span>Live in as little as 1 week <i></i></span><span>Streaming TV <i></i></span><span>Done for you <i></i></span></div>
     <div class="tr"><span>No Retainers. No Creative Fees. <i></i></span><span>Free commercial-grade creative <i></i></span><span>Target Lock AI <i></i></span><span>Live in as little as 1 week <i></i></span><span>Streaming TV <i></i></span><span>Done for you <i></i></span></div>
   </div>
-  <p class="sr">First 30 days free. Jul 16 to Aug 15 2026, $504k spend: portfolio ROAS 6.03x, warm prospects new-to-brand 44%, streaming new-to-brand 57%, blended CPC $1.35. No Retainers. No Creative Fees.</p>
+  <p class="sr">First 30 days free. Jul 16 to Aug 15 2026: portfolio ROAS 6.03x, warm prospects new-to-brand 44%, streaming new-to-brand 57%, blended CPC $1.35. No Retainers. No Creative Fees.</p>
 </section>
 
 <!-- ============ CLIENT LOGOS ============ -->
@@ -947,7 +1035,7 @@ footer{background:var(--k);color:#fff;border-top:2px solid #241e28;padding-top:5
     </div>
   </div>
   <div class="fun-foot">
-    <p>reMKTR portfolio · Jul 16–Aug 15 2026 · $504k spend. Past results, not a promise about yours.</p>
+    <p>reMKTR portfolio · Jul 16–Aug 15 2026. Past results, not a promise about yours.</p>
     <a class="btn lt mag" href="https://calendly.com/jayce-remktr/30min" target="_blank" rel="noopener">Grow both ends <span class="fr">30 days free</span> <span class="arr" aria-hidden="true">→</span></a>
   </div>
 </section>
@@ -1124,11 +1212,6 @@ footer{background:var(--k);color:#fff;border-top:2px solid #241e28;padding-top:5
   </div>
   <p class="cmo-line">Keeps the CMO <em>and</em> the CFO happy.</p>
 
-  <div class="plat">
-    <h3>Your brand can appear on <em>all of these.</em></h3>
-    <div class="plat-grid"><div class="pl"><img src="assets/streaming/prime-video.png" alt="" loading="lazy"><span>Prime Video<small>Amazon</small></span></div><div class="pl"><img src="assets/streaming/fire-tv.png" alt="" loading="lazy"><span>Fire TV<small>Amazon</small></span></div><div class="pl"><img src="assets/streaming/twitch.png" alt="" loading="lazy"><span>Twitch<small>Amazon</small></span></div><div class="pl"><span class="tx">TNF</span><span>Thursday Night Football<small>Amazon · Prime Video</small></span></div><div class="pl"><span class="tx">NBA</span><span>NBA on Prime<small>Amazon · Prime Video</small></span></div><div class="pl"><span class="tx">NAS<br>CAR</span><span>NASCAR on Prime<small>Amazon · Prime Video</small></span></div><div class="pl"><img src="assets/streaming/netflix.png" alt="" loading="lazy"><span>Netflix<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/disney-plus.png" alt="" loading="lazy"><span>Disney+<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/hulu.png" alt="" loading="lazy"><span>Hulu<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/espn.png" alt="" loading="lazy"><span>ESPN<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/max.png" alt="" loading="lazy"><span>HBO Max<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/paramount-plus.png" alt="" loading="lazy"><span>Paramount+<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/peacock.png" alt="" loading="lazy"><span>Peacock<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/tubi.png" alt="" loading="lazy"><span>Tubi<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/pluto-tv.png" alt="" loading="lazy"><span>Pluto TV<small>Partner</small></span></div><div class="pl"><img src="assets/streaming/roku.png" alt="" loading="lazy"><span>Roku<small>Partner</small></span></div><div class="pl"><span class="tx">WNBA</span><span>WNBA on Prime<small>Amazon · Prime Video</small></span></div><div class="pl"><span class="tx" style="background:#fff"><img src="assets/platforms/amazon-wordmark.svg" alt="" style="width:44px;height:auto;background:none;border-radius:0"></span><span>Amazon.com<small>Amazon</small></span></div></div>
-    <p class="qual">Amazon-owned properties plus partner streaming apps reachable through Amazon's audience network. Examples only: availability varies by market and deal, and marquee sports are sold separately in advance.</p>
-  </div>
 </section>
 
 <!-- ============ PRODUCTS ============ -->
@@ -1188,32 +1271,101 @@ footer{background:var(--k);color:#fff;border-top:2px solid #241e28;padding-top:5
         </div>
       </article>
 
-      <article class="panel p3">
+      <article class="panel p3" aria-labelledby="h-lo">
         <div class="pcopy">
           <div>
             <div class="pn"><i>03</i> Link Out</div>
-            <h3>Link Out.</h3>
-            <p>Amazon's audiences, sent to your own store. Amazon's shopper signals on one side, your Shopify storefront on the other. For brands that want the audience and the customer relationship.</p>
+            <h3 id="h-lo">Link Out.</h3>
+            <p class="lo-lead">Keep selling on Amazon. <em>Just stop renting every customer.</em></p>
+            <p>Link Out aims Amazon's high-intent audiences at your own store. The shopper who buys there is yours: on your list, in your data, one email away from the next order.</p>
           </div>
-          <dl><dt>Reaches</dt><dd>Amazon audiences</dd><dt>Sends them to</dt><dd>Your own site</dd><dt>Aimed by</dt><dd>Target Lock AI</dd></dl>
+          <ul class="lo-own" aria-label="What you own">
+            <li><b>The relationship.</b> First-party data, email and SMS lists, your retargeting pool</li>
+            <li><b>The repeat order.</b> Subscriptions and reorders on your terms</li>
+            <li><b>The basket.</b> Bundles, upsells and your own pricing</li>
+            <li><b>The whole funnel.</b> Analytics from first click to fifth order</li>
+            <li><b>The experience.</b> Your brand, your store, start to finish</li>
+            <li><b>More of the margin.</b> No marketplace referral fee on the order</li>
+          </ul>
         </div>
-        <div class="art" aria-hidden="true">
-          <div class="p3v">
-            <div class="az"><img src="assets/platforms/amazon-wordmark.svg" alt=""><div class="who"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>Amazon shopper audiences</span></div>
-            <svg class="path" viewBox="0 0 300 110" preserveAspectRatio="none">
-              <path id="loP" d="M70 0 C 70 70, 230 40, 230 110" fill="none" stroke="#D9C2F7" stroke-width="3" stroke-dasharray="3 9" vector-effect="non-scaling-stroke"/>
-              <g class="lo-dot"><circle r="6" fill="#8E20E2"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#loP"/></animateMotion></circle>
-              <circle r="6" fill="#D9C2F7"><animateMotion dur="2.4s" begin="-.8s" repeatCount="indefinite"><mpath href="#loP"/></animateMotion></circle>
-              <circle r="6" fill="#95bf47"><animateMotion dur="2.4s" begin="-1.6s" repeatCount="indefinite"><mpath href="#loP"/></animateMotion></circle></g>
+        <div class="art">
+          <div class="lo-stage" aria-hidden="true">
+            <svg class="lo-flow" viewBox="0 0 1000 1100" preserveAspectRatio="none">
+              <defs><linearGradient id="loG" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#8E20E2"/><stop offset="1" stop-color="#D9C2F7"/></linearGradient></defs>
+              <path id="loA" d="M470 150 C 580 150, 640 150, 760 150" class="lo-ln"/>
+              <path id="loB" d="M800 300 C 800 320, 760 325, 700 336" class="lo-ln"/>
+              <path id="loC" d="M250 690 C 250 790, 300 830, 370 850" class="lo-ln g"/>
+              <g class="lo-dot">
+                <circle r="9" fill="#8E20E2"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#loA"/></animateMotion></circle>
+                <circle r="7" fill="#D9C2F7"><animateMotion dur="1.8s" begin="-.6s" repeatCount="indefinite"><mpath href="#loA"/></animateMotion></circle>
+                <circle r="8" fill="#C9A8F2"><animateMotion dur="1.8s" begin="-1.2s" repeatCount="indefinite"><mpath href="#loA"/></animateMotion></circle>
+                <circle r="9" fill="#FCCC00"><animateMotion dur="1.8s" begin="-.3s" repeatCount="indefinite"><mpath href="#loB"/></animateMotion></circle>
+                <circle r="7" fill="#FCCC00"><animateMotion dur="1.8s" begin="-1.2s" repeatCount="indefinite"><mpath href="#loB"/></animateMotion></circle>
+                <circle r="10" fill="#95bf47"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#loC"/></animateMotion></circle>
+              </g>
             </svg>
-            <div class="shop">
-              <div class="bar"><i></i><i></i><i></i><span>yourbrand.com</span></div>
+
+            <div class="lo-az">
+              <img src="assets/platforms/amazon-wordmark.svg" alt="">
+              <span class="k">Shopper signals</span>
+              <ul class="sig"><li><i></i>Viewed · mushroom powder</li><li><i></i>Searched · “lion's mane”</li><li><i></i>Watched · Prime Video</li></ul>
+              <div class="who"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+
+            <div class="lo-ret">
+              <svg viewBox="0 0 100 100"><circle class="rg" cx="50" cy="50" r="46" fill="none" stroke="#D9C2F7" stroke-width="2" stroke-dasharray="4 7"/><circle cx="50" cy="50" r="30" fill="none" stroke="#fff" stroke-width="4"/><path d="M50 8v24M50 68v24M8 50h24M68 50h24" stroke="#fff" stroke-width="4"/><circle cx="50" cy="50" r="6" fill="#FCCC00"/></svg>
+              <span>Target Lock</span>
+            </div>
+
+            <div class="lo-shop">
+              <div class="bar"><i></i><i></i><i></i><span><svg viewBox="0 0 10 12"><path d="M2 5V3.5a3 3 0 0 1 6 0V5M1 5h8v6H1z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>yourbrand.com</span><img src="assets/platforms/shopify-logo.svg" alt=""></div>
               <div class="in">
-                <img class="p" src="assets/video/ocean-product-still.jpg" alt="">
-                <div class="t"><img src="assets/platforms/shopify-logo.svg" alt=""><i></i><i style="width:60%"></i><b>Add to cart</b></div>
+                <div class="ph"><img src="assets/video/naturealm-sacred7-podcast-poster.jpg" alt=""></div>
+                <div class="t">
+                  <b class="nm">Organic mushroom blend</b>
+                  <span class="st">★★★★★</span>
+                  <span class="pr">$34.99</span>
+                  <span class="op"><i></i>One-time purchase</span>
+                  <span class="op on"><i></i>Subscribe · every 30 days</span>
+                  <span class="up">+ Add the 3-pack bundle</span>
+                  <span class="cta">Add to cart</span>
+                </div>
               </div>
             </div>
+
+            <div class="lo-list">
+              <span><i>+1</i>Email list</span>
+              <span><i>+1</i>SMS list</span>
+              <span><i>+1</i>Retargeting pool</span>
+            </div>
+
+            <div class="lo-cust">
+              <div class="top"><span class="av">JM</span><div><b>Jordan M.</b><small>Owned customer · example</small></div></div>
+              <ul class="ck"><li><i>✓</i>Email <em>j•••@gmail.com</em></li><li><i>✓</i>SMS <em>(•••) •••-4410</em></li></ul>
+              <ol class="ord" id="loOrd">
+                <li><span>#1001 · First order</span><b>$34.99</b></li>
+                <li><span>#1024 · Subscription</span><b>$34.99</b></li>
+                <li><span>#1058 · 3-pack bundle</span><b>$89.97</b></li>
+              </ol>
+              <div class="ltv"><span>Lifetime value</span><b id="loLtv">$159.95</b><span class="sp" id="loSp"><i style="--h:22%"></i><i style="--h:44%"></i><i style="--h:100%"></i></span></div>
+              <span class="lo-stamp">Yours to remarket</span>
+            </div>
           </div>
+        </div>
+        <div class="lo-vs">
+          <h4>Same shopper.<br><em>Two outcomes.</em></h4>
+          <table>
+            <thead><tr><th scope="col"><span class="sr">Compare</span></th><th scope="col"><img src="assets/platforms/amazon-wordmark.svg" alt="">Marketplace sale</th><th scope="col" class="own"><img src="assets/platforms/shopify-logo.svg" alt="">Owned sale</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Customer data</th><td>Amazon's</td><td class="own">Yours</td></tr>
+              <tr><th scope="row">Repeat purchase</th><td>Re-buy the click</td><td class="own">Email them, free</td></tr>
+              <tr><th scope="row">Fees</th><td>Referral + FBA</td><td class="own">Your payment processor</td></tr>
+              <tr><th scope="row">Pricing &amp; bundles</th><td>Marketplace rules</td><td class="own">Your terms</td></tr>
+              <tr><th scope="row">Brand experience</th><td>One listing of many</td><td class="own">Your whole store</td></tr>
+            </tbody>
+          </table>
+          <p class="lo-fn">Amazon's referral fee is 15% in most categories, plus fulfilment fees on FBA orders. Link Out sends shoppers to the store you already run: we build and aim the ads, you keep the customer.</p>
+          <dl><dt>Reaches</dt><dd>Amazon's high-intent audiences</dd><dt>Sends them to</dt><dd>Your own store</dd><dt>Aimed by</dt><dd>Target Lock AI</dd></dl>
         </div>
       </article>
     </div>
@@ -1260,7 +1412,7 @@ footer{background:var(--k);color:#fff;border-top:2px solid #241e28;padding-top:5
     <div class="stat"><div class="v" data-count="57" data-suf="%" data-dec="0">57%</div><div class="l"><b>Streaming new-to-brand</b><span>Our best NTB product</span></div></div>
     <div class="stat"><div class="v" data-count="1.35" data-pre="$" data-dec="2">$1.35</div><div class="l"><b>Blended CPC</b><span>All products</span></div></div>
   </div>
-  <div class="period"><span>Period <b>Jul 16 – Aug 15 2026</b></span><span>Spend <b>$504k</b></span><span>Source <b>reMKTR portfolio</b></span></div>
+  <div class="period"><span>Period <b>Jul 16 – Aug 15 2026</b></span><span>Source <b>reMKTR portfolio</b></span></div>
 
   <div class="bigquote">
     <svg class="seal" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="96" fill="none" stroke="#D9C2F7" stroke-width="6"/><circle cx="100" cy="100" r="80" fill="none" stroke="#D9C2F7" stroke-width="2" stroke-dasharray="3 7"/><text x="100" y="92" text-anchor="middle" font-family="Poppins" font-weight="900" font-size="48" fill="#fff" letter-spacing="-2">6x+</text><text x="100" y="124" text-anchor="middle" font-family="DM Mono" font-size="14" fill="#D9C2F7" letter-spacing="2">JULY 2026</text></svg>
@@ -1926,7 +2078,7 @@ window.addEventListener('DOMContentLoaded', function(){
   var mqSkew = gsap.quickTo('.logo-mq', 'skewX', { duration: .4, ease: 'power3' });
   ScrollTrigger.create({ onUpdate: function(self){ var v = self.getVelocity(); skewTo(clamp(v / -300, -12, 12)); mqSkew(clamp(v / -400, -8, 8)); } });
 
-  gsap.utils.toArray('.sec-head h2, .offer h2, .faq h2, .doors h2, .panel.intro h2, .stv-copy h2, .plat h3, .net h3').forEach(function(h){
+  gsap.utils.toArray('.sec-head h2, .offer h2, .faq h2, .doors h2, .panel.intro h2, .stv-copy h2, .net h3').forEach(function(h){
     gsap.from(h, { yPercent: 40, opacity: 0, skewY: 4, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 88%' } });
   });
 
@@ -1961,7 +2113,6 @@ window.addEventListener('DOMContentLoaded', function(){
   gsap.from('.ring', { scale: .6, opacity: 0, rotate: -40, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.net', start: 'top 80%' } });
   gsap.from('.vs > div', { y: 60, opacity: 0, stagger: .12, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.vs', start: 'top 85%' } });
   gsap.from('.cmo .who', { scale: 0, rotate: -12, stagger: .2, duration: .8, ease: 'back.out(2)', scrollTrigger: { trigger: '.cmo', start: 'top 85%' } });
-  gsap.from('.pl', { y: 30, opacity: 0, stagger: .03, duration: .6, ease: 'power3.out', scrollTrigger: { trigger: '.plat-grid', start: 'top 88%' } });
   gsap.from('.bigtv', { rotateY: -18, x: -60, opacity: 0, duration: 1.3, ease: 'expo.out', scrollTrigger: { trigger: '.stv-hero', start: 'top 80%' } });
   gsap.from('.cr-hero h2 .ln', { yPercent: 110, opacity: 0, skewY: 6, stagger: .12, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '.cr-hero', start: 'top 80%' } });
   gsap.fromTo('.cr-hero .fr', { scale: 2.6, rotate: 14, opacity: 0 }, { scale: 1, rotate: -2.5, opacity: 1, duration: .65, ease: 'power4.in', delay: .35, scrollTrigger: { trigger: '.cr-hero', start: 'top 75%' } });
@@ -1970,6 +2121,41 @@ window.addEventListener('DOMContentLoaded', function(){
 
   window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
 });
+</script>
+<script>
+/* Link Out panel: an owned customer's orders land one by one and LTV climbs. Static final state without JS or with reduced motion. */
+(function(){
+  var root = document.documentElement;
+  if (root.classList.contains('rm')) return;
+  var ord = document.getElementById('loOrd'), ltv = document.getElementById('loLtv'), sp = document.getElementById('loSp');
+  if (!ord || !ltv || !sp) return;
+  var card = ord.closest('.lo-cust'), rows = ord.querySelectorAll('li'), bars = sp.querySelectorAll('i');
+  var vals = [34.99, 34.99, 89.97], shown = 0, cur = 0, timer = null, raf = null;
+  function fmt(v){ return '$' + v.toFixed(2); }
+  function countTo(target){
+    cancelAnimationFrame(raf);
+    var from = cur, t0 = performance.now();
+    (function step(now){
+      var t = Math.min(1, (now - t0) / 700), e = 1 - Math.pow(1 - t, 3);
+      cur = from + (target - from) * e; ltv.textContent = fmt(cur);
+      if (t < 1) raf = requestAnimationFrame(step);
+    })(t0);
+  }
+  function render(){
+    var sum = 0;
+    for (var i = 0; i < rows.length; i++){
+      var on = i < shown; rows[i].classList.toggle('off', !on); bars[i].classList.toggle('off', !on);
+      if (on) sum += vals[i];
+    }
+    countTo(Math.round(sum * 100) / 100);
+    card.classList.remove('hit'); void card.offsetWidth; card.classList.add('hit');
+  }
+  function tick(){ shown = shown >= rows.length ? 1 : shown + 1; render(); timer = setTimeout(tick, shown === rows.length ? 4200 : 2400); }
+  function start(){ if (timer) return; shown = 0; cur = 0; tick(); }
+  function stop(){ clearTimeout(timer); timer = null; }
+  if (!('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(en){ en[0].isIntersecting ? start() : stop(); }, { threshold: 0.25 }).observe(card);
+})();
 </script>
 <link rel="stylesheet" href="/ava/ava-widget.css">
 <script src="/ava/ava-widget.js" data-agent="jacob" defer></script>
