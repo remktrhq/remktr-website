@@ -2359,6 +2359,13 @@ var CALENDLY_URL = (window.REMKTR_TRACKING && window.REMKTR_TRACKING.bookingUrl)
   modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
   if (location.hash === '#apply') openModal();
+  // Google sitelinks land on ?section=how-it-works|target-lock|streaming-tv|book (2026-10-05)
+  var section = (params.get('section') || '').toLowerCase();
+  if (section === 'book') { openModal(); }
+  else if (section) {
+    var target = document.getElementById({ 'how-it-works': 'h-gets', 'target-lock': 'h-proof', 'streaming-tv': 'h-gets' }[section] || '');
+    if (target) setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
+  }
 
   function openCalendly(data) {
     // prefill name/email/phone + Jayce's booking questions (a1..a7) so the answers show on the booking (tracking.js: remktrLead)
