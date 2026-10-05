@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://remktr.com/growthleak-a/">
+<title>Free Growth Leak Audit | reMKTR</title>
+<meta name="description" content="Watch the 6-minute Growth Leak breakdown, then book a free audit call on your Amazon account. First 30 days free if we're a fit. No retainers. No creative fees.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5E8FF">
+<link rel="icon" href="/growthleak-assets/assets/v2/favicon.png">
+<!--
+  GROWTH LEAK VSL PAGE, v2 (2026-10-02)
+  Redesign of offers/undercut-vsl-below-video.html in the remktr.com design language (lavender + ink + purple,
+  Poppins 900 uppercase headlines, DM Mono pill tags, sticker cards with 3px ink border + offset shadow),
+  kept minimal: logo + one CTA, no site nav, eight short sections.
+
+  KEPT FROM v1 (do not break):
+    - assets/tracking.js (Meta pixel, GA4, Clarity, X; landing_page_view, cta_click/InitiateCheckout,
+      application_submitted/Lead, booking_scheduled/Schedule, scroll_50, engaged_30s)
+    - body[data-offer], every booking CTA carries data-cta="book-call"
+    - VARIANTS headline mechanism (?v=a|b|c|d, ?debug=1 shows the badge)
+    - #apply-form (application form) -> Calendly popup (https://calendly.com/jayce-remktr/30min), now in a modal
+    - VSL watch-depth events vsl_play / vsl_25 / vsl_50 / vsl_75 / vsl_100
+
+  NUMBERS: copied from remktr.com "Receipts, not charts" (live + repo commit ffdd83d, 2026-09-28):
+    6.03x portfolio ROAS, 44% NTB warm prospects, 57% streaming NTB, $1.35 blended CPC, Jul 16 - Aug 15 2026, reMKTR portfolio.
+    The site source carries an internal note that these are "to re-verify before publishing" - same status here.
+  COPY RULES: no "platform fees", no attack on %-of-spend pricing, no "DSP", no "second auction"/"two auctions",
+    no free-creative claims, no invented stats/testimonials, logos only from remktr.com assets/clients.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --lav:#F5E8FF; --lav2:#EBDDFB; --lav3:#D9C2F7; --lav4:#C9A8F2;
+  --k:#131015; --k2:#1b1620; --k3:#241d2b; --body:#4a404e; --mute:#8c8197;
+  --p:#6E19AD; --p2:#8E20E2; --pd:#360958; --y:#FCCC00;
+  --gut:clamp(16px,4vw,56px);
+  --max:1180px;
+  --f:'Poppins',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --m:'DM Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--lav);scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--lav);color:var(--k);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--p2);color:#fff}
+.wrap{max-width:calc(var(--max) + 2 * var(--gut));margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--p2);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+/* ---------- shared type ---------- */
+.tag{display:inline-block;font-family:var(--m);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border:1.5px solid currentColor;border-radius:999px;color:var(--p);margin-bottom:20px}
+.h2{font-weight:900;font-size:clamp(40px,6.4vw,104px);line-height:.88;letter-spacing:-.055em;word-spacing:.08em;text-transform:uppercase}
+.h2 em{font-style:normal;color:var(--p)}
+.lead{font-size:clamp(16px,1.35vw,19px);color:var(--body);font-weight:500;max-width:520px}
+section{position:relative}
+
+/* ---------- buttons (remktr.com .btn) ---------- */
+.btn{display:inline-flex;align-items:center;gap:16px;background:var(--k);color:#fff;text-decoration:none;font-weight:800;font-size:clamp(18px,1.7vw,24px);letter-spacing:-.015em;padding:18px 20px 18px 30px;border-radius:999px;border:3px solid var(--k);box-shadow:6px 6px 0 var(--p);transition:box-shadow .2s,transform .2s;cursor:pointer;font-family:var(--f)}
+.btn:hover{box-shadow:2px 2px 0 var(--p);transform:translate(2px,2px)}
+.btn .fr{background:var(--lav3);color:var(--pd);border-radius:8px;padding:2px 10px;margin-left:-4px;white-space:nowrap}
+.btn .arr{display:inline-grid;place-items:center;flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--p2);color:#fff;font-size:22px;transition:transform .3s}
+.btn:hover .arr{transform:rotate(-45deg)}
+.btn.pp{background:var(--p);box-shadow:6px 6px 0 var(--k)}
+.btn.pp .fr{background:#fff;color:var(--p)}
+.btn.pp .arr{background:#fff;color:var(--p)}
+.btn-note{font-family:var(--m);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--body);display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-top:22px}
+.btn-note span{display:inline-flex;align-items:center;gap:7px}
+.btn-note span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--p2)}
+
+/* ---------- 1. top bar ---------- */
+.top{position:sticky;top:0;z-index:50;padding:12px 0;background:rgba(245,232,255,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--k);text-decoration:none;padding:5px 14px 5px 6px;border-radius:999px;border:2px solid var(--k);box-shadow:3px 3px 0 var(--k);font-weight:900;font-size:19px;letter-spacing:-.045em;line-height:1}
+.logo img{width:30px;height:30px;border-radius:50%;background:var(--k);padding:4px 3px 2px;object-fit:contain}
+.logo small{font-size:.66em;font-weight:900;letter-spacing:-.02em}
+.top-cta{display:inline-flex;align-items:center;gap:6px;background:var(--k);color:#fff;text-decoration:none;font-weight:800;font-size:13.5px;padding:11px 18px;border-radius:999px;white-space:nowrap;transition:background .2s}
+.top-cta b{color:var(--lav3);font-weight:800}
+.top-cta:hover{background:var(--p)}
+
+/* ---------- 2. hero + VSL ---------- */
+.hero{text-align:center;padding:clamp(28px,4.5vw,64px) 0 clamp(56px,7vw,100px);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(110,25,173,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(110,25,173,.07) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(70% 60% at 50% 30%,#000,transparent);mask-image:radial-gradient(70% 60% at 50% 30%,#000,transparent);pointer-events:none}
+.hero .wrap{position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--m);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.7);border:1.5px solid var(--k);border-radius:999px;padding:7px 14px}
+.eyebrow .dot{width:9px;height:9px;border-radius:50%;background:var(--p2);box-shadow:0 0 0 4px rgba(142,32,226,.2);animation:pulse 1.4s infinite;flex:0 0 auto}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(142,32,226,0)}}
+h1.headline{font-weight:900;font-size:clamp(40px,6.2vw,100px);line-height:.88;letter-spacing:-.055em;word-spacing:.08em;text-transform:uppercase;margin:22px auto 20px;max-width:1150px}
+h1.headline .l1,h1.headline .l2{display:block}
+h1.headline .l2{color:var(--p)}
+p.promise{font-size:clamp(17px,1.5vw,21px);font-weight:500;color:var(--body);max-width:640px;margin:0 auto}
+.vsl{position:relative;max-width:1040px;margin:clamp(30px,4vw,48px) auto 0;aspect-ratio:16/9;border:3px solid var(--k);border-radius:clamp(14px,2vw,24px);overflow:hidden;background:var(--k);box-shadow:10px 10px 0 var(--p)}
+.vsl video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.vsl-play{position:absolute;inset:0;z-index:2;width:100%;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(180deg,rgba(19,16,21,0) 30%,rgba(19,16,21,.55) 100%);font-family:var(--f)}
+.vsl-play img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+.vsl-play .pb{width:clamp(66px,8vw,100px);height:clamp(66px,8vw,100px);border-radius:50%;background:var(--p2);border:3px solid var(--k);box-shadow:5px 5px 0 var(--k);display:grid;place-items:center;transition:transform .25s}
+.vsl-play .pb svg{width:36%;height:36%;margin-left:8%;color:#fff}
+.vsl-play:hover .pb{transform:scale(1.07)}
+.vsl-play .lbl{font-family:var(--m);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--k);background:#fff;border:2px solid var(--k);border-radius:999px;padding:7px 14px}
+.vsl-play.hidden{display:none}
+.hero-cta{margin-top:clamp(34px,4vw,48px)}
+
+/* ---------- 3. logos + family ---------- */
+.brands{padding:0 0 clamp(64px,8vw,110px);text-align:center}
+.brands .tag{color:var(--body)}
+.mq{display:flex;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mq .lt{display:flex;flex:0 0 auto;align-items:center;gap:clamp(36px,4vw,64px);padding-right:clamp(36px,4vw,64px);animation:mq 70s linear infinite}
+.mq:hover .lt{animation-play-state:paused}
+.mq img{height:var(--h,34px);width:auto;max-width:150px;object-fit:contain;filter:grayscale(1) contrast(1.1);opacity:.62;transition:filter .3s,opacity .3s}
+.mq img:hover{filter:none;opacity:1}
+@keyframes mq{to{transform:translateX(-100%)}}
+.family{max-width:1040px;margin:clamp(36px,4vw,52px) auto 0;display:flex;align-items:center;gap:clamp(16px,2.4vw,28px);background:var(--k);color:#fff;border-radius:22px;padding:clamp(18px,2.4vw,28px) clamp(20px,3vw,36px);text-align:left}
+.family img{width:clamp(48px,5vw,66px);height:auto;flex:0 0 auto}
+.family p{font-weight:800;font-size:clamp(18px,2vw,28px);line-height:1.12;letter-spacing:-.03em}
+.family p b{color:var(--lav4);font-weight:800}
+
+/* ---------- 4. what the call gives you ---------- */
+.gets{padding:clamp(64px,8vw,120px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4vw,56px)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,24px)}
+.card{background:#fff;border:3px solid var(--k);border-radius:24px;box-shadow:6px 6px 0 var(--k);padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:8px 10px 0 var(--p)}
+.card .n{font-weight:900;font-size:clamp(54px,5vw,80px);line-height:.8;letter-spacing:-.07em;color:var(--p)}
+.card h3{font-weight:900;font-size:clamp(22px,2vw,30px);line-height:.95;letter-spacing:-.035em;text-transform:uppercase;margin-top:8px}
+.card p{font-size:15.5px;color:var(--body)}
+.card .mono{font-family:var(--m);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--p);margin-top:auto;padding-top:6px}
+
+/* ---------- 5. receipts ---------- */
+.receipts{padding:clamp(40px,6vw,90px) 0 clamp(64px,8vw,120px)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:3px solid var(--k)}
+.stat{padding:clamp(22px,3vw,44px) 0;border-bottom:3px solid var(--k)}
+.stat:nth-child(odd){padding-right:clamp(16px,3vw,40px);border-right:3px solid var(--k)}
+.stat:nth-child(even){padding-left:clamp(16px,3vw,40px)}
+.stat .v{font-weight:900;font-size:clamp(60px,10vw,168px);line-height:.82;letter-spacing:-.065em;color:var(--p);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat .l{display:flex;justify-content:space-between;gap:6px 14px;margin-top:16px;align-items:baseline;flex-wrap:wrap}
+.stat .l b{font-weight:800;font-size:clamp(16px,1.6vw,23px);text-transform:uppercase;letter-spacing:-.02em}
+.stat .l span{font-family:var(--m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--body)}
+.period{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:22px;font-family:var(--m);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--body)}
+.period b{color:var(--p);font-weight:500}
+.disclaim{margin-top:12px;font-size:14px;color:var(--body);max-width:760px}
+
+/* ---------- 6. offer: guarantee + doctrine ---------- */
+.offer{background:linear-gradient(180deg,var(--lav2),var(--lav3));padding:clamp(70px,9vw,140px) 0;overflow:hidden}
+.offer .h2 .d30{display:inline-block;background:var(--k);color:#fff;padding:0 .08em;border-radius:.06em;transform:rotate(-2deg)}
+.offer-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,72px);margin-top:clamp(32px,4vw,56px);align-items:center}
+.offer-grid .lead{max-width:560px}
+.offer-grid .lead+.lead{margin-top:14px}
+.guar{margin-top:30px;background:var(--k);color:#fff;border-radius:24px;padding:clamp(22px,3vw,34px);border:3px solid var(--k);box-shadow:8px 8px 0 var(--p);position:relative;overflow:hidden}
+.guar .k{font-family:var(--m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--lav4)}
+.guar q{display:block;quotes:none;font-weight:900;font-size:clamp(26px,2.8vw,42px);line-height:.95;letter-spacing:-.04em;text-transform:uppercase;margin-top:10px;max-width:92%}
+.guar q em{font-style:normal;color:var(--lav3)}
+.guar small{display:block;margin-top:14px;font-size:14px;color:#cfc6d6}
+.guar svg{position:absolute;right:-22px;bottom:-22px;width:120px;opacity:.22}
+.doctrine{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.doctrine .sd{display:inline-block;border:6px solid var(--k);border-radius:18px;padding:clamp(14px,1.8vw,24px) clamp(18px,2.6vw,36px);font-weight:900;font-size:clamp(24px,4.2vw,64px);line-height:.92;letter-spacing:-.05em;text-transform:uppercase;transform:rotate(-3deg);position:relative;background:rgba(255,255,255,.4)}
+.doctrine .sd::before{content:"";position:absolute;inset:6px;border:2px solid var(--k);border-radius:10px;pointer-events:none}
+.doctrine .free{display:inline-block;background:var(--p);color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:-.04em;font-size:clamp(20px,2.6vw,40px);line-height:1;padding:.24em .5em;border-radius:14px;transform:rotate(2deg);box-shadow:6px 6px 0 var(--k)}
+
+/* ---------- 7. team ---------- */
+.team{padding:clamp(64px,8vw,110px) 0}
+.team .sec-head{margin-bottom:clamp(26px,3vw,40px)}
+.team .h2{font-size:clamp(34px,4.6vw,72px)}
+.people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
+.person{display:flex;gap:16px;align-items:center;background:#fff;border:2px solid var(--k);border-radius:20px;padding:16px 18px;box-shadow:4px 4px 0 var(--k)}
+.person img{width:72px;height:72px;border-radius:50%;object-fit:cover;flex:0 0 auto;border:2px solid var(--k)}
+.person b{display:block;font-weight:800;font-size:18px;letter-spacing:-.02em;line-height:1.15}
+.person .r{display:block;font-family:var(--m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--p);margin:3px 0 6px}
+.person p{font-size:13.5px;line-height:1.45;color:var(--body)}
+
+/* ---------- 8. FAQ ---------- */
+.faq{background:var(--k);color:#fff;padding:clamp(70px,9vw,130px) 0}
+.faq-grid{display:grid;grid-template-columns:.8fr 1.4fr;gap:clamp(30px,5vw,80px)}
+.faq .h2{font-size:clamp(44px,6.4vw,104px);position:sticky;top:96px;align-self:start}
+.faq .h2 em{color:var(--lav4)}
+details{border-top:2px solid #3a3140}
+details:last-child{border-bottom:2px solid #3a3140}
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-weight:800;font-size:clamp(18px,1.8vw,25px);letter-spacing:-.025em;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary .pm{flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:var(--lav);color:var(--k);display:grid;place-items:center;font-size:24px;font-weight:600;line-height:1;transition:transform .3s,background .3s}
+details[open] summary .pm{transform:rotate(45deg);background:var(--p2);color:#fff}
+details .a{padding:0 56px 26px 0;font-size:17px;font-weight:500;color:#d9d1df;max-width:720px}
+
+/* ---------- 9. closer ---------- */
+.final{background:radial-gradient(70% 60% at 50% 50%,#E2CCFA 0%,var(--lav) 70%);text-align:center;padding:clamp(90px,12vw,170px) 0 clamp(100px,12vw,170px);overflow:hidden}
+.final .ret{position:absolute;left:50%;top:50%;width:min(120vw,1100px);aspect-ratio:1;transform:translate(-50%,-50%);opacity:.14;pointer-events:none}
+.final .wrap{position:relative}
+.final h2{font-weight:900;font-size:min(22vw,280px);line-height:.8;letter-spacing:-.07em;text-transform:uppercase}
+.final h2 em{font-style:normal;color:var(--p)}
+.final p{font-size:clamp(17px,1.6vw,22px);font-weight:600;max-width:640px;margin:26px auto 36px}
+
+/* ---------- footer ---------- */
+.foot{background:var(--k);color:#8c8197;padding:44px 0 48px;font-size:12px;line-height:1.6}
+.foot .row{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+.foot .brand{display:flex;align-items:center;gap:12px;color:var(--lav3);font-weight:900;font-size:30px;letter-spacing:-.06em}
+.foot .brand img{width:46px;height:auto}
+.foot .meta{font-family:var(--m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-align:right}
+.foot a{color:#cfc6d6}
+.foot p+p{margin-top:8px}
+
+/* ---------- sticky book-a-call bar (all widths, always visible) ---------- */
+.sbar{display:flex;position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(680px,calc(100% - 24px));z-index:60;align-items:center;gap:12px;background:rgba(19,16,21,.95);border:1.5px solid rgba(217,194,247,.35);border-radius:999px;padding:7px 7px 7px 22px;box-shadow:0 18px 40px -12px rgba(54,9,88,.7)}
+.sbar .t{display:flex;flex-direction:column;line-height:1.15;color:#fff;min-width:0}
+.sbar .t b{font-weight:800;font-size:15px}
+.sbar .t span{font-family:var(--m);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--lav4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sbar a{margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--p2),var(--p));color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:13px 22px;border-radius:999px;white-space:nowrap}
+.sbar a:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.foot{padding-bottom:120px}
+
+/* ---------- application modal ---------- */
+[hidden]{display:none!important}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(19,16,21,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;padding:clamp(16px,5vh,60px) 16px;display:none}
+.modal.open{display:block}
+.mcard{position:relative;max-width:600px;margin:0 auto;background:#fff;border:3px solid var(--k);border-radius:26px;box-shadow:10px 10px 0 var(--p);padding:clamp(22px,3vw,34px)}
+.mclose{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:2px solid var(--k);background:var(--lav);color:var(--k);font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;font-family:var(--f)}
+.msteps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;padding-right:44px}
+.msteps span{font-family:var(--m);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid #cdbfdc;color:var(--mute);border-radius:999px;padding:5px 10px}
+.msteps span.on{border-color:var(--k);background:var(--k);color:#fff}
+.mcard h3{font-weight:900;font-size:clamp(26px,3vw,36px);line-height:.92;letter-spacing:-.045em;text-transform:uppercase}
+.mcard h3 em{font-style:normal;color:var(--p)}
+.mcard .sub{font-size:14.5px;color:var(--body);margin:10px 0 18px}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px;margin-bottom:14px}
+.fgrid .field{display:grid;grid-row:span 2;grid-template-rows:subgrid;row-gap:6px;min-width:0;margin:0}
+.fgrid .full{grid-column:1/-1}
+.field label{display:block;align-self:end;font-family:var(--m);font-size:10.5px;line-height:1.35;letter-spacing:.1em;text-transform:uppercase;color:var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.field input,.field select{display:block;width:100%;height:50px;box-sizing:border-box;font-family:var(--f);font-size:16px;color:var(--k);padding:0 14px;border:2px solid var(--k);border-radius:12px;background:#fff;appearance:none;-webkit-appearance:none;text-overflow:ellipsis}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23131015' stroke-width='1.8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.field input:focus,.field select:focus{outline:none;border-color:var(--p2);box-shadow:3px 3px 0 var(--p2)}
+.field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:#c4002b}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+@media (max-width:560px){.fgrid{grid-template-columns:1fr}.fgrid .full{grid-column:auto}}
+.form-error{display:none;color:#c4002b;font-size:13px;font-weight:600;margin:4px 0 10px}
+.consent{font-size:11.5px;color:var(--mute);line-height:1.5;margin:6px 0 16px}
+.consent a{color:var(--p)}
+.msubmit{width:100%;justify-content:space-between;font-size:18px;padding:12px 12px 12px 24px;box-shadow:5px 5px 0 var(--p)}
+.msubmit .arr{width:42px;height:42px}
+.done{display:none;text-align:left}
+.done .btn{margin-top:18px}
+html.locked,html.locked body{overflow:hidden}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .cards{grid-template-columns:1fr}
+  .offer-grid{grid-template-columns:1fr}
+  .people{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .faq .h2{position:static}
+  details .a{padding-right:0}
+}
+@media (max-width:760px){
+  .stats{grid-template-columns:1fr}
+  .stat:nth-child(odd){border-right:none;padding-right:0}
+  .stat:nth-child(even){padding-left:0}
+  .sec-head{margin-bottom:28px}
+  .eyebrow{font-size:10.5px;padding:6px 11px;gap:8px}
+  .vsl{box-shadow:6px 6px 0 var(--p)}
+  .vsl-play .lbl{font-size:10px;padding:5px 10px}
+  .btn{font-size:17px;padding:14px 14px 14px 22px;gap:12px}
+  .btn .arr{width:40px;height:40px;font-size:20px}
+  .family{flex-direction:row;align-items:flex-start}
+  .foot .meta{text-align:left}
+  .sbar{padding-left:16px}.sbar .t b{font-size:13.5px}.sbar .t span{font-size:9.5px}.sbar a{font-size:14px;padding:12px 16px}
+
+}
+@media (max-width:440px){
+  .xs-hide{display:none}
+  .top-cta{font-size:13px;padding:10px 14px}
+  .hero-cta .btn,.final .btn{width:100%;justify-content:space-between}
+  .btn-note{font-size:10.5px;gap:6px 12px}
+  .sbar .t span{display:none}
+}
+</style>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</head>
+<body data-offer="growth-leak-a">
+
+<!-- ============ 1. TOP BAR: logo + one CTA, no nav ============ -->
+<header class="top">
+  <div class="wrap">
+    <span class="logo" aria-label="reMKTR"><img src="/growthleak-assets/assets/v2/rm-icon.png" alt="" width="30" height="30"><span aria-hidden="true"><small>RE</small>MKTR</span></span>
+    <a class="top-cta" href="#apply" data-cta="book-call" data-cta-pos="topbar">Book a call <b class="xs-hide">· first 30 days free</b></a>
+  </div>
+</header>
+
+<main>
+<!-- ============ 2. HERO + VSL ============ -->
+<section class="hero" aria-labelledby="h-hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot" aria-hidden="true"></span>For Amazon brands doing 7 figures+</div>
+    <!-- Headline + promise are swapped by VARIANTS (?v=a|b|c|d) in the script at the bottom -->
+    <h1 class="headline" id="h-hero"><span class="l1">Find your growth leak.</span> <span class="l2">Then plug it.</span></h1>
+    <p class="promise">A free 30-minute audit of your Amazon account. You leave with the number, and the plan.</p>
+
+    <div class="vsl">
+      <!--
+        VSL SWAP POINT: to replace the video, change ONLY the src on the <source data-video> line
+        (and the poster, if the new cut has its own first frame). Current file: Jayce's Growth Leak VSL v2.2, cut 1,
+        self-hosted 720p (5:57). The new motion-graphics VSL drops in here.
+      -->
+      <video id="vsl" controls playsinline preload="metadata" poster="/growthleak-assets/video/growth-leak-vsl-official-v3-poster.jpg">
+        <source data-video src="/growthleak-assets/video/growth-leak-vsl-official-v3-720p.mp4" type="video/mp4">
+      </video>
+      <button class="vsl-play" id="vsl-play" type="button" aria-label="Play the 6-minute breakdown">
+        <img src="/growthleak-assets/video/growth-leak-vsl-official-v3-poster.jpg" alt="">
+        <span class="pb"><svg viewBox="0 0 14 16" aria-hidden="true"><path d="M0 0l14 8-14 8z" fill="currentColor"/></svg></span>
+        <span class="lbl">Watch the 6-minute breakdown</span>
+      </button>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn" href="#apply" data-cta="book-call" data-cta-pos="hero">Book a call <span class="fr"><span class="xs-hide">first </span>30 days free</span> <span class="arr" aria-hidden="true">&rarr;</span></a>
+      <div class="btn-note"><span>Free Growth Leak Audit</span><span>30 minutes, on your account</span><span>Yours to keep either way</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. LOGOS + FULL CIRCLE FAMILY ============ -->
+<!-- Logos: copied from remktr.com assets/clients (same files the live site shows), rendered grayscale. List duplicated for a seamless loop. -->
+<section class="brands" aria-label="Brands we've worked with">
+  <div class="wrap"><span class="tag">Brands we've worked with</span></div>
+  <div class="mq" aria-hidden="true">
+    <div class="lt">
+      <img src="/growthleak-assets/assets/v2/client-underdog-games.png" alt="" style="--h:34px"><img src="/growthleak-assets/assets/v2/client-cutluxe.png" alt="" style="--h:30px"><img src="/growthleak-assets/assets/v2/client-naturealm.png" alt="" style="--h:40px"><img src="/growthleak-assets/assets/v2/client-first-aid-beauty.png" alt="" style="--h:24px"><img src="/growthleak-assets/assets/v2/client-just-thrive.png" alt="" style="--h:26px"><img src="/growthleak-assets/assets/v2/client-clocky.png" alt="" style="--h:32px"><img src="/growthleak-assets/assets/v2/client-carpe.png" alt="" style="--h:32px"><img src="/growthleak-assets/assets/v2/client-copper-compression.png" alt="" style="--h:30px"><img src="/growthleak-assets/assets/v2/client-taco-vs-burrito.png" alt="" style="--h:46px"><img src="/growthleak-assets/assets/v2/client-woof.png" alt="" style="--h:36px"><img src="/growthleak-assets/assets/v2/client-upwellness.png" alt="" style="--h:40px"><img src="/growthleak-assets/assets/v2/client-coldest.png" alt="" style="--h:22px"><img src="/growthleak-assets/assets/v2/client-manuka-doctor.png" alt="" style="--h:38px"><img src="/growthleak-assets/assets/v2/client-alpha-lion.png" alt="" style="--h:28px"><img src="/growthleak-assets/assets/v2/client-legion.png" alt="" style="--h:38px"><img src="/growthleak-assets/assets/v2/client-swimzip.png" alt="" style="--h:30px"><img src="/growthleak-assets/assets/v2/client-hiya-health.png" alt="" style="--h:44px"><img src="/growthleak-assets/assets/v2/client-curist.png" alt="" style="--h:36px"><img src="/growthleak-assets/assets/v2/client-unbox-me.png" alt="" style="--h:46px"><img src="/growthleak-assets/assets/v2/client-liquid-rubber.png" alt="" style="--h:44px">
+    </div>
+    <div class="lt">
+      <img src="/growthleak-assets/assets/v2/client-underdog-games.png" alt="" style="--h:34px"><img src="/growthleak-assets/assets/v2/client-cutluxe.png" alt="" style="--h:30px"><img src="/growthleak-assets/assets/v2/client-naturealm.png" alt="" style="--h:40px"><img src="/growthleak-assets/assets/v2/client-first-aid-beauty.png" alt="" style="--h:24px"><img src="/growthleak-assets/assets/v2/client-just-thrive.png" alt="" style="--h:26px"><img src="/growthleak-assets/assets/v2/client-clocky.png" alt="" style="--h:32px"><img src="/growthleak-assets/assets/v2/client-carpe.png" alt="" style="--h:32px"><img src="/growthleak-assets/assets/v2/client-copper-compression.png" alt="" style="--h:30px"><img src="/growthleak-assets/assets/v2/client-taco-vs-burrito.png" alt="" style="--h:46px"><img src="/growthleak-assets/assets/v2/client-woof.png" alt="" style="--h:36px"><img src="/growthleak-assets/assets/v2/client-upwellness.png" alt="" style="--h:40px"><img src="/growthleak-assets/assets/v2/client-coldest.png" alt="" style="--h:22px"><img src="/growthleak-assets/assets/v2/client-manuka-doctor.png" alt="" style="--h:38px"><img src="/growthleak-assets/assets/v2/client-alpha-lion.png" alt="" style="--h:28px"><img src="/growthleak-assets/assets/v2/client-legion.png" alt="" style="--h:38px"><img src="/growthleak-assets/assets/v2/client-swimzip.png" alt="" style="--h:30px"><img src="/growthleak-assets/assets/v2/client-hiya-health.png" alt="" style="--h:44px"><img src="/growthleak-assets/assets/v2/client-curist.png" alt="" style="--h:36px"><img src="/growthleak-assets/assets/v2/client-unbox-me.png" alt="" style="--h:46px"><img src="/growthleak-assets/assets/v2/client-liquid-rubber.png" alt="" style="--h:44px">
+    </div>
+  </div>
+  <p class="sr">Brands we've worked with include Underdog Games, Cutluxe, Naturealm, First Aid Beauty, Just Thrive, Clocky, Carpe, Copper Compression, Taco vs Burrito, Woof, UpWellness, Coldest, Manuka Doctor, Alpha Lion, Legion, SwimZip, Hiya Health, Curist, Unbox Me and Liquid Rubber.</p>
+  <div class="wrap">
+    <div class="family">
+      <img src="/growthleak-assets/assets/v2/rm-icon.png" alt="" width="66" height="56">
+      <p>Part of the Full Circle family: <b>$500M+ in Amazon revenue managed, 100+ brands.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. WHAT THE AUDIT CALL GIVES YOU (from the VSL v2.2 script) ============ -->
+<section class="gets" aria-labelledby="h-gets">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="tag">The audit call</span>
+        <h2 class="h2" id="h-gets">What you<br><em>walk away with.</em></h2>
+      </div>
+      <p class="lead">We tear down your account and walk you through it, page by page. Thirty minutes, built by hand on your own numbers.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="n">01</div><h3>The number.</h3><p>Page one is what you're leaving on the table: where the budget leaks, how much you're overpaying on PPC, and how many buyers you lose after the click.</p><span class="mono">Your account, your numbers</span></div>
+      <div class="card"><div class="n">02</div><h3>The fit.</h3><p>Which of our four opportunities fit your brand, ranked by what grows profit fastest. We only turn on what your brand actually needs.</p><span class="mono">Ranked by profit</span></div>
+      <div class="card"><div class="n">03</div><h3>The plan.</h3><p>A clear plan for profitable growth. The audit is free, and it's yours to keep whatever you decide.</p><span class="mono">Yours to keep</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. RECEIPTS (exact numbers + footnote from remktr.com) ============ -->
+<section class="receipts" aria-labelledby="h-proof">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="tag">Numbers first</span>
+        <h2 class="h2" id="h-proof">Receipts,<br><em>not charts.</em></h2>
+      </div>
+      <p class="lead">One period, one book of business, reported straight. Jul 16&ndash;Aug 15 2026 across the reMKTR portfolio.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">6.03x</div><div class="l"><b>Portfolio ROAS</b><span>Whole portfolio</span></div></div>
+      <div class="stat"><div class="v">44%</div><div class="l"><b>New-to-brand</b><span>Warm prospects</span></div></div>
+      <div class="stat"><div class="v">57%</div><div class="l"><b>Streaming new-to-brand</b><span>Our best NTB product</span></div></div>
+      <div class="stat"><div class="v">$1.35</div><div class="l"><b>Blended CPC</b><span>All products</span></div></div>
+    </div>
+    <div class="period"><span>Period <b>Jul 16 &ndash; Aug 15 2026</b></span><span>Source <b>reMKTR portfolio</b></span></div>
+    <p class="disclaim">These are results from a past period, not a promise about yours. What we do promise is below: your overall ROAS improves, or we work for free until it does.</p>
+  </div>
+</section>
+
+<!-- ============ 6. OFFER: guarantee + doctrine ============ -->
+<section class="offer" aria-labelledby="h-offer">
+  <div class="wrap">
+    <span class="tag">The offer</span>
+    <h2 class="h2" id="h-offer">First <span class="d30">30 days</span><br><em>free.</em></h2>
+    <div class="offer-grid">
+      <div>
+        <p class="lead"><b>The audit call is free.</b> If we're a fit, your first 30 days with reMKTR are free too.</p>
+        <p class="lead">After that, reMKTR is paid as a percentage of the ad spend we run for you. We'll tell you the exact number on the first call.</p>
+        <div class="guar">
+          <span class="k">The guarantee</span>
+          <q>Improve your ROAS, <em>or we work for free until we do.</em></q>
+          <small>We agree the targets with you up front.</small>
+          <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#D9C2F7" stroke-width="4"/><path d="M30 52 l14 14 l26 -30" fill="none" stroke="#D9C2F7" stroke-width="8"/></svg>
+        </div>
+      </div>
+      <div class="doctrine">
+        <div class="sd">No retainers.<br>No creative fees.</div>
+        <div class="free">First 30 days free.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. TEAM (facts carried over from v1; headshots = Slack profile photos) ============ -->
+<section class="team" aria-labelledby="h-team">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="tag">Who's behind your audit</span>
+        <h2 class="h2" id="h-team">Amazon is<br><em>all we do.</em></h2>
+      </div>
+    </div>
+    <div class="people">
+      <div class="person"><img src="/growthleak-assets/assets/v2/team-ken.jpg" alt="Ken Freeman" width="72" height="72"><div><b>Ken Freeman</b><span class="r">Founder &middot; reMKTR &amp; Full Circle</span><p>Ten-plus years building and operating on Amazon. Former VP of Amazon at Ridge Wallet.</p></div></div>
+      <div class="person"><img src="/growthleak-assets/assets/v2/team-jayce.jpg" alt="Jayce Broda" width="72" height="72"><div><b>Jayce Broda</b><span class="r">VP of Growth &middot; reMKTR</span><p>Runs growth at reMKTR: the offers, the creative and the testing loop behind every campaign.</p></div></div>
+      <div class="person"><img src="/growthleak-assets/assets/v2/team-nick.jpg" alt="Nick Shucet" width="72" height="72"><div><b>Nick Shucet</b><span class="r">CEO &middot; Full Circle</span><p>Runs Full Circle day to day: the account teams and the operating system behind them.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. FAQ (answers copied from the remktr.com FAQ) ============ -->
+<section class="faq" aria-labelledby="h-faq">
+  <div class="wrap faq-grid">
+    <h2 class="h2" id="h-faq">Straight <em>answers.</em></h2>
+    <div>
+      <details><summary>What is reMKTR? <span class="pm" aria-hidden="true">+</span></summary><div class="a"><p>reMKTR (say it "re-market-er") is an ad-tech company for Amazon brands. We combine Amazon's audience network, our Target Lock AI and commercial-grade video production, and run it all for you, so you can scale beyond traditional Amazon PPC. We're a Full Circle company.</p></div></details>
+      <details><summary>How is this different from my sponsored ads? <span class="pm" aria-hidden="true">+</span></summary><div class="a"><p>Sponsored ads catch shoppers at the moment they search. That's valuable, and it's also where everyone is bidding. reMKTR goes after everyone else: people who viewed and left, people in your category who never typed your keyword, and people watching streaming TV.</p></div></details>
+      <details><summary>Is the first 30 days really free? <span class="pm" aria-hidden="true">+</span></summary><div class="a"><p>Yes. Your first 30 days with reMKTR are free. We'll walk you through exactly how it works on the call, before you commit to anything.</p></div></details>
+      <details><summary>What's the guarantee? <span class="pm" aria-hidden="true">+</span></summary><div class="a"><p>Your overall ROAS improves, or we work for free until it does. We agree the starting baseline with you up front, so we both measure the same number.</p></div></details>
+      <details><summary>How do you charge after the free month? <span class="pm" aria-hidden="true">+</span></summary><div class="a"><p>A percentage of ad spend. No retainers. No creative fees. We'll give you the exact percentage on the call.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. CLOSER ============ -->
+<section class="final" aria-labelledby="h-final">
+  <svg class="ret" viewBox="0 0 400 400" fill="none" stroke="#6E19AD" aria-hidden="true"><circle cx="200" cy="200" r="190" stroke-width="3"/><circle cx="200" cy="200" r="130" stroke-width="3" stroke-dasharray="6 12"/><circle cx="200" cy="200" r="70" stroke-width="3"/><path d="M200 0v140M200 260v140M0 200h140M260 200h140" stroke-width="3"/></svg>
+  <div class="wrap">
+    <span class="tag">Your move</span>
+    <h2 id="h-final">Lock<br><em>on.</em></h2>
+    <p>Thirty minutes on your account. We show you the number you're leaving on the table and agree the targets. If we're a fit, the first 30 days are free.</p>
+    <a class="btn pp" href="#apply" data-cta="book-call" data-cta-pos="final">Book a call <span class="fr"><span class="xs-hide">first </span>30 days free</span> <span class="arr" aria-hidden="true">&rarr;</span></a>
+    <div class="btn-note"><span>Free Growth Leak Audit</span><span>No retainers. No creative fees.</span><span>Miss the targets? We work free until we hit them</span></div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="row">
+      <div class="brand"><img src="/growthleak-assets/assets/v2/rm-icon.png" alt="" width="46" height="39">reMKTR</div>
+      <div class="meta">Ad-tech for Amazon brands<br>A Full Circle company &middot; <a href="https://remktr.com/privacy-policy/">Privacy Policy</a></div>
+    </div>
+    <p>&copy; 2026 reMKTR. All rights reserved. Results shown are from a past period and are not a promise about yours. Individual results vary based on your account, category and market conditions.</p>
+    <p>This site is not a part of the Facebook&trade; website or Meta Platforms, Inc. This site is NOT endorsed by Facebook&trade; in any way. Facebook&trade; is a trademark of Meta Platforms, Inc.</p>
+  </div>
+</footer>
+
+<!-- Sticky book-a-call bar: visible on every screen size, top to bottom -->
+<div class="sbar" id="sbar" role="region" aria-label="Book a call">
+  <span class="t"><b>Free Growth Leak Audit</b><span>First 30 days free if we're a fit</span></span>
+  <a href="#apply" data-cta="book-call" data-cta-pos="sticky">Book a call &rarr;</a>
+</div>
+
+<!-- ============ APPLICATION MODAL: form -> Calendly popup ============ -->
+<div class="modal" id="apply" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-hidden="true">
+  <div class="mcard">
+    <button class="mclose" id="m-close" type="button" aria-label="Close">&times;</button>
+    <div class="msteps"><span class="on" id="step1">1 &middot; Tell us about your brand</span><span id="step2">2 &middot; Pick your time</span></div>
+    <form id="apply-form" novalidate>
+      <h3 id="m-title">Free Growth Leak <em>Audit.</em></h3>
+      <p class="sub">Five quick questions so we can prep your numbers before the call.</p>
+      <div class="fstep" id="fs1">
+      <div class="fgrid">
+        <div class="field"><label for="f-brand">Brand name *</label><input id="f-brand" type="text" name="brand" required autocomplete="organization"></div>
+        <div class="field"><label for="f-role">Your role *</label>
+          <select id="f-role" name="role" required>
+            <option value="">Select</option>
+            <option>Founder / owner</option>
+            <option>Marketing or e-commerce lead</option>
+            <option>Agency or consultant</option>
+            <option>Other</option>
+          </select></div>
+        <div class="field full"><label for="f-amz">Amazon storefront or best-seller link *</label><input id="f-amz" type="url" name="amazon_link" required placeholder="https://www.amazon.com/…" inputmode="url"></div>
+        <div class="field"><label for="f-rev">Amazon revenue, last 12 mo *</label>
+          <select id="f-rev" name="revenue" required>
+            <option value="">Select</option>
+            <option data-q="no">Under $500K</option>
+            <option data-q="no">$500K &ndash; $1M</option>
+            <option>$1M &ndash; $3M</option>
+            <option>$3M &ndash; $10M</option>
+            <option>$10M+</option>
+          </select></div>
+        <div class="field"><label for="f-ads">Monthly Amazon ad spend *</label>
+          <select id="f-ads" name="adspend" required>
+            <option value="">Select</option>
+            <option data-q="no">Under $5K</option>
+            <option>$5K &ndash; $15K</option>
+            <option>$15K &ndash; $50K</option>
+            <option>$50K &ndash; $150K</option>
+            <option>$150K+</option>
+          </select></div>
+        <div class="field"><label for="f-who">Who runs your ads today? *</label>
+          <select id="f-who" name="ads_run_by" required>
+            <option value="">Select</option>
+            <option>I do</option>
+            <option>In-house team</option>
+            <option>An agency</option>
+            <option>Nobody right now</option>
+          </select></div>
+        <div class="field"><label for="f-goal">Most interested in? (optional)</label>
+          <select id="f-goal" name="goal">
+            <option value="">Select</option>
+            <option value="Reach new customers past my PPC ceiling">New customers beyond PPC</option>
+            <option value="Bring back shoppers who added to cart and left">Win back cart abandoners</option>
+            <option value="Get my brand on streaming TV">Streaming TV (Prime Video, Fire TV)</option>
+            <option value="Link-out ads to my own website">Link-outs to my own website</option>
+            <option value="Lower what I pay for customers I already win">Better overall ROAS</option>
+            <option value="Not sure yet">Not sure yet</option>
+          </select></div>
+      </div>
+      <button type="button" class="btn msubmit" id="f-next">Next: where to send your audit <span class="arr" aria-hidden="true">&rarr;</span></button>
+      </div>
+      <div class="fstep" id="fs2" hidden>
+        <p class="sub" style="margin-top:0">Last step. Then pick a time on Jayce's calendar.</p>
+        <div class="fgrid">
+          <div class="field"><label for="f-name">Full name *</label><input id="f-name" type="text" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="f-email">Business email *</label><input id="f-email" type="email" name="email" required autocomplete="email"></div>
+          <div class="field full"><label for="f-phone">Mobile phone *</label><input id="f-phone" type="tel" name="phone" required autocomplete="tel" inputmode="tel" pattern="[0-9 +.\-\(\)]{7,25}" placeholder="(555) 555-5555"></div>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="f-company">Company website</label><input id="f-company" type="text" name="company_website" tabindex="-1" autocomplete="off"></div>
+      </div>
+      <div class="form-error" id="form-error" role="alert">Please fill in every field to continue.</div>
+      <p class="consent" id="f-consent" hidden>By submitting, you agree reMKTR may call, text or email you about your audit, usually within minutes. Message and data rates may apply. Reply STOP to opt out. See our <a href="https://remktr.com/privacy-policy/">Privacy Policy</a>.</p>
+      <button type="submit" class="btn msubmit" id="f-submit" hidden>Continue to pick a time <span class="arr" aria-hidden="true">&rarr;</span></button>
+    </form>
+    <div class="done" id="notfit">
+      <h3>Thanks. <em>Here's the right door.</em></h3>
+      <p class="sub">The audit call is built for Amazon brands past about $1M a year and $5K a month in ads, so we'd rather not take 30 minutes of your time yet. Dr. PPC runs your Amazon PPC for you and is made for brands at your stage.</p>
+      <a class="btn" href="https://drppc.ai/" target="_blank" rel="noopener">See Dr. PPC <span class="arr" aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="done" id="done">
+      <h3>You're in. <em>Pick your time.</em></h3>
+      <p class="sub">The calendar opens next. We prep your numbers before the call.</p>
+      <button type="button" class="btn" id="reopen">Open the calendar <span class="arr" aria-hidden="true">&rarr;</span></button>
+    </div>
+  </div>
+</div>
+
+<script src="/growthleak-assets/assets/tracking.js"></script>
+<script>
+// Hero variants: ?v=a|b|c|d (default a). ?debug=1 shows the active variant badge.
+// Rewritten 2026-10-02 in the remktr.com voice: line 1 ink, line 2 purple. No "DSP", no "second auction" wording.
+var VARIANTS = {
+  // Positive, guarantee-led set (Ken 2026-10-02). Default = g.
+  "g": {
+    "headline": "<span class=\"l1\">Improve your ROAS.</span> <span class=\"l2\">Or we work for free.</span>",
+    "subhead": "Amazon's audience network, our Target Lock AI and commercial-grade creative, run for you. Your overall ROAS improves, or we keep working for free until it does."
+  },
+  "n": {
+    "headline": "<span class=\"l1\">New customers.</span> <span class=\"l2\">Not just new clicks.</span>",
+    "subhead": "Reach in-market Amazon shoppers who've never bought from you, before they ever search. ROAS improves, or we work for free."
+  },
+  "s": {
+    "headline": "<span class=\"l1\">Scale past</span> <span class=\"l2\">Amazon PPC.</span>",
+    "subhead": "Keep the PPC that works. Add the shoppers it can't reach, on and off Amazon. ROAS improves, or we work for free."
+  },
+  "r": {
+    "headline": "<span class=\"l1\">Bring back the shoppers</span> <span class=\"l2\">who almost bought.</span>",
+    "subhead": "They viewed it. They added to cart. Target Lock puts you back in front of them and turns them into buyers. ROAS improves, or we work for free."
+  },
+  "t": {
+    "headline": "<span class=\"l1\">Big-brand TV.</span> <span class=\"l2\">Aimed like search.</span>",
+    "subhead": "Your commercial on Prime Video and premium streaming, shown to households Amazon's shopper signals say are likely to buy. We make the spot."
+  },
+  // Message match for Google/Bing (?v=an|ppc|tv|brand)
+  "an": {
+    "headline": "<span class=\"l1\">Audience ads for</span> <span class=\"l2\">Amazon brands.</span>",
+    "subhead": "Amazon's audience network, run end to end by reMKTR. Your overall ROAS improves, or we work for free until it does."
+  },
+  "ppc": {
+    "headline": "<span class=\"l1\">Scale past</span> <span class=\"l2\">Amazon PPC.</span>",
+    "subhead": "PPC works. We run it too. Then we reach the shoppers your keywords can't. ROAS improves, or we work for free."
+  },
+  "tv": {
+    "headline": "<span class=\"l1\">Your brand on</span> <span class=\"l2\">Prime Video.</span>",
+    "subhead": "Streaming TV aimed with Amazon's shopper signals, with the commercial made for you. ROAS improves, or we work for free."
+  },
+  "brand": {
+    "headline": "<span class=\"l1\">reMKTR.</span> <span class=\"l2\">Ad-tech for Amazon brands.</span>",
+    "subhead": "Book a call. First 30 days free if we're a fit. Your overall ROAS improves, or we work for free until it does."
+  },
+  // Growth-leak set (original angle, kept for testing)
+  "a": {
+    "headline": "<span class=\"l1\">Find your growth leak.</span> <span class=\"l2\">Then plug it.</span>",
+    "subhead": "A free 30-minute audit of your Amazon account. You leave with the number, and the plan."
+  },
+  "b": {
+    "headline": "<span class=\"l1\">Your Amazon ads</span> <span class=\"l2\">are leaking growth.</span>",
+    "subhead": "Free 30-minute teardown. See where, and what it's costing you."
+  },
+  "c": {
+    "headline": "<span class=\"l1\">Stop paying more</span> <span class=\"l2\">for the same sales.</span>",
+    "subhead": "Free audit: where your ad budget leaks, and which fix pays back first."
+  },
+  "d": {
+    "headline": "<span class=\"l1\">Same shoppers.</span> <span class=\"l2\">A fraction of the competition.</span>",
+    "subhead": "Reach them through Amazon's audience network. Your winning keywords stay untouched."
+  }
+};
+var CALENDLY_URL = (window.REMKTR_TRACKING && window.REMKTR_TRACKING.bookingUrl) || 'https://calendly.com/jayce-remktr/30min';
+
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var v = (params.get('v') || 'g').toLowerCase();
+  if (!VARIANTS[v]) v = 'g';
+  document.querySelector('h1.headline').innerHTML = VARIANTS[v].headline;
+  document.querySelector('p.promise').innerHTML = VARIANTS[v].subhead;
+  if (params.get('debug') === '1') {
+    var badge = document.createElement('div');
+    badge.textContent = 'page A (' + document.body.dataset.offer + ') · variant: ' + v;
+    badge.style.cssText = 'position:fixed;top:76px;right:12px;background:#6E19AD;color:#fff;font:700 12px Poppins,sans-serif;padding:6px 12px;border-radius:20px;z-index:9999;';
+    document.body.appendChild(badge);
+  }
+
+  // ---- VSL: poster overlay is the play button; native controls take over once playing ----
+  var vsl = document.getElementById('vsl'), vslPlay = document.getElementById('vsl-play');
+  if (vsl && vslPlay) {
+    vslPlay.addEventListener('click', function () { var p = vsl.play(); if (p && p.catch) p.catch(function () {}); });
+    vsl.addEventListener('play', function () { vslPlay.classList.add('hidden'); });
+    // watch-depth events (vsl_play, vsl_25, vsl_50, vsl_75, vsl_100) through tracking.js -> GA4 / Meta
+    var fired = {};
+    function mark(name) { if (fired[name]) return; fired[name] = true; if (window.remktrTrack) window.remktrTrack(name, { variant: v }); }
+    vsl.addEventListener('play', function () { mark('vsl_play'); });
+    vsl.addEventListener('timeupdate', function () {
+      if (!vsl.duration) return; var pct = vsl.currentTime / vsl.duration * 100;
+      [25, 50, 75].forEach(function (q) { if (pct >= q) mark('vsl_' + q); });
+    });
+    vsl.addEventListener('ended', function () { mark('vsl_100'); vslPlay.classList.remove('hidden'); vsl.load(); });
+  }
+
+  // ---- Application modal ----
+  var modal = document.getElementById('apply'), form = document.getElementById('apply-form');
+  var errBox = document.getElementById('form-error'), lastFocus = null;
+  function openModal() {
+    lastFocus = document.activeElement;
+    modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('locked');
+    if (vsl && !vsl.paused) vsl.pause();
+    setTimeout(function () {
+      var f = form.style.display === 'none' ? document.getElementById('reopen') : form.querySelector('input');
+      if (f) f.focus({ preventScroll: true });
+    }, 30);
+  }
+  function closeModal() {
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('locked');
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+  // every booking CTA opens the form (tracking.js separately logs cta_click + InitiateCheckout)
+  document.querySelectorAll('[data-cta="book-call"]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+  });
+  document.getElementById('m-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+  if (location.hash === '#apply') openModal();
+
+  function openCalendly(data) {
+    // prefill name/email/phone + Jayce's booking questions (a1..a7) so the answers show on the booking (tracking.js: remktrLead)
+    var url = window.remktrLead ? window.remktrLead.calendlyUrl(CALENDLY_URL, data) : CALENDLY_URL + '?name=' + encodeURIComponent(data.name) + '&email=' + encodeURIComponent(data.email);
+    if (window.Calendly) { window.Calendly.initPopupWidget({ url: url }); } else { window.open(url, '_blank'); }
+  }
+  var lastData = null;
+  form.querySelectorAll('input,select').forEach(function (el) {
+    el.addEventListener('input', function () { if (el.checkValidity()) el.removeAttribute('aria-invalid'); });
+    el.addEventListener('change', function () { if (el.checkValidity()) el.removeAttribute('aria-invalid'); if (!form.querySelector('[aria-invalid="true"]')) errBox.style.display = 'none'; });
+  });
+  // two-step form: business questions first (taps), contact details second
+  var fs1 = document.getElementById('fs1'), fs2 = document.getElementById('fs2');
+  function stepValid(box) {
+    var first = null;
+    box.querySelectorAll('input,select').forEach(function (el) {
+      if (!el.checkValidity()) { el.setAttribute('aria-invalid', 'true'); if (!first) first = el; } else el.removeAttribute('aria-invalid');
+    });
+    return first;
+  }
+  document.getElementById('f-next').addEventListener('click', function () {
+    var bad = stepValid(fs1);
+    if (bad) { errBox.textContent = 'Please answer each question to continue.'; errBox.style.display = 'block'; bad.focus(); return; }
+    errBox.style.display = 'none'; fs1.hidden = true; fs2.hidden = false;
+    document.getElementById('f-submit').hidden = false; document.getElementById('f-consent').hidden = false;
+    if (window.remktrTrack) window.remktrTrack('application_step1');
+    document.getElementById('f-name').focus();
+  });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!fs1.hidden) { e.stopImmediatePropagation(); document.getElementById('f-next').click(); return; }
+    if (!form.checkValidity()) {
+      var first = null;
+      form.querySelectorAll('input,select').forEach(function (el) {
+        if (!el.checkValidity()) { el.setAttribute('aria-invalid', 'true'); if (!first) first = el; } else el.removeAttribute('aria-invalid');
+      });
+      errBox.textContent = (fs1.hidden ? (form.querySelector('input[type=email]').validity.typeMismatch ? 'Please enter a valid email address.' : 'Please add your name, email and mobile number.') : 'Please answer each question to continue.');
+      errBox.style.display = 'block';
+      if (first) first.focus();
+      return;
+    }
+    errBox.style.display = 'none';
+    var data = Object.fromEntries(new FormData(form).entries());
+    data.variant = v; data.page = window.location.pathname;
+    // Qualification: under $1M/yr revenue OR under $5K/mo ad spend -> no audit call, no Meta "Lead" (tracking.js reads data-qualified)
+    var unq = ['f-rev', 'f-ads'].some(function (id) { var o = document.getElementById(id).selectedOptions[0]; return o && o.dataset.q === 'no'; });
+    data.qualified = unq ? 'no' : 'yes'; form.dataset.qualified = data.qualified;
+    data.offer = document.body.dataset.offer;
+    try { localStorage.setItem('remktr-apply-' + Date.now(), JSON.stringify(data)); } catch (err) {}
+    // every application (qualified or not) -> /api/lead -> Close CRM + Slack (tracking.js: remktrLead)
+    if (window.remktrLead) window.remktrLead.submit(data);
+    lastData = data;
+    form.style.display = 'none';
+    if (unq) { document.getElementById('notfit').style.display = 'block'; return; }
+    document.getElementById('done').style.display = 'block';
+    document.getElementById('step1').classList.remove('on');
+    document.getElementById('step2').classList.add('on');
+    closeModal();
+    openCalendly(data);
+  });
+  document.getElementById('reopen').addEventListener('click', function () { if (lastData) { closeModal(); openCalendly(lastData); } });
+
+})();
+</script>
+</body>
+</html>
