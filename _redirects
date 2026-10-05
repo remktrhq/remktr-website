@@ -23,3 +23,6 @@
 /case-studies* /case-studies.html 200
 /home / 301
 /home/ / 301
+
+# Homepage source (read by remktr-go/build.py; never served)
+/_src/*  /  301!
