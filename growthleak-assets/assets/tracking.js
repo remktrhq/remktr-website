@@ -214,6 +214,8 @@ window.addEventListener("load", () => {
 (function leadBackend() {
   function endpoint() {
     const h = window.location.hostname;
+    // "off" = never post (here.now review previews of unapproved pages set this; see remktr-landing-lab-preview/build-dist.py)
+    if (window.REMKTR_TRACKING.leadEndpoint === "off") return null;
     if (window.REMKTR_TRACKING.leadEndpoint) return window.REMKTR_TRACKING.leadEndpoint;
     if (h === "localhost" || h === "127.0.0.1" || h === "" ) return null;
     // Same-origin only on the remktr-go site itself. Everywhere else (remktr.com/growthleak-a|b, its deploy
@@ -287,22 +289,23 @@ window.addEventListener("load", () => {
       const how = (src === "meta" || src === "facebook" || src === "fb" || src === "ig" ? "Meta ad" :
         src === "google" ? "Google ad" : src === "bing" ? "Bing ad" : src ? src : "Website") + " (" + page.trim() + ")";
       const summary = [how,
-        "Brand: " + (d.brand || ""), "Amazon: " + (d.amazon_link || ""),
-        "Revenue (12 mo): " + (d.revenue || ""), "Ad spend/mo: " + (d.adspend || ""),
+        "Brand: " + (d.brand || ""), d.website ? "Website: " + d.website : "", (d.amazon_link || !d.website) ? "Amazon: " + (d.amazon_link || "") : "",
+        (d.revenue_basis ? "Total revenue (12 mo): " : "Revenue (12 mo): ") + (d.revenue || ""),
+        (d.adspend_basis ? "Ad spend/mo, all channels: " : "Ad spend/mo: ") + (d.adspend || ""),
         "Ads run by: " + (d.ads_run_by || ""), d.goal ? "Goal: " + d.goal : "", "Role: " + (d.role || "")
       ].filter(Boolean).join(" | ").replace(DASH, "-").slice(0, 480);
-      const spendMap = { "Under $5K": "Less than $10,000", "$150K+": "$100,000+" };
+      const spendMap = { "Under $10K": "Less than $10,000", "$150K+": "$100,000+" };
       const parts = (d.name || "").trim().split(/\s+/);
       const q = {
         name: d.name || "", email: d.email || "",
         first_name: parts[0] || "", last_name: parts.slice(1).join(" "),
         a1: summary,
         a2: /agency|consultant/i.test(d.role || "") ? "Agency" : "Brand",
-        a3: d.brand || "", a4: d.amazon_link || "",
+        a3: d.brand || "", a4: d.website || d.amazon_link || "",
         a7: phoneE164(d.phone)
       };
       const spend = spendMap[(d.adspend || "").replace(DASH, "-").replace(" - ", " – ")] || spendMap[d.adspend || ""];
-      if (spend) q.a6 = spend;
+      if (spend && !d.adspend_basis) q.a6 = spend; // a6 asks for Amazon ad spend; the link-outs form collects total spend
       ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach((k) => { if (a[k]) q[k] = a[k]; });
       if (!q.utm_term && a.v) q.utm_term = "variant_" + a.v;
       const qs = Object.keys(q).filter((k) => q[k]).map((k) => k + "=" + encodeURIComponent(q[k])).join("&");
