@@ -9,9 +9,14 @@ window.REMKTR_TRACKING = {
   // or GA4 tag ("G-XXXXXXXXXX"). Either works; AW- recommended for ads.
   googleTagId: "G-ZLDNDSGP5K",
 
-  // Google Ads booking conversion: Goals > Conversions > your action's
-  // "send_to" value, looks like "AW-XXXXXXXXX/AbC-dEfGhIjK"
-  googleAdsBookingLabel: "REPLACE_WITH_GOOGLE_ADS_CONVERSION_LABEL",
+  // Google Ads account tag (reMKTR account 4256508560). Loaded on the same gtag.js as GA4.
+  googleAdsTagId: "AW-18390364141",
+
+  // Google Ads conversions (created 2026-10-05 via the API). "send_to" values.
+  // PRIMARY (bidding): "reMKTR | Booked call" — fires on Calendly event_scheduled.
+  googleAdsBookingLabel: "AW-18390364141/F3X5CPr9xJIdEO3fmsFE",
+  // SECONDARY (reporting): "reMKTR | Qualified application" — fires on QUALIFIED #apply-form submits only.
+  googleAdsApplicationLabel: "AW-18390364141/A7VoCP39xJIdEO3fmsFE",
 
   // X (Twitter): Events Manager pixel ID (looks like "of2ab")
   xPixelId: "rd4k5",
@@ -85,6 +90,9 @@ function remktrConfigured(id) {
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   gtag("js", new Date());
   gtag("config", id);
+  // Google Ads tag on the same gtag.js (conversion linker + remarketing + enhanced conversions)
+  const aw = window.REMKTR_TRACKING.googleAdsTagId;
+  if (remktrConfigured(aw) && aw !== id) gtag("config", aw, { allow_enhanced_conversions: true });
 })();
 
 // ---------- X (Twitter) pixel ----------
@@ -158,6 +166,20 @@ document.addEventListener("submit", (event) => {
   }
   window.remktrTrack("application_submitted");
   if (window.fbq) window.fbq("track", "Lead");
+  // Google Ads: qualified application (secondary conversion) + enhanced-conversion user data.
+  // gtag hashes email/phone (SHA-256) in the browser before anything is sent; the later booking reuses it.
+  const t = window.REMKTR_TRACKING;
+  if (window.gtag && remktrConfigured(t.googleAdsTagId)) {
+    const val = (n) => ((form.elements[n] && form.elements[n].value) || "").trim();
+    const ud = {};
+    if (val("email")) ud.email = val("email").toLowerCase();
+    const digits = val("phone").replace(/[^0-9+]/g, "");
+    if (digits) ud.phone_number = digits[0] === "+" ? digits : (digits.length === 10 ? "+1" + digits : "+" + digits);
+    if (ud.email || ud.phone_number) window.gtag("set", "user_data", ud);
+    if (remktrConfigured(t.googleAdsApplicationLabel)) {
+      window.gtag("event", "conversion", { send_to: t.googleAdsApplicationLabel, value: 50, currency: "USD" });
+    }
+  }
 });
 
 // ---------- THE conversion: Calendly booking completed (fires in the
@@ -170,7 +192,7 @@ window.addEventListener("message", (event) => {
     window.remktrTrack("booking_scheduled", { source: "calendly_embed" });
     if (window.fbq) window.fbq("track", "Schedule");
     if (window.gtag && remktrConfigured(t.googleAdsBookingLabel)) {
-      window.gtag("event", "conversion", { send_to: t.googleAdsBookingLabel });
+      window.gtag("event", "conversion", { send_to: t.googleAdsBookingLabel, value: 250, currency: "USD" });
     }
     if (window.twq && remktrConfigured(t.xBookingEventId)) {
       window.twq("event", t.xBookingEventId, {});
