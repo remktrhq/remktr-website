@@ -24,7 +24,7 @@ window.REMKTR_TRACKING = {
   // X booking conversion event ID (looks like "tw-of2ab-od3cd")
   xBookingEventId: "tw-rd4k5-rd6v3",
 
-  // X lead event (CTA click)
+  // X lead event: QUALIFIED #apply-form submits only (same gate as Meta "Lead")
   xLeadEventId: "tw-rd4k5-rd6v2",
 
   // Microsoft Clarity (session recordings) — JP's project, live since June
@@ -166,6 +166,10 @@ document.addEventListener("submit", (event) => {
   }
   window.remktrTrack("application_submitted");
   if (window.fbq) window.fbq("track", "Lead");
+  // X: qualified application = "Lead" event in X Events Manager (pixel rd4k5, ad account 18ce55w1sp5).
+  if (window.twq && remktrConfigured(window.REMKTR_TRACKING.xLeadEventId)) {
+    window.twq("event", window.REMKTR_TRACKING.xLeadEventId, {});
+  }
   // Google Ads: qualified application (secondary conversion) + enhanced-conversion user data.
   // gtag hashes email/phone (SHA-256) in the browser before anything is sent; the later booking reuses it.
   const t = window.REMKTR_TRACKING;
