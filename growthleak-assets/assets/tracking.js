@@ -43,17 +43,21 @@ function remktrConfigured(id) {
   return id && !String(id).startsWith("REPLACE");
 }
 
-// ---------- Attribution capture (utm_* + variant, survives navigation) ----------
+// ---------- Attribution capture (utm_* + variant + ad click IDs, survives navigation) ----------
+// Click IDs (gclid/fbclid/msclkid/...) go to the lead backend -> Close custom fields + note (2026-10-05).
 (function captureAttribution() {
   const params = new URLSearchParams(window.location.search);
-  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "v", "cid"];
-  const stored = JSON.parse(localStorage.getItem("remktr_attribution") || "{}");
+  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id", "v", "cid",
+    "gclid", "gbraid", "wbraid", "fbclid", "msclkid", "ttclid", "li_fat_id"];
+  let stored = {};
+  try { stored = JSON.parse(localStorage.getItem("remktr_attribution") || "{}"); } catch (e) {}
   keys.forEach((key) => {
     if (params.has(key)) stored[key] = params.get(key);
   });
+  if (!stored.first_landing_path) { stored.first_landing_path = window.location.pathname; stored.first_seen_at = new Date().toISOString(); }
   stored.landing_path = window.location.pathname;
   stored.last_seen_at = new Date().toISOString();
-  localStorage.setItem("remktr_attribution", JSON.stringify(stored));
+  try { localStorage.setItem("remktr_attribution", JSON.stringify(stored)); } catch (e) {}
 })();
 
 // ---------- Meta pixel ----------
@@ -265,6 +269,9 @@ window.addEventListener("load", () => {
         referrer: document.referrer || "",
         attribution: a,
         fbp: cookie("_fbp"), fbc: cookie("_fbc"),
+        // the call/text/email disclosure shown beside the submit button (#f-consent); submitting = agreeing
+        consent: true, consent_text: ((document.getElementById("f-consent") || {}).textContent || "").replace(/\s+/g, " ").trim(),
+        user_agent: navigator.userAgent,
         submitted_at: new Date().toISOString()
       });
       remember({ email: data.email, name: data.name, brand: data.brand, offer: body.offer });
