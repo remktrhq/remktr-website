@@ -208,7 +208,7 @@ window.addEventListener("load", () => {
 });
 
 // ---------- Lead backend (added 2026-10-05) ----------
-// Every application (qualified or not) is POSTed to the remktr-go Netlify function (/api/lead; same-origin on remktr.com via proxy),
+// Every application (qualified or not) is POSTed to the remktr-go Netlify function (https://remktr-go.netlify.app/api/lead),
 // which writes the lead to Close CRM and alerts Slack. On a Calendly booking it is called again (type "booked").
 // Localhost previews never send (no test leads in the CRM by accident).
 (function leadBackend() {
@@ -216,8 +216,10 @@ window.addEventListener("load", () => {
     const h = window.location.hostname;
     if (window.REMKTR_TRACKING.leadEndpoint) return window.REMKTR_TRACKING.leadEndpoint;
     if (h === "localhost" || h === "127.0.0.1" || h === "" ) return null;
-    // remktr.com proxies /api/lead to the remktr-go function (_redirects in remktrhq/remktr-website)
-    if (h === "remktr.com" || h === "www.remktr.com" || h === "go.remktr.com" || /\.netlify\.app$/.test(h)) return "/api/lead";
+    // Same-origin only on the remktr-go site itself. Everywhere else (remktr.com/growthleak-a|b, its deploy
+    // previews, here.now) posts cross-origin; the function's CORS allowlist includes remktr.com.
+    // (A Netlify proxy rule on remktr.com -> remktr-go returned 500, so it is not used.)
+    if (h === "go.remktr.com" || h === "remktr-go.netlify.app" || /--remktr-go\.netlify\.app$/.test(h)) return "/api/lead";
     return "https://remktr-go.netlify.app/api/lead";
   }
   function cookie(name) {
