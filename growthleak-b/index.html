@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://remktr.com/growthleak-b/">
+<title>Free Growth Leak Audit</title>
+<meta name="theme-color" content="#131628">
+<!--
+  EXAMPLE PAGE: reMKTR "below the video" stack, styled after acquisition.com/workshop-4b.
+
+  DESIGN TOKENS COPIED FROM THAT PAGE'S OWN STYLESHEET (used the same way it uses them):
+    navy      #131628   hero, dark sections, footer          navy-2 #1f223c / navy-3 #272d51 (dark borders, pills)
+    purple    #7000ff   buttons, numbers, accents, gradient end
+    lilac     #9b6bff   eyebrows, card borders, gradient start
+    gold      #f6d234   the main button (black uppercase text)
+    grey      #efefef   review-wall background
+    font      Poppins (heavy uppercase headlines, 800-900)
+
+  SECTION ORDER (same as his page):
+    top bar > hero (headline, video, gold button) > "what it covers" (checklist + photo mosaic) >
+    "the constraints" (headline left, 4 outlined cards right) > "the founder" (purple gradient, photo,
+    torn-paper letter) > "brands at your level" (navy, icon grid + booking form card) >
+    availability (4 date cards) > proof wall (grey) > FAQ (white) > footer
+
+  WHERE IT DIFFERS FROM HIS ON PURPOSE:
+    - no event photos or Google rating exist for reMKTR, so: placeholder tiles + no star rating line
+    - his booking widget is replaced by our application form (same fields as before) -> Calendly popup
+    - "Las Vegas dates" become audit-slot availability
+
+  PLACEHOLDERS (all visibly tagged SAMPLE - replace before launch): mosaic tiles, founder photo,
+  client stories in the letter, review cards. (Availability cards removed 2026-10-02; qualification floor is now $1M/yr + $5K/mo.)
+
+  COPY RULES HONORED: no "platform fees", no free-creative promises, no attack on %-of-spend pricing,
+  no "DSP" wording and no auction-mechanics naming (FTC naming hold; old variants c and d dropped).
+
+  A/B UPGRADE (2026-10-02) - this is PAGE B (body data-offer="growth-leak-b"); page A = offers/growth-leak-vsl-v2.html
+  (data-offer="growth-leak-a"). Backup of the pre-upgrade file: undercut-vsl-below-video.pre-ab-2026-10-02.html.
+  Ported from v2: motion-graphics VSL, always-on "Book a call" bar, two-step qualifying application form
+  (unqualified -> Dr. PPC panel + form.dataset.qualified="no" -> tracking.js fires UnqualifiedLead, not Lead),
+  guarantee-led VARIANTS (default ?v=g), guarantee wording "Your overall ROAS improves, or we work for free until it does."
+  Removed: the numeric "slots left" scarcity section and "limited slots" top-bar line.
+  Numbers: only remktr.com's receipts (6.03x / 44% / 57% / $1.35, Jul 16 - Aug 15 2026, past results not a promise).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #131628;
+    --navy-2: #1f223c;
+    --navy-3: #272d51;
+    --purple: #7000ff;
+    --lilac:  #9b6bff;
+    --gold:   #f6d234;
+    --grey-bg:#efefef;
+    --line:   #eaeaea;
+    --g1: #92949c;
+    --g2: #61636f;
+    --g3: #b8b7c2;
+    --red: #ef4444;
+    --wrap: 1100px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--navy); font-family: Poppins, sans-serif; color: var(--navy); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { max-width: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; }
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--lilac); margin-bottom: 16px;
+  }
+  .h2 {
+    font-weight: 800; text-transform: uppercase; line-height: 1.06; letter-spacing: -.02em;
+    font-size: clamp(30px, 3.8vw, 58px);
+  }
+
+  /* ===== Buttons (his exact styles) ===== */
+  .btn-gold {
+    display: inline-block; box-sizing: border-box; background: var(--gold); color: #000; text-align: center; text-decoration: none;
+    text-transform: uppercase; font-weight: 900; font-size: 20px; line-height: normal; border-radius: 8px; padding: 20px 48px;
+    transition: transform .15s ease, filter .15s ease;
+  }
+  .btn-gold:hover { filter: brightness(1.05); transform: translateY(-2px); }
+  .btn-gold.block { display: block; width: 100%; }
+  .btn-purple {
+    display: block; width: 100%; border: 0; cursor: pointer; background: var(--purple); color: #fff; text-align: center;
+    font-family: Poppins, sans-serif; font-weight: 700; font-size: 16px; border-radius: 6px; padding: 14px 18px;
+  }
+  .btn-purple:hover { background: #5b00d1; }
+  a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  /* ===== 1. Top bar ===== */
+  .topbar {
+    background: var(--navy); color: var(--g3); text-align: center; padding: 10px 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    border-bottom: 1px solid var(--navy-2);
+  }
+
+  /* ===== 2. Hero ===== */
+  .hero {
+    background:
+      radial-gradient(55% 90% at 12% 25%, rgba(112,0,255,.28), transparent 62%),
+      radial-gradient(45% 70% at 92% 80%, rgba(155,107,255,.14), transparent 60%),
+      var(--navy);
+    text-align: center; padding: clamp(28px, 3.4vw, 48px) clamp(16px, 3.5vw, 45px) clamp(36px, 4vw, 56px);
+    color: #fff;
+  }
+  .hero .kicker { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g3); margin-bottom: 18px; }
+  h1.headline {
+    max-width: 1000px; margin: 0 auto 16px; font-weight: 800; text-transform: uppercase; letter-spacing: -.015em;
+    line-height: 1.06; font-size: clamp(28px, 3.9vw, 54px);
+  }
+  h1.headline u { text-decoration: none; }
+  h2.promise { max-width: 860px; margin: 0 auto 28px; font-weight: 500; font-size: clamp(15px, 1.5vw, 19px); line-height: 1.6; color: #fff; }
+  .guarantee-bar {
+    max-width: 680px; margin: 0 auto 18px; background: var(--purple); color: #fff; border-radius: 8px;
+    padding: 11px 16px; font-size: 13px; font-weight: 600; letter-spacing: .02em; line-height: 1.5;
+  }
+  .video-frame {
+    max-width: 680px; margin: 0 auto; position: relative; border-radius: 12px; overflow: hidden;
+    background: #0d0f1e; border: 1px solid var(--navy-3); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  }
+  .video-frame::before { content: ""; display: block; padding-top: 56.25%; }
+  .video-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+  .play {
+    width: clamp(58px, 8vw, 74px); height: clamp(58px, 8vw, 74px); border-radius: 50%; background: var(--purple);
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 10px rgba(112,0,255,.22);
+  }
+  .play svg { width: 42%; height: 42%; fill: #fff; margin-left: 6%; }
+  .video-inner span { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g3); }
+  .video-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+  .video-inner { border: 0; background: linear-gradient(180deg, rgba(13,15,30,.15), rgba(13,15,30,.55)); cursor: pointer; width: 100%; font-family: Poppins, sans-serif; }
+  .video-inner.hidden { display: none; }
+  .hero-cta { max-width: 680px; margin: 26px auto 0; }
+  .hero-trust { margin-top: 18px; font-size: 13px; color: var(--g3); font-weight: 500; }
+  .hero-trust b { color: #fff; font-weight: 600; }
+
+  /* ===== 3. What the audit covers ===== */
+  .covers { background: #fff; padding: clamp(36px, 4.5vw, 60px) clamp(16px, 3.5vw, 45px); }
+  .covers .wrap { max-width: 1190px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .covers .h2 { margin-bottom: 26px; }
+  .checks { list-style: none; }
+  .checks li { display: flex; gap: 12px; align-items: flex-start; font-size: 18px; font-weight: 500; line-height: 1.5; padding: 7px 0; }
+  .checks svg { flex: none; width: 20px; height: 20px; margin-top: 4px; }
+  .mosaic { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .tile {
+    border-radius: 10px; min-height: 196px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
+    color: #fff; background: linear-gradient(160deg, var(--navy-2), var(--navy)); position: relative; overflow: hidden;
+  }
+  .tile:nth-child(1), .tile:nth-child(2) { grid-column: span 3; }
+  .tile:nth-child(n+3) { grid-column: span 2; }
+  .tile:nth-child(2n) { background: linear-gradient(160deg, var(--purple), #3d0099); }
+  .tile:nth-child(3) { background: linear-gradient(160deg, #3d0099, var(--navy)); }
+  .tile svg { width: 34px; height: 34px; stroke: var(--gold); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .tile b { font-size: 14px; font-weight: 700; line-height: 1.3; }
+  .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(19,22,40,0) 45%, rgba(19,22,40,.85) 100%); }
+  .tile b { position: relative; z-index: 1; margin-top: auto; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+
+  /* ===== 5b. Team ===== */
+  .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: var(--wrap); margin: 34px auto 0; }
+  .member { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); border-radius: 16px; padding: 22px; backdrop-filter: blur(4px); }
+  .member img { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.7); box-shadow: 0 10px 30px rgba(0,0,0,.3); margin-bottom: 16px; }
+  .member h3 { font-size: 20px; font-weight: 800; line-height: 1.2; }
+  .member .role { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #ffe9a8; margin: 6px 0 12px; }
+  .member p { font-size: 14px; line-height: 1.65; color: #fff; margin: 0; max-width: none; }
+  .scale { max-width: var(--wrap); margin: 30px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .stat { text-align: center; background: rgba(19,22,40,.35); border-radius: 12px; padding: 18px 10px; }
+  .stat .n { font-size: clamp(28px, 3.2vw, 40px); font-weight: 900; line-height: 1; color: var(--gold); }
+  .stat .l { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-top: 8px; color: #fff; }
+  .brands { margin: 34px auto 0; text-align: center; color: #fff; }
+  .brands b { display: block; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #ffe9a8; margin-bottom: 18px; }
+  .marquee { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .track { display: flex; align-items: center; gap: 72px; width: max-content; padding: 6px 0; animation: slide 38s linear infinite; }
+  .track img { height: 52px; width: auto; max-width: 220px; object-fit: contain; filter: brightness(0) invert(1); opacity: .92; }
+  .track img[alt="BK Beauty"], .track img[alt="Epic Gardening"] { height: 68px; }
+  .track img.two-tone { filter: none; height: 60px; }   /* Obvi: bubble letters go solid under the white filter, so it ships as its own white + purple file */
+  @media (prefers-reduced-motion: reduce) { .track img:nth-child(n+10) { display: none; } }
+  .marquee:hover .track { animation-play-state: paused; }
+  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; gap: 32px 40px; } }
+
+  /* ===== 8b. Proof videos ===== */
+  .vid-row { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; text-align: left; }
+  .vid { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+  .vid .frame { position: relative; background: #000; }
+  .vid .frame::before { content: ""; display: block; padding-top: 56.25%; }
+  .vid video { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .vid .cap { padding: 14px 16px 16px; }
+  .vid .brand { font-size: 15px; font-weight: 800; }
+  .vid .label { font-size: 13px; color: var(--g2); line-height: 1.5; margin-top: 3px; }
+
+  /* ===== 4. The constraints ===== */
+  .cons { background: #fff; padding: clamp(36px, 4.5vw, 64px) clamp(16px, 3.5vw, 45px) clamp(48px, 6vw, 84px); }
+  .cons .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .cons-left { position: sticky; top: 32px; }
+  .cons-left .h2 .accent { color: var(--purple); display: block; }
+  .cons-left p { margin-top: 22px; font-size: 15px; line-height: 1.7; color: var(--navy); max-width: 460px; }
+  .cons-cards { display: grid; gap: 20px; }
+  .cons-card { border: 1px solid var(--lilac); border-radius: 16px; padding: 24px 26px; background: #fff; }
+  .cons-card .n { font-size: 30px; font-weight: 800; line-height: 1; margin-bottom: 8px; }
+  .cons-card h3 { color: var(--purple); text-transform: uppercase; font-size: 16px; font-weight: 700; letter-spacing: .02em; margin-bottom: 10px; }
+  .cons-card p { font-size: 14px; line-height: 1.7; color: #2b2e45; }
+
+  /* ===== 5. The founder (purple gradient + torn paper) ===== */
+  .fnd { background-image: linear-gradient(var(--lilac), var(--purple)); padding: clamp(32px, 4vw, 56px) clamp(16px, 3.5vw, 45px) clamp(48px, 6vw, 84px); color: #fff; }
+  .fnd-row { max-width: var(--wrap); margin: 0 auto; display: flex; gap: 44px; align-items: center; }
+  .fnd-img {
+    flex: 0 0 min(42%, 440px); aspect-ratio: 530 / 670; border-radius: 16px; position: relative; overflow: hidden;
+    background: linear-gradient(#8535ff00 40%, #7e22ff 100%), linear-gradient(160deg, #b592ff, #5a1bd9);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fnd-img .initial { font-size: 150px; font-weight: 900; color: rgba(255,255,255,.35); line-height: 1; }
+  .fnd-img i { position: absolute; top: 14px; left: 14px; font-style: normal; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: #fff3cd; color: #7a5b00; border-radius: 4px; padding: 3px 8px; }
+  .fnd-text .h2 { font-size: clamp(34px, 4.4vw, 64px); margin-bottom: 22px; }
+  .fnd-text p { font-size: 15px; line-height: 1.75; margin-bottom: 16px; color: #fff; max-width: 560px; }
+  .paper { position: relative; max-width: 510px; margin: 52px auto 0; padding: 30px 30px 26px; text-align: center; color: var(--navy); }
+  .paper::before { content: ""; position: absolute; inset: 0; background: #fff; filter: url(#rough); z-index: 0; }
+  .paper > * { position: relative; z-index: 1; }
+  .paper p { font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+  .paper p.b { font-weight: 700; }
+  .paper .sample { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: #fff3cd; color: #7a5b00; border-radius: 4px; padding: 2px 7px; margin-bottom: 6px; }
+  .paper .sig { font-family: Yellowtail, cursive; font-size: 40px; color: var(--purple); line-height: 1; margin-top: 8px; }
+
+  /* ===== 6. Brands at your level + form card ===== */
+  .level { background: var(--navy); color: #fff; padding: clamp(40px, 5vw, 72px) clamp(16px, 3.5vw, 45px) clamp(36px, 4vw, 56px); }
+  .level .wrap { display: grid; grid-template-columns: 1fr 480px; gap: 56px; align-items: start; }
+  .level .h2 { margin-bottom: 22px; }
+  .level p.lead { font-size: 16px; line-height: 1.7; color: #e7e8f2; max-width: 560px; }
+  .cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 12px; margin-top: 30px; max-width: 480px; }
+  .cat { text-align: center; font-size: 14px; font-weight: 500; }
+  .cat svg { display: block; margin: 0 auto 8px; width: 34px; height: 34px; stroke: var(--lilac); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .card-form { background: #fff; color: var(--navy); border-radius: 12px; overflow: hidden; box-shadow: 0 24px 70px rgba(0,0,0,.4); scroll-margin-top: 24px; }
+  .steps { display: flex; justify-content: center; gap: 16px; padding: 14px 16px; border-bottom: 1px solid var(--line); font-size: 12px; color: #999; }
+  .steps span { display: inline-flex; align-items: center; gap: 6px; }
+  .steps span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #d3d3d9; }
+  .steps span.on { color: var(--navy); font-weight: 600; }
+  .steps span.on::before { background: var(--purple); }
+  .form-body { padding: 22px 22px 24px; }
+  .form-body h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .form-body p.sub { font-size: 13px; color: var(--g2); line-height: 1.55; margin-bottom: 14px; }
+  .form-body input, .form-body select {
+    display: block; width: 100%; height: 46px; box-sizing: border-box; font-family: Poppins, sans-serif; font-size: 15px; color: var(--navy); padding: 0 13px; margin: 0;
+    border: 1px solid #d7d7de; border-radius: 6px; background: #fff; appearance: none; -webkit-appearance: none; text-overflow: ellipsis;
+  }
+  /* form grid (2026-10-05): equal two-column rows, labels top-aligned via subgrid, one column on phones */
+  .fgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 12px; margin-bottom: 14px; }
+  .fgrid .field { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 5px; min-width: 0; }
+  .fgrid .full { grid-column: 1 / -1; }
+  .fgrid label { align-self: end; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--g2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+  @media (max-width: 520px) { .fgrid { grid-template-columns: 1fr; } .fgrid .full { grid-column: auto; } }
+  .form-body select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2361636f' stroke-width='1.6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; padding-right: 34px; }
+  .form-body input:focus, .form-body select:focus { border-color: var(--purple); outline: 2px solid rgba(112,0,255,.25); outline-offset: 0; }
+  .consent { font-size: 11px; color: var(--g2); line-height: 1.5; margin: 4px 0 14px; }
+  .consent a { color: var(--purple); }
+  .form-error { display: none; color: #b00020; font-size: 12px; margin: -2px 0 10px; }
+  .done { display: none; text-align: center; padding: 10px 0 4px; }
+  .done h3 { margin-bottom: 8px; }
+  .done .btn-purple { margin-top: 14px; }
+
+  /* ===== 7. Availability ===== */
+  .slots { background: var(--navy); color: #fff; text-align: center; padding: 8px clamp(16px, 3.5vw, 45px) clamp(48px, 5vw, 72px); }
+  .slots .h2 { font-size: clamp(28px, 3.4vw, 46px); margin-bottom: 12px; }
+  .slots p.lead { font-size: 14px; color: var(--g3); line-height: 1.6; max-width: 520px; margin: 0 auto 30px; }
+  .slot-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 760px; margin: 0 auto 30px; }
+  .slot { position: relative; border: 1px solid var(--navy-3); border-radius: 12px; padding: 30px 12px 16px; }
+  .slot.avail { border-color: rgba(255,255,255,.7); }
+  .slot .badge { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); background: var(--red); color: #fff; font-size: 9px; font-weight: 800; letter-spacing: .08em; border-radius: 4px; padding: 3px 8px; white-space: nowrap; }
+  .slot .date { font-size: 15px; font-weight: 800; text-transform: uppercase; margin-bottom: 14px; line-height: 1.3; }
+  .slot.full .date { color: #4a5078; }
+  .slot .pill { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; border-radius: 999px; padding: 8px 14px; background: var(--navy-3); color: #fff; }
+  .slot.avail .pill { background: #2b1163; color: var(--lilac); }
+  .slot-note { margin-top: 16px; font-size: 12px; color: var(--g1); }
+  .slot-note .sample { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: #fff3cd; color: #7a5b00; border-radius: 4px; padding: 2px 6px; margin-right: 6px; }
+
+  /* ===== 8. Proof wall ===== */
+  .proof { background: var(--grey-bg); padding: clamp(40px, 5vw, 64px) clamp(16px, 3.5vw, 45px) clamp(48px, 6vw, 80px); text-align: center; }
+  .proof .eyebrow { margin-bottom: 14px; }
+  .proof .h2 { max-width: 780px; margin: 0 auto 12px; font-size: clamp(28px, 3.4vw, 46px); }
+  .proof p.lead { font-size: 14px; color: var(--g2); line-height: 1.6; max-width: 420px; margin: 0 auto 22px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 26px; }
+  .chip { font-family: Poppins, sans-serif; font-weight: 600; font-size: 13px; color: var(--navy); background: #fff; border: 1px solid #d9d9df; border-radius: 999px; padding: 8px 18px; cursor: pointer; }
+  .chip:hover { border-color: var(--purple); }
+  .chip[aria-pressed="true"] { background: var(--purple); border-color: var(--purple); color: #fff; }
+  .wall { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
+  .rev { background: #fff; border-radius: 12px; padding: 22px 22px 18px; display: flex; flex-direction: column; }
+  .rev.hide { display: none; }
+  .rev .stars { color: var(--purple); letter-spacing: .08em; font-size: 14px; margin-bottom: 12px; }
+  .rev q { display: block; quotes: none; font-size: 14px; line-height: 1.65; color: var(--g2); font-style: italic; margin-bottom: 16px; flex: 1; }
+  .rev hr { border: 0; border-top: 1px solid var(--line); margin: 0 0 12px; }
+  .rev .who { font-size: 12.5px; font-weight: 700; }
+  .rev .meta { font-size: 11px; color: var(--g1); margin-top: 2px; }
+  .rev .sample { align-self: flex-start; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: #fff3cd; color: #7a5b00; border-radius: 4px; padding: 2px 6px; margin-bottom: 10px; }
+  .wall-empty { display: none; margin-top: 18px; font-size: 14px; color: var(--g2); }
+
+  /* ===== 9. FAQ ===== */
+  .faq { background: #fff; padding: clamp(40px, 5vw, 68px) clamp(16px, 3.5vw, 45px) clamp(48px, 6vw, 80px); }
+  .faq .wrap { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+  .faq .h2 { margin-bottom: 26px; font-size: clamp(30px, 3.6vw, 52px); }
+  details { border-bottom: 1px solid var(--line); }
+  summary { list-style: none; cursor: pointer; position: relative; padding: 18px 34px 18px 0; font-size: 14.5px; font-weight: 500; line-height: 1.5; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 20px; font-weight: 400; color: var(--navy); }
+  details[open] summary::after { content: "\2212"; }
+  details p { font-size: 14px; line-height: 1.75; color: var(--g2); padding: 0 8px 20px 0; }
+
+  /* ===== 10. Footer ===== */
+  .foot { background: var(--navy); color: var(--g1); text-align: center; padding: 40px 16px 44px; }
+  .foot img { width: 170px; height: auto; filter: brightness(0) invert(1); margin-bottom: 18px; }
+  .foot nav a { font-size: 11px; color: var(--g1); text-decoration: none; }
+  .foot nav a:hover { color: #fff; }
+  .foot p { font-size: 11px; line-height: 1.6; max-width: 880px; margin: 14px auto 0; }
+
+  /* ===== A/B upgrade 2026-10-02 ===== */
+  [hidden] { display: none !important; }
+  body { overflow-x: hidden; }
+  h1.headline .l1, h1.headline .l2 { display: block; }
+  h1.headline .l2 { color: var(--lilac); }
+  .slot-row.receipts .slot { padding: 22px 12px 18px; border-color: rgba(255,255,255,.35); }
+  .slot-row.receipts .n { font-size: clamp(30px, 3.4vw, 44px); font-weight: 900; line-height: 1; color: var(--gold); margin-bottom: 10px; }
+  .slot-row.receipts .l { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #fff; line-height: 1.4; }
+  .slots .h2 .accent { color: var(--lilac); display: block; }
+  .doctrine { display: inline-block; margin: 6px 0 26px; border: 2px solid var(--gold); color: var(--gold); border-radius: 10px; padding: 10px 18px; font-weight: 800; font-size: clamp(15px, 1.6vw, 19px); text-transform: uppercase; letter-spacing: .02em; }
+  .form-body .fstep-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
+  .form-body input[aria-invalid="true"], .form-body select[aria-invalid="true"] { border-color: #b00020; }
+  .form-body .btn-purple + .btn-purple { margin-top: 0; }
+  .notfit .btn-purple { display: inline-block; width: auto; text-decoration: none; margin-top: 14px; padding: 14px 24px; }
+  /* always-on book-a-call bar: every screen size, top to bottom of the page */
+  .sbar { display: flex; position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); width: min(680px, calc(100% - 24px)); z-index: 60; align-items: center; gap: 12px; background: rgba(19,22,40,.96); border: 1px solid rgba(155,107,255,.55); border-radius: 12px; padding: 8px 8px 8px 18px; box-shadow: 0 18px 40px -10px rgba(0,0,0,.6); }
+  .sbar .t { display: flex; flex-direction: column; line-height: 1.2; color: #fff; min-width: 0; }
+  .sbar .t b { font-weight: 800; font-size: 14.5px; text-transform: uppercase; letter-spacing: .01em; }
+  .sbar .t span { font-size: 11.5px; font-weight: 500; color: var(--g3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sbar a { margin-left: auto; flex: none; background: var(--gold); color: #000; text-decoration: none; text-transform: uppercase; font-weight: 900; font-size: 15px; padding: 13px 20px; border-radius: 8px; white-space: nowrap; }
+  .sbar a:hover { filter: brightness(1.05); }
+  .foot { padding-bottom: 120px; }
+  @media (max-width: 640px) {
+    .sbar { padding-left: 14px; } .sbar .t b { font-size: 12.5px; } .sbar .t span { font-size: 10.5px; } .sbar a { font-size: 13.5px; padding: 12px 14px; }
+  }
+  @media (max-width: 400px) { .sbar .t span { display: none; } }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 980px) {
+    .covers .wrap, .cons .wrap, .level .wrap, .faq .wrap { grid-template-columns: 1fr; gap: 36px; }
+    .cons-left { position: static; }
+    .fnd-row { flex-direction: column; }
+    .fnd-img { flex: none; width: min(100%, 420px); }
+    .wall { grid-template-columns: repeat(2, 1fr); }
+    /* team stays three-across (Ken 2026-09-22) — cards just get tighter; videos go one per row */
+    .team { gap: 12px; }
+    .member { padding: 16px 14px; }
+    .member img { width: 84px; height: 84px; }
+    .member h3 { font-size: 16px; }
+    .member .role { font-size: 10px; letter-spacing: .08em; }
+    .member p { font-size: 13px; }
+    .vid-row { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .scale { grid-template-columns: repeat(2, 1fr); }
+    .slot-row { grid-template-columns: repeat(2, 1fr); }
+    .level .wrap > .card-form { max-width: 520px; }
+  }
+  @media (max-width: 640px) {
+    .btn-gold { font-size: 16px; padding: 18px 20px; }
+    .mosaic { grid-template-columns: repeat(2, 1fr); }
+    .tile:nth-child(n) { grid-column: span 1; min-height: 150px; }
+    .tile:nth-child(5) { grid-column: span 2; }
+    .wall { grid-template-columns: 1fr; }
+    .cats { grid-template-columns: repeat(2, 1fr); }
+    .team { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .member { padding: 12px 8px; text-align: center; }
+    .member img { width: 64px; height: 64px; }
+    .member h3 { font-size: 14px; }
+    .member p { font-size: 11.5px; line-height: 1.5; }
+    .topbar { font-size: 10.5px; letter-spacing: .08em; }
+    .checks li { font-size: 16px; }
+  }
+</style>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</head>
+<body data-offer="growth-leak-b">
+
+<!-- torn-paper edge filter for the founder letter -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="rough" x="-3%" y="-3%" width="106%" height="106%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="6"/>
+  </filter>
+</svg>
+
+<!-- 1. Top bar -->
+<div class="topbar">Free Growth Leak Audit &middot; 30 minutes on your account &middot; Built for 7-figure Amazon brands</div>
+
+<!-- 2. Hero -->
+<header class="hero">
+  <div class="kicker">Free Growth Leak Audit &middot; 30 minutes</div>
+  <!-- Headline + subhead are swapped by VARIANTS (?v=g default) in the script at the bottom -->
+  <h1 class="headline"><span class="l1">Improve your ROAS.</span> <span class="l2">Or we work for free.</span></h1>
+  <h2 class="promise">Amazon's audience network, our Target Lock AI and commercial-grade creative, run for you. Your overall ROAS improves, or we keep working for free until it does.</h2>
+
+  <div class="guarantee-bar">Your overall ROAS improves, or we work for free until it does.</div>
+
+  <div class="video-frame">
+    <!-- Motion-graphics Growth Leak VSL v1 (2026-10-02, same file as page A). Self-hosted 720p, 5:57. -->
+    <video id="vsl" controls playsinline preload="metadata" poster="/growthleak-assets/video/growth-leak-vsl-official-v3-poster.jpg">
+      <source data-video src="/growthleak-assets/video/growth-leak-vsl-official-v3-720p.mp4" type="video/mp4">
+    </video>
+    <button class="video-inner" id="vsl-play" type="button" aria-label="Play the 6-minute breakdown">
+      <div class="play"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg></div>
+      <span>Watch the 6-minute breakdown</span>
+    </button>
+  </div>
+
+  <div class="hero-cta"><a class="btn-gold block" data-cta="book-call" href="#call">See if you're a fit &rarr;</a></div>
+  <p class="hero-trust"><b>Free. 30 minutes.</b> You leave with the numbers either way &middot; Built for 7-figure Amazon brands</p>
+</header>
+
+<!-- 3. What the audit covers -->
+<section class="covers">
+  <div class="wrap">
+    <div>
+      <h2 class="h2">What your free audit actually covers</h2>
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="#131628" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.3l2.7 2.7L16 9.5"/></svg>See exactly where your budget overpays</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="#131628" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.3l2.7 2.7L16 9.5"/></svg>Rebuild your 50 most expensive keywords as audiences</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="#131628" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.3l2.7 2.7L16 9.5"/></svg>Get a projected monthly recovery number</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="#131628" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.3l2.7 2.7L16 9.5"/></svg>Leave with 3&ndash;5 tactical next steps for your account</li>
+      </ul>
+    </div>
+    <!-- Photo mosaic: GPT Image 2.5 Sunburst renders (assets/tiles/gen_tiles.py), 2026-09-22. -->
+    <div class="mosaic" aria-hidden="true">
+      <div class="tile"><img src="/growthleak-assets/assets/tiles/audit.jpg?v=2" alt=""><b>The Growth Leak Audit</b></div>
+      <div class="tile"><img src="/growthleak-assets/assets/tiles/audience.jpg?v=2" alt=""><b>The Audience Rebuild Plan</b></div>
+      <div class="tile"><img src="/growthleak-assets/assets/tiles/recovery.jpg?v=2" alt=""><b>Projected recovery</b></div>
+      <div class="tile"><img src="/growthleak-assets/assets/tiles/steps.jpg?v=2" alt=""><b>3&ndash;5 next steps</b></div>
+      <div class="tile"><img src="/growthleak-assets/assets/tiles/call.jpg?v=2" alt=""><b>30 min, your account</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. The constraints (four leaks) -->
+<section class="cons">
+  <div class="wrap">
+    <div class="cons-left">
+      <div class="eyebrow">The four leaks</div>
+      <h2 class="h2">Your margin is capped by its weakest link. <span class="accent">Find it. Fix it.</span></h2>
+      <p>Most brand owners think they have a hundred ad problems. They usually have one leak, and it almost always sits in one of four places. See which one sounds like your account.</p>
+    </div>
+    <div class="cons-cards">
+      <div class="cons-card"><div class="n">01</div><h3>Defending what's already yours</h3><p>Your brand terms and your top winners soak up budget every single week. Great for rank. But you can't tell which dollars are defending and which are actually winning new customers.</p></div>
+      <div class="cons-card"><div class="n">02</div><h3>The expensive middle</h3><p>Between your brand terms and your best sellers sits a broad middle of keywords you bid up every quarter. The same shoppers can be reached for a fraction per click. Nobody has ever rebuilt that middle.</p></div>
+      <div class="cons-card"><div class="n">03</div><h3>Scaling that stalls</h3><p>Every extra dollar buys a worse click. Turn spend up and ACoS climbs. Turn it down and rank slips. So the budget sits at the level you're already nervous about.</p></div>
+      <div class="cons-card"><div class="n">04</div><h3>Nobody is really watching</h3><p>Reports full of charts and no decisions. A junior hand-off after the pitch. Bids on autopilot between check-ins. Nobody owns the number that matters: what you pay to reach a shopper.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. The team (facts from remktr-gtm/ken-ultimate-resume.md + Slack titles; headshots = Slack profile photos) -->
+<section class="fnd">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow" style="color:#e9dcff">Who you'll be working with</div>
+    <h2 class="h2" style="font-size:clamp(34px,4.4vw,64px)">The team behind your audit</h2>
+    <p style="max-width:720px;margin:18px auto 0;font-size:16px;line-height:1.7;color:#fff">Full Circle and reMKTR merged to put all of it under one roof: the operators, the media buyers and the creative team that manage Amazon for some of the most recognized brands in e-commerce. Amazon is all we do.</p>
+  </div>
+
+  <div class="team">
+    <div class="member">
+      <img src="/growthleak-assets/assets/team/ken-800.jpg" alt="Ken Freeman">
+      <h3>Ken Freeman</h3>
+      <div class="role">Founder &middot; reMKTR &amp; Full Circle</div>
+      <p>More than ten years building, buying and operating businesses on Amazon. Built one of the best-selling back braces on Amazon and sold the company to Thrasio in a multiple-seven-figure exit. Former VP of Amazon at Ridge Wallet. Founded Full Circle and grew it to nearly 100 people across 10 countries.</p>
+    </div>
+    <div class="member">
+      <img src="/growthleak-assets/assets/team/jayce-800.jpg" alt="Jayce Broda">
+      <h3>Jayce Broda</h3>
+      <div class="role">VP of Growth &middot; reMKTR</div>
+      <p>Runs growth at reMKTR: the offers, the creative and the testing loop behind every campaign we launch. Volume-and-data operator &mdash; formats get tested against numbers, not taste. The person walking you through your audit is the person who built the playbook.</p>
+    </div>
+    <div class="member">
+      <img src="/growthleak-assets/assets/team/nick-800.jpg" alt="Nick Shucet">
+      <h3>Nick Shucet</h3>
+      <div class="role">Chief Executive Officer &middot; Full Circle</div>
+      <p>Runs Full Circle day to day: the account teams, the operating system behind them, and the AI agents now handling daily reporting and PPC checks across the brands we manage. Nothing in your plan gets recommended that his teams aren't already doing for brands at your level.</p>
+    </div>
+  </div>
+
+  <div class="scale">
+    <div class="stat"><div class="n">$520M+</div><div class="l">Amazon revenue managed</div></div>
+    <div class="stat"><div class="n">100</div><div class="l">People across 10 countries</div></div>
+    <div class="stat"><div class="n">100+</div><div class="l">Brands managed</div></div>
+    <div class="stat"><div class="n">10 yrs</div><div class="l">Each, operating on Amazon</div></div>
+  </div>
+  <!-- Brand logo marquee: real logos pulled from each brand's site 2026-09-22 (assets/brands/), rendered white. List is duplicated so the loop is seamless. -->
+  <div class="brands">
+    <b>Brands we've worked with</b>
+    <div class="marquee" aria-label="HexClad, Ridge Wallet, BK Beauty, The Woobles, Legion Athletics, Alpha Lion, Obvi, Epic Gardening, Lonely Planet">
+      <div class="track">
+        <img src="/growthleak-assets/assets/brands/hexclad.svg" alt="HexClad"><img src="/growthleak-assets/assets/brands/ridge.svg" alt="Ridge"><img src="/growthleak-assets/assets/brands/bk-beauty.png" alt="BK Beauty"><img src="/growthleak-assets/assets/brands/woobles.png" alt="The Woobles"><img src="/growthleak-assets/assets/brands/legion.png" alt="Legion Athletics"><img src="/growthleak-assets/assets/brands/alpha-lion.webp" alt="Alpha Lion"><img src="/growthleak-assets/assets/brands/obvi-mono.svg" alt="Obvi" class="two-tone"><img src="/growthleak-assets/assets/brands/epic-gardening.svg" alt="Epic Gardening"><img src="/growthleak-assets/assets/brands/lonely-planet.svg" alt="Lonely Planet">
+        <img src="/growthleak-assets/assets/brands/hexclad.svg" alt=""><img src="/growthleak-assets/assets/brands/ridge.svg" alt=""><img src="/growthleak-assets/assets/brands/bk-beauty.png" alt=""><img src="/growthleak-assets/assets/brands/woobles.png" alt=""><img src="/growthleak-assets/assets/brands/legion.png" alt=""><img src="/growthleak-assets/assets/brands/alpha-lion.webp" alt=""><img src="/growthleak-assets/assets/brands/obvi-mono.svg" alt="" class="two-tone"><img src="/growthleak-assets/assets/brands/epic-gardening.svg" alt=""><img src="/growthleak-assets/assets/brands/lonely-planet.svg" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Brands at your level + application form card -->
+<section class="level">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Find out where your leak is</div>
+      <h2 class="h2">Brands at your level, in categories that look like yours</h2>
+      <p class="lead">This audit is for brands doing $1M+ a year on Amazon and spending $5K or more a month on ads. We benchmark you against brands in your own category, so the numbers you see are ones you can act on. The principles are universal. The audit is specific to your account.</p>
+      <div class="cats">
+        <div class="cat"><svg viewBox="0 0 32 32"><path d="M11 5h10v4H11z"/><path d="M9 9h14v18a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2z"/><path d="M13 18h6M16 15v6"/></svg>Supplements</div>
+        <div class="cat"><svg viewBox="0 0 32 32"><path d="M16 4l2.5 7.5L26 14l-7.5 2.5L16 24l-2.5-7.5L6 14l7.5-2.5z"/><path d="M25 22l.8 2.2L28 25l-2.2.8L25 28l-.8-2.2L22 25l2.2-.8z"/></svg>Beauty</div>
+        <div class="cat"><svg viewBox="0 0 32 32"><rect x="9" y="9" width="14" height="14" rx="2"/><path d="M13 5v4M19 5v4M13 23v4M19 23v4M5 13h4M5 19h4M23 13h4M23 19h4"/></svg>Electronics</div>
+        <div class="cat"><svg viewBox="0 0 32 32"><path d="M5 15L16 6l11 9"/><path d="M8 13v14h16V13"/><path d="M13 27v-8h6v8"/></svg>Home &amp; Kitchen</div>
+        <div class="cat"><svg viewBox="0 0 32 32"><circle cx="9" cy="14" r="2.2"/><circle cx="14" cy="9" r="2.2"/><circle cx="20" cy="9" r="2.2"/><circle cx="25" cy="14" r="2.2"/><path d="M16 15c-4 0-7 4-7 7 0 2.5 2 3.5 4 3 1.2-.3 2-.7 3-.7s1.8.4 3 .7c2 .5 4-.5 4-3 0-3-3-7-7-7z"/></svg>Pet</div>
+        <div class="cat"><svg viewBox="0 0 32 32"><path d="M3 26l9-15 5 8 3-4 9 11z"/></svg>Fitness &amp; Outdoors</div>
+      </div>
+    </div>
+
+    <!-- Application form (2026-10-02): two steps, same fields + qualification logic as page A (growth-leak-vsl-v2.html).
+         Step 1 = business questions, step 2 = name + email + mobile phone (2026-10-05).
+         Under $1M/yr OR under $5K/mo -> form.dataset.qualified="no" -> Dr. PPC panel, no Calendly (tracking.js fires UnqualifiedLead).
+         Qualified -> Calendly popup prefilled with name + email. -->
+    <div class="card-form" id="call">
+      <div class="steps"><span class="on" id="step1">1 &middot; About your brand</span><span id="step2">2 &middot; Book your call</span></div>
+      <div class="form-body">
+        <form id="apply-form" novalidate>
+          <h3>Free Growth Leak Audit</h3>
+          <p class="sub" id="f-sub">Five quick questions so we can prep your numbers before the call.</p>
+          <div class="fstep" id="fs1">
+            <div class="fgrid">
+              <div class="field"><label for="f-brand">Brand name *</label><input id="f-brand" type="text" name="brand" required autocomplete="organization"></div>
+              <div class="field"><label for="f-role">Your role *</label>
+                <select id="f-role" name="role" required>
+                  <option value="">Select</option>
+                  <option>Founder / owner</option>
+                  <option>Marketing or e-commerce lead</option>
+                  <option>Agency or consultant</option>
+                  <option>Other</option>
+                </select></div>
+              <div class="field full"><label for="f-amz">Amazon storefront or best-seller link *</label><input id="f-amz" type="url" name="amazon_link" required placeholder="https://www.amazon.com/…" inputmode="url"></div>
+              <div class="field"><label for="f-rev">Amazon revenue, 12 mo *</label>
+                <select id="f-rev" name="revenue" required>
+                  <option value="">Select</option>
+                  <option data-q="no">Under $500K</option>
+                  <option data-q="no">$500K &ndash; $1M</option>
+                  <option>$1M &ndash; $3M</option>
+                  <option>$3M &ndash; $10M</option>
+                  <option>$10M+</option>
+                </select></div>
+              <div class="field"><label for="f-ads">Monthly ad spend *</label>
+                <select id="f-ads" name="adspend" required>
+                  <option value="">Select</option>
+                  <option data-q="no">Under $5K</option>
+                  <option>$5K &ndash; $15K</option>
+                  <option>$15K &ndash; $50K</option>
+                  <option>$50K &ndash; $150K</option>
+                  <option>$150K+</option>
+                </select></div>
+              <div class="field"><label for="f-who">Who runs your ads? *</label>
+                <select id="f-who" name="ads_run_by" required>
+                  <option value="">Select</option>
+                  <option>I do</option>
+                  <option>In-house team</option>
+                  <option>An agency</option>
+                  <option>Nobody right now</option>
+                </select></div>
+              <div class="field"><label for="f-goal">Most interested in? (optional)</label>
+                <select id="f-goal" name="goal">
+                  <option value="">Select</option>
+                  <option value="Reach new customers past my PPC ceiling">New customers beyond PPC</option>
+                  <option value="Bring back shoppers who added to cart and left">Win back cart abandoners</option>
+                  <option value="Get my brand on streaming TV">Streaming TV (Prime Video, Fire TV)</option>
+                  <option value="Link-out ads to my own website">Link-outs to my own website</option>
+                  <option value="Lower what I pay for customers I already win">Better overall ROAS</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select></div>
+            </div>
+            <button type="button" class="btn-purple" id="f-next">Next &rsaquo;</button>
+          </div>
+          <div class="fstep" id="fs2" hidden>
+            <div class="fgrid">
+              <div class="field"><label for="f-name">Full name *</label><input id="f-name" type="text" name="name" required autocomplete="name"></div>
+              <div class="field"><label for="f-email">Business email *</label><input id="f-email" type="email" name="email" required autocomplete="email"></div>
+              <div class="field full"><label for="f-phone">Mobile phone *</label><input id="f-phone" type="tel" name="phone" required autocomplete="tel" inputmode="tel" pattern="[0-9 +.\-\(\)]{7,25}" placeholder="(555) 555-5555"></div>
+            </div>
+            <div class="hp" aria-hidden="true"><label for="f-company">Company website</label><input id="f-company" type="text" name="company_website" tabindex="-1" autocomplete="off"></div>
+          </div>
+          <div class="form-error" id="form-error" role="alert">Please fill in every field to continue.</div>
+          <p class="consent" id="f-consent" hidden>By submitting, you agree reMKTR may call, text or email you about your audit, usually within minutes. Message and data rates may apply. Reply STOP to opt out. See our <a href="https://remktr.com/privacy-policy/">Privacy Policy</a>.</p>
+          <button type="submit" class="btn-purple" id="f-submit" hidden>Continue to pick a time &rsaquo;</button>
+        </form>
+        <div class="done notfit" id="notfit">
+          <h3>Thanks. Here's the right door.</h3>
+          <p class="sub">The audit call is built for Amazon brands past about $1M a year and $5K a month in ads, so we'd rather not take 30 minutes of your time yet. Dr. PPC runs your Amazon PPC for you and is made for brands at your stage.</p>
+          <a class="btn-purple" href="https://drppc.ai/" target="_blank" rel="noopener">See Dr. PPC &rsaquo;</a>
+        </div>
+        <div class="done" id="done">
+          <h3>You're in. Pick your time.</h3>
+          <p class="sub">The calendar opens next. We prep your numbers before the call.</p>
+          <button type="button" class="btn-purple" id="reopen">Open the calendar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. The guarantee + receipts (replaces the "slots left" availability block; numbers = remktr.com receipts only) -->
+<section class="slots" aria-labelledby="h-guar">
+  <div class="eyebrow">The guarantee</div>
+  <h2 class="h2" id="h-guar">Improve your ROAS. <span class="accent">Or we work for free.</span></h2>
+  <p class="lead">Your overall ROAS improves, or we work for free until it does. We agree the starting baseline with you up front, so we both measure the same number.</p>
+  <div class="doctrine">No retainers. No creative fees.</div>
+  <div class="slot-row receipts">
+    <div class="slot"><div class="n">6.03x</div><div class="l">Portfolio ROAS</div></div>
+    <div class="slot"><div class="n">44%</div><div class="l">New-to-brand, warm prospects</div></div>
+    <div class="slot"><div class="n">57%</div><div class="l">Streaming new-to-brand</div></div>
+    <div class="slot"><div class="n">$1.35</div><div class="l">Blended CPC</div></div>
+  </div>
+  <p class="slot-note" style="margin:-12px auto 28px;max-width:560px">reMKTR portfolio, Jul 16 &ndash; Aug 15 2026. Results from a past period, not a promise about yours.</p>
+  <a class="btn-gold" data-cta="book-call" data-cta-pos="guarantee" href="#call">See if you're a fit &rarr;</a>
+</section>
+
+<!-- 8. Proof wall -->
+<section class="proof">
+  <div class="eyebrow">Proof</div>
+  <h2 class="h2">See what brand owners like you are saying</h2>
+  <p class="lead">Three Full Circle client stories, in their own words.</p>
+  <!-- Full Circle client episodes (full-circle-site/lib/testimonials.ts), compressed to 720p in video/testimonials/. Click to play. -->
+  <div class="vid-row">
+    <div class="vid"><div class="frame"><video controls playsinline preload="none" poster="/growthleak-assets/video/testimonials/hexclad.jpg"><source src="/growthleak-assets/video/testimonials/hexclad.mp4" type="video/mp4"></video></div><div class="cap"><div class="brand">HexClad</div><div class="label">8 figures in one day on Amazon</div></div></div>
+    <div class="vid"><div class="frame"><video controls playsinline preload="none" poster="/growthleak-assets/video/testimonials/bk-beauty.jpg"><source src="/growthleak-assets/video/testimonials/bk-beauty.mp4" type="video/mp4"></video></div><div class="cap"><div class="brand">BK Beauty</div><div class="label">TikTok Shop + Amazon: blowing up an e-commerce brand</div></div></div>
+    <div class="vid"><div class="frame"><video controls playsinline preload="none" poster="/growthleak-assets/video/testimonials/beardbrand.jpg"><source src="/growthleak-assets/video/testimonials/beardbrand.mp4" type="video/mp4"></video></div><div class="cap"><div class="brand">Beardbrand</div><div class="label">6 figures selling on 2 hours a week</div></div></div>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Find out where your leak is</div>
+      <h2 class="h2">Frequently asked questions</h2>
+      <a class="btn-gold block" data-cta="book-call" href="#call">See if you're a fit &rarr;</a>
+    </div>
+    <div>
+      <details><summary>What is the free Growth Leak Audit?</summary><p>A 30-minute screen-share on your own Amazon account. We show where your budget leaks at the top of the funnel, where buyers slip away after the click, put a number on what you're leaving on the table, and rank which of our four fixes pays back first.</p></details>
+      <details><summary>What do I walk away with?</summary><p>A written growth-leak teardown, your audience rebuild plan, a projected monthly recovery number, and 3&ndash;5 tactical next steps. They are yours whether or not we ever work together.</p></details>
+      <details><summary>How do I book?</summary><p>Fill out the short form on this page (about a minute). A calendar opens right after so you can pick your time. We prep your numbers before the call.</p></details>
+      <details><summary>Do I have to change my keywords or listings?</summary><p>No. Your proven winners and brand terms stay exactly where they are. We rebuild only the expensive middle of your traffic.</p></details>
+      <details><summary>Is this right for my brand?</summary><p>Size: if you are doing $1M+ a year on Amazon and spending $5K or more a month on ads, we can usually help. Under that, Dr. PPC is the better fit for now. Category: we work with supplements, beauty, electronics, home &amp; kitchen, pet, and fitness &amp; outdoors brands, and benchmark you against brands in your own category.</p></details>
+      <details><summary>What's the guarantee?</summary><p>Your overall ROAS improves, or we work for free until it does. We agree the starting baseline with you up front, so we both measure the same number.</p></details>
+      <details><summary>How does pricing work?</summary><p>The audit itself is free. On the call we show you exactly how we are paid, before you commit to anything. No retainers. No creative fees.</p></details>
+      <details><summary>What happens after the call?</summary><p>If it is a fit, we walk you through how we would run it. If it is not, you keep the audit and the plan. No pressure either way.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Footer -->
+<footer class="foot">
+  <img src="/growthleak-assets/assets/remktr-footer-logo.png" alt="reMKTR">
+  <nav><a href="https://remktr.com/privacy-policy/">Privacy Policy</a></nav>
+  <p>&copy; 2026 reMKTR. All rights reserved.</p>
+  <p>Results shown are from a past period and are not a promise about yours. Individual results vary based on your account, category and market conditions. The guarantee: your overall ROAS improves, or we work for free until it does. We agree the starting baseline with you up front.</p>
+  <p>This site is not a part of the Facebook&trade; website or Meta Platforms, Inc. This site is NOT endorsed by Facebook&trade; in any way. Facebook&trade; is a trademark of Meta Platforms, Inc.</p>
+</footer>
+
+<!-- Always-on book-a-call bar: visible on every screen size, top to bottom -->
+<div class="sbar" id="sbar" role="region" aria-label="Book a call">
+  <span class="t"><b>Free Growth Leak Audit</b><span>ROAS improves, or we work for free</span></span>
+  <a href="#call" data-cta="book-call" data-cta-pos="sticky">Book a call &rarr;</a>
+</div>
+
+<script src="/growthleak-assets/assets/tracking.js"></script>
+<script>
+// PAGE B of the A/B test (body data-offer="growth-leak-b"). Page A = growth-leak-vsl-v2.html (data-offer="growth-leak-a").
+// Hero variants: ?v=g (default) | n | s | r | t | an | ppc | tv | brand (same text as page A) + this page's original a | b | c | d.
+// ?debug=1 shows a badge with the page (A/B) and the active variant.
+// Variants c and d from undercut-vsl.html are intentionally left out (FTC naming hold; no "DSP" wording).
+var VARIANTS = {
+  // Positive, guarantee-led set (Ken 2026-10-02), copied exactly from page A. Default = g.
+  "g": {
+    "headline": "<span class=\"l1\">Improve your ROAS.</span> <span class=\"l2\">Or we work for free.</span>",
+    "subhead": "Amazon's audience network, our Target Lock AI and commercial-grade creative, run for you. Your overall ROAS improves, or we keep working for free until it does."
+  },
+  "n": {
+    "headline": "<span class=\"l1\">New customers.</span> <span class=\"l2\">Not just new clicks.</span>",
+    "subhead": "Reach in-market Amazon shoppers who've never bought from you, before they ever search. ROAS improves, or we work for free."
+  },
+  "s": {
+    "headline": "<span class=\"l1\">Scale past</span> <span class=\"l2\">Amazon PPC.</span>",
+    "subhead": "Keep the PPC that works. Add the shoppers it can't reach, on and off Amazon. ROAS improves, or we work for free."
+  },
+  "r": {
+    "headline": "<span class=\"l1\">Bring back the shoppers</span> <span class=\"l2\">who almost bought.</span>",
+    "subhead": "They viewed it. They added to cart. Target Lock puts you back in front of them and turns them into buyers. ROAS improves, or we work for free."
+  },
+  "t": {
+    "headline": "<span class=\"l1\">Big-brand TV.</span> <span class=\"l2\">Aimed like search.</span>",
+    "subhead": "Your commercial on Prime Video and premium streaming, shown to households Amazon's shopper signals say are likely to buy. We make the spot."
+  },
+  // Message match for Google/Bing (?v=an|ppc|tv|brand)
+  "an": {
+    "headline": "<span class=\"l1\">Audience ads for</span> <span class=\"l2\">Amazon brands.</span>",
+    "subhead": "Amazon's audience network, run end to end by reMKTR. Your overall ROAS improves, or we work for free until it does."
+  },
+  "ppc": {
+    "headline": "<span class=\"l1\">Scale past</span> <span class=\"l2\">Amazon PPC.</span>",
+    "subhead": "PPC works. We run it too. Then we reach the shoppers your keywords can't. ROAS improves, or we work for free."
+  },
+  "tv": {
+    "headline": "<span class=\"l1\">Your brand on</span> <span class=\"l2\">Prime Video.</span>",
+    "subhead": "Streaming TV aimed with Amazon's shopper signals, with the commercial made for you. ROAS improves, or we work for free."
+  },
+  "brand": {
+    "headline": "<span class=\"l1\">reMKTR.</span> <span class=\"l2\">Ad-tech for Amazon brands.</span>",
+    "subhead": "Book a call. First 30 days free if we're a fit. Your overall ROAS improves, or we work for free until it does."
+  },
+  // This page's original Growth Leak headlines (2026-09-22), kept for testing. "d" = the original CPC headline, test only.
+  "a": {
+    "headline": "Find Your Amazon <u>Growth Leak</u>.",
+    "subhead": "A free 30-minute teardown of your account. You leave with the number &mdash; and the fix."
+  },
+  "b": {
+    "headline": "Your Amazon Ads Are <u>Leaking Growth</u>.",
+    "subhead": "Free 30-minute teardown. See where &mdash; and what it's costing you."
+  },
+  "c": {
+    "headline": "Stop Paying More For <u>The Same Sales</u>.",
+    "subhead": "Free audit: where your ad budget leaks, and which fix pays back first."
+  },
+  "d": {
+    "headline": "Cut What You Pay For <u>Amazon Traffic</u> In Half",
+    "subhead": "Same shoppers, a fraction per click &mdash; your winning keywords untouched."
+  }
+};
+var CALENDLY_URL = (window.REMKTR_TRACKING && window.REMKTR_TRACKING.bookingUrl) || 'https://calendly.com/jayce-remktr/30min';
+
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var v = (params.get('v') || 'g').toLowerCase();
+  if (!VARIANTS[v]) v = 'g';
+  document.querySelector('h1.headline').innerHTML = VARIANTS[v].headline;
+  document.querySelector('h2.promise').innerHTML = VARIANTS[v].subhead;
+  if (params.get('debug') === '1') {
+    var badge = document.createElement('div');
+    badge.id = 'ab-debug';
+    badge.textContent = 'page B (' + document.body.dataset.offer + ') · variant: ' + v;
+    badge.style.cssText = 'position:fixed;top:12px;right:12px;background:#7000ff;color:#fff;font:700 12px Poppins,sans-serif;padding:6px 12px;border-radius:20px;z-index:9999;';
+    document.body.appendChild(badge);
+  }
+
+  // VSL: the poster overlay is a play button; once playing, native controls take over.
+  var vsl = document.getElementById('vsl'), vslPlay = document.getElementById('vsl-play');
+  if (vsl && vslPlay) {
+    vslPlay.addEventListener('click', function () { var p = vsl.play(); if (p && p.catch) p.catch(function () {}); });
+    vsl.addEventListener('play', function () { vslPlay.classList.add('hidden'); });
+    // watch-depth events (vsl_play, vsl_25, vsl_50, vsl_75, vsl_100) through tracking.js → GA4 / Meta
+    var fired = {};
+    function mark(name) { if (fired[name]) return; fired[name] = true; if (window.remktrTrack) window.remktrTrack(name, { variant: v }); }
+    vsl.addEventListener('play', function () { mark('vsl_play'); });
+    vsl.addEventListener('timeupdate', function () {
+      if (!vsl.duration) return; var pct = vsl.currentTime / vsl.duration * 100;
+      [25, 50, 75].forEach(function (q) { if (pct >= q) mark('vsl_' + q); });
+    });
+    vsl.addEventListener('ended', function () { mark('vsl_100'); vslPlay.classList.remove('hidden'); vsl.load(); });
+  }
+
+  var form = document.getElementById('apply-form'), errBox = document.getElementById('form-error');
+  var fs1 = document.getElementById('fs1'), fs2 = document.getElementById('fs2');
+
+  // Every booking button (hero, guarantee, FAQ, sticky bar) scrolls to the form card and focuses the current step's first field.
+  document.querySelectorAll('[data-cta="book-call"]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (vsl && !vsl.paused) vsl.pause();
+      document.getElementById('call').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(function () {
+        if (form.style.display === 'none') return;
+        var f = (fs1.hidden ? fs2 : fs1).querySelector('input,select');
+        if (f) f.focus({ preventScroll: true });
+      }, 500);
+    });
+  });
+
+  function openCalendly(data) {
+    // prefill name/email/phone + Jayce's booking questions (a1..a7) so the answers show on the booking (tracking.js: remktrLead)
+    var url = window.remktrLead ? window.remktrLead.calendlyUrl(CALENDLY_URL, data) : CALENDLY_URL + '?name=' + encodeURIComponent(data.name) + '&email=' + encodeURIComponent(data.email);
+    if (window.Calendly) { window.Calendly.initPopupWidget({ url: url }); } else { window.open(url, '_blank'); }
+  }
+  var lastData = null;
+
+  // errors clear as soon as the field is fixed
+  function clearIfFixed(el) {
+    if (el.checkValidity()) el.removeAttribute('aria-invalid');
+    if (!form.querySelector('[aria-invalid="true"]')) errBox.style.display = 'none';
+  }
+  form.querySelectorAll('input,select').forEach(function (el) {
+    el.addEventListener('input', function () { clearIfFixed(el); });
+    el.addEventListener('change', function () { clearIfFixed(el); });
+  });
+
+  // two-step form: business questions first, contact details second
+  function stepValid(box) {
+    var first = null;
+    box.querySelectorAll('input,select').forEach(function (el) {
+      if (!el.checkValidity()) { el.setAttribute('aria-invalid', 'true'); if (!first) first = el; } else el.removeAttribute('aria-invalid');
+    });
+    return first;
+  }
+  function nextStep() {
+    var bad = stepValid(fs1);
+    if (bad) {
+      errBox.textContent = (bad.type === 'url' && bad.value) ? 'Please paste a full Amazon link (starting with https://).' : 'Please answer each question to continue.';
+      errBox.style.display = 'block'; bad.focus(); return;
+    }
+    errBox.style.display = 'none'; fs1.hidden = true; fs2.hidden = false;
+    document.getElementById('f-submit').hidden = false; document.getElementById('f-consent').hidden = false;
+    document.getElementById('f-sub').textContent = 'Last step. Then pick a time on Jayce’s calendar.';
+    if (window.remktrTrack) window.remktrTrack('application_step1', { variant: v });
+    document.getElementById('f-name').focus();
+  }
+  document.getElementById('f-next').addEventListener('click', nextStep);
+  // Enter on a step-1 text field advances instead of submitting
+  fs1.querySelectorAll('input').forEach(function (el) {
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); nextStep(); } });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    // still on step 1: advance, and stop tracking.js from counting this as an application
+    if (!fs1.hidden) { e.stopImmediatePropagation(); e.stopPropagation(); nextStep(); return; }
+    if (!form.checkValidity()) {
+      e.stopPropagation();
+      var bad = stepValid(fs2);
+      errBox.textContent = document.getElementById('f-email').validity.typeMismatch ? 'Please enter a valid email address.' : 'Please add your name, email and mobile number.';
+      errBox.style.display = 'block';
+      if (bad) bad.focus();
+      return;
+    }
+    errBox.style.display = 'none';
+    var data = Object.fromEntries(new FormData(form).entries());
+    data.variant = v; data.page = window.location.pathname; data.offer = document.body.dataset.offer;
+    // Qualification: under $1M/yr revenue OR under $5K/mo ad spend -> no audit call, no Meta "Lead" (tracking.js reads data-qualified)
+    var unq = ['f-rev', 'f-ads'].some(function (id) { var o = document.getElementById(id).selectedOptions[0]; return o && o.dataset.q === 'no'; });
+    data.qualified = unq ? 'no' : 'yes'; form.dataset.qualified = data.qualified;
+    try { localStorage.setItem('remktr-apply-' + Date.now(), JSON.stringify(data)); } catch (err) {}
+    // every application (qualified or not) -> /api/lead -> Close CRM + Slack (tracking.js: remktrLead)
+    if (window.remktrLead) window.remktrLead.submit(data);
+    lastData = data;
+    form.style.display = 'none';
+    if (unq) { document.getElementById('notfit').style.display = 'block'; return; }
+    document.getElementById('done').style.display = 'block';
+    document.getElementById('step1').classList.remove('on');
+    document.getElementById('step2').classList.add('on');
+    openCalendly(data);
+  });
+  document.getElementById('reopen').addEventListener('click', function () { if (lastData) openCalendly(lastData); });
+})();
+</script>
+</body>
+</html>
