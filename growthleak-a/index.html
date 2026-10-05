@@ -497,7 +497,7 @@ html.locked,html.locked body{overflow:hidden}
           <select id="f-ads" name="adspend" required>
             <option value="">Select</option>
             <option data-q="no">Under $10K</option>
-            <option data-q="no">$10K &ndash; $20K</option>
+            <option>$10K &ndash; $20K</option>
             <option>$20K &ndash; $50K</option>
             <option>$50K &ndash; $150K</option>
             <option>$150K+</option>
@@ -538,7 +538,7 @@ html.locked,html.locked body{overflow:hidden}
     </form>
     <div class="done" id="notfit">
       <h3>Thanks. <em>Here's the right door.</em></h3>
-      <p class="sub">The audit call is built for Amazon brands past about $1M a year and $20K a month in Amazon ads, so we'd rather not take 30 minutes of your time yet. Dr. PPC runs your Amazon PPC for you and is made for brands at your stage.</p>
+      <p class="sub">The audit call is built for Amazon brands past about $1M a year and $10K a month in Amazon ads, so we'd rather not take 30 minutes of your time yet. Dr. PPC runs your Amazon PPC for you and is made for brands at your stage.</p>
       <a class="btn" href="https://drppc.ai/" target="_blank" rel="noopener">See Dr. PPC <span class="arr" aria-hidden="true">&rarr;</span></a>
     </div>
     <div class="done" id="done">
@@ -718,7 +718,7 @@ var CALENDLY_URL = (window.REMKTR_TRACKING && window.REMKTR_TRACKING.bookingUrl)
     errBox.style.display = 'none';
     var data = Object.fromEntries(new FormData(form).entries());
     data.variant = v; data.page = window.location.pathname;
-    // Qualification: under $1M/yr revenue OR under $20K/mo ad spend -> no audit call, no Meta "Lead" (tracking.js reads data-qualified)
+    // Qualification: under $1M/yr revenue OR under $10K/mo ad spend -> no audit call, no Meta "Lead" (tracking.js reads data-qualified)
     var unq = ['f-rev', 'f-ads'].some(function (id) { var o = document.getElementById(id).selectedOptions[0]; return o && o.dataset.q === 'no'; });
     data.qualified = unq ? 'no' : 'yes'; form.dataset.qualified = data.qualified;
     data.offer = document.body.dataset.offer;
