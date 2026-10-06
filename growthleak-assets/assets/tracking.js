@@ -33,7 +33,12 @@ window.REMKTR_TRACKING = {
   // Hotjar (optional session recordings)
   hotjarId: "REPLACE_WITH_HOTJAR_ID",
 
-  bookingUrl: "https://calendly.com/jayce-remktr/30min"
+  bookingUrl: "https://calendly.com/jayce-remktr/30min",
+
+  // Post-booking page (DRAFT, Ken's review 2026-10-05). "" = off: the Calendly popup keeps its own confirmation.
+  // remktr-go/build.py --booked-redirect sets "/booked/" in the remktr.com copy only. After a booking the visitor
+  // is sent there with ?t=<call start ISO> (from the lead backend's Calendly read; no PII in the URL).
+  bookedPage: "/booked/"
 };
 
 (function initClarity(){
@@ -203,9 +208,20 @@ window.addEventListener("message", (event) => {
     }
     // tell the backend (Close "Call Booked" + Slack booked/call-prep). Calendly sends the event + invitee URIs.
     const p = (event.data && event.data.payload) || {};
-    if (window.remktrLead) window.remktrLead.booked({
+    const sent = window.remktrLead ? window.remktrLead.booked({
       event_uri: p.event && p.event.uri, invitee_uri: p.invitee && p.invitee.uri
-    });
+    }) : null;
+    // post-booking page: wait (max 4s) for the backend's Calendly read so the page can show the call time.
+    // Conversions above have already been queued; the 600ms floor lets the pixels flush before navigating.
+    const page = t.bookedPage;
+    if (page && /^\/[a-z0-9\/-]*$/i.test(page)) {
+      const timeout = new Promise((r) => setTimeout(() => r(null), 4000));
+      const floor = new Promise((r) => setTimeout(r, 600));
+      Promise.all([Promise.race([Promise.resolve(sent).catch(() => null), timeout]), floor]).then(([res]) => {
+        const iso = res && res.time && !isNaN(new Date(res.time).getTime()) ? new Date(res.time).toISOString() : "";
+        window.location.assign(page + (iso ? "?t=" + encodeURIComponent(iso) : ""));
+      });
+    }
   }
 });
 
