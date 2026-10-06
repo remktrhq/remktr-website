@@ -296,7 +296,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .orbit:not(.live) .o-core,.orbit:not(.live) .o-glow{left:50%;top:52%}
 @media (max-width:640px){.onode .tag i{display:none}}
 
-.agents{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(18px,3vw,36px)}
+.agents{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:clamp(18px,3vw,36px)}
+.agents>.acard{grid-column:span 2}
+.agents>.acard:nth-child(4){grid-column:2 / span 2}
 .acard{position:relative;padding:22px;border-radius:22px;border:1px solid var(--line2);background:linear-gradient(170deg,rgba(var(--cr),.12),rgba(21,19,29,.9) 55%);overflow:hidden;transition:transform .35s var(--ease),border-color .35s,box-shadow .35s}
 .acard:hover{transform:translateY(-4px);border-color:rgba(var(--cr),.55);box-shadow:0 30px 60px -30px rgba(var(--cr),.55)}
 .acard::before{content:"";position:absolute;width:220px;height:220px;right:-90px;top:-110px;border-radius:50%;background:radial-gradient(circle,rgba(var(--cr),.3),transparent 65%);pointer-events:none}
@@ -340,6 +342,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .ticket-in::after{content:"℞";position:absolute;right:-10px;top:-50px;font-weight:900;font-size:260px;color:rgba(var(--gr),.05);line-height:1;pointer-events:none}
 .was{font-size:clamp(15px,1.5vw,18px);color:var(--mute);font-weight:600}
 .was-pr{position:relative;display:inline-block;margin-top:6px;font-weight:900;font-size:clamp(30px,4.6vw,58px);letter-spacing:-.04em;color:#a59db2}
+.one .w .plus{font-weight:700;font-size:clamp(15px,1.6vw,20px);color:#cfc6dc;margin-top:8px}
 .was-pr small{font-size:.5em;font-weight:800}
 .was-pr::after{content:"";position:absolute;left:-3%;top:52%;width:106%;height:clamp(6px,.8vw,10px);border-radius:8px;background:var(--y);box-shadow:0 0 24px rgba(252,204,0,.7);transform:scaleX(0) rotate(-2deg);transform-origin:0 50%;transition:transform .7s .35s var(--ease)}
 .ticket.in .was-pr::after{transform:scaleX(1) rotate(-2deg)}
@@ -401,10 +404,13 @@ footer .fl a{text-decoration:none}footer .fl a:hover{color:#fff}
   .ppc-grid,.faq-grid{grid-template-columns:1fr}
   .console{transform:none}
   .agents{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .agents>.acard,.agents>.acard:nth-child(4){grid-column:auto}
+  .agents>.acard:nth-child(5){grid-column:1 / -1}
 }
 @media (max-width:560px){
   .hero{padding-bottom:80px}
   .steps,.agents{grid-template-columns:1fr}
+  .agents>.acard:nth-child(5){grid-column:auto}
   .addcal .btn{flex:1 1 100%}
   .cta-row .btn{flex:1 1 100%}
   .ppc-head .ag{width:84px;height:84px}
@@ -578,21 +584,19 @@ footer .fl a{text-decoration:none}footer .fl a:hover{color:#fff}
       <a class="onode" href="#ag-bruno" data-ring="1" data-a="4.44" style="--fx:80%;--fy:40%"><span class="ag c-bruno"><img src="media/bruno.jpg" alt=""><video src="media/bruno.mp4" autoplay muted loop playsinline aria-hidden="true"></video></span><span class="tag c-bruno"><b>Bruno</b><i>Creative director</i></span></a>
       <a class="onode" href="#ag-stock" data-ring="2" data-a="2.4" style="--fx:8%;--fy:48%"><span class="ag rev c-stock"><img src="media/dr-stock.jpg" alt=""><video src="media/dr-stock.mp4" autoplay muted loop playsinline aria-hidden="true"></video></span><span class="tag c-stock"><b>Dr. Stock</b><i>Inventory</i></span></a>
       <a class="onode" href="#ag-shield" data-ring="2" data-a="5.54" style="--fx:92%;--fy:70%"><span class="ag c-shield"><img src="media/dr-shield.jpg" alt=""><video src="media/dr-shield.mp4" autoplay muted loop playsinline aria-hidden="true"></video></span><span class="tag c-shield"><b>Dr. Shield</b><i>Protection</i></span></a>
-      <a class="onode" href="#ag-dsp" data-ring="0" data-a="3.54" style="--fx:70%;--fy:62%"><span class="ag rev c-dsp"><img src="media/dr-dsp.jpg" alt=""><video src="media/dr-dsp.mp4" autoplay muted loop playsinline aria-hidden="true"></video></span><span class="tag c-dsp"><b>Dr. DSP</b><i>Audience network</i></span></a>
     </div>
 
     <div class="agents">
-      <article class="acard c-ava rv" id="ag-ava"><div class="top"><div class="ag c-ava"><img src="media/ava.jpg" alt=""><video src="media/ava.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">01 / 06</div><h4>Ava</h4><div class="role">Brand manager</div></div></div><p>Reads your whole Amazon business and finds where sales are leaking. Reds first, then the fix.</p><div class="glimpse"><i></i>Profit growing slower than sales<code>get_brand_snapshot</code></div></article>
-      <article class="acard c-ppc me rv d1" id="ag-ppc"><span class="you">Your bonus</span><div class="top"><div class="ag rev c-ppc"><img src="media/dr-ppc.jpg" alt=""><video src="media/dr-ppc.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">02 / 06</div><h4>Dr. PPC</h4><div class="role">Advertising</div></div></div><p>Runs your Sponsored Products, Brands and Display around the clock, with a goal per product.</p><div class="glimpse"><i></i>3 bid changes proposed · evidence attached<code>get_search_terms</code></div></article>
-      <article class="acard c-bruno rv d2" id="ag-bruno"><div class="top"><div class="ag c-bruno"><img src="media/bruno.jpg" alt=""><video src="media/bruno.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">03 / 06</div><h4>Bruno</h4><div class="role">Creative director</div></div></div><p>Builds the whole listing: copy, images, the full stack. Scores every image against evidence, not taste.</p><div class="glimpse"><i></i>Image stack scored · main image flagged<code>score_image_stack</code></div></article>
-      <article class="acard c-stock rv" id="ag-stock"><div class="top"><div class="ag rev c-stock"><img src="media/dr-stock.jpg" alt=""><video src="media/dr-stock.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">04 / 06</div><h4>Dr. Stock</h4><div class="role">Inventory</div></div></div><p>Watches every unit and tells you when to reorder, weeks before you'd notice.</p><div class="glimpse"><i></i>PO must leave supplier by Oct 14<code>get_inventory_forecast</code></div></article>
-      <article class="acard c-shield rv d1" id="ag-shield"><div class="top"><div class="ag c-shield"><img src="media/dr-shield.jpg" alt=""><video src="media/dr-shield.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">05 / 06</div><h4>Dr. Shield</h4><div class="role">Account &amp; brand protection</div></div></div><p>Watches every ASIN every hour, 24/7, for hijackers, Buy Box changes and compliance issues.</p><div class="glimpse"><i></i>New offer on hero ASIN · evidence collected<code>get_offer_changes</code></div></article>
-      <article class="acard c-dsp rv d2" id="ag-dsp"><div class="top"><div class="ag rev c-dsp"><img src="media/dr-dsp.jpg" alt=""><video src="media/dr-dsp.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">06 / 06</div><h4>Dr. DSP</h4><div class="role">Audience network</div></div></div><p>When sponsored ads plateau, finds the new-to-brand reach beyond the search bar.</p><div class="glimpse"><i></i>Viewed-not-purchased audience mapped<code>get_audience_sizes</code></div></article>
+      <article class="acard c-ava rv" id="ag-ava"><div class="top"><div class="ag c-ava"><img src="media/ava.jpg" alt=""><video src="media/ava.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">01 / 05</div><h4>Ava</h4><div class="role">Brand manager</div></div></div><p>Reads your whole Amazon business and finds where sales are leaking. Reds first, then the fix.</p><div class="glimpse"><i></i>Profit growing slower than sales<code>get_brand_snapshot</code></div></article>
+      <article class="acard c-ppc me rv d1" id="ag-ppc"><span class="you">Your bonus</span><div class="top"><div class="ag rev c-ppc"><img src="media/dr-ppc.jpg" alt=""><video src="media/dr-ppc.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">02 / 05</div><h4>Dr. PPC</h4><div class="role">Advertising</div></div></div><p>Runs your Sponsored Products, Brands and Display around the clock, with a goal per product.</p><div class="glimpse"><i></i>3 bid changes proposed · evidence attached<code>get_search_terms</code></div></article>
+      <article class="acard c-bruno rv d2" id="ag-bruno"><div class="top"><div class="ag c-bruno"><img src="media/bruno.jpg" alt=""><video src="media/bruno.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">03 / 05</div><h4>Bruno</h4><div class="role">Creative director</div></div></div><p>Builds the whole listing: copy, images, the full stack. Scores every image against evidence, not taste.</p><div class="glimpse"><i></i>Image stack scored · main image flagged<code>score_image_stack</code></div></article>
+      <article class="acard c-stock rv" id="ag-stock"><div class="top"><div class="ag rev c-stock"><img src="media/dr-stock.jpg" alt=""><video src="media/dr-stock.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">04 / 05</div><h4>Dr. Stock</h4><div class="role">Inventory</div></div></div><p>Watches every unit and tells you when to reorder, weeks before you'd notice.</p><div class="glimpse"><i></i>PO must leave supplier by Oct 14<code>get_inventory_forecast</code></div></article>
+      <article class="acard c-shield rv d1" id="ag-shield"><div class="top"><div class="ag c-shield"><img src="media/dr-shield.jpg" alt=""><video src="media/dr-shield.mp4" autoplay muted loop playsinline aria-hidden="true"></video></div><div><div class="ix">05 / 05</div><h4>Dr. Shield</h4><div class="role">Account &amp; brand protection</div></div></div><p>Watches every ASIN every hour, 24/7, for hijackers, Buy Box changes and compliance issues.</p><div class="glimpse"><i></i>New offer on hero ASIN · evidence collected<code>get_offer_changes</code></div></article>
     </div>
 
     <div class="allinc">
       <div class="big rv">ALL INCLUDED.</div>
-      <div class="ls rv d1">Ava<span>·</span>Dr. PPC<span>·</span>Bruno<span>·</span>Dr. Stock<span>·</span>Dr. Shield<span>·</span>Dr. DSP</div>
+      <div class="ls rv d1">Ava<span>·</span>Dr. PPC<span>·</span>Bruno<span>·</span>Dr. Stock<span>·</span>Dr. Shield</div>
       <div class="pl rv d2"><img src="media/orbit-logo.svg" alt="">+ and all of Orbit</div>
     </div>
   </div>
@@ -612,11 +616,11 @@ footer .fl a{text-decoration:none}footer .fl a:hover{color:#fff}
     <div class="ticket rv d2" id="ticket">
       <div class="ticket-in">
         <div class="was" data-o="wasLabel">Normally</div>
-        <div class="was-pr" data-o-html="wasPrice">$300<small>/month</small> + 2%<small> of ad spend</small></div>
-        <div class="one"><div class="d"><sup>$</sup><span id="count" data-o="price">1</span></div><div class="w"><div class="m" data-o="per">a month.</div><div class="pm" data-o="term">Permanently.</div></div></div>
-        <p class="waive" data-o-html="waive">No $300 monthly fee. <b>No % of ad spend.</b> Just $1 a month, for as long as you work with reMKTR.</p>
+        <div class="was-pr" data-o-html="wasPrice">$300<small>/month</small></div>
+        <div class="one"><div class="d"><sup>$</sup><span id="count" data-o="price">1</span></div><div class="w"><div class="m" data-o="per">a month.</div><div class="pm" data-o="term">Permanently.</div><div class="plus" data-o="plus">+ 2% of ad spend</div></div></div>
+        <p class="waive" data-o-html="waive">The $300 monthly fee drops to <b>$1 a month</b>, for as long as you work with reMKTR. The standard 2% of ad spend still applies.</p>
         <div class="incl">
-          <span><img src="media/ava.jpg" alt="">Ava</span><span><img src="media/dr-ppc.jpg" alt="">Dr. PPC</span><span><img src="media/bruno.jpg" alt="">Bruno</span><span><img src="media/dr-stock.jpg" alt="">Dr. Stock</span><span><img src="media/dr-shield.jpg" alt="">Dr. Shield</span><span><img src="media/dr-dsp.jpg" alt="">Dr. DSP</span><span class="orb">+ all of Orbit</span>
+          <span><img src="media/ava.jpg" alt="">Ava</span><span><img src="media/dr-ppc.jpg" alt="">Dr. PPC</span><span><img src="media/bruno.jpg" alt="">Bruno</span><span><img src="media/dr-stock.jpg" alt="">Dr. Stock</span><span><img src="media/dr-shield.jpg" alt="">Dr. Shield</span><span class="orb">+ all of Orbit</span>
         </div>
         <div class="cta-row">
           <a class="btn btn-g" href="https://drppc.ai/" target="_blank" rel="noopener" data-drppc-cta="offer"><span data-o="ctaLabel">Claim Dr. PPC for $1</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
@@ -635,7 +639,7 @@ footer .fl a{text-decoration:none}footer .fl a:hover{color:#fff}
     <div><div class="kick rv"><span class="n">03</span>Quick answers</div><h2 class="h2 rv d1">Questions, <span class="ser" style="color:var(--g)">answered.</span></h2></div>
     <div class="rv">
       <details open><summary>Does this change my call with Jayce?<span class="pm"></span></summary><div class="ans"><p>No. Your call is booked and stays exactly as it is. Dr. PPC is optional. Ask Jayce about it on the call and he'll show you how the two fit together.</p></div></details>
-      <details><summary>What do I get for $1?<span class="pm"></span></summary><div class="ans"><p data-o-html="faqGet">Dr. PPC plus the whole team (Ava, Bruno, Dr. Stock, Dr. Shield and Dr. DSP) and all of Orbit. Normally that's <b>$300/month + 2% of ad spend</b>. As a reMKTR client it's <b>$1 a month, permanently</b>.</p></div></details>
+      <details><summary>What do I get for $1?<span class="pm"></span></summary><div class="ans"><p data-o-html="faqGet">Dr. PPC plus the whole team (Ava, Bruno, Dr. Stock and Dr. Shield) and all of Orbit. Normally that's <b>$300/month + 2% of ad spend</b>. As a reMKTR client the $300 becomes <b>$1 a month, permanently</b>, and the 2% of ad spend stays.</p></div></details>
       <details><summary>Do I need to know PPC?<span class="pm"></span></summary><div class="ans"><p>No. That's the point. Dr. PPC reads the account, builds the plan and explains his reasoning in plain language. You decide how much to approve.</p></div></details>
       <details><summary>Will he change my account without asking?<span class="pm"></span></summary><div class="ans"><p>Only if you let him. At “Approve every move”, nothing reaches Amazon until you click approve. You can switch to “Inside guardrails” or “Fully autonomous”, and back, whenever you like.</p></div></details>
       <details><summary>Can you guarantee my ACoS or ROAS?<span class="pm"></span></summary><div class="ans"><p>No, and be careful with anyone who does. What we promise is process: every change has a reason you can read, a measurement window and a rollback trigger.</p></div></details>
@@ -656,7 +660,7 @@ footer .fl a{text-decoration:none}footer .fl a:hover{color:#fff}
 </section>
 </main>
 
-<div class="float" id="float" aria-hidden="true"><span><span class="x">Your bonus: </span><b data-o="floatText">Dr. PPC + Orbit for $1/mo</b></span><a href="#offer" tabindex="-1">See it ↓</a></div>
+<div class="float" id="float" aria-hidden="true"><span><span class="x">Your bonus: </span><b data-o="floatText">Dr. PPC + Orbit for $1/mo + 2% of spend</b></span><a href="#offer" tabindex="-1">See it ↓</a></div>
 
 <footer>
   <div class="wrap">
@@ -669,8 +673,9 @@ footer .fl a{text-decoration:none}footer .fl a:hover{color:#fff}
 <script>
 /* =====================================================================================
    CONFIG — the ONLY place the offer wording and the CTA destination live.
-   !! KEN TO CONFIRM before going live: (1) the offer wording (is the 2% also waived?)
-   !! and (2) CTA_URL (no Dr. PPC checkout exists yet; drppc.ai is a placeholder).
+   Offer confirmed by Ken 2026-10-06: $300/mo becomes $1/mo permanently; the 2% of ad spend stays.
+   No Dr. DSP on this page or in the film (Ken 2026-10-06).
+   !! KEN TO CONFIRM before going live: CTA_URL (no Dr. PPC checkout exists yet; drppc.ai is a placeholder).
    The film (media/booked-film-1080.mp4, 41–53 s) shows the same wording; changing it here
    means re-rendering the film (remktr-gtm/creative/booked-film).
    ===================================================================================== */
@@ -679,18 +684,19 @@ var OFFER = {
   price: "1",
   per: "a month.",
   term: "Permanently.",
+  plus: "+ 2% of ad spend",
   wasLabel: "Normally",
-  wasPrice: "$300<small>/month</small> + 2%<small> of ad spend</small>",
-  waive: "No $300 monthly fee. <b>No % of ad spend.</b> Just $1 a month, for as long as you work with reMKTR.",
+  wasPrice: "$300<small>/month</small>",
+  waive: "The $300 monthly fee drops to <b>$1 a month</b>, for as long as you work with reMKTR. The standard 2% of ad spend still applies.",
   headlineTail: "for $1. Permanently.",
   bridgePrice: "$1 a month",
   ctaLabel: "Claim Dr. PPC for $1",
   navCta: "Your $1 bonus ↓",
   cueBonus: "$1 bonus",
-  floatText: "Dr. PPC + Orbit for $1/mo",
+  floatText: "Dr. PPC + Orbit for $1/mo + 2% of spend",
   finalTail: "Claim your $1 team today.",
   whatMeans: "<b>What “work with reMKTR” means:</b> you become a reMKTR client, with reMKTR running your Amazon audience, DSP and streaming ads. That's exactly what your call with Jayce is about. Start Dr. PPC now and the $1 rate applies once you're on board.",
-  faqGet: "Dr. PPC plus the whole team (Ava, Bruno, Dr. Stock, Dr. Shield and Dr. DSP) and all of Orbit. Normally that's <b>$300/month + 2% of ad spend</b>. As a reMKTR client it's <b>$1 a month, permanently</b>.",
+  faqGet: "Dr. PPC plus the whole team (Ava, Bruno, Dr. Stock and Dr. Shield) and all of Orbit. Normally that's <b>$300/month + 2% of ad spend</b>. As a reMKTR client the $300 becomes <b>$1 a month, permanently</b>, and the 2% of ad spend stays.",
   fine: "Offer for reMKTR clients. Jayce will confirm the details on your call."
 };
 
@@ -809,7 +815,7 @@ var OFFER = {
   }
 
   // ---------- ticker (demo activity) ----------
-  var T = [["dr-ppc", "Dr. PPC", "3 bid changes proposed · evidence attached", "get_search_terms"], ["dr-stock", "Dr. Stock", "PO must leave supplier by Oct 14", "get_inventory_forecast"], ["bruno", "Bruno", "image stack scored · main image flagged", "score_image_stack"], ["dr-shield", "Dr. Shield", "new offer on hero ASIN · evidence collected", "get_offer_changes"], ["ava", "Ava", "profit growing slower than sales · reds first", "get_brand_snapshot"], ["dr-dsp", "Dr. DSP", "viewed-not-purchased audience mapped", "get_audience_sizes"]];
+  var T = [["dr-ppc", "Dr. PPC", "3 bid changes proposed · evidence attached", "get_search_terms"], ["dr-stock", "Dr. Stock", "PO must leave supplier by Oct 14", "get_inventory_forecast"], ["bruno", "Bruno", "image stack scored · main image flagged", "score_image_stack"], ["dr-shield", "Dr. Shield", "new offer on hero ASIN · evidence collected", "get_offer_changes"], ["ava", "Ava", "profit growing slower than sales · reds first", "get_brand_snapshot"]];
   var html = T.map(function (r) { return '<div class="t-item"><img src="media/' + r[0] + '.jpg" alt=""><b>' + r[1] + "</b> " + r[2] + " <code>" + r[3] + "</code></div>"; }).join("");
   $("#ticker").innerHTML = html + html;
 
