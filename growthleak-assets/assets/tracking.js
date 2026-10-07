@@ -237,6 +237,30 @@ window.addEventListener("load", () => {
   }
 });
 
+// ---------- Amazon link field: accept links typed without https:// (Ken 2026-10-06) ----------
+// type="url" rejected "amazon.com/stores/…" on phones, blocking step 1 of the application.
+// Make the field plain text and add https:// before validation and submit.
+(function amazonLinkLenient() {
+  function fix(el) {
+    const v = (el.value || "").trim();
+    if (v && !/^[a-z][a-z0-9+.-]*:\/\//i.test(v)) el.value = "https://" + v.replace(/^\/+/, "");
+  }
+  function init() {
+    document.querySelectorAll('input[name="amazon_link"]').forEach((el) => {
+      el.type = "text";
+      el.setAttribute("autocapitalize", "off");
+      el.setAttribute("autocorrect", "off");
+      el.setAttribute("spellcheck", "false");
+      el.placeholder = "amazon.com/… or a.co/… link";
+      ["blur", "change"].forEach((ev) => el.addEventListener(ev, () => fix(el)));
+      const next = document.getElementById("f-next");
+      if (next) next.addEventListener("click", () => fix(el), true);
+      if (el.form) el.form.addEventListener("submit", () => fix(el), true);
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+
 // ---------- Lead backend (added 2026-10-05) ----------
 // Every application (qualified or not) is POSTed to the remktr-go Netlify function (https://remktr-go.netlify.app/api/lead),
 // which writes the lead to Close CRM and alerts Slack. On a Calendly booking it is called again (type "booked").
