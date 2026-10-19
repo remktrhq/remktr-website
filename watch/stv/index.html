@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://remktr.com/watch/stv/">
-<title>Streaming TV Ads, Managed Free | reMKTR</title>
-<meta name="description" content="Watch how growing brands run streaming TV ads on Netflix and Prime Video, shown only to likely buyers. Free management for brands that qualify.">
+<title>Streaming TV Ads, Managed Free For 90 Days | reMKTR</title>
+<meta name="description" content="Watch how growing brands run streaming TV ads on Netflix and Prime Video, shown only to likely buyers. 90 days of free management for brands that qualify.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,7 @@
   /* 2 · guarantee strip */
   .banner { background:var(--purple-light); padding:9px 16px; margin-top:5px; }
   .banner h2 { font-family:"Open Sans",sans-serif; font-weight:700; line-height:1.4; color:var(--purple-deep); font-size:clamp(15px,1.5vw,20px); text-align:center; }
+  .banner h2 .qual { display:block; font-weight:600; font-size:.8em; opacity:.85; }
   /* 3 · video */
   .video-section { padding:16px 16px 6px; }
   .video-frame { max-width:1150px; margin:0 auto; position:relative; border-radius:14px; overflow:hidden; background:#000; box-shadow:0 18px 50px -18px rgba(73,37,146,.55); }
@@ -81,10 +82,10 @@
 <div class="page">
 
   <section class="hero"><div class="hero-inner">
-    <h1 class="headline">Get Your Brand On <u>Netflix And Prime Video</u>, Shown Only To The Households <u>Most Likely To Buy</u> &mdash; And We'll <u>Manage It For Free</u></h1>
+    <h1 class="headline">Get Your Brand On <u>Netflix And Prime Video</u>, Shown Only To The Households <u>Most Likely To Buy</u> &mdash; And We'll <u>Manage It Free For 90 Days</u></h1>
   </div></section>
 
-  <div class="banner"><h2>Free Management For Brands That Qualify &mdash; No Retainer, No Commission, No Flat Fees*</h2></div>
+  <div class="banner"><h2>90 Days Of Free Management For Brands That Qualify &mdash; No Retainer, No Commission, No Flat Fees*</h2></div>
 
   <section class="video-section">
     <div class="video-frame">
@@ -95,7 +96,7 @@
 
   <section class="cta-section"><div class="cta-inner">
     <a class="cta-button" data-cta="book-call" href="#apply">Apply For Free Streaming TV Management</a>
-    <p class="trust">Built for brands ready to put <b>~$15K/month</b> behind streaming TV for <b>3+ months</b> &middot; Free 30-minute call &middot; <b>Free management</b></p>
+    <p class="trust">Built for brands ready to put <b>~$15K/month</b> behind streaming TV for <b>3+ months</b> &middot; Free 30-minute call &middot; <b>90 days of free management</b></p>
   </div></section>
 
   <footer class="footer"><div class="footer-inner">
@@ -103,7 +104,7 @@
     <p>
       &copy; 2026 reMKTR. All rights reserved.<br><br>
       <a href="https://remktr.com/privacy-policy/">Privacy Policy</a><br><br>
-      *Free management applies to brands that qualify on the call and commit to at least three months; your ad spend is paid directly and is not included. Streaming partner inventory is bought through Amazon's ad platform; availability varies by partner. Results mentioned are not typical and are not guaranteed. Individual results vary based on your account, budget and market conditions. *Guarantee terms are set out in your written agreement.<br><br>
+      *Free management covers your first 90 days and applies to brands that qualify on the call and commit to at least three months; your ad spend is paid directly and is not included. Streaming partner inventory is bought through Amazon's ad platform; availability varies by partner. Results mentioned are not typical and are not guaranteed. Individual results vary based on your account, budget and market conditions. *Guarantee terms are set out in your written agreement.<br><br>
       This site is not a part of the Facebook&trade; website or Meta Platforms, Inc. This site is NOT endorsed by Facebook&trade; in any way. Facebook&trade; is a trademark of Meta Platforms, Inc.
     </p>
   </div></footer>
@@ -198,7 +199,7 @@
     data.variant = v; data.page = location.pathname; data.offer = document.body.dataset.offer; data.form = 'short';
     if (BASIS) data.adspend_basis = BASIS;
     if (/^(https?:\/\/)?[^\s]*\.[a-z]{2,}/i.test(data.amazon_link || '') && !/amazon\./i.test(data.amazon_link)) { data.website = data.amazon_link; data.amazon_link = ''; }
-    // qualification: under $10K/mo ad spend -> no call, no Meta "Lead" (tracking.js reads form.dataset.qualified)
+    // qualification: under the page's minimum ($10K, or $20K on Standard/Link-Out) -> no call, no Meta "Lead" (tracking.js reads form.dataset.qualified)
     var o = document.getElementById('f-ads').selectedOptions[0], unq = !!(o && o.dataset.q === 'no');
     data.qualified = unq ? 'no' : 'yes'; form.dataset.qualified = data.qualified;
     try { localStorage.setItem('remktr-apply-' + Date.now(), JSON.stringify(data)); } catch (x) {}

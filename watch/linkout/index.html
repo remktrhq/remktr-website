@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://remktr.com/watch/linkout/">
 <title>Free Intent Gap Audit | reMKTR</title>
-<meta name="description" content="Watch how we point Amazon's shopper data at your own website, then apply for a free Intent Gap Audit. No Retainers. No Creative Fees.">
+<meta name="description" content="Drive Amazon traffic to your own website: you keep the customer, the email and the reorders. Watch the breakdown, then apply for a free Intent Gap Audit. No Retainers. No Long-Term Contracts.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,7 @@
   /* 2 · guarantee strip */
   .banner { background:var(--purple-light); padding:9px 16px; margin-top:5px; }
   .banner h2 { font-family:"Open Sans",sans-serif; font-weight:700; line-height:1.4; color:var(--purple-deep); font-size:clamp(15px,1.5vw,20px); text-align:center; }
+  .banner h2 .qual { display:block; font-weight:600; font-size:.8em; opacity:.85; }
   /* 3 · video */
   .video-section { padding:16px 16px 6px; }
   .video-frame { max-width:1150px; margin:0 auto; position:relative; border-radius:14px; overflow:hidden; background:#000; box-shadow:0 18px 50px -18px rgba(73,37,146,.55); }
@@ -81,10 +82,10 @@
 <div class="page">
 
   <section class="hero"><div class="hero-inner">
-    <h1 class="headline">We'll Point <u>Amazon's Shopper Data</u> At Your Own Website &mdash; So You Keep <u>The Customer</u>, The Email And <u>The Reorder</u></h1>
+    <h1 class="headline">Drive <u>Amazon Traffic</u> To Your Own Website &mdash; You Keep <u>The Customer</u>, <u>The Email</u>, And <u>The Reorders</u> Forever!</h1>
   </div></section>
 
-  <div class="banner"><h2>If We Don't Hit The Targets,<br>We'll Work For Free Until We Do!*</h2></div>
+  <div class="banner"><h2>No Retainers. No Long-Term Contracts.<span class="qual">For brands spending $20,000+ a month on brand growth</span></h2></div>
 
   <section class="video-section">
     <div class="video-frame">
@@ -95,7 +96,7 @@
 
   <section class="cta-section"><div class="cta-inner">
     <a class="cta-button" data-cta="book-call" href="#apply">Apply For Your Free Intent Gap Audit</a>
-    <p class="trust">For brands spending <b>$10K+/month</b> on ads &middot; Free 30-minute call &middot; <b>No Retainers. No Creative Fees.</b></p>
+    <p class="trust">For brands spending <b>$20K+/month</b> on brand growth &middot; Free 30-minute call &middot; <b>If we don't hit the targets, we'll work for free until we do.*</b></p>
   </div></section>
 
   <footer class="footer"><div class="footer-inner">
@@ -122,7 +123,7 @@
         <select id="f-ads" name="adspend" required>
           <option value="">Select</option>
           <option data-q="no">Under $10K</option>
-          <option>$10K &ndash; $20K</option>
+          <option data-q="no">$10K &ndash; $20K</option>
           <option>$20K &ndash; $50K</option>
           <option>$50K &ndash; $150K</option>
           <option>$150K+</option>
@@ -135,7 +136,7 @@
     </form>
     <div class="done" id="notfit">
       <h3>Thanks. <em>Here's the right door.</em></h3>
-      <p class="sub">The audit call is built for brands spending about $10K a month or more on ads, so we'd rather not take 30 minutes of your time yet. Dr. PPC runs your Amazon PPC for you and is made for brands at your stage.</p>
+      <p class="sub">The audit call is built for brands spending about $20K a month or more on brand growth, so we'd rather not take 30 minutes of your time yet. Dr. PPC runs your Amazon PPC for you and is made for brands at your stage.</p>
       <a class="btn" href="https://drppc.ai/" target="_blank" rel="noopener">See Dr. PPC &rarr;</a>
     </div>
     <div class="done" id="done">
@@ -198,7 +199,7 @@
     data.variant = v; data.page = location.pathname; data.offer = document.body.dataset.offer; data.form = 'short';
     if (BASIS) data.adspend_basis = BASIS;
     if (/^(https?:\/\/)?[^\s]*\.[a-z]{2,}/i.test(data.amazon_link || '') && !/amazon\./i.test(data.amazon_link)) { data.website = data.amazon_link; data.amazon_link = ''; }
-    // qualification: under $10K/mo ad spend -> no call, no Meta "Lead" (tracking.js reads form.dataset.qualified)
+    // qualification: under the page's minimum ($10K, or $20K on Standard/Link-Out) -> no call, no Meta "Lead" (tracking.js reads form.dataset.qualified)
     var o = document.getElementById('f-ads').selectedOptions[0], unq = !!(o && o.dataset.q === 'no');
     data.qualified = unq ? 'no' : 'yes'; form.dataset.qualified = data.qualified;
     try { localStorage.setItem('remktr-apply-' + Date.now(), JSON.stringify(data)); } catch (x) {}

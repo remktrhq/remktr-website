@@ -5,8 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://remktr.com/book/stv/">
-<title>See If You Qualify For Free Streaming TV Management | reMKTR</title>
-<meta name="description" content="You watched the Streaming TV breakdown. Next step: a 30-minute call with Jayce to see if you qualify for free management.">
+<title>See If You Qualify For 90 Days Of Free Streaming TV Management | reMKTR</title>
+<meta name="description" content="You watched the Streaming TV breakdown. Next step: a 30-minute call with Jayce to see if you qualify for 90 days of free management.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,7 @@
   /* 2 · guarantee strip */
   .banner { background:var(--purple-light); padding:9px 16px; margin-top:5px; }
   .banner h2 { font-family:"Open Sans",sans-serif; font-weight:700; line-height:1.4; color:var(--purple-deep); font-size:clamp(15px,1.5vw,20px); text-align:center; }
+  .banner h2 .qual { display:block; font-weight:600; font-size:.8em; opacity:.85; }
   /* 3 · video */
   .video-section { padding:16px 16px 6px; }
   .video-frame { max-width:1150px; margin:0 auto; position:relative; border-radius:14px; overflow:hidden; background:#000; box-shadow:0 18px 50px -18px rgba(73,37,146,.55); }
@@ -106,10 +107,10 @@
 
   <section class="hero"><div class="hero-inner">
     <span class="eyebrow">You watched the Streaming TV breakdown</span>
-    <h1 class="headline">Next Step: See If You Qualify For <u>Free Management</u> Of Your Streaming TV Ads</h1>
+    <h1 class="headline">Next Step: See If You Qualify For <u>90 Days Of Free Management</u> Of Your Streaming TV Ads</h1>
   </div></section>
 
-  <div class="banner"><h2>Free Management For Brands That Qualify &mdash; No Retainer, No Commission, No Flat Fees*</h2></div>
+  <div class="banner"><h2>90 Days Of Free Management For Brands That Qualify &mdash; No Retainer, No Commission, No Flat Fees*</h2></div>
 
   <section class="book"><div class="book-inner">
     <div class="book-form">
@@ -154,14 +155,14 @@
       <h3>What happens next</h3>
       <ol class="steps"><li><b>Answer 4 quick questions</b> (about a minute).</li><li><b>Pick a time</b> &mdash; Jayce's calendar opens right after.</li><li><b>On the call:</b> whether your brand is a fit, what a streaming TV program would look like for you, and how we'd measure it.</li></ol>
       <div class="who">Free management is for brands that: <ul class="q"><li>won't run out of stock when we scale</li><li>convert at or above their category average</li><li>know their cost per new customer and lifetime value</li><li>can put <b>~$15K/month</b> behind streaming TV for <b>3+ months</b></li></ul></div>
-      <p class="trust" style="text-align:left">Built for brands ready to put <b>~$15K/month</b> behind streaming TV for <b>3+ months</b> &middot; Free 30-minute call &middot; <b>Free management</b></p>
+      <p class="trust" style="text-align:left">Built for brands ready to put <b>~$15K/month</b> behind streaming TV for <b>3+ months</b> &middot; Free 30-minute call &middot; <b>90 days of free management</b></p>
       <a class="rewatch" href="https://remktr.com/watch/stv/">Missed part of the video? Watch it here &rarr;</a>
     </div>
   </div></section>
 
   <section class="faq"><div class="faq-inner">
     <h2>Questions</h2>
-    <details><summary>Is it really free?</summary><p>Management is free for brands that qualify: no retainer, no commission, no flat fees. You pay your own ad spend directly.*</p></details>
+    <details><summary>Is it really free?</summary><p>Your first 90 days of management are free for brands that qualify: no retainer, no commission, no flat fees. You pay your own ad spend directly.*</p></details>
     <details><summary>What budget do I need?</summary><p>About $15K a month for streaming TV, with a 3-month commitment.</p></details>
     <details><summary>Where do the ads run?</summary><p>Prime Video, Netflix and other streaming apps, bought through Amazon's ad platform. Availability varies by partner.</p></details>
     <details><summary>Do I need to prepare anything?</summary><p>No. Know roughly what you spend on ads each month. That's it.</p></details>
@@ -172,7 +173,7 @@
     <p>
       &copy; 2026 reMKTR. All rights reserved.<br><br>
       <a href="https://remktr.com/privacy-policy/">Privacy Policy</a><br><br>
-      *Free management applies to brands that qualify on the call and commit to at least three months; your ad spend is paid directly and is not included. Streaming partner inventory is bought through Amazon's ad platform; availability varies by partner. Results mentioned are not typical and are not guaranteed. Individual results vary based on your account, budget and market conditions. *Guarantee terms are set out in your written agreement.<br><br>
+      *Free management covers your first 90 days and applies to brands that qualify on the call and commit to at least three months; your ad spend is paid directly and is not included. Streaming partner inventory is bought through Amazon's ad platform; availability varies by partner. Results mentioned are not typical and are not guaranteed. Individual results vary based on your account, budget and market conditions. *Guarantee terms are set out in your written agreement.<br><br>
       This site is not a part of the Facebook&trade; website or Meta Platforms, Inc. This site is NOT endorsed by Facebook&trade; in any way. Facebook&trade; is a trademark of Meta Platforms, Inc.
     </p>
   </div></footer>
@@ -221,7 +222,7 @@
     data.variant = v; data.page = location.pathname; data.offer = document.body.dataset.offer; data.form = 'short';
     if (BASIS) data.adspend_basis = BASIS;
     if (/^(https?:\/\/)?[^\s]*\.[a-z]{2,}/i.test(data.amazon_link || '') && !/amazon\./i.test(data.amazon_link)) { data.website = data.amazon_link; data.amazon_link = ''; }
-    // qualification: under $10K/mo ad spend -> no call, no Meta "Lead" (tracking.js reads form.dataset.qualified)
+    // qualification: under the page's minimum ($10K, or $20K on Standard/Link-Out) -> no call, no Meta "Lead" (tracking.js reads form.dataset.qualified)
     var o = document.getElementById('f-ads').selectedOptions[0], unq = !!(o && o.dataset.q === 'no');
     data.qualified = unq ? 'no' : 'yes'; form.dataset.qualified = data.qualified;
     try { localStorage.setItem('remktr-apply-' + Date.now(), JSON.stringify(data)); } catch (x) {}
