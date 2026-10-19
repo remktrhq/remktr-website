@@ -153,14 +153,15 @@
   var params = new URLSearchParams(location.search), v = params.get('v') || 'gno';
   // ---- VSL: big play overlay, then native controls; watch-depth events through tracking.js -> GA4 / Meta ----
   var vsl = document.getElementById('vsl'), vplay = document.getElementById('vsl-play'), fired = {};
-  function mark(n) { if (fired[n]) return; fired[n] = true; if (window.remktrTrack) window.remktrTrack(n, { variant: v }); }
+  function mark(n, x) { if (fired[n]) return; fired[n] = true; if (window.remktrTrack) window.remktrTrack(n, Object.assign({ variant: v }, x || {})); }
   vplay.addEventListener('click', function () { var p = vsl.play(); if (p && p.catch) p.catch(function () {}); });
   vsl.addEventListener('play', function () { vplay.classList.add('hidden'); vsl.controls = true; mark('vsl_play'); });
   vsl.addEventListener('timeupdate', function () {
     if (!vsl.duration) return; var pct = vsl.currentTime / vsl.duration * 100;
-    [25, 50, 75].forEach(function (q) { if (pct >= q) mark('vsl_' + q); });
+    // every 10% (+ the original 25/75) → drop-off chart in GA4/Meta; seconds = where they are in the video (2026-10-19)
+    [10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90].forEach(function (q) { if (pct >= q) mark('vsl_' + q, { seconds: Math.round(vsl.currentTime) }); });
   });
-  vsl.addEventListener('ended', function () { mark('vsl_100'); openModal(); });
+  vsl.addEventListener('ended', function () { mark('vsl_100', { seconds: Math.round(vsl.duration) }); openModal(); });
   // ---- application modal ----
   var modal = document.getElementById('apply'), form = document.getElementById('apply-form'), err = document.getElementById('form-error'), last = null, lastData = null;
   function openModal() {
