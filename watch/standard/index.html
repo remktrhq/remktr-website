@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://remktr.com/watch/standard/">
 <title>Free Growth Leak Audit | reMKTR</title>
-<meta name="description" content="Watch how we find the growth leak in your Amazon ads, then apply for a free 30-minute audit. No Retainers. No Creative Fees.">
+<meta name="description" content="We hit your growth targets, or we work for free until we do. Watch the breakdown, then apply for a free 30-minute Growth Leak Audit. No Retainers. No Long-Term Contracts.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,7 @@
   /* 2 · guarantee strip */
   .banner { background:var(--purple-light); padding:9px 16px; margin-top:5px; }
   .banner h2 { font-family:"Open Sans",sans-serif; font-weight:700; line-height:1.4; color:var(--purple-deep); font-size:clamp(15px,1.5vw,20px); text-align:center; }
+  .banner h2 .qual { display:block; font-weight:600; font-size:.8em; opacity:.85; }
   /* 3 · video */
   .video-section { padding:16px 16px 6px; }
   .video-frame { max-width:1150px; margin:0 auto; position:relative; border-radius:14px; overflow:hidden; background:#000; box-shadow:0 18px 50px -18px rgba(73,37,146,.55); }
@@ -81,10 +82,10 @@
 <div class="page">
 
   <section class="hero"><div class="hero-inner">
-    <h1 class="headline">We'll Find The <u>Growth Leak</u> In Your Amazon Ads And Bring Your <u>Best Buyers</u> Back &mdash; Using <u>Amazon's Own Shopper Data</u></h1>
+    <h1 class="headline">We Hit Your <u>Growth Targets</u>, Or We <u>Work For Free</u> Until We Do</h1>
   </div></section>
 
-  <div class="banner"><h2>If We Don't Hit The Targets,<br>We'll Work For Free Until We Do!*</h2></div>
+  <div class="banner"><h2>No Retainers. No Long-Term Contracts.<span class="qual">For brands spending $20,000+ a month on brand growth</span></h2></div>
 
   <section class="video-section">
     <div class="video-frame">
@@ -95,7 +96,7 @@
 
   <section class="cta-section"><div class="cta-inner">
     <a class="cta-button" data-cta="book-call" href="#apply">Apply For Your Free Growth Leak Audit</a>
-    <p class="trust">For brands spending <b>$10K+/month</b> on ads &middot; Free 30-minute call &middot; <b>No Retainers. No Creative Fees.</b></p>
+    <p class="trust">For brands spending <b>$20K+/month</b> on brand growth &middot; Free 30-minute call &middot; <b>No Retainers. No Long-Term Contracts.</b></p>
   </div></section>
 
   <footer class="footer"><div class="footer-inner">
@@ -103,7 +104,7 @@
     <p>
       &copy; 2026 reMKTR. All rights reserved.<br><br>
       <a href="https://remktr.com/privacy-policy/">Privacy Policy</a><br><br>
-      Results mentioned are not typical and are not guaranteed. Individual results vary based on your account, budget and market conditions. *Guarantee terms are set out in your written agreement.<br><br>
+      Results mentioned are not typical and are not guaranteed. Individual results vary based on your account, budget and market conditions. Guarantee terms are set out in your written agreement.<br><br>
       This site is not a part of the Facebook&trade; website or Meta Platforms, Inc. This site is NOT endorsed by Facebook&trade; in any way. Facebook&trade; is a trademark of Meta Platforms, Inc.
     </p>
   </div></footer>
@@ -118,11 +119,11 @@
       <p class="sub">Takes about a minute. If we're a fit, you pick a time on Jayce's calendar next.</p>
       <div class="field"><label for="f-name">Full name</label><input id="f-name" type="text" name="name" required autocomplete="name"></div>
       <div class="field"><label for="f-email">Business email</label><input id="f-email" type="email" name="email" required autocomplete="email"></div>
-      <div class="field"><label for="f-ads">Monthly Amazon ad spend</label>
+      <div class="field"><label for="f-ads">Monthly ad spend (Amazon, Meta, Google…)</label>
         <select id="f-ads" name="adspend" required>
           <option value="">Select</option>
           <option data-q="no">Under $10K</option>
-          <option>$10K &ndash; $20K</option>
+          <option data-q="no">$10K &ndash; $20K</option>
           <option>$20K &ndash; $50K</option>
           <option>$50K &ndash; $150K</option>
           <option>$150K+</option>
@@ -135,7 +136,7 @@
     </form>
     <div class="done" id="notfit">
       <h3>Thanks. <em>Here's the right door.</em></h3>
-      <p class="sub">The audit call is built for brands spending about $10K a month or more on ads, so we'd rather not take 30 minutes of your time yet. Dr. PPC runs your Amazon PPC for you and is made for brands at your stage.</p>
+      <p class="sub">The audit call is built for brands spending about $20K a month or more on brand growth, so we'd rather not take 30 minutes of your time yet. Dr. PPC runs your Amazon PPC for you and is made for brands at your stage.</p>
       <a class="btn" href="https://drppc.ai/" target="_blank" rel="noopener">See Dr. PPC &rarr;</a>
     </div>
     <div class="done" id="done">
@@ -149,18 +150,19 @@
 <script src="/growthleak-assets/assets/tracking.js"></script>
 <script>
 (function () {
-  var CALENDLY_URL = 'https://calendly.com/jayce-remktr/30min', BASIS = '';
+  var CALENDLY_URL = 'https://calendly.com/jayce-remktr/30min', BASIS = 'total';
   var params = new URLSearchParams(location.search), v = params.get('v') || 'gno';
   // ---- VSL: big play overlay, then native controls; watch-depth events through tracking.js -> GA4 / Meta ----
   var vsl = document.getElementById('vsl'), vplay = document.getElementById('vsl-play'), fired = {};
-  function mark(n) { if (fired[n]) return; fired[n] = true; if (window.remktrTrack) window.remktrTrack(n, { variant: v }); }
+  function mark(n, x) { if (fired[n]) return; fired[n] = true; if (window.remktrTrack) window.remktrTrack(n, Object.assign({ variant: v }, x || {})); }
   vplay.addEventListener('click', function () { var p = vsl.play(); if (p && p.catch) p.catch(function () {}); });
   vsl.addEventListener('play', function () { vplay.classList.add('hidden'); vsl.controls = true; mark('vsl_play'); });
   vsl.addEventListener('timeupdate', function () {
     if (!vsl.duration) return; var pct = vsl.currentTime / vsl.duration * 100;
-    [25, 50, 75].forEach(function (q) { if (pct >= q) mark('vsl_' + q); });
+    // every 10% (+ the original 25/75) → drop-off chart in GA4/Meta; seconds = where they are in the video (2026-10-19)
+    [10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90].forEach(function (q) { if (pct >= q) mark('vsl_' + q, { seconds: Math.round(vsl.currentTime) }); });
   });
-  vsl.addEventListener('ended', function () { mark('vsl_100'); openModal(); });
+  vsl.addEventListener('ended', function () { mark('vsl_100', { seconds: Math.round(vsl.duration) }); openModal(); });
   // ---- application modal ----
   var modal = document.getElementById('apply'), form = document.getElementById('apply-form'), err = document.getElementById('form-error'), last = null, lastData = null;
   function openModal() {
@@ -197,7 +199,7 @@
     data.variant = v; data.page = location.pathname; data.offer = document.body.dataset.offer; data.form = 'short';
     if (BASIS) data.adspend_basis = BASIS;
     if (/^(https?:\/\/)?[^\s]*\.[a-z]{2,}/i.test(data.amazon_link || '') && !/amazon\./i.test(data.amazon_link)) { data.website = data.amazon_link; data.amazon_link = ''; }
-    // qualification: under $10K/mo ad spend -> no call, no Meta "Lead" (tracking.js reads form.dataset.qualified)
+    // qualification: under the page's minimum ($10K, or $20K on Standard/Link-Out) -> no call, no Meta "Lead" (tracking.js reads form.dataset.qualified)
     var o = document.getElementById('f-ads').selectedOptions[0], unq = !!(o && o.dataset.q === 'no');
     data.qualified = unq ? 'no' : 'yes'; form.dataset.qualified = data.qualified;
     try { localStorage.setItem('remktr-apply-' + Date.now(), JSON.stringify(data)); } catch (x) {}
