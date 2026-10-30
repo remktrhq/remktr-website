@@ -14,8 +14,8 @@
 <meta property="article:modified_time" content="2026-08-21" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/site.css" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/site.css?v=2026-10-29" />
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Holdout Testing on Amazon DSP", "description": "How to run a holdout test on Amazon DSP specifically \u2014 the design choices, a worked arithmetic example, and the mistake of pulling the test too early.", "datePublished": "2026-08-21", "dateModified": "2026-08-21", "wordCount": 1257, "inLanguage": "en-US", "author": {"@type": "Organization", "name": "reMKTR"}, "publisher": {"@type": "Organization", "name": "reMKTR"}, "mainEntityOfPage": "https://remktr.com/learn/holdout-testing-on-amazon-dsp/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://remktr.com/"}, {"@type": "ListItem", "position": 2, "name": "Learn", "item": "https://remktr.com/learn/"}, {"@type": "ListItem", "position": 3, "name": "Holdout Testing on Amazon DSP: A Practical Guide", "item": "https://remktr.com/learn/holdout-testing-on-amazon-dsp/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How big should a DSP holdout group be?", "acceptedAnswer": {"@type": "Answer", "text": "Commonly 10-20% of the eligible audience, but the right size depends on a power calculation against your expected lift and baseline conversion rate \u2014 smaller accounts need a careful check that the holdout isn't too small to detect a real result."}}, {"@type": "Question", "name": "How long should a DSP holdout test run?", "acceptedAnswer": {"@type": "Answer", "text": "At least 6 weeks in most cases, and specifically past the roughly 3-week mark where audience models are typically still resolving \u2014 ending early is the most common design mistake we see."}}, {"@type": "Question", "name": "What if a tentpole event like Prime Day falls during my test?", "acceptedAnswer": {"@type": "Answer", "text": "Either exclude that window from the measurement period or extend the test long enough that it's a small share of the total \u2014 an unaccounted-for tentpole event will distort the read in ways that have nothing to do with whether the campaign is incremental."}}, {"@type": "Question", "name": "Can I run a DSP holdout without Amazon Marketing Cloud?", "acceptedAnswer": {"@type": "Answer", "text": "Not reliably \u2014 measuring purchase behaviour in a genuinely unexposed control group requires the pseudonymized join AMC provides. Native DSP or sponsored ads reporting alone can't measure a group that, by design, received no attributable ad exposure."}}]}]}</script>
 </head>
@@ -25,7 +25,7 @@
 <div class="wrap">
   <div class="crumbs"><a href="/">Home</a> › <a href="/learn/">Learn</a> › <span>Holdout Testing on Amazon DSP: A Practical Guide</span></div>
   <article data-article>
-    <span class="kicker">Comparison</span>
+    <span class="kicker">Guide</span>
     <h1>Holdout Testing on Amazon DSP</h1>
     <div class="meta">Updated 2026-08-21 · 1257 words · Written against what currently ranked for “Holdout testing on Amazon DSP”</div>
 
