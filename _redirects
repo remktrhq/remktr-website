@@ -4,25 +4,33 @@
 /audit/  /growthleak-a/  301
 
 /case-studies/a-digital-odyssey-on-amazon /case-studies/a-digital-odyssey-on-amazon.html 200
-/case-studies/a-digital-odyssey-on-amazon* /case-studies/a-digital-odyssey-on-amazon.html 200
+/case-studies/a-digital-odyssey-on-amazon/ /case-studies/a-digital-odyssey-on-amazon.html 200
 /case-studies/amazon-dsp-ads-for-brand-awareness-and-revenue-growth-at-coop-home-goods /case-studies/amazon-dsp-ads-for-brand-awareness-and-revenue-growth-at-coop-home-goods.html 200
-/case-studies/amazon-dsp-ads-for-brand-awareness-and-revenue-growth-at-coop-home-goods* /case-studies/amazon-dsp-ads-for-brand-awareness-and-revenue-growth-at-coop-home-goods.html 200
+/case-studies/amazon-dsp-ads-for-brand-awareness-and-revenue-growth-at-coop-home-goods/ /case-studies/amazon-dsp-ads-for-brand-awareness-and-revenue-growth-at-coop-home-goods.html 200
 /case-studies/how-improvia-unlocked-growth-through-amazon-dsp /case-studies/how-improvia-unlocked-growth-through-smarter-advertising.html 200
-/case-studies/how-improvia-unlocked-growth-through-amazon-dsp* /case-studies/how-improvia-unlocked-growth-through-smarter-advertising.html 200
+/case-studies/how-improvia-unlocked-growth-through-amazon-dsp/ /case-studies/how-improvia-unlocked-growth-through-smarter-advertising.html 200
 /case-studies/how-improvia-unlocked-growth-through-smarter-advertising /case-studies/how-improvia-unlocked-growth-through-smarter-advertising.html 200
-/case-studies/how-improvia-unlocked-growth-through-smarter-advertising* /case-studies/how-improvia-unlocked-growth-through-smarter-advertising.html 200
+/case-studies/how-improvia-unlocked-growth-through-smarter-advertising/ /case-studies/how-improvia-unlocked-growth-through-smarter-advertising.html 200
 /case-studies/maximazing-sales-growth-through-integrated-amazon-advertising-a-case-study-of-coop-home-goods /case-studies/maximazing-sales-growth-through-integrated-amazon-advertising-a-case-study-of-coop-home-goods.html 200
-/case-studies/maximazing-sales-growth-through-integrated-amazon-advertising-a-case-study-of-coop-home-goods* /case-studies/maximazing-sales-growth-through-integrated-amazon-advertising-a-case-study-of-coop-home-goods.html 200
+/case-studies/maximazing-sales-growth-through-integrated-amazon-advertising-a-case-study-of-coop-home-goods/ /case-studies/maximazing-sales-growth-through-integrated-amazon-advertising-a-case-study-of-coop-home-goods.html 200
 /case-studies/prime-video-ads-vs-streaming-tv-a-head-to-head-case-study-for-manuka-doctor /case-studies/prime-video-ads-vs-streaming-tv-a-head-to-head-case-study-for-manuka-doctor.html 200
-/case-studies/prime-video-ads-vs-streaming-tv-a-head-to-head-case-study-for-manuka-doctor* /case-studies/prime-video-ads-vs-streaming-tv-a-head-to-head-case-study-for-manuka-doctor.html 200
+/case-studies/prime-video-ads-vs-streaming-tv-a-head-to-head-case-study-for-manuka-doctor/ /case-studies/prime-video-ads-vs-streaming-tv-a-head-to-head-case-study-for-manuka-doctor.html 200
 /case-studies/unleashing-potential-with-amazons-unified-ad-tech /case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem.html 200
-/case-studies/unleashing-potential-with-amazons-unified-ad-tech* /case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem.html 200
+/case-studies/unleashing-potential-with-amazons-unified-ad-tech/ /case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem.html 200
 /case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem /case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem.html 200
-/case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem* /case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem.html 200
+/case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem/ /case-studies/unleashing-potential-with-amazons-unified-advertising-ecosystem.html 200
 /case-studies /case-studies.html 200
-/case-studies* /case-studies.html 200
+/case-studies/ /case-studies.html 200
 /home / 301
 /home/ / 301
+
+# /blog/ has been empty since the 2026-08-19 purge of auto-generated posts; the guides live at /learn/ (2026-10-29).
+/blog    /learn/  301
+/blog/   /learn/  301
+# Deleted posts that have an on-topic replacement. The other deleted posts (AWS, EC2, SP-API news) stay 404 on purpose.
+/blog/dsp-brand-safety-suitability-1759108903273  /learn/brand-suitability-tiers/  301
+/blog/dsp-brand-safety-suitability-1759107890308  /learn/brand-suitability-tiers/  301
+/blog/amazon-ads-api-account  /learn/amazon-ads-reporting-api/  301
 
 # Homepage source (read by remktr-go/build.py; never served)
 /_src/*  /  301!
