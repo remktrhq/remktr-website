@@ -289,3 +289,18 @@
     }
   }, true);
 })();
+
+// ── RB2B visitor identification (Ken 2026-11-03, "Yes, set it up") ──────
+// Every page of fullcircleagency.com and remktr.com loads that site's own
+// consent loader (/assets/rb2b-consent.js): nothing is identified until the
+// visitor clicks "Allow", and Global Privacy Control is honored. Other sites
+// that share this file are skipped. Pages that already load it are left alone.
+(function () {
+  var host = location.hostname.replace(/^www\./, '');
+  if (['fullcircleagency.com', 'remktr.com'].indexOf(host) < 0) return;
+  if (document.querySelector('script[src*="rb2b-consent.js"]')) return;
+  var s = document.createElement('script');
+  s.src = '/assets/rb2b-consent.js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
