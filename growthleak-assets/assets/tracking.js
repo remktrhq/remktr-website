@@ -53,6 +53,18 @@ function remktrConfigured(id) {
   return id && !String(id).startsWith("REPLACE");
 }
 
+// ---------- Referral Partner pages (2026-11-16) ----------
+// An agency applying to the partner program is NOT a brand lead. On pages whose body[data-offer] is listed here the
+// brand conversion events never fire (Meta "Lead" / "UnqualifiedLead" / "InitiateCheckout" / "Schedule", the Google Ads
+// application + booked-call conversions, the X lead + booking events). They fire their own events instead:
+// Meta custom events "PartnerLead" and "PartnerSchedule", and GA4 / dataLayer "partner_application_submitted" and
+// "partner_booking_scheduled". Page views, ViewContent, cta_click, scroll and the vsl_* watch-depth events are the
+// same on every page. Every other offer behaves exactly as before.
+var REMKTR_PARTNER_OFFERS = ["watch-partner"];
+function remktrIsPartnerPage() {
+  return REMKTR_PARTNER_OFFERS.indexOf((document.body && document.body.dataset && document.body.dataset.offer) || "") !== -1;
+}
+
 // ---------- Attribution capture (utm_* + variant + ad click IDs, survives navigation) ----------
 // Click IDs (gclid/fbclid/msclkid/...) go to the lead backend -> Close custom fields + note (2026-10-05).
 (function captureAttribution() {
@@ -151,7 +163,7 @@ document.addEventListener("click", (event) => {
   // Meta standard event so you can optimize on it before bookings accumulate.
   // Skipped for CTAs marked data-cta-secondary (e.g. "see how it works" anchors)
   // so the optimization signal stays booking-intent only.
-  if (window.fbq && !cta.hasAttribute("data-cta-secondary")) {
+  if (window.fbq && !cta.hasAttribute("data-cta-secondary") && !remktrIsPartnerPage()) {
     window.fbq("track", "InitiateCheckout");
   }
 });
@@ -162,6 +174,12 @@ document.addEventListener("submit", (event) => {
   const form = event.target;
   if (!form || form.id !== "apply-form") return;
   if (typeof form.checkValidity === "function" && !form.checkValidity()) return;
+  // Partner pages: their own events only (see REMKTR_PARTNER_OFFERS). No Lead, no UnqualifiedLead, no Google Ads / X conversion.
+  if (remktrIsPartnerPage()) {
+    window.remktrTrack("partner_application_submitted");
+    if (window.fbq) window.fbq("trackCustom", "PartnerLead");
+    return;
+  }
   // Pages that screen leads set form.dataset.qualified = "no" in their own submit handler (runs first).
   // Unqualified applications must not train Meta/X on "Lead"; they get a custom event instead.
   if (form.dataset.qualified === "no") {
@@ -198,6 +216,12 @@ window.addEventListener("message", (event) => {
   const type = event.data && event.data.event;
   if (type === "calendly.event_scheduled") {
     const t = window.REMKTR_TRACKING;
+    const partner = remktrIsPartnerPage();
+    if (partner) {
+      // a partner call is not a brand "Booked call": own events only
+      window.remktrTrack("partner_booking_scheduled", { source: "calendly_embed" });
+      if (window.fbq) window.fbq("trackCustom", "PartnerSchedule");
+    } else {
     window.remktrTrack("booking_scheduled", { source: "calendly_embed" });
     if (window.fbq) window.fbq("track", "Schedule");
     if (window.gtag && remktrConfigured(t.googleAdsBookingLabel)) {
@@ -206,6 +230,7 @@ window.addEventListener("message", (event) => {
     if (window.twq && remktrConfigured(t.xBookingEventId)) {
       window.twq("event", t.xBookingEventId, {});
     }
+    }
     // tell the backend (Close "Call Booked" + Slack booked/call-prep). Calendly sends the event + invitee URIs.
     const p = (event.data && event.data.payload) || {};
     const sent = window.remktrLead ? window.remktrLead.booked({
@@ -213,7 +238,7 @@ window.addEventListener("message", (event) => {
     }) : null;
     // post-booking page: wait (max 4s) for the backend's Calendly read so the page can show the call time.
     // Conversions above have already been queued; the 600ms floor lets the pixels flush before navigating.
-    const page = t.bookedPage;
+    const page = partner ? "" : t.bookedPage;   // /booked/ is the brand post-booking page; partners keep Calendly's own confirmation
     if (page && /^\/[a-z0-9\/-]*$/i.test(page)) {
       const timeout = new Promise((r) => setTimeout(() => r(null), 4000));
       const floor = new Promise((r) => setTimeout(r, 600));
