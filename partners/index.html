@@ -255,7 +255,7 @@
     try {
       var u = new URL(url), how = (u.searchParams.get('a1') || 'Website (WATCH-PARTNER)').split(' | ')[0];
       u.searchParams.set('a1', [how, 'Agency: ' + d.agency, 'Amazon brands managed: ' + d.brands_managed, d.offers_dva ? 'Offers DSP/DVA today: ' + d.offers_dva : ''].filter(Boolean).join(' | ').slice(0, 480));
-      url = u.toString();
+      url = u.toString().replace(/\+/g, '%20');   // URL.toString() writes spaces as '+', which Calendly shows as a literal plus in the name
     } catch (x) {}
     if (window.Calendly) window.Calendly.initPopupWidget({ url: url }); else window.open(url, '_blank');
   }
