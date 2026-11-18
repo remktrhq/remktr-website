@@ -61,6 +61,12 @@ function remktrConfigured(id) {
 // "partner_booking_scheduled". Page views, ViewContent, cta_click, scroll and the vsl_* watch-depth events are the
 // same on every page. Every other offer behaves exactly as before.
 var REMKTR_PARTNER_OFFERS = ["watch-partner"];
+// Meta deduplication (2026-11-18): partner events are also sent server-side by the lead backend (Conversions API) with
+// the SAME event id, so Meta counts each application / booking once. Brand pages do not send event ids.
+function remktrNewEventId(prefix, seed) {
+  var tail = seed ? String(seed).split("/").filter(Boolean).pop() : "";
+  return prefix + "." + (tail || (Date.now().toString(36) + "." + Math.random().toString(36).slice(2, 10)));
+}
 function remktrIsPartnerPage() {
   return REMKTR_PARTNER_OFFERS.indexOf((document.body && document.body.dataset && document.body.dataset.offer) || "") !== -1;
 }
@@ -196,7 +202,8 @@ document.addEventListener("submit", (event) => {
   // Partner pages: their own events only (see REMKTR_PARTNER_OFFERS). No Lead, no UnqualifiedLead, no Google Ads / X conversion.
   if (remktrIsPartnerPage()) {
     window.remktrTrack("partner_application_submitted");
-    if (window.fbq) window.fbq("trackCustom", "PartnerLead");
+    // eventID = the one remktrLead.submit() just sent to the backend (the page's own submit handler runs first)
+    if (window.fbq) window.fbq("trackCustom", "PartnerLead", {}, window.remktrLeadEventId ? { eventID: window.remktrLeadEventId } : undefined);
     return;
   }
   // Pages that screen leads set form.dataset.qualified = "no" in their own submit handler (runs first).
@@ -236,10 +243,12 @@ window.addEventListener("message", (event) => {
   if (type === "calendly.event_scheduled") {
     const t = window.REMKTR_TRACKING;
     const partner = remktrIsPartnerPage();
+    const p = (event.data && event.data.payload) || {};
+    const scheduleEventId = partner ? remktrNewEventId("ps", p.invitee && p.invitee.uri) : "";
     if (partner) {
       // a partner call is not a brand "Booked call": own events only
       window.remktrTrack("partner_booking_scheduled", { source: "calendly_embed" });
-      if (window.fbq) window.fbq("trackCustom", "PartnerSchedule");
+      if (window.fbq) window.fbq("trackCustom", "PartnerSchedule", {}, { eventID: scheduleEventId });
     } else {
     window.remktrTrack("booking_scheduled", { source: "calendly_embed" });
     if (window.fbq) window.fbq("track", "Schedule");
@@ -251,10 +260,9 @@ window.addEventListener("message", (event) => {
     }
     }
     // tell the backend (Close "Call Booked" + Slack booked/call-prep). Calendly sends the event + invitee URIs.
-    const p = (event.data && event.data.payload) || {};
-    const sent = window.remktrLead ? window.remktrLead.booked({
+    const sent = window.remktrLead ? window.remktrLead.booked(Object.assign({
       event_uri: p.event && p.event.uri, invitee_uri: p.invitee && p.invitee.uri
-    }) : null;
+    }, partner ? { meta_event_id: scheduleEventId } : {})) : null;
     // post-booking page: wait (max 4s) for the backend's Calendly read so the page can show the call time.
     // Conversions above have already been queued; the 600ms floor lets the pixels flush before navigating.
     const page = partner ? "" : t.bookedPage;   // /booked/ is the brand post-booking page; partners keep Calendly's own confirmation
@@ -384,6 +392,7 @@ window.addEventListener("load", () => {
         user_agent: navigator.userAgent,
         submitted_at: new Date().toISOString()
       });
+      if (remktrIsPartnerPage()) body.meta_event_id = window.remktrLeadEventId = remktrNewEventId("pl");
       remember({ email: data.email, name: data.name, brand: data.brand, offer: body.offer });
       return post(body).then((res) => {
         if (res && res.lead_id) remember(Object.assign(recall(), { lead_id: res.lead_id }));
@@ -392,8 +401,10 @@ window.addEventListener("load", () => {
     },
     booked(info) {
       const lead = recall();
+      // partner bookings also carry what the backend's Conversions API call needs to match the person
+      const extra = remktrIsPartnerPage() ? { fbp: cookie("_fbp"), fbc: cookie("_fbc"), user_agent: navigator.userAgent, attribution: attribution() } : {};
       return post(Object.assign({ type: "booked", lead_id: lead.lead_id || "", email: lead.email || "",
-        offer: lead.offer || document.body.dataset.offer, page_url: window.location.href.split("#")[0] }, info || {}));
+        offer: lead.offer || document.body.dataset.offer, page_url: window.location.href.split("#")[0] }, extra, info || {}));
     },
     // Calendly prefill: name/email + Jayce's event questions (in order):
     // a1 How did you hear (required) -> source + all form answers, a2 Brand or Agency, a3 Brand/Agency name,
