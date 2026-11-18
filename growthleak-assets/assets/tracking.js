@@ -170,10 +170,29 @@ document.addEventListener("click", (event) => {
 
 // ---------- Application form submitted (mid-funnel: CTA -> form -> Calendly) ----------
 // Fires alongside the pages' own inline submit handlers; only counts valid submissions.
+// Meta advanced matching (2026-11-18): hand the pixel the applicant's email / name / phone right before the
+// Lead / UnqualifiedLead / PartnerLead event (and the later Schedule / PartnerSchedule), so Meta can tie the
+// application to the ad click. fbevents.js SHA-256-hashes these in the browser; raw values never leave the page.
+function remktrMetaMatch(form) {
+  const id = window.REMKTR_TRACKING.metaPixelId;
+  if (!window.fbq || !remktrConfigured(id)) return;
+  const val = (n) => ((form.elements[n] && form.elements[n].value) || "").trim();
+  const ud = {};
+  const em = val("email").toLowerCase();
+  if (em) ud.em = em;
+  const parts = val("name").toLowerCase().split(/\s+/).filter(Boolean);
+  if (parts[0]) ud.fn = parts[0];
+  if (parts.length > 1) ud.ln = parts[parts.length - 1];
+  const ph = val("phone").replace(/[^0-9]/g, "");
+  if (ph) ud.ph = ph.length === 10 ? "1" + ph : ph;
+  if (Object.keys(ud).length) { try { window.fbq("init", id, ud); } catch (e) {} }
+}
+
 document.addEventListener("submit", (event) => {
   const form = event.target;
   if (!form || form.id !== "apply-form") return;
   if (typeof form.checkValidity === "function" && !form.checkValidity()) return;
+  remktrMetaMatch(form);
   // Partner pages: their own events only (see REMKTR_PARTNER_OFFERS). No Lead, no UnqualifiedLead, no Google Ads / X conversion.
   if (remktrIsPartnerPage()) {
     window.remktrTrack("partner_application_submitted");
