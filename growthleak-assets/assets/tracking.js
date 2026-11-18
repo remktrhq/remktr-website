@@ -142,6 +142,25 @@ function remktrIsPartnerPage() {
   document.head.appendChild(script);
 })();
 
+// ---------- RB2B visitor identification on partner pages (Ken 2026-11-18: "Yes, no pop-up") ----------
+// Referral Partner pages only (agency owners arriving from business ads): RB2B loads with the page, no consent pop-up.
+// Still honored: Global Privacy Control, and a saved "no" from the site notice or the privacy-policy button.
+// Every other page keeps the opt-in loader /assets/rb2b-consent.js (same RB2B account and script).
+(function installRb2bOnPartnerPages() {
+  function go() {
+    if (!remktrIsPartnerPage() || window.reb2b || navigator.globalPrivacyControl) return;
+    let choice;
+    try { choice = localStorage.getItem("remktr-visitor-identification-consent"); } catch (e) {}
+    if (choice === "no") return;
+    window.reb2b = { loaded: true };
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "https://ddwl4m2hdecbv.cloudfront.net/b/1N5W0HJLEEO5/1N5W0HJLEEO5.js.gz";
+    document.head.appendChild(script);
+  }
+  if (document.body) go(); else document.addEventListener("DOMContentLoaded", go);
+})();
+
 // ---------- Unified event fan-out ----------
 window.remktrTrack = function remktrTrack(eventName, payload = {}) {
   const attribution = JSON.parse(localStorage.getItem("remktr_attribution") || "{}");
