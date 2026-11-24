@@ -69,6 +69,16 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "/assets/rb2b-consent.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/engagement.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
   for = "/hs-fs/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"

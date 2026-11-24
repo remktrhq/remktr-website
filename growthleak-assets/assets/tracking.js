@@ -35,10 +35,9 @@ window.REMKTR_TRACKING = {
 
   bookingUrl: "https://calendly.com/jayce-remktr/30min",
 
-  // Post-booking page (DRAFT, Ken's review 2026-10-05). "" = off: the Calendly popup keeps its own confirmation.
-  // remktr-go/build.py --booked-redirect sets "/booked/" in the remktr.com copy only. After a booking the visitor
-  // is sent there with ?t=<call start ISO> (from the lead backend's Calendly read; no PII in the URL).
-  bookedPage: ""
+  // Post-booking page: after a brand Calendly booking (non-partner), redirect to /booked/ with ?t=<call start ISO>
+  // (from the lead backend's Calendly read; no PII in the URL). Partner pages keep Calendly's confirmation.
+  bookedPage: "/booked/"
 };
 
 (function initClarity(){
@@ -142,13 +141,14 @@ function remktrIsPartnerPage() {
   document.head.appendChild(script);
 })();
 
-// ---------- RB2B visitor identification on partner pages (Ken 2026-11-18: "Yes, no pop-up") ----------
-// Referral Partner pages only (agency owners arriving from business ads): RB2B loads with the page, no consent pop-up.
-// Still honored: Global Privacy Control, and a saved "no" from the site notice or the privacy-policy button.
-// Every other page keeps the opt-in loader /assets/rb2b-consent.js (same RB2B account and script).
-(function installRb2bOnPartnerPages() {
+// ---------- RB2B visitor identification (auto-load, GPC-respecting) ----------
+// Matches /partners/ and /assets/rb2b-consent.js: loads with the page, zero opt-in popup blocker.
+// Still honored: Global Privacy Control (navigator.globalPrivacyControl === true) and a saved "no"
+// from /privacy-policy/#visitor-identification. Guarded by window.reb2b so pages also loading
+// /assets/rb2b-consent.js only inject RB2B once.
+(function installRb2b() {
   function go() {
-    if (!remktrIsPartnerPage() || window.reb2b || navigator.globalPrivacyControl) return;
+    if (window.reb2b || navigator.globalPrivacyControl === true) return;
     let choice;
     try { choice = localStorage.getItem("remktr-visitor-identification-consent"); } catch (e) {}
     if (choice === "no") return;
